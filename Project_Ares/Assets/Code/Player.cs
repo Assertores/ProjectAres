@@ -32,6 +32,7 @@ namespace ProjectAres {
         [Header("Balancing")]
         [SerializeField] int _maxHealth = 100;
         [SerializeField] float _dashForce = 2;
+        [SerializeField] float _invulnerableDuration = 1;
 
         public PlayerStuts _stuts;
 
@@ -41,6 +42,7 @@ namespace ProjectAres {
 
         Dictionary<Collider2D, Vector2> _collisionNormals = new Dictionary<Collider2D, Vector2>();
 
+        float _respawntTime = float.MaxValue;
         int _currentHealth;
         int _currentWeapon = 0;
         bool _isShooting = false;
@@ -51,7 +53,8 @@ namespace ProjectAres {
         #region Unity
 
         void Start() {
-            GameManager test = GameManager._singelton;
+            DontDestroyOnLoad(this.gameObject);
+            //GameManager test = GameManager._singelton;
             _rig = GetComponent<Rigidbody2D>();
             Init();
             _references.Add(this);
@@ -89,6 +92,7 @@ namespace ProjectAres {
             _controle.SelectWeapon += SelectWeapon;
             _controle.ChangeWeapon += ChangeWeapon;
             _controle.UseItem += UseItem;
+            _controle.Disconect += Disconect;
 
             GameObject tmp;
             IWeapon tmpInterface;
@@ -103,9 +107,7 @@ namespace ProjectAres {
                 }
             }
 
-            _currentHealth = _maxHealth;
-            _currentWeapon = 0;
-            _weapons[_currentWeapon].SetActive(true);
+            Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
         }
 
@@ -113,9 +115,20 @@ namespace ProjectAres {
             transform.position = pos;
 
             _currentHealth = _maxHealth;
+            if(_currentWeapon != 0) {
+                _weapons[_currentWeapon].SetActive(false);
+                _currentWeapon = 0;
+                _weapons[_currentWeapon].SetActive(true);
+            }
+            _respawntTime = Time.timeSinceLevelLoad;
+            //für eine zeit unverwundbar machen
         }
 
         public bool TakeDamage(int damage, out int realDamage) {
+            if(Time.timeSinceLevelLoad-_respawntTime < _invulnerableDuration) {
+                realDamage = 0;
+                return false;
+            }
             if(damage > _currentHealth) {
                 realDamage = _currentHealth;
                 _currentHealth = 0;
@@ -173,6 +186,10 @@ namespace ProjectAres {
                 tmp += it.Value;
             }
             _rig.AddForce(tmp.normalized * _dashForce);
+        }
+
+        void Disconect() {
+            Destroy(this.gameObject);
         }
 
         #region Physics
