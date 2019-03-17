@@ -15,5 +15,7 @@ namespace ProjectAres {
         Action<int> SelectWeapon { get; set; }
         Action<int> ChangeWeapon { get; set; }
         Action<int> UseItem { get; set; }
+
+        Action Disconect { get; set; }
     }
 }

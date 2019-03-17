@@ -13,23 +13,24 @@ namespace ProjectAres {
         public Action<int> SelectWeapon { get; set; }
         public Action<int> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
+        public Action Disconect { get; set; }
 
         Camera _myCamera = null;
 
         // Start is called before the first frame update
         void Start() {
-            if (CameraControler._singelton)
-                _myCamera = CameraControler._singelton.AddCamera();
+            //if (CameraControler._singelton)
+            //    _myCamera = CameraControler._singelton.AddCamera();
         }
         private void OnDestroy() {
-            if (_myCamera)
-                CameraControler._singelton.RemoveCamera(_myCamera);
+            //if (_myCamera)
+            //    CameraControler._singelton.RemoveCamera(_myCamera);
         }
 
         // Update is called once per frame
         void Update() {
 
-            _dir = _myCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            _dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
             if (Input.GetButtonDown(StringCollection.FIRE)) {
                 StartShooting?.Invoke();
@@ -47,8 +48,12 @@ namespace ProjectAres {
                 Dash?.Invoke();
             }
 
-            if (_myCamera) {
-                _myCamera.transform.position = new Vector3(transform.position.x, transform.position.y, _myCamera.transform.position.z);
+            //if (_myCamera) {
+            //    _myCamera.transform.position = new Vector3(transform.position.x, transform.position.y, _myCamera.transform.position.z);
+            //}
+
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Disconect?.Invoke();
             }
         }
     }

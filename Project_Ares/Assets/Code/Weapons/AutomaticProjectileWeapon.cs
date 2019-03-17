@@ -23,7 +23,6 @@ namespace ProjectAres {
         //}
 
         public override void StartShooting() {
-            print("I'm gonna shoot");
             Invoke("ShootBullet", 60 / _rPM);
         }
 
