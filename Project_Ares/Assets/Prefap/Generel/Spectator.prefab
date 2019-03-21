@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minCameraSize: 5
-  _padding: 10
+  _padding: 2

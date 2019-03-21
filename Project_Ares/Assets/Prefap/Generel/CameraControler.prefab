@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraRef: {fileID: 1544642052170413004, guid: 8f19cc3122d1aff4a875b874270b9f8d,
     type: 3}
+  _spectatorRef: {fileID: 494059890042577383, guid: 65a28ce03f7411f47b614258d2b2c6bc,
+    type: 3}

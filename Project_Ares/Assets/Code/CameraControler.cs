@@ -7,6 +7,7 @@ namespace ProjectAres {
 
         [Header("References")]
         [SerializeField] GameObject _cameraRef;
+        [SerializeField] GameObject _spectatorRef;
 
         List<Camera> _cameras = new List<Camera>();
 
@@ -93,8 +94,12 @@ namespace ProjectAres {
                     Destroy(_fillerSpectator);
                     break;
                 }
-                _fillerSpectator = new GameObject();
-                _fillerSpectator.AddComponent<Spectator>();
+                if (_spectatorRef) {
+                    _fillerSpectator = Instantiate(_spectatorRef);
+                } else {
+                    _fillerSpectator = new GameObject();
+                    _fillerSpectator.AddComponent<Spectator>();
+                }
                 _fillerSpectator.name = "Spectator";
                 break;
             }
