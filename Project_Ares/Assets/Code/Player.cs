@@ -56,7 +56,7 @@ namespace ProjectAres {
             DontDestroyOnLoad(this.gameObject);
             //GameManager test = GameManager._singelton;
             _rig = GetComponent<Rigidbody2D>();
-            Init();
+            //Init(null);
             _references.Add(this);
         }
         private void OnDestroy() {
@@ -64,15 +64,16 @@ namespace ProjectAres {
         }
         
         void Update() {
-            _weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-_controle._dir.y,_controle._dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+            if(_controle != null)
+                _weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-_controle._dir.y,_controle._dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
 
             _healthBar.fillAmount = (float)_currentHealth / _maxHealth;
         }
 
         #endregion
 
-        public void Init() {
-            if (_controle == null) {
+        public void Init(IControle controle) {
+            if (controle == null) {
                 if(_controleObject == null) {
                     DestroyImmediate(gameObject);
                     return;
@@ -83,6 +84,8 @@ namespace ProjectAres {
                     DestroyImmediate(gameObject);
                     return;
                 }
+            } else {
+                _controle = controle;
             }
             
             _controle.StartShooting += StartShooting;
