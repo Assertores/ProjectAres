@@ -10,6 +10,12 @@ namespace ProjectAres {
         public static string AXISX = "Horizontal";
         public static string AXISY = "Vertical";
         public static string FIRE = "Fire1";
+
+        #endregion
+        #region SZENES
+
+        public static string EXAMPLESZENE = "SampleScene";
+
         #endregion
     }
 }
