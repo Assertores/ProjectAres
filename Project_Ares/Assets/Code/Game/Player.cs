@@ -64,7 +64,7 @@ namespace ProjectAres {
         }
         
         void Update() {
-            if(_controle != null)
+            if(_controle != null && _currentHealth > 0)
                 _weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-_controle._dir.y,_controle._dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
 
             _healthBar.fillAmount = (float)_currentHealth / _maxHealth;
@@ -87,15 +87,8 @@ namespace ProjectAres {
             } else {
                 _controle = controle;
             }
-            
-            _controle.StartShooting += StartShooting;
-            _controle.StopShooting += StopShooting;
-            _controle.Dash += Dash;
 
-            _controle.SelectWeapon += SelectWeapon;
-            _controle.ChangeWeapon += ChangeWeapon;
-            _controle.UseItem += UseItem;
-            _controle.Disconect += Disconect;
+            InControle(true);
 
             GameObject tmp;
             IWeapon tmpInterface;
@@ -114,6 +107,28 @@ namespace ProjectAres {
             //WeaponIcons in WheaponWheel einfügen;
         }
 
+        public void InControle(bool controle) {
+            if (controle) {
+                _controle.StartShooting += StartShooting;
+                _controle.StopShooting += StopShooting;
+                _controle.Dash += Dash;
+
+                _controle.SelectWeapon += SelectWeapon;
+                _controle.ChangeWeapon += ChangeWeapon;
+                _controle.UseItem += UseItem;
+                _controle.Disconect += Disconect;
+            } else {
+                _controle.StartShooting = null;
+                _controle.StopShooting = null;
+                _controle.Dash = null;
+
+                _controle.SelectWeapon = null;
+                _controle.ChangeWeapon = null;
+                _controle.UseItem = null;
+                _controle.Disconect = null;
+            }
+        }
+
         public void Respawn(Vector2 pos) {
             transform.position = pos;
 
@@ -124,11 +139,10 @@ namespace ProjectAres {
                 _weapons[_currentWeapon].SetActive(true);
             }
             _respawntTime = Time.timeSinceLevelLoad;
-            //für eine zeit unverwundbar machen
         }
 
-        public bool TakeDamage(int damage, out int realDamage) {
-            if(Time.timeSinceLevelLoad-_respawntTime < _invulnerableDuration) {
+        public bool TakeDamage(int damage, out int realDamage, bool ignoreInvulnerable = false) {
+            if(Time.timeSinceLevelLoad-_respawntTime < _invulnerableDuration && !ignoreInvulnerable) {
                 realDamage = 0;
                 return false;
             }
@@ -137,6 +151,8 @@ namespace ProjectAres {
                 _currentHealth = 0;
                 _stuts.DamageTaken += realDamage;
                 _stuts.Deaths++;
+                InControle(false);
+                //TODO: Stuff zum respawnen
                 return true;
             } else {
                 realDamage = damage;
@@ -191,8 +207,9 @@ namespace ProjectAres {
             _rig.AddForce(tmp.normalized * _dashForce);
         }
 
-        void Disconect() {
+        public void Disconect() {
             Destroy(this.gameObject);
+            _references.Remove(this);
         }
 
         #region Physics

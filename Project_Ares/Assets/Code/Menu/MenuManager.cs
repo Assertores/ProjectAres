@@ -9,6 +9,23 @@ namespace ProjectAres {
         [Header("References")]
         [SerializeField] GameObject _playerRev;
 
+        #region Singelton
+
+        public static MenuManager _singelton = null;
+
+        private void Awake() {
+            if (_singelton)
+                Destroy(this);
+
+            _singelton = this;
+        }
+        private void OnDestroy() {
+            if (_singelton == this)
+                _singelton = null;
+        }
+
+        #endregion
+
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Return)) {
                 GameObject tmp = Instantiate(_playerRev);
@@ -23,6 +40,7 @@ namespace ProjectAres {
         }
 
         public void StartGame() {
+            SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
             //lade ausgewählte Szene im hintergrund
             //spiel animation für szenenwechsel ab
             //überblände die musik
@@ -30,6 +48,7 @@ namespace ProjectAres {
         }
 
         public void Exit() {
+            print("Quitting the Game");
             Application.Quit();
         }
     }
