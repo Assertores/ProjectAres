@@ -16,6 +16,11 @@ namespace ProjectAres {
 
         public void Init() {
             _startTime = Time.timeSinceLevelLoad;
+            gameObject.SetActive(true);
+        }
+
+        public void Stop() {
+            gameObject.SetActive(false);
         }
 
         public void PlayerDied(Player player) {
@@ -30,11 +35,12 @@ namespace ProjectAres {
         }
         
         void Start() {
-
+            Stop();
         }
         
         void Update() {
             if(_gameTime <= _startTime + Time.timeSinceLevelLoad) {
+                //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
                 //auf WinScreen wächseln
             }
         }

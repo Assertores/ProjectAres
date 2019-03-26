@@ -6,6 +6,7 @@ namespace ProjectAres {
     public interface IGameMode {
 
         void Init();
+        void Stop();
         void PlayerDied(Player player);
 
     }

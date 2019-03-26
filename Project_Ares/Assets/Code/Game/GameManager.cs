@@ -51,6 +51,12 @@ namespace ProjectAres {
             }
         }
 
+        public void Init(IGameMode mode) {
+            _gameMode?.Stop();
+            _gameMode = mode;
+            mode.Init();
+        }
+
         void Update() {
 
         }

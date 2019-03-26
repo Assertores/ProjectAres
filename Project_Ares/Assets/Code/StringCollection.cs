@@ -15,6 +15,7 @@ namespace ProjectAres {
         #region SZENES
 
         public static string EXAMPLESZENE = "SampleScene";
+        public static string MAINMENU = "Menu";
 
         #endregion
     }
