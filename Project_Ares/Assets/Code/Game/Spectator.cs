@@ -33,16 +33,18 @@ namespace ProjectAres {
             if (Player._references.Count == 0)
                 return;
 
-            float minX = Player._references[0].transform.position.x;
+            float minX = Player._references[0].transform.position.x;//TODO: eventuell nicht so geil, wenn keiner alive ist.
             float maxX = minX;
             float minY = Player._references[0].transform.position.y;
             float maxY = minY;
 
             foreach (var it in Player._references) {
-                minX = Mathf.Min(minX, it.transform.position.x);
-                maxX = Mathf.Max(maxX, it.transform.position.x);
-                minY = Mathf.Min(minY, it.transform.position.y);
-                maxY = Mathf.Max(maxY, it.transform.position.y);
+                if (it._alive) {
+                    minX = Mathf.Min(minX, it.transform.position.x);
+                    maxX = Mathf.Max(maxX, it.transform.position.x);
+                    minY = Mathf.Min(minY, it.transform.position.y);
+                    maxY = Mathf.Max(maxY, it.transform.position.y);
+                }
             }
 
             _myCamera.orthographicSize = Mathf.Max(Mathf.Max((maxX - minX + 2* _padding) / _myCamera.aspect, maxY - minY + 2 * _padding) / 2, _minCameraSize);

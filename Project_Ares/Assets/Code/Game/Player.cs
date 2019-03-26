@@ -35,6 +35,7 @@ namespace ProjectAres {
         [SerializeField] float _invulnerableDuration = 1;
 
         public PlayerStuts _stuts;
+        public bool _alive { get; set; }
 
         IControle _controle;
         List<IWeapon> _weapons = new List<IWeapon>();
@@ -133,6 +134,7 @@ namespace ProjectAres {
             transform.position = pos;
 
             _currentHealth = _maxHealth;
+            _alive = true;
             if(_currentWeapon != 0) {
                 _weapons[_currentWeapon].SetActive(false);
                 _currentWeapon = 0;
@@ -149,6 +151,7 @@ namespace ProjectAres {
             if(damage > _currentHealth) {
                 realDamage = _currentHealth;
                 _currentHealth = 0;
+                _alive = false;
                 _stuts.DamageTaken += realDamage;
                 _stuts.Deaths++;
                 InControle(false);
@@ -160,6 +163,10 @@ namespace ProjectAres {
                 _stuts.DamageTaken += realDamage;
                 return false;
             }
+        }
+
+        public int GetHealth() {
+            return _currentHealth;
         }
 
         void SelectWeapon(int selectedWeapon) {
