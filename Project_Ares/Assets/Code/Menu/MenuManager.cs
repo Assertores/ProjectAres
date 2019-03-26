@@ -39,7 +39,7 @@ namespace ProjectAres {
                 }
             }
             for(int i = 0; i < 4; i++) {
-                if(GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
+                if(GamePad.GetState((PlayerIndex)i).IsConnected && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
                     GameObject tmp = Instantiate(_playerRev);
                     if (tmp) {
                         GameObject tmpControle = new GameObject("Controler");
