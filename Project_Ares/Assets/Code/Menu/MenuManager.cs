@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 
 namespace ProjectAres {
     public class MenuManager : MonoBehaviour {
@@ -35,6 +36,19 @@ namespace ProjectAres {
 
                     IControle reference = tmpControle.AddComponent<KeyboardControle>();//null reference checks
                     tmp.GetComponent<Player>().Init(reference);//null reference checks
+                }
+            }
+            for(int i = 0; i < 4; i++) {
+                if(GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
+                    GameObject tmp = Instantiate(_playerRev);
+                    if (tmp) {
+                        GameObject tmpControle = new GameObject("Controler");
+                        tmpControle.transform.parent = tmp.transform;
+
+                        ControllerControle reference = tmpControle.AddComponent<ControllerControle>();//null reference checks
+                        reference._controlerIndex = i;
+                        tmp.GetComponent<Player>().Init(reference);//null reference checks
+                    }
                 }
             }
         }
