@@ -16,8 +16,7 @@ namespace ProjectAres {
         public Action Disconect { get; set; }
 
         Camera _myCamera = null;
-
-        // Start is called before the first frame update
+        
         void Start() {
             //if (CameraControler._singelton)
             //    _myCamera = CameraControler._singelton.AddCamera();
@@ -26,8 +25,7 @@ namespace ProjectAres {
             //if (_myCamera)
             //    CameraControler._singelton.RemoveCamera(_myCamera);
         }
-
-        // Update is called once per frame
+        
         void Update() {
 
             _dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
@@ -52,7 +50,7 @@ namespace ProjectAres {
             //    _myCamera.transform.position = new Vector3(transform.position.x, transform.position.y, _myCamera.transform.position.z);
             //}
 
-            if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (Input.GetKeyUp(KeyCode.Escape)) {
                 Disconect?.Invoke();
             }
         }
