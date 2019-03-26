@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ProjectAres {
     public class FFA_Casual : MonoBehaviour, IGameMode {
@@ -39,8 +40,10 @@ namespace ProjectAres {
         }
         
         void Update() {
+            print(Time.timeSinceLevelLoad - _startTime);
             if(_gameTime <= _startTime + Time.timeSinceLevelLoad) {
                 //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
+                SceneManager.LoadScene(StringCollection.FFACASUAL);
                 //auf WinScreen wächseln
             }
         }

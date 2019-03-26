@@ -16,6 +16,7 @@ namespace ProjectAres {
 
         public static string EXAMPLESZENE = "SampleScene";
         public static string MAINMENU = "Menu";
+        public static string FFACASUAL = "WinScreen_FFA_Casual";
 
         #endregion
     }
