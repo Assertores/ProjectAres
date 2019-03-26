@@ -142,6 +142,7 @@ namespace ProjectAres {
                 _weapons[_currentWeapon].SetActive(true);
             }*/
             InControle(true);
+            gameObject.SetActive(true);
             _respawntTime = Time.timeSinceLevelLoad;
         }
 
@@ -154,6 +155,8 @@ namespace ProjectAres {
                 realDamage = _currentHealth;
                 _currentHealth = 0;
                 _alive = false;
+                _rig.velocity = Vector2.zero;
+                gameObject.SetActive(false);
                 _stuts.DamageTaken += realDamage;
                 _stuts.Deaths++;
                 InControle(false);
