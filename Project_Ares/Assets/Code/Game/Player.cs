@@ -127,6 +127,7 @@ namespace ProjectAres {
                 _controle.ChangeWeapon = null;
                 _controle.UseItem = null;
                 _controle.Disconect = null;
+                StopShooting();
             }
         }
 
@@ -135,11 +136,12 @@ namespace ProjectAres {
 
             _currentHealth = _maxHealth;
             _alive = true;
-            if(_currentWeapon != 0) {
+            /*if(_currentWeapon != 0) {
                 _weapons[_currentWeapon].SetActive(false);
                 _currentWeapon = 0;
                 _weapons[_currentWeapon].SetActive(true);
-            }
+            }*/
+            InControle(true);
             _respawntTime = Time.timeSinceLevelLoad;
         }
 
@@ -155,6 +157,7 @@ namespace ProjectAres {
                 _stuts.DamageTaken += realDamage;
                 _stuts.Deaths++;
                 InControle(false);
+                GameManager._singelton.PlayerDied(this);
                 //TODO: Stuff zum respawnen
                 return true;
             } else {
