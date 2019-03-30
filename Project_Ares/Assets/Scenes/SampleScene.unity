@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _respawnParent: {fileID: 1851875763}
-  _gameTime: 120
+  _gameTime: 20
   _respawnTime: 2
 --- !u!4 &385585063
 Transform:
