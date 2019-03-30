@@ -94,13 +94,13 @@ namespace ProjectAres {
                     Destroy(_fillerSpectator);
                     break;
                 }
-                if (_spectatorRef) {
-                    _fillerSpectator = Instantiate(_spectatorRef);
-                } else {
-                    _fillerSpectator = new GameObject();
-                    _fillerSpectator.AddComponent<Spectator>();
-                }
-                _fillerSpectator.name = "Spectator";
+                //if (_spectatorRef) {//kein spectator mehr, feste kammera
+                //    _fillerSpectator = Instantiate(_spectatorRef);
+                //} else {
+                //    _fillerSpectator = new GameObject();
+                //    _fillerSpectator.AddComponent<Spectator>();
+                //}
+                //_fillerSpectator.name = "Spectator";
                 break;
             }
         }
