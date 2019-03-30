@@ -29,8 +29,8 @@ namespace ProjectAres {
         // Update is called once per frame
         void Update() {
             for(int i = 0; i < Player._references.Count; i++) {
-                if(1/_pillarSpeed * Player._references[i]._stuts.Kills < Time.timeSinceLevelLoad - _startTime) {
-                    _pillar[i].transform.position += new Vector3(0,_pillarSpeed,0);
+                if(1/_pillarSpeed * Player._references[i]._stuts.Kills > Time.timeSinceLevelLoad - _startTime) {
+                    _pillar[i].transform.position += new Vector3(0,_pillarSpeed * Time.deltaTime,0);
 
                     Player._references[i].transform.position = _pillar[i].transform.position;
                 }
