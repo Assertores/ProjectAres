@@ -10,6 +10,8 @@ namespace ProjectAres {
         [Header("References")]
         [SerializeField] GameObject _playerRev;
 
+        GamePadState[] _lastStates = new GamePadState[4];
+
         #region Singelton
 
         public static MenuManager _singelton = null;
@@ -39,7 +41,7 @@ namespace ProjectAres {
                 }
             }
             for(int i = 0; i < 4; i++) {
-                if(GamePad.GetState((PlayerIndex)i).IsConnected && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
+                if(_lastStates[i].IsConnected && _lastStates[i].Buttons.Start == ButtonState.Pressed && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
                     GameObject tmp = Instantiate(_playerRev);
                     if (tmp) {
                         GameObject tmpControle = new GameObject("Controler");
@@ -50,6 +52,7 @@ namespace ProjectAres {
                         tmp.GetComponent<Player>().Init(reference);//null reference checks
                     }
                 }
+                _lastStates[i] = GamePad.GetState((PlayerIndex)i);
             }
         }
 

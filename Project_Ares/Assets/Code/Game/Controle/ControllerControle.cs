@@ -26,7 +26,7 @@ namespace ProjectAres {
 
         // Start is called before the first frame update
         void Start() {
-
+            _state = GamePad.GetState((PlayerIndex)_controlerIndex);
         }
 
         // Update is called once per frame
@@ -37,7 +37,11 @@ namespace ProjectAres {
             _lastState = _state;
             _state = GamePad.GetState((PlayerIndex)_controlerIndex);
             //_dir = new Vector2 (_state.ThumbSticks.Right.X * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.Y * _state.ThumbSticks.Right.Y) / 2), _state.ThumbSticks.Right.Y * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.X * _state.ThumbSticks.Right.X) / 2));//unnötig http://mathproofs.blogspot.com/2005/07/mapping-square-to-circle.html
+            
             _dir = new Vector2(_state.ThumbSticks.Right.X, _state.ThumbSticks.Right.Y).normalized;
+            if(_dir == Vector2.zero) {
+                _dir = new Vector2(_state.ThumbSticks.Left.X, _state.ThumbSticks.Left.Y).normalized;
+            }
 
             if (_state.Triggers.Right > _shootThreshold && _lastState.Triggers.Right <= _shootThreshold) {
                 StartShooting?.Invoke();
@@ -45,9 +49,9 @@ namespace ProjectAres {
                 StopShooting?.Invoke();
             }
 
-            if(_state.DPad.Down == ButtonState.Released) {
+            if(_lastState.DPad.Down == ButtonState.Pressed && _state.DPad.Down == ButtonState.Released) {
                 ChangeWeapon?.Invoke(0);
-            }else if(_state.DPad.Left == ButtonState.Released) {
+            }else if(_lastState.DPad.Left == ButtonState.Pressed && _state.DPad.Left == ButtonState.Released) {
                 ChangeWeapon?.Invoke(1);
             }
 
@@ -55,7 +59,7 @@ namespace ProjectAres {
                 Dash?.Invoke();
             }
 
-            if(_state.Buttons.Start == ButtonState.Released) {
+            if(_lastState.Buttons.Start == ButtonState.Pressed && _state.Buttons.Start == ButtonState.Released) {
                 Disconect?.Invoke();
             }
         }
