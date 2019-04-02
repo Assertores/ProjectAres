@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    public class WS_FFA_Casual : MonoBehaviour {
+    public class WS_FFA_Casual : WinScreen {
 
         [Header("References")]
         [SerializeField] GameObject _pillarRef;
