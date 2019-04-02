@@ -17,6 +17,9 @@ namespace ProjectAres {
 
         public void Init() {
             _startTime = Time.timeSinceLevelLoad;
+            foreach(var it in Player._references) {
+                it.Respawn(_respawnParent.GetChild(Random.Range(0, _respawnParent.childCount)).position);
+            }
             gameObject.SetActive(true);
         }
 
@@ -40,7 +43,7 @@ namespace ProjectAres {
         }
         
         void Update() {
-            print(Time.timeSinceLevelLoad - _startTime);
+            //print(Time.timeSinceLevelLoad - _startTime);
             if(_gameTime <= _startTime + Time.timeSinceLevelLoad) {
                 //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
                 SceneManager.LoadScene(StringCollection.FFACASUAL);
