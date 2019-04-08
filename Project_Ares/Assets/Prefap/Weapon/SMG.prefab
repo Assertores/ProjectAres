@@ -156,6 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bullet: {fileID: 6427757345274832488, guid: 3dd99c852e85baa40b69b81bd82f9a39, type: 3}
   _barrol: {fileID: 8526788404880525850}
-  _bulletVelocity: 10
+  _bulletVelocity: 15
   _recoil: 20
-  _rPM: 1000
+  _rPM: 500
