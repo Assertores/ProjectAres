@@ -39,13 +39,13 @@ namespace ProjectAres {
             _gameMode = _gmObject.GetComponent<IGameMode>();//Interface werden nicht im inspector angezeigt
             _gameMode?.Init();//TODO: wie bekommt er den richtigen GameMode aus dem Menü
 
-            if(Player._references.Count == 0) {
+            if(Player.s_references.Count == 0) {
                 GameObject tmp = Instantiate(_playerRev);
                 if (tmp) {
                     GameObject tmpControle = new GameObject("Controler");
                     tmpControle.transform.parent = tmp.transform;
 
-                    IControle reference = tmpControle.AddComponent<KeyboardControle>();//null reference checks
+                    IControl reference = tmpControle.AddComponent<KeyboardControle>();//null reference checks
                     tmp.GetComponent<Player>().Init(reference);//null reference checks
                 }
             }

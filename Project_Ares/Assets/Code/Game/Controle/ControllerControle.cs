@@ -5,7 +5,7 @@ using UnityEngine;
 using XInputDotNetPure;
 
 namespace ProjectAres {
-    public class ControllerControle : MonoBehaviour, IControle {
+    public class ControllerControle : MonoBehaviour, IControl {
 
         [Header("Balancing")]
         [SerializeField] float _shootThreshold = 0.9f;
@@ -19,7 +19,7 @@ namespace ProjectAres {
         public Action<int> SelectWeapon { get; set; }
         public Action<int> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
-        public Action Disconect { get; set; }
+        public Action Disconnect { get; set; }
 
         GamePadState _state;
         GamePadState _lastState;
@@ -60,7 +60,7 @@ namespace ProjectAres {
             }
 
             if(_lastState.Buttons.Start == ButtonState.Pressed && _state.Buttons.Start == ButtonState.Released) {
-                Disconect?.Invoke();
+                Disconnect?.Invoke();
             }
         }
     }

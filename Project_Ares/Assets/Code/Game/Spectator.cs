@@ -20,26 +20,26 @@ namespace ProjectAres {
             //}
             //_singelton = this;
             
-            _myCamera = CameraControler._singelton?.AddCamera();
+            _myCamera = CameraControler.s_singelton?.AddCamera();
         }
         private void OnDestroy() {
             //if (_singelton == this)
             //    _singelton = null;
-            CameraControler._singelton?.RemoveCamera(_myCamera);
+            CameraControler.s_singelton?.RemoveCamera(_myCamera);
         }
 
         // Update is called once per frame
         void Update() {
-            if (Player._references.Count == 0)
+            if (Player.s_references.Count == 0)
                 return;
 
-            float minX = Player._references[0].transform.position.x;//TODO: eventuell nicht so geil, wenn keiner alive ist.
+            float minX = Player.s_references[0].transform.position.x;//TODO: eventuell nicht so geil, wenn keiner alive ist.
             float maxX = minX;
-            float minY = Player._references[0].transform.position.y;
+            float minY = Player.s_references[0].transform.position.y;
             float maxY = minY;
 
-            foreach (var it in Player._references) {
-                if (it._alive) {
+            foreach (var it in Player.s_references) {
+                if (it.m_alive) {
                     minX = Mathf.Min(minX, it.transform.position.x);
                     maxX = Mathf.Max(maxX, it.transform.position.x);
                     minY = Mathf.Min(minY, it.transform.position.y);

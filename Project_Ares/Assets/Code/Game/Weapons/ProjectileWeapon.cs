@@ -6,20 +6,20 @@ namespace ProjectAres {
     public class ProjectileWeapon : MonoBehaviour, IWeapon {
 
         [Header("References")]
-        [SerializeField] protected GameObject _bullet;
-        [SerializeField] protected Transform _barrol;
+        [SerializeField] protected GameObject m_bullet;
+        [SerializeField] protected Transform m_barrel;
 
         [Header("Balancing")]
         //[SerializeField] float _rPM = 1;
-        [SerializeField] protected float _bulletVelocity = 20;
-        [SerializeField] protected float _recoil = 2;
+        [SerializeField] protected float m_bulletVelocity = 20;
+        [SerializeField] protected float m_recoil = 2;
 
-        protected Player _player = null;
+        protected Player m_player = null;
 
-        public Sprite Icon => throw new System.NotImplementedException();
+        public Sprite m_Icon => throw new System.NotImplementedException();
 
         public void Init(Player player) {
-            _player = player;
+            m_player = player;
         }
 
         public virtual void SetActive(bool activate) {
@@ -34,10 +34,10 @@ namespace ProjectAres {
         }
         
         protected virtual void ShootBullet() {
-            Instantiate(_bullet,_barrol == null? transform.position : _barrol.position,_barrol == null ? transform.rotation : _barrol.rotation)
-                .GetComponent<Bullet>()?.Init(_player, _player._rig.velocity + (Vector2)transform.right * _bulletVelocity);
+            Instantiate(m_bullet,m_barrel == null? transform.position : m_barrel.position,m_barrel == null ? transform.rotation : m_barrel.rotation)
+                .GetComponent<Bullet>()?.Init(m_player, m_player.m_rig.velocity + (Vector2)transform.right * m_bulletVelocity);
 
-            _player._rig.AddForce(-transform.right * _recoil);
+            m_player.m_rig.AddForce(-transform.right * m_recoil);
         }
     }
 }

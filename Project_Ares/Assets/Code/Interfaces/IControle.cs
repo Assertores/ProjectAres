@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    public interface IControle {
+    public interface IControl {
 
         Vector2 _dir { get; set; }
 
@@ -16,6 +16,6 @@ namespace ProjectAres {
         Action<int> ChangeWeapon { get; set; }
         Action<int> UseItem { get; set; }
 
-        Action Disconect { get; set; }
+        Action Disconnect { get; set; }
     }
 }

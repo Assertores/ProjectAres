@@ -29,16 +29,16 @@ namespace ProjectAres {
 
         private void OnCollisionEnter2D(Collision2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
-            if (tmp != null) {
+            if (tmp != null) {                              
                 int realDamage;
                 bool kill = tmp.TakeDamage(_damage, out realDamage);
                 if (_source) {//wass ist mit an sich selbst schaden machen (oder an teamkolegen)
                     if(realDamage > 0) {
-                        _source._stuts.DamageDealed += realDamage;
-                        _source._stuts.Assists++;
+                        _source.m_stats.m_damageDealt += realDamage;
+                        _source.m_stats.m_assists++;
                     }
                     if (kill) {
-                        _source._stuts.Kills++;
+                        _source.m_stats.m_kills++;
                     }
                 }
             }

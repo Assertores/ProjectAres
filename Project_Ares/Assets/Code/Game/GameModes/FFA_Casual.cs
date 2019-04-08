@@ -17,7 +17,7 @@ namespace ProjectAres {
 
         public void Init() {
             _startTime = Time.timeSinceLevelLoad;
-            foreach(var it in Player._references) {
+            foreach(var it in Player.s_references) {
                 it.Respawn(_respawnParent.GetChild(Random.Range(0, _respawnParent.childCount)).position);
             }
             gameObject.SetActive(true);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    public class KeyboardControle : MonoBehaviour, IControle {
+    public class KeyboardControle : MonoBehaviour, IControl {
 
         public Vector2 _dir { get; set; }
         public Action StartShooting { get; set; }
@@ -13,7 +13,7 @@ namespace ProjectAres {
         public Action<int> SelectWeapon { get; set; }
         public Action<int> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
-        public Action Disconect { get; set; }
+        public Action Disconnect { get; set; }
 
         Camera _myCamera = null;
         
@@ -51,7 +51,7 @@ namespace ProjectAres {
             //}
 
             if (Input.GetKeyUp(KeyCode.Escape)) {
-                Disconect?.Invoke();
+                Disconnect?.Invoke();
             }
         }
     }
