@@ -24,6 +24,8 @@ namespace ProjectAres {
         GamePadState _state;
         GamePadState _lastState;
 
+        Vector2 _tmpDir;
+
         // Start is called before the first frame update
         void Start() {
             _state = GamePad.GetState((PlayerIndex)_controlerIndex);
@@ -38,9 +40,13 @@ namespace ProjectAres {
             _state = GamePad.GetState((PlayerIndex)_controlerIndex);
             //_dir = new Vector2 (_state.ThumbSticks.Right.X * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.Y * _state.ThumbSticks.Right.Y) / 2), _state.ThumbSticks.Right.Y * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.X * _state.ThumbSticks.Right.X) / 2));//unnötig http://mathproofs.blogspot.com/2005/07/mapping-square-to-circle.html
             
-            _dir = new Vector2(_state.ThumbSticks.Right.X, _state.ThumbSticks.Right.Y).normalized;
-            if(_dir == Vector2.zero) {
-                _dir = new Vector2(_state.ThumbSticks.Left.X, _state.ThumbSticks.Left.Y).normalized;
+
+            _tmpDir = new Vector2(_state.ThumbSticks.Right.X, _state.ThumbSticks.Right.Y).normalized;
+            if(_tmpDir == Vector2.zero) {
+                _tmpDir = new Vector2(_state.ThumbSticks.Left.X, _state.ThumbSticks.Left.Y).normalized;//damit die waffe nicht nach rechts zurück springt, wenn man die sticks loslässt
+            }
+            if(_tmpDir != Vector2.zero) {
+                _dir = _tmpDir;
             }
 
             if (_state.Triggers.Right > _shootThreshold && _lastState.Triggers.Right <= _shootThreshold) {
