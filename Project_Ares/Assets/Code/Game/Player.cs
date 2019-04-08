@@ -104,6 +104,8 @@ namespace ProjectAres {
                 }
             }
 
+            ChangeWeapon(0);//damit die erste waffe ausgewählt ist
+
             Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
         }
