@@ -1463,20 +1463,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c2513983139bf4b91de650f8561343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponInit:
+  m_weaponInit:
   - {fileID: 2582504901680775649, guid: 78bfee4a38890614296d2d71ddd36b4a, type: 3}
   - {fileID: 8294756563320938153, guid: 4da10e41b5a4d484a80a82139062aee1, type: 3}
-  _weaponAncor: {fileID: 3749817363473744153}
-  _weaponRotationAncor: {fileID: 2660925482668115267}
-  _healthBar: {fileID: 5840008463104912062}
-  _weaponWheel: {fileID: 8791171201075259141}
-  _controleObject: {fileID: 8904584645726280161}
-  _dashColiders:
+  m_weaponAnchor: {fileID: 3749817363473744153}
+  m_weaponRotationAncor: {fileID: 2660925482668115267}
+  m_healthBar: {fileID: 5840008463104912062}
+  m_weaponWheel: {fileID: 8791171201075259141}
+  m_controlObject: {fileID: 0}
+  m_dashColliders:
     serializedVersion: 2
     m_Bits: 256
-  _maxHealth: 100
-  _dashForce: 100
-  _invulnerableDuration: 1
+  m_maxHealth: 100
+  m_dashForce: 2
+  m_iFrames: 1
+  m_gravity: 1
+  m_airResistance: 0.25
 --- !u!50 &3322077235621303162
 Rigidbody2D:
   serializedVersion: 4
@@ -1489,7 +1491,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 80
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0.5
