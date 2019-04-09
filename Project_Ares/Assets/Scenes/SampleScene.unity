@@ -244,7 +244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260778365}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.78, y: -1.3990002, z: 0}
+  m_LocalPosition: {x: -0.9, y: -1.73, z: 0}
   m_LocalScale: {x: 4.994641, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 455327452}
@@ -353,9 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eeaa8ca500133a41a6d292c90e68536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _respawnParent: {fileID: 1851875763}
-  _gameTime: 120
-  _respawnTime: 2
+  m_respawnParent: {fileID: 1851875763}
+  m_gameTime: 120
+  m_respawnTime: 2
 --- !u!4 &385585063
 Transform:
   m_ObjectHideFlags: 0
@@ -609,7 +609,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30, y: 30}
+  m_Size: {x: 54.4, y: 30}
   m_EdgeRadius: 0
 --- !u!114 &1313938145
 MonoBehaviour:
@@ -1178,5 +1178,16 @@ PrefabInstance:
       propertyPath: _gmObject
       value: 
       objectReference: {fileID: 385585061}
+    - target: {fileID: 8702894642429529503, guid: 260732bd95587664e91221c25971814f,
+        type: 3}
+      propertyPath: m_gmObject
+      value: 
+      objectReference: {fileID: 385585061}
+    - target: {fileID: 8702894642429529503, guid: 260732bd95587664e91221c25971814f,
+        type: 3}
+      propertyPath: m_playerRef
+      value: 
+      objectReference: {fileID: 3853162914686457987, guid: abcbf94c67c319c4ca96a6c3643ee268,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 260732bd95587664e91221c25971814f, type: 3}
