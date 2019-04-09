@@ -20,7 +20,7 @@ namespace ProjectAres {
         private void Awake() {
             if (s_singelton)
                 Destroy(this);
-            if (!m_cameraRef.GetComponent<Camera>())
+            if (!m_cameraRef || !m_cameraRef.GetComponent<Camera>())
                 Destroy(this);
 
             s_singelton = this;
