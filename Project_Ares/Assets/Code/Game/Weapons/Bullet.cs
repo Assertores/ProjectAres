@@ -11,14 +11,15 @@ namespace ProjectAres {
 
         Player _source = null;
 
-        public void Init(Player source, Vector2 velocity) {
+        public Rigidbody2D Init(Player source, Vector2 velocity) {
             _source = source;
-            Rigidbody2D rig = GetComponent<Rigidbody2D>();
-            if (!rig) {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            if (!rb) {
                 Destroy(gameObject);
-                return;
+                return null;
             }
-            rig.velocity = velocity;
+            rb.velocity = velocity;
+            return rb;
         }
 
         private void Update() {
