@@ -1477,8 +1477,8 @@ MonoBehaviour:
   m_maxHealth: 100
   m_dashForce: 2
   m_iFrames: 1
-  m_gravity: 1
-  m_airResistance: 0.25
+  m_gravity: 2
+  m_airResistance: 0.175
 --- !u!50 &3322077235621303162
 Rigidbody2D:
   serializedVersion: 4
