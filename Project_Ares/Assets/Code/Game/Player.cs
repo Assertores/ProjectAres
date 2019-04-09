@@ -158,7 +158,7 @@ namespace ProjectAres {
             m_respawntTime = Time.timeSinceLevelLoad;
         }
 
-        public void TakeDamage(int damage, Player source) {
+        public void TakeDamage(int damage, Player source, Vector2 force) {
             if(Time.timeSinceLevelLoad-m_respawntTime < m_iFrames) {
                 return;
             }
@@ -183,6 +183,7 @@ namespace ProjectAres {
                 GameManager._singelton.PlayerDied(this);
             } else {
                 m_stats.m_damageTaken += damage;
+                m_rb.AddForce(force);
                 if (source) {
                     source.m_stats.m_damageDealt += damage;
                     m_assistRefs.Add(source);
