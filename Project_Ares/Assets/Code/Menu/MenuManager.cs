@@ -8,9 +8,9 @@ namespace ProjectAres {
     public class MenuManager : MonoBehaviour {
 
         [Header("References")]
-        [SerializeField] GameObject _playerRev;
+        [SerializeField] GameObject m_playerRev;
 
-        GamePadState[] _lastStates = new GamePadState[4];
+        GamePadState[] m_lastStates = new GamePadState[4];
 
         #region Singelton
 
@@ -31,28 +31,28 @@ namespace ProjectAres {
 
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Return)) {
-                GameObject tmp = Instantiate(_playerRev);
+                GameObject tmp = Instantiate(m_playerRev);
                 if (tmp) {
                     GameObject tmpControle = new GameObject("Controler");
                     tmpControle.transform.parent = tmp.transform;
 
-                    IControle reference = tmpControle.AddComponent<KeyboardControle>();//null reference checks
+                    IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
                     tmp.GetComponent<Player>().Init(reference);//null reference checks
                 }
             }
             for(int i = 0; i < 4; i++) {
-                if(_lastStates[i].IsConnected && _lastStates[i].Buttons.Start == ButtonState.Pressed && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
-                    GameObject tmp = Instantiate(_playerRev);
+                if(m_lastStates[i].IsConnected && m_lastStates[i].Buttons.Start == ButtonState.Pressed && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
+                    GameObject tmp = Instantiate(m_playerRev);
                     if (tmp) {
                         GameObject tmpControle = new GameObject("Controler");
                         tmpControle.transform.parent = tmp.transform;
 
-                        ControllerControle reference = tmpControle.AddComponent<ControllerControle>();//null reference checks
+                        ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
                         reference._controlerIndex = i;
                         tmp.GetComponent<Player>().Init(reference);//null reference checks
                     }
                 }
-                _lastStates[i] = GamePad.GetState((PlayerIndex)i);
+                m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
             }
         }
 

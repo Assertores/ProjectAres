@@ -7,18 +7,18 @@ namespace ProjectAres {
     public class FFA_Casual : MonoBehaviour, IGameMode {
 
         [Header("References")]
-        [SerializeField] Transform _respawnParent;
+        [SerializeField] Transform m_respawnParent;
 
         [Header("Balancing")]
-        [SerializeField] float _gameTime = 120.0f;
-        [SerializeField] float _respawnTime = 2.0f;
+        [SerializeField] float m_gameTime = 120.0f;
+        [SerializeField] float m_respawnTime = 2.0f;
 
-        float _startTime;
+        float m_startTime;
 
         public void Init() {
-            _startTime = Time.timeSinceLevelLoad;
-            foreach(var it in Player._references) {
-                it.Respawn(_respawnParent.GetChild(Random.Range(0, _respawnParent.childCount)).position);
+            m_startTime = Time.timeSinceLevelLoad;
+            foreach(var it in Player.s_references) {
+                it.Respawn(m_respawnParent.GetChild(Random.Range(0, m_respawnParent.childCount)).position);
             }
             gameObject.SetActive(true);
         }
@@ -32,9 +32,9 @@ namespace ProjectAres {
         }
 
         IEnumerator RespawnPlayer(Player player) {
-            yield return new WaitForSeconds(_respawnTime);
+            yield return new WaitForSeconds(m_respawnTime);
 
-            player.Respawn(_respawnParent.GetChild(Random.Range(0,_respawnParent.childCount)).position);
+            player.Respawn(m_respawnParent.GetChild(Random.Range(0,m_respawnParent.childCount)).position);
 
         }
         
@@ -44,7 +44,7 @@ namespace ProjectAres {
         
         void Update() {
             //print(Time.timeSinceLevelLoad - _startTime);
-            if(_gameTime <= _startTime + Time.timeSinceLevelLoad) {
+            if(m_gameTime <= m_startTime + Time.timeSinceLevelLoad) {
                 //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
                 SceneManager.LoadScene(StringCollection.FFACASUAL);
                 //auf WinScreen wächseln

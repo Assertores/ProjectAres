@@ -6,20 +6,20 @@ namespace ProjectAres {
     public class ProjectileWeapon : MonoBehaviour, IWeapon {
 
         [Header("References")]
-        [SerializeField] protected GameObject _bullet;
-        [SerializeField] protected Transform _barrol;
+        [SerializeField] protected GameObject m_bullet;
+        [SerializeField] protected Transform m_barrel;
 
         [Header("Balancing")]
         //[SerializeField] float _rPM = 1;
-        [SerializeField] protected float _bulletVelocity = 20;
-        [SerializeField] protected float _recoil = 2;
+        [SerializeField] protected float m_muzzleEnergy = 800;
+        [SerializeField] protected int m_damage = 1;
 
-        protected Player _player = null;
+        protected Player m_player = null;
 
-        public Sprite Icon => throw new System.NotImplementedException();
+        public Sprite m_Icon => throw new System.NotImplementedException();
 
         public void Init(Player player) {
-            _player = player;
+            m_player = player;
         }
 
         public virtual void SetActive(bool activate) {
@@ -34,10 +34,14 @@ namespace ProjectAres {
         }
         
         protected virtual void ShootBullet() {
-            Instantiate(_bullet,_barrol == null? transform.position : _barrol.position,_barrol == null ? transform.rotation : _barrol.rotation)
-                .GetComponent<Bullet>()?.Init(_player, _player._rig.velocity + (Vector2)transform.right * _bulletVelocity);
+            Rigidbody2D bulletRB = Instantiate(m_bullet,m_barrel == null? transform.position : m_barrel.position,m_barrel == null ? transform.rotation : m_barrel.rotation)
+                .GetComponent<IHarmingObject>()?.Init(m_player);
 
-            _player._rig.AddForce(-transform.right * _recoil);
+            if (bulletRB) {
+                bulletRB.velocity = m_player.m_rb.velocity;
+                bulletRB.AddForce(transform.right * m_muzzleEnergy);
+            }
+            m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);
         }
     }
 }

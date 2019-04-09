@@ -8,7 +8,7 @@ namespace ProjectAres {
         //[Header("References")]
 
         //[Header("Balancing")]
-        [SerializeField] float _rPM = 1;
+        [SerializeField] float m_rPM = 1;
 
         //Player _player = null;
 
@@ -23,7 +23,7 @@ namespace ProjectAres {
         //}
 
         public override void StartShooting() {
-            Invoke("ShootBullet", 60 / _rPM);
+            Invoke("ShootBullet", 60 / m_rPM);
         }
 
         public override void StopShooting() {
@@ -37,7 +37,7 @@ namespace ProjectAres {
 
             //_player._rig.AddForce(-transform.right * _recoil);
 
-            Invoke("ShootBullet", 60 / _rPM);//Automatic
+            Invoke("ShootBullet", 60 / m_rPM);//Automatic
         }
     }
 }

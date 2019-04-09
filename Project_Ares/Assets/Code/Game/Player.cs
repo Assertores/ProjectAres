@@ -5,50 +5,55 @@ using UnityEngine.UI;
 
 namespace ProjectAres {
 
-    public struct PlayerStuts {
-        public int Kills;
-        public int Deaths;
-        public int Assists;
-        public int DamageDealed;
-        public int DamageTaken;
+    public struct d_playerStats {
+        public int m_kills;
+        public int m_deaths;
+        public int m_assists;
+        public int m_damageDealt;
+        public int m_damageTaken;
     }
 
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MonoBehaviour, IDamageableObject {
 
-        public static List<Player> _references = new List<Player>();
+        public static List<Player> s_references = new List<Player>();
 
         #region Variables
 
         [Header("References")]
-        [SerializeField] GameObject[] _weaponInit;
-        [SerializeField] Transform _weaponAncor;
-        [SerializeField] Transform _weaponRotationAncor;
-        [SerializeField] Image _healthBar;
-        [SerializeField] Transform _weaponWheel;
-        [SerializeField] GameObject _controleObject;
-        [SerializeField] LayerMask _dashColiders;
+        [SerializeField] GameObject[] m_weaponInit;
+        [SerializeField] Transform m_weaponAnchor;
+        [SerializeField] Transform m_weaponRotationAncor;
+        [SerializeField] Image m_healthBar;
+        [SerializeField] Transform m_weaponWheel;
+        [SerializeField] GameObject m_controlObject;
+        [SerializeField] LayerMask m_dashColliders;
 
         [Header("Balancing")]
-        [SerializeField] int _maxHealth = 100;
-        [SerializeField] float _dashForce = 2;
-        [SerializeField] float _invulnerableDuration = 1;
+        [SerializeField] int m_maxHealth = 100;
+        [SerializeField] float m_dashForce = 2;
+        [Tooltip("Immer in Sekunden angeben")]
+        [SerializeField] float m_iFrames = 1;
+        [SerializeField] float m_gravity = 1;
+        [Range(0,1)]
+        [SerializeField] float m_airResistance = 0.25f;
 
-        public PlayerStuts _stuts;
-        public bool _alive { get; set; }
+        public d_playerStats m_stats;
+        public bool m_alive { get; set; }
 
-        IControle _controle;
-        List<IWeapon> _weapons = new List<IWeapon>();
-        List<IItem> _items = new List<IItem>();
+        IControl m_control;
+        List<IWeapon> m_weapons = new List<IWeapon>();
+        List<IItem> m_items = new List<IItem>();
 
-        Dictionary<Collider2D, Vector2> _collisionNormals = new Dictionary<Collider2D, Vector2>();
+        Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();
+        List<Player> m_assistRefs = new List<Player>();
 
-        float _respawntTime = float.MaxValue;
-        int _currentHealth;
-        int _currentWeapon = 0;
-        bool _isShooting = false;
+        float m_respawntTime = float.MaxValue;
+        int m_currentHealth;
+        int m_currentWeapon = 0;
+        bool m_isShooting = false;
 
-        public Rigidbody2D _rig { get; private set; }
+        public Rigidbody2D m_rb { get; private set; }
 
         #endregion
         #region Unity
@@ -56,53 +61,60 @@ namespace ProjectAres {
         void Start() {
             DontDestroyOnLoad(this.gameObject);
             //GameManager test = GameManager._singelton;
-            _rig = GetComponent<Rigidbody2D>();
+            m_rb = GetComponent<Rigidbody2D>();
             //Init(null);
-            _references.Add(this);
+            s_references.Add(this);
         }
         private void OnDestroy() {
-            _references.Remove(this);
+            s_references.Remove(this);
         }
         
         void Update() {
-            if(_controle != null && _currentHealth > 0)
-                _weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-_controle._dir.y,_controle._dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+            if(m_control != null && m_currentHealth > 0)
+                m_weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
 
-            _healthBar.fillAmount = (float)_currentHealth / _maxHealth;
+            m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
+        }
+
+        void FixedUpdate() {
+            m_rb.velocity -= m_rb.velocity * m_airResistance * Time.fixedDeltaTime;
+            m_rb.velocity += Vector2.down * m_gravity * Time.fixedDeltaTime;
         }
 
         #endregion
 
-        public void Init(IControle controle) {
-            if (controle == null) {
-                if(_controleObject == null) {
+        public void Init(IControl control) {
+            if (control == null) {
+                if(m_controlObject == null) {
                     DestroyImmediate(gameObject);
                     return;
                 }
-                _controle = _controleObject.GetComponent<IControle>();
-                if(_controle == null) {
+                m_control = m_controlObject.GetComponent<IControl>();
+                if(m_control == null) {
                     //Destroy(gameObject);
                     DestroyImmediate(gameObject);
                     return;
                 }
             } else {
-                _controle = controle;
+                m_control = control;
             }
 
             InControle(true);
 
             GameObject tmp;
             IWeapon tmpInterface;
-            foreach (var it in _weaponInit) {
+            foreach (var it in m_weaponInit) {
                 tmpInterface = it.GetComponent<IWeapon>();
                 if (tmpInterface != null) {
-                    tmp = Instantiate(it, _weaponAncor);
+                    tmp = Instantiate(it, m_weaponAnchor);
                     tmpInterface = tmp.GetComponent<IWeapon>();
                     tmpInterface.Init(this);
                     tmpInterface.SetActive(false);
-                    _weapons.Add(tmpInterface);
+                    m_weapons.Add(tmpInterface);
                 }
             }
+
+            ChangeWeapon(0);//damit die erste waffe ausgewählt ist
 
             Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
@@ -110,23 +122,23 @@ namespace ProjectAres {
 
         public void InControle(bool controle) {
             if (controle) {
-                _controle.StartShooting += StartShooting;
-                _controle.StopShooting += StopShooting;
-                _controle.Dash += Dash;
+                m_control.StartShooting += StartShooting;
+                m_control.StopShooting += StopShooting;
+                m_control.Dash += Dash;
 
-                _controle.SelectWeapon += SelectWeapon;
-                _controle.ChangeWeapon += ChangeWeapon;
-                _controle.UseItem += UseItem;
-                _controle.Disconect += Disconect;
+                m_control.SelectWeapon += SelectWeapon;
+                m_control.ChangeWeapon += ChangeWeapon;
+                m_control.UseItem += UseItem;
+                m_control.Disconnect += Disconect;
             } else {
-                _controle.StartShooting = null;
-                _controle.StopShooting = null;
-                _controle.Dash = null;
+                m_control.StartShooting = null;
+                m_control.StopShooting = null;
+                m_control.Dash = null;
 
-                _controle.SelectWeapon = null;
-                _controle.ChangeWeapon = null;
-                _controle.UseItem = null;
-                _controle.Disconect = null;
+                m_control.SelectWeapon = null;
+                m_control.ChangeWeapon = null;
+                m_control.UseItem = null;
+                m_control.Disconnect = null;
                 StopShooting();
             }
         }
@@ -134,8 +146,8 @@ namespace ProjectAres {
         public void Respawn(Vector2 pos) {
             transform.position = pos;
 
-            _currentHealth = _maxHealth;
-            _alive = true;
+            m_currentHealth = m_maxHealth;
+            m_alive = true;
             /*if(_currentWeapon != 0) {
                 _weapons[_currentWeapon].SetActive(false);
                 _currentWeapon = 0;
@@ -143,86 +155,114 @@ namespace ProjectAres {
             }*/
             InControle(true);
             gameObject.SetActive(true);
-            _respawntTime = Time.timeSinceLevelLoad;
+            m_respawntTime = Time.timeSinceLevelLoad;
         }
 
-        public bool TakeDamage(int damage, out int realDamage, bool ignoreInvulnerable = false) {
-            if(Time.timeSinceLevelLoad-_respawntTime < _invulnerableDuration && !ignoreInvulnerable) {
-                realDamage = 0;
-                return false;
+        public void TakeDamage(int damage, Player source) {
+            if(Time.timeSinceLevelLoad-m_respawntTime < m_iFrames) {
+                return;
             }
-            if(damage > _currentHealth) {
-                realDamage = _currentHealth;
-                _currentHealth = 0;
-                _alive = false;
-                _rig.velocity = Vector2.zero;
+            if(damage > m_currentHealth) {
+                m_stats.m_damageTaken += m_currentHealth;
+                m_stats.m_deaths++;
+                if (source) {
+                    source.m_stats.m_damageDealt += m_currentHealth;
+                    source.m_stats.m_kills++;
+                }
+                foreach(var it in m_assistRefs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
+                    it.m_stats.m_assists++;
+                }
+                m_assistRefs.Clear();
+
+                m_currentHealth = 0;
+                m_alive = false;
+                m_rb.velocity = Vector2.zero;
                 gameObject.SetActive(false);
-                _stuts.DamageTaken += realDamage;
-                _stuts.Deaths++;
+                
                 InControle(false);
                 GameManager._singelton.PlayerDied(this);
-                //TODO: Stuff zum respawnen
-                return true;
             } else {
-                realDamage = damage;
-                _currentHealth -= realDamage;
-                _stuts.DamageTaken += realDamage;
-                return false;
+                m_stats.m_damageTaken += damage;
+                if (source) {
+                    source.m_stats.m_damageDealt += damage;
+                    m_assistRefs.Add(source);
+                }
+
+                m_currentHealth -= damage;
             }
+        }
+
+        public void Die(Player source) {
+            m_stats.m_deaths++;
+            if (source) {
+                source.m_stats.m_kills++;
+            }
+            foreach (var it in m_assistRefs) {//eventuell gegen funktion ersetzten
+                it.m_stats.m_assists++;
+            }
+            m_assistRefs.Clear();
+
+            m_currentHealth = 0;
+            m_alive = false;
+            m_rb.velocity = Vector2.zero;
+            gameObject.SetActive(false);
+
+            InControle(false);
+            GameManager._singelton.PlayerDied(this);
         }
 
         public int GetHealth() {
-            return _currentHealth;
+            return m_currentHealth;
         }
 
         void SelectWeapon(int selectedWeapon) {
-            if (selectedWeapon >= _weapons.Count || selectedWeapon < 0)
+            if (selectedWeapon >= m_weapons.Count || selectedWeapon < 0)
                 selectedWeapon = 0;
-            _weaponWheel.gameObject.SetActive(true);
+            m_weaponWheel.gameObject.SetActive(true);
 
             //_weaponWheel.GetChild(selectedWeapon) highlight selected item
         }
 
         void ChangeWeapon(int newWeapon) {
-            if (newWeapon < _weapons.Count && newWeapon >= 0) {
-                _weapons[_currentWeapon].StopShooting();
-                _weapons[_currentWeapon].SetActive(false);
-                _currentWeapon = newWeapon;
-                _weapons[_currentWeapon].SetActive(true);
-                if (_isShooting)
-                    _weapons[_currentWeapon].StartShooting();
-                _weaponWheel.gameObject.SetActive(false);
+            if (newWeapon < m_weapons.Count && newWeapon >= 0) {
+                m_weapons[m_currentWeapon].StopShooting();
+                m_weapons[m_currentWeapon].SetActive(false);
+                m_currentWeapon = newWeapon;
+                m_weapons[m_currentWeapon].SetActive(true);
+                if (m_isShooting)
+                    m_weapons[m_currentWeapon].StartShooting();
+                m_weaponWheel.gameObject.SetActive(false);
             }
         }
 
         void StartShooting() {
-            _weapons[_currentWeapon].StartShooting();
-            _isShooting = true;
+            m_weapons[m_currentWeapon].StartShooting();
+            m_isShooting = true;
         }
 
         void StopShooting() {
-            _isShooting = false;
-            _weapons[_currentWeapon].StopShooting();
+            m_isShooting = false;
+            m_weapons[m_currentWeapon].StopShooting();
         }
 
         void UseItem(int item) {
-            if(item < _items.Count && item >= 0) {
-                _items[item].Activate();
-                _items.Remove(_items[item]);
+            if(item < m_items.Count && item >= 0) {
+                m_items[item].Activate();
+                m_items.Remove(m_items[item]);
             }
         }
 
         void Dash() {
             Vector2 tmp = new Vector2(0, 0);
-            foreach(var it in _collisionNormals) {
+            foreach(var it in m_collisionNormals) {
                 tmp += it.Value;
             }
-            _rig.AddForce(tmp.normalized * _dashForce);
+            m_rb.AddForce(tmp.normalized * m_dashForce);
         }
 
         public void Disconect() {
             Destroy(this.gameObject);
-            _references.Remove(this);
+            s_references.Remove(this);
         }
 
         #region Physics
@@ -230,24 +270,24 @@ namespace ProjectAres {
         private void OnTriggerEnter2D(Collider2D collision) {
             IItem tmpItem = collision.GetComponent<IItem>();
             if (tmpItem != null) {
-                _items.Add(tmpItem);
+                m_items.Add(tmpItem);
                 tmpItem.Collect();
             }
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if (_dashColiders.value == (_dashColiders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
+            if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
                 foreach (var it in collision.contacts) {
                     tmpNormal += it.normal;
                 }
-                _collisionNormals[collision.collider] = tmpNormal.normalized;
+                m_collisionNormals[collision.collider] = tmpNormal.normalized;
             }
         }
 
         private void OnCollisionExit2D(Collision2D collision) {
-            if (_dashColiders.value == (_dashColiders | 1 << collision.gameObject.layer)) {
-                _collisionNormals.Remove(collision.collider);
+            if (m_dashColliders.value == (m_dashColliders | 1 << collision.gameObject.layer)) {
+                m_collisionNormals.Remove(collision.collider);
             }
         }
 

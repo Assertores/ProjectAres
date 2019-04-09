@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    public class KeyboardControle : MonoBehaviour, IControle {
+    public class KeyboardControl : MonoBehaviour, IControl {
 
-        public Vector2 _dir { get; set; }
+        public Vector2 m_dir { get; set; }
         public Action StartShooting { get; set; }
         public Action StopShooting { get; set; }
         public Action Dash { get; set; }
         public Action<int> SelectWeapon { get; set; }
         public Action<int> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
-        public Action Disconect { get; set; }
+        public Action Disconnect { get; set; }
 
-        Camera _myCamera = null;
+        Camera m_myCamera = null;
         
         void Start() {
             //if (CameraControler._singelton)
@@ -28,7 +28,7 @@ namespace ProjectAres {
         
         void Update() {
 
-            _dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            m_dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
             if (Input.GetButtonDown(StringCollection.FIRE)) {
                 StartShooting?.Invoke();
@@ -51,7 +51,7 @@ namespace ProjectAres {
             //}
 
             if (Input.GetKeyUp(KeyCode.Escape)) {
-                Disconect?.Invoke();
+                Disconnect?.Invoke();
             }
         }
     }
