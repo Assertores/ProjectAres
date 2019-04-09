@@ -7,7 +7,7 @@ namespace ProjectAres {
 
         public bool m_alive { get; set; }
 
-        public void TakeDamage(int damage, Player source) {
+        public void TakeDamage(int damage, Player source, Vector2 force) {
             MenuManager._singelton?.StartGame();
         }
 

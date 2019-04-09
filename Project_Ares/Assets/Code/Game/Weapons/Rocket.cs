@@ -15,6 +15,7 @@ namespace ProjectAres {
         [SerializeField] int m_damage = 1;
 
         Player m_source;
+        Rigidbody2D m_rb;
 
         #endregion
         #region MonoBehaviour
@@ -32,14 +33,14 @@ namespace ProjectAres {
         #region IHarmingObject
 
         public Rigidbody2D Init(Player reverence) {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            if (!rb) {
+            m_rb = GetComponent<Rigidbody2D>();
+            if (!m_rb) {
                 Destroy(gameObject);
                 return null;
             }
 
             m_source = reverence;
-            return rb;
+            return m_rb;
         }
 
         #endregion
@@ -49,7 +50,7 @@ namespace ProjectAres {
             Instantiate(m_explosionRef);
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.TakeDamage(m_damage, m_source);
+                tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass);
             }
             Destroy(gameObject);
         }
