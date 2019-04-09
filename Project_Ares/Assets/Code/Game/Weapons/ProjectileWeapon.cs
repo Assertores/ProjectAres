@@ -12,6 +12,7 @@ namespace ProjectAres {
         [Header("Balancing")]
         //[SerializeField] float _rPM = 1;
         [SerializeField] protected float m_muzzleEnergy = 800;
+        [SerializeField] protected int m_damage = 1;
 
         protected Player m_player = null;
 
@@ -34,9 +35,10 @@ namespace ProjectAres {
         
         protected virtual void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_bullet,m_barrel == null? transform.position : m_barrel.position,m_barrel == null ? transform.rotation : m_barrel.rotation)
-                .GetComponent<Bullet>()?.Init(m_player, m_player.m_rb.velocity/* + (Vector2)transform.right * m_bulletVelocity*/);
+                .GetComponent<IHarmingObject>()?.Init(m_player, m_damage);
 
             if (bulletRB) {
+                bulletRB.velocity = m_player.m_rb.velocity;
                 bulletRB.AddForce(transform.right * m_muzzleEnergy);
             }
             m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);

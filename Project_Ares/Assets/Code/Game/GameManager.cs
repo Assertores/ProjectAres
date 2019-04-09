@@ -55,6 +55,13 @@ namespace ProjectAres {
             _gameMode?.Stop();
             _gameMode = mode;
             mode.Init();
+            foreach(var it in Player.s_references) {
+                it.m_stats.m_assists = 0;
+                it.m_stats.m_damageDealt = 0;
+                it.m_stats.m_damageTaken = 0;
+                it.m_stats.m_deaths = 0;
+                it.m_stats.m_kills = 0;
+            }
         }
 
         void Update() {

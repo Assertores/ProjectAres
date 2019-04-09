@@ -7,7 +7,8 @@ namespace ProjectAres {
 
         bool m_alive { get; set; }
 
-        bool TakeDamage(int damage, out int realDamage, bool ignoreInvulnerable = false);
+        void TakeDamage(int damage, Player source);
+        void Die(Player source);
         int GetHealth();
     }
 }

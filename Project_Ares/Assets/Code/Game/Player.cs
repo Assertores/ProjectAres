@@ -46,6 +46,7 @@ namespace ProjectAres {
         List<IItem> m_items = new List<IItem>();
 
         Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();
+        List<Player> m_assistRevs = new List<Player>();
 
         float m_respawntTime = float.MaxValue;
         int m_currentHealth;
@@ -157,29 +158,57 @@ namespace ProjectAres {
             m_respawntTime = Time.timeSinceLevelLoad;
         }
 
-        public bool TakeDamage(int damage, out int realDamage, bool ignoreInvulnerable = false) {
-            if(Time.timeSinceLevelLoad-m_respawntTime < m_iFrames && !ignoreInvulnerable) {
-                realDamage = 0;
-                return false;
+        public void TakeDamage(int damage, Player source) {
+            if(Time.timeSinceLevelLoad-m_respawntTime < m_iFrames) {
+                return;
             }
             if(damage > m_currentHealth) {
-                realDamage = m_currentHealth;
+                m_stats.m_damageTaken += m_currentHealth;
+                m_stats.m_deaths++;
+                if (source) {
+                    source.m_stats.m_damageDealt += m_currentHealth;
+                    source.m_stats.m_kills++;
+                }
+                foreach(var it in m_assistRevs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
+                    it.m_stats.m_assists++;
+                }
+                m_assistRevs.Clear();
+
                 m_currentHealth = 0;
                 m_alive = false;
                 m_rb.velocity = Vector2.zero;
                 gameObject.SetActive(false);
-                m_stats.m_damageTaken += realDamage;
-                m_stats.m_deaths++;
+                
                 InControle(false);
                 GameManager._singelton.PlayerDied(this);
-                //TODO: Stuff zum respawnen
-                return true;
             } else {
-                realDamage = damage;
-                m_currentHealth -= realDamage;
-                m_stats.m_damageTaken += realDamage;
-                return false;
+                m_stats.m_damageTaken += damage;
+                if (source) {
+                    source.m_stats.m_damageDealt += damage;
+                    m_assistRevs.Add(source);
+                }
+
+                m_currentHealth -= damage;
             }
+        }
+
+        public void Die(Player source) {
+            m_stats.m_deaths++;
+            if (source) {
+                source.m_stats.m_kills++;
+            }
+            foreach (var it in m_assistRevs) {//eventuell gegen funktion ersetzten
+                it.m_stats.m_assists++;
+            }
+            m_assistRevs.Clear();
+
+            m_currentHealth = 0;
+            m_alive = false;
+            m_rb.velocity = Vector2.zero;
+            gameObject.SetActive(false);
+
+            InControle(false);
+            GameManager._singelton.PlayerDied(this);
         }
 
         public int GetHealth() {
