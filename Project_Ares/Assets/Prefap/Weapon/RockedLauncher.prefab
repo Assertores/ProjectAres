@@ -157,5 +157,5 @@ MonoBehaviour:
   m_bullet: {fileID: 6427757345274832488, guid: 3dd99c852e85baa40b69b81bd82f9a39,
     type: 3}
   m_barrel: {fileID: 2783012653673747794}
-  m_bulletVelocity: 20
-  m_recoil: 2
+  m_muzzleEnergy: 10000
+  m_damage: 1
