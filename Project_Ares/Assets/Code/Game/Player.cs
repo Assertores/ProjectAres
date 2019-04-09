@@ -34,6 +34,9 @@ namespace ProjectAres {
         [SerializeField] float m_dashForce = 2;
         [Tooltip("Immer in Sekunden angeben")]
         [SerializeField] float m_iFrames = 1;
+        [SerializeField] float m_gravity = 1;
+        [Range(0,1)]
+        [SerializeField] float m_airResistance = 0.25f;
 
         public d_playerStats m_stats;
         public bool m_alive { get; set; }
@@ -49,7 +52,7 @@ namespace ProjectAres {
         int m_currentWeapon = 0;
         bool m_isShooting = false;
 
-        public Rigidbody2D m_rig { get; private set; }
+        public Rigidbody2D m_rb { get; private set; }
 
         #endregion
         #region Unity
@@ -57,7 +60,7 @@ namespace ProjectAres {
         void Start() {
             DontDestroyOnLoad(this.gameObject);
             //GameManager test = GameManager._singelton;
-            m_rig = GetComponent<Rigidbody2D>();
+            m_rb = GetComponent<Rigidbody2D>();
             //Init(null);
             s_references.Add(this);
         }
@@ -70,6 +73,11 @@ namespace ProjectAres {
                 m_weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control._dir.y,m_control._dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
+        }
+
+        void FixedUpdate() {
+            m_rb.velocity -= m_rb.velocity * m_airResistance * Time.fixedDeltaTime;
+            m_rb.velocity += Vector2.down * m_gravity * Time.fixedDeltaTime;
         }
 
         #endregion
@@ -158,7 +166,7 @@ namespace ProjectAres {
                 realDamage = m_currentHealth;
                 m_currentHealth = 0;
                 m_alive = false;
-                m_rig.velocity = Vector2.zero;
+                m_rb.velocity = Vector2.zero;
                 gameObject.SetActive(false);
                 m_stats.m_damageTaken += realDamage;
                 m_stats.m_deaths++;
@@ -220,7 +228,7 @@ namespace ProjectAres {
             foreach(var it in m_collisionNormals) {
                 tmp += it.Value;
             }
-            m_rig.AddForce(tmp.normalized * m_dashForce);
+            m_rb.AddForce(tmp.normalized * m_dashForce);
         }
 
         public void Disconect() {
