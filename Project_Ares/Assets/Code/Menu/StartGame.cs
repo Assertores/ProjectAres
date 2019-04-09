@@ -7,10 +7,12 @@ namespace ProjectAres {
 
         public bool m_alive { get; set; }
 
-        public bool TakeDamage(int damage, out int realDamage, bool ignoreInvulnerable = false) {
-            realDamage = 0;
+        public void TakeDamage(int damage, Player source) {
             MenuManager._singelton?.StartGame();
-            return false;
+        }
+
+        public void Die(Player source) {
+            return;
         }
 
         public int GetHealth() {
