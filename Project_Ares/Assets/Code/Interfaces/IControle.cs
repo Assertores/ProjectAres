@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ProjectAres {
     public interface IControl {
 
-        Vector2 _dir { get; set; }
+        Vector2 m_dir { get; set; }
 
         Action StartShooting { get; set; }
         Action StopShooting { get; set; }

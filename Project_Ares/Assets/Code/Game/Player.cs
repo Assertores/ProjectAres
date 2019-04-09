@@ -71,7 +71,7 @@ namespace ProjectAres {
         
         void Update() {
             if(m_control != null && m_currentHealth > 0)
-                m_weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control._dir.y,m_control._dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                m_weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
         }

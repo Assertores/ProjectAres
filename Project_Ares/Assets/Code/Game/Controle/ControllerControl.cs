@@ -5,14 +5,14 @@ using UnityEngine;
 using XInputDotNetPure;
 
 namespace ProjectAres {
-    public class ControllerControle : MonoBehaviour, IControl {
+    public class ControllerControl : MonoBehaviour, IControl {
 
         [Header("Balancing")]
         [SerializeField] float _shootThreshold = 0.9f;
 
         public int _controlerIndex = int.MinValue;
 
-        public Vector2 _dir { get; set; }
+        public Vector2 m_dir { get; set; }
         public Action StartShooting { get; set; }
         public Action StopShooting { get; set; }
         public Action Dash { get; set; }
@@ -46,7 +46,7 @@ namespace ProjectAres {
                 _tmpDir = new Vector2(_state.ThumbSticks.Left.X, _state.ThumbSticks.Left.Y).normalized;//damit die waffe nicht nach rechts zurück springt, wenn man die sticks loslässt
             }
             if(_tmpDir != Vector2.zero) {
-                _dir = _tmpDir;
+                m_dir = _tmpDir;
             }
 
             if (_state.Triggers.Right > _shootThreshold && _lastState.Triggers.Right <= _shootThreshold) {

@@ -6,10 +6,10 @@ namespace ProjectAres {
     public class Bullet : MonoBehaviour, IHarmingObject {
 
         [Header("Balancing")]
-        [SerializeField] float _killDistance = 1000;
+        [SerializeField] float m_killDistance = 1000;
 
-        int _damage = 1;
-        Player _source = null;
+        int m_damage = 1;
+        Player m_source = null;
 
         public Rigidbody2D Init(Player source, int damage) {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -18,13 +18,13 @@ namespace ProjectAres {
                 return null;
             }
 
-            _source = source;
-            _damage = damage;
+            m_source = source;
+            m_damage = damage;
             return rb;
         }
 
         private void Update() {
-            if(Vector2.Distance(transform.position, Vector2.zero) > _killDistance) {
+            if(Vector2.Distance(transform.position, Vector2.zero) > m_killDistance) {
                 Destroy(gameObject);
             }
         }
@@ -32,7 +32,7 @@ namespace ProjectAres {
         private void OnCollisionEnter2D(Collision2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.TakeDamage(_damage, _source);
+                tmp.TakeDamage(m_damage, m_source);
             }
             Destroy(gameObject);
         }

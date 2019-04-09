@@ -36,7 +36,7 @@ namespace ProjectAres {
                     GameObject tmpControle = new GameObject("Controler");
                     tmpControle.transform.parent = tmp.transform;
 
-                    IControl reference = tmpControle.AddComponent<KeyboardControle>();//null reference checks
+                    IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
                     tmp.GetComponent<Player>().Init(reference);//null reference checks
                 }
             }
@@ -47,7 +47,7 @@ namespace ProjectAres {
                         GameObject tmpControle = new GameObject("Controler");
                         tmpControle.transform.parent = tmp.transform;
 
-                        ControllerControle reference = tmpControle.AddComponent<ControllerControle>();//null reference checks
+                        ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
                         reference._controlerIndex = i;
                         tmp.GetComponent<Player>().Init(reference);//null reference checks
                     }
