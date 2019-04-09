@@ -46,7 +46,7 @@ namespace ProjectAres {
         List<IItem> m_items = new List<IItem>();
 
         Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();
-        List<Player> m_assistRevs = new List<Player>();
+        List<Player> m_assistRefs = new List<Player>();
 
         float m_respawntTime = float.MaxValue;
         int m_currentHealth;
@@ -169,10 +169,10 @@ namespace ProjectAres {
                     source.m_stats.m_damageDealt += m_currentHealth;
                     source.m_stats.m_kills++;
                 }
-                foreach(var it in m_assistRevs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
+                foreach(var it in m_assistRefs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
                     it.m_stats.m_assists++;
                 }
-                m_assistRevs.Clear();
+                m_assistRefs.Clear();
 
                 m_currentHealth = 0;
                 m_alive = false;
@@ -185,7 +185,7 @@ namespace ProjectAres {
                 m_stats.m_damageTaken += damage;
                 if (source) {
                     source.m_stats.m_damageDealt += damage;
-                    m_assistRevs.Add(source);
+                    m_assistRefs.Add(source);
                 }
 
                 m_currentHealth -= damage;
@@ -197,10 +197,10 @@ namespace ProjectAres {
             if (source) {
                 source.m_stats.m_kills++;
             }
-            foreach (var it in m_assistRevs) {//eventuell gegen funktion ersetzten
+            foreach (var it in m_assistRefs) {//eventuell gegen funktion ersetzten
                 it.m_stats.m_assists++;
             }
-            m_assistRevs.Clear();
+            m_assistRefs.Clear();
 
             m_currentHealth = 0;
             m_alive = false;

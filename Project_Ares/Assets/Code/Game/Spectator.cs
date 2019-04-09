@@ -8,10 +8,10 @@ namespace ProjectAres {
         //static Spectator _singelton = null;
 
         [Header("Balancing")]
-        [SerializeField] float _minCameraSize = 15;
-        [SerializeField] float _padding = 10;
+        [SerializeField] float m_minCameraSize = 15;
+        [SerializeField] float m_padding = 10;
 
-        Camera _myCamera = null;
+        Camera m_myCamera = null;
 
         void Awake() {
             //if (_singelton) {
@@ -20,12 +20,12 @@ namespace ProjectAres {
             //}
             //_singelton = this;
             
-            _myCamera = CameraControler.s_singelton?.AddCamera();
+            m_myCamera = CameraControler.s_singelton?.AddCamera();
         }
         private void OnDestroy() {
             //if (_singelton == this)
             //    _singelton = null;
-            CameraControler.s_singelton?.RemoveCamera(_myCamera);
+            CameraControler.s_singelton?.RemoveCamera(m_myCamera);
         }
 
         // Update is called once per frame
@@ -47,9 +47,9 @@ namespace ProjectAres {
                 }
             }
 
-            _myCamera.orthographicSize = Mathf.Max(Mathf.Max((maxX - minX + 2* _padding) / _myCamera.aspect, maxY - minY + 2 * _padding) / 2, _minCameraSize);
+            m_myCamera.orthographicSize = Mathf.Max(Mathf.Max((maxX - minX + 2* m_padding) / m_myCamera.aspect, maxY - minY + 2 * m_padding) / 2, m_minCameraSize);
 
-            _myCamera.transform.position = new Vector3(minX + (maxX-minX)/2, minY + (maxY-minY)/2, _myCamera.transform.position.z);
+            m_myCamera.transform.position = new Vector3(minX + (maxX-minX)/2, minY + (maxY-minY)/2, m_myCamera.transform.position.z);
         }
     }
 }

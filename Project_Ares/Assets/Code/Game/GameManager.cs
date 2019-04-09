@@ -6,28 +6,28 @@ namespace ProjectAres {
     public class GameManager : MonoBehaviour {
 
         [Header("References")]
-        [SerializeField] GameObject _gmObject;
-        [SerializeField] GameObject _playerRev;
+        [SerializeField] GameObject m_gmObject;
+        [SerializeField] GameObject m_playerRef;
 
-        IGameMode _gameMode;
+        IGameMode m_gameMode;
 
         #region Singelton
 
-        static GameManager _singelton_ = null;
+        static GameManager s_singelton_ = null;
         public static GameManager _singelton  {
             get {
-                if (!_singelton_)
-                    _singelton_ = new GameObject {
+                if (!s_singelton_)
+                    s_singelton_ = new GameObject {
                         name = "GameManager"
                     }.AddComponent<GameManager>();
-                return _singelton_;
+                return s_singelton_;
                 }
             }
 
         void Awake() {
-            if(_singelton_ == null) {
-                _singelton_ = this;
-            }else if (_singelton_ != this) {
+            if(s_singelton_ == null) {
+                s_singelton_ = this;
+            }else if (s_singelton_ != this) {
                 Destroy(gameObject);
                 return;
             }
@@ -36,11 +36,11 @@ namespace ProjectAres {
         #endregion
 
         void Start() {
-            _gameMode = _gmObject.GetComponent<IGameMode>();//Interface werden nicht im inspector angezeigt
-            _gameMode?.Init();//TODO: wie bekommt er den richtigen GameMode aus dem Menü
+            m_gameMode = m_gmObject.GetComponent<IGameMode>();//Interface werden nicht im inspector angezeigt
+            m_gameMode?.Init();//TODO: wie bekommt er den richtigen GameMode aus dem Menü
 
             if(Player.s_references.Count == 0) {
-                GameObject tmp = Instantiate(_playerRev);
+                GameObject tmp = Instantiate(m_playerRef);
                 if (tmp) {
                     GameObject tmpControle = new GameObject("Controler");
                     tmpControle.transform.parent = tmp.transform;
@@ -52,8 +52,8 @@ namespace ProjectAres {
         }
 
         public void Init(IGameMode mode) {
-            _gameMode?.Stop();
-            _gameMode = mode;
+            m_gameMode?.Stop();
+            m_gameMode = mode;
             mode.Init();
             foreach(var it in Player.s_references) {
                 it.m_stats.m_assists = 0;
@@ -69,7 +69,7 @@ namespace ProjectAres {
         }
 
         public void PlayerDied(Player player) {
-            _gameMode.PlayerDied(player);
+            m_gameMode.PlayerDied(player);
         }
     }
 }
