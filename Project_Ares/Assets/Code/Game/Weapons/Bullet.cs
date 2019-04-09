@@ -7,19 +7,18 @@ namespace ProjectAres {
 
         [Header("Balancing")]
         [SerializeField] float _killDistance = 1000;
+        [SerializeField] int _damage = 1;
 
-        int _damage = 1;
         Player _source = null;
 
-        public Rigidbody2D Init(Player source, int damage) {
+        public Rigidbody2D Init(Player reverence) {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             if (!rb) {
                 Destroy(gameObject);
                 return null;
             }
 
-            _source = source;
-            _damage = damage;
+            _source = reverence;
             return rb;
         }
 

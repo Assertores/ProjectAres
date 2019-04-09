@@ -5,6 +5,6 @@ using UnityEngine;
 namespace ProjectAres {
     public interface IHarmingObject {
 
-        Rigidbody2D Init(Player reverence, int damage);
+        Rigidbody2D Init(Player reverence);
     }
 }
