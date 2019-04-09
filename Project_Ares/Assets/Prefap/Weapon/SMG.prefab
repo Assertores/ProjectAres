@@ -154,8 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33620c54241a1c94bb173ec9104b5322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 6427757345274832488, guid: 3dd99c852e85baa40b69b81bd82f9a39, type: 3}
-  _barrol: {fileID: 8526788404880525850}
-  _bulletVelocity: 15
-  _recoil: 20
+  m_bullet: {fileID: 6427757345274832488, guid: 3dd99c852e85baa40b69b81bd82f9a39,
+    type: 3}
+  m_barrel: {fileID: 8526788404880525850}
+  m_bulletVelocity: 20
+  m_recoil: 20
   _rPM: 500
