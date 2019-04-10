@@ -110,7 +110,12 @@ namespace ProjectAres {
                 GameManager.s_singelton.PlayerDied(this);
             } else {
                 m_stats.m_damageTaken += damage;
-                m_rb.AddForce(force);
+                print("fource = " + force);
+                print("velocity befor = " + m_rb.velocity);
+                print("mass  = " + m_rb.mass);
+                m_rb.velocity += (force / m_rb.mass);//AddForce will irgendwie nicht funktionieren
+                //m_rb.AddForce(force);
+                print("velocity alfter = " + m_rb.velocity);
                 if (source) {
                     source.m_stats.m_damageDealt += damage;
                     m_assistRefs.Add(source);
@@ -241,7 +246,8 @@ namespace ProjectAres {
         }
 
         void StartShooting() {
-            m_weapons[m_currentWeapon].StartShooting();
+            if(!m_isShooting)
+                m_weapons[m_currentWeapon].StartShooting();
             m_isShooting = true;
         }
 
