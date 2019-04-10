@@ -6,6 +6,8 @@ namespace ProjectAres {
     [RequireComponent(typeof(Collider2D))]
     public class AliveZone : MonoBehaviour {
 
+        #region Physics
+
         private void OnTriggerExit2D(Collider2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
@@ -15,5 +17,7 @@ namespace ProjectAres {
                 Destroy(collision.gameObject);
             }
         }
+
+        #endregion
     }
 }

@@ -5,16 +5,20 @@ using UnityEngine;
 namespace ProjectAres {
     public class GameManager : MonoBehaviour {
 
+        #region Variables
+
         [Header("References")]
         [SerializeField] GameObject m_gmObject;
         [SerializeField] GameObject m_playerRef;
 
         IGameMode m_gameMode;
 
+        #endregion
+        #region MonoBehaviour
         #region Singelton
 
         static GameManager s_singelton_ = null;
-        public static GameManager _singelton  {
+        public static GameManager s_singelton  {
             get {
                 if (!s_singelton_)
                     s_singelton_ = new GameObject {
@@ -31,6 +35,11 @@ namespace ProjectAres {
                 Destroy(gameObject);
                 return;
             }
+        }
+
+        void OnDestroy() {
+            if (s_singelton_ == this)
+                s_singelton_ = null;
         }
 
         #endregion
@@ -51,6 +60,8 @@ namespace ProjectAres {
             }
         }
 
+        #endregion
+
         public void Init(IGameMode mode) {
             m_gameMode?.Stop();
             m_gameMode = mode;
@@ -62,10 +73,6 @@ namespace ProjectAres {
                 it.m_stats.m_deaths = 0;
                 it.m_stats.m_kills = 0;
             }
-        }
-
-        void Update() {
-
         }
 
         public void PlayerDied(Player player) {

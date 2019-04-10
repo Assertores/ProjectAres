@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 namespace ProjectAres {
     public class FFA_Casual : MonoBehaviour, IGameMode {
 
+        #region Variables
+
         [Header("References")]
         [SerializeField] Transform m_respawnParent;
 
@@ -15,9 +17,28 @@ namespace ProjectAres {
 
         float m_startTime;
 
+        #endregion
+        #region MonoBehaviour
+
+        void Start() {
+            Stop();
+        }
+
+        void Update() {
+            //print(Time.timeSinceLevelLoad - _startTime);
+            if (m_gameTime <= m_startTime + Time.timeSinceLevelLoad) {
+                //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
+                SceneManager.LoadScene(StringCollection.FFACASUAL);
+                //auf WinScreen wächseln
+            }
+        }
+
+        #endregion
+        #region IGameMode
+
         public void Init() {
             m_startTime = Time.timeSinceLevelLoad;
-            foreach(var it in Player.s_references) {
+            foreach (var it in Player.s_references) {
                 it.Respawn(m_respawnParent.GetChild(Random.Range(0, m_respawnParent.childCount)).position);
             }
             gameObject.SetActive(true);
@@ -31,24 +52,13 @@ namespace ProjectAres {
             StartCoroutine(RespawnPlayer(player));
         }
 
+        #endregion
+
         IEnumerator RespawnPlayer(Player player) {
             yield return new WaitForSeconds(m_respawnTime);
 
             player.Respawn(m_respawnParent.GetChild(Random.Range(0,m_respawnParent.childCount)).position);
 
-        }
-        
-        void Start() {
-            Stop();
-        }
-        
-        void Update() {
-            //print(Time.timeSinceLevelLoad - _startTime);
-            if(m_gameTime <= m_startTime + Time.timeSinceLevelLoad) {
-                //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
-                SceneManager.LoadScene(StringCollection.FFACASUAL);
-                //auf WinScreen wächseln
-            }
         }
     }
 }

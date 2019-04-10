@@ -5,6 +5,8 @@ using UnityEngine;
 namespace ProjectAres {
     public class Bullet : MonoBehaviour, IHarmingObject {
 
+        #region Variables
+
         [Header("Balancing")]
         [SerializeField] float m_killDistance = 1000;
 
@@ -12,6 +14,18 @@ namespace ProjectAres {
         Player m_source = null;
 
         Rigidbody2D m_rb;
+
+        #endregion
+        #region MonoBehaviour
+
+        private void Update() {
+            if (Vector2.Distance(transform.position, Vector2.zero) > m_killDistance) {
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
+        #region IHarmingObject
 
         public Rigidbody2D Init(Player reverence) {
             m_rb = GetComponent<Rigidbody2D>();
@@ -24,11 +38,8 @@ namespace ProjectAres {
             return m_rb;
         }
 
-        private void Update() {
-            if(Vector2.Distance(transform.position, Vector2.zero) > m_killDistance) {
-                Destroy(gameObject);
-            }
-        }
+        #endregion
+        #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
@@ -37,5 +48,7 @@ namespace ProjectAres {
             }
             Destroy(gameObject);
         }
+
+        #endregion
     }
 }

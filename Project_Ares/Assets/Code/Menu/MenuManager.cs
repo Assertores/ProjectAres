@@ -7,11 +7,15 @@ using XInputDotNetPure;
 namespace ProjectAres {
     public class MenuManager : MonoBehaviour {
 
+        #region Variables
+
         [Header("References")]
         [SerializeField] GameObject m_playerRev;
 
         GamePadState[] m_lastStates = new GamePadState[4];
 
+        #endregion
+        #region MonoBehaviour
         #region Singelton
 
         public static MenuManager _singelton = null;
@@ -55,6 +59,8 @@ namespace ProjectAres {
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
             }
         }
+
+        #endregion
 
         public void StartGame() {
             SceneManager.LoadScene(StringCollection.EXAMPLESZENE);

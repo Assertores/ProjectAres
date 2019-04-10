@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    public class CameraControler : MonoBehaviour {
+    public class CameraController : MonoBehaviour {
+
+        #region Variables
 
         [Header("References")]
         [SerializeField] GameObject m_cameraRef;
@@ -13,21 +15,32 @@ namespace ProjectAres {
 
         GameObject m_fillerSpectator = null;
 
+        #endregion
+        #region MonoBehaviour
         #region Singelton
 
-        public static CameraControler s_singelton = null;
+        static CameraController s_singelton_ = null;
+        public static CameraController s_singelton {
+            get {
+                if (!s_singelton_)
+                    s_singelton_ = new GameObject {
+                        name = "CameraControler"
+                    }.AddComponent<CameraController>();
+                return s_singelton_;
+            }
+        }
 
         private void Awake() {
-            if (s_singelton)
+            if (s_singelton_)
                 Destroy(this);
             if (!m_cameraRef || !m_cameraRef.GetComponent<Camera>())
                 Destroy(this);
 
-            s_singelton = this;
+            s_singelton_ = this;
         }
         private void OnDestroy() {
-            if (s_singelton == this)
-                s_singelton = null;
+            if (s_singelton_ == this)
+                s_singelton_ = null;
         }
 
         #endregion
@@ -35,6 +48,8 @@ namespace ProjectAres {
         private void Start() {
             SetCameraSizes();
         }
+
+        #endregion
 
         public Camera AddCamera() {
             Camera value = Instantiate(m_cameraRef, transform).GetComponent<Camera>();

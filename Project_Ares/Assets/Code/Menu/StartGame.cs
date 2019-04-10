@@ -5,6 +5,8 @@ using UnityEngine;
 namespace ProjectAres {
     public class StartGame : MonoBehaviour, IDamageableObject {
 
+        #region IDamageableObject
+
         public bool m_alive { get; set; }
 
         public void TakeDamage(int damage, Player source, Vector2 force) {
@@ -18,5 +20,7 @@ namespace ProjectAres {
         public int GetHealth() {
             return 0;
         }
+
+        #endregion
     }
 }
