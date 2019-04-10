@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fc4bd3fb73798479183d17730aae35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bullet: {fileID: 6427757345274832488, guid: 3dd99c852e85baa40b69b81bd82f9a39,
+  m_bullet: {fileID: 1508690974879307017, guid: 23345fb61738fc34eb98c61695492792,
     type: 3}
   m_barrel: {fileID: 2783012653673747794}
   m_muzzleEnergy: 10000
