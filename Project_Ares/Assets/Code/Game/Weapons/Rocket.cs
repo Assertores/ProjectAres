@@ -8,9 +8,10 @@ namespace ProjectAres {
         #region Variables
 
         [Header("References")]
-        [SerializeField] GameManager m_explosionRef;
+        [SerializeField] GameObject m_explosionRef;
 
         [Header("Balancing")]
+        [Tooltip("distance form levelorigion to autodestry")]
         [SerializeField] float m_killDistance = 1000;
         [SerializeField] int m_damage = 1;
 
@@ -47,7 +48,10 @@ namespace ProjectAres {
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            Instantiate(m_explosionRef);
+            if (m_explosionRef) {
+                GameObject temp = Instantiate(m_explosionRef,transform.position, transform.rotation);
+                temp.GetComponentInChildren<IHarmingObject>()?.Init(m_source);
+            }
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
                 tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass);
