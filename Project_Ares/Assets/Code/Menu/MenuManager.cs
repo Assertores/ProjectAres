@@ -11,6 +11,7 @@ namespace ProjectAres {
 
         [Header("References")]
         [SerializeField] GameObject m_playerRev;
+        [SerializeField] GameObject m_SpawnPoint;
 
         GamePadState[] m_lastStates = new GamePadState[4];
 
@@ -32,6 +33,13 @@ namespace ProjectAres {
         }
 
         #endregion
+
+        private void Start() {
+            foreach (var it in Player.s_references) {
+                it.m_rb.velocity = Vector2.zero;
+                it.transform.position = m_SpawnPoint.transform.position;
+            }
+        }
 
         private void Update() {
             if (Input.GetKeyDown(KeyCode.Return)) {
