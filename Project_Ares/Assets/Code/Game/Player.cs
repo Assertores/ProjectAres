@@ -75,10 +75,10 @@ namespace ProjectAres {
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
         }
 
-        void FixedUpdate() {
-            m_rb.velocity -= m_rb.velocity * m_airResistance * Time.fixedDeltaTime;
-            m_rb.velocity += Vector2.down * m_gravity * Time.fixedDeltaTime;
-        }
+        //void FixedUpdate() {
+        //    m_rb.velocity -= m_rb.velocity * m_airResistance * Time.fixedDeltaTime;
+        //    m_rb.velocity += Vector2.down * m_gravity * Time.fixedDeltaTime;
+        //}
 
         #endregion
         #region IDamageableObject

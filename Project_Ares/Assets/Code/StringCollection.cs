@@ -19,5 +19,10 @@ namespace ProjectAres {
         public static string FFACASUAL = "WinScreen_FFA_Casual";
 
         #endregion
+        #region TAGS
+
+        public static string PLAYER = "Player";
+
+        #endregion
     }
 }

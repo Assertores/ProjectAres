@@ -45,8 +45,8 @@ namespace ProjectAres {
         #endregion
 
         void Start() {
-            m_gameMode = m_gmObject.GetComponent<IGameMode>();//Interface werden nicht im inspector angezeigt
-            m_gameMode?.Init();//TODO: wie bekommt er den richtigen GameMode aus dem Menü
+            //m_gameMode = m_gmObject.GetComponent<IGameMode>();//Interface werden nicht im inspector angezeigt
+            //m_gameMode?.Init();//TODO: wie bekommt er den richtigen GameMode aus dem Menü
 
             if(Player.s_references.Count == 0) {
                 GameObject tmp = Instantiate(m_playerRef);
@@ -58,6 +58,8 @@ namespace ProjectAres {
                     tmp.GetComponent<Player>().Init(reference);//null reference checks
                 }
             }
+
+            Init(m_gmObject.GetComponent<IGameMode>());//TODO: muss irgendwie von ausen aufgerufen werden
         }
 
         #endregion
@@ -72,6 +74,8 @@ namespace ProjectAres {
                 it.m_stats.m_damageTaken = 0;
                 it.m_stats.m_deaths = 0;
                 it.m_stats.m_kills = 0;
+
+                it.m_rb.velocity = Vector2.zero;
             }
         }
 
