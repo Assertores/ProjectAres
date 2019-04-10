@@ -27,6 +27,7 @@ namespace ProjectAres {
             for (int i = 0; i < Player.s_references.Count; i++) {
                 Player.s_references[i].transform.position = Vector3.Lerp(_leftMostPlayer.position, _rightMostPlayer.position,
                                                                         Player.s_references.Count == 1 ? 0.5f : i /(Player.s_references.Count-1));
+                Player.s_references[i].InControle(false);
                 _pillar.Add(Instantiate(_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation));
             }
             _startTime = Time.timeSinceLevelLoad;
@@ -39,6 +40,8 @@ namespace ProjectAres {
                     _pillar[i].transform.position += new Vector3(0,_pillarSpeed * Time.deltaTime,0);
 
                     Player.s_references[i].transform.position = _pillar[i].transform.position;
+                } else {
+                    Player.s_references[i].InControle(true);
                 }
             }
         }
