@@ -11,6 +11,7 @@ namespace ProjectAres {
 
         [Header("References")]
         [SerializeField] GameObject m_playerRev;
+        [SerializeField] GameObject m_SpawnPoint;
 
         GamePadState[] m_lastStates = new GamePadState[4];
 
