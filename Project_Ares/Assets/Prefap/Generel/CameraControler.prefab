@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1883298103}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875ce31beb25aa54ab03fea3ca314fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraRef: {fileID: 1544642052170413004, guid: 8f19cc3122d1aff4a875b874270b9f8d,
-    type: 3}
-  _spectatorRef: {fileID: 494059890042577383, guid: 65a28ce03f7411f47b614258d2b2c6bc,
-    type: 3}
+  m_cameraRef: {fileID: 0}
+  m_spectatorRef: {fileID: 0}
