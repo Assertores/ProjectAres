@@ -39,7 +39,6 @@ namespace ProjectAres {
         [SerializeField] float m_airResistance = 0.25f;
 
         public d_playerStats m_stats;
-        public bool m_alive { get; set; }
 
         IControl m_control;
         List<IWeapon> m_weapons = new List<IWeapon>();
@@ -56,7 +55,7 @@ namespace ProjectAres {
         public Rigidbody2D m_rb { get; private set; }
 
         #endregion
-        #region Unity
+        #region MonoBehaviour
 
         void Start() {
             DontDestroyOnLoad(this.gameObject);
@@ -79,6 +78,69 @@ namespace ProjectAres {
         void FixedUpdate() {
             m_rb.velocity -= m_rb.velocity * m_airResistance * Time.fixedDeltaTime;
             m_rb.velocity += Vector2.down * m_gravity * Time.fixedDeltaTime;
+        }
+
+        #endregion
+        #region IDamageableObject
+
+        public bool m_alive { get; set; }
+
+        public void TakeDamage(int damage, Player source, Vector2 force) {
+            if (Time.timeSinceLevelLoad - m_respawntTime < m_iFrames) {
+                return;
+            }
+            if (damage > m_currentHealth) {
+                m_stats.m_damageTaken += m_currentHealth;
+                m_stats.m_deaths++;
+                if (source) {
+                    source.m_stats.m_damageDealt += m_currentHealth;
+                    source.m_stats.m_kills++;
+                }
+                foreach (var it in m_assistRefs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
+                    it.m_stats.m_assists++;
+                }
+                m_assistRefs.Clear();
+
+                m_currentHealth = 0;
+                m_alive = false;
+                m_rb.velocity = Vector2.zero;
+                gameObject.SetActive(false);
+
+                InControle(false);
+                GameManager.s_singelton.PlayerDied(this);
+            } else {
+                m_stats.m_damageTaken += damage;
+                m_rb.AddForce(force);
+                if (source) {
+                    source.m_stats.m_damageDealt += damage;
+                    m_assistRefs.Add(source);
+                }
+
+                m_currentHealth -= damage;
+            }
+        }
+
+        public void Die(Player source) {
+            m_stats.m_deaths++;
+            if (source) {
+                source.m_stats.m_kills++;
+            }
+            foreach (var it in m_assistRefs) {//eventuell gegen funktion ersetzten
+                it.m_stats.m_assists++;
+            }
+            m_assistRefs.Clear();
+
+            m_currentHealth = 0;
+            m_alive = false;
+            m_rb.velocity = Vector2.zero;
+            gameObject.SetActive(false);
+
+            InControle(false);
+            GameManager.s_singelton.PlayerDied(this);
+        }
+
+        public int GetHealth() {
+            return m_currentHealth;
         }
 
         #endregion
@@ -156,64 +218,6 @@ namespace ProjectAres {
             InControle(true);
             gameObject.SetActive(true);
             m_respawntTime = Time.timeSinceLevelLoad;
-        }
-
-        public void TakeDamage(int damage, Player source, Vector2 force) {
-            if(Time.timeSinceLevelLoad-m_respawntTime < m_iFrames) {
-                return;
-            }
-            if(damage > m_currentHealth) {
-                m_stats.m_damageTaken += m_currentHealth;
-                m_stats.m_deaths++;
-                if (source) {
-                    source.m_stats.m_damageDealt += m_currentHealth;
-                    source.m_stats.m_kills++;
-                }
-                foreach(var it in m_assistRefs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
-                    it.m_stats.m_assists++;
-                }
-                m_assistRefs.Clear();
-
-                m_currentHealth = 0;
-                m_alive = false;
-                m_rb.velocity = Vector2.zero;
-                gameObject.SetActive(false);
-                
-                InControle(false);
-                GameManager._singelton.PlayerDied(this);
-            } else {
-                m_stats.m_damageTaken += damage;
-                m_rb.AddForce(force);
-                if (source) {
-                    source.m_stats.m_damageDealt += damage;
-                    m_assistRefs.Add(source);
-                }
-
-                m_currentHealth -= damage;
-            }
-        }
-
-        public void Die(Player source) {
-            m_stats.m_deaths++;
-            if (source) {
-                source.m_stats.m_kills++;
-            }
-            foreach (var it in m_assistRefs) {//eventuell gegen funktion ersetzten
-                it.m_stats.m_assists++;
-            }
-            m_assistRefs.Clear();
-
-            m_currentHealth = 0;
-            m_alive = false;
-            m_rb.velocity = Vector2.zero;
-            gameObject.SetActive(false);
-
-            InControle(false);
-            GameManager._singelton.PlayerDied(this);
-        }
-
-        public int GetHealth() {
-            return m_currentHealth;
         }
 
         void SelectWeapon(int selectedWeapon) {

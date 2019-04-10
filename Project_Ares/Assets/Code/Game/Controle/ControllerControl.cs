@@ -7,24 +7,20 @@ using XInputDotNetPure;
 namespace ProjectAres {
     public class ControllerControl : MonoBehaviour, IControl {
 
+        #region Variables
+
         [Header("Balancing")]
         [SerializeField] float _shootThreshold = 0.9f;
 
         public int _controlerIndex = int.MinValue;
 
-        public Vector2 m_dir { get; set; }
-        public Action StartShooting { get; set; }
-        public Action StopShooting { get; set; }
-        public Action Dash { get; set; }
-        public Action<int> SelectWeapon { get; set; }
-        public Action<int> ChangeWeapon { get; set; }
-        public Action<int> UseItem { get; set; }
-        public Action Disconnect { get; set; }
-
         GamePadState _state;
         GamePadState _lastState;
 
         Vector2 _tmpDir;
+
+        #endregion
+        #region MonoBehaviour
 
         // Start is called before the first frame update
         void Start() {
@@ -69,5 +65,19 @@ namespace ProjectAres {
                 Disconnect?.Invoke();
             }
         }
+
+        #endregion
+        #region IControl
+
+        public Vector2 m_dir { get; set; }
+        public Action StartShooting { get; set; }
+        public Action StopShooting { get; set; }
+        public Action Dash { get; set; }
+        public Action<int> SelectWeapon { get; set; }
+        public Action<int> ChangeWeapon { get; set; }
+        public Action<int> UseItem { get; set; }
+        public Action Disconnect { get; set; }
+
+        #endregion
     }
 }

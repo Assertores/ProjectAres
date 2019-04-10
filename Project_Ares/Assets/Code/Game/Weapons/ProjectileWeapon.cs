@@ -5,6 +5,8 @@ using UnityEngine;
 namespace ProjectAres {
     public class ProjectileWeapon : MonoBehaviour, IWeapon {
 
+        #region Variables
+
         [Header("References")]
         [SerializeField] protected GameObject m_bullet;
         [SerializeField] protected Transform m_barrel;
@@ -15,6 +17,14 @@ namespace ProjectAres {
         [SerializeField] protected int m_damage = 1;
 
         protected Player m_player = null;
+
+        #endregion
+        #region MonoBehaviour
+
+
+
+        #endregion
+        #region IWeapon
 
         public Sprite m_Icon => throw new System.NotImplementedException();
 
@@ -32,7 +42,9 @@ namespace ProjectAres {
 
         public virtual void StopShooting() {
         }
-        
+
+        #endregion
+
         protected virtual void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_bullet,m_barrel == null? transform.position : m_barrel.position,m_barrel == null ? transform.rotation : m_barrel.rotation)
                 .GetComponent<IHarmingObject>()?.Init(m_player);

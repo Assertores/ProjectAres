@@ -5,6 +5,8 @@ using UnityEngine;
 namespace ProjectAres {
     public class AutomaticProjectileWeapon : ProjectileWeapon {
 
+        #region Variables
+
         //[Header("References")]
 
         //[Header("Balancing")]
@@ -12,15 +14,9 @@ namespace ProjectAres {
 
         //Player _player = null;
 
-        //public Sprite Icon => throw new System.NotImplementedException();
-
-        //public void Init(Player player) {
-        //    _player = player;
-        //}
-
-        //public void SetActive(bool activate) {
-        //    gameObject.SetActive(activate);
-        //}
+        #endregion
+        #region ProjectileWeapon
+        #region IWeapon
 
         public override void StartShooting() {
             Invoke("ShootBullet", 60 / m_rPM);
@@ -29,6 +25,8 @@ namespace ProjectAres {
         public override void StopShooting() {
             CancelInvoke();
         }
+
+        #endregion
 
         protected override void ShootBullet() {
             base.ShootBullet();
@@ -39,5 +37,7 @@ namespace ProjectAres {
 
             Invoke("ShootBullet", 60 / m_rPM);//Automatic
         }
+
+        #endregion
     }
 }

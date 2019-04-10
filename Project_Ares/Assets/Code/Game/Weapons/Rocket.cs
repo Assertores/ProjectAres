@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    public class Rocket : MonoBehaviour, IHarmingObject {//TODO: fieleicht von Bullet erben lassen.
+    public class Rocket : MonoBehaviour, IHarmingObject {
 
         #region Variables
 

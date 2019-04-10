@@ -6,6 +6,8 @@ namespace ProjectAres {
     [RequireComponent(typeof(Collider2D))]
     public class PlayerExit : MonoBehaviour {
 
+        #region Physics
+
         private void OnTriggerEnter2D(Collider2D collision) {
             Player tmp = collision.gameObject.GetComponent<Player>();
             if (tmp) {
@@ -15,5 +17,7 @@ namespace ProjectAres {
                 }
             }
         }
+
+        #endregion
     }
 }

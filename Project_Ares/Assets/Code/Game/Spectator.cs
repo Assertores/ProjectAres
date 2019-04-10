@@ -7,11 +7,16 @@ namespace ProjectAres {
 
         //static Spectator _singelton = null;
 
+        #region Variables
+
         [Header("Balancing")]
         [SerializeField] float m_minCameraSize = 15;
         [SerializeField] float m_padding = 10;
 
         Camera m_myCamera = null;
+
+        #endregion
+        #region MonoBehaviour
 
         void Awake() {
             //if (_singelton) {
@@ -20,12 +25,12 @@ namespace ProjectAres {
             //}
             //_singelton = this;
             
-            m_myCamera = CameraControler.s_singelton?.AddCamera();
+            m_myCamera = CameraController.s_singelton?.AddCamera();
         }
         private void OnDestroy() {
             //if (_singelton == this)
             //    _singelton = null;
-            CameraControler.s_singelton?.RemoveCamera(m_myCamera);
+            CameraController.s_singelton?.RemoveCamera(m_myCamera);
         }
 
         // Update is called once per frame
@@ -51,5 +56,7 @@ namespace ProjectAres {
 
             m_myCamera.transform.position = new Vector3(minX + (maxX-minX)/2, minY + (maxY-minY)/2, m_myCamera.transform.position.z);
         }
+
+        #endregion
     }
 }

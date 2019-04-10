@@ -5,6 +5,8 @@ using UnityEngine;
 namespace ProjectAres {
     public class WS_FFA_Casual : WinScreen {
 
+        #region Variables
+
         [Header("References")]
         [SerializeField] GameObject _pillarRef;
         [SerializeField] Transform _rightMostPlayer;
@@ -16,6 +18,10 @@ namespace ProjectAres {
 
         List<GameObject> _pillar = new List<GameObject>();
         float _startTime;
+
+        #endregion
+        #region WinScreen
+        #region MonoBehaviour
 
         void Start() {
             for (int i = 0; i < Player.s_references.Count; i++) {
@@ -36,5 +42,8 @@ namespace ProjectAres {
                 }
             }
         }
+
+        #endregion
+        #endregion
     }
 }
