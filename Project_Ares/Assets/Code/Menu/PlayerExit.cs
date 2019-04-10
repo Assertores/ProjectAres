@@ -10,7 +10,7 @@ namespace ProjectAres
         #region Variables
         [Header("References")]
         [SerializeField] GameObject m_exitHatch;
-        [SerializeField] GameObject m_exit;
+        
 
         [Header("Variables")]
         [SerializeField] float m_exitTime;
@@ -21,35 +21,45 @@ namespace ProjectAres
 
         private void Start()
         {
-            m_time = Time.timeSinceLevelLoad;
+            
+        }
+
+        private void Update()
+        {
+            if (m_collInd > 0)
+            {
+                if (m_exitTime + m_time <= Time.timeSinceLevelLoad)
+                {
+                    m_exitHatch.SetActive(false);
+                    
+                }
+
+            }
+
+            else {
+
+                m_exitHatch.SetActive(true);
+                
+            }
+
         }
         #region Physics
+
+
 
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             m_collInd++;
-            while (m_collInd != 0)
-            {
-                if (m_exitTime + m_time <= Time.timeSinceLevelLoad)
-                {
-                    m_exitHatch.SetActive(false);
-                    Player tmp = collision.gameObject.GetComponent<Player>();
-                    if (tmp)
-                    {
-                        tmp.Disconect();
-                        if (Player.s_references.Count <= 0)
-                        {
-                            MenuManager._singelton?.Exit();
+            if(m_collInd == 1) m_time = Time.timeSinceLevelLoad;
 
-                        }
+        }
 
-
-                    }
-
-                }
-
-            }
+    
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            
+            m_collInd--;
         }
 
     }
