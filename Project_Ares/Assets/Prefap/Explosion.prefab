@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 854507398363705032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 3039136259464356734}
   m_RootOrder: 2
@@ -124,9 +124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_explosion: {fileID: 6944612050018747919}
   m_explosionStains: {fileID: 854507398363705032}
-  m_baseDamage: 100
-  m_radius: 5
-  m_baseKnockback: 3000
+  m_baseDamage: 20
+  m_radius: 3
+  m_baseKnockback: 1000
   m_fallOff:
     serializedVersion: 2
     m_Curve:
@@ -140,8 +140,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.045827914
     - serializedVersion: 3
-      time: 4.9931602
-      value: 0.063595414
+      time: 2.9984152
+      value: 0.09086351
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 6944612050018747919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 3039136259464356734}
   m_RootOrder: 1

@@ -9,8 +9,8 @@ namespace ProjectAres {
 
         [Header("Balancing")]
         [SerializeField] float m_killDistance = 1000;
+        [SerializeField] int m_damage = 1;
 
-        int m_damage = 1;
         Player m_source = null;
 
         Rigidbody2D m_rb;
