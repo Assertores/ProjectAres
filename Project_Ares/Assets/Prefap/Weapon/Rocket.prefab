@@ -49,7 +49,7 @@ MonoBehaviour:
   m_explosionRef: {fileID: 3039136259464356723, guid: 972721242feb5a242a9a4249e643c3c0,
     type: 3}
   m_killDistance: 1000
-  m_damage: 1
+  m_damage: 5
 --- !u!61 &3022745360682548735
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 40
+  m_Mass: 15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

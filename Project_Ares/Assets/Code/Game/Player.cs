@@ -89,6 +89,9 @@ namespace ProjectAres {
             if (Time.timeSinceLevelLoad - m_respawntTime < m_iFrames) {
                 return;
             }
+            if(source == this) {
+                return;
+            }
             if (damage > m_currentHealth) {
                 m_stats.m_damageTaken += m_currentHealth;
                 m_stats.m_deaths++;

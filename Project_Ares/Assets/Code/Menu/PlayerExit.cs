@@ -50,16 +50,24 @@ namespace ProjectAres
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            m_collInd++;
-            if(m_collInd == 1) m_time = Time.timeSinceLevelLoad;
+            if(collision.gameObject.tag == StringCollection.PLAYER) {
+                m_collInd++;
+                if (m_collInd == 1)
+                    m_time = Time.timeSinceLevelLoad;
+            }
+            
 
         }
 
     
         private void OnTriggerExit2D(Collider2D collision)
         {
+            if(collision.gameObject.tag == StringCollection.PLAYER) {
+                m_collInd--;
+                if (m_collInd == 0)
+                    m_time = float.MinValue;
+            }
             
-            m_collInd--;
         }
 
     }
