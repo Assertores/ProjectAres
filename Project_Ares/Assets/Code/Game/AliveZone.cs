@@ -11,7 +11,6 @@ namespace ProjectAres {
         private void OnTriggerExit2D(Collider2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                print(collision.gameObject.name);
                 tmp.Die(null);
             } else {
                 Destroy(collision.gameObject);

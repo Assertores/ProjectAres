@@ -1440,19 +1440,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8702894642429529503, guid: 260732bd95587664e91221c25971814f,
         type: 3}
-      propertyPath: _gmObject
-      value: 
-      objectReference: {fileID: 385585061}
-    - target: {fileID: 8702894642429529503, guid: 260732bd95587664e91221c25971814f,
-        type: 3}
       propertyPath: m_gmObject
       value: 
       objectReference: {fileID: 385585061}
-    - target: {fileID: 8702894642429529503, guid: 260732bd95587664e91221c25971814f,
-        type: 3}
-      propertyPath: m_playerRef
-      value: 
-      objectReference: {fileID: 3853162914686457987, guid: abcbf94c67c319c4ca96a6c3643ee268,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 260732bd95587664e91221c25971814f, type: 3}

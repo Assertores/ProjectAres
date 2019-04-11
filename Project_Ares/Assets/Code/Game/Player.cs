@@ -51,6 +51,7 @@ namespace ProjectAres {
         int m_currentHealth;
         int m_currentWeapon = 0;
         bool m_isShooting = false;
+        bool m_isInvincible = false;
 
         public Rigidbody2D m_rb { get; private set; }
 
@@ -71,6 +72,11 @@ namespace ProjectAres {
         void Update() {
             if(m_control != null && m_currentHealth > 0)
                 m_weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+            if(m_control.m_dir.x < 0) {
+                //m_weapons[m_c]
+            } else {
+                m_weaponRotationAncor.transform.localScale = new Vector3(1, 1, 1);
+            }
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
         }
@@ -86,6 +92,9 @@ namespace ProjectAres {
         public bool m_alive { get; set; }
 
         public void TakeDamage(int damage, Player source, Vector2 force) {
+            if (m_isInvincible) {
+                return;
+            }
             if (Time.timeSinceLevelLoad - m_respawntTime < m_iFrames) {
                 return;
             }
@@ -222,6 +231,10 @@ namespace ProjectAres {
             InControle(true);
             gameObject.SetActive(true);
             m_respawntTime = Time.timeSinceLevelLoad;
+        }
+
+        public void Invincible(bool inv) {
+            m_isInvincible = inv;
         }
 
         void SelectWeapon(int selectedWeapon) {

@@ -36,6 +36,7 @@ namespace ProjectAres {
 
         private void Start() {
             foreach (var it in Player.s_references) {
+                it.Invincible(true);
                 it.m_rb.velocity = Vector2.zero;
                 it.transform.position = m_SpawnPoint.transform.position;
             }
@@ -50,6 +51,7 @@ namespace ProjectAres {
 
                     IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
                     tmp.GetComponent<Player>().Init(reference);//null reference checks
+                    tmp.GetComponent<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                 }
             }
             for(int i = 0; i < 4; i++) {
@@ -61,7 +63,9 @@ namespace ProjectAres {
 
                         ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
                         reference._controlerIndex = i;
+
                         tmp.GetComponent<Player>().Init(reference);//null reference checks
+                        tmp.GetComponent<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                     }
                 }
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
@@ -71,7 +75,8 @@ namespace ProjectAres {
         #endregion
 
         public void StartGame() {
-            SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
+            SceneManager.LoadScene(StringCollection.COLOSSEUM);
+            //SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
             //lade ausgewählte Szene im hintergrund
             //spiel animation für szenenwechsel ab
             //überblände die musik

@@ -15,6 +15,7 @@ namespace ProjectAres {
         #region SZENES
 
         public static string EXAMPLESZENE = "SampleScene";
+        public static string COLOSSEUM = "Colosseum";
         public static string MAINMENU = "Menu";
         public static string FFACASUAL = "WinScreen_FFA_Casual";
 

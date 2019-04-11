@@ -8,17 +8,20 @@ namespace ProjectAres {
         //static Spectator _singelton = null;
 
         #region Variables
+        
+        [Header("Reverences")]
+        [SerializeField] Camera m_myCamera;
 
         [Header("Balancing")]
         [SerializeField] float m_minCameraSize = 15;
         [SerializeField] float m_padding = 10;
 
-        Camera m_myCamera = null;
+        
 
         #endregion
         #region MonoBehaviour
 
-        void Awake() {
+        /*void Awake() {
             //if (_singelton) {
             //    Destroy(this);
             //    return;
@@ -31,9 +34,8 @@ namespace ProjectAres {
             //if (_singelton == this)
             //    _singelton = null;
             CameraController.s_singelton?.RemoveCamera(m_myCamera);
-        }
-
-        // Update is called once per frame
+        }*/
+        
         void Update() {
             if (Player.s_references.Count == 0)
                 return;
