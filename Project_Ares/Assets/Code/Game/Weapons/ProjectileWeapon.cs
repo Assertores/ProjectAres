@@ -50,7 +50,7 @@ namespace ProjectAres {
                 .GetComponent<IHarmingObject>()?.Init(m_player);
 
             if (bulletRB) {
-                bulletRB.velocity = m_player.m_rb.velocity;
+                //bulletRB.velocity = m_player.m_rb.velocity;
                 bulletRB.AddForce(transform.right * m_muzzleEnergy);
             }
             m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);
