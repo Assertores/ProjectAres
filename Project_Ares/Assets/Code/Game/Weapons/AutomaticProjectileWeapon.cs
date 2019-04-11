@@ -3,41 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    public class AutomaticProjectileWeapon : ProjectileWeapon {
+    public class AutomaticProjectileWeapon : MonoBehaviour, IWeapon {
 
         #region Variables
 
-        //[Header("References")]
+        [Header("References")]
+        [SerializeField] GameObject m_bullet;
+        [SerializeField] Transform m_barrel;
 
-        //[Header("Balancing")]
+        [Header("Balancing")]
         [SerializeField] float m_rPM = 1;
+        [SerializeField] float m_muzzleEnergy = 800;
+        [SerializeField] int m_damage = 1;
 
-        //Player _player = null;
+        protected Player m_player = null;
 
         #endregion
-        #region ProjectileWeapon
         #region IWeapon
 
-        public override void StartShooting() {
+        public Sprite m_Icon => throw new System.NotImplementedException();
+
+        public void Init(Player player) {
+            m_player = player;
+        }
+
+        public void SetActive(bool activate) {
+            gameObject.SetActive(activate);
+        }
+
+        public void StartShooting() {
             Invoke("ShootBullet", 60 / m_rPM);
         }
 
-        public override void StopShooting() {
+        public void StopShooting() {
             CancelInvoke();
         }
 
         #endregion
 
-        protected override void ShootBullet() {
-            base.ShootBullet();
-            //Instantiate(_bullet, _barrol == null ? transform.position : _barrol.position, _barrol == null ? transform.rotation : _barrol.rotation)
-            //    .GetComponent<Bullet>()?.Init(_player, _player._rig.velocity + (Vector2)transform.right * _bulletVelocity);
+        void ShootBullet() {
+            Rigidbody2D bulletRB = Instantiate(m_bullet, m_barrel == null ? transform.position : m_barrel.position, m_barrel == null ? transform.rotation : m_barrel.rotation)
+                .GetComponent<IHarmingObject>()?.Init(m_player);
 
-            //_player._rig.AddForce(-transform.right * _recoil);
+            if (bulletRB) {
+                //bulletRB.velocity = m_player.m_rb.velocity;
+                bulletRB.AddForce(transform.right * m_muzzleEnergy);
+            }
+            m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);
 
-            Invoke("ShootBullet", 60 / m_rPM);//Automatic
+            Invoke("ShootBullet", 60 / m_rPM);
         }
-
-        #endregion
     }
 }

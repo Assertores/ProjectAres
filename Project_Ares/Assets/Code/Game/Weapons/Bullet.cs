@@ -42,6 +42,10 @@ namespace ProjectAres {
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
+            if(collision.gameObject == m_source.gameObject) {
+                return;
+            }
+
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
                 tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass);

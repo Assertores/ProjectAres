@@ -8,20 +8,19 @@ namespace ProjectAres {
         #region Variables
 
         [Header("References")]
-        [SerializeField] protected GameObject m_bullet;
-        [SerializeField] protected Transform m_barrel;
+        [SerializeField] GameObject m_bullet;
+        [SerializeField] Transform m_barrel;
 
         [Header("Balancing")]
-        //[SerializeField] float _rPM = 1;
-        [SerializeField] protected float m_muzzleEnergy = 800;
-        [SerializeField] protected int m_damage = 1;
+        [SerializeField] float m_muzzleEnergy = 800;
+        [SerializeField] int m_damage = 1;
+        [SerializeField] float m_shootDelay = 2;
 
-        protected Player m_player = null;
-
-        #endregion
-        #region MonoBehaviour
-
-
+        Player m_player = null;
+        Vector2 m_velocity;
+        float m_gravetyScale;
+        bool m_isShooting = false;
+        float m_startShootingTime = float.MinValue;
 
         #endregion
         #region IWeapon
@@ -32,20 +31,40 @@ namespace ProjectAres {
             m_player = player;
         }
 
-        public virtual void SetActive(bool activate) {
+        public void SetActive(bool activate) {
             gameObject.SetActive(activate);
         }
 
-        public virtual void StartShooting() {
-            ShootBullet();
+        public void StartShooting() {
+            if(m_startShootingTime + m_shootDelay > Time.time) {
+                return;
+            }
+
+            m_startShootingTime = Time.time;
+
+            m_isShooting = true;
+
+            //m_velocity = m_player.m_rb.velocity;
+            m_gravetyScale = m_player.m_rb.gravityScale;
+
+            m_player.m_rb.velocity = Vector2.zero;
+            m_player.m_rb.gravityScale = 0;
         }
 
-        public virtual void StopShooting() {
+        public void StopShooting() {
+            if (!m_isShooting)
+                return;
+
+            //m_player.m_rb.velocity += m_velocity;
+            m_player.m_rb.gravityScale = m_gravetyScale;
+
+            ShootBullet();
+            m_isShooting = false;
         }
 
         #endregion
 
-        protected virtual void ShootBullet() {
+        void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_bullet,m_barrel == null? transform.position : m_barrel.position,m_barrel == null ? transform.rotation : m_barrel.rotation)
                 .GetComponent<IHarmingObject>()?.Init(m_player);
 

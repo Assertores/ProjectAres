@@ -48,10 +48,15 @@ namespace ProjectAres {
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
+            if(collision.gameObject == m_source.gameObject) {
+                return;
+            }
+
             if (m_explosionRef) {
                 GameObject temp = Instantiate(m_explosionRef,transform.position, transform.rotation);
                 temp.GetComponentInChildren<IHarmingObject>()?.Init(m_source);
             }
+
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
                 tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass);
