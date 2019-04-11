@@ -33,9 +33,12 @@ namespace ProjectAres {
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha1)) {
-                ChangeWeapon?.Invoke(0);
+                ChangeWeapon?.Invoke(0, false);
             } else if (Input.GetKeyUp(KeyCode.Alpha2)) {
-                ChangeWeapon?.Invoke(1);
+                ChangeWeapon?.Invoke(1, false);
+            }
+            if (Input.GetKeyUp(KeyCode.Space)) {
+                ChangeWeapon?.Invoke(1, true);
             }
 
             if (Input.GetKeyDown(KeyCode.C)) {
@@ -59,7 +62,7 @@ namespace ProjectAres {
         public Action StopShooting { get; set; }
         public Action Dash { get; set; }
         public Action<int> SelectWeapon { get; set; }
-        public Action<int> ChangeWeapon { get; set; }
+        public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
 

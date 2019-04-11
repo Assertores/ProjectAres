@@ -197,14 +197,14 @@ namespace ProjectAres {
 
         public void InControle(bool controle) {
             if (controle) {
-                m_control.StartShooting += StartShooting;
-                m_control.StopShooting += StopShooting;
-                m_control.Dash += Dash;
+                m_control.StartShooting = StartShooting;
+                m_control.StopShooting = StopShooting;
+                m_control.Dash = Dash;
 
-                m_control.SelectWeapon += SelectWeapon;
-                m_control.ChangeWeapon += ChangeWeapon;
-                m_control.UseItem += UseItem;
-                m_control.Disconnect += Disconect;
+                m_control.SelectWeapon = SelectWeapon;
+                m_control.ChangeWeapon = ChangeWeapon;
+                m_control.UseItem = UseItem;
+                m_control.Disconnect = Disconect;
             } else {
                 m_control.StartShooting = null;
                 m_control.StopShooting = null;
@@ -245,11 +245,19 @@ namespace ProjectAres {
             //_weaponWheel.GetChild(selectedWeapon) highlight selected item
         }
 
-        void ChangeWeapon(int newWeapon) {
-            if (newWeapon < m_weapons.Count && newWeapon >= 0) {
+        void ChangeWeapon(int newWeapon, bool relative = false) {
+            if ((newWeapon < m_weapons.Count && newWeapon >= 0) || relative) {
                 m_weapons[m_currentWeapon].StopShooting();
                 m_weapons[m_currentWeapon].SetActive(false);
-                m_currentWeapon = newWeapon;
+
+                if (relative) {
+                    m_currentWeapon += newWeapon;
+                    m_currentWeapon = (m_currentWeapon % m_weapons.Count + m_weapons.Count) % m_weapons.Count;//https://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain/1082938
+                    //m_currentWeapon %= m_weapons.Count;//c# mod im negativen bereich ist scheise
+                } else {
+                    m_currentWeapon = newWeapon;
+                }
+
                 m_weapons[m_currentWeapon].SetActive(true);
                 if (m_isShooting)
                     m_weapons[m_currentWeapon].StartShooting();
