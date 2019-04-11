@@ -51,9 +51,9 @@ namespace ProjectAres {
                 StopShooting?.Invoke();
             }
 
-            if(_lastState.DPad.Down == ButtonState.Pressed && _state.DPad.Down == ButtonState.Released) {
+            if(_lastState.Buttons.LeftShoulder == ButtonState.Pressed && _state.Buttons.LeftShoulder == ButtonState.Released) {
                 ChangeWeapon?.Invoke(0);
-            }else if(_lastState.DPad.Left == ButtonState.Pressed && _state.DPad.Left == ButtonState.Released) {
+            }else if(_lastState.Buttons.RightShoulder == ButtonState.Pressed && _state.Buttons.RightShoulder == ButtonState.Released) {
                 ChangeWeapon?.Invoke(1);
             }
 
