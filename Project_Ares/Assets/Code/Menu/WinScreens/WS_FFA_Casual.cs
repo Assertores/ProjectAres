@@ -25,8 +25,15 @@ namespace ProjectAres {
 
         void Start() {
             for (int i = 0; i < Player.s_references.Count; i++) {
+                Player.s_references[i].Invincible(true);
+
+                if (!Player.s_references[i].m_alive) {
+                    Player.s_references[i].Respawn(transform.position);
+                }
+                Player.s_references[i].m_rb.velocity = Vector2.zero;
+
                 Player.s_references[i].transform.position = Vector3.Lerp(_leftMostPlayer.position, _rightMostPlayer.position,
-                                                                        Player.s_references.Count == 1 ? 0.5f : i /(Player.s_references.Count-1));
+                                                                        Player.s_references.Count == 1 ? 0.5f : (float)i /(Player.s_references.Count-1));
                 Player.s_references[i].InControle(false);
                 _pillar.Add(Instantiate(_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation));
             }
