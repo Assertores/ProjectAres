@@ -32,19 +32,23 @@ namespace ProjectAres {
 
         private void Update()
         {
-            if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
-
-                m_currentHealth += m_regeneration*Time.deltaTime;
-                m_healthText.text = (Mathf.RoundToInt(m_currentHealth)).ToString();
-
-                if (m_currentHealth > m_maxHealth)
+            if (m_currentHealth > 0)
+            {
+                if (m_time + m_regenTime <= Time.timeSinceLevelLoad)
                 {
 
-                    m_currentHealth = m_maxHealth;
+                    m_currentHealth += m_regeneration * Time.deltaTime;
+                    m_healthText.text = (Mathf.RoundToInt(m_currentHealth)).ToString();
+
+                    if (m_currentHealth > m_maxHealth)
+                    {
+
+                        m_currentHealth = m_maxHealth;
+
+                    }
+
 
                 }
-
-
             }
 
         }
@@ -59,7 +63,7 @@ namespace ProjectAres {
                 m_healthText.text = (Mathf.RoundToInt(m_currentHealth)).ToString();
 
             }
-            if (m_currentHealth == 0)
+            if (m_currentHealth <= 0)
             {
                 m_healthText.text = "";
                 m_startText.text = "Game is Starting";
