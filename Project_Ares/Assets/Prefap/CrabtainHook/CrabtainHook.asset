@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
-  m_Name: BobDerFisch
+  m_Name: IceCube
   m_EditorClassIdentifier: 
-  m_model: {fileID: 8021982208745273552, guid: 9aa114db1c466a64f953ca16bbe7330b, type: 3}
-  m_icon: {fileID: 21300000, guid: cc77d2fe3dd1aa0419a8d1561f50fca6, type: 3}
-  m_name: Toasty-Chan
-  m_sMG: {fileID: 8294756563320938153, guid: 4da10e41b5a4d484a80a82139062aee1, type: 3}
-  m_rocked: {fileID: 2582504901680775649, guid: 78bfee4a38890614296d2d71ddd36b4a,
+  m_model: {fileID: 8021982208745273552, guid: b7d875536f5867648866c28054003580, type: 3}
+  m_icon: {fileID: 21300000, guid: 048e1608ff366f345a97d860d2b772cd, type: 3}
+  m_name: IceCube
+  m_sMG: {fileID: 8294756563320938153, guid: 512c91bb5b0671b40a2f888e1b63a556, type: 3}
+  m_rocked: {fileID: 2582504901680775649, guid: e2b111843e76bf2469fe1b0776419adc,
     type: 3}
