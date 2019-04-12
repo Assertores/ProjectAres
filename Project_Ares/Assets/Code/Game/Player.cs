@@ -294,6 +294,13 @@ namespace ProjectAres {
         public void Disconect() {
             Destroy(this.gameObject);
             s_references.Remove(this);
+            RepositionGUI();
+        }
+
+        void RepositionGUI() {
+            for (int i = 0; i < s_references.Count; i++) {
+                s_references[i].m_GUIHandler.Init(((float)i + 1) / (s_references.Count + 1));
+            }
         }
 
         #region Physics
