@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
+  m_Name: Toasty-Chan
+  m_EditorClassIdentifier: 
+  m_model: {fileID: 8021982208745273552, guid: 9aa114db1c466a64f953ca16bbe7330b, type: 3}
+  m_sMG: {fileID: 8294756563320938153, guid: 4da10e41b5a4d484a80a82139062aee1, type: 3}
+  m_rocked: {fileID: 2582504901680775649, guid: 78bfee4a38890614296d2d71ddd36b4a,
+    type: 3}
