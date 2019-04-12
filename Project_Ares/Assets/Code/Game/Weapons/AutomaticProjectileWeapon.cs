@@ -10,6 +10,7 @@ namespace ProjectAres {
         [Header("References")]
         [SerializeField] GameObject m_bullet;
         [SerializeField] Transform m_barrel;
+        [SerializeField] Sprite m_icon_;
 
         [Header("Balancing")]
         [SerializeField] float m_rPM = 1;
@@ -21,7 +22,7 @@ namespace ProjectAres {
         #endregion
         #region IWeapon
 
-        public Sprite m_Icon => throw new System.NotImplementedException();
+        public Sprite m_icon { get { return m_icon_; } }
 
         public void Init(Player player) {
             m_player = player;

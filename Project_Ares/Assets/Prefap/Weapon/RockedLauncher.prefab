@@ -157,6 +157,7 @@ MonoBehaviour:
   m_bullet: {fileID: 1508690974879307017, guid: 23345fb61738fc34eb98c61695492792,
     type: 3}
   m_barrel: {fileID: 2783012653673747794}
+  m_icon_: {fileID: 21300000, guid: 95b7a85c42c971b4b9f737a8ccb51a38, type: 3}
   m_muzzleEnergy: 20000
   m_damage: 1
   m_shootDelay: 2
