@@ -47,11 +47,12 @@ namespace ProjectAres {
                 GameObject tmp = Instantiate(m_playerRev);
                 if (tmp) {
                     GameObject tmpControle = new GameObject("Controler");
-                    tmpControle.transform.parent = tmp.transform;
+                    //tmpControle.transform.parent = tmp.transform;
 
                     IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
+                    
                     //tmp.GetComponent<Player>().Init(KeyboardControl);
-                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty null reference checks
+                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
                     //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
                     tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                 }
@@ -66,7 +67,7 @@ namespace ProjectAres {
                         ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
                         reference.m_controlerIndex = i;
 
-                        tmp.GetComponent<Player>().Init(tmpControle);//dirty null reference checks
+                        tmp.GetComponent<Player>().Init(tmpControle);//dirty
                         //tmp.GetComponent<Player>().Init(reference);//null reference checks
                         tmp.GetComponent<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                     }

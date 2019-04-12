@@ -21,11 +21,12 @@ namespace ProjectAres {
         #region Variables
 
         [Header("References")]
-        [SerializeField] GameObject[] m_weaponInit;
-        [SerializeField] Transform m_weaponAnchor;
-        [SerializeField] Transform m_weaponRotationAncor;
+        [SerializeField] Transform m_modelRef;
+        [SerializeField] Transform m_weaponRef;
+        [SerializeField] Transform m_controlRef;
+        [SerializeField] CharacterData[] m_charData;
+
         [SerializeField] Image m_healthBar;
-        [SerializeField] Transform m_weaponWheel;
         [SerializeField] GameObject m_controlObject;
         [SerializeField] LayerMask m_dashColliders;
         [SerializeField] PlayerGUIHandler m_GUIHandler;
@@ -52,6 +53,7 @@ namespace ProjectAres {
 
         float m_respawntTime = float.MaxValue;
         int m_currentHealth;
+        int m_currentChar = 0;
         int m_currentWeapon = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
@@ -76,11 +78,11 @@ namespace ProjectAres {
         
         void Update() {
             if(m_control != null && m_currentHealth > 0)
-                m_weaponRotationAncor.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
             if(m_control.m_dir.x < 0) {
                 //m_weapons[m_c]
             } else {
-                m_weaponRotationAncor.transform.localScale = new Vector3(1, 1, 1);
+                m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
@@ -176,7 +178,7 @@ namespace ProjectAres {
                     return;
                 }
             } else {
-                control.transform.parent = m_weaponRotationAncor;
+                control.transform.parent = m_controlRef;
                 control.transform.localPosition = Vector3.zero;
                 m_control = control.GetComponent<IControl>();
             }
@@ -186,19 +188,24 @@ namespace ProjectAres {
 
             InControle(true);
 
-            GameObject tmp;
-            IWeapon tmpInterface;
-            foreach (var it in m_weaponInit) {
-                tmpInterface = it.GetComponent<IWeapon>();
-                if (tmpInterface != null) {
-                    tmp = Instantiate(it, m_weaponAnchor);
-                    tmpInterface = tmp.GetComponent<IWeapon>();
-                    tmpInterface.Init(this);
-                    tmpInterface.SetActive(false);
-                    m_weapons.Add(tmpInterface);
-                }
+            foreach (var it in m_charData) {
+                it.m_weapons[0] = it.m_sMG.GetComponent<IWeapon>();
+                it.m_weapons[1] = it.m_rocked.GetComponent<IWeapon>();
             }
 
+            //GameObject tmp;
+            //IWeapon tmpInterface;
+            //foreach (var it in m_weaponInit) {
+            //    tmpInterface = it.GetComponent<IWeapon>();
+            //    if (tmpInterface != null) {
+            //        tmp = Instantiate(it, m_weaponAnchor);
+            //        tmpInterface = tmp.GetComponent<IWeapon>();
+            //        tmpInterface.Init(this);
+            //        tmpInterface.SetActive(false);
+            //        m_weapons.Add(tmpInterface);
+            //    }
+            //}
+            ChangeCharacter(0, false);
             ChangeWeapon(0);//damit die erste waffe ausgewählt ist
 
             Respawn(transform.position);//hier die richtige position eingeben
@@ -250,9 +257,32 @@ namespace ProjectAres {
         void SelectWeapon(int selectedWeapon) {
             if (selectedWeapon >= m_weapons.Count || selectedWeapon < 0)
                 selectedWeapon = 0;
-            m_weaponWheel.gameObject.SetActive(true);
 
             //_weaponWheel.GetChild(selectedWeapon) highlight selected item
+        }
+
+        void ChangeCharacter(int newCaracter, bool relative = true) {
+            if(!relative && (newCaracter < 0 && newCaracter >= m_charData.Length)) {
+                return;
+            }
+
+            foreach(Transform it in m_modelRef) {
+                Destroy(it.gameObject);
+            }
+            foreach(Transform it in m_weaponRef) {
+                Destroy(it.gameObject);
+            }
+
+            if (relative) {
+                m_currentChar += newCaracter;
+                m_currentChar = (m_currentChar % m_charData.Length + m_charData.Length) % m_charData.Length;
+            } else {
+                m_currentChar = newCaracter;
+            }
+
+            Instantiate(m_charData[m_currentChar].m_model, m_modelRef);
+            m_weapons.Add(Instantiate(m_charData[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            m_weapons.Add(Instantiate(m_charData[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
         }
 
         void ChangeWeapon(int newWeapon, bool relative = false) {
@@ -272,8 +302,7 @@ namespace ProjectAres {
                 m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
 
                 if (m_isShooting)
-                    m_weapons[m_currentWeapon].StartShooting();
-                m_weaponWheel.gameObject.SetActive(false);
+                    m_charData[m_currentChar].m_weapons[m_currentWeapon].StartShooting();
             }
         }
 
