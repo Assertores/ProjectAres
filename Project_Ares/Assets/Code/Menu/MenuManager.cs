@@ -62,7 +62,7 @@ namespace ProjectAres {
                         tmpControle.transform.parent = tmp.transform;
 
                         ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
-                        reference._controlerIndex = i;
+                        reference.m_controlerIndex = i;
 
                         tmp.GetComponent<Player>().Init(reference);//null reference checks
                         tmp.GetComponent<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
