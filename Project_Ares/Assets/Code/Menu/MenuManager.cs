@@ -62,14 +62,15 @@ namespace ProjectAres {
                     GameObject tmp = Instantiate(m_playerRev);
                     if (tmp) {
                         GameObject tmpControle = new GameObject("Controler");
-                        tmpControle.transform.parent = tmp.transform;
+                        //tmpControle.transform.parent = tmp.transform;
 
                         ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
                         reference.m_controlerIndex = i;
 
-                        tmp.GetComponent<Player>().Init(tmpControle);//dirty
+                        tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
                         //tmp.GetComponent<Player>().Init(reference);//null reference checks
-                        tmp.GetComponent<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+                        tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+
                     }
                 }
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
