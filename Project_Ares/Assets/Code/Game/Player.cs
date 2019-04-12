@@ -69,7 +69,7 @@ namespace ProjectAres {
         }
 
         void Start() {
-            m_rb = GetComponentInChildren<Rigidbody2D>();
+            m_rb = GetComponent<Rigidbody2D>();
             
         }
         private void OnDestroy() {
@@ -282,7 +282,9 @@ namespace ProjectAres {
 
             Instantiate(m_charData[m_currentChar].m_model, m_modelRef);
             m_weapons.Add(Instantiate(m_charData[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            m_weapons[m_weapons.Count - 1].Init(this);
             m_weapons.Add(Instantiate(m_charData[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            m_weapons[m_weapons.Count - 1].Init(this);
         }
 
         void ChangeWeapon(int newWeapon, bool relative = false) {
