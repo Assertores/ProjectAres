@@ -40,7 +40,7 @@ namespace ProjectAres {
                 return;
             }
 
-            m_startShootingTime = Time.time;
+            
 
             m_isShooting = true;
 
@@ -57,7 +57,7 @@ namespace ProjectAres {
 
             //m_player.m_rb.velocity += m_velocity;
             m_player.m_rb.gravityScale = m_gravetyScale;
-
+            m_startShootingTime = Time.time;
             ShootBullet();
             m_isShooting = false;
         }
