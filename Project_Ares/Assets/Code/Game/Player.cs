@@ -12,7 +12,7 @@ namespace ProjectAres {
         public int m_damageDealt;
         public int m_damageTaken;
     }
-
+    
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MonoBehaviour, IDamageableObject {
 
@@ -28,6 +28,9 @@ namespace ProjectAres {
         [SerializeField] Transform m_weaponWheel;
         [SerializeField] GameObject m_controlObject;
         [SerializeField] LayerMask m_dashColliders;
+        [SerializeField] PlayerGUIHandler m_GUIHandler;
+        [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
+        [SerializeField] string m_characterName;
 
         [Header("Balancing")]
         [SerializeField] int m_maxHealth = 100;
@@ -58,12 +61,14 @@ namespace ProjectAres {
         #endregion
         #region MonoBehaviour
 
-        void Start() {
-            DontDestroyOnLoad(this.gameObject);
-            //GameManager test = GameManager._singelton;
-            m_rb = GetComponent<Rigidbody2D>();
-            //Init(null);
+        void Awake() {
+            DontDestroyOnLoad(this.gameObject.transform.parent);//dirty
             s_references.Add(this);
+        }
+
+        void Start() {
+            m_rb = GetComponentInChildren<Rigidbody2D>();
+            
         }
         private void OnDestroy() {
             s_references.Remove(this);
@@ -158,7 +163,7 @@ namespace ProjectAres {
 
         #endregion
 
-        public void Init(IControl control) {
+        public void Init(GameObject control) {//dirty wegen nicht direkt IControl übergeben
             if (control == null) {
                 if(m_controlObject == null) {
                     DestroyImmediate(gameObject);
@@ -171,8 +176,13 @@ namespace ProjectAres {
                     return;
                 }
             } else {
-                m_control = control;
+                control.transform.parent = m_weaponRotationAncor;
+                control.transform.localPosition = Vector3.zero;
+                m_control = control.GetComponent<IControl>();
             }
+
+            RepositionGUI();
+            m_GUIHandler.ChangeCharacter(m_characterIcon, m_characterName);
 
             InControle(true);
 
@@ -259,6 +269,8 @@ namespace ProjectAres {
                 }
 
                 m_weapons[m_currentWeapon].SetActive(true);
+                m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
+
                 if (m_isShooting)
                     m_weapons[m_currentWeapon].StartShooting();
                 m_weaponWheel.gameObject.SetActive(false);
@@ -294,6 +306,13 @@ namespace ProjectAres {
         public void Disconect() {
             Destroy(this.gameObject);
             s_references.Remove(this);
+            RepositionGUI();
+        }
+
+        void RepositionGUI() {
+            for (int i = 0; i < s_references.Count; i++) {
+                s_references[i].m_GUIHandler.Reposition(((float)i + 1) / (s_references.Count + 1));
+            }
         }
 
         #region Physics

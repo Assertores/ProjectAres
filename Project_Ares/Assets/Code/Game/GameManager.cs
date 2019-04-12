@@ -55,7 +55,8 @@ namespace ProjectAres {
                     tmpControle.transform.parent = tmp.transform;
 
                     IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
-                    tmp.GetComponent<Player>().Init(reference);//null reference checks
+                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty null reference checks
+                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
                 }
             }
 
