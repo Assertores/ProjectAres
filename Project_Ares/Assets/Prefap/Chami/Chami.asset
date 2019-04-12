@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
+  m_Name: Chami
+  m_EditorClassIdentifier: 
+  m_model: {fileID: 8021982208745273552, guid: 47f006c7e4d19be418cb9c111a0ad8b5, type: 3}
+  m_icon: {fileID: 21300000, guid: befde752ab54f64428973860401193a6, type: 3}
+  m_name: Chami
+  m_sMG: {fileID: 8294756563320938153, guid: 7299241c464005b4f855644c451bf1cb, type: 3}
+  m_rocked: {fileID: 2582504901680775649, guid: 9c2d13986ca79234f80b240e8ab9e71b,
+    type: 3}
