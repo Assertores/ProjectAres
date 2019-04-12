@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
-  m_Name: CrabtainHook
+  m_Name: NoTexture
   m_EditorClassIdentifier: 
-  m_model: {fileID: 8021982208745273552, guid: f85d2b9648d51b040b167a2a85ed101c, type: 3}
-  m_icon: {fileID: 21300000, guid: f0bf7eb825176e64daf96ee563b64b29, type: 3}
-  m_name: Crabtain Hook
-  m_sMG: {fileID: 8294756563320938153, guid: a330d567f92e7214a82323bc2f6e3161, type: 3}
-  m_rocked: {fileID: 2582504901680775649, guid: d8b819d01b68bed468d31f36d6913704,
+  m_model: {fileID: 8021982208745273552, guid: 50c37fe6348b5084dba37ed3b65277c7, type: 3}
+  m_icon: {fileID: 21300000, guid: 44266535e0b3c774dbbab37caab97385, type: 3}
+  m_name: No Texture
+  m_sMG: {fileID: 8294756563320938153, guid: 57d6705caf89b534abfb1c85037a2599, type: 3}
+  m_rocked: {fileID: 2582504901680775649, guid: 25b9c8778fa2543439834c9b3c9d440f,
     type: 3}

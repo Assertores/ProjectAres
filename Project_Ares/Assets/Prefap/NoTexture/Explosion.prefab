@@ -126,21 +126,21 @@ MonoBehaviour:
   m_explosion: {fileID: 3039136259464356723}
   m_explosionStains: {fileID: 854507398363705032}
   m_audio: {fileID: 6854406944128411455}
-  m_baseDamage: 20
+  m_baseDamage: 35
   m_radius: 1.5
   m_baseKnockback: 1000
   m_fallOff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0041656494
+      time: 0.0028533936
       value: 1.0070801
-      inSlope: -0.50566554
-      outSlope: -0.50566554
+      inSlope: -0.03417834
+      outSlope: -0.03417834
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.045827914
+      outWeight: 0.042291623
     - serializedVersion: 3
       time: 1.4907248
       value: 0.09519701
