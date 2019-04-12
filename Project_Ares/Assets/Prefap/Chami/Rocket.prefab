@@ -49,7 +49,7 @@ MonoBehaviour:
   m_explosionRef: {fileID: 3039136259464356723, guid: 94583e90a944d7e44adccc0fa24d7f1a,
     type: 3}
   m_killDistance: 1000
-  m_damage: 5
+  m_damage: 3
 --- !u!61 &3022745360682548735
 BoxCollider2D:
   m_ObjectHideFlags: 0

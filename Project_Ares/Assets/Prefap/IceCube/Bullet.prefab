@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3806085516393694044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0086, y: 0.0172, z: 0}
+  m_LocalPosition: {x: -0.081, y: -0.007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7888638139750685942}
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_killDistance: 1000
-  m_damage: 5
+  m_damage: 3
 --- !u!61 &7218983981221809822
 BoxCollider2D:
   m_ObjectHideFlags: 0

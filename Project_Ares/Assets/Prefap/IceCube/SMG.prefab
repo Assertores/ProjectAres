@@ -161,8 +161,9 @@ MonoBehaviour:
   m_audio: {fileID: 5545514078711503098}
   m_icon_: {fileID: 21300000, guid: 113246930fdc88b448a8a5e3c438b848, type: 3}
   m_rPM: 500
-  m_muzzleEnergy: 2000
-  m_damage: 5
+  m_muzzleEnergy: 2500
+  m_damage: 3
+  m_shootForSec: 4
 --- !u!82 &5545514078711503098
 AudioSource:
   m_ObjectHideFlags: 0

@@ -159,11 +159,10 @@ MonoBehaviour:
     type: 3}
   m_barrel: {fileID: 8526788404880525850}
   m_audio: {fileID: 5545514078711503098}
-  m_icon_: {fileID: 21300000, guid: 113246930fdc88b448a8a5e3c438b848, type: 3}
+  m_icon_: {fileID: 21300000, guid: 1971b69e2e5e3e84b8cde844aeb09c29, type: 3}
   m_rPM: 500
-  m_muzzleEnergy: 2000
-  m_damage: 5
-  m_shootForSec: 2
+  m_muzzleEnergy: 2500
+  m_shootForSec: 4
 --- !u!82 &5545514078711503098
 AudioSource:
   m_ObjectHideFlags: 0

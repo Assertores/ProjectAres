@@ -16,7 +16,6 @@ namespace ProjectAres {
         [Header("Balancing")]
         [SerializeField] float m_rPM = 1;
         [SerializeField] float m_muzzleEnergy = 800;
-        [SerializeField] int m_damage = 1;
         [SerializeField] float m_shootForSec = 2;
 
 
