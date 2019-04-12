@@ -10,6 +10,7 @@ namespace ProjectAres {
         [Header("References")]
         [SerializeField] GameObject m_bullet;
         [SerializeField] Transform m_barrel;
+        [SerializeField] AudioSource m_audio;
 
         [Header("Balancing")]
         [SerializeField] float m_muzzleEnergy = 800;
@@ -58,6 +59,7 @@ namespace ProjectAres {
             //m_player.m_rb.velocity += m_velocity;
             m_player.m_rb.gravityScale = m_gravetyScale;
             m_startShootingTime = Time.time;
+            m_audio.Play();
             ShootBullet();
             m_isShooting = false;
         }

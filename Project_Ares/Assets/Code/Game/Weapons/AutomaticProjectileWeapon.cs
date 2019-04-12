@@ -10,6 +10,7 @@ namespace ProjectAres {
         [Header("References")]
         [SerializeField] GameObject m_bullet;
         [SerializeField] Transform m_barrel;
+        [SerializeField] AudioSource m_audio;
 
         [Header("Balancing")]
         [SerializeField] float m_rPM = 1;
@@ -33,6 +34,7 @@ namespace ProjectAres {
 
         public void StartShooting() {
             Invoke("ShootBullet", 60 / m_rPM);
+            m_audio.Play();
         }
 
         public void StopShooting() {
@@ -44,7 +46,7 @@ namespace ProjectAres {
         void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_bullet, m_barrel == null ? transform.position : m_barrel.position, m_barrel == null ? transform.rotation : m_barrel.rotation)
                 .GetComponent<IHarmingObject>()?.Init(m_player);
-
+            
             if (bulletRB) {
                 //bulletRB.velocity = m_player.m_rb.velocity;
                 bulletRB.AddForce(transform.right * m_muzzleEnergy);

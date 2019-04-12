@@ -158,6 +158,7 @@ MonoBehaviour:
   m_bullet: {fileID: 6427757345274832488, guid: 3dd99c852e85baa40b69b81bd82f9a39,
     type: 3}
   m_barrel: {fileID: 8526788404880525850}
+  m_audio: {fileID: 5545514078711503098}
   m_rPM: 500
   m_muzzleEnergy: 2000
   m_damage: 5
@@ -171,7 +172,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 86a702caddec33f40b60147623c180aa, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
