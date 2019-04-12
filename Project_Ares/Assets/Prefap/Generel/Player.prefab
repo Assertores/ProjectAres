@@ -1588,6 +1588,7 @@ MonoBehaviour:
   m_controlRef: {fileID: 4229960895838823259}
   m_charData:
   - {fileID: 11400000, guid: 716b8229e292ecf4ca467f4563eca010, type: 2}
+  - {fileID: 11400000, guid: f6a28c1fe5b0aa3479b26a48213265ce, type: 2}
   m_healthBar: {fileID: 5840008463104912062}
   m_controlObject: {fileID: 0}
   m_dashColliders:
