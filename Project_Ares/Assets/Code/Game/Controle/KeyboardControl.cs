@@ -42,7 +42,7 @@ namespace ProjectAres {
             }
 
             if (Input.GetKeyDown(KeyCode.C)) {
-                Dash?.Invoke();
+                ChangeCharacter?.Invoke(1, true);
             }
 
             //if (_myCamera) {
@@ -62,6 +62,7 @@ namespace ProjectAres {
         public Action StopShooting { get; set; }
         public Action Dash { get; set; }
         public Action<int> SelectWeapon { get; set; }
+        public Action<int, bool> ChangeCharacter { get; set; }
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }

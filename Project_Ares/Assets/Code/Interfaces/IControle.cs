@@ -13,6 +13,7 @@ namespace ProjectAres {
         Action Dash { get; set; }
 
         Action<int> SelectWeapon { get; set; }
+        Action<int, bool> ChangeCharacter { get; set; }
         Action<int, bool> ChangeWeapon { get; set; }
         Action<int> UseItem { get; set; }
 
