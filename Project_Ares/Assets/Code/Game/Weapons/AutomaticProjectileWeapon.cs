@@ -17,10 +17,39 @@ namespace ProjectAres {
         [SerializeField] float m_rPM = 1;
         [SerializeField] float m_muzzleEnergy = 800;
         [SerializeField] int m_damage = 1;
+        [SerializeField] float m_shootForSec = 2;
 
-        protected Player m_player = null;
+
+        private float m_ShootingTime;
+        bool m_isShooting = false;
+        bool m_forceCoolDown = false;
+
+        Player m_player = null;
 
         #endregion
+
+        private void Update()
+        {
+            if (m_isShooting)
+            {
+                m_ShootingTime += Time.deltaTime;
+            }
+            else
+            {
+                m_ShootingTime -= Time.deltaTime;
+            }
+
+            if(m_ShootingTime >= m_shootForSec)
+            {
+                m_forceCoolDown = true;
+                StopShooting();
+            }else if(m_ShootingTime <= 0)
+            {
+                m_forceCoolDown = false;
+                m_ShootingTime = 0;
+            }
+        }
+
         #region IWeapon
 
         public Sprite m_icon { get { return m_icon_; } }
@@ -34,11 +63,17 @@ namespace ProjectAres {
         }
 
         public void StartShooting() {
+            if (m_forceCoolDown)
+                return;
+
+            m_isShooting = true;
+
             Invoke("ShootBullet", 60 / m_rPM);
             m_audio.Play();
         }
 
         public void StopShooting() {
+            m_isShooting = false;
             CancelInvoke();
         }
 
