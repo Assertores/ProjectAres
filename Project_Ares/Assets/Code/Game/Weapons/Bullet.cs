@@ -42,7 +42,7 @@ namespace ProjectAres {
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if(collision.gameObject == m_source.gameObject) {
+            if(collision.gameObject == m_source.gameObject) {//null reference test
                 return;
             }
 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
+  m_Name: IceCube
+  m_EditorClassIdentifier: 
+  m_model: {fileID: 8021982208745273552, guid: b7d875536f5867648866c28054003580, type: 3}
+  m_icon: {fileID: 21300000, guid: 048e1608ff366f345a97d860d2b772cd, type: 3}
+  m_name: IceCube
+  m_sMG: {fileID: 8294756563320938153, guid: 512c91bb5b0671b40a2f888e1b63a556, type: 3}
+  m_rocked: {fileID: 2582504901680775649, guid: e2b111843e76bf2469fe1b0776419adc,
+    type: 3}
