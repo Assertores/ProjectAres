@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
-    [System.Serializable]
-    public class CharacterData {
-        public GameObject Model;
-        public GameObject SMG;
-        public GameObject Rocked;
+    [CreateAssetMenu(menuName = "Character")]
+    public class CharacterData: ScriptableObject {
+        public GameObject m_model;
+        public GameObject m_sMG;
+        public GameObject m_rocked;
+
+        [HideInInspector]
+        public IWeapon[] m_weapons = new IWeapon[2];
     }
 }
