@@ -85,6 +85,11 @@ namespace ProjectAres {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
 
+            if (MenuManager._singelton)//dirty
+                m_control.ChangeCharacter = ChangeCharacter;
+            else
+                m_control.ChangeCharacter = null;
+
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
         }
 
@@ -220,7 +225,7 @@ namespace ProjectAres {
                 m_control.Dash = Dash;
 
                 m_control.SelectWeapon = SelectWeapon;
-                m_control.ChangeCharacter = ChangeCharacter;
+
                 m_control.ChangeWeapon = ChangeWeapon;
                 m_control.UseItem = UseItem;
                 m_control.Disconnect = Disconect;
