@@ -166,6 +166,7 @@ namespace ProjectAres {
         #endregion
 
         public void Init(GameObject control) {//dirty wegen nicht direkt IControl übergeben
+            print(control);
             if (control == null) {
                 if(m_controlObject == null) {
                     DestroyImmediate(gameObject);
@@ -219,6 +220,7 @@ namespace ProjectAres {
                 m_control.Dash = Dash;
 
                 m_control.SelectWeapon = SelectWeapon;
+                m_control.ChangeCharacter = ChangeCharacter;
                 m_control.ChangeWeapon = ChangeWeapon;
                 m_control.UseItem = UseItem;
                 m_control.Disconnect = Disconect;
@@ -228,6 +230,7 @@ namespace ProjectAres {
                 m_control.Dash = null;
 
                 m_control.SelectWeapon = null;
+                m_control.ChangeCharacter = null;
                 m_control.ChangeWeapon = null;
                 m_control.UseItem = null;
                 m_control.Disconnect = null;
@@ -266,6 +269,8 @@ namespace ProjectAres {
                 return;
             }
 
+            m_weapons.Clear();
+
             foreach(Transform it in m_modelRef) {
                 Destroy(it.gameObject);
             }
@@ -285,6 +290,14 @@ namespace ProjectAres {
             m_weapons[m_weapons.Count - 1].Init(this);
             m_weapons.Add(Instantiate(m_charData[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
             m_weapons[m_weapons.Count - 1].Init(this);
+            for (int i = 0; i < m_weapons.Count; i++) {
+                if(i != m_currentWeapon) {
+                    m_weapons[i].SetActive(false);
+                }
+            }
+
+            m_GUIHandler.ChangeCharacter(m_charData[m_currentChar].m_icon, m_charData[m_currentChar].m_name);
+            m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
         }
 
         void ChangeWeapon(int newWeapon, bool relative = false) {
