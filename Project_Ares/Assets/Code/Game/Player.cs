@@ -353,7 +353,7 @@ namespace ProjectAres {
         }
 
         public void Disconect() {
-            Destroy(this.gameObject);
+            Destroy(this.transform.root.gameObject);
             s_references.Remove(this);
             RepositionGUI();
         }
