@@ -29,6 +29,8 @@ namespace ProjectAres {
         [SerializeField] GameObject m_controlObject;
         [SerializeField] LayerMask m_dashColliders;
         [SerializeField] PlayerGUIHandler m_GUIHandler;
+        [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
+        [SerializeField] string m_characterName;
 
         [Header("Balancing")]
         [SerializeField] int m_maxHealth = 100;
@@ -180,6 +182,7 @@ namespace ProjectAres {
             }
 
             RepositionGUI();
+            m_GUIHandler.ChangeCharacter(m_characterIcon, m_characterName);
 
             InControle(true);
 
@@ -266,6 +269,8 @@ namespace ProjectAres {
                 }
 
                 m_weapons[m_currentWeapon].SetActive(true);
+                m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
+
                 if (m_isShooting)
                     m_weapons[m_currentWeapon].StartShooting();
                 m_weaponWheel.gameObject.SetActive(false);
@@ -306,7 +311,7 @@ namespace ProjectAres {
 
         void RepositionGUI() {
             for (int i = 0; i < s_references.Count; i++) {
-                s_references[i].m_GUIHandler.Init(((float)i + 1) / (s_references.Count + 1));
+                s_references[i].m_GUIHandler.Reposition(((float)i + 1) / (s_references.Count + 1));
             }
         }
 
