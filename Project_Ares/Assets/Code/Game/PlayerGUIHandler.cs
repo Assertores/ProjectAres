@@ -38,7 +38,6 @@ namespace ProjectAres {
         }
 
         public void Reposition(float position) {
-            print("new Position is " + position + " (" + m_canvas.pixelRect.width * position + ")");
             transform.position = new Vector2 (m_canvas.pixelRect.width * position,transform.position.y);
         }
 

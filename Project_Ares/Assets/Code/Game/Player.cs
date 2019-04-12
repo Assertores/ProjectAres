@@ -150,10 +150,15 @@ namespace ProjectAres {
             if (source) {
                 source.m_stats.m_kills++;
             }
-            foreach (var it in m_assistRefs) {//eventuell gegen funktion ersetzten
-                it.m_stats.m_assists++;
+
+            if(m_assistRefs.Count > 0) {
+                m_assistRefs[m_assistRefs.Count - 1].m_stats.m_kills++;
+                for (int i = 0; i < m_assistRefs.Count - 1; i++) {//eventuell gegen funktion ersetzten
+                    m_assistRefs[i].m_stats.m_assists++;
+                }
+                m_assistRefs.Clear();
             }
-            m_assistRefs.Clear();
+            
 
             m_currentHealth = 0;
             m_alive = false;
@@ -171,7 +176,6 @@ namespace ProjectAres {
         #endregion
 
         public void Init(GameObject control) {//dirty wegen nicht direkt IControl übergeben
-            print(control);
             if (control == null) {
                 if(m_controlObject == null) {
                     DestroyImmediate(gameObject);
