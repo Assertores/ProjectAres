@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
-  m_Name: IceCube
+  m_Name: CrabtainHook
   m_EditorClassIdentifier: 
   m_model: {fileID: 8021982208745273552, guid: b7d875536f5867648866c28054003580, type: 3}
   m_icon: {fileID: 21300000, guid: 048e1608ff366f345a97d860d2b772cd, type: 3}

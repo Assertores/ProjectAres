@@ -1590,6 +1590,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 716b8229e292ecf4ca467f4563eca010, type: 2}
   - {fileID: 11400000, guid: f6a28c1fe5b0aa3479b26a48213265ce, type: 2}
   - {fileID: 11400000, guid: 3c03d8f968a8c784e849d9bf0257bf78, type: 2}
+  - {fileID: 11400000, guid: 885e882de12f3a4408885a14f8c3c022, type: 2}
+  - {fileID: 11400000, guid: d896f89f0e07ee2488bf0058eef9ec02, type: 2}
   m_healthBar: {fileID: 5840008463104912062}
   m_controlObject: {fileID: 0}
   m_dashColliders:
