@@ -50,8 +50,10 @@ namespace ProjectAres {
                     tmpControle.transform.parent = tmp.transform;
 
                     IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
-                    tmp.GetComponent<Player>().Init(reference);//null reference checks
-                    tmp.GetComponent<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+                    //tmp.GetComponent<Player>().Init(KeyboardControl);
+                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty null reference checks
+                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
+                    tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                 }
             }
             for(int i = 0; i < 4; i++) {
@@ -64,7 +66,8 @@ namespace ProjectAres {
                         ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
                         reference.m_controlerIndex = i;
 
-                        tmp.GetComponent<Player>().Init(reference);//null reference checks
+                        tmp.GetComponent<Player>().Init(tmpControle);//dirty null reference checks
+                        //tmp.GetComponent<Player>().Init(reference);//null reference checks
                         tmp.GetComponent<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                     }
                 }

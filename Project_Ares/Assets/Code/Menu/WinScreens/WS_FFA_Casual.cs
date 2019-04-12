@@ -32,8 +32,7 @@ namespace ProjectAres {
                 }
                 Player.s_references[i].m_rb.velocity = Vector2.zero;
 
-                Player.s_references[i].transform.position = Vector3.Lerp(_leftMostPlayer.position, _rightMostPlayer.position,
-                                                                        Player.s_references.Count == 1 ? 0.5f : (float)i /(Player.s_references.Count-1));
+                Player.s_references[i].transform.position = Vector3.Lerp(_leftMostPlayer.position, _rightMostPlayer.position, ((float)i+1) /(Player.s_references.Count+1));
                 Player.s_references[i].InControle(false);
                 _pillar.Add(Instantiate(_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation));
             }
