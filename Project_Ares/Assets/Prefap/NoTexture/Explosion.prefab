@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0e6a0e1772a3a42a2d276654e07be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_explosion: {fileID: 3039136259464356723}
+  m_explosion: {fileID: 6944612050018747919}
   m_explosionStains: {fileID: 854507398363705032}
   m_audio: {fileID: 6854406944128411455}
   m_baseDamage: 35
