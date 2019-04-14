@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
   m_Name: NoTexture
   m_EditorClassIdentifier: 
-  m_model: {fileID: 8021982208745273552, guid: 50c37fe6348b5084dba37ed3b65277c7, type: 3}
+  m_model: {fileID: 1233551065175723928, guid: 9b7850128d7f0804a91da652a86b8bb0, type: 3}
   m_icon: {fileID: 21300000, guid: 44266535e0b3c774dbbab37caab97385, type: 3}
   m_name: No Texture
-  m_sMG: {fileID: 8294756563320938153, guid: 57d6705caf89b534abfb1c85037a2599, type: 3}
-  m_rocked: {fileID: 2582504901680775649, guid: 25b9c8778fa2543439834c9b3c9d440f,
+  m_sMG: {fileID: 6716697570813824091, guid: 593bfb71906c8704597a16151d107aa2, type: 3}
+  m_rocked: {fileID: 6354967896809232613, guid: 722d77b7d18deb94d8eb3129c3a0e805,
     type: 3}

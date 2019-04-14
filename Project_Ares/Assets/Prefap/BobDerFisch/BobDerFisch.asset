@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
   m_Name: BobDerFisch
   m_EditorClassIdentifier: 
-  m_model: {fileID: 8021982208745273552, guid: e43c76676d8cbb143ae3b25c35139e46, type: 3}
+  m_model: {fileID: 8834730126767423310, guid: 87eddd2063ddce644907afd686354ff6, type: 3}
   m_icon: {fileID: 21300000, guid: d0a1f383deaae3348a8ea482bbdb1b3d, type: 3}
   m_name: Bob Der Fisch
-  m_sMG: {fileID: 8294756563320938153, guid: 19e84e3855d77374da91d7bdb570c22a, type: 3}
-  m_rocked: {fileID: 2582504901680775649, guid: d52b5574e0ce9b14ab72b16fbde173f4,
+  m_sMG: {fileID: 5918392622380571818, guid: e803e2db0d073d64a8682c9385906ccf, type: 3}
+  m_rocked: {fileID: 1453774085195080677, guid: cb2e3bb38dd9dc244977fbdf65f62cce,
     type: 3}

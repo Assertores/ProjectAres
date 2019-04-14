@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276ca7ab68425d74180978cc99735d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_explosionRef: {fileID: 3039136259464356723, guid: 25e511a37588a17498e08d040c6e8a25,
+  m_explosionRef: {fileID: 3039136259464356723, guid: 973c7300ae2d07248ad89f8bd41128ea,
     type: 3}
   m_killDistance: 1000
   m_damage: 3
@@ -122,8 +122,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8722882940928831549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0619, y: 0.0034, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2352598480938561431}
   m_RootOrder: 0
