@@ -11,6 +11,7 @@ namespace ProjectAres {
         [SerializeField] GameObject m_bullet;
         [SerializeField] Transform m_barrel;
         [SerializeField] AudioSource m_audio;
+        [SerializeField] AudioClip[] m_sounds;
         [SerializeField] Sprite m_icon_;
 
         [Header("Balancing")]
@@ -83,7 +84,6 @@ namespace ProjectAres {
             m_isShooting = true;
 
             Invoke("ShootBullet", 60 / m_rPM);
-            m_audio.Play();
         }
 
         public void StopShooting() {
@@ -102,6 +102,9 @@ namespace ProjectAres {
                 bulletRB.AddForce(transform.right * m_muzzleEnergy);
             }
             m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);
+
+            if(m_sounds.Length > 0)
+                m_audio.PlayOneShot(m_sounds[Random.Range(0,m_sounds.Length-1)]);
 
             Invoke("ShootBullet", 60 / m_rPM);
         }

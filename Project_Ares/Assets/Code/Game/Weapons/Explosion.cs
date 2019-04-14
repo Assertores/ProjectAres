@@ -10,6 +10,7 @@ namespace ProjectAres {
         [SerializeField] GameObject m_explosion;
         [SerializeField] GameObject m_explosionStains;
         [SerializeField] AudioSource m_audio;
+        [SerializeField] AudioClip[] m_sounds;
 
         [Header("Balancing")]
         [SerializeField] int m_baseDamage = 1;
@@ -42,7 +43,10 @@ namespace ProjectAres {
         public Rigidbody2D Init(Player reverence) {
             m_explosion.SetActive(true);
             m_time = Time.timeSinceLevelLoad;
-            m_audio.Play();
+
+            if(m_sounds.Length > 0)
+                m_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length - 1)]);
+
             foreach (var it in Physics2D.OverlapCircleAll(transform.position, m_radius)) {
                 IDamageableObject tmp = it.gameObject.GetComponent<IDamageableObject>();
                 if (tmp != null) {
