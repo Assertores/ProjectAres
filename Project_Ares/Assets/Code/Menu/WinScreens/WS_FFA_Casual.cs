@@ -8,44 +8,53 @@ namespace ProjectAres {
         #region Variables
 
         [Header("References")]
-        [SerializeField] GameObject _pillarRef;
-        [SerializeField] Transform _rightMostPlayer;
-        [SerializeField] Transform _leftMostPlayer;
+        [SerializeField] GameObject m_pillarRef;
+        [SerializeField] Transform m_rightMostPlayer;
+        [SerializeField] Transform m_leftMostPlayer;
+        [SerializeField] Transform m_maxHight;
 
         [Header("Balancing")]
-        [SerializeField] float _pillarSpeed = 1;
-        [SerializeField] float _killHight = 1;
+        [SerializeField] float m_winScreenMaxTime = 4;
 
-        List<GameObject> _pillar = new List<GameObject>();
-        float _startTime;
+        float m_pillarSpeed = 1;
+        float m_hightPerKill = 1;
+        List<GameObject> m_pillar = new List<GameObject>();
+        float m_startTime;
 
         #endregion
         #region WinScreen
         #region MonoBehaviour
 
         void Start() {
+            int maxKills = 0;
             for (int i = 0; i < Player.s_references.Count; i++) {
                 Player.s_references[i].Invincible(true);
 
                 if (!Player.s_references[i].m_alive) {
                     Player.s_references[i].Respawn(transform.position);
                 }
-                Player.s_references[i].m_rb.velocity = Vector2.zero;
+                Player.s_references[i].DoReset();
 
-                Player.s_references[i].transform.position = Vector3.Lerp(_leftMostPlayer.position, _rightMostPlayer.position, ((float)i+1) /(Player.s_references.Count+1));
+                if (Player.s_references[i].m_stats.m_kills > maxKills)
+                    maxKills = Player.s_references[i].m_stats.m_kills;
+
+                Player.s_references[i].transform.position = Vector3.Lerp(m_leftMostPlayer.position, m_rightMostPlayer.position, ((float)i+1) /(Player.s_references.Count+1));
                 Player.s_references[i].InControle(false);
-                _pillar.Add(Instantiate(_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation));
+                m_pillar.Add(Instantiate(m_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation));
             }
-            _startTime = Time.timeSinceLevelLoad;
+
+            m_pillarSpeed = (m_maxHight.position.y - m_rightMostPlayer.position.y) / m_winScreenMaxTime;
+            m_hightPerKill = (m_maxHight.position.y - m_rightMostPlayer.position.y) / maxKills;
+            m_startTime = Time.timeSinceLevelLoad;
         }
 
         // Update is called once per frame
         void Update() {
             for(int i = 0; i < Player.s_references.Count; i++) {
-                if(1/_pillarSpeed * Player.s_references[i].m_stats.m_kills > Time.timeSinceLevelLoad - _startTime) {
-                    _pillar[i].transform.position += new Vector3(0,_pillarSpeed * Time.deltaTime,0);
+                if(1/m_pillarSpeed * (Player.s_references[i].m_stats.m_kills * m_hightPerKill) > Time.timeSinceLevelLoad - m_startTime) {
+                    m_pillar[i].transform.position += new Vector3(0,m_pillarSpeed * Time.deltaTime,0);
 
-                    Player.s_references[i].transform.position = _pillar[i].transform.position;
+                    Player.s_references[i].transform.position = m_pillar[i].transform.position;
                 } else {
                     Player.s_references[i].InControle(true);
                 }
