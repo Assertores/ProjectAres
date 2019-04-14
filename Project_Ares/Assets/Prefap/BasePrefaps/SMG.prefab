@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 4162003346175362497}
   - component: {fileID: 7651391310459712476}
   - component: {fileID: 5545514078711503098}
+  - component: {fileID: 3738275278642140705}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -271,3 +272,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3738275278642140705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294756563320938153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ebfeb084db3554e8626ec9dc250343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

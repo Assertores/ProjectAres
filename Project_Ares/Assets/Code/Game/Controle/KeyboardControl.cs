@@ -50,7 +50,13 @@ namespace ProjectAres {
             //}
 
             if (Input.GetKeyUp(KeyCode.Escape)) {
-                Disconnect?.Invoke();
+                if(Time.timeScale > 0) {
+                    Time.timeScale = 0;
+                } else {
+                    Time.timeScale = 1;
+                }
+                PauseAudioHandler.UpdateAudio();
+                //Disconnect?.Invoke();
             }
         }
 

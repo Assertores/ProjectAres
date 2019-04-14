@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 7568409528999598729}
   - component: {fileID: 5238133484686612310}
   - component: {fileID: 755934772241460942}
+  - component: {fileID: 687608131056733578}
   m_Layer: 0
   m_Name: RockedLauncher
   m_TagString: Untagged
@@ -258,3 +259,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &687608131056733578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582504901680775649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ebfeb084db3554e8626ec9dc250343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
