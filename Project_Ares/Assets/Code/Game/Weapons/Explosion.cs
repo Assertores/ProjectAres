@@ -51,7 +51,7 @@ namespace ProjectAres {
                 IDamageableObject tmp = it.gameObject.GetComponent<IDamageableObject>();
                 if (tmp != null) {
                     Vector2 dir = it.transform.position - transform.position;
-                    float fallOff = m_fallOff.Evaluate(dir.magnitude);
+                    float fallOff = m_fallOff.Evaluate(dir.magnitude/m_radius);
                     tmp.TakeDamage((int)Mathf.Round(fallOff * m_baseDamage), reverence == null ? null : reverence, dir.normalized * fallOff * m_baseKnockback);//eventuell doch in rocket mit rein schreiben wegen reference zu source player
                 }
             }
