@@ -86,11 +86,6 @@ namespace ProjectAres {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
 
-            if (MenuManager._singelton)//dirty
-                m_control.ChangeCharacter = ChangeCharacter;
-            else
-                m_control.ChangeCharacter = null;
-
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
         }
@@ -213,7 +208,8 @@ namespace ProjectAres {
             //RepositionGUI();//eventuell over the top
             StopShooting();
             m_currentHealth = m_maxHealth;
-            m_rb.velocity = Vector2.zero;
+            if(m_rb)
+                m_rb.velocity = Vector2.zero;
         }
 
         public void InControle(bool controle) {
@@ -238,6 +234,16 @@ namespace ProjectAres {
                 m_control.UseItem = null;
                 m_control.Disconnect = null;
                 StopShooting();
+            }
+        }
+
+        public void SetChangeCharAble(bool able) {
+            if (able) {
+                m_control.ChangeCharacter = ChangeCharacter;
+                m_GUIHandler.SetCharChangeActive(true);
+            } else {
+                m_control.ChangeCharacter = null;
+                m_GUIHandler.SetCharChangeActive(false);
             }
         }
 

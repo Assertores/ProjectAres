@@ -39,6 +39,7 @@ namespace ProjectAres {
                 it.DoReset();
                 it.Invincible(true);
                 it.transform.position = m_SpawnPoint.transform.position;
+                it.SetChangeCharAble(true);
             }
         }
 
@@ -55,6 +56,7 @@ namespace ProjectAres {
                     tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
                     //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
                     tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+                    tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
                 }
             }
             for(int i = 0; i < 4; i++) {
@@ -70,6 +72,7 @@ namespace ProjectAres {
                         tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
                         //tmp.GetComponent<Player>().Init(reference);//null reference checks
                         tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+                        tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
 
                     }
                 }
@@ -80,6 +83,11 @@ namespace ProjectAres {
         #endregion
 
         public void StartGame() {
+
+            foreach(var it in Player.s_references) {
+                it.SetChangeCharAble(false);
+            }
+
             SceneManager.LoadScene(StringCollection.COLOSSEUM);
             //SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
             //lade ausgewählte Szene im hintergrund
