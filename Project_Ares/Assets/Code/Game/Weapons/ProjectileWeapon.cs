@@ -24,9 +24,23 @@ namespace ProjectAres {
         float m_startShootingTime = float.MinValue;
 
         #endregion
+        #region MonoBehaviour
+
+        void Update() {
+            if (!m_isShooting && m_value > 0) {
+                m_value = 1 - ((Time.time - m_startShootingTime) / m_shootDelay);
+                if(m_value < 0) {
+                    m_value = 0;
+                }
+            }
+        }
+
+        #endregion
         #region IWeapon
 
         public Sprite m_icon { get { return m_icon_; } }
+
+        public float m_value { get; private set; }
 
         public void Init(Player player) {
             m_player = player;
@@ -61,6 +75,7 @@ namespace ProjectAres {
             m_startShootingTime = Time.time;
             m_audio.Play();
             ShootBullet();
+            m_value = 1;
             m_isShooting = false;
         }
 

@@ -8,6 +8,8 @@ namespace ProjectAres {
 
         [SerializeField] Sprite m_icon { get;}
 
+        float m_value { get; }
+
         void Init(Player player);
         void SetActive(bool activate);
         void StartShooting();

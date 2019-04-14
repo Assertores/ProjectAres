@@ -16,10 +16,12 @@ namespace ProjectAres {
         [Header("Balancing")]
         [SerializeField] float m_rPM = 1;
         [SerializeField] float m_muzzleEnergy = 800;
-        [SerializeField] float m_shootForSec = 2;
+        [SerializeField] float m_shootForSec = 4;
+        [SerializeField] float m_coolDownRatio = 2;
 
 
-        private float m_ShootingTime;
+        float m_shootingTime;
+        float m_weaponChangeTime;
         bool m_isShooting = false;
         bool m_forceCoolDown = false;
 
@@ -31,33 +33,46 @@ namespace ProjectAres {
         {
             if (m_isShooting)
             {
-                m_ShootingTime += Time.deltaTime;
+                m_shootingTime += Time.deltaTime;
             }
             else
             {
-                m_ShootingTime -= Time.deltaTime;
+                m_shootingTime -= Time.deltaTime * m_coolDownRatio;
             }
 
-            if(m_ShootingTime >= m_shootForSec)
+            if(m_shootingTime >= m_shootForSec)
             {
                 m_forceCoolDown = true;
                 StopShooting();
-            }else if(m_ShootingTime <= 0)
+            }else if(m_shootingTime <= 0)
             {
                 m_forceCoolDown = false;
-                m_ShootingTime = 0;
+                m_shootingTime = 0;
             }
+
+            m_value = m_shootingTime / m_shootForSec;
         }
 
         #region IWeapon
 
         public Sprite m_icon { get { return m_icon_; } }
 
+        public float m_value { get; private set; }
+
         public void Init(Player player) {
             m_player = player;
         }
 
         public void SetActive(bool activate) {
+            if (!activate) {
+                m_weaponChangeTime = Time.time;
+            } else {
+                m_shootingTime -= (Time.time - m_weaponChangeTime) * m_coolDownRatio;
+                if(m_shootingTime <= 0) {
+                    m_forceCoolDown = false;
+                    m_shootingTime = 0;
+                }
+            }
             gameObject.SetActive(activate);
         }
 
