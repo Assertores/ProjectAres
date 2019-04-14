@@ -11,9 +11,11 @@ namespace ProjectAres {
         [Header("References")]
         [SerializeField] Image m_characterIconRef;
         [SerializeField] Text m_characterNameRef;
+        [SerializeField] GameObject m_characterSelector;
         [SerializeField] Image m_weaponIconRef;
         [SerializeField] Text m_playerNameRef;
         [SerializeField] Canvas m_canvas;
+        
 
         #endregion
         #region MonoBehaviour
@@ -41,6 +43,8 @@ namespace ProjectAres {
             transform.position = new Vector2 (m_canvas.pixelRect.width * position,transform.position.y);
         }
 
-
+        public void SetCharChangeActive(bool activate) {
+            m_characterSelector.SetActive(activate);
+        }
     }
 }

@@ -804,6 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterIconRef: {fileID: 1637040670234672111}
   m_characterNameRef: {fileID: 1637040669271963390}
+  m_characterSelector: {fileID: 2982966311343569728}
   m_weaponIconRef: {fileID: 1637040669552718588}
   m_playerNameRef: {fileID: 6308019160385745258}
   m_canvas: {fileID: 8478215940611499266}
