@@ -76,7 +76,7 @@ namespace ProjectAres {
                 it.m_stats.m_deaths = 0;
                 it.m_stats.m_kills = 0;
 
-                it.m_rb.velocity = Vector2.zero;
+                it.DoReset();
                 it.Invincible(false);
             }
         }

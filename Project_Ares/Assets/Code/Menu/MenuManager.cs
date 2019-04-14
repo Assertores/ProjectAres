@@ -36,8 +36,8 @@ namespace ProjectAres {
 
         private void Start() {
             foreach (var it in Player.s_references) {
+                it.DoReset();
                 it.Invincible(true);
-                it.m_rb.velocity = Vector2.zero;
                 it.transform.position = m_SpawnPoint.transform.position;
             }
         }
