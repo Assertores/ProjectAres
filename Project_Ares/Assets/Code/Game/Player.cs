@@ -27,6 +27,7 @@ namespace ProjectAres {
         [SerializeField] CharacterData[] m_charData;
 
         [SerializeField] Image m_healthBar;
+        [SerializeField] Image m_weaponValue;
         [SerializeField] GameObject m_controlObject;
         [SerializeField] LayerMask m_dashColliders;
         [SerializeField] PlayerGUIHandler m_GUIHandler;
@@ -46,9 +47,9 @@ namespace ProjectAres {
 
         IControl m_control;
         List<IWeapon> m_weapons = new List<IWeapon>();
-        List<IItem> m_items = new List<IItem>();
+        List<IItem> m_items = new List<IItem>();//eventuell obsolet
 
-        Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();
+        Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();//eventuel obsolet
         List<Player> m_assistRefs = new List<Player>();
 
         float m_respawntTime = float.MaxValue;
@@ -91,6 +92,7 @@ namespace ProjectAres {
                 m_control.ChangeCharacter = null;
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
+            m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
         }
 
         //void FixedUpdate() {
@@ -194,32 +196,24 @@ namespace ProjectAres {
             }
 
             RepositionGUI();
-            m_GUIHandler.ChangeCharacter(m_characterIcon, m_characterName);
 
             InControle(true);
 
-            foreach (var it in m_charData) {
-                it.m_weapons[0] = it.m_sMG.GetComponent<IWeapon>();
-                it.m_weapons[1] = it.m_rocked.GetComponent<IWeapon>();
-            }
-
-            //GameObject tmp;
-            //IWeapon tmpInterface;
-            //foreach (var it in m_weaponInit) {
-            //    tmpInterface = it.GetComponent<IWeapon>();
-            //    if (tmpInterface != null) {
-            //        tmp = Instantiate(it, m_weaponAnchor);
-            //        tmpInterface = tmp.GetComponent<IWeapon>();
-            //        tmpInterface.Init(this);
-            //        tmpInterface.SetActive(false);
-            //        m_weapons.Add(tmpInterface);
-            //    }
-            //}
-            ChangeCharacter(0, false);
+            ChangeCharacter(0, false);//damit der erste Charakter ausgewählt ist
             ChangeWeapon(0);//damit die erste waffe ausgewählt ist
 
             Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
+        }
+
+        public void DoReset() {//Reset ist von MonoBehaviour benutz
+            if (!m_alive) {
+                Respawn(transform.position);
+            }
+            //RepositionGUI();//eventuell over the top
+            StopShooting();
+            m_currentHealth = m_maxHealth;
+            m_rb.velocity = Vector2.zero;
         }
 
         public void InControle(bool controle) {
@@ -249,6 +243,11 @@ namespace ProjectAres {
 
         public void Respawn(Vector2 pos) {
             transform.position = pos;
+
+            StopShooting();
+
+            if(m_rb)
+                m_rb.velocity = Vector2.zero;
 
             m_currentHealth = m_maxHealth;
             m_alive = true;
