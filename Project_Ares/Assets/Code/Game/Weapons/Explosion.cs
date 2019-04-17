@@ -47,6 +47,8 @@ namespace ProjectAres {
             if(m_sounds.Length > 0)
                 m_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length - 1)]);
 
+            CameraShake.DoCamerashake(0.1f, 0.7f);
+
             foreach (var it in Physics2D.OverlapCircleAll(transform.position, m_radius)) {
                 IDamageableObject tmp = it.gameObject.GetComponent<IDamageableObject>();
                 if (tmp != null) {
