@@ -1,0 +1,59 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace ProjectAres {
+    [RequireComponent(typeof(Camera))]
+    public class CameraShake : MonoBehaviour {
+
+        static List<CameraShake> s_reference = new List<CameraShake>();
+
+        #region Variables
+
+        Camera m_camera;
+        Vector3 m_starPos;
+
+        float m_magnitude = 0;
+        float m_time = 0;
+        float m_startTime = 0;
+
+        #endregion
+        #region MonoBehaviour
+
+        private void Awake() {
+            s_reference.Add(this);
+        }
+        private void OnDestroy() {
+            s_reference.Remove(this);
+        }
+
+        private void Start() {
+            m_camera = GetComponent<Camera>();
+            m_starPos = transform.position;
+        }
+
+        void Update() {
+            if(m_time > 0) {
+                float duration = Time.timeSinceLevelLoad - m_startTime;
+
+                if(duration > m_time) {
+                    m_time = 0;
+                    return;
+                }
+
+                Vector3 dir = new Vector3(Random.Range(-1.0f,1.0f), Random.Range(-1.0f, 1.0f), 0).normalized;
+                transform.position = m_starPos + dir * m_magnitude * (1 - duration / m_time);
+            }
+        }
+
+        #endregion
+
+        public static void DoCamerashake(float magnitude, float time) {
+            foreach(var it in s_reference) {
+                it.m_magnitude = magnitude;
+                it.m_time = time;
+                it.m_startTime = Time.timeSinceLevelLoad;
+            }
+        }
+    }
+}
