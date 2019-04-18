@@ -86,13 +86,12 @@ namespace ProjectAres {
                     GameObject tmpController = new GameObject("KI Controller");
                     //tmpControle.transform.parent = tmp.transform;
 
-                    IControl reference = tmpController.AddComponent<KeyboardControl>();// <= KI INPUT
+                    IControl reference = tmpController.AddComponent<KI_Minion>();
 
-                    //tmp.GetComponent<Player>().Init(KeyboardControl);
-                    tmp.GetComponentInChildren<Player>().Init(tmpController);//dirty
-                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
-                    tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
-                    tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
+                    Player minion = tmp.GetComponentInChildren<Player>();
+                    minion.Init(tmpController);
+                    minion.Invincible(true);
+                    minion.SetChangeCharAble(true);
                 }
             }
         }
@@ -109,7 +108,7 @@ namespace ProjectAres {
             //SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
             //lade ausgewählte Szene im hintergrund
             //spiel animation für szenenwechsel ab
-            //überblände die musik
+            //überblende die musik
             //unload Menuszene
         }
 

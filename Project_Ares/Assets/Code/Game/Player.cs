@@ -45,7 +45,7 @@ namespace ProjectAres {
 
         public d_playerStats m_stats;
 
-        IControl m_control;
+        public IControl m_control { get; private set; }
         List<IWeapon> m_weapons = new List<IWeapon>();
         List<IItem> m_items = new List<IItem>();//eventuell obsolet
 
@@ -172,6 +172,9 @@ namespace ProjectAres {
 
         #endregion
 
+        /// <summary>
+        /// dirty wegen nicht direkt IControl übergeben
+        /// </summary>
         public void Init(GameObject control) {//dirty wegen nicht direkt IControl übergeben
             if (control == null) {
                 if(m_controlObject == null) {
