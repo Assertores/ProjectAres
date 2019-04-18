@@ -78,6 +78,23 @@ namespace ProjectAres {
                 }
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
             }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                GameObject tmp = Instantiate(m_playerRev);
+                if (tmp) {
+                    GameObject tmpController = new GameObject("KI Controller");
+                    //tmpControle.transform.parent = tmp.transform;
+
+                    IControl reference = tmpController.AddComponent<KeyboardControl>();// <= KI INPUT
+
+                    //tmp.GetComponent<Player>().Init(KeyboardControl);
+                    tmp.GetComponentInChildren<Player>().Init(tmpController);//dirty
+                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
+                    tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+                    tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
+                }
+            }
         }
 
         #endregion
