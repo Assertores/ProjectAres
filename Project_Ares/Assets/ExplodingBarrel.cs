@@ -15,6 +15,9 @@ namespace ProjectAres
         [SerializeField] int m_maxHealth;
         int m_currentHealth;
 
+
+       // Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();
+
         bool m_isExploded = false;
         Rigidbody2D m_rb;
 
@@ -26,7 +29,8 @@ namespace ProjectAres
         public bool m_alive { get; set; }
 
         public void Die(Player source) {
-            throw new System.NotImplementedException();
+            return;
+
         }
 
         public int GetHealth() {
@@ -56,6 +60,29 @@ namespace ProjectAres
         }
 
         #endregion
+
+        #region Physics
+
+        private void OnCollisionEnter2D(Collision2D collision) {
+            if (collision.gameObject.tag =="Level" ){
+                ReflectDirection(collision.contacts[0].normal);
+            }
+
+        }
+        /*private void OnTriggerExit2D(Collider2D collision) {
+            ReflectDirection(collision.normal);
+        }*/
+
+
+        #endregion
+
+        void ReflectDirection(Vector2 m_collisionNormal) {
+            Vector2 tmp = (m_rb.velocity);
+            print(tmp);
+            tmp = Vector2.Reflect(tmp, m_collisionNormal);
+            print(tmp);
+            m_rb.velocity = tmp;
+        }
     }
 
 }
