@@ -81,7 +81,7 @@ namespace ProjectAres {
             if(m_control != null && m_currentHealth > 0)
                 m_weaponRef.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
             if(m_control.m_dir.x < 0) {
-                //m_weapons[m_c]
+                m_weaponRef.localScale = new Vector3(1, -1, 1);
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
