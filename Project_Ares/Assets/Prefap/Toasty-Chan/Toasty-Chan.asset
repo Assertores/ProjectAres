@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
   m_Name: Toasty-Chan
   m_EditorClassIdentifier: 
-  m_model: {fileID: 8021982208745273552, guid: 9aa114db1c466a64f953ca16bbe7330b, type: 3}
+  m_model: {fileID: 5176588372977724770, guid: 7fb438c7184bd8b4490146e4a20cb85c, type: 3}
   m_icon: {fileID: 21300000, guid: cc77d2fe3dd1aa0419a8d1561f50fca6, type: 3}
   m_name: Toasty-Chan
-  m_sMG: {fileID: 8294756563320938153, guid: 4da10e41b5a4d484a80a82139062aee1, type: 3}
-  m_rocked: {fileID: 2582504901680775649, guid: 78bfee4a38890614296d2d71ddd36b4a,
+  m_sMG: {fileID: 3700812534670384927, guid: c27a0656d1bd97746925fed2117a18b4, type: 3}
+  m_rocked: {fileID: 4119032674878466029, guid: 27ffe5e5ab086594e9dedf39bd6ab464,
     type: 3}
