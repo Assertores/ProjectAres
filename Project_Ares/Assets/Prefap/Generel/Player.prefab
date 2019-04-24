@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 8.05
+  m_fontSize: 8.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1516,7 +1516,7 @@ MonoBehaviour:
     spaceCount: 11
     wordCount: 12
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -2290,6 +2290,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d896f89f0e07ee2488bf0058eef9ec02, type: 2}
   - {fileID: 11400000, guid: 5c8fceeb082b1fd49a0bf62ed6d590cb, type: 2}
   - {fileID: 11400000, guid: 8a700600fdc07524182549cab5355f53, type: 2}
+  - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}
   m_healthBar: {fileID: 5840008463104912062}
   m_weaponValue: {fileID: 7892810267783094501}
   m_controlObject: {fileID: 0}
