@@ -1966,6 +1966,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 885e882de12f3a4408885a14f8c3c022, type: 2}
   - {fileID: 11400000, guid: d896f89f0e07ee2488bf0058eef9ec02, type: 2}
   - {fileID: 11400000, guid: 5c8fceeb082b1fd49a0bf62ed6d590cb, type: 2}
+  - {fileID: 11400000, guid: 8a700600fdc07524182549cab5355f53, type: 2}
   m_healthBar: {fileID: 5840008463104912062}
   m_weaponValue: {fileID: 7892810267783094501}
   m_controlObject: {fileID: 0}

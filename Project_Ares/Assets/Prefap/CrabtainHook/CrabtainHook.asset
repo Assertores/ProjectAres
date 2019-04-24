@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
   m_Name: CrabtainHook
   m_EditorClassIdentifier: 
-  m_model: {fileID: 8021982208745273552, guid: f85d2b9648d51b040b167a2a85ed101c, type: 3}
+  m_model: {fileID: 5583647180062562666, guid: 73bbbb0d0cf1f914bac462c577195d11, type: 3}
   m_icon: {fileID: 21300000, guid: f0bf7eb825176e64daf96ee563b64b29, type: 3}
   m_name: Crabtain Hook
-  m_sMG: {fileID: 8294756563320938153, guid: a330d567f92e7214a82323bc2f6e3161, type: 3}
-  m_rocked: {fileID: 2582504901680775649, guid: d8b819d01b68bed468d31f36d6913704,
+  m_sMG: {fileID: 3184623851636242072, guid: f8266ee6a0bd91b42b94f1849db7a0da, type: 3}
+  m_rocked: {fileID: 6762533652055549595, guid: 15d10e08706cbbc4dbfa225eea82b8e7,
     type: 3}
