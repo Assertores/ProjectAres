@@ -50,7 +50,7 @@ Rigidbody2D:
   m_LinearDrag: 0.2
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 753d7dfcb1dcade48b5ed6be74810aad, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_explosion: {fileID: 3039136259464356723, guid: 973c7300ae2d07248ad89f8bd41128ea,
     type: 3}
   m_maxHealth: 30
+  m_bouncinessFactor: 1.5
 --- !u!1 &7569549897396654944
 GameObject:
   m_ObjectHideFlags: 0
