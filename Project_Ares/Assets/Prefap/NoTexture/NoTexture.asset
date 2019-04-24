@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_model: {fileID: 1233551065175723928, guid: 9b7850128d7f0804a91da652a86b8bb0, type: 3}
   m_icon: {fileID: 21300000, guid: 44266535e0b3c774dbbab37caab97385, type: 3}
-  m_name: No Texture
+  m_name: Missing Texture
   m_sMG: {fileID: 6716697570813824091, guid: 593bfb71906c8704597a16151d107aa2, type: 3}
   m_rocked: {fileID: 6354967896809232613, guid: 722d77b7d18deb94d8eb3129c3a0e805,
     type: 3}
