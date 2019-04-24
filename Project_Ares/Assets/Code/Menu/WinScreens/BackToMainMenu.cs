@@ -10,27 +10,36 @@ namespace ProjectAres {
 
         #region Variables
 
-        int m_playerCount = 0;
-        [SerializeField] int m_restartTime;
+        [Header("References")]
+        [SerializeField] TextMeshProUGUI m_winscreenRestartText;
         [SerializeField] TextMeshProUGUI m_restartTimeText;
-        
 
+        [Header("Balancing")]
+        [SerializeField] int m_restartTime;
+        [SerializeField] int m_pillarRiseTime;
+
+        int m_playerCount = 0;
         #endregion
         #region MonoBehaviour
 
         void Start() {
-            m_restartTimeText.text = m_restartTime.ToString();
+            
         }
         
         void Update() {
             if(m_playerCount >= Player.s_references.Count) {
                 SceneManager.LoadScene(StringCollection.MAINMENU);
             }
-            if (Time.timeSinceLevelLoad >= m_restartTime) {
-                SceneManager.LoadScene(StringCollection.MAINMENU);
-            }
-            m_restartTimeText.text = Mathf.RoundToInt((m_restartTime - Time.timeSinceLevelLoad)).ToString();
+            if (m_pillarRiseTime < Time.timeSinceLevelLoad) {
+                m_restartTimeText.text = m_restartTime.ToString();
+                m_winscreenRestartText.text = "Time till Restart";
+                m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime +m_pillarRiseTime) - Time.timeSinceLevelLoad)).ToString();
 
+                if (Time.timeSinceLevelLoad >= m_restartTime) {
+                    SceneManager.LoadScene(StringCollection.MAINMENU);
+                }
+               
+            }
         }
 
         #endregion
