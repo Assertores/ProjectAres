@@ -334,7 +334,7 @@ namespace ProjectAres {
                 m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
 
                 if (m_isShooting)
-                    m_charData[m_currentChar].m_weapons[m_currentWeapon].StartShooting();
+                    m_weapons[m_currentWeapon].StartShooting();
             }
         }
 
