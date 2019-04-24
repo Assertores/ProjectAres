@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ProjectAres {
     public class PlayerGUIHandler : MonoBehaviour {
@@ -10,10 +11,10 @@ namespace ProjectAres {
 
         [Header("References")]
         [SerializeField] Image m_characterIconRef;
-        [SerializeField] Text m_characterNameRef;
+        [SerializeField] TextMeshProUGUI m_characterNameRef;
         [SerializeField] GameObject m_characterSelector;
         [SerializeField] Image m_weaponIconRef;
-        [SerializeField] Text m_playerNameRef;
+        [SerializeField] TextMeshProUGUI m_playerNameRef;
         [SerializeField] Canvas m_canvas;
         
 
