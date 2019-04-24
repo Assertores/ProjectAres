@@ -11,7 +11,7 @@ namespace ProjectAres {
         [SerializeField] GameObject m_pillarRef;
         [SerializeField] Transform m_rightMostPlayer;
         [SerializeField] Transform m_leftMostPlayer;
-        [SerializeField] Transform m_maxHight;
+        [SerializeField] Transform m_maxHeight;
 
         [Header("Balancing")]
         [SerializeField] float m_winScreenMaxTime = 4;
@@ -43,8 +43,8 @@ namespace ProjectAres {
                 m_pillar.Add(Instantiate(m_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation));
             }
 
-            m_pillarSpeed = (m_maxHight.position.y - m_rightMostPlayer.position.y) / m_winScreenMaxTime;
-            m_hightPerKill = (m_maxHight.position.y - m_rightMostPlayer.position.y) / maxKills;
+            m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_winScreenMaxTime;
+            m_hightPerKill = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / maxKills;
             m_startTime = Time.timeSinceLevelLoad;
         }
 
