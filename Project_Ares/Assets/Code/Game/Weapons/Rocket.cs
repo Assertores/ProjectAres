@@ -59,7 +59,7 @@ namespace ProjectAres {
 
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass);
+                tmp.TakeDamage(m_damage, m_source, Vector2.zero/*m_rb.velocity * m_rb.mass*/);//rocket wont give recoil to the hit one
             }
             Destroy(gameObject);
         }
