@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace ProjectAres {
     public class WS_FFA_Casual : WinScreen {
 
         #region Variables
+
+        struct d_pillar {
+            public GameObject pillar;
+            public TextMeshProUGUI text;
+        }
 
         [Header("References")]
         [SerializeField] GameObject m_pillarRef;
@@ -18,7 +24,7 @@ namespace ProjectAres {
 
         float m_pillarSpeed = 1;
         float m_hightPerKill = 1;
-        List<GameObject> m_pillar = new List<GameObject>();
+        List<d_pillar> m_pillar = new List<d_pillar>();
         float m_startTime;
 
         #endregion
@@ -40,7 +46,10 @@ namespace ProjectAres {
 
                 Player.s_references[i].transform.position = Vector3.Lerp(m_leftMostPlayer.position, m_rightMostPlayer.position, ((float)i+1) /(Player.s_references.Count+1));
                 Player.s_references[i].InControle(false);
-                m_pillar.Add(Instantiate(m_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation));
+                d_pillar tmp;
+                tmp.pillar = Instantiate(m_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation);
+                tmp.text = tmp.pillar.GetComponentInChildren<TextMeshProUGUI>();
+                m_pillar.Add(tmp);
             }
 
             m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_winScreenMaxTime;
@@ -51,10 +60,11 @@ namespace ProjectAres {
         // Update is called once per frame
         void Update() {
             for(int i = 0; i < Player.s_references.Count; i++) {
-                if(1/m_pillarSpeed * (Player.s_references[i].m_stats.m_kills * m_hightPerKill) > Time.timeSinceLevelLoad - m_startTime) {
-                    m_pillar[i].transform.position += new Vector3(0,m_pillarSpeed * Time.deltaTime,0);
+                if(m_pillar[i].pillar.transform.position.y < m_leftMostPlayer.position.y + (Player.s_references[i].m_stats.m_kills * m_hightPerKill)) {
+                    m_pillar[i].text.text = Mathf.RoundToInt((m_pillar[i].pillar.transform.position.y - m_leftMostPlayer.position.y) / m_hightPerKill).ToString();
+                    m_pillar[i].pillar.transform.position += new Vector3(0,m_pillarSpeed * Time.deltaTime,0);
 
-                    Player.s_references[i].transform.position = m_pillar[i].transform.position;
+                    Player.s_references[i].transform.position = m_pillar[i].pillar.transform.position;
                 } else {
                     Player.s_references[i].InControle(true);
                 }
