@@ -67,6 +67,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7651391310459712476, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
+        type: 3}
+      propertyPath: m_bullet
+      value: 
+      objectReference: {fileID: 5383469470506205993, guid: b8fd3f18120cad548bbb0b0d83fa658a,
+        type: 3}
+    - target: {fileID: 7651391310459712476, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
+        type: 3}
+      propertyPath: m_icon_
+      value: 
+      objectReference: {fileID: 21300000, guid: 8fb6fa7e77e6513448b51f868b9a5ca1,
+        type: 3}
     - target: {fileID: 4387958983715932738, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
         type: 3}
       propertyPath: m_Sprite
@@ -78,11 +90,5 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eef3be22295644c4a906f10fa345b65f, type: 2}
-    - target: {fileID: 7651391310459712476, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
-        type: 3}
-      propertyPath: m_bullet
-      value: 
-      objectReference: {fileID: 5383469470506205993, guid: b8fd3f18120cad548bbb0b0d83fa658a,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f, type: 3}
