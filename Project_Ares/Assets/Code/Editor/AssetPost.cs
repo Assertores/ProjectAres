@@ -8,7 +8,7 @@ public class AssetPost : AssetPostprocessor
         TextureImporter textureImporter = (TextureImporter)assetImporter;
         if (assetPath.Contains("UI"))//distinguishes different import settings for different asset types e.g. UI, Background etc.
             return;
-        if (assetPath.Contains("BackgroundLayer"))
+        if (assetPath.Contains("Environment"))
             return;
 
         textureImporter.spritePixelsPerUnit = 512;
