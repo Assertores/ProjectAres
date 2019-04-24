@@ -33,9 +33,9 @@ namespace ProjectAres {
             if (m_pillarRiseTime < Time.timeSinceLevelLoad) {
                 m_restartTimeText.text = m_restartTime.ToString();
                 m_winscreenRestartText.text = "Time till Restart";
-                m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime +m_pillarRiseTime) - Time.timeSinceLevelLoad)).ToString();
+                m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime + m_pillarRiseTime) - Time.timeSinceLevelLoad)).ToString();
 
-                if (Time.timeSinceLevelLoad >= m_restartTime) {
+                if (Time.timeSinceLevelLoad >= (m_restartTime + m_pillarRiseTime)) {
                     SceneManager.LoadScene(StringCollection.MAINMENU);
                 }
                
