@@ -77,7 +77,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_icon_
       value: 
-      objectReference: {fileID: 21300000, guid: 1b40d57024f85434fa29802f56cfe53f,
+      objectReference: {fileID: 21300000, guid: 5230df450ef277e46991985f0fbb8dbf,
         type: 3}
     - target: {fileID: 4387958983715932738, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
         type: 3}

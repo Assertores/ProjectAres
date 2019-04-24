@@ -12,12 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockedLauncher Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 5238133484686612310, guid: 4cc16d7398c592647ae184ca6242637f,
-        type: 3}
-      propertyPath: m_bullet
-      value: 
-      objectReference: {fileID: 2247791111429803111, guid: 414a874a21258964290aaf3794b5812c,
-        type: 3}
     - target: {fileID: 7568409528999598729, guid: 4cc16d7398c592647ae184ca6242637f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,6 +67,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5238133484686612310, guid: 4cc16d7398c592647ae184ca6242637f,
+        type: 3}
+      propertyPath: m_bullet
+      value: 
+      objectReference: {fileID: 2247791111429803111, guid: 414a874a21258964290aaf3794b5812c,
+        type: 3}
+    - target: {fileID: 5238133484686612310, guid: 4cc16d7398c592647ae184ca6242637f,
+        type: 3}
+      propertyPath: m_icon_
+      value: 
+      objectReference: {fileID: 21300000, guid: 647f01037838894439213eaa2f167d63,
+        type: 3}
     - target: {fileID: 7795496558902482186, guid: 4cc16d7398c592647ae184ca6242637f,
         type: 3}
       propertyPath: m_Sprite
