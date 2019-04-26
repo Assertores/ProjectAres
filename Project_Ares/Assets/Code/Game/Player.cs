@@ -141,7 +141,8 @@ namespace ProjectAres {
                 //m_rb.AddForce(force);
                 if (source) {
                     source.m_stats.m_damageDealt += damage;
-                    m_assistRefs.Add(source);
+                    if(!m_assistRefs.Exists(x => x == source))
+                        m_assistRefs.Add(source);
                 }
 
                 m_currentHealth -= damage;
