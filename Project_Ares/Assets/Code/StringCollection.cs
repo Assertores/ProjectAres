@@ -25,5 +25,7 @@ namespace ProjectAres {
         public static string PLAYER = "Player";
 
         #endregion
+
+        public static string DATAPATH = Application.dataPath + "/DATA/";
     }
 }

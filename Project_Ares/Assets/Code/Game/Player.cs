@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 namespace ProjectAres {
 
-    public struct d_playerStats {
+    public struct d_playerData {
+        public string m_name;
         public int m_kills;
         public int m_deaths;
         public int m_assists;
         public int m_damageDealt;
         public int m_damageTaken;
+
+        public override string ToString()
+        {
+            return m_name + "," + m_kills + "," + m_deaths + "," + m_assists + "," + m_damageDealt + "," + m_damageTaken;
+        }
     }
     
     [RequireComponent(typeof(Rigidbody2D))]
@@ -43,7 +49,7 @@ namespace ProjectAres {
         [Range(0,1)]
         [SerializeField] float m_airResistance = 0.25f;
 
-        public d_playerStats m_stats;
+        public d_playerData m_stats;
 
         public IControl m_control { get; private set; }
         List<IWeapon> m_weapons = new List<IWeapon>();

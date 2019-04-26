@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using TMPro;
 
@@ -21,6 +22,7 @@ namespace ProjectAres {
 
         [Header("Balancing")]
         [SerializeField] float m_winScreenMaxTime = 4;
+        [SerializeField] string m_TrackingPath = "Tracking.csv";
 
         float m_pillarSpeed = 1;
         float m_hightPerKill = 1;
@@ -34,6 +36,10 @@ namespace ProjectAres {
         void Start() {
             int maxKills = 0;
             for (int i = 0; i < Player.s_references.Count; i++) {
+
+                Directory.Exists(StringCollection.DATAPATH);
+                File.AppendAllText(StringCollection.DATAPATH + m_TrackingPath, Player.s_references[i].m_stats.ToString());
+
                 Player.s_references[i].Invincible(true);
 
                 if (!Player.s_references[i].m_alive) {
