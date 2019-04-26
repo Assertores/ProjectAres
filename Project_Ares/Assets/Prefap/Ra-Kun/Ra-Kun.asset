@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ra-Kun
   m_EditorClassIdentifier: 
   m_model: {fileID: 8862161734256854456, guid: 5b36325bd3309474593eff8a55b75a3f, type: 3}
-  m_icon: {fileID: 21300000, guid: ec5696df1ea897a418242c4a1b54a478, type: 3}
+  m_icon: {fileID: 21300000, guid: b9494c88e3b77904da28d36f82eea5e9, type: 3}
   m_name: Ra Kun
   m_sMG: {fileID: 1487732690542116842, guid: a1ffb2e0dc3c8cb458e56837be821051, type: 3}
   m_rocked: {fileID: 307970942243192593, guid: 8fc1c46bb0239d9499f5c14fbe3f2e7e, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chami
   m_EditorClassIdentifier: 
   m_model: {fileID: 8941799346402383378, guid: f7b6c8ac56d684a4bbe0b36bf8a7a2c7, type: 3}
-  m_icon: {fileID: 21300000, guid: befde752ab54f64428973860401193a6, type: 3}
+  m_icon: {fileID: 21300000, guid: bfa98c597d3c34e49b7c767c051af791, type: 3}
   m_name: Chami
   m_sMG: {fileID: 1908737985493813686, guid: b4fe843eb4de930419cedf59fd98cda0, type: 3}
   m_rocked: {fileID: 6014406814426872369, guid: 10b8fa94c849a7d4484f014ecc049b4b,

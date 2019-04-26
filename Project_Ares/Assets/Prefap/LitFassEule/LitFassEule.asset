@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LitFassEule
   m_EditorClassIdentifier: 
   m_model: {fileID: 7385152042857369008, guid: e594ef8103867f3499635e7b75154a26, type: 3}
-  m_icon: {fileID: 21300000, guid: a49229ade224ecf45adad75167670b87, type: 3}
+  m_icon: {fileID: 21300000, guid: 725975925eed7764e940f75e805bf4ae, type: 3}
   m_name: Lit Fass Eule
   m_sMG: {fileID: 8768165095378623446, guid: 7e03768144baeb14d96d1fed9ba3012f, type: 3}
   m_rocked: {fileID: 1595633387112873472, guid: 4b6f2667ed40a894cb44064604e6e359,
