@@ -31,6 +31,7 @@ namespace ProjectAres {
         [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
         [SerializeField] CharacterData[] m_charData;
+        [SerializeField] string[] m_names;
 
         [SerializeField] Image m_healthBar;
         [SerializeField] Image m_weaponValue;
@@ -200,6 +201,8 @@ namespace ProjectAres {
                 m_control = control.GetComponent<IControl>();
             }
 
+            m_stats.m_name = m_names[Random.Range(0, m_names.Length - 1)];
+            m_GUIHandler.SetName(m_stats.m_name);
             RepositionGUI();
 
             InControle(true);

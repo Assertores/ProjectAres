@@ -2291,6 +2291,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c8fceeb082b1fd49a0bf62ed6d590cb, type: 2}
   - {fileID: 11400000, guid: 8a700600fdc07524182549cab5355f53, type: 2}
   - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}
+  m_names:
+  - Tyler
+  - Clyde
+  - Mario
+  - Luigi
+  - Waaahh
+  - Bob Ross
+  - Frau Hermann Mannfrau
+  - Ben10
+  - SaNiC
+  - Elon Muskatnuss
+  - Nelson Mandela
+  - "R\xFCdiger"
+  - Winfried
+  - Hanibal
+  - "G\xFCnter"
+  - Steffan
+  - "Fliegender B\xE4ren"
+  - Donlad
+  - Baummann
+  - Holga
   m_healthBar: {fileID: 5840008463104912062}
   m_weaponValue: {fileID: 7892810267783094501}
   m_controlObject: {fileID: 0}

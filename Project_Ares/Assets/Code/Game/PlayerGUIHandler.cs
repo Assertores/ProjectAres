@@ -44,6 +44,10 @@ namespace ProjectAres {
             transform.position = new Vector2 (m_canvas.pixelRect.width * position,transform.position.y);
         }
 
+        public void SetName(string name) {
+            m_playerNameRef.text = name;
+        }
+
         public void SetCharChangeActive(bool activate) {
             m_characterSelector.SetActive(activate);
         }
