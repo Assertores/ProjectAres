@@ -15,7 +15,7 @@ namespace ProjectAres {
 
         public override string ToString()
         {
-            return m_name + "," + m_kills + "," + m_deaths + "," + m_assists + "," + m_damageDealt + "," + m_damageTaken;
+            return m_name + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
         }
     }
     
