@@ -36,9 +36,9 @@ namespace ProjectAres {
         void Start() {
             int maxKills = 0;
             for (int i = 0; i < Player.s_references.Count; i++) {
-
-                Directory.Exists(StringCollection.DATAPATH);
-                File.AppendAllText(StringCollection.DATAPATH + m_TrackingPath, Player.s_references[i].m_stats.ToString());
+                
+                Directory.CreateDirectory(StringCollection.DATAPATH);
+                File.AppendAllText(StringCollection.DATAPATH + m_TrackingPath, Player.s_references[i].m_stats.ToString() + System.Environment.NewLine);
 
                 Player.s_references[i].Invincible(true);
 
