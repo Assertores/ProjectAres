@@ -50,7 +50,7 @@ namespace ProjectAres {
             if (tmp != null) {
                 tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass);
             }
-            CameraShake.DoCamerashake(0.01f, 0.1f);
+            //CameraShake.DoCamerashake(0.01f, 0.1f);
 
             Destroy(gameObject);
         }
