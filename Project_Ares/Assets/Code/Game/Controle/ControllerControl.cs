@@ -11,6 +11,7 @@ namespace ProjectAres {
 
         [Header("Balancing")]
         [SerializeField] float m_shootThreshold = 0.9f;
+        [SerializeField] float m_stickDeadZone = 0.2f;
 
         public int m_controlerIndex = int.MinValue;
 
@@ -42,7 +43,7 @@ namespace ProjectAres {
             if(m_tmpDir == Vector2.zero) {
                 m_tmpDir = new Vector2(m_state.ThumbSticks.Left.X, m_state.ThumbSticks.Left.Y).normalized;//damit die waffe nicht nach rechts zurück springt, wenn man die sticks loslässt
             }
-            if(m_tmpDir != Vector2.zero) {
+            if(m_tmpDir.magnitude > m_stickDeadZone) {//fieleicht besser wenn man x und y seperat abfägt, da der input auf ein quadrat gemapt wird und nicht auf einen kreis
                 m_dir = m_tmpDir;
             }
 
