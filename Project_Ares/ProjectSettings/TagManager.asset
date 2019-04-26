@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Level
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - 
   - Level
   - Projectiles
-  - 
+  - Post Processing
   - 
   - 
   - 
@@ -40,4 +41,31 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Space
+    uniqueID: 2668709413
+    locked: 0
+  - name: Background
+    uniqueID: 1718225865
+    locked: 0
+  - name: Stage
+    uniqueID: 3287580705
+    locked: 0
+  - name: Props
+    uniqueID: 3957700817
+    locked: 0
+  - name: Characters
+    uniqueID: 155767401
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1379476171
+    locked: 0
+  - name: Weapons
+    uniqueID: 2478608191
+    locked: 0
+  - name: Effects
+    uniqueID: 4104346605
+    locked: 0
+  - name: GUI
+    uniqueID: 2803473141
     locked: 0

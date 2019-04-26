@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectAres {
+
+    /// <summary>
+    /// Legacy
+    /// </summary>
     public interface IItem {
 
         void Init();

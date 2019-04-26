@@ -7,9 +7,18 @@ using XInputDotNetPure;
 namespace ProjectAres {
     public class MenuManager : MonoBehaviour {
 
-        [Header("References")]
-        [SerializeField] GameObject _playerRev;
+        #region Variables
 
+        [Header("References")]
+        [SerializeField] GameObject m_playerRev;
+        [SerializeField] GameObject m_SpawnPoint;
+
+        GamePadState[] m_lastStates = new GamePadState[4];
+
+        bool[] m_existingPlayers = new bool[5];
+
+        #endregion
+        #region MonoBehaviour
         #region Singelton
 
         public static MenuManager _singelton = null;
@@ -27,37 +36,86 @@ namespace ProjectAres {
 
         #endregion
 
-        private void Update() {
-            if (Input.GetKeyDown(KeyCode.Return)) {
-                GameObject tmp = Instantiate(_playerRev);
-                if (tmp) {
-                    GameObject tmpControle = new GameObject("Controler");
-                    tmpControle.transform.parent = tmp.transform;
+        private void Start() {
+            foreach (var it in Player.s_references) {
+                it.DoReset();
+                it.Invincible(true);
+                it.transform.position = m_SpawnPoint.transform.position;
+                it.SetChangeCharAble(true);
+            }
+            for (int i = 0; i < m_existingPlayers.Length; i++) {
+                m_existingPlayers[i] = false;
+            }
+        }
 
-                    IControle reference = tmpControle.AddComponent<KeyboardControle>();//null reference checks
-                    tmp.GetComponent<Player>().Init(reference);//null reference checks
+        private void Update() {
+            if (!m_existingPlayers[4] && Input.GetKeyDown(KeyCode.Return)) {
+                GameObject tmp = Instantiate(m_playerRev);
+                if (tmp) {
+                    m_existingPlayers[4] = true;
+                    GameObject tmpControle = new GameObject("Controler");
+                    //tmpControle.transform.parent = tmp.transform;
+
+                    IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
+                    
+                    //tmp.GetComponent<Player>().Init(KeyboardControl);
+                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
+                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
+                    tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+                    tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
                 }
             }
             for(int i = 0; i < 4; i++) {
-                if(GamePad.GetState((PlayerIndex)i).IsConnected && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
-                    GameObject tmp = Instantiate(_playerRev);
+                if(!m_existingPlayers[i] && m_lastStates[i].IsConnected && m_lastStates[i].Buttons.Start == ButtonState.Pressed && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
+                    GameObject tmp = Instantiate(m_playerRev);
                     if (tmp) {
+                        m_existingPlayers[i] = true;
                         GameObject tmpControle = new GameObject("Controler");
-                        tmpControle.transform.parent = tmp.transform;
+                        //tmpControle.transform.parent = tmp.transform;
 
-                        ControllerControle reference = tmpControle.AddComponent<ControllerControle>();//null reference checks
-                        reference._controlerIndex = i;
-                        tmp.GetComponent<Player>().Init(reference);//null reference checks
+                        ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
+                        reference.m_controlerIndex = i;
+
+                        tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
+                        //tmp.GetComponent<Player>().Init(reference);//null reference checks
+                        tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
+                        tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
+
                     }
+                }
+                m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                GameObject tmp = Instantiate(m_playerRev);
+                if (tmp) {
+                    GameObject tmpController = new GameObject("KI Controller");
+                    //tmpControle.transform.parent = tmp.transform;
+
+                    IControl reference = tmpController.AddComponent<KI_Minion>();
+
+                    Player minion = tmp.GetComponentInChildren<Player>();
+                    minion.Init(tmpController);
+                    minion.Invincible(true);
+                    minion.SetChangeCharAble(true);
                 }
             }
         }
 
+        #endregion
+
         public void StartGame() {
-            SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
+
+            foreach(var it in Player.s_references) {
+                it.SetChangeCharAble(false);
+            }
+
+            SceneManager.LoadScene(StringCollection.COLOSSEUM);
+            //SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
             //lade ausgewählte Szene im hintergrund
             //spiel animation für szenenwechsel ab
-            //überblände die musik
+            //überblende die musik
             //unload Menuszene
         }
 
