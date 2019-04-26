@@ -8,7 +8,7 @@ namespace ProjectAres {
 
         [SerializeField] BoxCollider2D m_boundingBox;
 
-        void Start() {
+        void Awake() {
             if (!m_boundingBox) {
                 Destroy(this);
                 return;

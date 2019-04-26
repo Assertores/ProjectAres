@@ -14,6 +14,7 @@ namespace ProjectAres {
         Vector3 m_starPos;
 
         float m_magnitude = 0;
+        float m_currentMagnitude = 0;
         float m_time = 0;
         float m_startTime = 0;
 
@@ -35,14 +36,15 @@ namespace ProjectAres {
         void Update() {
             if(m_time > 0) {
                 float duration = Time.timeSinceLevelLoad - m_startTime;
+                m_currentMagnitude = m_magnitude * (1 - duration / m_time);
 
-                if(duration > m_time) {
+                if (duration > m_time) {
                     m_time = 0;
                     return;
                 }
 
                 Vector3 dir = new Vector3(Random.Range(-1.0f,1.0f), Random.Range(-1.0f, 1.0f), 0).normalized;
-                transform.position = m_starPos + dir * m_magnitude * (1 - duration / m_time);
+                transform.position = m_starPos + dir * m_currentMagnitude;
             }
         }
 
@@ -50,9 +52,12 @@ namespace ProjectAres {
 
         public static void DoCamerashake(float magnitude, float time) {
             foreach(var it in s_reference) {
-                it.m_magnitude = magnitude;
-                it.m_time = time;
-                it.m_startTime = Time.timeSinceLevelLoad;
+                if(it.m_currentMagnitude < magnitude) {
+                    it.m_magnitude = magnitude;
+                    it.m_time = time;
+                    it.m_startTime = Time.timeSinceLevelLoad;
+                }
+                
             }
         }
     }
