@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 namespace ProjectAres
 {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -10,6 +10,7 @@ namespace ProjectAres
         #region Variables
         [Header("References")]
         [SerializeField] GameObject m_explosion;
+        TextMeshPro m_healthText;
 
         [Header("Balancing")]
         [SerializeField] int m_maxHealth;
@@ -41,6 +42,7 @@ namespace ProjectAres
 
         public void TakeDamage(int damage, Player source, Vector2 force) {
             m_currentHealth -= damage;
+            m_healthText.text = (m_currentHealth).ToString();
             m_rb.AddForce(force);
             if(!m_isExploded && m_currentHealth <= 0) {
                 m_isExploded = true;
@@ -56,9 +58,11 @@ namespace ProjectAres
         #region MonoBehaviour
         void Start()
         {
-          
+            m_healthText = this.GetComponent<TextMeshPro>();
             m_currentHealth = m_maxHealth;
             m_rb = GetComponent<Rigidbody2D>();
+            
+            m_healthText.text = (m_currentHealth.ToString());
         }
 
         #endregion
@@ -67,13 +71,14 @@ namespace ProjectAres
 
         private void OnCollisionEnter2D(Collision2D collision) {
             Vector2 tmpNormal = new Vector2(0,0);
+            
             m_collisionNormals[collision.collider] = tmpNormal.normalized;
             if (collision.gameObject.tag =="Level" ){
                 ReflectDirection(collision.contacts[0].normal);
                 foreach(var it in collision.contacts) {
                     Debug.DrawRay(it.point, it.normal);
                 }
-
+                
             }
             
         }
@@ -86,12 +91,15 @@ namespace ProjectAres
         #endregion
 
         void ReflectDirection(Vector2 m_collisionNormal) {
-            Vector2 tmp = (m_bouncinessFactor*(m_rb.velocity));
-            print(tmp);
-            tmp = Vector2.Reflect(tmp, m_collisionNormal);
-            print(tmp);
-            m_rb.velocity = tmp;
+            if (Vector2.Dot(m_rb.velocity, m_collisionNormal) < 0)
+                m_rb.velocity = Vector2.Reflect(m_rb.velocity, m_collisionNormal);
+                  
         }
     }
 
 }
+
+
+/*Vector2 tmp = ((m_bouncinessFactor * m_rb.velocity));
+tmp = Vector2.Reflect(tmp, m_collisionNormal);
+            m_rb.velocity = tmp;*/
