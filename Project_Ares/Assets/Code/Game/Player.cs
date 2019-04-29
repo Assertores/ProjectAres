@@ -117,7 +117,7 @@ namespace ProjectAres {
             if(source == this) {
                 return;
             }
-            if (damage > m_currentHealth) {
+            if (damage >= m_currentHealth) {
                 m_stats.m_damageTaken += m_currentHealth;
                 m_stats.m_deaths++;
                 if (source) {
