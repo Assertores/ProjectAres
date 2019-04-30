@@ -31,7 +31,7 @@ namespace ProjectAres {
         [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
         [SerializeField] CharacterData[] m_charData;
-        [SerializeField] string[] m_names;
+        [SerializeField] List<string> m_names;
 
         [SerializeField] Image m_healthBar;
         [SerializeField] Image m_weaponValue;
@@ -65,6 +65,9 @@ namespace ProjectAres {
         int m_currentWeapon = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
+
+        int m_currentName;
+        System.Random m_ranNameGen;
 
         public Rigidbody2D m_rb { get; private set; }
 
@@ -201,7 +204,9 @@ namespace ProjectAres {
                 m_control = control.GetComponent<IControl>();
             }
 
-            m_stats.m_name = m_names[Random.Range(0, m_names.Length - 1)];
+            m_ranNameGen = new System.Random(0);//fixed seed to get the same result every time;
+            m_currentName = Random.Range(0, m_names.Count - 1);
+            m_stats.m_name = m_names[m_currentName];
             m_GUIHandler.SetName(m_stats.m_name);
             RepositionGUI();
 
@@ -254,9 +259,11 @@ namespace ProjectAres {
             if (able) {
                 m_control.ChangeCharacter = ChangeCharacter;
                 m_GUIHandler.SetCharChangeActive(true);
+                m_control.ChangeName = ChangeName;
             } else {
                 m_control.ChangeCharacter = null;
                 m_GUIHandler.SetCharChangeActive(false);
+                m_control.ChangeName = null;
             }
         }
 
@@ -289,6 +296,29 @@ namespace ProjectAres {
                 selectedWeapon = 0;
 
             //_weaponWheel.GetChild(selectedWeapon) highlight selected item
+        }
+
+        void ChangeName(bool next = true) {
+            if(!next && m_currentName <= 0) {
+                print("nameindex to low");
+                return;
+            }
+
+            if (next) {
+                m_currentName++;
+            } else {
+                m_currentName--;
+            }
+
+            if(m_currentName < m_names.Count) {
+                m_GUIHandler.SetName(m_names[m_currentName]);
+                return;
+            }
+
+            int value = m_ranNameGen.Next();
+            string tmp = string.Format("{0}{1}{2}", (char)(value % 25 + 65), (char)((value / 100) % 25 + 65), (char)((value / 10000) % 25 + 65));
+            m_names.Add(tmp);
+            m_GUIHandler.SetName(tmp);
         }
 
         void ChangeCharacter(int newCaracter, bool relative = true) {
