@@ -31,7 +31,7 @@ namespace ProjectAres {
         [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
         [SerializeField] CharacterData[] m_charData;
-        [SerializeField] List<string> m_names;
+        [SerializeField] List<string> m_names;//könnte man eventuell static machen um es nicht mehrfach zu speichern
 
         [SerializeField] Image m_healthBar;
         [SerializeField] Image m_weaponValue;
@@ -67,7 +67,7 @@ namespace ProjectAres {
         bool m_isInvincible = false;
 
         int m_currentName;
-        System.Random m_ranNameGen;
+        System.Random m_ranNameGen;//wenn liste static ist muss das auch static sein
 
         public Rigidbody2D m_rb { get; private set; }
 
