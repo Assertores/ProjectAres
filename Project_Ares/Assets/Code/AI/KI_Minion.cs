@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres
-{
+namespace ProjectAres {
 
-    public class KI_Minion : MonoBehaviour, IControl
-    {
+    public class KI_Minion : MonoBehaviour, IControl {
 
         #region Variables
 
@@ -51,6 +49,7 @@ namespace ProjectAres
         public Action StopShooting { get; set; }
         public Action Dash { get; set; }
         public Action<int> SelectWeapon { get; set; }
+        public Action<bool> ChangeName { get; set; }
         public Action<int, bool> ChangeCharacter { get; set; }
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
@@ -92,14 +91,14 @@ namespace ProjectAres
                     nearestPlayers.Add(other);
                     distances.Add(nextDistance);
 
-                    SortNearest();
+                    SortInLast();
                 }
                 else if (nextDistance < distances[maxNearest - 1])
                 {
                     nearestPlayers[maxNearest - 1] = other;
                     distances[maxNearest - 1] = nextDistance;
 
-                    SortNearest();
+                    SortInLast();
                 }
             }
             //nearestPlayers.Sort(delegate (Player a, Player b)
@@ -110,12 +109,23 @@ namespace ProjectAres
             //});
         }
 
-        void SortNearest()
+        void SortInLast()
         {
-            //for (int i = 0; i < length; i++)
-            //{
+            int nextPos = nearestPlayers.Count - 1;
+            float shiftedDisstance = distances[nextPos];
+            Player shiftedPlayer = nearestPlayers[nextPos];
 
-            //}
+            while (nextPos - 1 >= 0 && distances[nextPos] < distances[nextPos - 1])
+            {
+                distances[nextPos] = distances[nextPos - 1];
+                nearestPlayers[nextPos] = nearestPlayers[nextPos - 1];
+                nextPos -= 1;
+            }
+            if (nextPos != nearestPlayers.Count - 1)
+            {
+                distances[nextPos] = shiftedDisstance;
+                nearestPlayers[nextPos] = shiftedPlayer;
+            }
         }
     }
 }
