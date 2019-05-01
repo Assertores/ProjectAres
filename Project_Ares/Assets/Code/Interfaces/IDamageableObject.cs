@@ -17,7 +17,7 @@ namespace ProjectAres {
         /// <param name="damage">die menge an schaden, die gemacht wurde</param>
         /// <param name="source">referenc auf den spieler, der für den schaden verantwortlich ist. falls es keinen spieler gibt sollte diese variable "null" sein</param>
         /// <param name="force">mit welcher kraft das object in welche richtung geschleudert werden soll</param>
-        void TakeDamage(int damage, Player source, Vector2 force);
+        void TakeDamage(float damage, Player source, Vector2 force);
 
         /// <summary>
         /// wird diese funktion aufgerufen, soll das object sofort und ohne ausnahme serben
@@ -29,6 +29,6 @@ namespace ProjectAres {
         /// falls jemand mal wissen will wie fiel leben das ding noch hat
         /// </summary>
         /// <returns>die health, die dieses object noch haben</returns>
-        int GetHealth();
+        float GetHealth();
     }
 }

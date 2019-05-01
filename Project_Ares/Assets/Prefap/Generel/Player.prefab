@@ -2308,7 +2308,7 @@ MonoBehaviour:
   - Hanibal
   - "G\xFCnter"
   - Steffan
-  - "Fliegender B\xE4ren"
+  - "Fliegende B\xE4ren"
   - Donlad
   - Baummann
   - Holga
@@ -2321,6 +2321,8 @@ MonoBehaviour:
   m_GUIHandler: {fileID: 5617126295021934926}
   m_characterIcon: {fileID: 21300000, guid: cc77d2fe3dd1aa0419a8d1561f50fca6, type: 3}
   m_characterName: Toasty-Chan
+  m_regenTime: 5
+  m_regeneration: 1
   m_maxHealth: 100
   m_dashForce: 2
   m_iFrames: 1

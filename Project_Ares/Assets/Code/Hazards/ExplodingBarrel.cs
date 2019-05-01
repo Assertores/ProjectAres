@@ -13,10 +13,10 @@ namespace ProjectAres
         TextMeshPro m_healthText;
 
         [Header("Balancing")]
-        [SerializeField] int m_maxHealth;
+        [SerializeField] float m_maxHealth;
         [Tooltip("Muss am besten zwischen 1 u. 2 liegen")]
         [SerializeField] float m_bouncinessFactor;
-        int m_currentHealth;
+        float m_currentHealth;
 
 
         Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();
@@ -36,11 +36,11 @@ namespace ProjectAres
 
         }
 
-        public int GetHealth() {
+        public float GetHealth() {
             throw new System.NotImplementedException();
         }
 
-        public void TakeDamage(int damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force) {
             m_currentHealth -= damage;
             m_healthText.text = (m_currentHealth).ToString();
             m_rb.AddForce(force);

@@ -10,8 +10,8 @@ namespace ProjectAres {
         public int m_kills;
         public int m_deaths;
         public int m_assists;
-        public int m_damageDealt;
-        public int m_damageTaken;
+        public float m_damageDealt;
+        public float m_damageTaken;
 
         public override string ToString()
         {
@@ -42,7 +42,9 @@ namespace ProjectAres {
         [SerializeField] string m_characterName;
 
         [Header("Balancing")]
-        [SerializeField] int m_maxHealth = 100;
+        [SerializeField] private float m_regenTime;
+        [SerializeField] private float m_regeneration;
+        [SerializeField] float m_maxHealth = 100;
         [SerializeField] float m_dashForce = 2;
         [Tooltip("Immer in Sekunden angeben")]
         [SerializeField] float m_iFrames = 1;
@@ -60,7 +62,8 @@ namespace ProjectAres {
         List<Player> m_assistRefs = new List<Player>();
 
         float m_respawntTime = float.MaxValue;
-        int m_currentHealth;
+        private float m_time;
+        float m_currentHealth;
         int m_currentChar = 0;
         int m_currentWeapon = 0;
         bool m_isShooting = false;
@@ -88,16 +91,33 @@ namespace ProjectAres {
         }
         
         void Update() {
-            if(m_control != null && m_currentHealth > 0)
-                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
-            if(m_control.m_dir.x < 0) {
-                m_weaponRef.localScale = new Vector3(1, -1, 1);
+
+            if (m_control != null && m_currentHealth > 0) {
+                
+                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+
+                if (m_currentHealth < m_maxHealth) {
+                    if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
+
+                        m_currentHealth += (m_regeneration * Time.deltaTime);
+                        print(m_currentHealth);
+                        if (m_currentHealth > m_maxHealth) {
+                            m_currentHealth = m_maxHealth;
+                        }
+                    }
+                }
+            }
+
+            if (m_control.m_dir.x < 0) {
+            m_weaponRef.localScale = new Vector3(1, -1, 1);
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
+
+            
         }
 
         //void FixedUpdate() {
@@ -110,7 +130,7 @@ namespace ProjectAres {
 
         public bool m_alive { get; set; }
 
-        public void TakeDamage(int damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force) {
             if (m_isInvincible) {
                 return;
             }
@@ -150,6 +170,7 @@ namespace ProjectAres {
                 }
 
                 m_currentHealth -= damage;
+                m_time = Time.timeSinceLevelLoad;
             }
         }
 
@@ -177,7 +198,7 @@ namespace ProjectAres {
             GameManager.s_singelton.PlayerDied(this);
         }
 
-        public int GetHealth() {
+        public float GetHealth() {
             return m_currentHealth;
         }
 
