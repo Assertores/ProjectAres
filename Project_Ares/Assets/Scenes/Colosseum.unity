@@ -689,6 +689,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exploding Barrel
       objectReference: {fileID: 0}
+    - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -971,6 +976,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Exploding Barrel (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
@@ -1544,6 +1554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Exploding Barrel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
@@ -2558,6 +2573,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Exploding Barrel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
