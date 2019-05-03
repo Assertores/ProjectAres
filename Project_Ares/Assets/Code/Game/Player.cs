@@ -448,6 +448,13 @@ namespace ProjectAres {
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
+            if(collision.gameObject.tag == "Player") {
+                Vector2 tmp = collision.contacts[0].normal;
+                if (Vector2.Dot(m_rb.velocity, tmp) < 0) {
+                    m_rb.velocity = Vector2.Reflect(m_rb.velocity, tmp);
+                }
+
+            }
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
                 foreach (var it in collision.contacts) {
