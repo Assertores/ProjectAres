@@ -57,8 +57,11 @@ namespace ProjectAres {
                     //tmpControle.transform.parent = tmp.transform;
 
                     IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
-                    
+
                     //tmp.GetComponent<Player>().Init(KeyboardControl);
+
+                    tmp.transform.position = m_SpawnPoint.transform.position;
+
                     tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
                     //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
                     tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
@@ -75,6 +78,8 @@ namespace ProjectAres {
 
                         ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
                         reference.m_controlerIndex = i;
+
+                        tmp.transform.position = m_SpawnPoint.transform.position;
 
                         tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
                         //tmp.GetComponent<Player>().Init(reference);//null reference checks
@@ -94,6 +99,8 @@ namespace ProjectAres {
                     //tmpControle.transform.parent = tmp.transform;
 
                     IControl reference = tmpController.AddComponent<KI_Minion>();
+
+                    tmp.transform.position = m_SpawnPoint.transform.position;
 
                     Player minion = tmp.GetComponentInChildren<Player>();
                     minion.Init(tmpController);
