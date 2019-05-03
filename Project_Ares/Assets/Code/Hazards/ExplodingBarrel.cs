@@ -42,7 +42,7 @@ namespace ProjectAres
 
         public void TakeDamage(float damage, Player source, Vector2 force) {
             m_currentHealth -= damage;
-            m_healthText.text = (m_currentHealth).ToString();
+            m_healthText.text = (Mathf.RoundToInt(m_currentHealth)).ToString();
             m_rb.AddForce(force);
             if(!m_isExploded && m_currentHealth <= 0) {
                 m_isExploded = true;
