@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace ProjectAres {
 
     public struct d_playerData {
@@ -40,6 +41,10 @@ namespace ProjectAres {
         [SerializeField] PlayerGUIHandler m_GUIHandler;
         [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
         [SerializeField] string m_characterName;
+
+        private DragonBones.UnityArmatureComponent m_modelAnim;
+
+        
 
         [Header("Balancing")]
         [SerializeField] private float m_regenTime;
@@ -83,6 +88,8 @@ namespace ProjectAres {
         }
 
         void Start() {
+           
+
             m_rb = GetComponent<Rigidbody2D>();
             
         }
@@ -100,10 +107,9 @@ namespace ProjectAres {
                     if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
 
                         m_currentHealth += (m_regeneration * Time.deltaTime);
-                        print(m_currentHealth);
-                        if (m_currentHealth > m_maxHealth) {
-                            m_currentHealth = m_maxHealth;
-                        }
+                            if (m_currentHealth > m_maxHealth) {
+                                m_currentHealth = m_maxHealth;
+                            }
                     }
                 }
             }
@@ -112,6 +118,10 @@ namespace ProjectAres {
             m_weaponRef.localScale = new Vector3(1, -1, 1);
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
+            }
+            
+            if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                m_modelAnim.animation.Play("Idle");
             }
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
@@ -171,6 +181,13 @@ namespace ProjectAres {
 
                 m_currentHealth -= damage;
                 m_time = Time.timeSinceLevelLoad;
+                
+                //----- ----- Feedback ----- -----
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("Got_Hit",1);
+                  
+                    
+                }
             }
         }
 
@@ -363,7 +380,7 @@ namespace ProjectAres {
                 m_currentChar = newCaracter;
             }
 
-            Instantiate(m_charData[m_currentChar].m_model, m_modelRef);
+            GameObject model = Instantiate(m_charData[m_currentChar].m_model, m_modelRef);
             m_weapons.Add(Instantiate(m_charData[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
             m_weapons[m_weapons.Count - 1].Init(this);
             m_weapons.Add(Instantiate(m_charData[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
@@ -373,7 +390,12 @@ namespace ProjectAres {
                     m_weapons[i].SetActive(false);
                 }
             }
-
+            
+            m_modelAnim = model.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            if (m_modelAnim != null) {
+                print("REF GOT");
+                m_modelAnim.animation.Play("Idle");//In stringCollection übertragen
+            }
             m_GUIHandler.ChangeCharacter(m_charData[m_currentChar].m_icon, m_charData[m_currentChar].m_name);
             m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
         }
