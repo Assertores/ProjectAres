@@ -10,6 +10,8 @@ public class AssetPost : AssetPostprocessor
             return;
         if (assetPath.Contains("Environment"))
             return;
+        if (assetPath.Contains("Logo"))
+            return;
 
         textureImporter.spritePixelsPerUnit = 512;
         textureImporter.filterMode = FilterMode.Point;
