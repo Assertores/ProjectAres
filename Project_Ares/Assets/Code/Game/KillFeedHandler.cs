@@ -67,7 +67,7 @@ namespace ProjectAres {
             holder.m_victimIcon.sprite = victimIcon;
             holder.m_victimName.text = victimName;
 
-            item.transform.position += new Vector3(0, ((RectTransform)s_reference.transform).rect.height, 0);
+            item.transform.position -= new Vector3(0, ((RectTransform)s_reference.transform).rect.height, 0);
             ((RectTransform)s_reference.transform).sizeDelta = new Vector2(((RectTransform)s_reference.transform).sizeDelta.x, ((RectTransform)s_reference.transform).sizeDelta.y + s_reference.m_itemHight);
         }
     }
