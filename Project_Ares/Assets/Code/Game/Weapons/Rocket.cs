@@ -33,14 +33,14 @@ namespace ProjectAres {
         #endregion
         #region IHarmingObject
 
-        public Rigidbody2D Init(Player reverence) {
+        public Rigidbody2D Init(Player reference) {
             m_rb = GetComponent<Rigidbody2D>();
             if (!m_rb) {
                 Destroy(gameObject);
                 return null;
             }
 
-            m_source = reverence;
+            m_source = reference;
             return m_rb;
         }
 
@@ -48,7 +48,7 @@ namespace ProjectAres {
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if(collision.gameObject == m_source.gameObject) {
+            if(m_source && collision.gameObject == m_source.gameObject) {
                 return;
             }
 
