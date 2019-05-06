@@ -160,6 +160,11 @@ namespace ProjectAres {
                 if (source) {
                     source.m_stats.m_damageDealt += m_currentHealth;
                     source.m_stats.m_kills++;
+                    m_assistRefs.Remove(source);
+                } else {
+                    m_assistRefs[m_assistRefs.Count - 1].m_stats.m_damageDealt += m_currentHealth;
+                    m_assistRefs[m_assistRefs.Count - 1].m_stats.m_kills++;
+                    m_assistRefs.Remove(m_assistRefs[m_assistRefs.Count - 1]);
                 }
                 foreach (var it in m_assistRefs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
                     it.m_stats.m_assists++;
@@ -184,6 +189,10 @@ namespace ProjectAres {
                     source.m_stats.m_damageDealt += damage;
                     if(!m_assistRefs.Exists(x => x == source))
                         m_assistRefs.Add(source);
+                    else {
+                        m_assistRefs.Remove(source);
+                        m_assistRefs.Add(source);
+                    }
                 }
 
                 m_currentHealth -= damage;
