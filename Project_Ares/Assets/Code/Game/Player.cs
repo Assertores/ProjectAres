@@ -145,6 +145,9 @@ namespace ProjectAres {
         public bool m_alive { get; set; }
 
         public void TakeDamage(float damage, Player source, Vector2 force) {
+            if (!m_alive) {
+                return;
+            }
             if (m_isInvincible) {
                 return;
             }
@@ -209,13 +212,17 @@ namespace ProjectAres {
 
         public void Die(Player source) {
             m_stats.m_deaths++;
-            if (source) {
-                source.m_stats.m_kills++;
-            }
+            
 
             if(m_assistRefs.Count > 0) {
-                m_assistRefs[m_assistRefs.Count - 1].m_stats.m_kills++;
-                for (int i = 0; i < m_assistRefs.Count - 1; i++) {//eventuell gegen funktion ersetzten
+                if (source) {
+                    source.m_stats.m_kills++;
+                } else {
+                    m_assistRefs[m_assistRefs.Count - 1].m_stats.m_kills++;
+                    m_assistRefs.Remove(m_assistRefs[m_assistRefs.Count - 1]);
+                }
+                
+                for (int i = 0; i < m_assistRefs.Count; i++) {//eventuell gegen funktion ersetzten
                     m_assistRefs[i].m_stats.m_assists++;
                 }
                 m_assistRefs.Clear();
