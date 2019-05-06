@@ -204,8 +204,6 @@ namespace ProjectAres {
                 //----- ----- Feedback ----- -----
                 if (m_modelAnim != null) {
                     m_modelAnim.animation.Play("Got_Hit",1);
-                  
-                    
                 }
             }
         }
@@ -416,7 +414,6 @@ namespace ProjectAres {
             
             m_modelAnim = model.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
             if (m_modelAnim != null) {
-                print("REF GOT");
                 m_modelAnim.animation.Play("Idle");//In stringCollection übertragen
             }
             m_GUIHandler.ChangeCharacter(m_charData[m_currentChar].m_icon, m_charData[m_currentChar].m_name);
