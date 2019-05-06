@@ -84,6 +84,11 @@ namespace ProjectAres {
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
 
+        public void DoDisconect() {
+            DataHolder.s_players[4] = false;
+            Disconnect?.Invoke();
+        }
+
         #endregion
     }
 }

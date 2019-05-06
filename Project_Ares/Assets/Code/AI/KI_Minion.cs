@@ -55,6 +55,10 @@ namespace ProjectAres {
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
 
+        public void DoDisconect() {
+            Disconnect?.Invoke();
+        }
+
         #endregion
 
         void SceneSwap(UnityEngine.SceneManagement.Scene loadedScene, UnityEngine.SceneManagement.LoadSceneMode loadmode)

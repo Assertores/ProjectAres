@@ -62,5 +62,7 @@ namespace ProjectAres {
         /// call this to leave the game
         /// </summary>
         Action Disconnect { get; set; }
+
+        void DoDisconect();
     }
 }
