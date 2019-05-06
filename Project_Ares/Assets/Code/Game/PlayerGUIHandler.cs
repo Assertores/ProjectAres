@@ -16,6 +16,7 @@ namespace ProjectAres {
         [SerializeField] Image m_weaponIconRef;
         [SerializeField] TextMeshProUGUI m_playerNameRef;
         [SerializeField] Canvas m_canvas;
+        [SerializeField] public TextMeshProUGUI m_debugStats;//eventuell in eine funktion verpacken
         
 
         #endregion

@@ -13,9 +13,11 @@ namespace ProjectAres {
         public float m_damageDealt;
         public float m_damageTaken;
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return m_name + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
+        }
+        public string StringWithNewLine() {
+            return "Kills: " + m_kills + System.Environment.NewLine + "Deaths: " + m_deaths + System.Environment.NewLine + "Assists: " + m_assists + System.Environment.NewLine + "Damage Dealt: " + m_damageDealt + System.Environment.NewLine + "Damage Taken: " + m_damageTaken;
         }
     }
     
@@ -114,10 +116,12 @@ namespace ProjectAres {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
 
+            //----- ----- Feedback ----- -----
+
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
 
-            
+            m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
 
         //void FixedUpdate() {
