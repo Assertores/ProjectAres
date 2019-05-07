@@ -1635,5 +1635,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_winscreenRestartText: {fileID: 249702253}
   m_restartTimeText: {fileID: 1682437339}
-  m_restartTime: 30
+  m_restartTime: 10
   m_pillarRiseTime: 4
