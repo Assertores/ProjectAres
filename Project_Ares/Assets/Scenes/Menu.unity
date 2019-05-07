@@ -649,7 +649,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 83afee7027119de4bab355f0db396e61, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.699
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2621,6 +2621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2128402833}
   - component: {fileID: 2128402832}
+  - component: {fileID: 2128402834}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -2657,3 +2658,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2128402834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128402831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e86ffcfc6c6134f852c8d9442a9381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_names:
+  - Tyler
+  - Clyde
+  - Mario
+  - Luigi
+  - Waaahh
+  - Bob Ross
+  - Frau Herrmann Mannfrau
+  - Ben10
+  - SaNiC
+  - Elon Muskatnuss
+  - Nelson Mandela
+  - "R\xFCdiger"
+  - Winfried
+  - Hanibal
+  - "G\xFCnter"
+  - Steffan
+  - "Fliegende B\xE4ren"
+  - Donlad
+  - Baummann
+  - Holga
+  m_characters:
+  - {fileID: 11400000, guid: 716b8229e292ecf4ca467f4563eca010, type: 2}
+  - {fileID: 11400000, guid: f6a28c1fe5b0aa3479b26a48213265ce, type: 2}
+  - {fileID: 11400000, guid: 3c03d8f968a8c784e849d9bf0257bf78, type: 2}
+  - {fileID: 11400000, guid: 885e882de12f3a4408885a14f8c3c022, type: 2}
+  - {fileID: 11400000, guid: d896f89f0e07ee2488bf0058eef9ec02, type: 2}
+  - {fileID: 11400000, guid: 5c8fceeb082b1fd49a0bf62ed6d590cb, type: 2}
+  - {fileID: 11400000, guid: 8a700600fdc07524182549cab5355f53, type: 2}
+  - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}

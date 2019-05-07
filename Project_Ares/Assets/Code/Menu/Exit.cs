@@ -15,7 +15,7 @@ namespace ProjectAres
             Player tmp = collision.gameObject.GetComponent<Player>();
             if (tmp)
             {
-                tmp.Disconect();
+                tmp.m_control.DoDisconect();
                 if (Player.s_references.Count <= 0)
                 {
                     MenuManager._singelton?.Exit();

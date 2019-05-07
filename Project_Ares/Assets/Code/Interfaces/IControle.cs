@@ -33,6 +33,12 @@ namespace ProjectAres {
         Action<int> SelectWeapon { get; set; }
 
         /// <summary>
+        /// wächselt den Playername
+        /// </summary>
+        /// <param type=bool>true für next. false für previous</param>
+        Action<bool> ChangeName { get; set; }
+
+        /// <summary>
         /// wächselt den character
         /// </summary>
         /// <param type=bool>true für relatieve answahl. false für index auswahl</param>
@@ -56,5 +62,7 @@ namespace ProjectAres {
         /// call this to leave the game
         /// </summary>
         Action Disconnect { get; set; }
+
+        void DoDisconect();
     }
 }

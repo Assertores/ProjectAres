@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3039136259464356723, guid: 973c7300ae2d07248ad89f8bd41128ea,
         type: 3}
       propertyPath: m_Name
-      value: Explosion
+      value: Explosion Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3039136259464356734, guid: 973c7300ae2d07248ad89f8bd41128ea,
         type: 3}
@@ -67,5 +67,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c262cdc241d5cb1429c64e11712a1cba, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 37b5bf8f87c9fe8448dc5347c118ac96, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a885198a05532849be332d6f7d903e5, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: c7a02b76afd65bb4e9abaaa65cae9bb2, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: ea33e8d11b189854683783a2d08283b5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 973c7300ae2d07248ad89f8bd41128ea, type: 3}

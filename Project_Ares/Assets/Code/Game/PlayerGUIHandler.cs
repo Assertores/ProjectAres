@@ -15,7 +15,11 @@ namespace ProjectAres {
         [SerializeField] GameObject m_characterSelector;
         [SerializeField] Image m_weaponIconRef;
         [SerializeField] TextMeshProUGUI m_playerNameRef;
+        [SerializeField] Image m_healthBar;
+
         [SerializeField] Canvas m_canvas;
+
+        [SerializeField] public TextMeshProUGUI m_debugStats;//eventuell in eine funktion verpacken
         
 
         #endregion
@@ -50,6 +54,10 @@ namespace ProjectAres {
 
         public void SetCharChangeActive(bool activate) {
             m_characterSelector.SetActive(activate);
+        }
+
+        public void SetHealth(float fill) {
+            m_healthBar.fillAmount = fill;
         }
     }
 }

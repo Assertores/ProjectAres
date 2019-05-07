@@ -61,6 +61,10 @@ namespace ProjectAres {
                 ChangeCharacter?.Invoke(1, true);
             } else if (m_lastState.DPad.Left == ButtonState.Pressed && m_state.DPad.Left == ButtonState.Released) {
                 ChangeCharacter?.Invoke(-1, true);
+            } else if (m_lastState.DPad.Down == ButtonState.Pressed && m_state.DPad.Down == ButtonState.Released) {
+                ChangeName?.Invoke(true);
+            } else if (m_lastState.DPad.Up == ButtonState.Pressed && m_state.DPad.Up == ButtonState.Released) {
+                ChangeName?.Invoke(false);
             }
 
             if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
@@ -86,10 +90,16 @@ namespace ProjectAres {
         public Action StopShooting { get; set; }
         public Action Dash { get; set; }
         public Action<int> SelectWeapon { get; set; }
+        public Action<bool> ChangeName { get; set; }
         public Action<int, bool> ChangeCharacter { get; set; }
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
+
+        public void DoDisconect() {
+            DataHolder.s_players[m_controlerIndex] = false;
+            Disconnect?.Invoke();
+        }
 
         #endregion
     }

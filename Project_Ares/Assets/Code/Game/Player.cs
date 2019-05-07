@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace ProjectAres {
 
     public struct d_playerData {
@@ -10,12 +11,14 @@ namespace ProjectAres {
         public int m_kills;
         public int m_deaths;
         public int m_assists;
-        public int m_damageDealt;
-        public int m_damageTaken;
+        public float m_damageDealt;
+        public float m_damageTaken;
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return m_name + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
+        }
+        public string StringWithNewLine() {
+            return "Kills: " + m_kills + System.Environment.NewLine + "Deaths: " + m_deaths + System.Environment.NewLine + "Assists: " + m_assists + System.Environment.NewLine + "Damage Dealt: " + m_damageDealt + System.Environment.NewLine + "Damage Taken: " + m_damageTaken;
         }
     }
     
@@ -30,8 +33,6 @@ namespace ProjectAres {
         [SerializeField] Transform m_modelRef;
         [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
-        [SerializeField] CharacterData[] m_charData;
-        [SerializeField] string[] m_names;
 
         [SerializeField] Image m_healthBar;
         [SerializeField] Image m_weaponValue;
@@ -41,8 +42,14 @@ namespace ProjectAres {
         [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
         [SerializeField] string m_characterName;
 
+        private DragonBones.UnityArmatureComponent m_modelAnim;
+
+        
+
         [Header("Balancing")]
-        [SerializeField] int m_maxHealth = 100;
+        [SerializeField] private float m_regenTime;
+        [SerializeField] private float m_regeneration;
+        [SerializeField] float m_maxHealth = 100;
         [SerializeField] float m_dashForce = 2;
         [Tooltip("Immer in Sekunden angeben")]
         [SerializeField] float m_iFrames = 1;
@@ -60,11 +67,14 @@ namespace ProjectAres {
         List<Player> m_assistRefs = new List<Player>();
 
         float m_respawntTime = float.MaxValue;
-        int m_currentHealth;
+        private float m_time;
+        float m_currentHealth;
         int m_currentChar = 0;
         int m_currentWeapon = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
+
+        int m_currentName;
 
         public Rigidbody2D m_rb { get; private set; }
 
@@ -77,6 +87,8 @@ namespace ProjectAres {
         }
 
         void Start() {
+           
+
             m_rb = GetComponent<Rigidbody2D>();
             
         }
@@ -85,16 +97,40 @@ namespace ProjectAres {
         }
         
         void Update() {
-            if(m_control != null && m_currentHealth > 0)
-                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward,new Vector2(-m_control.m_dir.y,m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
-            if(m_control.m_dir.x < 0) {
-                m_weaponRef.localScale = new Vector3(1, -1, 1);
+
+            if (m_control != null && m_currentHealth > 0) {
+                
+                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+
+                if (m_currentHealth < m_maxHealth) {
+                    if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
+
+                        m_currentHealth += (m_regeneration * Time.deltaTime);
+                            if (m_currentHealth > m_maxHealth) {
+                                m_currentHealth = m_maxHealth;
+                            }
+                    }
+                }
+            }
+
+            if (m_control.m_dir.x < 0) {
+            m_weaponRef.localScale = new Vector3(1, -1, 1);
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
+            
+            if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                m_modelAnim.animation.Play("Idle");
+            }
+
+            //----- ----- Feedback ----- -----
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
+
+            m_GUIHandler.SetHealth(m_healthBar.fillAmount);
+
+            m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
 
         //void FixedUpdate() {
@@ -107,7 +143,10 @@ namespace ProjectAres {
 
         public bool m_alive { get; set; }
 
-        public void TakeDamage(int damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force) {
+            if (!m_alive) {
+                return;
+            }
             if (m_isInvincible) {
                 return;
             }
@@ -117,12 +156,17 @@ namespace ProjectAres {
             if(source == this) {
                 return;
             }
-            if (damage > m_currentHealth) {
+            if (damage >= m_currentHealth) {
                 m_stats.m_damageTaken += m_currentHealth;
                 m_stats.m_deaths++;
                 if (source) {
                     source.m_stats.m_damageDealt += m_currentHealth;
                     source.m_stats.m_kills++;
+                    m_assistRefs.Remove(source);
+                } else {
+                    m_assistRefs[m_assistRefs.Count - 1].m_stats.m_damageDealt += m_currentHealth;
+                    m_assistRefs[m_assistRefs.Count - 1].m_stats.m_kills++;
+                    m_assistRefs.Remove(m_assistRefs[m_assistRefs.Count - 1]);
                 }
                 foreach (var it in m_assistRefs) {//bekommen alle einen assist oder gibt es ein zeit limit oder nur der letzte?
                     it.m_stats.m_assists++;
@@ -136,6 +180,13 @@ namespace ProjectAres {
 
                 InControle(false);
                 GameManager.s_singelton.PlayerDied(this);
+
+                //----- ----- Kill Feed ----- -----
+                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                                        DataHolder.s_characterDatas[source.m_currentChar].m_icon,
+                                        null,
+                                        DataHolder.s_characterDatas[m_currentChar].m_icon,
+                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
             } else {
                 m_stats.m_damageTaken += damage;
                 m_rb.velocity += (force / m_rb.mass);//AddForce will irgendwie nicht funktionieren
@@ -144,21 +195,35 @@ namespace ProjectAres {
                     source.m_stats.m_damageDealt += damage;
                     if(!m_assistRefs.Exists(x => x == source))
                         m_assistRefs.Add(source);
+                    else {
+                        m_assistRefs.Remove(source);
+                        m_assistRefs.Add(source);
+                    }
                 }
 
                 m_currentHealth -= damage;
+                m_time = Time.timeSinceLevelLoad;
+                
+                //----- ----- Feedback ----- -----
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("Got_Hit",1);
+                }
             }
         }
 
         public void Die(Player source) {
             m_stats.m_deaths++;
-            if (source) {
-                source.m_stats.m_kills++;
-            }
+            
 
             if(m_assistRefs.Count > 0) {
-                m_assistRefs[m_assistRefs.Count - 1].m_stats.m_kills++;
-                for (int i = 0; i < m_assistRefs.Count - 1; i++) {//eventuell gegen funktion ersetzten
+                if (source) {
+                    source.m_stats.m_kills++;
+                } else {
+                    m_assistRefs[m_assistRefs.Count - 1].m_stats.m_kills++;
+                    m_assistRefs.Remove(m_assistRefs[m_assistRefs.Count - 1]);
+                }
+                
+                for (int i = 0; i < m_assistRefs.Count; i++) {//eventuell gegen funktion ersetzten
                     m_assistRefs[i].m_stats.m_assists++;
                 }
                 m_assistRefs.Clear();
@@ -174,7 +239,7 @@ namespace ProjectAres {
             GameManager.s_singelton.PlayerDied(this);
         }
 
-        public int GetHealth() {
+        public float GetHealth() {
             return m_currentHealth;
         }
 
@@ -201,8 +266,8 @@ namespace ProjectAres {
                 m_control = control.GetComponent<IControl>();
             }
 
-            m_stats.m_name = m_names[Random.Range(0, m_names.Length - 1)];
-            m_GUIHandler.SetName(m_stats.m_name);
+            m_currentName = Random.Range(0, DataHolder.s_playerNames.Count - 1);
+            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
             RepositionGUI();
 
             InControle(true);
@@ -254,9 +319,11 @@ namespace ProjectAres {
             if (able) {
                 m_control.ChangeCharacter = ChangeCharacter;
                 m_GUIHandler.SetCharChangeActive(true);
+                m_control.ChangeName = ChangeName;
             } else {
                 m_control.ChangeCharacter = null;
                 m_GUIHandler.SetCharChangeActive(false);
+                m_control.ChangeName = null;
             }
         }
 
@@ -291,8 +358,23 @@ namespace ProjectAres {
             //_weaponWheel.GetChild(selectedWeapon) highlight selected item
         }
 
+        void ChangeName(bool next = true) {
+            if(!next && m_currentName <= 0) {
+                print("nameindex to low");
+                return;
+            }
+
+            if (next) {
+                m_currentName++;
+            } else {
+                m_currentName--;
+            }
+
+            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
+        }
+
         void ChangeCharacter(int newCaracter, bool relative = true) {
-            if(!relative && (newCaracter < 0 && newCaracter >= m_charData.Length)) {
+            if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
                 return;
             }
 
@@ -307,23 +389,27 @@ namespace ProjectAres {
 
             if (relative) {
                 m_currentChar += newCaracter;
-                m_currentChar = (m_currentChar % m_charData.Length + m_charData.Length) % m_charData.Length;
+                m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
             } else {
                 m_currentChar = newCaracter;
             }
 
-            Instantiate(m_charData[m_currentChar].m_model, m_modelRef);
-            m_weapons.Add(Instantiate(m_charData[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            GameObject model = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef);
+            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
             m_weapons[m_weapons.Count - 1].Init(this);
-            m_weapons.Add(Instantiate(m_charData[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
             m_weapons[m_weapons.Count - 1].Init(this);
             for (int i = 0; i < m_weapons.Count; i++) {
                 if(i != m_currentWeapon) {
                     m_weapons[i].SetActive(false);
                 }
             }
-
-            m_GUIHandler.ChangeCharacter(m_charData[m_currentChar].m_icon, m_charData[m_currentChar].m_name);
+            
+            m_modelAnim = model.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("Idle");//In stringCollection übertragen
+            }
+            m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
             m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
         }
 
@@ -397,6 +483,13 @@ namespace ProjectAres {
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
+            if(collision.gameObject.tag == "Player") {
+                Vector2 tmp = collision.contacts[0].normal;
+                if (Vector2.Dot(m_rb.velocity, tmp) < 0) {
+                    m_rb.velocity = Vector2.Reflect(m_rb.velocity, tmp);
+                }
+
+            }
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
                 foreach (var it in collision.contacts) {

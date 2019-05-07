@@ -54,7 +54,7 @@ namespace ProjectAres {
         }
 
 
-        public void TakeDamage(int damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force) {
 
             if (m_currentHealth > 0)
             {
@@ -77,7 +77,7 @@ namespace ProjectAres {
             return;
         }
 
-        public int GetHealth() {
+        public float GetHealth() {
             return 0;
         }
 

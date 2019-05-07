@@ -35,9 +35,9 @@ namespace ProjectAres {
 
         void Start() {
             int maxKills = 0;
+            Directory.CreateDirectory(StringCollection.DATAPATH);
             for (int i = 0; i < Player.s_references.Count; i++) {
                 
-                Directory.CreateDirectory(StringCollection.DATAPATH);
                 File.AppendAllText(StringCollection.DATAPATH + m_TrackingPath, Player.s_references[i].m_stats.ToString() + System.Environment.NewLine);
 
                 Player.s_references[i].Invincible(true);
@@ -56,6 +56,7 @@ namespace ProjectAres {
                 tmp.pillar = Instantiate(m_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation);
                 tmp.text = tmp.pillar.GetComponentInChildren<TextMeshProUGUI>();
                 m_pillar.Add(tmp);
+                m_pillar[i].text.text = "0";
             }
 
             m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_winScreenMaxTime;

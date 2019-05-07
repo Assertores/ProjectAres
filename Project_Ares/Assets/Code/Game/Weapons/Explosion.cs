@@ -13,7 +13,7 @@ namespace ProjectAres {
         [SerializeField] AudioClip[] m_sounds;
 
         [Header("Balancing")]
-        [SerializeField] int m_baseDamage = 1;
+        [SerializeField] float m_baseDamage = 1;
         [SerializeField] float m_radius = 5;
         [SerializeField] float m_baseKnockback = 300;
         [SerializeField] AnimationCurve m_fallOff;
@@ -55,7 +55,7 @@ namespace ProjectAres {
                  if (tmp != null) {
                     Vector2 dir = it.transform.position - transform.position;
                     float fallOff = m_fallOff.Evaluate(dir.magnitude/m_radius);
-                    tmp.TakeDamage((int)Mathf.Round(fallOff * m_baseDamage), reference == null ? null : reference, dir.normalized * fallOff * m_baseKnockback);//eventuell doch in rocket mit rein schreiben wegen reference zu source player
+                    tmp.TakeDamage((fallOff * m_baseDamage), reference == null ? null : reference, dir.normalized * fallOff * m_baseKnockback);//eventuell doch in rocket mit rein schreiben wegen reference zu source player
                 }
             }
             return null;

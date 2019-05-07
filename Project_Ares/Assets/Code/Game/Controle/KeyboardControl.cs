@@ -44,6 +44,16 @@ namespace ProjectAres {
             if (Input.GetKeyDown(KeyCode.C)) {
                 ChangeCharacter?.Invoke(1, true);
             }
+            if (Input.GetKeyDown(KeyCode.V)) {
+                ChangeCharacter?.Invoke(-1, true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.N)) {
+                ChangeName?.Invoke(true);
+            }
+            if (Input.GetKeyDown(KeyCode.M)) {
+                ChangeName?.Invoke(false);
+            }
 
             //if (_myCamera) {
             //    _myCamera.transform.position = new Vector3(transform.position.x, transform.position.y, _myCamera.transform.position.z);
@@ -68,10 +78,16 @@ namespace ProjectAres {
         public Action StopShooting { get; set; }
         public Action Dash { get; set; }
         public Action<int> SelectWeapon { get; set; }
+        public Action<bool> ChangeName { get; set; }
         public Action<int, bool> ChangeCharacter { get; set; }
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
+
+        public void DoDisconect() {
+            DataHolder.s_players[4] = false;
+            Disconnect?.Invoke();
+        }
 
         #endregion
     }
