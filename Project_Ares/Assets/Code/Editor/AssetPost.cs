@@ -12,6 +12,8 @@ public class AssetPost : AssetPostprocessor
             return;
         if (assetPath.Contains("Logo"))
             return;
+        if (assetPath.Contains("VFX"))
+            return;
 
         textureImporter.spritePixelsPerUnit = 512;
         textureImporter.filterMode = FilterMode.Point;
