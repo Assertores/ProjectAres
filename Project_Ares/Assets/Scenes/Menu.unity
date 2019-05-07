@@ -649,7 +649,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 83afee7027119de4bab355f0db396e61, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.699
+  m_Volume: 0.288
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2691,3 +2691,12 @@ MonoBehaviour:
   - Donlad
   - Baummann
   - Holga
+  m_characters:
+  - {fileID: 11400000, guid: 716b8229e292ecf4ca467f4563eca010, type: 2}
+  - {fileID: 11400000, guid: f6a28c1fe5b0aa3479b26a48213265ce, type: 2}
+  - {fileID: 11400000, guid: 3c03d8f968a8c784e849d9bf0257bf78, type: 2}
+  - {fileID: 11400000, guid: 885e882de12f3a4408885a14f8c3c022, type: 2}
+  - {fileID: 11400000, guid: d896f89f0e07ee2488bf0058eef9ec02, type: 2}
+  - {fileID: 11400000, guid: 5c8fceeb082b1fd49a0bf62ed6d590cb, type: 2}
+  - {fileID: 11400000, guid: 8a700600fdc07524182549cab5355f53, type: 2}
+  - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}
