@@ -128,6 +128,8 @@ namespace ProjectAres {
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
 
+            m_GUIHandler.SetHealth(m_healthBar.fillAmount);
+
             m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
 
