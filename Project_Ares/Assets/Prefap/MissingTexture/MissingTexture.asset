@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f1cff8cefb30314084e448940891002, type: 3}
-  m_Name: NoTexture
+  m_Name: MissingTexture
   m_EditorClassIdentifier: 
   m_model: {fileID: 1233551065175723928, guid: 9b7850128d7f0804a91da652a86b8bb0, type: 3}
   m_icon: {fileID: 21300000, guid: 5d6e5c754881913498ea9785122dadbf, type: 3}
