@@ -2621,6 +2621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2128402833}
   - component: {fileID: 2128402832}
+  - component: {fileID: 2128402834}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -2657,3 +2658,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2128402834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128402831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e86ffcfc6c6134f852c8d9442a9381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_names:
+  - Tyler
+  - Clyde
+  - Mario
+  - Luigi
+  - Waaahh
+  - Bob Ross
+  - Frau Herrmann Mannfrau
+  - Ben10
+  - SaNiC
+  - Elon Muskatnuss
+  - Nelson Mandela
+  - "R\xFCdiger"
+  - Winfried
+  - Hanibal
+  - "G\xFCnter"
+  - Steffan
+  - "Fliegende B\xE4ren"
+  - Donlad
+  - Baummann
+  - Holga

@@ -30,7 +30,6 @@ namespace ProjectAres {
                 for (int i = 0; i < m_names.Length; i++) {
                     s_playerNames.Add(m_names[i]);
                 }
-                m_names = null;
             }
             if(m_characters != null && s_characterDatas.Count == 0) {
                 for (int i = 0; i < m_characters.Length; i++) {
