@@ -33,8 +33,6 @@ namespace ProjectAres {
         [SerializeField] Transform m_modelRef;
         [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
-        [SerializeField] CharacterData[] m_charData;
-        [SerializeField] List<string> m_names;//könnte man eventuell static machen um es nicht mehrfach zu speichern
 
         [SerializeField] Image m_healthBar;
         [SerializeField] Image m_weaponValue;
@@ -77,7 +75,6 @@ namespace ProjectAres {
         bool m_isInvincible = false;
 
         int m_currentName;
-        System.Random m_ranNameGen;//wenn liste static ist muss das auch static sein
 
         public Rigidbody2D m_rb { get; private set; }
 
@@ -183,7 +180,7 @@ namespace ProjectAres {
                 GameManager.s_singelton.PlayerDied(this);
 
                 //----- ----- Kill Feed ----- -----
-                KillFeedHandler.AddKill(m_names[m_currentName], m_charData[m_currentChar].m_icon, null, source.m_charData[source.m_currentChar].m_icon, source.m_names[source.m_currentName]);//TODO: KillerWeapon herausfinden, namensliste globalisieren
+                KillFeedHandler.AddKill(DataHolder.s_playerNames[m_currentName], DataHolder.s_characterDatas[m_currentChar].m_icon, null, DataHolder.s_characterDatas[source.m_currentChar].m_icon, DataHolder.s_playerNames[source.m_currentName]);//TODO: KillerWeapon herausfinden
             } else {
                 m_stats.m_damageTaken += damage;
                 m_rb.velocity += (force / m_rb.mass);//AddForce will irgendwie nicht funktionieren
@@ -263,10 +260,8 @@ namespace ProjectAres {
                 m_control = control.GetComponent<IControl>();
             }
 
-            m_ranNameGen = new System.Random(0);//fixed seed to get the same result every time;
-            m_currentName = Random.Range(0, m_names.Count - 1);
-            m_stats.m_name = m_names[m_currentName];
-            m_GUIHandler.SetName(m_stats.m_name);
+            m_currentName = Random.Range(0, DataHolder.s_playerNames.Count - 1);
+            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
             RepositionGUI();
 
             InControle(true);
@@ -369,19 +364,11 @@ namespace ProjectAres {
                 m_currentName--;
             }
 
-            if(m_currentName < m_names.Count) {
-                m_GUIHandler.SetName(m_names[m_currentName]);
-                return;
-            }
-
-            int value = m_ranNameGen.Next();
-            string tmp = string.Format("{0}{1}{2}", (char)(value % 25 + 65), (char)((value / 100) % 25 + 65), (char)((value / 10000) % 25 + 65));
-            m_names.Add(tmp);
-            m_GUIHandler.SetName(tmp);
+            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
         }
 
         void ChangeCharacter(int newCaracter, bool relative = true) {
-            if(!relative && (newCaracter < 0 && newCaracter >= m_charData.Length)) {
+            if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
                 return;
             }
 
@@ -396,15 +383,15 @@ namespace ProjectAres {
 
             if (relative) {
                 m_currentChar += newCaracter;
-                m_currentChar = (m_currentChar % m_charData.Length + m_charData.Length) % m_charData.Length;
+                m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
             } else {
                 m_currentChar = newCaracter;
             }
 
-            GameObject model = Instantiate(m_charData[m_currentChar].m_model, m_modelRef);
-            m_weapons.Add(Instantiate(m_charData[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            GameObject model = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef);
+            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
             m_weapons[m_weapons.Count - 1].Init(this);
-            m_weapons.Add(Instantiate(m_charData[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
             m_weapons[m_weapons.Count - 1].Init(this);
             for (int i = 0; i < m_weapons.Count; i++) {
                 if(i != m_currentWeapon) {
@@ -416,7 +403,7 @@ namespace ProjectAres {
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("Idle");//In stringCollection übertragen
             }
-            m_GUIHandler.ChangeCharacter(m_charData[m_currentChar].m_icon, m_charData[m_currentChar].m_name);
+            m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
             m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
         }
 
