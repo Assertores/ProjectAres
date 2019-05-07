@@ -182,7 +182,11 @@ namespace ProjectAres {
                 GameManager.s_singelton.PlayerDied(this);
 
                 //----- ----- Kill Feed ----- -----
-                KillFeedHandler.AddKill(DataHolder.s_playerNames[m_currentName], DataHolder.s_characterDatas[m_currentChar].m_icon, null, DataHolder.s_characterDatas[source.m_currentChar].m_icon, DataHolder.s_playerNames[source.m_currentName]);//TODO: KillerWeapon herausfinden
+                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                                        DataHolder.s_characterDatas[source.m_currentChar].m_icon,
+                                        null,
+                                        DataHolder.s_characterDatas[m_currentChar].m_icon,
+                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
             } else {
                 m_stats.m_damageTaken += damage;
                 m_rb.velocity += (force / m_rb.mass);//AddForce will irgendwie nicht funktionieren
