@@ -160,17 +160,7 @@ MonoBehaviour:
     type: 3}
   m_barrel: {fileID: 8526788404880525850}
   m_audio: {fileID: 5545514078711503098}
-  m_sounds:
-  - {fileID: 8300000, guid: 63a19e0ed1211704bb8d1396e5f06967, type: 3}
-  - {fileID: 8300000, guid: 8b13a7b0e7198f743b10b61ea626076b, type: 3}
-  - {fileID: 8300000, guid: a968fcbbf88421e4499c10314c9ceb10, type: 3}
-  - {fileID: 8300000, guid: 1d0a2cbfd6eeecd40934f3a38fbe819e, type: 3}
-  - {fileID: 8300000, guid: b4d87bada672fd24093588d9ebfdf26f, type: 3}
-  - {fileID: 8300000, guid: a6fa7f839eca7ca4693f0a7f7fd7322f, type: 3}
-  - {fileID: 8300000, guid: cb52905780205d2489a978fc803d94ad, type: 3}
-  - {fileID: 8300000, guid: 6008f1316da670544a3aa2cfb1979431, type: 3}
-  - {fileID: 8300000, guid: c0606f671324f2d43ac97535c0a9290b, type: 3}
-  - {fileID: 8300000, guid: 4351ff6cd53a2ed4c9f80cfbb327f090, type: 3}
+  m_sounds: []
   m_icon_: {fileID: 21300000, guid: 2d6ca3dfdfeb5f14292af7132c4f8315, type: 3}
   m_rPM: 500
   m_muzzleEnergy: 2000

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1346180647136399897
 Transform:
   m_ObjectHideFlags: 0
@@ -125,12 +125,7 @@ MonoBehaviour:
   m_explosion: {fileID: 5424249025874711400}
   m_explosionStains: {fileID: 854507398363705032}
   m_audio: {fileID: 3293680556011053861}
-  m_sounds:
-  - {fileID: 8300000, guid: c262cdc241d5cb1429c64e11712a1cba, type: 3}
-  - {fileID: 8300000, guid: 37b5bf8f87c9fe8448dc5347c118ac96, type: 3}
-  - {fileID: 8300000, guid: 3a885198a05532849be332d6f7d903e5, type: 3}
-  - {fileID: 8300000, guid: c7a02b76afd65bb4e9abaaa65cae9bb2, type: 3}
-  - {fileID: 8300000, guid: ea33e8d11b189854683783a2d08283b5, type: 3}
+  m_sounds: []
   m_baseDamage: 40
   m_radius: 2
   m_baseKnockback: 1000
