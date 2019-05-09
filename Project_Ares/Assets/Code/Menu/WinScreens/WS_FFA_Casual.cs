@@ -34,6 +34,11 @@ namespace ProjectAres {
         #region MonoBehaviour
 
         void Start() {
+            if(DataHolder.s_gameMode != e_gameMode.FFA_CASUAL) {
+                Destroy(this);
+                return;
+            }
+
             int maxKills = 0;
             Directory.CreateDirectory(StringCollection.DATAPATH);
             for (int i = 0; i < Player.s_references.Count; i++) {

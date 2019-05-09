@@ -28,7 +28,7 @@ namespace ProjectAres {
         
         void Update() {
             if(m_playerCount >= Player.s_references.Count) {
-                SceneManager.LoadScene(StringCollection.MAINMENU);
+                ChangeSzene();
             }
             if (m_pillarRiseTime < Time.timeSinceLevelLoad) {
                 m_restartTimeText.text = m_restartTime.ToString();
@@ -36,13 +36,21 @@ namespace ProjectAres {
                 m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime + m_pillarRiseTime) - Time.timeSinceLevelLoad)).ToString();
 
                 if (Time.timeSinceLevelLoad >= (m_restartTime + m_pillarRiseTime)) {
-                    SceneManager.LoadScene(StringCollection.MAINMENU);
+                    ChangeSzene();
                 }
                
             }
         }
 
         #endregion
+
+        void ChangeSzene() {
+            if (DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && !DataHolder.s_firstMatch) {
+                SceneManager.LoadScene(DataHolder.s_level);
+            }
+            SceneManager.LoadScene(StringCollection.MAINMENU);
+        }
+
         #region Physics
 
         private void OnTriggerEnter2D(Collider2D collision) {
