@@ -95,17 +95,18 @@ namespace ProjectAres {
 
                         Player.s_references[i].transform.position = m_pillar[i].gameObject.transform.position;
                     } else {
-                        int index = m_sorted.IndexOf(Player.s_references[i]) + 1;
-                        m_pillar[i].m_pillarField.text = (index.ToString() + ". Platz");//TODO: Lokalisierung, Bracket anstadt finale
+                        int index = m_sorted.IndexOf(Player.s_references[i]);
+                        m_pillar[i].m_pillarField.text = ((index+1).ToString() + ". Platz");//TODO: Lokalisierung, Bracket anstadt finale
                         Color c = Color.green;
                         c.a = m_pillar[i].m_pillarGradient.color.a;
                         m_pillar[i].m_pillarGradient.color = c;
                         m_pillar[i].m_pillarGradient.gameObject.SetActive(true);
                         Player.s_references[i].InControle(true);
-
-                        if (DataHolder.s_winnerPC ? index > Player.s_references.Count / 2 : index <= Player.s_references.Count / 2) {
+                        print("Player: " + Player.s_references[i].m_stats.m_name + " is finished and is " + (index + 1));
+                        if ((DataHolder.s_winnerPC && index >= m_playerCount / 2) ||(!DataHolder.s_winnerPC && index < m_playerCount / 2)) {
+                            print("he disconected");
                             Player.s_references[i].m_control.DoDisconect();
-                            m_pillar[i].m_pillarField.text = "Pleace Change PC " + m_pillar[i].m_pillarField.text;
+                            m_pillar[i].m_pillarField.text = "Change PC " + m_pillar[i].m_pillarField.text;
                             c = Color.red;
                             c.a = m_pillar[i].m_pillarGradient.color.a;
                             m_pillar[i].m_pillarGradient.color = c;
