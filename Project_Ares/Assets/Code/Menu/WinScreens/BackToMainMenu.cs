@@ -35,7 +35,7 @@ namespace ProjectAres {
             if (m_pillarRiseTime < Time.timeSinceLevelLoad - m_startTime) {
                 m_restartTimeText.text = m_restartTime.ToString();
                 m_winscreenRestartText.text = "Time till Restart";
-                m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime + m_pillarRiseTime) - Time.timeSinceLevelLoad)).ToString();
+                m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime + m_pillarRiseTime) - (Time.timeSinceLevelLoad - m_startTime))).ToString();
 
                 if (Time.timeSinceLevelLoad - m_startTime >= (m_restartTime + m_pillarRiseTime)) {
                     ChangeSzene();
@@ -48,7 +48,7 @@ namespace ProjectAres {
 
         void ChangeSzene() {
             if (DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && !DataHolder.s_firstMatch) {
-                print("restar level");
+                print("restar level: " + DataHolder.s_level);
                 SceneManager.LoadScene(DataHolder.s_level);
             }
             SceneManager.LoadScene(StringCollection.MAINMENU);
