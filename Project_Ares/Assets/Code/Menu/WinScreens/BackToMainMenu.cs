@@ -18,24 +18,26 @@ namespace ProjectAres {
         [SerializeField] int m_restartTime;
         [SerializeField] int m_pillarRiseTime;
 
+        float m_startTime;
+
         int m_playerCount = 0;
         #endregion
         #region MonoBehaviour
 
-        void Start() {
-            
+        private void OnEnable() {
+            m_startTime = Time.timeSinceLevelLoad;
         }
-        
+
         void Update() {
             if(m_playerCount >= Player.s_references.Count) {
                 ChangeSzene();
             }
-            if (m_pillarRiseTime < Time.timeSinceLevelLoad) {
+            if (m_pillarRiseTime < Time.timeSinceLevelLoad - m_startTime) {
                 m_restartTimeText.text = m_restartTime.ToString();
                 m_winscreenRestartText.text = "Time till Restart";
                 m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime + m_pillarRiseTime) - Time.timeSinceLevelLoad)).ToString();
 
-                if (Time.timeSinceLevelLoad >= (m_restartTime + m_pillarRiseTime)) {
+                if (Time.timeSinceLevelLoad - m_startTime >= (m_restartTime + m_pillarRiseTime)) {
                     ChangeSzene();
                 }
                
@@ -46,6 +48,7 @@ namespace ProjectAres {
 
         void ChangeSzene() {
             if (DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && !DataHolder.s_firstMatch) {
+                print("restar level");
                 SceneManager.LoadScene(DataHolder.s_level);
             }
             SceneManager.LoadScene(StringCollection.MAINMENU);
