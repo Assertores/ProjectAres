@@ -145,7 +145,7 @@ namespace ProjectAres {
 
         public bool m_alive { get; set; }
 
-        public void TakeDamage(float damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
             if (!m_alive) {
                 return;
             }
@@ -186,7 +186,7 @@ namespace ProjectAres {
                 //----- ----- Kill Feed ----- -----
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
-                                        null,
+                                        icon,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
                                         DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
             } else {
@@ -239,6 +239,19 @@ namespace ProjectAres {
 
             InControle(false);
             GameManager.s_singelton.PlayerDied(this);
+
+            if(source)
+                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                                        DataHolder.s_characterDatas[source.m_currentChar].m_icon,
+                                        null,
+                                        DataHolder.s_characterDatas[m_currentChar].m_icon,
+                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+            else
+                KillFeedHandler.AddKill("suicide",
+                                        null,
+                                        null,
+                                        DataHolder.s_characterDatas[m_currentChar].m_icon,
+                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
         }
 
         public float GetHealth() {
