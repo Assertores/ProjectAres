@@ -22,7 +22,7 @@ namespace ProjectAres {
 
         public static List<CharacterData> s_characterDatas = new List<CharacterData>();
 
-        public static e_gameMode s_gameMode = e_gameMode.FAIR_TOURNAMENT;
+        public static e_gameMode s_gameMode = e_gameMode.FFA_CASUAL;
         public static string s_level;
 
         //===== ===== Fair_Tournament ===== =====

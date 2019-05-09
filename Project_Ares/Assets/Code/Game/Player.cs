@@ -372,7 +372,8 @@ namespace ProjectAres {
                 m_currentName--;
             }
 
-            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
+            m_stats.m_name = DataHolder.GetPlayerName(m_currentName);
+            m_GUIHandler.SetName(m_stats.m_name);
         }
 
         void ChangeCharacter(int newCaracter, bool relative = true) {

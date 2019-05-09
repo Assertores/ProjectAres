@@ -38,9 +38,21 @@ namespace ProjectAres {
                 it.transform.position = m_SpawnPoint.transform.position;
                 it.SetChangeCharAble(true);
             }
+            DataHolder.s_firstMatch = true;
         }
 
-        
+        private void Update() {
+            if (Input.GetKeyUp(KeyCode.T)) {
+                if (DataHolder.s_gameMode != e_gameMode.FAIR_TOURNAMENT) {
+                    DataHolder.s_gameMode = e_gameMode.FAIR_TOURNAMENT;
+                }  else {
+                    DataHolder.s_gameMode = e_gameMode.FFA_CASUAL;
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.P)) {
+                DataHolder.s_winnerPC = !DataHolder.s_winnerPC;
+            }
+        }
 
         #endregion
 

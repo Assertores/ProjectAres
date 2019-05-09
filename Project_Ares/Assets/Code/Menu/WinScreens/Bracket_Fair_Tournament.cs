@@ -32,6 +32,8 @@ namespace ProjectAres {
 
         int m_playerCount;
 
+        bool m_endet = false;
+
         List<Player> m_sorted = new List<Player>();
 
         #endregion
@@ -77,6 +79,7 @@ namespace ProjectAres {
                 m_pillar[i].m_pillarGradient.gameObject.SetActive(false);
                 m_pillar[i].m_pillarField.text = "";
             }
+            Debug.Break();
 
             m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_winScreenMaxTime;
             m_hightPerKill = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / maxKills;
@@ -95,28 +98,42 @@ namespace ProjectAres {
 
                         Player.s_references[i].transform.position = m_pillar[i].gameObject.transform.position;
                     } else {
-                        int index = m_sorted.IndexOf(Player.s_references[i]) + 1;
-                        m_pillar[i].m_pillarField.text = (index.ToString() + ". Platz");//TODO: Lokalisierung, Bracket anstadt finale
+                        int index = m_sorted.IndexOf(Player.s_references[i]);
+                        m_pillar[i].m_pillarField.text = ((index+1).ToString() + ". Platz");//TODO: Lokalisierung, Bracket anstadt finale
                         Color c = Color.green;
                         c.a = m_pillar[i].m_pillarGradient.color.a;
                         m_pillar[i].m_pillarGradient.color = c;
                         m_pillar[i].m_pillarGradient.gameObject.SetActive(true);
                         Player.s_references[i].InControle(true);
-
-                        if (DataHolder.s_winnerPC ? index > Player.s_references.Count / 2 : index <= Player.s_references.Count / 2) {
-                            Player.s_references[i].m_control.DoDisconect();
-                            m_pillar[i].m_pillarField.text = "Pleace Change PC " + m_pillar[i].m_pillarField.text;
+                        if ((DataHolder.s_winnerPC && index >= m_playerCount / 2) ||(!DataHolder.s_winnerPC && index < m_playerCount / 2)) {
+                            m_pillar[i].m_pillarField.text = "Change PC " + m_pillar[i].m_pillarField.text;
                             c = Color.red;
                             c.a = m_pillar[i].m_pillarGradient.color.a;
                             m_pillar[i].m_pillarGradient.color = c;
                         }
                     }
                 }
-            } else {
-                m_spawnHandler.SetActive(true);
-                if(Player.s_references.Count >= m_playerCount) {
-                    m_backToMM.SetActive(true);
+            } else if(!m_endet) {
+                m_endet = true;
+                List<Player> disconect = new List<Player>();
+                if (DataHolder.s_winnerPC) {
+                    for(int i = m_sorted.Count / 2; i < m_sorted.Count; i++) {
+                        disconect.Add(m_sorted[i]);
+                    }
+                } else {
+                    for(int i = 0; i < m_sorted.Count/2; i++) {
+                        disconect.Add(m_sorted[i]);
+                    }
                 }
+                foreach(var it in disconect) {
+                    it.m_control.DoDisconect();
+                }
+
+                m_spawnHandler.SetActive(true);
+                
+            }
+            if (Player.s_references.Count >= m_playerCount) {
+                m_backToMM.SetActive(true);
             }
         }
 
