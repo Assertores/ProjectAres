@@ -5,12 +5,19 @@ using UnityEngine;
 namespace ProjectAres {
     public class GameManager : MonoBehaviour {
 
+        [System.Serializable]
+        struct d_gmObjectItem {
+            public e_gameMode m_type;
+            public GameObject m_value;
+        }
+
         #region Variables
 
         [Header("References")]
-        [SerializeField] GameObject m_gmObject;
+        [SerializeField] d_gmObjectItem[] m_gmObject;
         [SerializeField] GameObject m_playerRef;
 
+        Dictionary<e_gameMode, IGameMode> m_gameModes = new Dictionary<e_gameMode, IGameMode>();
         IGameMode m_gameMode;
 
         #endregion
@@ -45,8 +52,6 @@ namespace ProjectAres {
         #endregion
 
         void Start() {
-            //m_gameMode = m_gmObject.GetComponent<IGameMode>();//Interface werden nicht im inspector angezeigt
-            //m_gameMode?.Init();//TODO: wie bekommt er den richtigen GameMode aus dem Menü
 
             if(Player.s_references.Count == 0) {
                 GameObject tmp = Instantiate(m_playerRef);
@@ -60,7 +65,11 @@ namespace ProjectAres {
                 }
             }
 
-            Init(m_gmObject.GetComponent<IGameMode>());//TODO: muss irgendwie von ausen aufgerufen werden
+            foreach(var it in m_gmObject) {
+                m_gameModes[it.m_type] = it.m_value.GetComponent<IGameMode>();//kein null reference check
+            }
+
+            Init(m_gameModes[DataHolder.s_gameMode]);
         }
 
         #endregion
