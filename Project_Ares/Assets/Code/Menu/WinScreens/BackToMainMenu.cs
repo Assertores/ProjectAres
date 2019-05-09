@@ -50,7 +50,10 @@ namespace ProjectAres {
             if (DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && !DataHolder.s_firstMatch) {
                 print("restar level: " + DataHolder.s_level);
                 SceneManager.LoadScene(DataHolder.s_level);
+                return;
             }
+            print("i'm here");
+
             SceneManager.LoadScene(StringCollection.MAINMENU);
         }
 
