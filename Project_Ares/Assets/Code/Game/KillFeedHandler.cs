@@ -9,11 +9,16 @@ namespace ProjectAres {
 
         [Header("References")]
         [SerializeField] GameObject m_killFeedItemPrefab;
+        [SerializeField] CanvasGroup m_fade;
+        [SerializeField] RectTransform m_content;
 
         [Header("Balancing")]
         [SerializeField] float m_scrollSpeed = 1;
+        [SerializeField] float m_fadeTime = 1;
+        [SerializeField] float m_fadeDuration = 1;
 
         float m_itemHight;
+        float m_lastFeedTime = float.MaxValue;
 
         void Start() {
             if (!m_killFeedItemPrefab.GetComponent<KillFeedRefHolder>()) {
@@ -29,6 +34,9 @@ namespace ProjectAres {
             }
             s_reference = this;
 
+            if (!m_content) {
+                m_content = (RectTransform)transform;
+            }
             ((RectTransform)transform).sizeDelta = new Vector2(((RectTransform)transform).sizeDelta.x, 0);
 
             m_itemHight = ((RectTransform)m_killFeedItemPrefab.transform).rect.height;
@@ -42,8 +50,11 @@ namespace ProjectAres {
 
         // Update is called once per frame
         void Update() {
-            if(transform.position.y < ((RectTransform)transform).rect.height) {
+            if(((RectTransform)transform).anchoredPosition.y < ((RectTransform)transform).rect.height) {
                 transform.position += new Vector3(0, m_scrollSpeed * Time.deltaTime, 0);
+            }
+            if(Time.timeSinceLevelLoad - m_lastFeedTime > m_fadeTime) {
+                m_fade.alpha = 1 - (Time.timeSinceLevelLoad - m_lastFeedTime - m_fadeTime) / m_fadeDuration;
             }
         }
 
@@ -59,7 +70,7 @@ namespace ProjectAres {
             if (!s_reference)
                 return;
 
-            GameObject item = Instantiate(s_reference.m_killFeedItemPrefab, s_reference.transform);
+            GameObject item = Instantiate(s_reference.m_killFeedItemPrefab, s_reference.m_content);
             KillFeedRefHolder holder = item.GetComponent<KillFeedRefHolder>();
             holder.m_killerName.text = killerName;
             holder.m_killerIcon.sprite = killerIcon;
@@ -67,8 +78,11 @@ namespace ProjectAres {
             holder.m_victimIcon.sprite = victimIcon;
             holder.m_victimName.text = victimName;
 
-            item.transform.position -= new Vector3(0, ((RectTransform)s_reference.transform).rect.height, 0);
-            ((RectTransform)s_reference.transform).sizeDelta = new Vector2(((RectTransform)s_reference.transform).sizeDelta.x, ((RectTransform)s_reference.transform).sizeDelta.y + s_reference.m_itemHight);
+            ((RectTransform)(item.transform)).anchoredPosition -= new Vector2(0, s_reference.m_content.rect.height);
+            s_reference.m_content.sizeDelta = new Vector2(s_reference.m_content.sizeDelta.x, s_reference.m_content.sizeDelta.y + s_reference.m_itemHight);
+
+            s_reference.m_fade.alpha = 1;
+            s_reference.m_lastFeedTime = Time.timeSinceLevelLoad;
         }
     }
 }
