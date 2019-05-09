@@ -12,12 +12,13 @@ namespace ProjectAres {
         public static string FIRE = "Fire1";
 
         #endregion
-        #region SZENES
+        #region SCENES
 
         public static string EXAMPLESZENE = "SampleScene";
         public static string COLOSSEUM = "Colosseum";
         public static string MAINMENU = "Menu";
         public static string FFACASUAL = "WinScreen_FFA_Casual";
+        public static string GAMELOGO = "GameLogo";
 
         #endregion
         #region TAGS
