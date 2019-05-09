@@ -83,7 +83,7 @@ namespace ProjectAres {
 
         void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_bullet,m_barrel == null? transform.position : m_barrel.position,m_barrel == null ? transform.rotation : m_barrel.rotation)
-                .GetComponent<IHarmingObject>()?.Init(m_player);
+                .GetComponent<IHarmingObject>()?.Init(m_player, m_icon);
 
             if (bulletRB) {
                 //bulletRB.velocity = m_player.m_rb.velocity;

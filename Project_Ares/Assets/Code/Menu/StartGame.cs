@@ -54,7 +54,7 @@ namespace ProjectAres {
         }
 
 
-        public void TakeDamage(float damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
 
             if (m_currentHealth > 0)
             {

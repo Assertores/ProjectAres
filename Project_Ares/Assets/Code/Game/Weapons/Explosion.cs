@@ -40,7 +40,7 @@ namespace ProjectAres {
         #endregion
         #region IHarmingObject
 
-        public Rigidbody2D Init(Player reference) {
+        public Rigidbody2D Init(Player reference, Sprite icon) {
             m_explosion.SetActive(true);
             m_time = Time.timeSinceLevelLoad;
             
@@ -55,7 +55,7 @@ namespace ProjectAres {
                  if (tmp != null) {
                     Vector2 dir = it.transform.position - transform.position;
                     float fallOff = m_fallOff.Evaluate(dir.magnitude/m_radius);
-                    tmp.TakeDamage((fallOff * m_baseDamage), reference == null ? null : reference, dir.normalized * fallOff * m_baseKnockback);//eventuell doch in rocket mit rein schreiben wegen reference zu source player
+                    tmp.TakeDamage((fallOff * m_baseDamage), reference == null ? null : reference, dir.normalized * fallOff * m_baseKnockback, icon);//eventuell doch in rocket mit rein schreiben wegen reference zu source player
                 }
             }
             return null;

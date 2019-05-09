@@ -15,6 +15,6 @@ namespace ProjectAres {
         /// </summary>
         /// <param name="reverence">die referenz zum spieler, von dem dieses objekt kommt</param>
         /// <returns>seinen eigenen rigidbody, damit noch forces aplyed werden können</returns>
-        Rigidbody2D Init(Player reverence);
+        Rigidbody2D Init(Player reverence, Sprite icon);
     }
 }

@@ -12,6 +12,7 @@ namespace ProjectAres {
         [SerializeField] float m_damage = 1;
 
         Player m_source = null;
+        Sprite m_icon = null;
 
         Rigidbody2D m_rb;
 
@@ -27,7 +28,7 @@ namespace ProjectAres {
         #endregion
         #region IHarmingObject
 
-        public Rigidbody2D Init(Player reverence) {
+        public Rigidbody2D Init(Player reverence, Sprite icon) {
             m_rb = GetComponent<Rigidbody2D>();
             if (!m_rb) {
                 Destroy(gameObject);
@@ -35,6 +36,7 @@ namespace ProjectAres {
             }
 
             m_source = reverence;
+            m_icon = icon;
             return m_rb;
         }
 
@@ -49,7 +51,7 @@ namespace ProjectAres {
 
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass);
+                tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass, m_icon);
             }
             //CameraShake.DoCamerashake(0.01f, 0.1f);
 
