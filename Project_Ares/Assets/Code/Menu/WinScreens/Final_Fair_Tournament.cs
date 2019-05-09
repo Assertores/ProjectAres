@@ -38,7 +38,7 @@ namespace ProjectAres {
         #region MonoBehaviour
 
         void Start() {
-            if (DataHolder.s_gameMode != e_gameMode.FAIR_TOURNAMENT && !DataHolder.s_firstMatch) {//first match wurde ende GameMode schon hoch gezählt
+            if (DataHolder.s_gameMode != e_gameMode.FAIR_TOURNAMENT || !DataHolder.s_firstMatch) {//first match wurde ende GameMode schon hoch gezählt
                 Destroy(this);
                 return;
             }
