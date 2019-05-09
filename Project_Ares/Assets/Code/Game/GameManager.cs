@@ -77,7 +77,7 @@ namespace ProjectAres {
         public void Init(IGameMode mode) {
             m_gameMode?.Stop();
             m_gameMode = mode;
-            mode.Init();
+            
             foreach(var it in Player.s_references) {
                 it.m_stats.m_assists = 0;
                 it.m_stats.m_damageDealt = 0;
@@ -88,6 +88,7 @@ namespace ProjectAres {
                 it.DoReset();
                 it.Invincible(false);
             }
+            mode.Init();
         }
 
         public void PlayerDied(Player player) {

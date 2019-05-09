@@ -79,7 +79,6 @@ namespace ProjectAres {
                 m_pillar[i].m_pillarGradient.gameObject.SetActive(false);
                 m_pillar[i].m_pillarField.text = "";
             }
-            Debug.Break();
 
             m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_winScreenMaxTime;
             m_hightPerKill = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / maxKills;
@@ -132,7 +131,7 @@ namespace ProjectAres {
                 m_spawnHandler.SetActive(true);
                 
             }
-            if (Player.s_references.Count >= m_playerCount) {
+            if (m_endet && Player.s_references.Count >= m_playerCount) {
                 m_backToMM.SetActive(true);
             }
         }

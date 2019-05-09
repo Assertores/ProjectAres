@@ -788,6 +788,7 @@ GameObject:
   - component: {fileID: 1020014093}
   - component: {fileID: 1020014094}
   - component: {fileID: 1020014095}
+  - component: {fileID: 1020014096}
   m_Layer: 0
   m_Name: WinScreenManager
   m_TagString: Untagged
@@ -838,6 +839,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a01a020ea74f1504880e51d615740340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pillarRef: {fileID: 2674515526227317221, guid: ea5ef6b4836074646a4db78189afb0c2,
+    type: 3}
+  m_rightMostPlayer: {fileID: 1540636190}
+  m_leftMostPlayer: {fileID: 1382383712}
+  m_maxHeight: {fileID: 199048367}
+  m_backToMM: {fileID: 2144099882}
+  m_spawnHandler: {fileID: 649355707}
+  m_winScreenMaxTime: 4
+  m_TrackingPath: Tracking.csv
+--- !u!114 &1020014096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020014092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 636b56b56b488ee41828b539a87452e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_pillarRef: {fileID: 2674515526227317221, guid: ea5ef6b4836074646a4db78189afb0c2,
