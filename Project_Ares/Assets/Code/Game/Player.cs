@@ -56,6 +56,8 @@ namespace ProjectAres {
         [SerializeField] float m_gravity = 1;
         [Range(0,1)]
         [SerializeField] float m_airResistance = 0.25f;
+        [SerializeField] float m_bounciness = 0.5f;
+        
 
         public d_playerData m_stats;
 
@@ -73,6 +75,7 @@ namespace ProjectAres {
         int m_currentWeapon = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
+        Vector2 vel;
 
         int m_currentName;
 
@@ -97,7 +100,7 @@ namespace ProjectAres {
         }
         
         void Update() {
-
+            
             if (m_control != null && m_currentHealth > 0) {
                 
                 m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
@@ -133,10 +136,9 @@ namespace ProjectAres {
             m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
 
-        //void FixedUpdate() {
-        //    m_rb.velocity -= m_rb.velocity * m_airResistance * Time.fixedDeltaTime;
-        //    m_rb.velocity += Vector2.down * m_gravity * Time.fixedDeltaTime;
-        //}
+        void FixedUpdate() {
+            vel = m_rb.velocity;
+        }
 
         #endregion
         #region IDamageableObject
@@ -483,10 +485,10 @@ namespace ProjectAres {
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if(collision.gameObject.tag == "Player") {
-                Vector2 tmp = collision.contacts[0].normal;
-                if (Vector2.Dot(m_rb.velocity, tmp) < 0) {
-                    m_rb.velocity = Vector2.Reflect(m_rb.velocity, tmp);
+            if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Level") {
+                Vector2 tmp = collision.contacts[0].normal;               
+                if (Vector2.Dot(vel.normalized, tmp) < 0) {
+                    m_rb.velocity = m_bounciness * ( Vector2.Reflect(vel, tmp));
                 }
 
             }
