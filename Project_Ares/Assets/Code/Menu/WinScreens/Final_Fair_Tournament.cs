@@ -110,7 +110,6 @@ namespace ProjectAres {
                     }
                 }
             } else {
-                m_spawnHandler.SetActive(true);
                 if (Player.s_references.Count >= m_playerCount) {
                     m_backToMM.SetActive(true);
                 }
