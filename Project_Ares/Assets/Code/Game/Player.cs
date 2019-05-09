@@ -268,8 +268,8 @@ namespace ProjectAres {
                 m_control = control.GetComponent<IControl>();
             }
 
-            m_currentName = Random.Range(0, DataHolder.s_playerNames.Count - 1);
-            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
+            m_currentName = Random.Range(-1, DataHolder.s_playerNames.Count - 2);
+            ChangeName(true);
             RepositionGUI();
 
             InControle(true);
