@@ -147,7 +147,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 1
-  m_AspectRatio: 2
+  m_AspectRatio: 3
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d6cfc865e98754eb61d5290647b0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneName: GameLogo
+  m_sceneName: TeamLogo
   Clip: {fileID: 32900000, guid: 3cfb88f2f8298af4abcf47d2f846f7b8, type: 3}
 --- !u!1 &815601586
 GameObject:
