@@ -11,6 +11,7 @@ namespace ProjectAres {
 
         [Header("References")]
         [SerializeField] GameObject m_SpawnPoint;
+        [SerializeField] GameObject m_turnermantSprite;
 
         #endregion
         #region MonoBehaviour
@@ -45,8 +46,10 @@ namespace ProjectAres {
             if (Input.GetKeyUp(KeyCode.T)) {
                 if (DataHolder.s_gameMode != e_gameMode.FAIR_TOURNAMENT) {
                     DataHolder.s_gameMode = e_gameMode.FAIR_TOURNAMENT;
+                    m_turnermantSprite.SetActive(true);
                 }  else {
                     DataHolder.s_gameMode = e_gameMode.FFA_CASUAL;
+                    m_turnermantSprite.SetActive(false);
                 }
             }
             if (Input.GetKeyUp(KeyCode.P)) {
