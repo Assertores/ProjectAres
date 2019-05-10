@@ -41,6 +41,7 @@ namespace ProjectAres {
         [SerializeField] PlayerGUIHandler m_GUIHandler;
         [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
         [SerializeField] string m_characterName;
+        [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
 
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
@@ -132,6 +133,13 @@ namespace ProjectAres {
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
 
             m_GUIHandler.SetHealth(m_healthBar.fillAmount);
+
+            if (!m_isInvincible) {
+                m_killsRef.text = m_stats.m_kills.ToString();
+            } else {
+                m_killsRef.text = "";
+            }
+                
 
             m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
