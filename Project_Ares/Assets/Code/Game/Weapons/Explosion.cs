@@ -18,14 +18,18 @@ namespace ProjectAres {
         [SerializeField] float m_baseKnockback = 300;
         [SerializeField] AnimationCurve m_fallOff;
         [SerializeField] float m_explosionTime = 0.5f;
+        [SerializeField] float m_halfPitchRange = 0.1f;
+        [SerializeField] float m_halfVolumeRange = 0.1f;
 
         float m_time;
+
+        float m_startPitch;
+        float m_startVolume;
 
         #endregion
         #region MonoBehaviour
 
         void Start() {
-            //animation von explosion abspielen
         }
 
         void Update() {
@@ -43,11 +47,16 @@ namespace ProjectAres {
         public Rigidbody2D Init(Player reference, Sprite icon) {
             m_explosion.SetActive(true);
             m_time = Time.timeSinceLevelLoad;
-            
+
+            m_startPitch = m_audio.pitch;
+            m_startVolume = m_audio.volume;
+
             if (m_sounds.Length > 0) {
+                m_audio.pitch = Random.Range(m_startPitch - m_halfPitchRange, m_startPitch + m_halfPitchRange);
+                m_audio.volume = Random.Range(m_startVolume - m_halfVolumeRange, m_startVolume + m_halfVolumeRange);
                 m_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length - 1)]);
             }
-            
+
             CameraShake.DoCamerashake(0.1f, 0.7f);
          
             foreach (var it in Physics2D.OverlapCircleAll(transform.position, m_radius)) {

@@ -19,12 +19,17 @@ namespace ProjectAres {
         [SerializeField] float m_muzzleEnergy = 800;
         [SerializeField] float m_shootForSec = 4;
         [SerializeField] float m_coolDownRatio = 2;
+        [SerializeField] float m_halfPitchRange = 0.1f;
+        [SerializeField] float m_halfVolumeRange = 0.1f;
 
 
         float m_shootingTime;
         float m_weaponChangeTime;
         bool m_isShooting = false;
         bool m_forceCoolDown = false;
+
+        float m_startPitch;
+        float m_startVolume;
 
         Player m_player = null;
 
@@ -62,6 +67,8 @@ namespace ProjectAres {
 
         public void Init(Player player) {
             m_player = player;
+            m_startPitch = m_audio.pitch;
+            m_startVolume = m_audio.volume;
         }
 
         public void SetActive(bool activate) {
@@ -103,8 +110,12 @@ namespace ProjectAres {
             }
             m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);
 
-            if(m_sounds.Length > 0)
-                m_audio.PlayOneShot(m_sounds[Random.Range(0,m_sounds.Length-1)]);
+            if (m_sounds.Length > 0) {
+                m_audio.pitch = Random.Range(m_startPitch-m_halfPitchRange, m_startPitch+m_halfPitchRange);
+                m_audio.volume = Random.Range(m_startVolume - m_halfVolumeRange, m_startVolume + m_halfVolumeRange);
+                m_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length - 1)]);
+            }
+                
 
             Invoke("ShootBullet", 60 / m_rPM);
         }
