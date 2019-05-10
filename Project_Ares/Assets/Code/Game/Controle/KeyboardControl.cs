@@ -83,6 +83,7 @@ namespace ProjectAres {
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
+        public Action ShowStats { get; set; }
 
         public void DoDisconect() {
             DataHolder.s_players[4] = false;

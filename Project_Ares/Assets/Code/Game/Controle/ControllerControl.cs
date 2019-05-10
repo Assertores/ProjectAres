@@ -74,6 +74,9 @@ namespace ProjectAres {
                 ChangeName?.Invoke(false);
             }
 
+            if (m_state.Buttons.A == ButtonState.Pressed) {
+                ShowStats?.Invoke();
+            }
            /* if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
                 Dash?.Invoke();
             }*/
@@ -102,7 +105,7 @@ namespace ProjectAres {
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
-
+        public Action ShowStats { get; set; }
         public void DoDisconect() {
             DataHolder.s_players[m_controlerIndex] = false;
             Disconnect?.Invoke();
