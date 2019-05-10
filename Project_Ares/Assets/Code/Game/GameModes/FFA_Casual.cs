@@ -49,6 +49,30 @@ namespace ProjectAres {
         }
 
         public void PlayerDied(Player player) {
+
+            //----- ----- sorting players ----- -----
+            Player.s_sortedRef.Sort(delegate (Player lhs, Player rhs) {
+                if (lhs.m_stats.m_kills != rhs.m_stats.m_kills) {
+                    return rhs.m_stats.m_kills.CompareTo(lhs.m_stats.m_kills);
+                }
+                if (lhs.m_stats.m_assists != rhs.m_stats.m_assists) {
+                    return rhs.m_stats.m_assists.CompareTo(lhs.m_stats.m_assists);
+                }
+                if (lhs.m_stats.m_deaths != rhs.m_stats.m_deaths) {
+                    return rhs.m_stats.m_deaths.CompareTo(lhs.m_stats.m_deaths);
+                }
+                if (lhs.m_stats.m_damageDealt != rhs.m_stats.m_damageDealt) {
+                    return rhs.m_stats.m_damageDealt.CompareTo(lhs.m_stats.m_damageDealt);
+                }
+                if (lhs.m_stats.m_damageTaken != rhs.m_stats.m_damageTaken) {
+                    return rhs.m_stats.m_damageTaken.CompareTo(lhs.m_stats.m_damageTaken);
+                }
+                if (lhs.GetHealth() != rhs.GetHealth()) {
+                    return rhs.GetHealth().CompareTo(lhs.GetHealth());
+                }
+                return 0;
+            });
+
             StartCoroutine(RespawnPlayer(player));
         }
 
