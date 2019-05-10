@@ -2170,7 +2170,7 @@ MonoBehaviour:
   m_iFrames: 1
   m_gravity: 2
   m_airResistance: 0.175
-  m_bounciness: 0.5
+  m_bounciness: 0.3
 --- !u!50 &8924936815898551614
 Rigidbody2D:
   serializedVersion: 4
