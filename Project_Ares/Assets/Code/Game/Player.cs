@@ -26,6 +26,7 @@ namespace ProjectAres {
     public class Player : MonoBehaviour, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>();
+        public static List<Player> s_sortedRef = new List<Player>();
 
         #region Variables
 
@@ -88,6 +89,7 @@ namespace ProjectAres {
         void Awake() {
             DontDestroyOnLoad(this.gameObject.transform.parent);//dirty
             s_references.Add(this);
+            s_sortedRef.Add(this);
         }
 
         void Start() {
