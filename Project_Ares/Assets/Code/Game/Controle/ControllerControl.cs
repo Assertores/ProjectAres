@@ -47,9 +47,16 @@ namespace ProjectAres {
                 m_dir = m_tmpDir;
             }
 
-            if (m_state.Triggers.Right > m_shootThreshold && m_lastState.Triggers.Right <= m_shootThreshold) {
+            if (m_state.Triggers.Right > m_shootThreshold && m_lastState.Triggers.Right <= m_shootThreshold ) {
                 StartShooting?.Invoke();
-            }else if(m_state.Triggers.Right <= m_shootThreshold && m_lastState.Triggers.Right > m_shootThreshold) {
+            }
+            else if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
+                StartShooting?.Invoke();
+            }
+            else if(m_state.Triggers.Right <= m_shootThreshold && m_lastState.Triggers.Right > m_shootThreshold) {
+                StopShooting?.Invoke();
+            }
+            else if (m_state.Triggers.Left <= m_shootThreshold && m_lastState.Triggers.Left > m_shootThreshold) {
                 StopShooting?.Invoke();
             }
 
@@ -67,9 +74,9 @@ namespace ProjectAres {
                 ChangeName?.Invoke(false);
             }
 
-            if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
+           /* if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
                 Dash?.Invoke();
-            }
+            }*/
 
             if(m_lastState.Buttons.Start == ButtonState.Pressed && m_state.Buttons.Start == ButtonState.Released) {
                 /*if(Time.timeScale > 0) {
