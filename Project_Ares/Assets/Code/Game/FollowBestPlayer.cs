@@ -8,7 +8,7 @@ namespace ProjectAres {
         #region MonoBehaviour
         
         void Update() {
-            transform.LookAt(Player.s_sortedRef[0].transform);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Player.s_sortedRef[0].transform.position - transform.position), 0.2f);//framerate abhängig
         }
 
         #endregion
