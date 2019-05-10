@@ -54,6 +54,7 @@ namespace ProjectAres {
             }
             if (Input.GetKeyUp(KeyCode.P)) {
                 DataHolder.s_winnerPC = !DataHolder.s_winnerPC;
+                m_turnermantSprite.transform.Rotate(0, 0, 180);
             }
         }
 
