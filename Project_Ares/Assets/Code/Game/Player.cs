@@ -302,6 +302,8 @@ namespace ProjectAres {
 
             Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
+
+            //m_control.ShowStats += m_GUIHandler.WriteStats;
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
@@ -338,6 +340,15 @@ namespace ProjectAres {
                 m_control.Disconnect = null;
                 StopShooting();
             }
+        }
+
+        public void SetStatsAble(bool doable) {
+            if (doable) {
+                m_control.ShowStats = m_GUIHandler.WriteStats;
+            } else {
+                m_control.ShowStats = null;
+            }
+
         }
 
         public void SetChangeCharAble(bool able) {

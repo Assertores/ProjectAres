@@ -19,7 +19,6 @@ namespace ProjectAres {
         [SerializeField] Transform m_rightMostPlayer;
         [SerializeField] Transform m_leftMostPlayer;
         [SerializeField] Transform m_maxHeight;
-        [SerializeField] GameObject m_statsRef;
 
         [Header("Balancing")]
         [SerializeField] float m_winScreenMaxTime = 4;
@@ -28,7 +27,7 @@ namespace ProjectAres {
         float m_pillarSpeed = 1;
         float m_hightPerKill = 1;
         List<PillarRefHolder> m_pillar = new List<PillarRefHolder>();
-        List<PlayerStatsRefHolder> m_pStats = new List<PlayerStatsRefHolder>(); 
+        
         float m_startTime;
 
         #endregion
@@ -36,18 +35,19 @@ namespace ProjectAres {
         #region MonoBehaviour
 
         void Start() {
+            foreach (var it in Player.s_references) {
+                it.SetStatsAble(true);
+            }
             if (DataHolder.s_gameMode != e_gameMode.FFA_CASUAL) {
-                Destroy(this);
-                return;
+            Destroy(this);
+            return;
             }
             if (!m_pillarRef.GetComponent<PillarRefHolder>()) {
                 print("no pillar ref on the Prefab");
                 return;
             }
-            if (!m_statsRef.GetComponent<PlayerStatsRefHolder>()) {
-                print("no stats ref on the Prefab");
-                return;
-            }
+            
+            
             
             int maxKills = 0;
             Directory.CreateDirectory(StringCollection.DATAPATH);
