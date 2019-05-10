@@ -9,6 +9,7 @@ namespace ProjectAres {
         public TextMeshProUGUI m_screen;
         public TextMeshProUGUI m_playerName;
         public TextMeshProUGUI m_pillarField;
+        public TextMeshProUGUI m_changePcText;
         public Image m_pillarGradient;
     }
 }

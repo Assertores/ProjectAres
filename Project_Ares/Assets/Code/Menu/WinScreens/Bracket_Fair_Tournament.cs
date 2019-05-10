@@ -106,7 +106,7 @@ namespace ProjectAres {
                         m_pillar[i].m_pillarGradient.gameObject.SetActive(true);
                         Player.s_references[i].InControle(true);
                         if ((DataHolder.s_winnerPC && index >= m_playerCount / 2) ||(!DataHolder.s_winnerPC && index < m_playerCount / 2)) {
-                            m_pillar[i].m_pillarField.text = "Change PC " + m_pillar[i].m_pillarField.text;
+                            m_pillar[i].m_changePcText.text = "Please Change the Pc";
                             c = Color.red;
                             c.a = m_pillar[i].m_pillarGradient.color.a;
                             m_pillar[i].m_pillarGradient.color = c;
