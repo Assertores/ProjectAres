@@ -97,7 +97,7 @@
 				}
 				
 				o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
-				o.Normal.x *= lerp(-1, 1, step(0.5, IN.face));
+				o.Normal *= lerp(-1, 1, step(0.5, IN.face));
 			}
 			ENDCG
 		}
