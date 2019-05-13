@@ -48,8 +48,13 @@
 
 			float Outline(float2 uv) {
 
+				if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y)).a > 0.5) return 1.0;
+				if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y)).a > 0.5) return 1.0;
+				if (tex2D(_MainTex, float2(uv.x, uv.y + _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
+				if (tex2D(_MainTex, float2(uv.x, uv.y - _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
+
 				[loop]
-				for (int i = 0; i < _OutlineThickness; i++) {
+				for (int i = 1; i < _OutlineThickness; i++) {
 					if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y + i * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
 					if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y + i * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
 					if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y - i * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
