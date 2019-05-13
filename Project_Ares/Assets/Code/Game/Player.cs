@@ -120,7 +120,7 @@ namespace ProjectAres {
             }
 
             if (m_control.m_dir.x < 0) {
-            m_weaponRef.localScale = new Vector3(1, -1, 1);
+                m_weaponRef.localScale = new Vector3(1, -1, 1);
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
