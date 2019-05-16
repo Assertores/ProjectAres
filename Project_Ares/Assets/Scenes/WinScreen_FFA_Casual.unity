@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 1020014094}
   - component: {fileID: 1020014095}
   - component: {fileID: 1020014096}
+  - component: {fileID: 1020014097}
   m_Layer: 0
   m_Name: WinScreenManager
   m_TagString: Untagged
@@ -828,7 +829,6 @@ MonoBehaviour:
   m_leftMostPlayer: {fileID: 1382383712}
   m_maxHeight: {fileID: 199048367}
   m_winScreenMaxTime: 4
-  m_TrackingPath: Tracking.csv
 --- !u!114 &1020014095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +849,6 @@ MonoBehaviour:
   m_backToMM: {fileID: 2144099882}
   m_spawnHandler: {fileID: 649355707}
   m_winScreenMaxTime: 4
-  m_TrackingPath: Tracking.csv
 --- !u!114 &1020014096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,6 +869,18 @@ MonoBehaviour:
   m_backToMM: {fileID: 2144099882}
   m_spawnHandler: {fileID: 649355707}
   m_winScreenMaxTime: 4
+--- !u!114 &1020014097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020014092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f5fbef173a8044ebc1ca0b5176edbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_TrackingPath: Tracking.csv
 --- !u!1 &1110741814
 GameObject:
