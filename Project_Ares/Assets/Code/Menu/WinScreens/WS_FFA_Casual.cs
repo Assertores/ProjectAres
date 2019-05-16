@@ -22,7 +22,6 @@ namespace ProjectAres {
 
         [Header("Balancing")]
         [SerializeField] float m_winScreenMaxTime = 4;
-        [SerializeField] string m_TrackingPath = "Tracking.csv";
 
         float m_pillarSpeed = 1;
         float m_hightPerKill = 1;
@@ -44,10 +43,7 @@ namespace ProjectAres {
             }
             
             int maxKills = 0;
-            Directory.CreateDirectory(StringCollection.DATAPATH);
             for (int i = 0; i < Player.s_references.Count; i++) {
-                
-                File.AppendAllText(StringCollection.DATAPATH + m_TrackingPath, Player.s_references[i].m_stats.ToString() + System.Environment.NewLine);
 
                 Player.s_references[i].Invincible(true);
 
