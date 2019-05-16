@@ -303,7 +303,7 @@ namespace ProjectAres {
             Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
 
-            //m_control.ShowStats += m_GUIHandler.WriteStats;
+            
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
@@ -342,14 +342,6 @@ namespace ProjectAres {
             }
         }
 
-        public void SetStatsAble(bool doable) {
-            if (doable) {
-                m_control.ShowStats = m_GUIHandler.WriteStats;
-            } else {
-                m_control.ShowStats = null;
-            }
-
-        }
 
         public void SetChangeCharAble(bool able) {
             if (able) {
@@ -508,7 +500,25 @@ namespace ProjectAres {
                 s_references[i].m_GUIHandler.Reposition(((float)i + 1) / (s_references.Count + 1));
             }
         }
+        
 
+        public void SetStatsAble(bool doable) {
+            if (doable) {
+                m_control.ShowStats = ShowStatsToGUI;
+            } else {
+                m_control.ShowStats = null;
+            }
+
+        }
+
+        public void ShowStatsToGUI(bool doIt) {
+            if (doIt) {
+                m_GUIHandler.WriteStats(m_stats);
+            } else {
+                m_GUIHandler.HideStats();
+            }
+        }
+       
         #region Physics
 
         private void OnTriggerEnter2D(Collider2D collision) {

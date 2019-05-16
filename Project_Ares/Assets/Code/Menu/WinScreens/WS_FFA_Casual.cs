@@ -96,6 +96,12 @@ namespace ProjectAres {
             }
         }
 
+        private void OnDestroy() {
+            foreach(var it in Player.s_references){
+                it.SetStatsAble(false);
+            }
+        }
+
         #endregion
         #endregion
     }
