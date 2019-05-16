@@ -382,6 +382,7 @@ namespace ProjectAres {
             }
         }
 
+
         public void SetChangeCharAble(bool able) {
             if (able) {
                 m_control.ChangeCharacter = ChangeCharacter;
@@ -564,7 +565,25 @@ namespace ProjectAres {
                 s_references[i].m_GUIHandler.Reposition(((float)i + 1) / (s_references.Count + 1));
             }
         }
+        
 
+        public void SetStatsAble(bool doable) {
+            if (doable) {
+                m_control.ShowStats = ShowStatsToGUI;
+            } else {
+                m_control.ShowStats = null;
+            }
+
+        }
+
+        public void ShowStatsToGUI(bool doIt) {
+            if (doIt) {
+                m_GUIHandler.WriteStats(m_stats);
+            } else {
+                m_GUIHandler.HideStats();
+            }
+        }
+       
         #region Physics
 
         private void OnTriggerEnter2D(Collider2D collision) {

@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_respawnParent: {fileID: 1872427219}
-  m_gameTime: 120
+  m_gameTime: 20
   m_respawnTime: 2
 --- !u!1 &15752084
 GameObject:

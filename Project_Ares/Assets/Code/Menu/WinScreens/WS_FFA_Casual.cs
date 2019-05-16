@@ -26,6 +26,7 @@ namespace ProjectAres {
         float m_pillarSpeed = 1;
         float m_hightPerKill = 1;
         List<PillarRefHolder> m_pillar = new List<PillarRefHolder>();
+        
         float m_startTime;
 
         #endregion
@@ -33,14 +34,19 @@ namespace ProjectAres {
         #region MonoBehaviour
 
         void Start() {
+            foreach (var it in Player.s_references) {
+                it.SetStatsAble(true);
+            }
             if (DataHolder.s_gameMode != e_gameMode.FFA_CASUAL) {
-                Destroy(this);
-                return;
+            Destroy(this);
+            return;
             }
             if (!m_pillarRef.GetComponent<PillarRefHolder>()) {
                 print("no pillar ref on the Prefab");
                 return;
             }
+            
+            
             
             int maxKills = 0;
             for (int i = 0; i < Player.s_references.Count; i++) {
@@ -58,7 +64,7 @@ namespace ProjectAres {
                 Player.s_references[i].transform.position = Vector3.Lerp(m_leftMostPlayer.position, m_rightMostPlayer.position, ((float)i+1) /(Player.s_references.Count+1));
                 Player.s_references[i].InControle(false);
                 m_pillar.Add(Instantiate(m_pillarRef, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation).GetComponent<PillarRefHolder>());
-
+                //m_pStats.Add(m_statsRef, )
 
                 //----- ----- FeedBack ----- -----
                 
@@ -73,6 +79,7 @@ namespace ProjectAres {
 
         // Update is called once per frame
         void Update() {
+
             for(int i = 0; i < Player.s_references.Count; i++) {
                 if(m_pillar[i].gameObject.transform.position.y < m_leftMostPlayer.position.y + (Player.s_references[i].m_stats.m_kills * m_hightPerKill)) {
                     m_pillar[i].m_screen.text = Mathf.RoundToInt((m_pillar[i].gameObject.transform.position.y - m_leftMostPlayer.position.y) / m_hightPerKill).ToString();
@@ -82,6 +89,12 @@ namespace ProjectAres {
                 } else {
                     Player.s_references[i].InControle(true);
                 }
+            }
+        }
+
+        private void OnDestroy() {
+            foreach(var it in Player.s_references){
+                it.SetStatsAble(false);
             }
         }
 

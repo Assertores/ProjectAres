@@ -63,6 +63,9 @@ namespace ProjectAres {
         /// </summary>
         Action Disconnect { get; set; }
 
+        Action<bool> ShowStats { get; set; }
+
         void DoDisconect();
+
     }
 }
