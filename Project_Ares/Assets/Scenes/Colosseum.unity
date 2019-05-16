@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_respawnParent: {fileID: 1872427219}
-  m_gameTime: 20
+  m_gameTime: 120
   m_respawnTime: 2
 --- !u!1 &15752084
 GameObject:
@@ -804,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
@@ -1141,7 +1141,7 @@ PrefabInstance:
     - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
@@ -1801,7 +1801,7 @@ PrefabInstance:
     - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
@@ -3042,7 +3042,7 @@ PrefabInstance:
     - target: {fileID: 7569549896497973134, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7569549896497973130, guid: e406d2775c8907d42b6502dc23469414,
         type: 3}
