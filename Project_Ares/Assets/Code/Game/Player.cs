@@ -14,6 +14,20 @@ namespace ProjectAres {
         public float m_damageDealt;
         public float m_damageTaken;
 
+        //----- ----- Tracking ----- -----
+
+        public float m_spawnTimeSinceLevelLoad;
+        public float m_firstShot;
+        public float m_firstWeaponChange;
+        public float m_firstCaracterChange;
+        public float m_firstNameChange;
+        public float m_sMGTime;
+        public float m_rocketTime;
+        public float m_timeInLobby;
+        public int m_weaponSwitchCount;
+        public int m_deathBySuicide;
+
+
         public override string ToString() {
             return m_name + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
         }
@@ -73,7 +87,7 @@ namespace ProjectAres {
         float m_respawntTime = float.MaxValue;
         private float m_time;
         float m_currentHealth;
-        int m_currentChar = 0;
+        public int m_currentChar { get; private set; } = 0;
         int m_currentWeapon = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
@@ -83,6 +97,11 @@ namespace ProjectAres {
 
         public Rigidbody2D m_rb { get; private set; }
 
+        //----- ----- Tracking variables ----- -----
+
+        public float m_joinTime { get; private set; }
+        float m_weaponChangeTime;
+
         #endregion
         #region MonoBehaviour
 
@@ -90,12 +109,26 @@ namespace ProjectAres {
             DontDestroyOnLoad(this.gameObject.transform.parent);//dirty
             s_references.Add(this);
             s_sortedRef.Add(this);
-        }
+
+            //----- ----- Tracking ----- -----
+
+            m_stats.m_spawnTimeSinceLevelLoad = float.MaxValue;
+            m_stats.m_firstShot = 0;
+            m_stats.m_firstWeaponChange = 0;
+            m_stats.m_firstCaracterChange = 0;
+            m_stats.m_firstNameChange = 0;
+            m_stats.m_sMGTime = 0;
+            m_stats.m_rocketTime = 0;
+            m_stats.m_timeInLobby = 0;
+            m_stats.m_weaponSwitchCount = 0;
+            m_stats.m_deathBySuicide = 0;
+    }
 
         void Start() {
            
 
             m_rb = GetComponent<Rigidbody2D>();
+
             
         }
         private void OnDestroy() {
@@ -262,6 +295,9 @@ namespace ProjectAres {
                                         null,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
                                         DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+
+            //----- ----- Tracking ----- -----
+            m_stats.m_deathBySuicide++;
         }
 
         public float GetHealth() {
@@ -302,6 +338,12 @@ namespace ProjectAres {
 
             Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
+
+            //----- ----- Tracking ----- -----
+            m_joinTime = Time.time;
+            m_weaponChangeTime = Time.time;
+
+            m_stats.m_spawnTimeSinceLevelLoad = Time.timeSinceLevelLoad;
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
@@ -397,6 +439,10 @@ namespace ProjectAres {
 
             m_stats.m_name = DataHolder.GetPlayerName(m_currentName);
             m_GUIHandler.SetName(m_stats.m_name);
+
+            //----- ----- Tracking ----- -----
+            if (m_stats.m_firstNameChange == 0)
+                m_stats.m_firstNameChange = Time.time - m_joinTime;
         }
 
         void ChangeCharacter(int newCaracter, bool relative = true) {
@@ -437,6 +483,11 @@ namespace ProjectAres {
             }
             m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
             m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
+
+            //----- ----- Tracking ----- -----
+
+            if (m_stats.m_firstCaracterChange == 0)
+                m_stats.m_firstCaracterChange = Time.time - m_joinTime;
         }
 
         void ChangeWeapon(int newWeapon, bool relative = false) {
@@ -458,12 +509,28 @@ namespace ProjectAres {
                 if (m_isShooting)
                     m_weapons[m_currentWeapon].StartShooting();
             }
+
+            //----- ----- Tracking ----- -----
+            if (m_stats.m_firstWeaponChange == 0)
+                m_stats.m_firstWeaponChange = Time.time - m_joinTime;
+
+            m_stats.m_weaponSwitchCount++;
+            if (m_currentWeapon - newWeapon == 0)
+                m_stats.m_sMGTime += Time.time - m_weaponChangeTime;
+            else
+                m_stats.m_rocketTime += Time.time - m_weaponChangeTime;
+
+            m_weaponChangeTime = Time.time;
         }
 
         void StartShooting() {
             if(!m_isShooting)
                 m_weapons[m_currentWeapon].StartShooting();
             m_isShooting = true;
+
+            //----- ----- Tracking ----- -----
+            if (m_stats.m_firstShot == 0)
+                m_stats.m_firstShot = Time.time - m_joinTime;
         }
 
         void StopShooting() {

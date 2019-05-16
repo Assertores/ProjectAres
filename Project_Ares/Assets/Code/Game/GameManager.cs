@@ -70,6 +70,10 @@ namespace ProjectAres {
             }
 
             Init(m_gameModes[DataHolder.s_gameMode]);
+
+            foreach(var it in Player.s_references) {
+                it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
+            }
         }
 
         #endregion
