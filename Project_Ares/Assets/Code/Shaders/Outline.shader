@@ -1,4 +1,4 @@
-﻿Shader "Sprites/Bumped Diffuse both sides with Shadows"
+﻿Shader "Sprites/Outline"
 {
 	Properties
 	{
