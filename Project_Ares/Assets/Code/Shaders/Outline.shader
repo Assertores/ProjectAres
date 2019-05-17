@@ -48,22 +48,22 @@
 
 			float Outline(float2 uv) {
 
-				if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y)).a > 0.5) return 1.0;
-				if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y)).a > 0.5) return 1.0;
-				if (tex2D(_MainTex, float2(uv.x, uv.y + _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
-				if (tex2D(_MainTex, float2(uv.x, uv.y - _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
+				if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y)).a < 0.5) return 1.0;
+				if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y)).a < 0.5) return 1.0;
+				if (tex2D(_MainTex, float2(uv.x, uv.y + _OutlineThickness * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
+				if (tex2D(_MainTex, float2(uv.x, uv.y - _OutlineThickness * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
 
 				[loop]
 				for (int i = 1; i < _OutlineThickness; i++) {
-					if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y + i * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
-					if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y + i * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
-					if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y - i * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
-					if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y - i * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y + i * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y + i * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x + _OutlineThickness * _MainTex_TexelSize.x, uv.y - i * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x - _OutlineThickness * _MainTex_TexelSize.x, uv.y - i * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
 
-					if (tex2D(_MainTex, float2(uv.x + i * _MainTex_TexelSize.x, uv.y + _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
-					if (tex2D(_MainTex, float2(uv.x + i * _MainTex_TexelSize.x, uv.y - _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
-					if (tex2D(_MainTex, float2(uv.x - i * _MainTex_TexelSize.x, uv.y + _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
-					if (tex2D(_MainTex, float2(uv.x - i * _MainTex_TexelSize.x, uv.y - _OutlineThickness * _MainTex_TexelSize.y)).a > 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x + i * _MainTex_TexelSize.x, uv.y + _OutlineThickness * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x + i * _MainTex_TexelSize.x, uv.y - _OutlineThickness * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x - i * _MainTex_TexelSize.x, uv.y + _OutlineThickness * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
+					if (tex2D(_MainTex, float2(uv.x - i * _MainTex_TexelSize.x, uv.y - _OutlineThickness * _MainTex_TexelSize.y)).a < 0.5) return 1.0;
 				}
 				return 0.0;
 			}
@@ -86,15 +86,8 @@
 
 			void surf(Input IN, inout SurfaceOutput o) {
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) /** IN.color*/;
-
-				o.Albedo = c.rgb;
 				o.Alpha = c.a;
-
-				if (c.a < 0.5) {
-					float tmp = Outline(IN.uv_MainTex);
-					o.Albedo = lerp(o.Albedo, _OutlineColor.rgb, tmp);
-					o.Alpha = lerp(o.Alpha, _OutlineColor.a, tmp);
-				}
+				o.Albedo = lerp(c.rgb, _OutlineColor.rgb, Outline(IN.uv_MainTex));
 				
 				o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
 				o.Normal *= lerp(-1, 1, step(0.5, IN.face));
