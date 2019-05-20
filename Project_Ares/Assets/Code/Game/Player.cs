@@ -133,6 +133,7 @@ namespace ProjectAres {
         }
         private void OnDestroy() {
             s_references.Remove(this);
+            s_sortedRef.Remove(this);
         }
         
         void Update() {
