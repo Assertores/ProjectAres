@@ -79,6 +79,16 @@ PrefabInstance:
       propertyPath: m_sounds.Array.data[9]
       value: 
       objectReference: {fileID: 8300000, guid: 4351ff6cd53a2ed4c9f80cfbb327f090, type: 3}
+    - target: {fileID: 7651391310459712476, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
+        type: 3}
+      propertyPath: m_halfPitchRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651391310459712476, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
+        type: 3}
+      propertyPath: m_halfVolumeRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4162003346175362497, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
         type: 3}
       propertyPath: m_LocalPosition.x
