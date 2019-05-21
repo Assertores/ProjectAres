@@ -93,9 +93,9 @@ namespace PPBC {
                     } else {
                         int index = m_sorted.IndexOf(Player.s_references[i]) + 1;
                         if (DataHolder.s_winnerPC) {
-                            m_pillar[i].m_pillarField.text = (index.ToString() + ". Platz");//TODO: Lokalisierung, Bracket anstadt finale
+                            m_pillar[i].m_pillarField.text = ("Platz " + index.ToString());//TODO: Lokalisierung, Bracket anstadt finale
                         } else {
-                            m_pillar[i].m_pillarField.text = ((index+4).ToString() + ". Platz");//TODO: Lokalisierung, Bracket anstadt finale
+                            m_pillar[i].m_pillarField.text = ("Platz " + (index+4).ToString());//TODO: Lokalisierung, Bracket anstadt finale
                         }
                         
                         Color c = Color.green;

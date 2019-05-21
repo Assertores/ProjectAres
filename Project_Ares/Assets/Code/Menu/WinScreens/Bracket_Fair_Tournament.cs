@@ -95,7 +95,7 @@ namespace PPBC {
                         Player.s_references[i].transform.position = m_pillar[i].gameObject.transform.position;
                     } else {
                         int index = m_sorted.IndexOf(Player.s_references[i]);
-                        m_pillar[i].m_pillarField.text = ((index+1).ToString() + ". Platz");//TODO: Lokalisierung, Bracket anstadt finale
+                        m_pillar[i].m_pillarField.text = ("Platz " + (index+1).ToString());//TODO: Lokalisierung, Bracket anstadt finale
                         Color c = Color.green;
                         c.a = m_pillar[i].m_pillarGradient.color.a;
                         m_pillar[i].m_pillarGradient.color = c;
