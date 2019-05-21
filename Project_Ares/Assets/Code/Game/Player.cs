@@ -7,6 +7,8 @@ using UnityEngine.UI;
 namespace PPBC {
 
     public struct d_playerData {
+        public int m_points;
+
         public string m_name;
         public int m_kills;
         public int m_deaths;

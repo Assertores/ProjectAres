@@ -50,6 +50,9 @@ namespace PPBC {
 
         public void PlayerDied(Player player) {
 
+            foreach (var it in Player.s_sortedRef) {
+                it.m_stats.m_points = it.m_stats.m_kills;
+            }
             //----- ----- sorting players ----- -----
             Player.s_sortedRef.Sort(delegate (Player lhs, Player rhs) {
                 if (lhs.m_stats.m_kills != rhs.m_stats.m_kills) {
