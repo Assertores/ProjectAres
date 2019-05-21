@@ -13,6 +13,8 @@ namespace PPBC {
         [SerializeField] AudioSource m_audio;
         [SerializeField] Sprite m_icon_;
 
+        private DragonBones.UnityArmatureComponent m_modelAnim;
+
         [Header("Balancing")]
         [SerializeField] float m_muzzleEnergy = 800;
         [SerializeField] float m_shootDelay = 2;
@@ -25,6 +27,12 @@ namespace PPBC {
 
         #endregion
         #region MonoBehaviour
+        private void Start() {
+            m_modelAnim = this.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("Rocket_Idle");
+            }
+        }
 
         void Update() {
             if (!m_isShooting && m_value > 0) {
@@ -32,6 +40,9 @@ namespace PPBC {
                 if(m_value < 0) {
                     m_value = 0;
                 }
+            }
+            if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                m_modelAnim.animation.Play("Rocket_Idle");
             }
         }
 
@@ -48,6 +59,9 @@ namespace PPBC {
 
         public void SetActive(bool activate) {
             gameObject.SetActive(activate);
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("Rocket_Weapon_Change",1);
+            }
         }
 
         public void StartShooting() {
@@ -55,9 +69,11 @@ namespace PPBC {
                 return;
             }
 
-            
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("Rocket_Charge");
+            }
 
-            m_isShooting = true;
+                m_isShooting = true;
 
             //m_velocity = m_player.m_rb.velocity;
             m_gravetyScale = m_player.m_rb.gravityScale;
@@ -70,8 +86,11 @@ namespace PPBC {
             if (!m_isShooting)
                 return;
 
-            //m_player.m_rb.velocity += m_velocity;
-            m_player.m_rb.gravityScale = m_gravetyScale;
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("Rocket_Shoot",1);
+            }
+                //m_player.m_rb.velocity += m_velocity;
+                m_player.m_rb.gravityScale = m_gravetyScale;
             m_startShootingTime = Time.time;
             m_audio.Play();
             ShootBullet();
