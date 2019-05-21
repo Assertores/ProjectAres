@@ -573,6 +573,7 @@ namespace PPBC {
                 m_control.ShowStats = ShowStatsToGUI;
             } else {
                 m_control.ShowStats = null;
+                m_GUIHandler.HideStats();
             }
 
         }
