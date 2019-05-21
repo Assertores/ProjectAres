@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ProjectAres {
+namespace PPBC {
     public class Fair_Tournament : MonoBehaviour, IGameMode {
 
         #region Variables

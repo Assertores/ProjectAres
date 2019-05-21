@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
     public class Rocket : MonoBehaviour, IHarmingObject {
 
         #region Variables

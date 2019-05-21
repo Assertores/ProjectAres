@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace ProjectAres {
+namespace PPBC {
     public class PlayerGUIHandler : MonoBehaviour {
 
         #region Variables

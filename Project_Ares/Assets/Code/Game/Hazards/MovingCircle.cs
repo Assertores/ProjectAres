@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
 
     public class MovingCircle : MonoBehaviour, IDamageableObject {
         public bool m_alive { get; set; }

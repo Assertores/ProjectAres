@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-namespace ProjectAres {
+namespace PPBC {
     public class WriteStatsToCSV : MonoBehaviour {
 
         #region Variables

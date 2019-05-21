@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using TMPro;
 
-namespace ProjectAres {
+namespace PPBC {
     public class Bracket_Fair_Tournament : MonoBehaviour {
         #region Variables
 

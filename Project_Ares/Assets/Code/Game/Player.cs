@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace ProjectAres {
+namespace PPBC {
 
     public struct d_playerData {
         public string m_name;

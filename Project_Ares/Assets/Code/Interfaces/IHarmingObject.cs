@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
     /// <summary>
     /// das gegenstück zu DamageableObject
     /// zeuch dass anderen dingen schaden macht

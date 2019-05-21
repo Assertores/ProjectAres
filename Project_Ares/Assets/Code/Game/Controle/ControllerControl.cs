@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-namespace ProjectAres {
+namespace PPBC {
     public class ControllerControl : MonoBehaviour, IControl {
 
         #region Variables

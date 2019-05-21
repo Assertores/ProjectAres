@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-namespace ProjectAres
+namespace PPBC
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class ExplodingBarrel : MonoBehaviour, IDamageableObject

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
-namespace ProjectAres {
+namespace PPBC {
     public class LoadSceneAfterVideo : MonoBehaviour
     {
         [SerializeField] string m_sceneName;

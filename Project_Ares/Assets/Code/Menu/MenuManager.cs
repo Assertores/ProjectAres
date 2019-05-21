@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace ProjectAres {
+namespace PPBC {
     public class MenuManager : MonoBehaviour {
 
         #region Variables

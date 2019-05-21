@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ProjectAres {
+namespace PPBC {
     public class FFA_Casual : MonoBehaviour, IGameMode {
 
         #region Variables

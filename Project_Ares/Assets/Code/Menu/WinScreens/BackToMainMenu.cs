@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-namespace ProjectAres {
+namespace PPBC {
     [RequireComponent(typeof(Collider2D))]
     public class BackToMainMenu : MonoBehaviour {
 

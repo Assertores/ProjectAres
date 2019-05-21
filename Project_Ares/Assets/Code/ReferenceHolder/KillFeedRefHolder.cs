@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace ProjectAres {
+namespace PPBC {
     public class KillFeedRefHolder : MonoBehaviour {
         public TextMeshProUGUI m_killerName;
         public Image m_killerIcon;

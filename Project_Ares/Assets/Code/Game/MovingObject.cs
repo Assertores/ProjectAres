@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres
+namespace PPBC
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class MovingObject : MonoBehaviour {

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace ProjectAres {
+namespace PPBC {
     public class PillarRefHolder : MonoBehaviour {
         public TextMeshProUGUI m_screen;
         public TextMeshProUGUI m_playerName;

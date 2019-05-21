@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace ProjectAres
+namespace PPBC
 {   [System.Serializable]
     public class PlayerStatsRefHolder : MonoBehaviour
     {
