@@ -13,6 +13,7 @@ namespace PPBC {
         [SerializeField] AudioSource m_audio;
         [SerializeField] AudioClip[] m_sounds;
         [SerializeField] Sprite m_icon_;
+        [SerializeField] GameObject m_muzzleflash;
 
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
@@ -39,6 +40,7 @@ namespace PPBC {
 
         #region MonoBehaviour
         private void Start() {
+            
             m_modelAnim = this.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("SMG_Idle");
@@ -47,6 +49,7 @@ namespace PPBC {
 
         private void Update()
         {
+            m_muzzleflash.transform.rotation = transform.rotation;
             if (m_isShooting)
             {
                 m_shootingTime += Time.deltaTime;
@@ -82,6 +85,7 @@ namespace PPBC {
         public float m_value { get; private set; }
 
         public void Init(Player player) {
+            m_muzzleflash.SetActive(false);
             m_player = player;
             m_startPitch = m_audio.pitch;
             m_startVolume = m_audio.volume;
@@ -97,7 +101,7 @@ namespace PPBC {
                     m_shootingTime = 0;
                 }
             }
-            
+            m_muzzleflash.SetActive(false);
             gameObject.SetActive(activate);
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("SMG_Weapon_Change",1);
@@ -113,6 +117,8 @@ namespace PPBC {
             m_isShooting = true;
 
             Invoke("ShootBullet", 60 / m_rPM);
+            m_muzzleflash.SetActive(true);
+           
         }
 
         public void StopShooting() {
@@ -120,8 +126,9 @@ namespace PPBC {
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Stop("SMG_Shoot");
             }
-                m_isShooting = false;
-            
+
+            m_muzzleflash.SetActive(false);
+            m_isShooting = false;
             CancelInvoke();
         }
 
