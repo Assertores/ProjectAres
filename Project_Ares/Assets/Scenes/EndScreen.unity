@@ -786,10 +786,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1020014093}
-  - component: {fileID: 1020014094}
   - component: {fileID: 1020014095}
-  - component: {fileID: 1020014096}
   - component: {fileID: 1020014097}
+  - component: {fileID: 1020014094}
   m_Layer: 0
   m_Name: EndScreenManager
   m_TagString: Untagged
@@ -820,15 +819,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020014092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb123d3000d0d0a438d2cb5c90001b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9da3c36732e8a2e43afbfdd5a986ce6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_pillarRef: {fileID: 2674515526227317221, guid: ea5ef6b4836074646a4db78189afb0c2,
+  m_pillarPrefab: {fileID: 2674515526227317221, guid: ea5ef6b4836074646a4db78189afb0c2,
     type: 3}
   m_rightMostPlayer: {fileID: 1540636190}
   m_leftMostPlayer: {fileID: 1382383712}
   m_maxHeight: {fileID: 199048367}
-  m_winScreenMaxTime: 4
+  m_pillarRiseTime: 4
 --- !u!114 &1020014095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,37 +837,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020014092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a01a020ea74f1504880e51d615740340, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a0fa8b43636e4948a3e92dcb6f1f685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_pillarRef: {fileID: 2674515526227317221, guid: ea5ef6b4836074646a4db78189afb0c2,
-    type: 3}
-  m_rightMostPlayer: {fileID: 1540636190}
-  m_leftMostPlayer: {fileID: 1382383712}
-  m_maxHeight: {fileID: 199048367}
-  m_backToMM: {fileID: 2144099882}
-  m_spawnHandler: {fileID: 649355707}
-  m_winScreenMaxTime: 4
---- !u!114 &1020014096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020014092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636b56b56b488ee41828b539a87452e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_pillarRef: {fileID: 2674515526227317221, guid: ea5ef6b4836074646a4db78189afb0c2,
-    type: 3}
-  m_rightMostPlayer: {fileID: 1540636190}
-  m_leftMostPlayer: {fileID: 1382383712}
-  m_maxHeight: {fileID: 199048367}
-  m_backToMM: {fileID: 2144099882}
-  m_spawnHandler: {fileID: 649355707}
-  m_winScreenMaxTime: 4
+  pillarHandler: {fileID: 1020014094}
 --- !u!114 &1020014097
 MonoBehaviour:
   m_ObjectHideFlags: 0
