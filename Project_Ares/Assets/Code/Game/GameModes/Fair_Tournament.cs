@@ -43,20 +43,10 @@ namespace PPBC {
         }
 
         public void PlayerDied(Player player) {
-            int max = 0;
-            foreach(var it in Player.s_references) {
-                if(max < it.m_stats.m_kills)
-                    max = it.m_stats.m_kills;
+            foreach (var it in Player.s_sortedRef) {
+                it.m_stats.m_points = it.m_stats.m_kills;
             }
-            if(max >= m_maxKills) {
-                //disconecte die schlechtesten zwei/die besten zwei
-                
-                DataHolder.s_firstMatch = !DataHolder.s_firstMatch;
-
-                SceneManager.LoadScene(StringCollection.FFACASUAL);
-                return;
-            }
-
+            
             //----- ----- sorting players ----- -----
             Player.s_sortedRef.Sort(delegate (Player lhs, Player rhs) {
                 if(lhs.m_stats.m_kills != rhs.m_stats.m_kills) {
@@ -79,6 +69,15 @@ namespace PPBC {
                 }
                 return 0;
                 });
+
+            if (Player.s_sortedRef[0].m_stats.m_kills >= m_maxKills) {
+                //disconecte die schlechtesten zwei/die besten zwei
+
+                DataHolder.s_firstMatch = !DataHolder.s_firstMatch;
+
+                SceneManager.LoadScene(StringCollection.FFACASUAL);
+                return;
+            }
 
             StartCoroutine(RespawnPlayer(player));
         }

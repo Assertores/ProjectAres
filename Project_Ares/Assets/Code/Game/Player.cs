@@ -7,6 +7,8 @@ using UnityEngine.UI;
 namespace PPBC {
 
     public struct d_playerData {
+        public int m_points;
+
         public string m_name;
         public int m_kills;
         public int m_deaths;
@@ -241,7 +243,7 @@ namespace PPBC {
                 gameObject.SetActive(false);
 
                 InControle(false);
-                GameManager.s_singelton.PlayerDied(this);
+                GameManager.s_singelton?.PlayerDied(this);
 
                 //----- ----- Kill Feed ----- -----
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
