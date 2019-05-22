@@ -4,7 +4,7 @@ using UnityEngine;
 using XInputDotNetPure;
 
 namespace PPBC {
-    public class SpawnHandler : MonoBehaviour {
+    public class SpawnHandler : MonoBehaviour, IScriptQueueItem {
 
         #region Variables
 
@@ -16,6 +16,13 @@ namespace PPBC {
 
         #endregion
         #region MonoBehaviour
+
+        private void Start() {
+            if (EndScreenManager.s_ref && DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && DataHolder.s_firstMatch == false) {
+                EndScreenManager.s_ref.AddItem(this, 2);
+                this.enabled = false;
+            }
+        }
 
         private void Update() {
             if (!DataHolder.s_players[4] && Input.GetKeyDown(KeyCode.Return)) {
@@ -76,6 +83,18 @@ namespace PPBC {
                     minion.SetChangeCharAble(true);
                 }
             }
+        }
+
+        #endregion
+        #region IScriptQueueItem
+
+        public bool FirstTick() {
+            this.enabled = true;
+            return true;
+        }
+
+        public bool DoTick() {
+            return true;
         }
 
         #endregion

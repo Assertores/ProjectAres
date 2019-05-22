@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PPBC {
-    public class PillarHandler : MonoBehaviour {
+    public class PillarHandler : MonoBehaviour, IScriptQueueItem {
 
         #region Variables
 
@@ -25,6 +25,7 @@ namespace PPBC {
         public System.Action CallBack;
         #endregion
         #region MonoBehaviour
+
         void Start() {
             if (!m_pillarPrefab.GetComponent<PillarRefHolder>()) {
                 print("no pillar ref on the Prefab");
@@ -32,39 +33,30 @@ namespace PPBC {
                 return;
             }
 
-            /*
-            for (int i = 0; i < Player.s_references.Count; i++) {
-
-                Player.s_references[i].Invincible(true);
-
-                if (!Player.s_references[i].m_alive) {
-                    Player.s_references[i].Respawn(transform.position);
-                }
-                Player.s_references[i].DoReset();
-
-                Player.s_references[i].transform.position = Vector3.Lerp(m_leftMostPlayer.position, m_rightMostPlayer.position, ((float)i + 1) / (Player.s_references.Count + 1));
-                Player.s_references[i].InControle(false);
-                m_pillar.Add(Instantiate(m_pillarPrefab, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation).GetComponent<PillarRefHolder>());
-
-                //----- ----- FeedBack ----- -----
-
-                m_pillar[i].m_screen.text = "0";
-                m_pillar[i].m_playerName.text = Player.s_references[i].m_stats.m_name;
-            }*///muss in ein anderes script
-
             m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_pillarRiseTime;
             m_hightPerKill = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / Player.s_sortedRef[0].m_stats.m_points;
-            m_startTime = Time.timeSinceLevelLoad;
-        }
-
-        // Update is called once per frame
-        void Update() {
-            MovePiller();
+            
+            EndScreenManager.s_ref?.AddItem(this, 0);
         }
 
         #endregion
+        #region IScriptQueueItem
 
-        void MovePiller() {
+        public bool FirstTick() {
+            for (int i = 0; i < Player.s_references.Count; i++) {
+                Player.s_references[i].transform.position = Vector3.Lerp(m_leftMostPlayer.position, m_rightMostPlayer.position, ((float)i + 1) / (Player.s_references.Count + 1));
+                m_pillar.Add(Instantiate(m_pillarPrefab, Player.s_references[i].transform.position, Player.s_references[i].transform.rotation).GetComponent<PillarRefHolder>());
+
+                //----- ----- FeedBack ----- -----
+                m_pillar[i].m_screen.text = "0";
+                m_pillar[i].m_playerName.text = Player.s_references[i].m_stats.m_name;
+            }
+            m_startTime = Time.timeSinceLevelLoad;
+
+            return DoTick();
+        }
+
+        public bool DoTick() {
             for (int i = 0; i < Player.s_references.Count; i++) {
                 if (m_pillar[i].gameObject.transform.position.y < m_leftMostPlayer.position.y + (Player.s_references[i].m_stats.m_kills * m_hightPerKill)) {
                     m_pillar[i].m_screen.text = Mathf.RoundToInt((m_pillar[i].gameObject.transform.position.y - m_leftMostPlayer.position.y) / m_hightPerKill).ToString();
@@ -82,11 +74,13 @@ namespace PPBC {
                     m_pillar[i].m_pillarGradient.gameObject.SetActive(true);
 
                     if (index == 0) {
-                        CallBack?.Invoke();
-                        Destroy(this);
+                        return true;
                     }
                 }
             }
+            return false;
         }
+
+        #endregion
     }
 }
