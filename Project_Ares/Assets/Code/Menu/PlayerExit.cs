@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres
+namespace PPBC
 {
     [RequireComponent(typeof(Collider2D))]
     public class PlayerExit : MonoBehaviour

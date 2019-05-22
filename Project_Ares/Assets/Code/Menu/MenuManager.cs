@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using XInputDotNetPure;
 
-namespace ProjectAres {
+
+namespace PPBC {
     public class MenuManager : MonoBehaviour {
 
         #region Variables
 
         [Header("References")]
-        [SerializeField] GameObject m_playerRev;
         [SerializeField] GameObject m_SpawnPoint;
-
-        GamePadState[] m_lastStates = new GamePadState[4];
+        [SerializeField] GameObject m_turnermantSprite;
 
         #endregion
         #region MonoBehaviour
@@ -41,67 +39,22 @@ namespace ProjectAres {
                 it.transform.position = m_SpawnPoint.transform.position;
                 it.SetChangeCharAble(true);
             }
+            DataHolder.s_firstMatch = true;
         }
 
         private void Update() {
-            if (!DataHolder.s_players[4] && Input.GetKeyDown(KeyCode.Return)) {
-                GameObject tmp = Instantiate(m_playerRev);
-                if (tmp) {
-                    DataHolder.s_players[4] = true;
-                    GameObject tmpControle = new GameObject("Controler");
-                    //tmpControle.transform.parent = tmp.transform;
-
-                    IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
-
-                    //tmp.GetComponent<Player>().Init(KeyboardControl);
-
-                    tmp.transform.position = m_SpawnPoint.transform.position;
-
-                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
-                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
-                    tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
-                    tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
+            if (Input.GetKeyUp(KeyCode.T)) {
+                if (DataHolder.s_gameMode != e_gameMode.FAIR_TOURNAMENT) {
+                    DataHolder.s_gameMode = e_gameMode.FAIR_TOURNAMENT;
+                    m_turnermantSprite.SetActive(true);
+                }  else {
+                    DataHolder.s_gameMode = e_gameMode.FFA_CASUAL;
+                    m_turnermantSprite.SetActive(false);
                 }
             }
-            for(int i = 0; i < 4; i++) {
-                if(!DataHolder.s_players[i] && m_lastStates[i].IsConnected && m_lastStates[i].Buttons.Start == ButtonState.Pressed && GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
-                    GameObject tmp = Instantiate(m_playerRev);
-                    if (tmp) {
-                        DataHolder.s_players[i] = true;
-                        GameObject tmpControle = new GameObject("Controler");
-                        //tmpControle.transform.parent = tmp.transform;
-
-                        ControllerControl reference = tmpControle.AddComponent<ControllerControl>();//null reference checks
-                        reference.m_controlerIndex = i;
-
-                        tmp.transform.position = m_SpawnPoint.transform.position;
-
-                        tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty
-                        //tmp.GetComponent<Player>().Init(reference);//null reference checks
-                        tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
-                        tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
-
-                    }
-                }
-                m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
-            }
-
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                GameObject tmp = Instantiate(m_playerRev);
-                if (tmp) {
-                    GameObject tmpController = new GameObject("KI Controller");
-                    //tmpControle.transform.parent = tmp.transform;
-
-                    IControl reference = tmpController.AddComponent<KI_Minion>();
-
-                    tmp.transform.position = m_SpawnPoint.transform.position;
-
-                    Player minion = tmp.GetComponentInChildren<Player>();
-                    minion.Init(tmpController);
-                    minion.Invincible(true);
-                    minion.SetChangeCharAble(true);
-                }
+            if (Input.GetKeyUp(KeyCode.P)) {
+                DataHolder.s_winnerPC = !DataHolder.s_winnerPC;
+                m_turnermantSprite.transform.Rotate(0, 0, 180);
             }
         }
 
@@ -113,7 +66,7 @@ namespace ProjectAres {
                 it.SetChangeCharAble(false);
             }
 
-            SceneManager.LoadScene(StringCollection.COLOSSEUM);
+            SceneManager.LoadScene(DataHolder.s_level);
             //SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
             //lade ausgewählte Szene im hintergrund
             //spiel animation für szenenwechsel ab

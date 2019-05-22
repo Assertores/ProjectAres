@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ProjectAres {
+namespace PPBC {
     public class StartGame : MonoBehaviour, IDamageableObject {
 
         
@@ -54,7 +54,7 @@ namespace ProjectAres {
         }
 
 
-        public void TakeDamage(float damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
 
             if (m_currentHealth > 0)
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
     [CreateAssetMenu(menuName = "Character")]
     public class CharacterData: ScriptableObject {
 

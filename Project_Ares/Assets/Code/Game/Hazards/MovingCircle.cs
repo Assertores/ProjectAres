@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
 
     public class MovingCircle : MonoBehaviour, IDamageableObject {
         public bool m_alive { get; set; }
@@ -15,7 +15,7 @@ namespace ProjectAres {
             throw new System.NotImplementedException();
         }
 
-        public void TakeDamage(float damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
             return;
         }
 

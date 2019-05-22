@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f496fe1145529ff41b493e13327661ab, type: 3}
+  m_Name: Weapon_Smg_Data
+  m_EditorClassIdentifier: 
+  dataName: Weapon_Smg
+  dragonBonesJSON: {fileID: 4900000, guid: 7420008fc43227545a1147eb26306d70, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 8dc6159272449ea419ef28097360b33a, type: 3}
+    texture: {fileID: 2800000, guid: 80e4749468ed81c44b399eee165d2645, type: 3}
+    material: {fileID: 2100000, guid: 4337d355c7660e54a9c33a33aa562b2c, type: 2}
+    uiMaterial: {fileID: 0}

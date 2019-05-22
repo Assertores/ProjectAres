@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
 
     public class KI_Minion : MonoBehaviour, IControl {
 
@@ -54,6 +54,7 @@ namespace ProjectAres {
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
+        public Action<bool> ShowStats { get; set; }
 
         public void DoDisconect() {
             Disconnect?.Invoke();

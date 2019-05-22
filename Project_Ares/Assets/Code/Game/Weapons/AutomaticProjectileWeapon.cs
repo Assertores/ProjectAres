@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
     public class AutomaticProjectileWeapon : MonoBehaviour, IWeapon {
 
         #region Variables
@@ -13,12 +13,17 @@ namespace ProjectAres {
         [SerializeField] AudioSource m_audio;
         [SerializeField] AudioClip[] m_sounds;
         [SerializeField] Sprite m_icon_;
+        [SerializeField] GameObject m_muzzleflash;
+
+        private DragonBones.UnityArmatureComponent m_modelAnim;
 
         [Header("Balancing")]
         [SerializeField] float m_rPM = 1;
         [SerializeField] float m_muzzleEnergy = 800;
         [SerializeField] float m_shootForSec = 4;
         [SerializeField] float m_coolDownRatio = 2;
+        [SerializeField] float m_halfPitchRange = 0.1f;
+        [SerializeField] float m_halfVolumeRange = 0.1f;
 
 
         float m_shootingTime;
@@ -26,12 +31,25 @@ namespace ProjectAres {
         bool m_isShooting = false;
         bool m_forceCoolDown = false;
 
+        float m_startPitch;
+        float m_startVolume;
+
         Player m_player = null;
 
         #endregion
 
+        #region MonoBehaviour
+        private void Start() {
+            
+            m_modelAnim = this.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("SMG_Idle");
+            }
+        }
+
         private void Update()
         {
+            m_muzzleflash.transform.rotation = transform.rotation;
             if (m_isShooting)
             {
                 m_shootingTime += Time.deltaTime;
@@ -52,8 +70,14 @@ namespace ProjectAres {
             }
 
             m_value = m_shootingTime / m_shootForSec;
+
+            if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                m_modelAnim.animation.Play("SMG_Idle");
+            }
+
         }
 
+        #endregion
         #region IWeapon
 
         public Sprite m_icon { get { return m_icon_; } }
@@ -61,7 +85,10 @@ namespace ProjectAres {
         public float m_value { get; private set; }
 
         public void Init(Player player) {
+            m_muzzleflash.SetActive(false);
             m_player = player;
+            m_startPitch = m_audio.pitch;
+            m_startVolume = m_audio.volume;
         }
 
         public void SetActive(bool activate) {
@@ -74,19 +101,33 @@ namespace ProjectAres {
                     m_shootingTime = 0;
                 }
             }
+            m_muzzleflash.SetActive(false);
             gameObject.SetActive(activate);
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("SMG_Weapon_Change",1);
+            }
         }
 
         public void StartShooting() {
             if (m_forceCoolDown)
                 return;
-
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("SMG_Shoot");
+            }
             m_isShooting = true;
 
             Invoke("ShootBullet", 60 / m_rPM);
+            m_muzzleflash.SetActive(true);
+           
         }
 
         public void StopShooting() {
+
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Stop("SMG_Shoot");
+            }
+
+            m_muzzleflash.SetActive(false);
             m_isShooting = false;
             CancelInvoke();
         }
@@ -95,7 +136,7 @@ namespace ProjectAres {
 
         void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_bullet, m_barrel == null ? transform.position : m_barrel.position, m_barrel == null ? transform.rotation : m_barrel.rotation)
-                .GetComponent<IHarmingObject>()?.Init(m_player);
+                .GetComponent<IHarmingObject>()?.Init(m_player, m_icon);
             
             if (bulletRB) {
                 //bulletRB.velocity = m_player.m_rb.velocity;
@@ -103,8 +144,12 @@ namespace ProjectAres {
             }
             m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);
 
-            if(m_sounds.Length > 0)
-                m_audio.PlayOneShot(m_sounds[Random.Range(0,m_sounds.Length-1)]);
+            if (m_sounds.Length > 0) {
+                m_audio.pitch = Random.Range(m_startPitch-m_halfPitchRange, m_startPitch+m_halfPitchRange);
+                m_audio.volume = Random.Range(m_startVolume - m_halfVolumeRange, m_startVolume + m_halfVolumeRange);
+                m_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length - 1)]);
+            }
+                
 
             Invoke("ShootBullet", 60 / m_rPM);
         }

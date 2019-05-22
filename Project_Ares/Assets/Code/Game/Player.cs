@@ -4,15 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace ProjectAres {
+namespace PPBC {
 
     public struct d_playerData {
+        public int m_points;
+
         public string m_name;
         public int m_kills;
         public int m_deaths;
         public int m_assists;
         public float m_damageDealt;
         public float m_damageTaken;
+
+        //----- ----- Tracking ----- -----
+
+        public float m_spawnTimeSinceLevelLoad;
+        public float m_firstShot;
+        public float m_firstWeaponChange;
+        public float m_firstCaracterChange;
+        public float m_firstNameChange;
+        public float m_sMGTime;
+        public float m_rocketTime;
+        public float m_timeInLobby;
+        public int m_weaponSwitchCount;
+        public int m_deathBySuicide;
+
 
         public override string ToString() {
             return m_name + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
@@ -26,6 +42,7 @@ namespace ProjectAres {
     public class Player : MonoBehaviour, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>();
+        public static List<Player> s_sortedRef = new List<Player>();
 
         #region Variables
 
@@ -41,6 +58,8 @@ namespace ProjectAres {
         [SerializeField] PlayerGUIHandler m_GUIHandler;
         [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
         [SerializeField] string m_characterName;
+        [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
+        [SerializeField] ModellRefHolder m_modellRefHolder;
 
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
@@ -56,6 +75,8 @@ namespace ProjectAres {
         [SerializeField] float m_gravity = 1;
         [Range(0,1)]
         [SerializeField] float m_airResistance = 0.25f;
+        [SerializeField] float m_bounciness = 0.5f;
+        
 
         public d_playerData m_stats;
 
@@ -69,14 +90,21 @@ namespace ProjectAres {
         float m_respawntTime = float.MaxValue;
         private float m_time;
         float m_currentHealth;
-        int m_currentChar = 0;
+        public int m_currentChar { get; private set; } = 0;
         int m_currentWeapon = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
+        Vector2 vel;
 
         int m_currentName;
+        bool m_isColliding;
 
         public Rigidbody2D m_rb { get; private set; }
+
+        //----- ----- Tracking variables ----- -----
+
+        public float m_joinTime { get; private set; }
+        float m_weaponChangeTime;
 
         #endregion
         #region MonoBehaviour
@@ -84,20 +112,35 @@ namespace ProjectAres {
         void Awake() {
             DontDestroyOnLoad(this.gameObject.transform.parent);//dirty
             s_references.Add(this);
-        }
+            s_sortedRef.Add(this);
+
+            //----- ----- Tracking ----- -----
+
+            m_stats.m_spawnTimeSinceLevelLoad = float.MaxValue;
+            m_stats.m_firstShot = 0;
+            m_stats.m_firstWeaponChange = 0;
+            m_stats.m_firstCaracterChange = 0;
+            m_stats.m_firstNameChange = 0;
+            m_stats.m_sMGTime = 0;
+            m_stats.m_rocketTime = 0;
+            m_stats.m_timeInLobby = 0;
+            m_stats.m_weaponSwitchCount = 0;
+            m_stats.m_deathBySuicide = 0;
+    }
 
         void Start() {
-           
-
+        
             m_rb = GetComponent<Rigidbody2D>();
+
             
         }
         private void OnDestroy() {
             s_references.Remove(this);
+            s_sortedRef.Remove(this);
         }
         
         void Update() {
-
+            
             if (m_control != null && m_currentHealth > 0) {
                 
                 m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
@@ -114,38 +157,61 @@ namespace ProjectAres {
             }
 
             if (m_control.m_dir.x < 0) {
-            m_weaponRef.localScale = new Vector3(1, -1, 1);
+                m_weaponRef.localScale = new Vector3(1, -1, 1);
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
-            
-            if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
-                m_modelAnim.animation.Play("Idle");
+            if (m_modellRefHolder != null) {
+                m_weaponRef = m_modellRefHolder.m_weaponPos;
             }
 
             //----- ----- Feedback ----- -----
+            if (m_isColliding) {
+                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                    m_modelAnim.animation.Play("02_Idle_Luft");//In stringCollection übertragen
+                }
+            } else {
+                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                    m_modelAnim.animation.Play("01_Idle");
+                }
+            }
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
 
             m_GUIHandler.SetHealth(m_healthBar.fillAmount);
 
+            if (!m_isInvincible) {
+                m_killsRef.text = m_stats.m_kills.ToString();
+            } else {
+                m_killsRef.text = "";
+            }
+                
+
             m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
 
-        //void FixedUpdate() {
-        //    m_rb.velocity -= m_rb.velocity * m_airResistance * Time.fixedDeltaTime;
-        //    m_rb.velocity += Vector2.down * m_gravity * Time.fixedDeltaTime;
-        //}
+        void FixedUpdate() {
+            vel = m_rb.velocity;
+        }
 
         #endregion
         #region IDamageableObject
 
         public bool m_alive { get; set; }
 
-        public void TakeDamage(float damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
+           
             if (!m_alive) {
                 return;
+            }
+            if (source == this) {
+                return;
+            }
+            //---- ----- Feedback ----- ----
+            if (m_modelAnim != null) {
+                print("hit");
+                m_modelAnim.animation.Play("04_Treffer", 1);
             }
             if (m_isInvincible) {
                 return;
@@ -153,9 +219,7 @@ namespace ProjectAres {
             if (Time.timeSinceLevelLoad - m_respawntTime < m_iFrames) {
                 return;
             }
-            if(source == this) {
-                return;
-            }
+          
             if (damage >= m_currentHealth) {
                 m_stats.m_damageTaken += m_currentHealth;
                 m_stats.m_deaths++;
@@ -179,12 +243,12 @@ namespace ProjectAres {
                 gameObject.SetActive(false);
 
                 InControle(false);
-                GameManager.s_singelton.PlayerDied(this);
+                GameManager.s_singelton?.PlayerDied(this);
 
                 //----- ----- Kill Feed ----- -----
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
-                                        null,
+                                        icon,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
                                         DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
             } else {
@@ -205,9 +269,7 @@ namespace ProjectAres {
                 m_time = Time.timeSinceLevelLoad;
                 
                 //----- ----- Feedback ----- -----
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("Got_Hit",1);
-                }
+                
             }
         }
 
@@ -237,6 +299,26 @@ namespace ProjectAres {
 
             InControle(false);
             GameManager.s_singelton.PlayerDied(this);
+
+            if(source)
+                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                                        DataHolder.s_characterDatas[source.m_currentChar].m_icon,
+                                        null,
+                                        DataHolder.s_characterDatas[m_currentChar].m_icon,
+                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+            else
+                KillFeedHandler.AddKill("suicide",
+                                        null,
+                                        null,
+                                        DataHolder.s_characterDatas[m_currentChar].m_icon,
+                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+
+            //----- ----- Tracking ----- -----
+            m_stats.m_deathBySuicide++;
+            //---- ----- Feedback ----- ----
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("05_Sterben",1);//In stringCollection übertragen
+            }
         }
 
         public float GetHealth() {
@@ -266,8 +348,8 @@ namespace ProjectAres {
                 m_control = control.GetComponent<IControl>();
             }
 
-            m_currentName = Random.Range(0, DataHolder.s_playerNames.Count - 1);
-            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
+            m_currentName = Random.Range(-1, DataHolder.s_playerNames.Count - 2);
+            ChangeName(true);
             RepositionGUI();
 
             InControle(true);
@@ -277,6 +359,16 @@ namespace ProjectAres {
 
             Respawn(transform.position);//hier die richtige position eingeben
             //WeaponIcons in WheaponWheel einfügen;
+
+            //----- ----- Tracking ----- -----
+            m_joinTime = Time.time;
+            m_weaponChangeTime = Time.time;
+
+            m_stats.m_spawnTimeSinceLevelLoad = Time.timeSinceLevelLoad;
+
+            //---- ----- Feedback ----- ----
+
+            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
@@ -315,6 +407,7 @@ namespace ProjectAres {
             }
         }
 
+
         public void SetChangeCharAble(bool able) {
             if (able) {
                 m_control.ChangeCharacter = ChangeCharacter;
@@ -345,6 +438,10 @@ namespace ProjectAres {
             InControle(true);
             gameObject.SetActive(true);
             m_respawntTime = Time.timeSinceLevelLoad;
+            //---- ----- Feedback ----- ----
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("06_Respawn",1);//In stringCollection übertragen
+            }
         }
 
         public void Invincible(bool inv) {
@@ -370,7 +467,12 @@ namespace ProjectAres {
                 m_currentName--;
             }
 
-            m_GUIHandler.SetName(DataHolder.GetPlayerName(m_currentName));
+            m_stats.m_name = DataHolder.GetPlayerName(m_currentName);
+            m_GUIHandler.SetName(m_stats.m_name);
+
+            //----- ----- Tracking ----- -----
+            if (m_stats.m_firstNameChange == 0)
+                m_stats.m_firstNameChange = Time.time - m_joinTime;
         }
 
         void ChangeCharacter(int newCaracter, bool relative = true) {
@@ -404,13 +506,22 @@ namespace ProjectAres {
                     m_weapons[i].SetActive(false);
                 }
             }
-            
-            m_modelAnim = model.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            /*if (m_modellRefHolder != null) {
+                print("model found" + m_modellRefHolder.m_modelAnim);
+                m_modelAnim = m_modellRefHolder.m_modelAnim;
+            }*/
+            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("Idle");//In stringCollection übertragen
             }
             m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
             m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
+
+            //----- ----- Tracking ----- -----
+
+            if (m_stats.m_firstCaracterChange == 0)
+                m_stats.m_firstCaracterChange = Time.time - m_joinTime;
         }
 
         void ChangeWeapon(int newWeapon, bool relative = false) {
@@ -432,17 +543,44 @@ namespace ProjectAres {
                 if (m_isShooting)
                     m_weapons[m_currentWeapon].StartShooting();
             }
+
+            //----- ----- Tracking ----- -----
+            if (m_stats.m_firstWeaponChange == 0)
+                m_stats.m_firstWeaponChange = Time.time - m_joinTime;
+
+            m_stats.m_weaponSwitchCount++;
+            if (m_currentWeapon - newWeapon == 0)
+                m_stats.m_sMGTime += Time.time - m_weaponChangeTime;
+            else
+                m_stats.m_rocketTime += Time.time - m_weaponChangeTime;
+
+            m_weaponChangeTime = Time.time;
         }
 
         void StartShooting() {
             if(!m_isShooting)
                 m_weapons[m_currentWeapon].StartShooting();
             m_isShooting = true;
+
+            //----- ----- Tracking ----- -----
+            if (m_stats.m_firstShot == 0)
+                m_stats.m_firstShot = Time.time - m_joinTime;
+            //---- ----- Feedback ----- ----
+            if (m_currentWeapon == 1){
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("09_Zielen");//In stringCollection übertragen
+                }
+            }
         }
 
         void StopShooting() {
             m_isShooting = false;
             m_weapons[m_currentWeapon].StopShooting();
+            if (m_currentWeapon == 1) {
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("11_RaketeSchießen",1);//In stringCollection übertragen
+                }
+            }
         }
 
         void UseItem(int item) {
@@ -471,7 +609,26 @@ namespace ProjectAres {
                 s_references[i].m_GUIHandler.Reposition(((float)i + 1) / (s_references.Count + 1));
             }
         }
+        
 
+        public void SetStatsAble(bool doable) {
+            if (doable) {
+                m_control.ShowStats = ShowStatsToGUI;
+            } else {
+                m_control.ShowStats = null;
+                m_GUIHandler.HideStats();
+            }
+
+        }
+
+        public void ShowStatsToGUI(bool doIt) {
+            if (doIt) {
+                m_GUIHandler.WriteStats(m_stats);
+            } else {
+                m_GUIHandler.HideStats();
+            }
+        }
+       
         #region Physics
 
         private void OnTriggerEnter2D(Collider2D collision) {
@@ -483,12 +640,17 @@ namespace ProjectAres {
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if(collision.gameObject.tag == "Player") {
-                Vector2 tmp = collision.contacts[0].normal;
-                if (Vector2.Dot(m_rb.velocity, tmp) < 0) {
-                    m_rb.velocity = Vector2.Reflect(m_rb.velocity, tmp);
+           
+            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Level") {
+                Vector2 tmp = collision.contacts[0].normal;               
+                if (Vector2.Dot(vel.normalized, tmp) < 0) {
+                    m_rb.velocity = m_bounciness * ( Vector2.Reflect(vel, tmp));
                 }
-
+                m_isColliding = true;
+                //---- ----- Feedback ----- ----
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("03_Aufprall", 1);//In stringCollection übertragen
+                }
             }
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
@@ -497,9 +659,11 @@ namespace ProjectAres {
                 }
                 m_collisionNormals[collision.collider] = tmpNormal.normalized;
             }
+            
         }
 
         private void OnCollisionExit2D(Collision2D collision) {
+            m_isColliding = false;
             if (m_dashColliders.value == (m_dashColliders | 1 << collision.gameObject.layer)) {
                 m_collisionNormals.Remove(collision.collider);
             }

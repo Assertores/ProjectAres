@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-namespace ProjectAres {
+namespace PPBC {
     public class ControllerControl : MonoBehaviour, IControl {
 
         #region Variables
@@ -47,9 +47,16 @@ namespace ProjectAres {
                 m_dir = m_tmpDir;
             }
 
-            if (m_state.Triggers.Right > m_shootThreshold && m_lastState.Triggers.Right <= m_shootThreshold) {
+            if (m_state.Triggers.Right > m_shootThreshold && m_lastState.Triggers.Right <= m_shootThreshold ) {
                 StartShooting?.Invoke();
-            }else if(m_state.Triggers.Right <= m_shootThreshold && m_lastState.Triggers.Right > m_shootThreshold) {
+            }
+            else if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
+                StartShooting?.Invoke();
+            }
+            else if(m_state.Triggers.Right <= m_shootThreshold && m_lastState.Triggers.Right > m_shootThreshold) {
+                StopShooting?.Invoke();
+            }
+            else if (m_state.Triggers.Left <= m_shootThreshold && m_lastState.Triggers.Left > m_shootThreshold) {
                 StopShooting?.Invoke();
             }
 
@@ -67,9 +74,15 @@ namespace ProjectAres {
                 ChangeName?.Invoke(false);
             }
 
-            if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
-                Dash?.Invoke();
+            if (m_state.Buttons.A == ButtonState.Pressed) {
+                ShowStats?.Invoke(true);
             }
+            else if(m_state.Buttons.A == ButtonState.Released) {
+                ShowStats?.Invoke(false);
+            }
+           /* if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
+                Dash?.Invoke();
+            }*/
 
             if(m_lastState.Buttons.Start == ButtonState.Pressed && m_state.Buttons.Start == ButtonState.Released) {
                 /*if(Time.timeScale > 0) {
@@ -95,7 +108,7 @@ namespace ProjectAres {
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
-
+        public Action<bool> ShowStats { get; set; }
         public void DoDisconect() {
             DataHolder.s_players[m_controlerIndex] = false;
             Disconnect?.Invoke();

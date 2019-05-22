@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
     public class KeyboardControl : MonoBehaviour, IControl {
 
         #region Variables
@@ -54,6 +54,12 @@ namespace ProjectAres {
             if (Input.GetKeyDown(KeyCode.M)) {
                 ChangeName?.Invoke(false);
             }
+            if (Input.GetKeyDown(KeyCode.X)) {
+                ShowStats?.Invoke(true);
+            }
+            if (Input.GetKeyUp(KeyCode.X)) {
+                ShowStats?.Invoke(false);
+            }
 
             //if (_myCamera) {
             //    _myCamera.transform.position = new Vector3(transform.position.x, transform.position.y, _myCamera.transform.position.z);
@@ -83,6 +89,7 @@ namespace ProjectAres {
         public Action<int, bool> ChangeWeapon { get; set; }
         public Action<int> UseItem { get; set; }
         public Action Disconnect { get; set; }
+        public Action<bool> ShowStats { get; set; }
 
         public void DoDisconect() {
             DataHolder.s_players[4] = false;

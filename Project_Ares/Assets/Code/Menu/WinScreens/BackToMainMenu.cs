@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-namespace ProjectAres {
+namespace PPBC {
     [RequireComponent(typeof(Collider2D))]
-    public class BackToMainMenu : MonoBehaviour {
+    public class BackToMainMenu : MonoBehaviour, IScriptQueueItem {
 
         #region Variables
 
@@ -16,33 +16,49 @@ namespace ProjectAres {
 
         [Header("Balancing")]
         [SerializeField] int m_restartTime;
-        [SerializeField] int m_pillarRiseTime;
 
+        float m_startTime;
         int m_playerCount = 0;
+        bool m_active = false;
+
         #endregion
         #region MonoBehaviour
 
-        void Start() {
-            
+        private void Start() {
+            //if(DataHolder.s_gameMode == e_gameMode.FFA_CASUAL ||(DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && DataHolder.s_firstMatch)) {
+                EndScreenManager.s_ref?.AddItem(this, 10);
+            //}
         }
-        
-        void Update() {
-            if(m_playerCount >= Player.s_references.Count) {
-                SceneManager.LoadScene(StringCollection.MAINMENU);
-            }
-            if (m_pillarRiseTime < Time.timeSinceLevelLoad) {
-                m_restartTimeText.text = m_restartTime.ToString();
-                m_winscreenRestartText.text = "Time till Restart";
-                m_restartTimeText.text = Mathf.RoundToInt(((m_restartTime + m_pillarRiseTime) - Time.timeSinceLevelLoad)).ToString();
 
-                if (Time.timeSinceLevelLoad >= (m_restartTime + m_pillarRiseTime)) {
-                    SceneManager.LoadScene(StringCollection.MAINMENU);
-                }
-               
+        void Update() {
+            if (!m_active)
+                return;
+
+            if(m_playerCount >= Player.s_references.Count) {
+                ChangeSzene();
+            }
+
+            m_restartTimeText.text = m_restartTime.ToString();
+            m_winscreenRestartText.text = "Time till Restart";
+            m_restartTimeText.text = Mathf.RoundToInt((m_restartTime - (Time.timeSinceLevelLoad - m_startTime))).ToString();
+
+            if (Time.timeSinceLevelLoad - m_startTime >= m_restartTime) {
+                ChangeSzene();
             }
         }
 
         #endregion
+
+        void ChangeSzene() {
+            if (DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && !DataHolder.s_firstMatch) {
+                print("restar level: " + DataHolder.s_level);
+                SceneManager.LoadScene(DataHolder.s_level);
+                return;
+            }
+
+            SceneManager.LoadScene(StringCollection.MAINMENU);
+        }
+
         #region Physics
 
         private void OnTriggerEnter2D(Collider2D collision) {
@@ -53,6 +69,19 @@ namespace ProjectAres {
         private void OnTriggerExit2D(Collider2D collision) {
             if (collision.gameObject.tag == StringCollection.PLAYER)
                 m_playerCount--;
+        }
+
+        #endregion
+        #region IScriptQueueItem
+
+        public bool FirstTick() {
+            m_startTime = Time.timeSinceLevelLoad;
+            m_active = true;
+            return true;
+        }
+
+        public bool DoTick() {
+            return true;
         }
 
         #endregion

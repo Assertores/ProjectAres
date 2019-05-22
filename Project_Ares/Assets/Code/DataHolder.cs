@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
+
+    public enum e_gameMode {
+        FFA_CASUAL,
+        FAIR_TOURNAMENT
+    }
+
     public class DataHolder : MonoBehaviour {
 
         
@@ -15,6 +21,17 @@ namespace ProjectAres {
         static System.Random s_ranNameGen = new System.Random(0);//fixed seed to get the same result every time;
 
         public static List<CharacterData> s_characterDatas = new List<CharacterData>();
+
+        public static e_gameMode s_gameMode = e_gameMode.FFA_CASUAL;
+        public static string s_level;
+
+        //===== ===== Fair_Tournament ===== =====
+
+        public static bool s_winnerPC = true;
+        /// <summary>
+        /// wird am ende des gamemodes schon hoch gezählt
+        /// </summary>
+        public static bool s_firstMatch = true;
 
         #region Variables
 
@@ -36,7 +53,7 @@ namespace ProjectAres {
                     s_characterDatas.Add(m_characters[i]);
                 }
             }
-
+            s_level = StringCollection.COLOSSEUM;
             Destroy(this);
         }
 

@@ -63,6 +63,9 @@ TagManager:
   - name: Weapons
     uniqueID: 2478608191
     locked: 0
+  - name: Forground
+    uniqueID: 695697877
+    locked: 0
   - name: Effects
     uniqueID: 4104346605
     locked: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-namespace ProjectAres
+namespace PPBC
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class ExplodingBarrel : MonoBehaviour, IDamageableObject
@@ -38,13 +38,13 @@ namespace ProjectAres
             throw new System.NotImplementedException();
         }
 
-        public void TakeDamage(float damage, Player source, Vector2 force) {
+        public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
             m_currentHealth -= damage;
             m_healthText.text = (Mathf.RoundToInt(m_currentHealth)).ToString();
             m_rb.AddForce(force);
             if(!m_isExploded && m_currentHealth <= 0) {
                 m_isExploded = true;
-                Instantiate(m_explosion, transform.position, transform.rotation).GetComponentInChildren<IHarmingObject>()?.Init(source);
+                Instantiate(m_explosion, transform.position, transform.rotation).GetComponentInChildren<IHarmingObject>()?.Init(source, icon);
                 Destroy(gameObject);
 
             }

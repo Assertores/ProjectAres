@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
     [RequireComponent(typeof(Camera))]
     public class CameraShake : MonoBehaviour {
 
@@ -43,7 +43,7 @@ namespace ProjectAres {
                     return;
                 }
 
-                Vector3 dir = new Vector3(Random.Range(-1.0f,1.0f), Random.Range(-1.0f, 1.0f), 0).normalized;
+                Vector3 dir = Random.insideUnitCircle.normalized;
                 transform.position = m_starPos + dir * m_currentMagnitude;
             }
         }

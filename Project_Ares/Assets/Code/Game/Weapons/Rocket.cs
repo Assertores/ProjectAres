@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectAres {
+namespace PPBC {
     public class Rocket : MonoBehaviour, IHarmingObject {
 
         #region Variables
@@ -17,6 +17,7 @@ namespace ProjectAres {
 
         Player m_source;
         Rigidbody2D m_rb;
+        Sprite m_icon;
 
         #endregion
         #region MonoBehaviour
@@ -33,7 +34,7 @@ namespace ProjectAres {
         #endregion
         #region IHarmingObject
 
-        public Rigidbody2D Init(Player reference) {
+        public Rigidbody2D Init(Player reference, Sprite icon) {
             m_rb = GetComponent<Rigidbody2D>();
             if (!m_rb) {
                 Destroy(gameObject);
@@ -41,6 +42,7 @@ namespace ProjectAres {
             }
 
             m_source = reference;
+            m_icon = icon;
             return m_rb;
         }
 
@@ -54,12 +56,12 @@ namespace ProjectAres {
 
             if (m_explosionRef) {
                 GameObject temp = Instantiate(m_explosionRef,transform.position, transform.rotation);
-                temp.GetComponentInChildren<IHarmingObject>()?.Init(m_source);
+                temp.GetComponentInChildren<IHarmingObject>()?.Init(m_source, m_icon);
             }
 
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.TakeDamage(m_damage, m_source, Vector2.zero/*m_rb.velocity * m_rb.mass*/);//rocket wont give recoil to the hit one
+                tmp.TakeDamage(m_damage, m_source, Vector2.zero/*m_rb.velocity * m_rb.mass*/, m_icon);//rocket wont give recoil to the hit one
             }
             Destroy(gameObject);
         }
