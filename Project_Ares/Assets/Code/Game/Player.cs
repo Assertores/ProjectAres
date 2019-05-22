@@ -227,7 +227,7 @@ namespace PPBC {
                 gameObject.SetActive(false);
 
                 InControle(false);
-                GameManager.s_singelton.PlayerDied(this);
+                GameManager.s_singelton?.PlayerDied(this);
 
                 //----- ----- Kill Feed ----- -----
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
