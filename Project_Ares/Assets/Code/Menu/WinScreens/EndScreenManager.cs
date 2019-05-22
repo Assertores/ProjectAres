@@ -5,44 +5,51 @@ using UnityEngine;
 namespace PPBC {
     public class EndScreenManager : MonoBehaviour {
 
+        public static EndScreenManager s_ref = null;
+
         #region Variables
 
-        [Header("References")]
-        [SerializeField] PillarHandler pillarHandler;
+        ScriptQueueManager queue = new ScriptQueueManager();
 
         #endregion
         #region MonoBehaviour
 
-        void Start() {
-            switch (DataHolder.s_gameMode) {
-            case e_gameMode.FFA_CASUAL:
-                break;
-            case e_gameMode.FAIR_TOURNAMENT:
-                break;
-            default:
-                break;
+        private void Awake() {
+            if(s_ref != null && s_ref != this) {
+                Destroy(this);
+                return;
             }
 
-            if (pillarHandler) {
-                pillarHandler.CallBack += NextOfPillarHandler;
+            s_ref = this;
+        }
+
+        private void OnDestroy() {
+            if(s_ref == this) {
+                s_ref = null;
             }
         }
-        
-        void Update() {
 
+        private void Start() {
+            for (int i = 0; i < Player.s_references.Count; i++) {
+                Player.s_references[i].Invincible(true);
+
+                if (!Player.s_references[i].m_alive) {
+                    Player.s_references[i].Respawn(transform.position);
+                }
+                Player.s_references[i].DoReset();
+                    
+                Player.s_references[i].InControle(false);
+            }
+        }
+
+        void Update() {
+            queue.Tick();
         }
 
         #endregion
 
-        void NextOfPillarHandler() {
-            switch (DataHolder.s_gameMode) {
-            case e_gameMode.FFA_CASUAL:
-                break;
-            case e_gameMode.FAIR_TOURNAMENT:
-                break;
-            default:
-                break;
-            }
+        public void AddItem(IScriptQueueItem item, int sortingLayer) {
+            queue.AddItemToQueue(item, sortingLayer);
         }
     }
 }
