@@ -57,6 +57,7 @@ namespace PPBC {
         [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
         [SerializeField] string m_characterName;
         [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
+        [SerializeField] ModellRefHolder m_modellRefHolder;
 
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
@@ -94,6 +95,7 @@ namespace PPBC {
         Vector2 vel;
 
         int m_currentName;
+        bool m_isColliding;
 
         public Rigidbody2D m_rb { get; private set; }
 
@@ -125,8 +127,7 @@ namespace PPBC {
     }
 
         void Start() {
-           
-
+        
             m_rb = GetComponent<Rigidbody2D>();
 
             
@@ -158,12 +159,20 @@ namespace PPBC {
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
-            
-            if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
-                m_modelAnim.animation.Play("Idle");
+            if (m_modellRefHolder != null) {
+                m_weaponRef = m_modellRefHolder.m_weaponPos;
             }
 
             //----- ----- Feedback ----- -----
+            if (m_isColliding) {
+                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                    m_modelAnim.animation.Play("02_Idle_Luft");//In stringCollection übertragen
+                }
+            } else {
+                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                    m_modelAnim.animation.Play("01_Idle");
+                }
+            }
 
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
@@ -190,8 +199,17 @@ namespace PPBC {
         public bool m_alive { get; set; }
 
         public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
+           
             if (!m_alive) {
                 return;
+            }
+            if (source == this) {
+                return;
+            }
+            //---- ----- Feedback ----- ----
+            if (m_modelAnim != null) {
+                print("hit");
+                m_modelAnim.animation.Play("04_Treffer", 1);
             }
             if (m_isInvincible) {
                 return;
@@ -199,9 +217,7 @@ namespace PPBC {
             if (Time.timeSinceLevelLoad - m_respawntTime < m_iFrames) {
                 return;
             }
-            if(source == this) {
-                return;
-            }
+          
             if (damage >= m_currentHealth) {
                 m_stats.m_damageTaken += m_currentHealth;
                 m_stats.m_deaths++;
@@ -251,9 +267,7 @@ namespace PPBC {
                 m_time = Time.timeSinceLevelLoad;
                 
                 //----- ----- Feedback ----- -----
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("Got_Hit",1);
-                }
+                
             }
         }
 
@@ -299,6 +313,10 @@ namespace PPBC {
 
             //----- ----- Tracking ----- -----
             m_stats.m_deathBySuicide++;
+            //---- ----- Feedback ----- ----
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("05_Sterben",1);//In stringCollection übertragen
+            }
         }
 
         public float GetHealth() {
@@ -345,6 +363,10 @@ namespace PPBC {
             m_weaponChangeTime = Time.time;
 
             m_stats.m_spawnTimeSinceLevelLoad = Time.timeSinceLevelLoad;
+
+            //---- ----- Feedback ----- ----
+
+            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
@@ -414,6 +436,10 @@ namespace PPBC {
             InControle(true);
             gameObject.SetActive(true);
             m_respawntTime = Time.timeSinceLevelLoad;
+            //---- ----- Feedback ----- ----
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play("06_Respawn",1);//In stringCollection übertragen
+            }
         }
 
         public void Invincible(bool inv) {
@@ -478,8 +504,12 @@ namespace PPBC {
                     m_weapons[i].SetActive(false);
                 }
             }
-            
-            m_modelAnim = model.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            /*if (m_modellRefHolder != null) {
+                print("model found" + m_modellRefHolder.m_modelAnim);
+                m_modelAnim = m_modellRefHolder.m_modelAnim;
+            }*/
+            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("Idle");//In stringCollection übertragen
             }
@@ -533,11 +563,22 @@ namespace PPBC {
             //----- ----- Tracking ----- -----
             if (m_stats.m_firstShot == 0)
                 m_stats.m_firstShot = Time.time - m_joinTime;
+            //---- ----- Feedback ----- ----
+            if (m_currentWeapon == 1){
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("09_Zielen");//In stringCollection übertragen
+                }
+            }
         }
 
         void StopShooting() {
             m_isShooting = false;
             m_weapons[m_currentWeapon].StopShooting();
+            if (m_currentWeapon == 1) {
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("11_RaketeSchießen",1);//In stringCollection übertragen
+                }
+            }
         }
 
         void UseItem(int item) {
@@ -597,12 +638,17 @@ namespace PPBC {
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Level") {
+           
+            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Level") {
                 Vector2 tmp = collision.contacts[0].normal;               
                 if (Vector2.Dot(vel.normalized, tmp) < 0) {
                     m_rb.velocity = m_bounciness * ( Vector2.Reflect(vel, tmp));
                 }
-
+                m_isColliding = true;
+                //---- ----- Feedback ----- ----
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("03_Aufprall", 1);//In stringCollection übertragen
+                }
             }
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
@@ -611,9 +657,11 @@ namespace PPBC {
                 }
                 m_collisionNormals[collision.collider] = tmpNormal.normalized;
             }
+            
         }
 
         private void OnCollisionExit2D(Collision2D collision) {
+            m_isColliding = false;
             if (m_dashColliders.value == (m_dashColliders | 1 << collision.gameObject.layer)) {
                 m_collisionNormals.Remove(collision.collider);
             }
