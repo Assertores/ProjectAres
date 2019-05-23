@@ -162,8 +162,10 @@ namespace PPBC {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
             if (m_modellRefHolder != null) {
-                m_weaponRef = m_modellRefHolder.m_weaponPos;
+                m_weaponRef.position = m_modellRefHolder.m_weaponPos.position;
             }
+            m_controlRef.position = m_weaponRef.position;
+            m_controlRef.rotation = m_weaponRef.rotation;
 
             //----- ----- Feedback ----- -----
             if (m_isColliding) {
