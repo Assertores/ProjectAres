@@ -75,7 +75,7 @@ namespace PPBC {
 
                 DataHolder.s_firstMatch = !DataHolder.s_firstMatch;
 
-                SceneManager.LoadScene(StringCollection.FFACASUAL);
+                SceneManager.LoadScene(StringCollection.ENDSCREEN);
                 return;
             }
 

@@ -28,7 +28,7 @@ namespace PPBC {
             //print(Time.timeSinceLevelLoad - _startTime);
             if (m_gameTime <=  Time.timeSinceLevelLoad - m_startTime) {
                 //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
-                SceneManager.LoadScene(StringCollection.FFACASUAL);
+                SceneManager.LoadScene(StringCollection.ENDSCREEN);
                 //auf WinScreen wächseln
             }
         }

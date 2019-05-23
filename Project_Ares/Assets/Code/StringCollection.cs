@@ -17,7 +17,7 @@ namespace PPBC {
         public static string EXAMPLESZENE = "SampleScene";
         public static string COLOSSEUM = "Colosseum";
         public static string MAINMENU = "Menu";
-        public static string FFACASUAL = "WinScreen_FFA_Casual";
+        public static string ENDSCREEN = "EndScreen";
         public static string GAMELOGO = "GameLogo";
 
         #endregion
