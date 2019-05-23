@@ -424,7 +424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &649355708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 1020014095}
   - component: {fileID: 1020014097}
   - component: {fileID: 1020014094}
+  - component: {fileID: 1020014096}
   m_Layer: 0
   m_Name: EndScreenManager
   m_TagString: Untagged
@@ -840,7 +841,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0fa8b43636e4948a3e92dcb6f1f685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pillarHandler: {fileID: 1020014094}
+--- !u!114 &1020014096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020014092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7191b8fe5c1631e4ebcb826d1025e98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animationPlayTime: 1.67
 --- !u!114 &1020014097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1665,7 +1678,6 @@ MonoBehaviour:
   m_winscreenRestartText: {fileID: 249702253}
   m_restartTimeText: {fileID: 1682437339}
   m_restartTime: 10
-  m_pillarRiseTime: 4
 --- !u!61 &2144099886
 BoxCollider2D:
   m_ObjectHideFlags: 0
