@@ -20,25 +20,32 @@ namespace PPBC {
         #region IScriptQueueItem
 
         public bool FirstTick() {
-            float tmp;
+            float tmp = float.MinValue;
             for (int i = 0; i < Player.s_sortedRef.Count; i++) {
                 if(i == 0) {
                     tmp = Player.s_sortedRef[i].StartAnim("07_Win", 1);
                 } else {
                     tmp = Player.s_sortedRef[i].StartAnim("08_Lose", 1);
                 }
-
-                if (tmp == float.MinValue) {
-                    m_animationPlayTime += Time.time;
-                } else {
-                    m_animationPlayTime = Time.time + tmp;
-                }
+                print(tmp);
+            }
+            if (tmp == float.MinValue) {
+                m_animationPlayTime += Time.time;
+            } else {
+                m_animationPlayTime = Time.time + tmp;
             }
             return false;
         }
 
         public bool DoTick() {
-            return Time.time > m_animationPlayTime;
+            if(Time.time > m_animationPlayTime) {
+                foreach(var it in Player.s_references) {
+                    it.InControle(true);
+                }
+                return true;
+            } else {
+                return false;
+            }
         }
 
         #endregion
