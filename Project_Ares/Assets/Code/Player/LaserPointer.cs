@@ -17,7 +17,7 @@ namespace PPBC {
             Debug.DrawRay(transform.position, transform.right);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right);
             if (hit.collider == null) {
-                print("hit nothing");
+                m_laser.SetPosition(1, new Vector2(100, 0));
                 return;
             }
             print(hit.collider.name);
