@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-namespace ProjectAres {
+namespace PPBC {
     [Serializable]
     [PostProcess(typeof(OutlinePPSRenderer), PostProcessEvent.AfterStack, "Custom/OutlinePPS")]
     public sealed class OutlinePPS : PostProcessEffectSettings {

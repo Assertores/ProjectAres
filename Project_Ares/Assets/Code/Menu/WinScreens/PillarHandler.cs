@@ -50,6 +50,8 @@ namespace PPBC {
                 //----- ----- FeedBack ----- -----
                 m_pillar[i].m_screen.text = "0";
                 m_pillar[i].m_playerName.text = Player.s_references[i].m_stats.m_name;
+                m_pillar[i].m_pillarGradient.gameObject.SetActive(false);
+                m_pillar[i].m_pillarField.text = "";
             }
             m_startTime = Time.timeSinceLevelLoad;
 
@@ -64,8 +66,6 @@ namespace PPBC {
 
                     Player.s_references[i].transform.position = m_pillar[i].gameObject.transform.position;
                 } else {
-                    Player.s_references[i].InControle(true);
-
                     int index = Player.s_sortedRef.IndexOf(Player.s_references[i]);
                     m_pillar[i].m_pillarField.text = ("Platz " + (index + 1).ToString());//TODO: Lokalisierung, Bracket anstadt finale
                     Color c = Color.green;

@@ -4,8 +4,9 @@ using UnityEngine;
 using System;
 
 namespace PPBC {
+    [Serializable]
     public class ScriptQueueManager {
-
+        [Serializable]
         class d_SubItem {//https://stackoverflow.com/questions/16679033/cannot-modify-struct-in-a-list?rq=1
             public bool finished;
             public IScriptQueueItem item;
@@ -15,12 +16,22 @@ namespace PPBC {
                 item = reference;
             }
         }
+        [Serializable]
+        class d_Item {
+            public int Item1;
+            public List<d_SubItem> Item2 = new List<d_SubItem>();
 
-        List<Tuple<int,List<d_SubItem>>> m_queue = new List<Tuple<int, List<d_SubItem>>>();
+            public d_Item(int i) {
+                Item1 = i;
+            }
+        }
+
+        [SerializeField] List<d_Item> m_queue = new List<d_Item>();
 
         #region Variables
 
         int m_currentIndex = 0;
+        bool m_firstTick = false;
 
         #endregion
 
@@ -32,10 +43,17 @@ namespace PPBC {
             if(m_queue.Count == 0)
                 return true;
 
+            if (!m_firstTick) {
+                foreach (var it in m_queue[m_currentIndex].Item2) {
+                    it.finished = it.item.FirstTick();
+                }
+                m_firstTick = true;
+            }
+
             List<d_SubItem> activeQueue = null;
             activeQueue = m_queue[m_currentIndex].Item2.FindAll(e => e.finished == false);
 
-            if(activeQueue == null) {
+            if(activeQueue.Count == 0) {
                 m_currentIndex++;
                 if (m_currentIndex >= m_queue.Count) {
                     m_queue.Clear();
@@ -66,7 +84,7 @@ namespace PPBC {
             d_SubItem newSubItem = new d_SubItem(item);
 
             if(m_queue.Count <= 0 || sortingLayer > m_queue[m_queue.Count - 1].Item1) {
-                Tuple<int, List<d_SubItem>> newItem = new Tuple<int, List<d_SubItem>>(sortingLayer, new List<d_SubItem>());
+                d_Item newItem = new d_Item(sortingLayer);
                 newItem.Item2.Add(newSubItem);
                 m_queue.Add(newItem);
                 return;
@@ -74,7 +92,7 @@ namespace PPBC {
 
             for (int i = 0; i < m_queue.Count; i++) {
                 if(m_queue[i].Item1 > sortingLayer) {
-                    Tuple<int, List<d_SubItem>> newItem = new Tuple<int, List<d_SubItem>>(sortingLayer, new List<d_SubItem>());
+                    d_Item newItem = new d_Item(sortingLayer);
                     newItem.Item2.Add(newSubItem);
                     m_queue.Insert(i, newItem);
                     return;
@@ -84,6 +102,8 @@ namespace PPBC {
                     return;
                 }
             }
+
+            Debug.Log("something whent wrong");
         }
     }
 }

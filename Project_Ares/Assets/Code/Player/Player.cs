@@ -162,8 +162,10 @@ namespace PPBC {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
             if (m_modellRefHolder != null) {
-                m_weaponRef = m_modellRefHolder.m_weaponPos;
+                m_weaponRef.position = m_modellRefHolder.m_weaponPos.position;
             }
+            m_controlRef.position = m_weaponRef.position;
+            m_controlRef.rotation = m_weaponRef.rotation;
 
             //----- ----- Feedback ----- -----
             if (m_isColliding) {
@@ -628,6 +630,14 @@ namespace PPBC {
                 m_GUIHandler.HideStats();
             }
         }
+        public float StartAnim(string animName,int playTimes) {
+            if (m_modelAnim != null) {
+                m_modelAnim.animation.Play(animName, playTimes);
+                return m_modelAnim.animation.animationConfig.duration;
+            }
+            return float.MinValue;
+        }
+        
        
         #region Physics
 

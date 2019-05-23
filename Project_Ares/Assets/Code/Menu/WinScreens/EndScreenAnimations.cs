@@ -5,33 +5,47 @@ using UnityEngine;
 namespace PPBC {
     public class EndScreenAnimations : MonoBehaviour, IScriptQueueItem {
 
+        #region Variables
+
+        [SerializeField] float m_animationPlayTime = 1.67f;
+
+        #endregion
         #region MonoBehaviour
-        // Start is called before the first frame update
+
         void Start() {
             EndScreenManager.s_ref?.AddItem(this, 1);
-        }
-
-        // Update is called once per frame
-        void Update() {
-
         }
 
         #endregion
         #region IScriptQueueItem
 
         public bool FirstTick() {
+            float tmp = float.MinValue;
             for (int i = 0; i < Player.s_sortedRef.Count; i++) {
                 if(i == 0) {
-                    Player.s_sortedRef[i].m_modelAnim?.animation.Play("07_Win");
+                    tmp = Player.s_sortedRef[i].StartAnim("07_Win", 1);
                 } else {
-                    Player.s_sortedRef[i].m_modelAnim?.animation.Play("08_Lose");
+                    tmp = Player.s_sortedRef[i].StartAnim("08_Lose", 1);
                 }
+                print(tmp);
+            }
+            if (tmp == float.MinValue) {
+                m_animationPlayTime += Time.time;
+            } else {
+                m_animationPlayTime = Time.time + tmp;
             }
             return false;
         }
 
         public bool DoTick() {
-            throw new System.NotImplementedException();
+            if(Time.time > m_animationPlayTime) {
+                foreach(var it in Player.s_references) {
+                    it.InControle(true);
+                }
+                return true;
+            } else {
+                return false;
+            }
         }
 
         #endregion
