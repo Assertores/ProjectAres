@@ -481,6 +481,10 @@ namespace PPBC {
             if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
                 return;
             }
+            if (m_weapons != null && m_isShooting) {
+                m_weapons[m_currentWeapon].StopShooting();
+                m_isShooting = false;
+            }
 
             m_weapons.Clear();
 
