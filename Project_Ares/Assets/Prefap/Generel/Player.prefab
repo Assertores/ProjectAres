@@ -1348,7 +1348,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e18fe5ca43043dd4092ebfdf3ad4ab6e, type: 2}
+  - {fileID: 2100000, guid: cbbdaf97e76c68047a73676578b67757, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1373,13 +1373,13 @@ LineRenderer:
   - {x: 1, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.086091995
+        time: 0.012321472
+        value: 0.31823158
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1392,7 +1392,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.6603774, g: 0.052954797, b: 0.052954797, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 0.22745098}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1438,6 +1438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff0e642aca936447901ad52457bfd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_layerMask:
+    serializedVersion: 2
+    m_Bits: 1335
 --- !u!1 &3503666447122154705
 GameObject:
   m_ObjectHideFlags: 0
@@ -3860,7 +3863,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8904584645726280161}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

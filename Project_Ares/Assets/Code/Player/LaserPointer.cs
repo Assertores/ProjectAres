@@ -6,6 +6,8 @@ namespace PPBC {
     [RequireComponent(typeof(LineRenderer))]
     public class LaserPointer : MonoBehaviour {
 
+        [SerializeField] LayerMask m_layerMask;
+
         LineRenderer m_laser;
 
         void Start() {
@@ -15,7 +17,7 @@ namespace PPBC {
 
         private void Update() {
             Debug.DrawRay(transform.position, transform.right);
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right,1000f,m_layerMask);
             if (hit.collider == null) {
                 m_laser.SetPosition(1, new Vector2(100, 0));
                 return;
