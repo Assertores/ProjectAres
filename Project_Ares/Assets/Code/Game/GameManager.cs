@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace PPBC {
+
+    [System.Serializable]
+    struct d_gmObjectItem {
+        public e_gameMode m_type;
+        public GameObject m_value;
+    }
+
     public class GameManager : MonoBehaviour {
 
         #region Variables
@@ -11,10 +18,15 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] BoxCollider2D m_cameraSize;
         [SerializeField] AudioSource m_backgroundAudio;
+        [SerializeField] SpriteRenderer m_background;
+        [SerializeField] Light m_directionalLight;
         [SerializeField] Transform m_levelHolder;
+        [SerializeField] d_gmObjectItem[] m_gmObject;
 
         [HideInInspector]
         public List<Transform> m_borders { get; private set; } = new List<Transform>();
+
+        Dictionary<e_gameMode, IGameMode> m_gameModes = new Dictionary<e_gameMode, IGameMode>();
 
         #endregion
         #region MonoBehaviour
@@ -53,8 +65,19 @@ namespace PPBC {
                 SceneManager.LoadScene(StringCollection.MAINMENU);
             }
 
-            //LoadMap();
+            if (m_gmObject != null) {
+                foreach (var it in m_gmObject) {
+                    IGameMode tmp = it.m_value.GetComponent<IGameMode>();
+                    if (tmp != null) {
+                        m_gameModes[it.m_type] = tmp;
+                        tmp.Stop();
+                    }
+                }
+            }
 
+            LoadMap();
+
+            m_gameModes[DataHolder.s_gameMode].Init();
             foreach (var it in Player.s_references) {
                 it.m_stats.m_assists = 0;
                 it.m_stats.m_damageDealt = 0;
@@ -65,7 +88,6 @@ namespace PPBC {
                 it.DoReset();
                 it.Invincible(false);
             }
-            DataHolder.s_gameModes[DataHolder.s_gameMode].Init();
 
             foreach (var it in Player.s_references) {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
@@ -75,28 +97,45 @@ namespace PPBC {
         #endregion
 
         void LoadMap() {
+            foreach(Transform it in m_levelHolder) {
+                Destroy(it.gameObject);
+            }
+
             MapDATA currentMap = DataHolder.s_maps[DataHolder.s_map];
-            GameObject a = Instantiate(currentMap.p_background[currentMap.m_background],Vector3.zero, Quaternion.Euler(Vector3.zero));
-            a.transform.parent = m_levelHolder;
+            //GameObject a = Instantiate(currentMap.p_background[currentMap.m_background],Vector3.zero, Quaternion.Euler(Vector3.zero));
+            m_background.sprite = currentMap.p_background[currentMap.m_background];
+            m_directionalLight.color = currentMap.m_globalLight;
             foreach(var it in currentMap.m_props) {
                 GameObject tmp = Instantiate(currentMap.p_props[it.index], it.position, Quaternion.Euler(new Vector3(0, 0, it.rotation)));
-                tmp.transform.localScale = it.scale;
+                tmp.transform.localScale = new Vector3(it.scale.x,it.scale.y,1);
                 tmp.transform.parent = m_levelHolder;
             }
-            foreach (var it in currentMap.m_stage) {
-                GameObject tmp = Instantiate(currentMap.p_stage[it.index], it.position, Quaternion.Euler(new Vector3(0, 0, it.rotation)));
-                tmp.transform.localScale = it.scale;
+            for(int i = 0; i < currentMap.m_stage.Length; i++) {
+                GameObject tmp = new GameObject("Stage " + i);
+                tmp.transform.position = currentMap.m_stage[i].position;
+                tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, currentMap.m_stage[i].rotation));
+                tmp.transform.localScale = new Vector3(currentMap.m_stage[i].scale.x, currentMap.m_stage[i].scale.y, 1);
+                SpriteRenderer ren = tmp.AddComponent<SpriteRenderer>();
+                ren.sprite = currentMap.p_stage[currentMap.m_stage[i].index];
+                ren.sortingLayerName = StringCollection.STAGE;
+
                 tmp.transform.parent = m_levelHolder;
             }
-            foreach (var it in currentMap.m_forground) {
-                GameObject tmp = Instantiate(currentMap.p_forground[it.index], it.position, Quaternion.Euler(new Vector3(0, 0, it.rotation)));
-                tmp.transform.localScale = it.scale;
+            for(int i = 0; i < currentMap.m_forground.Length; i++) {
+                GameObject tmp = new GameObject("Forground " + i);
+                tmp.transform.position = currentMap.m_forground[i].position;
+                tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, currentMap.m_forground[i].rotation));
+                tmp.transform.localScale = new Vector3(currentMap.m_forground[i].scale.x, currentMap.m_forground[i].scale.y,1);
+                SpriteRenderer ren = tmp.AddComponent<SpriteRenderer>();
+                ren.sprite = currentMap.p_stage[currentMap.m_forground[i].index];
+                ren.sortingLayerName = StringCollection.FORGROUND;
+
                 tmp.transform.parent = m_levelHolder;
             }
-            if (currentMap.p_light.GetComponent<Light>()) {
+            if (currentMap.p_light.GetComponentInChildren<Light>()) {
                 foreach (var it in currentMap.m_lights) {
                     GameObject tmp = Instantiate(currentMap.p_light, it.position, Quaternion.Euler(Vector3.zero));
-                    tmp.GetComponent<Light>().color = it.color;
+                    tmp.GetComponentInChildren<Light>().color = it.color;
                     tmp.transform.parent = m_levelHolder;
                 }
             }
@@ -108,11 +147,11 @@ namespace PPBC {
             }
             for (int i = 0; i < currentMap.m_border.Length; i++) {
                 GameObject tmp = Instantiate(currentMap.p_props[currentMap.m_border[i].index], currentMap.m_border[i].position, Quaternion.Euler(new Vector3(0, 0, currentMap.m_border[i].rotation)));
-                tmp.transform.localScale = currentMap.m_border[i].scale;
+                tmp.transform.localScale = new Vector3(currentMap.m_border[i].scale.x, currentMap.m_border[i].scale.y,1);
                 tmp.transform.parent = m_levelHolder;
                 m_borders.Add(tmp.transform);
             }
-            a = Instantiate(currentMap.p_laserBariar);
+            GameObject a = Instantiate(currentMap.p_laserBariar);
             a.transform.parent = m_levelHolder;
 
             if (m_backgroundAudio) {
@@ -126,7 +165,7 @@ namespace PPBC {
         }
 
         public void PlayerDied(Player player) {
-            DataHolder.s_gameModes[DataHolder.s_gameMode].PlayerDied(player);
+            m_gameModes[DataHolder.s_gameMode].PlayerDied(player);
         }
     }
 }

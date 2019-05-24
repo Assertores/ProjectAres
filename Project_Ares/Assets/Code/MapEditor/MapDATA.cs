@@ -23,21 +23,22 @@ namespace PPBC {
             public int team;
         }
 
-        public GameObject[] p_background;
+        public Sprite[] p_background;
         public GameObject[] p_props;
-        public GameObject[] p_stage;
-        public GameObject[] p_forground;
+        public Sprite[] p_stage;
+        public Sprite[] p_forground;
         public GameObject p_light;
         public GameObject p_laserBariar;
 
         public Vector2 m_size;
         public int m_background;
+        public Color m_globalLight;
         public d_mapData[] m_props;
         public d_mapData[] m_stage;
         public d_mapData[] m_forground;
         public d_mapLights[] m_lights;
         public d_mapPlayerStart[] m_playerStarts;
-        public d_mapData[] m_border;
+        public d_mapData[] m_border = new d_mapData[4];
         public AudioClip m_backgroundMusic;
     }
 }
