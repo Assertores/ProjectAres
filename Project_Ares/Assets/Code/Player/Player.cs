@@ -80,6 +80,8 @@ namespace PPBC {
 
         public d_playerData m_stats;
 
+        public float m_distanceToGround;
+
         public IControl m_control { get; private set; }
         List<IWeapon> m_weapons = new List<IWeapon>();
         List<IItem> m_items = new List<IItem>();//eventuell obsolet
@@ -126,6 +128,8 @@ namespace PPBC {
             m_stats.m_timeInLobby = 0;
             m_stats.m_weaponSwitchCount = 0;
             m_stats.m_deathBySuicide = 0;
+
+            m_distanceToGround = transform.position.y - m_modelRef.position.y;
     }
 
         void Start() {

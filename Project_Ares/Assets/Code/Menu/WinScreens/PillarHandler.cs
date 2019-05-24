@@ -65,6 +65,7 @@ namespace PPBC {
                     m_pillar[i].gameObject.transform.position += new Vector3(0, m_pillarSpeed * Time.deltaTime, 0);
 
                     Player.s_references[i].transform.position = m_pillar[i].gameObject.transform.position;
+                    Player.s_references[i].transform.position += new Vector3(0, Player.s_references[i].m_distanceToGround, 0);
                 } else {
                     int index = Player.s_sortedRef.IndexOf(Player.s_references[i]);
                     m_pillar[i].m_pillarField.text = ("Platz " + (index + 1).ToString());//TODO: Lokalisierung, Bracket anstadt finale
