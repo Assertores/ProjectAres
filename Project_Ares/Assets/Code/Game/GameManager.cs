@@ -53,7 +53,7 @@ namespace PPBC {
                 SceneManager.LoadScene(StringCollection.MAINMENU);
             }
 
-            LoadMap();
+            //LoadMap();
 
             foreach (var it in Player.s_references) {
                 it.m_stats.m_assists = 0;
