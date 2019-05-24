@@ -73,12 +73,13 @@ namespace PPBC {
                     m_pillar[i].m_pillarGradient.color = c;
                     m_pillar[i].m_pillarGradient.gameObject.SetActive(true);
 
-                    if (index == 0) {
-                        return true;
-                    }
+                    m_pillar[i].finished = true;
                 }
             }
-            return false;
+            foreach (var it in m_pillar)
+                if (!it.finished)
+                    return false;
+            return true;
         }
 
         #endregion
