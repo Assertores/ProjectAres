@@ -3550,7 +3550,7 @@ PrefabInstance:
     - target: {fileID: 4944339648870537505, guid: 99ced5c182d0c1e4b8ea86d484bc7c8d,
         type: 3}
       propertyPath: m_switchTime
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4944339648870537505, guid: 99ced5c182d0c1e4b8ea86d484bc7c8d,
         type: 3}

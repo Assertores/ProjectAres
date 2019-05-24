@@ -60,6 +60,7 @@ namespace PPBC {
                         GameObject temp = Instantiate(m_explosionRef, transform.position, transform.rotation);
                         temp.GetComponentInChildren<IHarmingObject>()?.Init(m_player, m_icon);
                     }
+                    m_player.m_rb.gravityScale = m_gravetyScale;
                     m_isShooting = false;
                     m_overchargeValue = 1;
                     m_startShootingTime = Time.time;
