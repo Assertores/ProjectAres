@@ -12,18 +12,25 @@ namespace PPBC {
         [SerializeField] Transform m_barrel;
         [SerializeField] AudioSource m_audio;
         [SerializeField] Sprite m_icon_;
+        [SerializeField] GameObject m_explosionRef;
 
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
         [Header("Balancing")]
         [SerializeField] float m_muzzleEnergy = 800;
         [SerializeField] float m_shootDelay = 2;
+        [SerializeField] float m_overchargeMaxTime;
+        [SerializeField] float m_overchargeAdd;
+        [SerializeField] float m_overchargeFail;
+
+        float m_overchargeValue = 1;
 
         Player m_player = null;
         Vector2 m_velocity;
         float m_gravetyScale;
         bool m_isShooting = false;
         float m_startShootingTime = float.MinValue;
+        float m_time;
 
         #endregion
         #region MonoBehaviour
@@ -41,6 +48,25 @@ namespace PPBC {
                     m_value = 0;
                 }
             }
+            if (m_isShooting) {
+                if(m_time + m_overchargeMaxTime > Time.timeSinceLevelLoad) {
+                    m_overchargeValue += m_overchargeAdd * Time.deltaTime;
+                    print(m_overchargeValue);
+
+                }
+                else if(m_time + m_overchargeMaxTime < Time.timeSinceLevelLoad) {
+                   m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy * m_overchargeFail);
+                    if (m_explosionRef) {
+                        GameObject temp = Instantiate(m_explosionRef, transform.position, transform.rotation);
+                        temp.GetComponentInChildren<IHarmingObject>()?.Init(m_player, m_icon);
+                    }
+                    m_isShooting = false;
+                    m_overchargeValue = 1;
+                    m_startShootingTime = Time.time;
+                    m_value = 1;
+                }
+            }
+            
             if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
                 m_modelAnim.animation.Play("Rocket_Idle");
             }
@@ -72,8 +98,8 @@ namespace PPBC {
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("Rocket_Charge");
             }
-
-                m_isShooting = true;
+            m_time = Time.timeSinceLevelLoad;
+            m_isShooting = true;
 
             //m_velocity = m_player.m_rb.velocity;
             m_gravetyScale = m_player.m_rb.gravityScale;
@@ -85,10 +111,11 @@ namespace PPBC {
         public void StopShooting() {
             if (!m_isShooting)
                 return;
-
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play("Rocket_Shoot",1);
+                if (m_modelAnim != null) {
+                    m_modelAnim.animation.Play("Rocket_Shoot", 1);
+                
             }
+            m_overchargeValue = 1;
                 //m_player.m_rb.velocity += m_velocity;
                 m_player.m_rb.gravityScale = m_gravetyScale;
             m_startShootingTime = Time.time;
@@ -106,9 +133,9 @@ namespace PPBC {
 
             if (bulletRB) {
                 //bulletRB.velocity = m_player.m_rb.velocity;
-                bulletRB.AddForce(transform.right * m_muzzleEnergy);
+                bulletRB.AddForce(transform.right * m_muzzleEnergy * m_overchargeValue);
             }
-            m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy);
+            m_player.m_rb.AddForce(-transform.right * m_muzzleEnergy * (1 + m_overchargeValue/4));
         }
     }
 }

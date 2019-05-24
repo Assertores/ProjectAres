@@ -161,8 +161,13 @@ MonoBehaviour:
   m_barrel: {fileID: 2783012653673747794}
   m_audio: {fileID: 755934772241460942}
   m_icon_: {fileID: 21300000, guid: b265e7cc578e0fc48a56359d5f35169b, type: 3}
+  m_explosionRef: {fileID: 3039136259464356723, guid: 973c7300ae2d07248ad89f8bd41128ea,
+    type: 3}
   m_muzzleEnergy: 20000
   m_shootDelay: 2
+  m_overchargeMaxTime: 4
+  m_overchargeAdd: 0.4
+  m_overchargeFail: 1.5
 --- !u!82 &755934772241460942
 AudioSource:
   m_ObjectHideFlags: 0
