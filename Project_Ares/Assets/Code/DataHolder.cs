@@ -9,12 +9,18 @@ namespace PPBC {
         FAIR_TOURNAMENT
     }
 
+    [System.Serializable]
+    struct d_gmObjectItem {
+        public e_gameMode m_type;
+        public GameObject m_value;
+    }
+
     public class DataHolder : MonoBehaviour {
 
-        
+        static bool isInit = false;
 
         public static bool[] s_players = new bool[5];
-        public static string s_LevelName;
+
         //public static string s_gameMode;
 
         public static List<string> s_playerNames { get; private set; } = new List<string>();
@@ -22,6 +28,9 @@ namespace PPBC {
 
         public static List<CharacterData> s_characterDatas = new List<CharacterData>();
 
+        public static List<MapDATA> s_maps = new List<MapDATA>();
+        public static int s_map = 0;
+        public static Dictionary<e_gameMode, IGameMode> s_gameModes = new Dictionary<e_gameMode, IGameMode>();
         public static e_gameMode s_gameMode = e_gameMode.FFA_CASUAL;
         public static string s_level;
 
@@ -37,23 +46,47 @@ namespace PPBC {
 
         [SerializeField] string[] m_names;
         [SerializeField] CharacterData[] m_characters;
+        [SerializeField] MapDATA[] m_maps;
+        [SerializeField] d_gmObjectItem[] m_gmObject;
 
         #endregion
         #region MonoBehaviour
 
 
         private void Awake() {
-            if (m_names != null && s_playerNames.Count == 0) {
-                for (int i = 0; i < m_names.Length; i++) {
-                    s_playerNames.Add(m_names[i]);
+            if (isInit) {
+                Destroy(this);
+                return;
+            }
+
+            if (m_names != null) {
+                foreach (var it in m_names) {
+                    s_playerNames.Add(it);
                 }
             }
-            if(m_characters != null && s_characterDatas.Count == 0) {
-                for (int i = 0; i < m_characters.Length; i++) {
-                    s_characterDatas.Add(m_characters[i]);
+            if(m_characters != null) {
+                foreach (var it in m_characters) {
+                    s_characterDatas.Add(it);
                 }
             }
+            if (m_maps != null) {
+                foreach(var it in m_maps) {
+                    s_maps.Add(it);
+                }
+            }
+            if (m_gmObject != null) {
+                foreach (var it in m_gmObject) {
+                    IGameMode tmp = it.m_value.GetComponent<IGameMode>();
+                    if (tmp != null) {
+                        s_gameModes[it.m_type] = tmp;
+                        tmp.Stop();
+                    }
+                }
+            }
+
             s_level = StringCollection.COLOSSEUM;
+
+            isInit = true;
             Destroy(this);
         }
 
