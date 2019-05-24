@@ -16,13 +16,15 @@ namespace PPBC {
                     return;
                 }
             }
-        }
 
-        private void FixedUpdate() {
             float tmpZ = transform.position.z;
             transform.position = m_boundingBox.transform.position;
             transform.position += new Vector3(m_boundingBox.offset.x, m_boundingBox.offset.y, 0);
             transform.position = new Vector3(transform.position.x, transform.position.y, tmpZ);
+            m_boundingBox.offset = Vector2.zero;
+        }
+
+        private void FixedUpdate() {
             Camera cam = GetComponent<Camera>();
             cam.orthographicSize = m_boundingBox.size.y / 2;
             if (cam.orthographicSize * cam.aspect < m_boundingBox.size.x / 2) {
