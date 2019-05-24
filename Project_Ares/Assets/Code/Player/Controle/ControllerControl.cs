@@ -27,6 +27,7 @@ namespace PPBC {
         // Start is called before the first frame update
         void Start() {
             m_state = GamePad.GetState((PlayerIndex)m_controlerIndex);
+            m_lastState = m_state;
         }
 
         // Update is called once per frame
