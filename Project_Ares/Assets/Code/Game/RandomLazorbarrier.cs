@@ -8,23 +8,20 @@ namespace PPBC
     public class RandomLazorbarrier : MonoBehaviour
     {
         #region Variables
-        [Header("References")]
-        [SerializeField] GameObject[] m_positions = new GameObject[4];
-        [SerializeField] GameObject[] m_walls = new GameObject[4];
-        [SerializeField] GameObject m_lazor;
-        private int m_lastindex;       
 
         [Header("Balancing")]
         [SerializeField] int m_switchTime;
 
-        static System.Random s_ranPosGen = new System.Random(0);
+        System.Random s_ranPosGen = new System.Random(0);
         float m_time;
+        private int m_lastindex;
+
         #endregion
         // Start is called before the first frame update
-        void Start() {
-            SetLazorPosition(m_positions[0].transform);
+        void Awake() {
+            transform.position = GameManager.s_singelton.m_borders[0].position;
             m_time = Time.timeSinceLevelLoad;
-            m_walls[0].SetActive(false);
+            GameManager.s_singelton.m_borders[0].gameObject.SetActive(false);
             m_lastindex = 0;
         }
 
@@ -33,19 +30,24 @@ namespace PPBC
             if (m_switchTime <= Time.timeSinceLevelLoad - m_time) {
                 int tmp = s_ranPosGen.Next(0, 4);
                 if (tmp != m_lastindex) {
-                    SetLazorPosition(m_positions[tmp].transform);
-                    m_walls[tmp].SetActive(false);
-                    m_walls[m_lastindex].SetActive(true);
+                    transform.position = GameManager.s_singelton.m_borders[tmp].position;
+                    transform.rotation = Quaternion.Euler(0, 0, tmp * 90);
+                    m_time = Time.timeSinceLevelLoad;
+                    GameManager.s_singelton.m_borders[tmp].gameObject.SetActive(false);
+                    GameManager.s_singelton.m_borders[m_lastindex].gameObject.SetActive(true);
                     m_lastindex = tmp;
                 }
                 
             }
         }
 
-        void SetLazorPosition(Transform position ) {
-            m_lazor.transform.position = position.transform.position;
-            m_lazor.transform.rotation = position.transform.rotation;
-            m_time = Time.timeSinceLevelLoad;
+        private void OnCollisionEnter2D(Collision2D collision) {
+            IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
+            if (tmp != null) {
+                tmp.Die(null);
+            } else {
+                Destroy(collision.gameObject);
+            }
         }
     }
 
