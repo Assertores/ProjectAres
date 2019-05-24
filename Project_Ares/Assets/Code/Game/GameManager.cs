@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PPBC {
     public class GameManager : MonoBehaviour {
@@ -54,15 +55,7 @@ namespace PPBC {
         void Start() {
 
             if(Player.s_references.Count == 0) {
-                GameObject tmp = Instantiate(m_playerRef);
-                if (tmp) {
-                    GameObject tmpControle = new GameObject("Controler");
-                    tmpControle.transform.parent = tmp.transform;
-
-                    IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
-                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty null reference checks
-                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
-                }
+                SceneManager.LoadScene(StringCollection.MAINMENU);
             }
 
             foreach(var it in m_gmObject) {
