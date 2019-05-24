@@ -8,9 +8,6 @@ namespace PPBC {
 
         #region Variables
 
-        [Header("References")]
-        [SerializeField] Transform m_respawnParent;
-
         [Header("Balancing")]
         [SerializeField] float m_gameTime = 120.0f;
         [SerializeField] float m_respawnTime = 2.0f;
@@ -25,11 +22,8 @@ namespace PPBC {
         }
 
         void Update() {
-            //print(Time.timeSinceLevelLoad - _startTime);
             if (m_gameTime <=  Time.timeSinceLevelLoad - m_startTime) {
-                //Player._references.Sort((lhs, rhs) => lhs._stuts.Kills - rhs._stuts.Kills);//TEST ob es in der richtigen reihenfolge ist.//pasiert im winscreen
                 SceneManager.LoadScene(StringCollection.ENDSCREEN);
-                //auf WinScreen wächseln
             }
         }
 
@@ -39,7 +33,7 @@ namespace PPBC {
         public void Init() {
             m_startTime = Time.timeSinceLevelLoad;
             foreach (var it in Player.s_references) {
-                it.Respawn(m_respawnParent.GetChild(Random.Range(0, m_respawnParent.childCount)).position);
+                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count-1)].transform.position);
             }
             gameObject.SetActive(true);
         }
@@ -84,7 +78,7 @@ namespace PPBC {
         IEnumerator RespawnPlayer(Player player) {
             yield return new WaitForSeconds(m_respawnTime);
 
-            player.Respawn(m_respawnParent.GetChild(Random.Range(0,m_respawnParent.childCount)).position);
+            player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
 
         }
     }
