@@ -607,6 +607,7 @@ namespace PPBC {
         public void Disconect() {
             Destroy(this.transform.root.gameObject);
             s_references.Remove(this);
+            s_sortedRef.Remove(this);
             RepositionGUI();
         }
 

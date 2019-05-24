@@ -34,6 +34,11 @@ namespace PPBC {
             if (m_controlerIndex == int.MinValue)
                 return;
 
+            if (!m_lastState.IsConnected) {
+                Disconnect?.Invoke();
+                return;
+            }
+
             m_lastState = m_state;
             m_state = GamePad.GetState((PlayerIndex)m_controlerIndex);
             //_dir = new Vector2 (_state.ThumbSticks.Right.X * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.Y * _state.ThumbSticks.Right.Y) / 2), _state.ThumbSticks.Right.Y * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.X * _state.ThumbSticks.Right.X) / 2));//unnötig http://mathproofs.blogspot.com/2005/07/mapping-square-to-circle.html
@@ -80,7 +85,7 @@ namespace PPBC {
             else if(m_state.Buttons.A == ButtonState.Released) {
                 ShowStats?.Invoke(false);
             }
-           /* if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
+            /* if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
                 Dash?.Invoke();
             }*/
 
