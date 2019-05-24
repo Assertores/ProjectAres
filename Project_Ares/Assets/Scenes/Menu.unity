@@ -2933,3 +2933,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c8fceeb082b1fd49a0bf62ed6d590cb, type: 2}
   - {fileID: 11400000, guid: 8a700600fdc07524182549cab5355f53, type: 2}
   - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}
+  m_maps: []
+  m_gmObject: []
