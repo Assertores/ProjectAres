@@ -9,12 +9,6 @@ namespace PPBC {
         FAIR_TOURNAMENT
     }
 
-    [System.Serializable]
-    struct d_gmObjectItem {
-        public e_gameMode m_type;
-        public GameObject m_value;
-    }
-
     public class DataHolder : MonoBehaviour {
 
         static bool isInit = false;
@@ -30,7 +24,6 @@ namespace PPBC {
 
         public static List<MapDATA> s_maps = new List<MapDATA>();
         public static int s_map = 0;
-        public static Dictionary<e_gameMode, IGameMode> s_gameModes = new Dictionary<e_gameMode, IGameMode>();
         public static e_gameMode s_gameMode = e_gameMode.FFA_CASUAL;
         public static string s_level;
 
@@ -47,7 +40,6 @@ namespace PPBC {
         [SerializeField] string[] m_names;
         [SerializeField] CharacterData[] m_characters;
         [SerializeField] MapDATA[] m_maps;
-        [SerializeField] d_gmObjectItem[] m_gmObject;
 
         #endregion
         #region MonoBehaviour
@@ -72,15 +64,6 @@ namespace PPBC {
             if (m_maps != null) {
                 foreach(var it in m_maps) {
                     s_maps.Add(it);
-                }
-            }
-            if (m_gmObject != null) {
-                foreach (var it in m_gmObject) {
-                    IGameMode tmp = it.m_value.GetComponent<IGameMode>();
-                    if (tmp != null) {
-                        s_gameModes[it.m_type] = tmp;
-                        tmp.Stop();
-                    }
                 }
             }
 
