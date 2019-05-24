@@ -51,7 +51,6 @@ namespace PPBC {
             if (m_isShooting) {
                 if(m_time + m_overchargeMaxTime > Time.timeSinceLevelLoad) {
                     m_overchargeValue += m_overchargeAdd * Time.deltaTime;
-                    print(m_overchargeValue);
 
                 }
                 else if(m_time + m_overchargeMaxTime < Time.timeSinceLevelLoad) {
