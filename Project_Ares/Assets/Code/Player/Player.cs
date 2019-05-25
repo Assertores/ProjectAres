@@ -148,6 +148,7 @@ namespace PPBC {
             if (m_control != null && m_currentHealth > 0) {
                 
                 m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                
 
                 if (m_currentHealth < m_maxHealth) {
                     if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
@@ -646,17 +647,46 @@ namespace PPBC {
             }
             return float.MinValue;
         }
-        
-       
-        #region Physics
 
-        private void OnTriggerEnter2D(Collider2D collision) {
-            IItem tmpItem = collision.GetComponent<IItem>();
-            if (tmpItem != null) {
-                m_items.Add(tmpItem);
-                tmpItem.Collect();
+        EditorHUDAndPlayerLogic m_editHud;
+        public void GoIntoEditMode(bool doEdit) {
+            if (doEdit)
+                m_editHud.gameObject.SetActive(!m_editHud.gameObject.activeSelf);
+
+            if (m_editHud.gameObject.activeSelf) {
+                InControle(false);
+                Invincible(true);
+                m_rb.simulated = false;
+
+                m_control.StartShooting = m_editHud.DragHandler;
+                m_control.ChangeName = m_editHud.ChangeType;
+                m_control.ChangeCharacter = m_editHud.ChangeIndex;
+            } else {
+                m_control.StartShooting = null;
+                m_control.ChangeName = null;
+                m_control.ChangeCharacter = null;
+
+                InControle(true);
+                Invincible(false);
+                m_rb.simulated = true;
             }
         }
+
+        
+
+        public void EditAble(EditorHUDAndPlayerLogic hud) {
+            if(hud != null) {
+                m_control.ShowStats += GoIntoEditMode;
+                m_editHud = hud;
+                m_editHud.SetControlRef(m_control);
+                m_editHud.gameObject.SetActive(false);
+            } else {
+                m_control.ShowStats -= GoIntoEditMode;
+                Destroy(m_editHud);
+            }
+        }
+
+        #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
            
