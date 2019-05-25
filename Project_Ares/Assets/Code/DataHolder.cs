@@ -6,7 +6,8 @@ namespace PPBC {
 
     public enum e_gameMode {
         FFA_CASUAL,
-        FAIR_TOURNAMENT
+        FAIR_TOURNAMENT,
+        COOP_EDIT
     }
 
     public class DataHolder : MonoBehaviour {
@@ -24,7 +25,7 @@ namespace PPBC {
 
         public static List<MapDATA> s_maps = new List<MapDATA>();
         public static int s_map = 0;
-        public static e_gameMode s_gameMode = e_gameMode.FFA_CASUAL;
+        public static e_gameMode s_gameMode = e_gameMode.COOP_EDIT;
         public static string s_level;
 
         //===== ===== Fair_Tournament ===== =====
