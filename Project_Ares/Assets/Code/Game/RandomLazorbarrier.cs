@@ -19,9 +19,9 @@ namespace PPBC
         #endregion
         // Start is called before the first frame update
         void Awake() {
-            transform.position = GameManager.s_singelton.m_borders[0].position;
+            transform.position = GameManager.s_singelton.m_mapHandler.m_borders[0].position;
             m_time = Time.timeSinceLevelLoad;
-            GameManager.s_singelton.m_borders[0].gameObject.SetActive(false);
+            GameManager.s_singelton.m_mapHandler.m_borders[0].gameObject.SetActive(false);
             m_lastindex = 0;
         }
 
@@ -30,11 +30,11 @@ namespace PPBC
             if (m_switchTime <= Time.timeSinceLevelLoad - m_time) {
                 int tmp = s_ranPosGen.Next(0, 4);
                 if (tmp != m_lastindex) {
-                    transform.position = GameManager.s_singelton.m_borders[tmp].position;
+                    transform.position = GameManager.s_singelton.m_mapHandler.m_borders[tmp].position;
                     transform.rotation = Quaternion.Euler(0, 0, tmp * 90);
                     m_time = Time.timeSinceLevelLoad;
-                    GameManager.s_singelton.m_borders[tmp].gameObject.SetActive(false);
-                    GameManager.s_singelton.m_borders[m_lastindex].gameObject.SetActive(true);
+                    GameManager.s_singelton.m_mapHandler.m_borders[tmp].gameObject.SetActive(false);
+                    GameManager.s_singelton.m_mapHandler.m_borders[m_lastindex].gameObject.SetActive(true);
                     m_lastindex = tmp;
                 }
                 
