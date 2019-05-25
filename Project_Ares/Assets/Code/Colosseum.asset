@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf71bb7c48b26640958a5ebacf35bcf, type: 3}
   m_Name: Colosseum
   m_EditorClassIdentifier: 
+  p_size:
+  - {x: 23, y: 12}
   p_background:
   - {fileID: 21300000, guid: e0a73804f30386e4083b2faae00b87a1, type: 3}
+  - {fileID: 21300000, guid: a21f7bbd9fe335e4ead924686d525c49, type: 3}
+  p_colors:
+  - {r: 0.6, g: 0.5647059, b: 0.6313726, a: 1}
+  - {r: 0.023529412, g: 0.5254902, b: 0.94509804, a: 1}
+  p_music:
+  - {fileID: 8300000, guid: c5ed684cfba55454eb779b2bc679c03b, type: 3}
+  - {fileID: 8300000, guid: 83afee7027119de4bab355f0db396e61, type: 3}
   p_props:
   - {fileID: 2562403358438302693, guid: eba933866bb69ae40894c4c93517b72b, type: 3}
   - {fileID: 549862232678028000, guid: 275c21143b71ef443aa41704df1b7803, type: 3}
@@ -22,22 +31,95 @@ MonoBehaviour:
   - {fileID: 3418618197643395415, guid: 65de1a74282fc5642a578d8bc5a4c268, type: 3}
   p_stage: []
   p_forground: []
-  p_light: {fileID: 3586198048280091530, guid: d84157a9b3bf8c846b804bba1f24e73a, type: 3}
   p_laserBariar: {fileID: 5438180597333384809, guid: 99ced5c182d0c1e4b8ea86d484bc7c8d,
     type: 3}
-  m_size: {x: 23, y: 12}
+  m_size: 0
   m_background: 0
-  m_globalLight: {r: 0.6, g: 0.5647059, b: 0.6313726, a: 0}
-  m_props:
-  - index: 3
+  m_globalLight: 0
+  m_music: 0
+  m_data:
+  - type: 1
+    team: 3
+    index: 3
     position: {x: -7.54, y: -1.638}
     rotation: 0
     scale: {x: 1, y: 1}
-  - index: 3
+  - type: 1
+    team: 3
+    index: 3
     position: {x: 7.39, y: -1.638}
     rotation: 0
     scale: {x: 1, y: 1}
-  - index: 4
+  - type: 1
+    team: 4
+    index: 4
+    position: {x: 0, y: -1.87}
+    rotation: 0
+    scale: {x: 0.45, y: 0.45}
+  - type: 4
+    team: 1
+    index: 1
+    position: {x: -9.15, y: -0.42}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 4
+    team: 1
+    index: 1
+    position: {x: 9.15, y: -0.42}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 3
+    team: -1
+    index: -1
+    position: {x: -7.58, y: -1.94}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 3
+    team: -1
+    index: -1
+    position: {x: 7.32, y: -1.94}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 6
+    team: 2
+    index: 2
+    position: {x: 0, y: -6}
+    rotation: 0
+    scale: {x: 100, y: 4.171}
+  - type: 6
+    team: 0
+    index: 0
+    position: {x: 10.54, y: 0}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 6
+    team: 1
+    index: 1
+    position: {x: 0, y: 5.74}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 6
+    team: 0
+    index: 0
+    position: {x: -10.56, y: 0}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  m_props:
+  - type: 0
+    team: 3
+    index: 3
+    position: {x: -7.54, y: -1.638}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 0
+    team: 3
+    index: 3
+    position: {x: 7.39, y: -1.638}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 0
+    team: 4
+    index: 4
     position: {x: 0, y: -1.87}
     rotation: 0
     scale: {x: 0.45, y: 0.45}
@@ -54,20 +136,27 @@ MonoBehaviour:
   - position: {x: 7.32, y: -1.94}
     team: -1
   m_border:
-  - index: 2
+  - type: 0
+    team: 2
+    index: 2
     position: {x: 0, y: -6}
     rotation: 0
     scale: {x: 100, y: 4.171}
-  - index: 0
+  - type: 0
+    team: 0
+    index: 0
     position: {x: 10.54, y: 0}
     rotation: 0
     scale: {x: 1, y: 1}
-  - index: 1
+  - type: 0
+    team: 1
+    index: 1
     position: {x: 0, y: 5.74}
     rotation: 0
     scale: {x: 1, y: 1}
-  - index: 0
+  - type: 0
+    team: 0
+    index: 0
     position: {x: -10.56, y: 0}
     rotation: 0
     scale: {x: -1, y: 1}
-  m_backgroundMusic: {fileID: 8300000, guid: c5ed684cfba55454eb779b2bc679c03b, type: 3}
