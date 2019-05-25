@@ -15,7 +15,7 @@ namespace PPBC {
         #region SCENES
 
         public static string EXAMPLESZENE = "SampleScene";
-        public static string COLOSSEUM = "Map";
+        public static string INGAME = "Map";
         public static string MAINMENU = "Menu";
         public static string ENDSCREEN = "EndScreen";
         public static string GAMELOGO = "GameLogo";
