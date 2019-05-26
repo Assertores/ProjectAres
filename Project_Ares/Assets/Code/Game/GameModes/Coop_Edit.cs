@@ -49,10 +49,7 @@ namespace PPBC {
 
         public void SaveAndExit() {
 
-            //maps abspeichern
-            //map unter anderem namen kopieren DataHolder.s_maps[DataHolder.s_map];
-            //props index listen lehren
-            //props aus aktueller szene rein schreiben
+            GameManager.s_singelton.m_mapHandler.SaveMap("");
             Stop();
             SceneManager.LoadScene(StringCollection.MAINMENU);
         }
