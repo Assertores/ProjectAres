@@ -69,8 +69,6 @@ namespace PPBC {
                 return;
             }
 
-            m_typeRef.text = m_styple.ToString();
-
             Collider2D[] hits = Physics2D.OverlapPointAll(transform.position);
             foreach (var it in hits) {
                 ObjectReferenceHolder orh = it.GetComponent<ObjectReferenceHolder>();
@@ -78,6 +76,8 @@ namespace PPBC {
                     if(orh.m_data.type == m_type) {
                         m_editObj = orh;
                         m_isDraging = true;
+
+                        m_typeRef.text = m_styple.ToString();
                     }
                     return;
                 }
