@@ -198,7 +198,7 @@ namespace PPBC {
             name = name.Replace('|', '_');
             name = name.Replace(' ', '_');
 
-            MapDATA map = s_refMap;
+            MapDATA map = s_refMap.Copy();
             map.name = name;
 
             map.m_background = m_backgroundIndex;
