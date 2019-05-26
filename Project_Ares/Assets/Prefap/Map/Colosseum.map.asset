@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf71bb7c48b26640958a5ebacf35bcf, type: 3}
-  m_Name: Colosseum 4
+  m_Name: Colosseum.map
   m_EditorClassIdentifier: 
   p_size: []
   p_background: []
@@ -19,8 +19,6 @@ MonoBehaviour:
   p_props: []
   p_stage: []
   p_forground: []
-  p_laserBariar: {fileID: 5438180597333384809, guid: 99ced5c182d0c1e4b8ea86d484bc7c8d,
-    type: 3}
   m_size: 0
   m_background: 0
   m_globalLight: 0
