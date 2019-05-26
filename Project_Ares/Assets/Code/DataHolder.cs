@@ -24,7 +24,7 @@ namespace PPBC {
 
         public static List<CharacterData> s_characterDatas = new List<CharacterData>();
 
-        public static List<MapDATA> s_maps = new List<MapDATA>();
+        public static MapDATA[] s_maps = null;
         public static int s_map = 0;
         public static e_gameMode s_gameMode = e_gameMode.COOP_EDIT;
         public static string s_level;
@@ -37,6 +37,18 @@ namespace PPBC {
         /// </summary>
         public static bool s_firstMatch = true;
 
+        //===== ===== Maps Common Objects ===== =====
+
+        public static Vector2[] s_commonSize;
+        public static Sprite[] s_commonBackground;
+        public static Color[] s_commonColors;
+        public static AudioClip[] s_commonMusic;
+
+        public static d_prop[] s_commonProps;
+        public static Sprite[] s_commonStage;
+        public static Sprite[] s_commonForground;
+        public static GameObject s_commonLaserBariar;
+
         #region Variables
 
         [SerializeField] e_gameMode m_standardMode;
@@ -44,6 +56,16 @@ namespace PPBC {
         [SerializeField] string[] m_names;
         [SerializeField] CharacterData[] m_characters;
         [SerializeField] MapDATA[] m_maps;
+
+        [SerializeField] Vector2[] m_size;
+        [SerializeField] Sprite[] m_background;
+        [SerializeField] Color[] m_colors;
+        [SerializeField] AudioClip[] m_music;
+
+        [SerializeField] d_prop[] m_props;
+        [SerializeField] Sprite[] m_stage;
+        [SerializeField] Sprite[] m_forground;
+        [SerializeField] GameObject m_laserBariar;
 
         #endregion
         #region MonoBehaviour
@@ -65,11 +87,16 @@ namespace PPBC {
                     s_characterDatas.Add(it);
                 }
             }
-            if (m_maps != null) {
-                foreach(var it in m_maps) {
-                    s_maps.Add(it);
-                }
-            }
+            s_maps = m_maps;
+
+            s_commonBackground = m_background;
+            s_commonColors = m_colors;
+            s_commonForground = m_forground;
+            s_commonLaserBariar = m_laserBariar;
+            s_commonMusic = m_music;
+            s_commonProps = m_props;
+            s_commonSize = m_size;
+            s_commonStage = m_stage;
 
             s_level = StringCollection.INGAME;
             s_gameMode = m_standardMode;

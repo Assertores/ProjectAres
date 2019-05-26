@@ -13,7 +13,12 @@ namespace PPBC {
         public Vector2 position;
         public float rotation;
         public Vector2 scale;
-        
+    }
+
+    [System.Serializable]
+    public struct d_prop {
+        public Sprite m_sprite;
+        public Vector2[] m_collider;
     }
 
     [CreateAssetMenu(menuName = "Map")]
@@ -35,7 +40,7 @@ namespace PPBC {
         public Color[] p_colors;
         public AudioClip[] p_music;
 
-        public GameObject[] p_props;
+        public d_prop[] p_props;
         public Sprite[] p_stage;
         public Sprite[] p_forground;
         public GameObject p_laserBariar;
