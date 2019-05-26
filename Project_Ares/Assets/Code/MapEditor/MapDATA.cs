@@ -43,7 +43,6 @@ namespace PPBC {
         public d_prop[] p_props;
         public Sprite[] p_stage;
         public Sprite[] p_forground;
-        public GameObject p_laserBariar;
 
         public int m_size;
         public int m_background;
