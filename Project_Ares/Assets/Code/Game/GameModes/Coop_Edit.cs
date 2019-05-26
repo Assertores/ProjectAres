@@ -48,8 +48,7 @@ namespace PPBC {
         #endregion
 
         public void SaveAndExit() {
-
-            GameManager.s_singelton.m_mapHandler.SaveMap("");
+            GameManager.s_singelton.m_mapHandler.SaveMap(System.DateTime.Now.ToString());
             Stop();
             SceneManager.LoadScene(StringCollection.MAINMENU);
         }
