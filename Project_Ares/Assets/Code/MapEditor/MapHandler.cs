@@ -82,23 +82,35 @@ namespace PPBC {
         }
 
         public void SetBackgroundIndex(int index) {
+            if (index < 0 || index >= m_refMap.p_background.Length)
+                return;
+
             m_backgroundIndex = index;
-            m_background.sprite = m_refMap.p_background[m_backgroundIndex];//TODO: bound check
+            m_background.sprite = m_refMap.p_background[m_backgroundIndex];
         }
 
         public void SetMusicIndex(int index) {
+            if (index < 0 || index >= m_refMap.p_music.Length)
+                return;
+
             m_backgroundAudioIndex = index;
-            m_backgroundAudio.clip = m_refMap.p_music[m_backgroundAudioIndex];//TODO: bound check
+            m_backgroundAudio.clip = m_refMap.p_music[m_backgroundAudioIndex];
             if(!m_backgroundAudio.isPlaying)
                 m_backgroundAudio.Play();
         }
         
         public void SetGlobalLightColor(int index) {
+            if (index < 0 || index >= m_refMap.p_colors.Length)
+                return;
+
             m_directionalLightIndex = index;
-            m_directionalLight.color = m_refMap.p_colors[m_directionalLightIndex];//TODO: bound check
+            m_directionalLight.color = m_refMap.p_colors[m_directionalLightIndex];
         }
 
         public void SetSize(int index) {
+            if (index < 0 || index >= m_refMap.p_size.Length)
+                return;
+
             m_cameraSizeIndex = index;
             m_cameraSize.size = m_refMap.p_size[m_cameraSizeIndex];
         }
@@ -168,7 +180,7 @@ namespace PPBC {
             }
         }
 
-        public GameObject LoadObj(d_mapData obj) {
+        public GameObject LoadObj(d_mapData obj) {//eventuell überarbeiten, wenn common objects
             GameObject tmp = null;
             SpriteRenderer ren;
 
@@ -176,11 +188,17 @@ namespace PPBC {
             case e_objType.BACKGROUND:
                 return null;
             case e_objType.PROP:
+                if (obj.index < 0 || obj.index >= m_refMap.p_props.Length)
+                    return null;
+
                 tmp = Instantiate(m_refMap.p_props[obj.index], obj.position, Quaternion.Euler(new Vector3(0, 0, obj.rotation)));
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
                 
                 break;
             case e_objType.STAGE:
+                if (obj.index < 0 || obj.index >= m_refMap.p_stage.Length)
+                    return null;
+
                 tmp = new GameObject("Stage " + obj.index);
                 tmp.transform.position = obj.position;
                 tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
@@ -200,10 +218,16 @@ namespace PPBC {
                 tmp.AddComponent<PlayerStart>().team = obj.index;
                 break;
             case e_objType.LIGHT:
+                if (obj.index < 0 || obj.index >= m_refMap.p_colors.Length)
+                    return null;
+
                 tmp = Instantiate(m_lightPrefab, obj.position, Quaternion.Euler(Vector3.zero));
                 tmp.GetComponentInChildren<Light>().color = m_refMap.p_colors[obj.index];
                 break;
             case e_objType.FORGROUND:
+                if (obj.index < 0 || obj.index >= m_refMap.p_stage.Length)
+                    return null;
+
                 tmp = new GameObject("Forground " + obj.index);
                 tmp.transform.position = obj.position;
                 tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
@@ -214,6 +238,9 @@ namespace PPBC {
                 ren.sortingLayerName = StringCollection.FORGROUND;
                 break;
             case e_objType.BORDER:
+                if (obj.index < 0 || obj.index >= m_refMap.p_props.Length)
+                    return null;
+
                 tmp = Instantiate(m_refMap.p_props[obj.index], obj.position, Quaternion.Euler(new Vector3(0, 0, obj.rotation)));
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
 
