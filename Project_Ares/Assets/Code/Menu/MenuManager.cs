@@ -12,6 +12,7 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] GameObject m_SpawnPoint;
         [SerializeField] GameObject m_turnermantSprite;
+        [SerializeField] TMPro.TextMeshProUGUI m_modeRef;
 
         #endregion
         #region MonoBehaviour
@@ -56,6 +57,14 @@ namespace PPBC {
                 DataHolder.s_winnerPC = !DataHolder.s_winnerPC;
                 m_turnermantSprite.transform.Rotate(0, 0, 180);
             }
+            if (Input.GetKeyUp(KeyCode.E)) {
+                if(DataHolder.s_gameMode != e_gameMode.COOP_EDIT) {
+                    DataHolder.s_gameMode = e_gameMode.COOP_EDIT;
+                } else {
+                    DataHolder.s_gameMode = e_gameMode.FFA_CASUAL;
+                }
+            }
+            m_modeRef.text = DataHolder.s_gameMode.ToString();
         }
 
         #endregion
