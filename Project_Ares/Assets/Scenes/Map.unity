@@ -1167,8 +1167,7 @@ MonoBehaviour:
     type: 3}
   m_ObjectInteractPrefab: {fileID: 6526607643861557345, guid: b61564debb57f0d4789884441b39947d,
     type: 3}
-  m_backGroundMaterial: {fileID: 2100000, guid: e18fe5ca43043dd4092ebfdf3ad4ab6e,
-    type: 2}
+  m_spriteMaterial: {fileID: 2100000, guid: e18fe5ca43043dd4092ebfdf3ad4ab6e, type: 2}
 --- !u!1 &1410085251
 GameObject:
   m_ObjectHideFlags: 0
