@@ -147,7 +147,27 @@ namespace PPBC {
         public void LoadCurrentMap() {
             UnloadMap();
 
+            print("load map " + DataHolder.s_map);
+            foreach(var it in DataHolder.s_maps) {
+                print(it.Key);
+            }
+
             s_refMap = DataHolder.s_maps[DataHolder.s_map];
+            if (!s_refMap) {
+                print("map was not pre loaded");
+                s_refMap = DataHolder.LoadMap(DataHolder.s_map);
+                DataHolder.s_maps[DataHolder.s_map] = s_refMap;
+            }
+            print(s_refMap.p_background.Length);
+            print(s_refMap.p_colors.Length);
+            print(s_refMap.p_forground.Length);
+            print(s_refMap.p_music.Length);
+            print(s_refMap.p_props.Length);
+            print(s_refMap.p_size.Length);
+            print(s_refMap.p_stage.Length);
+            foreach (var it in s_refMap.m_data) {
+                print(it.index + " | " + it.position.ToString());
+            }
 
             SetBackgroundIndex(s_refMap.m_background);
             SetGlobalLightColorIndex(s_refMap.m_globalLight);
@@ -158,18 +178,28 @@ namespace PPBC {
                 LoadNewObj(it);
             }
 
-            GameObject a = Instantiate(s_refMap.p_laserBariar);
+            GameObject a = Instantiate(DataHolder.s_commonLaserBariar);
             a.transform.parent = m_levelHolder;
         }
 
         public void SaveMap(string name) {
             if (name == "") {
-                name = DataHolder.s_maps[DataHolder.s_map].name;
-            } else if (name != DataHolder.s_maps[DataHolder.s_map].name) {
-                //datenstrucktur kopieren;
+                name = DataHolder.s_map;
             }
+            name += ".map";
+            name = name.Replace('\\', '_');
+            name = name.Replace('/', '_');
+            name = name.Replace(':', '_');
+            name = name.Replace('*', '_');
+            name = name.Replace('?', '_');
+            name = name.Replace('"', '_');
+            name = name.Replace('<', '_');
+            name = name.Replace('>', '_');
+            name = name.Replace('|', '_');
+            name = name.Replace(' ', '_');
 
-            MapDATA map = DataHolder.s_maps[DataHolder.s_map];//Tempery
+            MapDATA map = s_refMap;
+            map.name = name;
 
             map.m_background = m_backgroundIndex;
             map.m_globalLight = m_directionalLightIndex;
@@ -181,8 +211,10 @@ namespace PPBC {
                 tmp.Add(it.m_data);
             }
             map.m_data = tmp.ToArray();
+            DataHolder.SaveMap(map);
 
-            DataHolder.s_maps[DataHolder.s_map] = map;
+            DataHolder.s_maps[name] = map;
+            DataHolder.s_map = name;
         }
 
         public void LoadNewObj(d_mapData obj) {
