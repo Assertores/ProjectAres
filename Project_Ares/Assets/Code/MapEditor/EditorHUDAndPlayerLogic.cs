@@ -125,6 +125,7 @@ namespace PPBC {
                 m_type++;
             else
                 m_type--;
+            m_rawIndex = 0;//everytime you change type it resets the index to 0
 
             m_type = (e_objType)fixedMod((int)m_type, 10);//reference to object type;
             m_typeRef.text = m_type.ToString();
@@ -134,11 +135,11 @@ namespace PPBC {
             if (m_type == e_objType.BACKGROUND) {
                 GameManager.s_singelton.m_mapHandler.SetBackgroundIndex(m_index);
             } else if (m_type == e_objType.GLOBALLIGHT) {
-                GameManager.s_singelton.m_mapHandler.SetGlobalLightColor(m_index);
+                GameManager.s_singelton.m_mapHandler.SetGlobalLightColorIndex(m_index);
             } else if (m_type == e_objType.MUSIC) {
                 GameManager.s_singelton.m_mapHandler.SetMusicIndex(m_index);
             } else if (m_type == e_objType.SIZE) {
-                GameManager.s_singelton.m_mapHandler.SetSize(m_index);
+                GameManager.s_singelton.m_mapHandler.SetSizeIndex(m_index);
             }
         }
 
@@ -154,11 +155,11 @@ namespace PPBC {
             if(m_type == e_objType.BACKGROUND) {
                 GameManager.s_singelton.m_mapHandler.SetBackgroundIndex(m_index);
             }else if(m_type == e_objType.GLOBALLIGHT) {
-                GameManager.s_singelton.m_mapHandler.SetGlobalLightColor(m_index);
+                GameManager.s_singelton.m_mapHandler.SetGlobalLightColorIndex(m_index);
             }else if(m_type == e_objType.MUSIC) {
                 GameManager.s_singelton.m_mapHandler.SetMusicIndex(m_index);
             }else if(m_type == e_objType.SIZE) {
-                GameManager.s_singelton.m_mapHandler.SetSize(m_index);
+                GameManager.s_singelton.m_mapHandler.SetSizeIndex(m_index);
             }
             else if (m_isDraging && m_editObj.m_objectHolder) {
                 foreach(Transform it in m_editObj.m_objectHolder) {
@@ -171,42 +172,53 @@ namespace PPBC {
 
         void CorrectIndex() {//arbeited auf current map reference. eventuell auf kopie arbeiten
             int max = 0;
+            int min = 0;
             switch (m_type) {
             case e_objType.BACKGROUND:
-                max = DataHolder.s_maps[DataHolder.s_map].p_background.Length;
+                max = DataHolder.s_commonBackground.Length;
+                min = MapHandler.s_refMap.p_background.Length;
                 break;
             case e_objType.PROP:
-                max = DataHolder.s_maps[DataHolder.s_map].p_props.Length;
+                max = DataHolder.s_commonProps.Length;
+                min = MapHandler.s_refMap.p_props.Length;
                 break;
             case e_objType.STAGE:
-                max = DataHolder.s_maps[DataHolder.s_map].p_stage.Length;
+                max = DataHolder.s_commonStage.Length;
+                min = MapHandler.s_refMap.p_stage.Length;
                 break;
             case e_objType.PLAYERSTART:
                 max = -1;
+                min = 0;
                 break;
             case e_objType.LIGHT:
-                max = DataHolder.s_maps[DataHolder.s_map].p_colors.Length;
+                max = DataHolder.s_commonColors.Length;
+                min = MapHandler.s_refMap.p_colors.Length;
                 break;
             case e_objType.FORGROUND:
-                max = DataHolder.s_maps[DataHolder.s_map].p_forground.Length;
+                max = DataHolder.s_commonForground.Length;
+                min = MapHandler.s_refMap.p_forground.Length;
                 break;
             case e_objType.BORDER:
-                max = DataHolder.s_maps[DataHolder.s_map].p_props.Length;
+                max = DataHolder.s_commonProps.Length;
+                min = MapHandler.s_refMap.p_props.Length;
                 break;
             case e_objType.GLOBALLIGHT:
-                max = DataHolder.s_maps[DataHolder.s_map].p_colors.Length;
+                max = DataHolder.s_commonColors.Length;
+                min = MapHandler.s_refMap.p_colors.Length;
                 break;
             case e_objType.MUSIC:
-                max = DataHolder.s_maps[DataHolder.s_map].p_music.Length;
+                max = DataHolder.s_commonMusic.Length;
+                min = MapHandler.s_refMap.p_music.Length;
                 break;
             case e_objType.SIZE:
-                max = DataHolder.s_maps[DataHolder.s_map].p_size.Length;
+                max = DataHolder.s_commonSize.Length;
+                min = MapHandler.s_refMap.p_size.Length;
                 break;
             default:
                 break;
             }
 
-            m_index = fixedMod(m_rawIndex, max);
+            m_index = fixedMod(m_rawIndex + min, max + min) - min;
 
             m_IndexRef.text = m_index.ToString();
         }

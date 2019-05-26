@@ -19,12 +19,12 @@ namespace PPBC {
         [SerializeField] Transform m_levelHolder;
         [SerializeField] GameObject m_lightPrefab;
         [SerializeField] GameObject m_ObjectInteractPrefab;
-        [SerializeField] Material m_backGroundMaterial;
+        [SerializeField] Material m_spriteMaterial;
 
         [HideInInspector]
         public List<Transform> m_borders { get; private set; } = new List<Transform>();
 
-        MapDATA m_refMap;
+        public static MapDATA s_refMap { get; private set; }
 
         #endregion
 
@@ -50,8 +50,8 @@ namespace PPBC {
                 GameObject tmp = new GameObject("AUTO_BackgroundSprite");
                 m_background = tmp.AddComponent<SpriteRenderer>();
                 m_background.sortingLayerName = StringCollection.BACKGROUND;
-                if (m_backGroundMaterial) {
-                    m_background.material = m_backGroundMaterial;
+                if (m_spriteMaterial) {
+                    m_background.material = m_spriteMaterial;
                 }
             }
             if (!m_directionalLight) {
@@ -82,55 +82,83 @@ namespace PPBC {
         }
 
         public void SetBackgroundIndex(int index) {
-            if (index < 0 || index >= m_refMap.p_background.Length)
+            if (index >= -s_refMap.p_background.Length && index < DataHolder.s_commonBackground.Length)
+                m_backgroundIndex = index;
+            else
                 return;
 
-            m_backgroundIndex = index;
-            m_background.sprite = m_refMap.p_background[m_backgroundIndex];
+            if (index >= 0) {
+                m_background.sprite = DataHolder.s_commonBackground[index];
+            } else {
+                index *= -1;
+                index--;
+                m_background.sprite = s_refMap.p_background[index];
+            }
         }
 
         public void SetMusicIndex(int index) {
-            if (index < 0 || index >= m_refMap.p_music.Length)
+            if (index >= -s_refMap.p_music.Length && index < DataHolder.s_commonMusic.Length)
+                m_backgroundAudioIndex = index;
+            else
                 return;
 
-            m_backgroundAudioIndex = index;
-            m_backgroundAudio.clip = m_refMap.p_music[m_backgroundAudioIndex];
+            if (index >= 0) {
+                m_backgroundAudio.clip = DataHolder.s_commonMusic[index];
+            } else {
+                index *= -1;
+                index--;
+                m_backgroundAudio.clip = s_refMap.p_music[index];
+            }
+
             if(!m_backgroundAudio.isPlaying)
                 m_backgroundAudio.Play();
         }
         
-        public void SetGlobalLightColor(int index) {
-            if (index < 0 || index >= m_refMap.p_colors.Length)
+        public void SetGlobalLightColorIndex(int index) {
+            if (index >= -s_refMap.p_colors.Length && index < DataHolder.s_commonColors.Length)
+                m_directionalLightIndex = index;
+            else
                 return;
 
-            m_directionalLightIndex = index;
-            m_directionalLight.color = m_refMap.p_colors[m_directionalLightIndex];
+            if (index >= 0) {
+                m_directionalLight.color = DataHolder.s_commonColors[index];
+            } else {
+                index *= -1;
+                index--;
+                m_directionalLight.color = s_refMap.p_colors[index];
+            }
         }
 
-        public void SetSize(int index) {
-            if (index < 0 || index >= m_refMap.p_size.Length)
+        public void SetSizeIndex(int index) {
+            if (index >= -s_refMap.p_size.Length && index < DataHolder.s_commonSize.Length)
+                m_cameraSizeIndex = index;
+            else
                 return;
 
-            m_cameraSizeIndex = index;
-            m_cameraSize.size = m_refMap.p_size[m_cameraSizeIndex];
+            if (index >= 0) {
+                m_cameraSize.size = DataHolder.s_commonSize[index];
+            } else {
+                index *= -1;
+                index--;
+                m_cameraSize.size = s_refMap.p_size[index];
+            }
         }
 
         public void LoadCurrentMap() {
             UnloadMap();
 
-            m_refMap = DataHolder.s_maps[DataHolder.s_map];
+            s_refMap = DataHolder.s_maps[DataHolder.s_map];
 
-            m_background.sprite = m_refMap.p_background[m_refMap.m_background];
-            m_directionalLight.color = m_refMap.p_colors[m_refMap.m_globalLight];
-            m_backgroundAudio.clip = m_refMap.p_music[m_refMap.m_music];
-            m_backgroundAudio.Play();
-            m_cameraSize.size = m_refMap.p_size[m_refMap.m_size];
+            SetBackgroundIndex(s_refMap.m_background);
+            SetGlobalLightColorIndex(s_refMap.m_globalLight);
+            SetMusicIndex(s_refMap.m_music);
+            SetSizeIndex(s_refMap.m_size);
 
-            foreach (var it in m_refMap.m_data) {
+            foreach (var it in s_refMap.m_data) {
                 LoadNewObj(it);
             }
 
-            GameObject a = Instantiate(m_refMap.p_laserBariar);
+            GameObject a = Instantiate(s_refMap.p_laserBariar);
             a.transform.parent = m_levelHolder;
         }
 
@@ -183,20 +211,38 @@ namespace PPBC {
         public GameObject LoadObj(d_mapData obj) {//eventuell überarbeiten, wenn common objects
             GameObject tmp = null;
             SpriteRenderer ren;
+            PolygonCollider2D col;
+            SpriteMask msk;
 
             switch (obj.type) {
             case e_objType.BACKGROUND:
                 return null;
             case e_objType.PROP:
-                if (obj.index < 0 || obj.index >= m_refMap.p_props.Length)
+                if (obj.index < -s_refMap.p_props.Length || obj.index >= DataHolder.s_commonProps.Length)
                     return null;
-
-                tmp = Instantiate(m_refMap.p_props[obj.index], obj.position, Quaternion.Euler(new Vector3(0, 0, obj.rotation)));
-                tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
                 
+                tmp = new GameObject("Prop " + obj.index);
+                tmp.transform.position = obj.position;
+                tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
+                tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
+                ren = tmp.AddComponent<SpriteRenderer>();
+                ren.material = m_spriteMaterial;
+                ren.sortingLayerName = StringCollection.PROPS;
+                col = tmp.AddComponent<PolygonCollider2D>();
+                
+                if (obj.index < 0) {//specific
+                    ren.sprite = s_refMap.p_props[obj.index * -1 - 1].m_sprite;
+                    col.SetPath(0, s_refMap.p_props[obj.index * -1 - 1].m_collider);
+                } else {//common
+                    ren.sprite = DataHolder.s_commonProps[obj.index].m_sprite;
+                    col.SetPath(0, DataHolder.s_commonProps[obj.index].m_collider);
+                }
+                
+                msk = tmp.AddComponent<SpriteMask>();
+                msk.sprite = ren.sprite;
                 break;
             case e_objType.STAGE:
-                if (obj.index < 0 || obj.index >= m_refMap.p_stage.Length)
+                if (obj.index < -s_refMap.p_stage.Length || obj.index >= DataHolder.s_commonStage.Length)
                     return null;
 
                 tmp = new GameObject("Stage " + obj.index);
@@ -205,10 +251,16 @@ namespace PPBC {
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
 
                 ren = tmp.AddComponent<SpriteRenderer>();
-                ren.sprite = m_refMap.p_stage[obj.index];
+                ren.material = m_spriteMaterial;
                 ren.sortingLayerName = StringCollection.STAGE;
 
-                SpriteMask msk = tmp.AddComponent<SpriteMask>();
+                if (obj.index < 0) {//specific
+                    ren.sprite = s_refMap.p_stage[obj.index * -1 - 1];
+                } else {//common
+                    ren.sprite = DataHolder.s_commonStage[obj.index];
+                }
+
+                msk = tmp.AddComponent<SpriteMask>();
                 msk.sprite = ren.sprite;
                 break;
             case e_objType.PLAYERSTART:
@@ -218,14 +270,19 @@ namespace PPBC {
                 tmp.AddComponent<PlayerStart>().m_team = obj.index;
                 break;
             case e_objType.LIGHT:
-                if (obj.index < 0 || obj.index >= m_refMap.p_colors.Length)
+                if (obj.index < -s_refMap.p_colors.Length || obj.index >= DataHolder.s_commonColors.Length)
                     return null;
 
                 tmp = Instantiate(m_lightPrefab, obj.position, Quaternion.Euler(Vector3.zero));
-                tmp.GetComponentInChildren<Light>().color = m_refMap.p_colors[obj.index];
+
+                if (obj.index < 0) {//specific
+                    tmp.GetComponentInChildren<Light>().color = s_refMap.p_colors[obj.index * -1 - 1];
+                } else {//common
+                    tmp.GetComponentInChildren<Light>().color = DataHolder.s_commonColors[obj.index];
+                }
                 break;
             case e_objType.FORGROUND:
-                if (obj.index < 0 || obj.index >= m_refMap.p_stage.Length)
+                if (obj.index < -s_refMap.p_stage.Length || obj.index >= DataHolder.s_commonStage.Length)
                     return null;
 
                 tmp = new GameObject("Forground " + obj.index);
@@ -234,15 +291,38 @@ namespace PPBC {
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
 
                 ren = tmp.AddComponent<SpriteRenderer>();
-                ren.sprite = m_refMap.p_stage[obj.index];
+                ren.material = m_spriteMaterial;
                 ren.sortingLayerName = StringCollection.FORGROUND;
+
+                if (obj.index < 0) {//specific
+                    ren.sprite = s_refMap.p_stage[obj.index * -1 - 1];
+                } else {//common
+                    ren.sprite = DataHolder.s_commonStage[obj.index];
+                }
                 break;
             case e_objType.BORDER:
-                if (obj.index < 0 || obj.index >= m_refMap.p_props.Length)
+                if (obj.index < -s_refMap.p_props.Length || obj.index >= DataHolder.s_commonProps.Length)
                     return null;
 
-                tmp = Instantiate(m_refMap.p_props[obj.index], obj.position, Quaternion.Euler(new Vector3(0, 0, obj.rotation)));
+                tmp = new GameObject("Prop " + obj.index);
+                tmp.transform.position = obj.position;
+                tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
+                ren = tmp.AddComponent<SpriteRenderer>();
+                ren.material = m_spriteMaterial;
+                ren.sortingLayerName = StringCollection.PROPS;
+                col = tmp.AddComponent<PolygonCollider2D>();
+
+                if (obj.index < 0) {//specific
+                    ren.sprite = s_refMap.p_props[obj.index * -1 - 1].m_sprite;
+                    col.SetPath(0, s_refMap.p_props[obj.index * -1 - 1].m_collider);
+                } else {//common
+                    ren.sprite = DataHolder.s_commonProps[obj.index].m_sprite;
+                    col.SetPath(0, DataHolder.s_commonProps[obj.index].m_collider);
+                }
+
+                msk = tmp.AddComponent<SpriteMask>();
+                msk.sprite = ren.sprite;
 
                 m_borders.Add(tmp.transform);
                 break;
