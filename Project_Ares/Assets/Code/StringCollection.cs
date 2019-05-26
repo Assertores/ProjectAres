@@ -42,6 +42,6 @@ namespace PPBC {
         #endregion
 
         public static string DATAPATH = System.IO.Path.Combine(Application.dataPath, "DATA") + System.IO.Path.DirectorySeparatorChar;
-        public static string MAPPARH = System.IO.Path.Combine(Application.streamingAssetsPath, "MAP") + System.IO.Path.DirectorySeparatorChar;
+        public static string MAPPARH = System.IO.Path.Combine(Application.dataPath, "MAP") + System.IO.Path.DirectorySeparatorChar;
     }
 }
