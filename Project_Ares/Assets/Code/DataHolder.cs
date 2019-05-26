@@ -7,7 +7,8 @@ namespace PPBC {
     public enum e_gameMode {
         FFA_CASUAL,
         FAIR_TOURNAMENT,
-        COOP_EDIT
+        COOP_EDIT,
+        TDM_TOURNAMENT
     }
 
     public class DataHolder : MonoBehaviour {
