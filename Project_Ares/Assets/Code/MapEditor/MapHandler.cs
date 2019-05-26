@@ -141,6 +141,8 @@ namespace PPBC {
                 tmp.Add(it.m_data);
             }
             map.m_data = tmp.ToArray();
+
+            DataHolder.s_maps[DataHolder.s_map] = map;
         }
 
         public void LoadNewObj(d_mapData obj) {
@@ -150,11 +152,17 @@ namespace PPBC {
 
             if (DataHolder.s_gameMode == e_gameMode.COOP_EDIT) {
                 ObjectReferenceHolder orh = Instantiate(m_ObjectInteractPrefab, m_levelHolder).GetComponent<ObjectReferenceHolder>();
+                orh.name = "[EDIT]_" + tmp.name;
                 orh.m_data = obj;
                 orh.transform.position = tmp.transform.position;
-                orh.transform.rotation = tmp.transform.rotation;
-                orh.transform.localScale = new Vector3(1, 1, 1);
+                orh.m_objectHolder.rotation = tmp.transform.rotation;
+                orh.m_objectHolder.localScale = tmp.transform.localScale;
+                
                 tmp.transform.parent = orh.m_objectHolder;
+
+                tmp.transform.localPosition = Vector3.zero;
+                tmp.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                tmp.transform.localScale = new Vector3(1, 1, 1);
             } else {
                 tmp.transform.parent = m_levelHolder;
             }
