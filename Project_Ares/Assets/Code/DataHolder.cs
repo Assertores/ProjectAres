@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace PPBC {
 
@@ -24,8 +26,8 @@ namespace PPBC {
 
         public static List<CharacterData> s_characterDatas = new List<CharacterData>();
 
-        public static MapDATA[] s_maps = null;
-        public static int s_map = 0;
+        public static Dictionary<string, MapDATA> s_maps = new Dictionary<string, MapDATA>();
+        public static string s_map = "";
         public static e_gameMode s_gameMode = e_gameMode.COOP_EDIT;
         public static string s_level;
 
@@ -52,7 +54,7 @@ namespace PPBC {
         #region Variables
 
         [SerializeField] e_gameMode m_standardMode;
-        [SerializeField] int m_mapIndex;
+        [SerializeField] string m_mapName;
         [SerializeField] string[] m_names;
         [SerializeField] CharacterData[] m_characters;
         [SerializeField] MapDATA[] m_maps;
@@ -87,7 +89,21 @@ namespace PPBC {
                     s_characterDatas.Add(it);
                 }
             }
-            s_maps = m_maps;
+            foreach(var it in m_maps) {
+                s_maps[it.name] = it;
+                SaveMap(it);
+            }
+            System.IO.DirectoryInfo info = new DirectoryInfo(StringCollection.MAPPARH);
+            foreach (var it in info.EnumerateFiles()) {
+                if (!s_maps.ContainsKey(it.Name) && it.Extension == ".map") {
+                    s_maps[it.Name] = LoadMap(it.Name);
+                }
+            }
+            if (!s_maps.ContainsKey(m_mapName)) {
+                s_map = m_maps[0].name;
+            } else {
+                s_map = m_mapName;
+            }
 
             s_commonBackground = m_background;
             s_commonColors = m_colors;
@@ -100,7 +116,6 @@ namespace PPBC {
 
             s_level = StringCollection.INGAME;
             s_gameMode = m_standardMode;
-            s_map = m_mapIndex;
 
             isInit = true;
             Destroy(this);
@@ -129,6 +144,58 @@ namespace PPBC {
             return tmp;
         }
 
+        //https://stackoverflow.com/questions/4266875/how-to-quickly-save-load-class-instance-to-file
+        public static MapDATA LoadMap(string path) {
+            print(path);
+            TextReader reader = null;
+            MapDATA tmp = new MapDATA();
+            try {
+                var serializer = new XmlSerializer(typeof(MapDATA));
+                reader = new StreamReader(StringCollection.MAPPARH + path);
+                tmp = (MapDATA)serializer.Deserialize(reader);
+            }catch(System.Exception e) {
+                Debug.Log(e);
+            }
+            if (reader != null)
+                reader.Close();
+            if (tmp) {
+                if (tmp.p_background == null)
+                    tmp.p_background = new Sprite[0];
+                if (tmp.p_colors == null)
+                    tmp.p_colors = new Color[0];
+                if (tmp.p_forground == null)
+                    tmp.p_forground = new Sprite[0];
+                if (tmp.p_music == null)
+                    tmp.p_music = new AudioClip[0];
+                if (tmp.p_props == null)
+                    tmp.p_props = new d_prop[0];
+                if (tmp.p_size == null)
+                    tmp.p_size = new Vector2[0];
+                if (tmp.p_stage == null)
+                    tmp.p_stage = new Sprite[0];
+            }
+            return tmp;
+        }
+
+        public static void SaveMap(MapDATA data) {
+            Directory.CreateDirectory(StringCollection.MAPPARH);
+            TextWriter writer = null;
+            XmlSerializer serializer = null;
+            try {
+                serializer = new XmlSerializer(typeof(MapDATA));
+                writer = new StreamWriter(StringCollection.MAPPARH + data.name, false);
+                serializer.Serialize(writer, data);
+            } catch (System.Exception e) {
+                Debug.Log(e);
+                return;
+            } finally {
+                if (writer != null)
+                    writer.Close();
+            }
+        }
+
         #endregion
+
+
     }
 }
