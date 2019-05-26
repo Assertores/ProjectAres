@@ -76,7 +76,8 @@ namespace PPBC {
         [Range(0,1)]
         [SerializeField] float m_airResistance = 0.25f;
         [SerializeField] float m_bounciness = 0.5f;
-        
+
+        public int m_team;
 
         public d_playerData m_stats;
 

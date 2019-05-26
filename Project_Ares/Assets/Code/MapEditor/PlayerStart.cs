@@ -14,6 +14,6 @@ namespace PPBC {
             s_references.Remove(this);
         }
 
-        public int team;
+        public int m_team;
     }
 }

@@ -215,7 +215,7 @@ namespace PPBC {
                 tmp = new GameObject("PlayerSpawn " + obj.index);
                 tmp.transform.position = obj.position;
 
-                tmp.AddComponent<PlayerStart>().team = obj.index;
+                tmp.AddComponent<PlayerStart>().m_team = obj.index;
                 break;
             case e_objType.LIGHT:
                 if (obj.index < 0 || obj.index >= m_refMap.p_colors.Length)
