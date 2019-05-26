@@ -3164,7 +3164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_standardMode: 0
-  m_mapIndex: 1
+  m_mapName: 
   m_names:
   - Tyler
   - Clyde
@@ -3197,10 +3197,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}
   m_maps:
   - {fileID: 11400000, guid: 5789446c4f9b3b84ab646dcc7dcda4a6, type: 2}
-  - {fileID: 11400000, guid: 12a4c34af3f740e4ebd08afeb6dda7e0, type: 2}
-  - {fileID: 11400000, guid: 4e5ed7b5a6b5db743ae6078e4d2e29b7, type: 2}
-  - {fileID: 11400000, guid: e90b0cad5abcf9b45a11c0173984ad45, type: 2}
-  - {fileID: 11400000, guid: ca673d8fe30dcac44888a615359460fc, type: 2}
   m_size:
   - {x: 23, y: 12}
   m_background:
