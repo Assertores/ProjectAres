@@ -2903,6 +2903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e86ffcfc6c6134f852c8d9442a9381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_standardMode: 0
+  m_mapIndex: 2
   m_names:
   - Tyler
   - Clyde
@@ -2935,3 +2937,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}
   m_maps:
   - {fileID: 11400000, guid: 5789446c4f9b3b84ab646dcc7dcda4a6, type: 2}
+  - {fileID: 11400000, guid: 84c1cea00d0f53044a2edee6198186a9, type: 2}
+  - {fileID: 11400000, guid: 50db46c504b81544f8e6acccf1f476b8, type: 2}
+  - {fileID: 11400000, guid: 8335c1185d325324a80a9ceb36c0e046, type: 2}
+  - {fileID: 11400000, guid: 159e24c86ff834748ba1d0a09277da15, type: 2}

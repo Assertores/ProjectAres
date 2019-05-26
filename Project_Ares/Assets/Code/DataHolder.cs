@@ -39,6 +39,7 @@ namespace PPBC {
         #region Variables
 
         [SerializeField] e_gameMode m_standardMode;
+        [SerializeField] int m_mapIndex;
         [SerializeField] string[] m_names;
         [SerializeField] CharacterData[] m_characters;
         [SerializeField] MapDATA[] m_maps;
@@ -71,6 +72,7 @@ namespace PPBC {
 
             s_level = StringCollection.INGAME;
             s_gameMode = m_standardMode;
+            s_map = m_mapIndex;
 
             isInit = true;
             Destroy(this);
