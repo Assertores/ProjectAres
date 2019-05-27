@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 namespace PPBC {
-    public class ExitEditor : ObjectReferenceHolder, IDamageableObject {
+    public class ExitEditor : MonoBehaviour, IDamageableObject {
 
         [Header("References")]
         [SerializeField] Coop_Edit m_gMRef;

@@ -14,10 +14,12 @@ namespace PPBC {
 
         [Header("Balancing")]
         [SerializeField] float m_scalerDampaning = 110;
+        [SerializeField] float m_speed = 6;
 
         IControl m_controlRef;
         bool m_isDraging = false;
-        ObjectReferenceHolder m_editObj;
+        ObjectReferenceHolder m_mapObj;
+        Transform m_editorObj;
         e_editingStyle m_styple = e_editingStyle.MOVE;
 
         e_objType m_type;
@@ -35,23 +37,37 @@ namespace PPBC {
 
         // Update is called once per frame
         void Update() {
-            if(m_styple == e_editingStyle.MOVE)
-                transform.parent.position += new Vector3(m_controlRef.m_dir.x * Mathf.Sqrt(1 - ((m_controlRef.m_dir.y * m_controlRef.m_dir.y) / 2)), m_controlRef.m_dir.y * Mathf.Sqrt(1 - ((m_controlRef.m_dir.x * m_controlRef.m_dir.x) / 2)), 0);
+            if(m_styple == e_editingStyle.MOVE) {
+                if(m_controlRef.m_dir.x > 1 || m_controlRef.m_dir.x < -1 || m_controlRef.m_dir.y > 1 || m_controlRef.m_dir.y < -1) {
+                    transform.parent.position += new Vector3(m_controlRef.m_dir.x, m_controlRef.m_dir.y, 0) * 0.5f;
+                } else {
+                    transform.parent.position += new Vector3(m_controlRef.m_dir.x * Mathf.Sqrt(1 - ((m_controlRef.m_dir.y * m_controlRef.m_dir.y) / 2)), m_controlRef.m_dir.y * Mathf.Sqrt(1 - ((m_controlRef.m_dir.x * m_controlRef.m_dir.x) / 2)), 0) * Time.deltaTime * m_speed;
+                }
+            }
 
             if (m_isDraging) {
+
+                Transform tmp;
+                if (m_mapObj)
+                    tmp = m_mapObj.m_objectHolder;
+                else
+                    tmp = transform;
                 
                 switch (m_styple) {
                 case e_editingStyle.ROTATE:
-                    m_editObj.m_objectHolder.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_controlRef.m_dir.y, m_controlRef.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                    tmp.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_controlRef.m_dir.y, m_controlRef.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
                     break;
                 case e_editingStyle.MOVE:
-                    m_editObj.transform.position = transform.position;
+                    if (m_editorObj)
+                        m_editorObj.position = transform.position;
+                    else
+                        m_mapObj.transform.position = transform.position;
                     break;
                 case e_editingStyle.SCALE:
                     float scaler = Vector2.SignedAngle(transform.up, m_controlRef.m_dir);
                     scaler /= m_scalerDampaning;
                     scaler = scaler * scaler * scaler;
-                    m_editObj.m_objectHolder.localScale = new Vector3(scaler, scaler, 1);
+                    tmp.localScale = new Vector3(scaler, scaler, 1);
                     break;
                 default:
                     break;
@@ -71,10 +87,27 @@ namespace PPBC {
 
             Collider2D[] hits = Physics2D.OverlapPointAll(transform.position);
             foreach (var it in hits) {
+                if(it.tag == StringCollection.BIN) {
+                    m_editorObj = it.transform;
+                    m_mapObj = null;
+                    m_isDraging = true;
+
+                    m_typeRef.text = m_styple.ToString();
+                    return;
+                }
+                ExitEditor ee = it.GetComponent<ExitEditor>();
+                if (ee) {
+                    m_editorObj = ee.transform;
+                    m_mapObj = null;
+                    m_isDraging = true;
+
+                    m_typeRef.text = m_styple.ToString();
+                    return;
+                }
                 ObjectReferenceHolder orh = it.GetComponent<ObjectReferenceHolder>();
                 if (orh != null) {
                     if(orh.m_data.type == m_type) {
-                        m_editObj = orh;
+                        m_mapObj = orh;
                         m_isDraging = true;
 
                         m_typeRef.text = m_styple.ToString();
@@ -87,14 +120,27 @@ namespace PPBC {
         }
 
         void Drop() {
-            if (m_isDraging) {
-                m_editObj.m_data.position = m_editObj.m_objectHolder.position;
-                m_editObj.m_data.rotation = m_editObj.m_objectHolder.rotation.eulerAngles.z;
-                m_editObj.m_data.scale = m_editObj.m_objectHolder.localScale;
-
-                m_isDraging = false;
+            if (m_isDraging && m_mapObj) {
+                bool deleted = false;
+                Collider2D[] hits = Physics2D.OverlapPointAll(transform.position);
+                foreach (var it in hits) {
+                    if(it.tag == StringCollection.BIN) {
+                        Destroy(m_mapObj.gameObject);
+                        deleted = true;
+                        break;
+                    }
+                }
+                if (!deleted) {
+                    m_mapObj.m_data.position = m_mapObj.m_objectHolder.position;
+                    m_mapObj.m_data.rotation = m_mapObj.m_objectHolder.rotation.eulerAngles.z;
+                    m_mapObj.m_data.scale = m_mapObj.m_objectHolder.localScale;
+                }
             }
+
+            m_isDraging = false;
             m_styple = e_editingStyle.MOVE;
+            m_mapObj = null;
+            m_editorObj = null;
 
             m_typeRef.text = m_type.ToString();
         }
@@ -125,12 +171,33 @@ namespace PPBC {
                 m_type++;
             else
                 m_type--;
-            m_rawIndex = 0;//everytime you change type it resets the index to 0
 
             m_type = (e_objType)fixedMod((int)m_type, 10);//reference to object type;
             m_typeRef.text = m_type.ToString();
 
+            
+            switch (m_type) {
+            case e_objType.BACKGROUND:
+                m_rawIndex = MapHandler.s_refMap.m_background;
+                break;
+            case e_objType.GLOBALLIGHT:
+                m_rawIndex = MapHandler.s_refMap.m_globalLight;
+                break;
+            case e_objType.MUSIC:
+                m_rawIndex = MapHandler.s_refMap.m_music;
+                break;
+            case e_objType.SIZE:
+                m_rawIndex = MapHandler.s_refMap.m_size;
+                break;
+            default:
+                m_rawIndex = 0;//everytime you change type it resets the index to 0
+                break;
+            }
             CorrectIndex();
+
+            if (m_editorObj) {
+                return;
+            }
 
             if (m_type == e_objType.BACKGROUND) {
                 GameManager.s_singelton.m_mapHandler.SetBackgroundIndex(m_index);
@@ -152,6 +219,10 @@ namespace PPBC {
 
             CorrectIndex();
 
+            if (m_editorObj) {
+                return;
+            }
+
             if(m_type == e_objType.BACKGROUND) {
                 GameManager.s_singelton.m_mapHandler.SetBackgroundIndex(m_index);
             }else if(m_type == e_objType.GLOBALLIGHT) {
@@ -161,12 +232,16 @@ namespace PPBC {
             }else if(m_type == e_objType.SIZE) {
                 GameManager.s_singelton.m_mapHandler.SetSizeIndex(m_index);
             }
-            else if (m_isDraging && m_editObj.m_objectHolder) {
-                foreach(Transform it in m_editObj.m_objectHolder) {
+            else if (m_isDraging && m_mapObj.m_objectHolder) {
+                foreach(Transform it in m_mapObj.m_objectHolder) {
                     Destroy(it.gameObject);
                 }
-                m_editObj.m_data = CreateData();
-                GameManager.s_singelton.m_mapHandler.LoadObj(m_editObj.m_data).transform.parent = m_editObj.m_objectHolder;
+                m_mapObj.m_data = CreateData();
+                GameObject tmp = GameManager.s_singelton.m_mapHandler.LoadObj(m_mapObj.m_data);
+                tmp.transform.parent = m_mapObj.m_objectHolder;
+                tmp.transform.localPosition = Vector3.zero;
+                tmp.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                tmp.transform.localScale = new Vector3(1, 1, 1);
             }
         }
 

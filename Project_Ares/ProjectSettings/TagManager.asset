@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Level
+  - Bin
   layers:
   - Default
   - TransparentFX
