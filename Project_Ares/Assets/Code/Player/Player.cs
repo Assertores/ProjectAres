@@ -190,7 +190,7 @@ namespace PPBC {
             m_GUIHandler.SetHealth(m_healthBar.fillAmount);
 
             if (!m_isInvincible) {
-                m_killsRef.text = m_stats.m_kills.ToString();
+                m_killsRef.text = m_stats.m_points.ToString();
             } else {
                 m_killsRef.text = "";
             }
@@ -663,27 +663,33 @@ namespace PPBC {
                 m_control.ChangeName = m_editHud.ChangeType;
                 m_control.ChangeCharacter = m_editHud.ChangeIndex;
             } else {
-                m_control.StartShooting = null;
-                m_control.ChangeName = null;
-                m_control.ChangeCharacter = null;
-
-                InControle(true);
-                Invincible(false);
-                m_rb.simulated = true;
+                StopEdit();
             }
         }
 
-        
+        public void StopEdit() {
+            m_control.StartShooting = null;
+            m_control.ChangeName = null;
+            m_control.ChangeCharacter = null;
+
+            InControle(true);
+            Invincible(false);
+            m_rb.simulated = true;
+        }
 
         public void EditAble(EditorHUDAndPlayerLogic hud) {
             if(hud != null) {
-                m_control.ShowStats += GoIntoEditMode;
                 m_editHud = hud;
                 m_editHud.SetControlRef(m_control);
                 m_editHud.gameObject.SetActive(false);
+
+                m_control.ShowStats += GoIntoEditMode;
             } else {
                 m_control.ShowStats -= GoIntoEditMode;
-                Destroy(m_editHud);
+
+                StopEdit();
+                if (m_editHud)
+                    Destroy(m_editHud.gameObject);
             }
         }
 
