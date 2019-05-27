@@ -29,14 +29,19 @@ namespace PPBC {
         #region IGameMode
 
         public void Init() {
+            m_lives.Clear();
+            for (int i = 0; i < m_teamCount; i++) {
+                m_lives.Add(m_teamLives);
+            }
+
             for (int i = 0; i < Player.s_references.Count; i++) {
                 Player.s_references[i].m_team = i % m_teamCount;
                 Player.s_references[i].m_stats.m_points = m_teamLives;
+                DoRespawn(Player.s_references[i]);
             }
-            m_lives.Clear();
-            for(int i = 0; i < m_teamCount; i++) {
-                m_lives.Add(m_teamLives);
-            }
+            
+
+            gameObject.SetActive(true);
         }
 
         public void Stop() {
@@ -59,6 +64,10 @@ namespace PPBC {
         IEnumerator RespawnPlayer(Player player) {
             yield return new WaitForSeconds(m_respawnTime);
 
+            DoRespawn(player);
+        }
+
+        void DoRespawn(Player player) {
             List<PlayerStart> availableSpawns = PlayerStart.s_references.FindAll(x => x.m_team == player.m_team);
             if (availableSpawns.Count == 0) {
                 player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);

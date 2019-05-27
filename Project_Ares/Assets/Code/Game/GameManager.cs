@@ -56,6 +56,7 @@ namespace PPBC {
 
             if(Player.s_references.Count == 0) {
                 SceneManager.LoadScene(StringCollection.MAINMENU);
+                return;
             }
 
             if (m_gmObject != null) {
@@ -70,8 +71,7 @@ namespace PPBC {
 
             if (m_mapHandler)
                 m_mapHandler.LoadCurrentMap();
-
-            m_gameModes[DataHolder.s_gameMode].Init();
+            
             foreach (var it in Player.s_references) {
                 it.m_stats.m_assists = 0;
                 it.m_stats.m_damageDealt = 0;
@@ -82,6 +82,8 @@ namespace PPBC {
                 it.DoReset();
                 it.Invincible(false);
             }
+
+            m_gameModes[DataHolder.s_gameMode].Init();
 
             foreach (var it in Player.s_references) {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
