@@ -24,6 +24,7 @@ namespace PPBC {
         #region TAGS
 
         public static string PLAYER = "Player";
+        public static string BIN = "Bin";
 
         #endregion
         #region SortingLayer
