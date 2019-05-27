@@ -24,7 +24,8 @@ namespace PPBC {
 
         void Update() {
 
-            m_dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            m_dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+
 
             if (Input.GetButtonDown(StringCollection.FIRE)) {
                 StartShooting?.Invoke();
@@ -48,10 +49,10 @@ namespace PPBC {
                 ChangeCharacter?.Invoke(-1, true);
             }
 
-            if (Input.GetKeyDown(KeyCode.N)) {
+            if (Input.GetKeyDown(KeyCode.M)) {
                 ChangeName?.Invoke(true);
             }
-            if (Input.GetKeyDown(KeyCode.M)) {
+            if (Input.GetKeyDown(KeyCode.N)) {
                 ChangeName?.Invoke(false);
             }
             if (Input.GetKeyDown(KeyCode.X)) {
