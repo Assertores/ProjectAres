@@ -158,16 +158,6 @@ namespace PPBC {
                 s_refMap = DataHolder.LoadMap(DataHolder.s_map);
                 DataHolder.s_maps[DataHolder.s_map] = s_refMap;
             }
-            print(s_refMap.p_background.Length);
-            print(s_refMap.p_colors.Length);
-            print(s_refMap.p_forground.Length);
-            print(s_refMap.p_music.Length);
-            print(s_refMap.p_props.Length);
-            print(s_refMap.p_size.Length);
-            print(s_refMap.p_stage.Length);
-            foreach (var it in s_refMap.m_data) {
-                print(it.index + " | " + it.position.ToString());
-            }
 
             SetBackgroundIndex(s_refMap.m_background);
             SetGlobalLightColorIndex(s_refMap.m_globalLight);
