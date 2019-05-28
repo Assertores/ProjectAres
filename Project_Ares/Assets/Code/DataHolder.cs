@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
-using System.Xml.Serialization;
+using UnityEngine;
+
 
 namespace PPBC {
 
@@ -69,6 +69,8 @@ namespace PPBC {
         [SerializeField] Sprite[] m_forground;
         [SerializeField] GameObject m_laserBariar;
 
+        [SerializeField] MapDATA SaveToXML;
+
         #endregion
         #region MonoBehaviour
 
@@ -89,14 +91,17 @@ namespace PPBC {
                     s_characterDatas.Add(it);
                 }
             }
+            if (SaveToXML) {
+                MapDATA.SaveMap(SaveToXML);
+            }
             foreach(var it in m_maps) {
                 s_maps[it.name] = it;
-                SaveMap(it);
+                //SaveMap(it);
             }
             System.IO.DirectoryInfo info = new DirectoryInfo(StringCollection.MAPPARH);
             foreach (var it in info.EnumerateFiles()) {
                 if (!s_maps.ContainsKey(it.Name) && it.Extension == ".map") {
-                    s_maps[it.Name] = LoadMap(it.Name);
+                    s_maps[it.Name] = MapDATA.LoadMap(it.Name);
                 }
             }
             if (!s_maps.ContainsKey(m_mapName)) {
@@ -144,55 +149,7 @@ namespace PPBC {
             return tmp;
         }
 
-        //https://stackoverflow.com/questions/4266875/how-to-quickly-save-load-class-instance-to-file
-        public static MapDATA LoadMap(string path) {
-            print(path);
-            TextReader reader = null;
-            MapDATA tmp = new MapDATA();
-            try {
-                var serializer = new XmlSerializer(typeof(MapDATA));
-                reader = new StreamReader(StringCollection.MAPPARH + path);
-                tmp = (MapDATA)serializer.Deserialize(reader);
-            }catch(System.Exception e) {
-                Debug.Log(e);
-            }
-            if (reader != null)
-                reader.Close();
-            if (tmp) {
-                if (tmp.p_background == null)
-                    tmp.p_background = new Sprite[0];
-                if (tmp.p_colors == null)
-                    tmp.p_colors = new Color[0];
-                if (tmp.p_forground == null)
-                    tmp.p_forground = new Sprite[0];
-                if (tmp.p_music == null)
-                    tmp.p_music = new AudioClip[0];
-                if (tmp.p_props == null)
-                    tmp.p_props = new d_prop[0];
-                if (tmp.p_size == null)
-                    tmp.p_size = new Vector2[0];
-                if (tmp.p_stage == null)
-                    tmp.p_stage = new Sprite[0];
-            }
-            return tmp;
-        }
-
-        public static void SaveMap(MapDATA data) {
-            Directory.CreateDirectory(StringCollection.MAPPARH);
-            TextWriter writer = null;
-            XmlSerializer serializer = null;
-            try {
-                serializer = new XmlSerializer(typeof(MapDATA));
-                writer = new StreamWriter(StringCollection.MAPPARH + data.name, false);
-                serializer.Serialize(writer, data);
-            } catch (System.Exception e) {
-                Debug.Log(e);
-                return;
-            } finally {
-                if (writer != null)
-                    writer.Close();
-            }
-        }
+        
 
         #endregion
 

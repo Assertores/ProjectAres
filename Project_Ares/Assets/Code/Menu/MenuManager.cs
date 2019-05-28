@@ -64,7 +64,7 @@ namespace PPBC {
                     DataHolder.s_gameMode = e_gameMode.FFA_CASUAL;
                 }
             }
-            m_modeRef.text = DataHolder.s_gameMode.ToString();
+            m_modeRef.text = DataHolder.s_gameMode.ToString() + System.Environment.NewLine + DataHolder.s_map;
         }
 
         #endregion

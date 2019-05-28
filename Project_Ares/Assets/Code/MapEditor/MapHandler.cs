@@ -155,7 +155,7 @@ namespace PPBC {
             s_refMap = DataHolder.s_maps[DataHolder.s_map];
             if (!s_refMap) {
                 print("map was not pre loaded");
-                s_refMap = DataHolder.LoadMap(DataHolder.s_map);
+                s_refMap = MapDATA.LoadMap(DataHolder.s_map);
                 DataHolder.s_maps[DataHolder.s_map] = s_refMap;
             }
 
@@ -201,7 +201,7 @@ namespace PPBC {
                 tmp.Add(it.m_data);
             }
             map.m_data = tmp.ToArray();
-            DataHolder.SaveMap(map);
+            MapDATA.SaveMap(map);
 
             DataHolder.s_maps[name] = map;
             DataHolder.s_map = name;

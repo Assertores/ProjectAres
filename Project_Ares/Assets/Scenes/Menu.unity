@@ -2391,7 +2391,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 257
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3256,3 +3256,4 @@ MonoBehaviour:
   m_forground: []
   m_laserBariar: {fileID: 5438180597333384809, guid: 99ced5c182d0c1e4b8ea86d484bc7c8d,
     type: 3}
+  SaveToXML: {fileID: 11400000, guid: 326f0b297fb95dc4285785a8df7ff333, type: 2}
