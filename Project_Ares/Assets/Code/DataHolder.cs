@@ -98,10 +98,15 @@ namespace PPBC {
                 s_maps[it.name] = it;
                 //SaveMap(it);
             }
-            System.IO.DirectoryInfo info = new DirectoryInfo(StringCollection.MAPPARH);
-            foreach (var it in info.EnumerateFiles()) {
-                if (!s_maps.ContainsKey(it.Name) && it.Extension == ".map") {
-                    s_maps[it.Name] = MapDATA.LoadMap(it.Name);
+            DirectoryInfo info = new DirectoryInfo(StringCollection.MAPPARH);
+            foreach (var it in info.EnumerateDirectories()) {
+                if (!s_maps.ContainsKey(it.Name)) {
+                   MapDATA tmp = MapDATA.LoadMap(it.Name);
+                    if (!tmp) {
+                        print("map was unable to load");
+                        continue;
+                    }
+                    s_maps[it.Name] = tmp;
                 }
             }
             if (!s_maps.ContainsKey(m_mapName)) {
