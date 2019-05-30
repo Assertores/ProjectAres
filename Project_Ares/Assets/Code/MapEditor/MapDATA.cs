@@ -36,45 +36,37 @@ namespace PPBC {
     [CreateAssetMenu(menuName = "Map")]
     public class MapDATA : ScriptableObject {
         
-        //https://stackoverflow.com/questions/4266875/how-to-quickly-save-load-class-instance-to-file
-        public static MapDATA LoadMap(string path) {
-            //*
-            Debug.Log("loading " + path);
-            TextReader reader = null;
-            MapDATA tmp = new MapDATA();
-            try {
-                var serializer = new XmlSerializer(typeof(MapDATA));
-                reader = new StreamReader(StringCollection.MAPPARH + path);
-                tmp = (MapDATA)serializer.Deserialize(reader);
-            } catch (System.Exception e) {
-                Debug.Log(e);
-            }
-            if (reader != null)
-                reader.Close();
-            if (tmp) {
-                if (tmp.p_background == null)
-                    tmp.p_background = new Sprite[0];
-                if (tmp.p_colors == null)
-                    tmp.p_colors = new Color[0];
-                if (tmp.p_forground == null)
-                    tmp.p_forground = new Sprite[0];
-                if (tmp.p_music == null)
-                    tmp.p_music = new AudioClip[0];
-                if (tmp.p_props == null)
-                    tmp.p_props = new d_prop[0];
-                if (tmp.p_size == null)
-                    tmp.p_size = new Vector2[0];
-                if (tmp.p_stage == null)
-                    tmp.p_stage = new Sprite[0];
-            }
-            return tmp;
-            /*/
-            TextReader saveFile = new StreamReader(StringCollection.MAPPARH + path);
+        public static MapDATA LoadMap(string name) {
+            Debug.Log("loading " + name);
+
+            string dir = StringCollection.MAPPARH + name + "/"; //Path.DirectorySeparatorChar;
             string file = "";
-            file = saveFile.ReadLine();
+            List<string> errorcodes = new List<string>();
+            //===== ===== Read form file ===== =====
+            if (!Directory.Exists(dir)) {
+                Debug.Log("path " + dir + " not valide");
+                return null;
+            }
+            if(!File.Exists(dir + name + ".map")) {
+                Debug.Log("file " + dir + name + ".map" + " not valide");
+                return null;
+            }
+            TextReader saveFile = new StreamReader(dir + name + ".map");
+            if(saveFile == null) {
+                Debug.Log("unable to open file: " + dir + name + ".map");
+                return null;
+            }
+
+            file = saveFile.ReadToEnd();
             saveFile.Close();
 
+            //===== ===== createing holder variables ===== =====
+
             MapDATA value = new MapDATA();
+            value.m_background = 0;
+            value.m_globalLight = 0;
+            value.m_music = 0;
+            value.m_size = 0;
 
             List<Vector2> sizes = new List<Vector2>();
             List<Sprite> backgrounds = new List<Sprite>();
@@ -84,11 +76,13 @@ namespace PPBC {
             List<Sprite> stages = new List<Sprite>();
             List<Sprite> forgrounds = new List<Sprite>();
             List<d_mapData> datas = new List<d_mapData>();
+            
+            //===== ===== creating temporary variables ===== =====
 
-            Texture2D tmpTex;
             Sprite tmpSprite;
             AudioClip tmpMusic;
             Vector2 tmpV2;
+            List<Vector2> tmpV2list = new List<Vector2>();
             Color tmpColor;
             d_prop tmpProp;
             tmpProp.m_sprite = null;
@@ -100,8 +94,12 @@ namespace PPBC {
             int readPos = 0;//1 = Resource, 2 = Data
             e_objType readType = e_objType.BORDER;//Border = non
 
-            string[] lines = file.Split(Environment.NewLine.ToCharArray()[0]);
+            //===== ===== procesing file data ===== =====
+
+            string[] lines = file.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < lines.Length; i++) {
+                //Debug.Log("Current line: " + lines[i]);
+                //----- ----- get category ----- -----
                 if (lines[i] == "#Resources") {
                     readPos = 1;
                     readType = e_objType.BORDER;
@@ -112,9 +110,12 @@ namespace PPBC {
                     continue;
                 }
 
-                if (readPos == 0)
+                if (readPos == 0) {
+                    errorcodes.Add("line " + i + " is in no category: " + lines[i]);
                     continue;
+                }
 
+                //----- ----- get sub category ----- -----
                 if(lines[i] == "[SIZE]") {
                     readType = e_objType.SIZE;
                     continue;
@@ -144,99 +145,124 @@ namespace PPBC {
                     continue;
                 }
 
-                if (readType == e_objType.BORDER)
+                if (readType == e_objType.BORDER) {
+                    errorcodes.Add("line " + i + " is in no subcategory: " + lines[i]);
                     continue;
+                }
 
+                //----- ----- interprate according to internal state ----- -----
                 if (readPos == 1) {
                     switch (readType) {
                     case e_objType.BACKGROUND:
-                        tmpTex = LoadTexture(StringCollection.MAPPARH + lines[i]);
-                        if (tmpTex) {
-                            tmpSprite = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(0, 0), 512);
-                            if (tmpSprite) {
-                                backgrounds.Add(tmpSprite);
-                                tmpSprite = null;
+                        tmpSprite = LoadSprite(dir, lines[i]);
+                        if (!tmpSprite) {
+                            errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
+                            continue;
+                        }
+                        backgrounds.Add(tmpSprite);
+                        break;
+                    case e_objType.PROP:
+                        if(propLine == 1) {
+                            tmpStgArr = lines[i].Split(';');
+                            if (tmpStgArr.Length < 2) {
+                                propLine = 0;
+                            } else if (!float.TryParse(tmpStgArr[0], out tmpV2.x)) {
+                                errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
+                                continue;
+                            } else if (!float.TryParse(tmpStgArr[1], out tmpV2.y)) {
+                                errorcodes.Add("unable to convert second value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
+                                continue;
+                            } else {
+                                tmpV2list.Add(tmpV2);
+                                if (i == lines.Length - 1 || lines[i+1].Split(';').Length < 2) {
+                                    tmpProp.m_collider = tmpV2list.ToArray();
+                                    props.Add(tmpProp);
+                                }
                             }
                         }
-                        break;
-                    case e_objType.PROP://sehr sehr unsave muss anders gelöst werden
-                        if (propLine == 0) {
-                            tmpTex = LoadTexture(StringCollection.MAPPARH + lines[i]);
-                            if (tmpTex) {
-                                tmpProp.m_sprite = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(0, 0), 512);
-                                if (!tmpProp.m_sprite) {
-                                    //irgendwass machen um den rest zu überspringen
-                                }
-                                tmpProp.m_collider = new Vector2[0];
+                        if(propLine == 0) {
+                            tmpSprite = LoadSprite(dir, lines[i]);
+                            if (!tmpSprite) {
+                                errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
+                                continue;
                             }
-                            propLine = -1;
-                        }else if(propLine == -1) {
-                            if(!int.TryParse(lines[i], out propLine)) {
-                                //irgendwass machen um den rest zu überspringen
-                            }
-                            tmpProp.m_collider = new Vector2[propLine];
-                        } else {
-                            if (tmpProp.m_collider.Length < propLine)
-                                continue;
-                            tmpStgArr = lines[i].Split(';');
-                            if (tmpStgArr.Length < 2)
-                                continue;
-                            if (!float.TryParse(tmpStgArr[0], out tmpV2.x))
-                                continue;
-                            if (!float.TryParse(tmpStgArr[1], out tmpV2.y))
-                                continue;
-
-                            tmpProp.m_collider[tmpProp.m_collider.Length - propLine] = tmpV2;
-                            propLine--;
-                            if(propLine == 0) {
-                                props.Add(tmpProp);
-                            }
+                            tmpProp.m_sprite = tmpSprite;
+                            propLine = 1;
+                            tmpV2list.Clear();
                         }
                         break;
                     case e_objType.STAGE:
-                        tmpTex = LoadTexture(StringCollection.MAPPARH + lines[i]);
-                        if (tmpTex) {
-                            tmpSprite = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(0, 0), 512);
-                            if (tmpSprite) {
-                                stages.Add(tmpSprite);
-                                tmpSprite = null;
-                            }
+                        tmpSprite = LoadSprite(dir, lines[i]);
+                        if (!tmpSprite) {
+                            errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
+                            continue;
                         }
+                        stages.Add(tmpSprite);
                         break;
                     case e_objType.LIGHT://color
                         tmpStgArr = lines[i].Split(';');
-                        if(tmpStgArr.Length < 3)
+                        if(tmpStgArr.Length < 3) {
+                            errorcodes.Add("values in line " + i + "cant be casted to at leased 3 values: " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[0], out tmpColor.r))
+                        }
+                        if (!float.TryParse(tmpStgArr[0], out tmpColor.r)) {
+                            errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[1], out tmpColor.g))
+                        }
+                        if (!float.TryParse(tmpStgArr[1], out tmpColor.g)) {
+                            errorcodes.Add("unable to convert second value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[2], out tmpColor.b))
+                        }
+                        if (!float.TryParse(tmpStgArr[2], out tmpColor.b)) {
+                            errorcodes.Add("unable to convert third value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
+                        }
                         tmpColor.a = 1;
 
                         colors.Add(tmpColor);
                         break;
                     case e_objType.FORGROUND:
-                        tmpTex = LoadTexture(StringCollection.MAPPARH + lines[i]);
-                        if (tmpTex) {
-                            tmpSprite = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(0, 0), 512);
-                            if (tmpSprite) {
-                                forgrounds.Add(tmpSprite);
-                                tmpSprite = null;
-                            }
+                        tmpSprite = LoadSprite(dir, lines[i]);
+                        if (!tmpSprite) {
+                            errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
+                            continue;
                         }
+                        forgrounds.Add(tmpSprite);
                         break;
-                    case e_objType.MUSIC:
+                    case e_objType.MUSIC: {
+                        WWW form = new WWW("file:///" + dir + lines[i]);
+                        while (!form.isDone) ;
+                        if (form == null) {
+                            errorcodes.Add("line " + i + " can't be read " + lines[i]);
+                            continue;
+                        }
+                        if (form.error != null) {
+                            errorcodes.Add("line " + i + ": " + form.error + " (" + lines[i] + ")");
+                            continue;
+                        }
+                        tmpMusic = form.GetAudioClip();
+                        if (!tmpMusic) {
+                            errorcodes.Add("line " + i + " is no valide audio: " + lines[i]);
+                            continue;
+                        }
+                        tmpMusic.name = lines[i];
+                        musics.Add(tmpMusic);
                         break;
+                    }
                     case e_objType.SIZE:
                         tmpStgArr = lines[i].Split(';');
-                        if (tmpStgArr.Length < 2)
+                        if (tmpStgArr.Length < 2) {
+                            errorcodes.Add("values in line " + i + "cant be casted to at leased 2 values: " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[0], out tmpV2.x))
+                        }
+                        if (!float.TryParse(tmpStgArr[0], out tmpV2.x)) {
+                            errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[1], out tmpV2.y))
+                        }
+                        if (!float.TryParse(tmpStgArr[1], out tmpV2.y)) {
+                            errorcodes.Add("unable to convert second value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
+                        }
 
                         sizes.Add(tmpV2);
                         break;
@@ -247,47 +273,67 @@ namespace PPBC {
                     switch (readType) {
                     case e_objType.BACKGROUND:
                         if (!int.TryParse(lines[i], out value.m_background)) {
-                            value.m_background = 0;
+                            errorcodes.Add("unable to convert" + lines[i] + " to float in line " + i + " and will be set to default value 0");
+                            continue;
                         }
                         readType = e_objType.BORDER;
                         break;
                     case e_objType.PLAYERSTART://data
                         tmpStgArr = lines[i].Split(';');
-                        if (tmpStgArr.Length < 7)
+                        if (tmpStgArr.Length < 7) {
+                            errorcodes.Add("values in line " + i + "cant be casted to at leased 7 values: " + lines[i]);
                             continue;
-                        if (!Enum.TryParse<e_objType>(tmpStgArr[0], out tmpMData.type))
+                        }
+                        if (!Enum.TryParse<e_objType>(tmpStgArr[0], out tmpMData.type)) {
+                            errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to e_objType enumerator in line " + i + ": " + lines[i]);
                             continue;
-                        if (!int.TryParse(tmpStgArr[1], out tmpMData.index))
+                        }
+                        if (!int.TryParse(tmpStgArr[1], out tmpMData.index)) {
+                            errorcodes.Add("unable to convert second value " + tmpStgArr[0] + " to int in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[2], out tmpMData.position.x))
+                        }
+                        if (!float.TryParse(tmpStgArr[2], out tmpMData.position.x)) {
+                            errorcodes.Add("unable to convert third value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[3], out tmpMData.position.y))
+                        }
+                        if (!float.TryParse(tmpStgArr[3], out tmpMData.position.y)) {
+                            errorcodes.Add("unable to convert forth value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[4], out tmpMData.rotation))
+                        }
+                        if (!float.TryParse(tmpStgArr[4], out tmpMData.rotation)) {
+                            errorcodes.Add("unable to convert fith value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[5], out tmpMData.scale.x))
+                        }
+                        if (!float.TryParse(tmpStgArr[5], out tmpMData.scale.x)) {
+                            errorcodes.Add("unable to convert sixth value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
-                        if (!float.TryParse(tmpStgArr[6], out tmpMData.scale.y))
+                        }
+                        if (!float.TryParse(tmpStgArr[6], out tmpMData.scale.y)) {
+                            errorcodes.Add("unable to convert seventh value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
                             continue;
+                        }
 
                         datas.Add(tmpMData);
 
                         break;
                     case e_objType.GLOBALLIGHT:
                         if (!int.TryParse(lines[i], out value.m_globalLight)) {
-                            value.m_globalLight = 0;
+                            errorcodes.Add("unable to convert" + lines[i] + " to float in line " + i + " and will be set to default value 0");
+                            continue;
                         }
                         readType = e_objType.BORDER;
                         break;
                     case e_objType.MUSIC:
                         if (!int.TryParse(lines[i], out value.m_music)) {
-                            value.m_music = 0;
+                            errorcodes.Add("unable to convert" + lines[i] + " to float in line " + i + " and will be set to default value 0");
+                            continue;
                         }
                         readType = e_objType.BORDER;
                         break;
                     case e_objType.SIZE:
                         if(!int.TryParse(lines[i], out value.m_size)) {
-                            value.m_size = 0;
+                            errorcodes.Add("unable to convert" + lines[i] + " to float in line " + i + " and will be set to default value 0");
+                            continue;
                         }
                         readType = e_objType.BORDER;
                         break;
@@ -296,6 +342,7 @@ namespace PPBC {
                     }
                 }
             }
+            
             value.p_background = backgrounds.ToArray();
             value.p_colors = colors.ToArray();
             value.p_forground = forgrounds.ToArray();
@@ -305,44 +352,36 @@ namespace PPBC {
             value.p_stage = stages.ToArray();
             value.m_data = datas.ToArray();
 
+            //TODO: validate datas;
+
+            for (int i = 0; i < errorcodes.Count; i++) {
+                Debug.Log(errorcodes[i] + Environment.NewLine);
+            }
+
             return value;
-            //*/
         }
 
-        public static Texture2D LoadTexture(string FilePath) {
-
-            // Load a PNG or JPG file from disk to a Texture2D
-            // Returns null if load fails
-
-            Texture2D Tex2D;
-            byte[] FileData;
-
-            if (File.Exists(FilePath)) {
-                FileData = File.ReadAllBytes(FilePath);
-                Tex2D = new Texture2D(2, 2);           // Create new "empty" texture
-                if (Tex2D.LoadImage(FileData))           // Load the imagedata into the texture (size is set automatically)
-                    return Tex2D;                 // If data = readable -> return texture
+        static Sprite LoadSprite(string path, string name) {
+            WWW tmp = new WWW("file:///" + path + name);
+            while (!tmp.isDone) ;
+            if (tmp == null) {
+                return null;
             }
-            return null;                     // Return null if load failed
+            if (tmp.error != null) {
+                Debug.Log(tmp.error);
+                return null;
+            }
+            Texture2D tmpTex = tmp.texture;
+            if (!tmpTex)
+                return null;
+            Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width/2, tmpTex.height/2), 512);
+            if (!value)
+                return null;
+            value.name = name;
+            return value;
         }
 
         public static void SaveMap(MapDATA data) {
-            //*
-            Directory.CreateDirectory(StringCollection.MAPPARH);
-            TextWriter writer = null;
-            XmlSerializer serializer = null;
-            try {
-                serializer = new XmlSerializer(typeof(MapDATA));
-                writer = new StreamWriter(StringCollection.MAPPARH + data.name, false);
-                serializer.Serialize(writer, data);
-            } catch (System.Exception e) {
-                Debug.Log(e);
-                return;
-            } finally {
-                if (writer != null)
-                    writer.Close();
-            }
-            /*/
             string value = "";
             value += "#Resources" + Environment.NewLine;
 
@@ -365,7 +404,6 @@ namespace PPBC {
             value += "[PROPS]" + Environment.NewLine;
             for (int i = 0; i < data.p_props.Length; i++) {
                 value += data.p_props[i].m_sprite.name + ".png" + Environment.NewLine;
-                value += data.p_props[i].m_collider.Length + Environment.NewLine;
                 for(int j = 0; j < data.p_props[i].m_collider.Length; j++) {
                     value += data.p_props[i].m_collider[j].x + ";" + data.p_props[i].m_collider[j].y + Environment.NewLine;
                 }
@@ -390,10 +428,10 @@ namespace PPBC {
                 value += Environment.NewLine + data.m_data[i].ToString();
             }
 
-            StreamWriter saveFile = File.CreateText(StringCollection.MAPPARH + data.name);
+            Directory.CreateDirectory(StringCollection.MAPPARH + data.name);
+            StreamWriter saveFile = File.CreateText(StringCollection.MAPPARH + data.name + "/" + data.name + ".map");
             saveFile.Write(value);
             saveFile.Close();
-            //*/
         }
 
         public MapDATA Copy() {
