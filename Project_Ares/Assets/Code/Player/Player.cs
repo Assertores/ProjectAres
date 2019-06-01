@@ -62,7 +62,7 @@ namespace PPBC {
         [SerializeField] ModellRefHolder m_modellRefHolder;
         //---- ----- Feedback ----- ----
         [SerializeField] GameObject m_laserdeathVFX;
-        [SerializeField] ParticleSystem m_deathVFX;
+        [SerializeField] GameObject m_deathVFX;
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
         
@@ -337,7 +337,7 @@ namespace PPBC {
                 print("hit laser");
                 m_laserdeathVFX.SetActive(true);
             } else {
-                m_deathVFX.Play();
+                m_deathVFX.SetActive(true);
             }
             StartCoroutine(PlayerDie(1.0f));
 

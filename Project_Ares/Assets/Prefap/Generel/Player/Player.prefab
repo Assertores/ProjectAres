@@ -3029,7 +3029,7 @@ MonoBehaviour:
   m_killsRef: {fileID: 754868780043255403}
   m_modellRefHolder: {fileID: 0}
   m_laserdeathVFX: {fileID: 242968859353934180}
-  m_deathVFX: {fileID: 5993499792938086127}
+  m_deathVFX: {fileID: 5993499792938086125}
   m_regenTime: 5
   m_regeneration: 1
   m_maxHealth: 100
@@ -4230,6 +4230,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_DEATH
       objectReference: {fileID: 0}
+    - target: {fileID: 5384589208509305913, guid: 35fb78fcff51d5a4f8fca233662b4ca6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5384589208509305916, guid: 35fb78fcff51d5a4f8fca233662b4ca6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4342,15 +4347,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35fb78fcff51d5a4f8fca233662b4ca6, type: 3}
---- !u!4 &5993499792938086120 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5384589208509305916, guid: 35fb78fcff51d5a4f8fca233662b4ca6,
+--- !u!1 &5993499792938086125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5384589208509305913, guid: 35fb78fcff51d5a4f8fca233662b4ca6,
     type: 3}
   m_PrefabInstance: {fileID: 1843334635881954004}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &5993499792938086127 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5384589208509305915, guid: 35fb78fcff51d5a4f8fca233662b4ca6,
+--- !u!4 &5993499792938086120 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5384589208509305916, guid: 35fb78fcff51d5a4f8fca233662b4ca6,
     type: 3}
   m_PrefabInstance: {fileID: 1843334635881954004}
   m_PrefabAsset: {fileID: 0}
