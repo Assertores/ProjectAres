@@ -60,7 +60,9 @@ namespace PPBC {
         [SerializeField] string m_characterName;
         [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
         [SerializeField] ModellRefHolder m_modellRefHolder;
-
+        //---- ----- Feedback ----- ----
+        [SerializeField] ParticleSystem m_laserdeathVFX;
+        [SerializeField] ParticleSystem m_deathVFX;
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
         
@@ -109,6 +111,9 @@ namespace PPBC {
         public float m_joinTime { get; private set; }
         float m_weaponChangeTime;
 
+        //---- ----- Feedback ----- ----
+       
+
         #endregion
         #region MonoBehaviour
 
@@ -136,7 +141,7 @@ namespace PPBC {
         void Start() {
         
             m_rb = GetComponent<Rigidbody2D>();
-
+            
             
         }
         private void OnDestroy() {
@@ -327,6 +332,7 @@ namespace PPBC {
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("05_Sterben",1);//In stringCollection übertragen
             }
+            m_deathVFX.Play();
         }
 
         public float GetHealth() {
@@ -708,6 +714,12 @@ namespace PPBC {
                     m_modelAnim.animation.Play("03_Aufprall", 1);//In stringCollection übertragen
                 }
             }
+            if (collision.gameObject.tag == "Laser") {
+                Vector2 tmp = (transform.position);
+                Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector2(tmp.x,tmp.y));
+                m_laserdeathVFX.transform.rotation = rotation;
+                m_laserdeathVFX.Play();
+            }
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
                 foreach (var it in collision.contacts) {
@@ -726,5 +738,12 @@ namespace PPBC {
         }
 
         #endregion
+        IEnumerator PlayerDie(float m_wait) {
+
+            yield return new WaitForSeconds(m_wait);
+
+            GameManager.s_singelton?.PlayerDied(this);
+
+        }
     }
 }
