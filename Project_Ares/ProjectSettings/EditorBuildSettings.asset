@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/WinScreen_FFA_Casual.unity
     guid: db47b71e1c7bc28489b9f828e865b6b3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Colosseum.unity
     guid: de5a126a8c8a7bb47a9128b8c4962481
   - enabled: 1
