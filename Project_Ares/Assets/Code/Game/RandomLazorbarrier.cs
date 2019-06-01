@@ -41,14 +41,14 @@ namespace PPBC
             }
         }
 
-       /* private void OnCollisionEnter2D(Collision2D collision) {
+        private void OnCollisionEnter2D(Collision2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
                 tmp.Die(null);
             } else {
                 Destroy(collision.gameObject);
             }
-        }*/
+        }
     }
 
    

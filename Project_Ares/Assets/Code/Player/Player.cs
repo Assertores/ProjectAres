@@ -61,7 +61,7 @@ namespace PPBC {
         [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
         [SerializeField] ModellRefHolder m_modellRefHolder;
         //---- ----- Feedback ----- ----
-        [SerializeField] ParticleSystem m_laserdeathVFX;
+        [SerializeField] GameObject m_laserdeathVFX;
         [SerializeField] ParticleSystem m_deathVFX;
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
@@ -103,6 +103,7 @@ namespace PPBC {
 
         int m_currentName;
         bool m_isColliding;
+        bool m_isCollidingLaser;
 
         public Rigidbody2D m_rb { get; private set; }
 
@@ -179,16 +180,17 @@ namespace PPBC {
             m_controlRef.rotation = m_weaponRef.rotation;
 
             //----- ----- Feedback ----- -----
-            if (m_isColliding) {
-                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
-                    m_modelAnim.animation.Play("02_Idle_Luft");//In stringCollection übertragen
-                }
-            } else {
-                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
-                    m_modelAnim.animation.Play("01_Idle");
+            if (m_modelAnim?.animation.lastAnimationName != "05_Sterben") {
+                if (m_isColliding) {
+                    if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                        m_modelAnim.animation.Play("02_Idle_Luft");//In stringCollection übertragen
+                    }
+                } else {
+                    if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
+                        m_modelAnim.animation.Play("01_Idle");
+                    }
                 }
             }
-
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
 
@@ -308,10 +310,11 @@ namespace PPBC {
             m_currentHealth = 0;
             m_alive = false;
             m_rb.velocity = Vector2.zero;
-            gameObject.SetActive(false);
+            
 
             InControle(false);
-            GameManager.s_singelton.PlayerDied(this);
+            
+            
 
             if(source)
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
@@ -329,10 +332,16 @@ namespace PPBC {
             //----- ----- Tracking ----- -----
             m_stats.m_deathBySuicide++;
             //---- ----- Feedback ----- ----
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play("05_Sterben",1);//In stringCollection übertragen
+            StartAnim("05_Sterben", 1);
+            if (m_isCollidingLaser) {
+                print("hit laser");
+                m_laserdeathVFX.SetActive(true);
+            } else {
+                m_deathVFX.Play();
             }
-            m_deathVFX.Play();
+            StartCoroutine(PlayerDie(1.0f));
+
+
         }
 
         public float GetHealth() {
@@ -715,10 +724,11 @@ namespace PPBC {
                 }
             }
             if (collision.gameObject.tag == "Laser") {
-                Vector2 tmp = (transform.position);
+                /*Vector2 tmp = (transform.position);
                 Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector2(tmp.x,tmp.y));
-                m_laserdeathVFX.transform.rotation = rotation;
-                m_laserdeathVFX.Play();
+                m_laserdeathVFX.transform.rotation = rotation;*/
+                m_isCollidingLaser = true;
+                print(m_isCollidingLaser);
             }
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
@@ -741,7 +751,7 @@ namespace PPBC {
         IEnumerator PlayerDie(float m_wait) {
 
             yield return new WaitForSeconds(m_wait);
-
+            gameObject.SetActive(false);
             GameManager.s_singelton?.PlayerDied(this);
 
         }
