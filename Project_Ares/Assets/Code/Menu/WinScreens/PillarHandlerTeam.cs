@@ -48,14 +48,14 @@ namespace PPBC {
             Vector3 lmp = new Vector3(m_pillars[0].transform.position.x - m_pillarWith / 2, m_pillars[0].transform.position.y, m_pillars[0].transform.position.z);
             Vector3 rmp = new Vector3(m_pillars[0].transform.position.x + m_pillarWith / 2, m_pillars[0].transform.position.y, m_pillars[0].transform.position.z);
             for (int i = 0; i < players.Count; i++) {
-                players[i].transform.position = Vector3.Lerp(lmp, rmp, ((float)i + 1) / (Player.s_references.Count + 1));
+                players[i].transform.position = Vector3.Lerp(lmp, rmp, ((float)i + 1) / (players.Count + 1));
             }
 
             players = Player.s_references.FindAll(x => x.m_team == 1);
             lmp = new Vector3(m_pillars[1].transform.position.x - m_pillarWith / 2, m_pillars[1].transform.position.y, m_pillars[1].transform.position.z);
             rmp = new Vector3(m_pillars[1].transform.position.x + m_pillarWith / 2, m_pillars[1].transform.position.y, m_pillars[1].transform.position.z);
             for (int i = 0; i < players.Count; i++) {
-                players[i].transform.position = Vector3.Lerp(lmp, rmp, ((float)i + 1) / (Player.s_references.Count + 1));
+                players[i].transform.position = Vector3.Lerp(lmp, rmp, ((float)i + 1) / (players.Count + 1));
             }
 
 
