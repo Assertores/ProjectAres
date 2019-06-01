@@ -66,7 +66,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -190620691
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e4380f6aa6cbefd4784c942c71a58090, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.6431373}
@@ -125,7 +125,12 @@ MonoBehaviour:
   m_explosion: {fileID: 5424249025874711400}
   m_explosionStains: {fileID: 854507398363705032}
   m_audio: {fileID: 3293680556011053861}
-  m_sounds: []
+  m_sounds:
+  - {fileID: 8300000, guid: db9278a9993f23448bd3d16a3c3516a4, type: 3}
+  - {fileID: 8300000, guid: cefe05d5fa31d794abb9d960d1dad39d, type: 3}
+  - {fileID: 8300000, guid: 708f724497a39d2459970a82fcdbb04f, type: 3}
+  - {fileID: 8300000, guid: 177e0f19f6b96bd40ba7175808bccbb7, type: 3}
+  - {fileID: 8300000, guid: c90cd907dfb228545abc99f265cdbca0, type: 3}
   m_baseDamage: 40
   m_radius: 2
   m_baseKnockback: 1000
@@ -154,6 +159,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_explosionTime: 0.8
+  m_halfPitchRange: 0.1
+  m_halfVolumeRange: 0.1
 --- !u!1 &3039136259464356723
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 2920412211633078805, guid: b785423de20414b418a807ca38aa8277,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2920412211555293780, guid: b785423de20414b418a807ca38aa8277,
         type: 3}
