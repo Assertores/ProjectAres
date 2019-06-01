@@ -29,7 +29,7 @@ namespace PPBC {
                 }
                 print(tmp);
             }
-            if (tmp == float.MinValue) {
+            if (tmp < 0) {
                 m_animationPlayTime += Time.time;
             } else {
                 m_animationPlayTime = Time.time + tmp;

@@ -21,6 +21,8 @@ namespace PPBC {
             if (EndScreenManager.s_ref && DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && DataHolder.s_firstMatch == false) {
                 EndScreenManager.s_ref.AddItem(this, 2);
                 this.enabled = false;
+            } else if(EndScreenManager.s_ref){
+                Destroy(this);
             }
         }
 

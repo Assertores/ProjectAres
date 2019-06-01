@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PPBC {
     public class TDM_Tournamant : MonoBehaviour, IGameMode {
@@ -51,6 +52,10 @@ namespace PPBC {
         public void PlayerDied(Player player) {
             if(player.m_team >= 0 && player.m_team < m_lives.Count) {
                 m_lives[player.m_team]--;
+                if(m_lives[player.m_team] <= 0) {
+                    SceneManager.LoadScene(StringCollection.ENDSCREEN);
+                    return;
+                }
                 foreach(var it in Player.s_references.FindAll(x => x.m_team == player.m_team)) {
                     it.m_stats.m_points = m_lives[player.m_team];
                 }
@@ -69,6 +74,7 @@ namespace PPBC {
 
         void DoRespawn(Player player) {
             List<PlayerStart> availableSpawns = PlayerStart.s_references.FindAll(x => x.m_team == player.m_team);
+
             if (availableSpawns.Count == 0) {
                 player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
             } else {

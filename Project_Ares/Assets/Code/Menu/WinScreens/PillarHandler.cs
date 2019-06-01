@@ -36,7 +36,8 @@ namespace PPBC {
             m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_pillarRiseTime;
             m_hightPerKill = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / Player.s_sortedRef[0].m_stats.m_points;
             
-            EndScreenManager.s_ref?.AddItem(this, 0);
+            if(DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT || DataHolder.s_gameMode == e_gameMode.FFA_CASUAL)
+                EndScreenManager.s_ref?.AddItem(this, 0);
         }
 
         #endregion
