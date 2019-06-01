@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PPBC {
-    public class GameManager : MonoBehaviour {
 
-        [System.Serializable]
-        struct d_gmObjectItem {
-            public e_gameMode m_type;
-            public GameObject m_value;
-        }
+    [System.Serializable]
+    struct d_gmObjectItem {
+        public e_gameMode m_type;
+        public GameObject m_value;
+    }
+
+    public class GameManager : MonoBehaviour {
 
         #region Variables
 
         [Header("References")]
+        public MapHandler m_mapHandler;
         [SerializeField] d_gmObjectItem[] m_gmObject;
-        [SerializeField] GameObject m_playerRef;
 
         Dictionary<e_gameMode, IGameMode> m_gameModes = new Dictionary<e_gameMode, IGameMode>();
-        IGameMode m_gameMode;
 
         #endregion
         #region MonoBehaviour
@@ -54,35 +55,24 @@ namespace PPBC {
         void Start() {
 
             if(Player.s_references.Count == 0) {
-                GameObject tmp = Instantiate(m_playerRef);
-                if (tmp) {
-                    GameObject tmpControle = new GameObject("Controler");
-                    tmpControle.transform.parent = tmp.transform;
+                SceneManager.LoadScene(StringCollection.MAINMENU);
+                return;
+            }
 
-                    IControl reference = tmpControle.AddComponent<KeyboardControl>();//null reference checks
-                    tmp.GetComponentInChildren<Player>().Init(tmpControle);//dirty null reference checks
-                    //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
+            if (m_gmObject != null) {
+                foreach (d_gmObjectItem it in m_gmObject) {
+                    IGameMode tmp = it.m_value.GetComponent<IGameMode>();
+                    if (tmp != null) {
+                        m_gameModes[it.m_type] = tmp;
+                        tmp.Stop();
+                    }
                 }
             }
 
-            foreach(var it in m_gmObject) {
-                m_gameModes[it.m_type] = it.m_value.GetComponent<IGameMode>();//kein null reference check
-            }
-
-            Init(m_gameModes[DataHolder.s_gameMode]);
-
-            foreach(var it in Player.s_references) {
-                it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
-            }
-        }
-
-        #endregion
-
-        public void Init(IGameMode mode) {
-            m_gameMode?.Stop();
-            m_gameMode = mode;
+            if (m_mapHandler)
+                m_mapHandler.LoadCurrentMap();
             
-            foreach(var it in Player.s_references) {
+            foreach (var it in Player.s_references) {
                 it.m_stats.m_assists = 0;
                 it.m_stats.m_damageDealt = 0;
                 it.m_stats.m_damageTaken = 0;
@@ -92,11 +82,18 @@ namespace PPBC {
                 it.DoReset();
                 it.Invincible(false);
             }
-            mode.Init();
+
+            m_gameModes[DataHolder.s_gameMode].Init();
+
+            foreach (var it in Player.s_references) {
+                it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
+            }
         }
 
+        #endregion
+
         public void PlayerDied(Player player) {
-            m_gameMode.PlayerDied(player);
+            m_gameModes[DataHolder.s_gameMode].PlayerDied(player);
         }
     }
 }

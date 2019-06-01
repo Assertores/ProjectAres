@@ -36,7 +36,8 @@ namespace PPBC {
             m_pillarSpeed = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / m_pillarRiseTime;
             m_hightPerKill = (m_maxHeight.position.y - m_rightMostPlayer.position.y) / Player.s_sortedRef[0].m_stats.m_points;
             
-            EndScreenManager.s_ref?.AddItem(this, 0);
+            if(DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT || DataHolder.s_gameMode == e_gameMode.FFA_CASUAL)
+                EndScreenManager.s_ref?.AddItem(this, 0);
         }
 
         #endregion
@@ -65,6 +66,7 @@ namespace PPBC {
                     m_pillar[i].gameObject.transform.position += new Vector3(0, m_pillarSpeed * Time.deltaTime, 0);
 
                     Player.s_references[i].transform.position = m_pillar[i].gameObject.transform.position;
+                    Player.s_references[i].transform.position += new Vector3(0, Player.s_references[i].m_distanceToGround, 0);
                 } else {
                     int index = Player.s_sortedRef.IndexOf(Player.s_references[i]);
                     m_pillar[i].m_pillarField.text = ("Platz " + (index + 1).ToString());//TODO: Lokalisierung, Bracket anstadt finale
@@ -73,12 +75,13 @@ namespace PPBC {
                     m_pillar[i].m_pillarGradient.color = c;
                     m_pillar[i].m_pillarGradient.gameObject.SetActive(true);
 
-                    if (index == 0) {
-                        return true;
-                    }
+                    m_pillar[i].finished = true;
                 }
             }
-            return false;
+            foreach (var it in m_pillar)
+                if (!it.finished)
+                    return false;
+            return true;
         }
 
         #endregion

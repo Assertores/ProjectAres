@@ -72,17 +72,47 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
-        type: 3}
-      propertyPath: m_explosion
-      value: 
-      objectReference: {fileID: 1696982425966001237}
     - target: {fileID: 6454535820238267637, guid: 973c7300ae2d07248ad89f8bd41128ea,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 077f44f6d69405d4d832882cd1daaffd,
         type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_explosion
+      value: 
+      objectReference: {fileID: 1696982425966001237}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 816226fff7635f246ab8a668e0b02cd1, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f67c087cbdf98b4995f96e7b9349b5d, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a66e3fe7f9f1db444834a0e5b7be0485, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 53f70d04de362a448bb4c48ea525b53d, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: bb3536e7fec47554399528ccb6fbc82b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 973c7300ae2d07248ad89f8bd41128ea, type: 3}
 --- !u!4 &7486555161251056130 stripped

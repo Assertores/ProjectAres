@@ -16,6 +16,7 @@ namespace PPBC {
         [SerializeField] float m_scrollSpeed = 1;
         [SerializeField] float m_fadeTime = 1;
         [SerializeField] float m_fadeDuration = 1;
+        [SerializeField] bool m_fadeOut = true;
 
         float m_itemHight;
         float m_lastFeedTime = float.MaxValue;
@@ -53,7 +54,7 @@ namespace PPBC {
             if(((RectTransform)transform).anchoredPosition.y < ((RectTransform)transform).rect.height) {
                 transform.position += new Vector3(0, m_scrollSpeed * Time.deltaTime, 0);
             }
-            if(Time.timeSinceLevelLoad - m_lastFeedTime > m_fadeTime) {
+            if(m_fadeOut && Time.timeSinceLevelLoad - m_lastFeedTime > m_fadeTime) {
                 m_fade.alpha = 1 - (Time.timeSinceLevelLoad - m_lastFeedTime - m_fadeTime) / m_fadeDuration;
             }
         }

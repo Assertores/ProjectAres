@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf71bb7c48b26640958a5ebacf35bcf, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  p_size:
+  - {x: 2, y: 3}
+  p_background:
+  - {fileID: 21300000, guid: 99c3c7075478b124ea3a11dc63de3b92, type: 3}
+  p_colors:
+  - {r: 0, g: 0.33, b: 0.66, a: 1}
+  p_music:
+  - {fileID: 8300000, guid: 2f91af574cad9f345acbccb9d929bb4e, type: 3}
+  p_props:
+  - m_sprite: {fileID: 21300000, guid: fd446d8a961dffe488f727a4ba4d124f, type: 3}
+    m_collider:
+    - {x: 0.13, y: 0}
+    - {x: 0.091, y: -0.091}
+    - {x: 0, y: -0.13}
+    - {x: -0.091, y: -0.091}
+    - {x: -0.13, y: 0}
+    - {x: -0.091, y: 0.091}
+    - {x: 0, y: 0.13}
+    - {x: 0.091, y: 0.091}
+  p_stage:
+  - {fileID: 21300000, guid: a394ebfe97237cd4dad041180c7db838, type: 3}
+  p_forground:
+  - {fileID: 21300000, guid: 02da7a455e42df346b63034834602e3c, type: 3}
+  m_size: 0
+  m_background: 0
+  m_globalLight: 0
+  m_music: 0
+  m_data:
+  - type: 1
+    index: 3
+    position: {x: -7.54, y: -1.638}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 1
+    index: 3
+    position: {x: 7.39, y: -1.638}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 1
+    index: 4
+    position: {x: 0, y: -1.87}
+    rotation: 0
+    scale: {x: 0.45, y: 0.45}
+  - type: 4
+    index: 1
+    position: {x: -9.15, y: -0.42}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 4
+    index: 1
+    position: {x: 9.15, y: -0.42}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 3
+    index: 0
+    position: {x: -7.58, y: -1.94}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 3
+    index: 1
+    position: {x: 7.32, y: -1.94}
+    rotation: 0
+    scale: {x: 0, y: 0}
+  - type: 6
+    index: 2
+    position: {x: 0, y: -6}
+    rotation: 0
+    scale: {x: 100, y: 4.171}
+  - type: 6
+    index: 0
+    position: {x: 10.54, y: 0}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 6
+    index: 1
+    position: {x: 0, y: 5.74}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 6
+    index: 0
+    position: {x: -10.56, y: 0}
+    rotation: 0
+    scale: {x: -1, y: 1}

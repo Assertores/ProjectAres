@@ -76,9 +76,12 @@ namespace PPBC {
         [Range(0,1)]
         [SerializeField] float m_airResistance = 0.25f;
         [SerializeField] float m_bounciness = 0.5f;
-        
+
+        public int m_team;
 
         public d_playerData m_stats;
+
+        public float m_distanceToGround;
 
         public IControl m_control { get; private set; }
         List<IWeapon> m_weapons = new List<IWeapon>();
@@ -126,6 +129,8 @@ namespace PPBC {
             m_stats.m_timeInLobby = 0;
             m_stats.m_weaponSwitchCount = 0;
             m_stats.m_deathBySuicide = 0;
+
+            m_distanceToGround = transform.position.y - m_modelRef.position.y;
     }
 
         void Start() {
@@ -144,6 +149,7 @@ namespace PPBC {
             if (m_control != null && m_currentHealth > 0) {
                 
                 m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                
 
                 if (m_currentHealth < m_maxHealth) {
                     if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
@@ -184,7 +190,7 @@ namespace PPBC {
             m_GUIHandler.SetHealth(m_healthBar.fillAmount);
 
             if (!m_isInvincible) {
-                m_killsRef.text = m_stats.m_kills.ToString();
+                m_killsRef.text = m_stats.m_points.ToString();
             } else {
                 m_killsRef.text = "";
             }
@@ -481,6 +487,10 @@ namespace PPBC {
             if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
                 return;
             }
+            if (m_weapons != null && m_isShooting) {
+                m_weapons[m_currentWeapon].StopShooting();
+                m_isShooting = false;
+            }
 
             m_weapons.Clear();
 
@@ -603,6 +613,7 @@ namespace PPBC {
         public void Disconect() {
             Destroy(this.transform.root.gameObject);
             s_references.Remove(this);
+            s_sortedRef.Remove(this);
             RepositionGUI();
         }
 
@@ -637,17 +648,52 @@ namespace PPBC {
             }
             return float.MinValue;
         }
-        
-       
-        #region Physics
 
-        private void OnTriggerEnter2D(Collider2D collision) {
-            IItem tmpItem = collision.GetComponent<IItem>();
-            if (tmpItem != null) {
-                m_items.Add(tmpItem);
-                tmpItem.Collect();
+        EditorHUDAndPlayerLogic m_editHud;
+        public void GoIntoEditMode(bool doEdit) {
+            if (doEdit)
+                m_editHud.gameObject.SetActive(!m_editHud.gameObject.activeSelf);
+
+            if (m_editHud.gameObject.activeSelf) {
+                InControle(false);
+                Invincible(true);
+                m_rb.simulated = false;
+
+                m_control.StartShooting = m_editHud.DragHandler;
+                m_control.ChangeName = m_editHud.ChangeType;
+                m_control.ChangeCharacter = m_editHud.ChangeIndex;
+            } else {
+                StopEdit();
             }
         }
+
+        public void StopEdit() {
+            m_control.StartShooting = null;
+            m_control.ChangeName = null;
+            m_control.ChangeCharacter = null;
+
+            InControle(true);
+            Invincible(false);
+            m_rb.simulated = true;
+        }
+
+        public void EditAble(EditorHUDAndPlayerLogic hud) {
+            if(hud != null) {
+                m_editHud = hud;
+                m_editHud.SetControlRef(m_control);
+                m_editHud.gameObject.SetActive(false);
+
+                m_control.ShowStats += GoIntoEditMode;
+            } else {
+                m_control.ShowStats -= GoIntoEditMode;
+
+                StopEdit();
+                if (m_editHud)
+                    Destroy(m_editHud.gameObject);
+            }
+        }
+
+        #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
            

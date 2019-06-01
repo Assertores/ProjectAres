@@ -72,17 +72,47 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
-        type: 3}
-      propertyPath: m_explosion
-      value: 
-      objectReference: {fileID: 58294852087964241}
     - target: {fileID: 6454535820238267637, guid: 973c7300ae2d07248ad89f8bd41128ea,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 72a0c05a1812ee54ebcbb772abb6cc77,
         type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_explosion
+      value: 
+      objectReference: {fileID: 58294852087964241}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: be5078cb7e1c17846a405413258a678f, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 363e7e1cd538f9641a17a7f5fdd65a2f, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a279976f0cfdcd44b38da72b5b6a839, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: b4a9435e9adaeed4ebf8ac8efd649b88, type: 3}
+    - target: {fileID: 8676503151707722015, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_sounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: a49ce4e05849b2d4dba1cc700af845ee, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 973c7300ae2d07248ad89f8bd41128ea, type: 3}
 --- !u!4 &3170105015639202122 stripped
@@ -158,6 +188,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8429783778832627007, guid: 2030dc281188f7945870a302a1082de5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429783778832627007, guid: 2030dc281188f7945870a302a1082de5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429783779724042301, guid: 2030dc281188f7945870a302a1082de5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429783779724042301, guid: 2030dc281188f7945870a302a1082de5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8429783779932302738, guid: 2030dc281188f7945870a302a1082de5,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -167,26 +217,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429783779724042301, guid: 2030dc281188f7945870a302a1082de5,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429783779724042301, guid: 2030dc281188f7945870a302a1082de5,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429783778832627007, guid: 2030dc281188f7945870a302a1082de5,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429783778832627007, guid: 2030dc281188f7945870a302a1082de5,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8429783778832627000, guid: 2030dc281188f7945870a302a1082de5,
         type: 3}
