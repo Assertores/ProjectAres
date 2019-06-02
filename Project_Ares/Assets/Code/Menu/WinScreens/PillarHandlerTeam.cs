@@ -51,6 +51,9 @@ namespace PPBC {
                 players[i].transform.position = Vector3.Lerp(lmp, rmp, ((float)i + 1) / (players.Count + 1));
             }
 
+            m_pillars[0].m_screen.text = players[0].m_stats.m_points.ToString();
+
+            players.Clear();
             players = Player.s_references.FindAll(x => x.m_team == 1);
             lmp = new Vector3(m_pillars[1].transform.position.x - m_pillarWith / 2, m_pillars[1].transform.position.y, m_pillars[1].transform.position.z);
             rmp = new Vector3(m_pillars[1].transform.position.x + m_pillarWith / 2, m_pillars[1].transform.position.y, m_pillars[1].transform.position.z);
@@ -58,6 +61,7 @@ namespace PPBC {
                 players[i].transform.position = Vector3.Lerp(lmp, rmp, ((float)i + 1) / (players.Count + 1));
             }
 
+            m_pillars[1].m_screen.text = players[0].m_stats.m_points.ToString();
 
             m_startTime = Time.time;
             return false;

@@ -154,7 +154,7 @@ namespace PPBC {
                 if (readPos == 1) {
                     switch (readType) {
                     case e_objType.BACKGROUND:
-                        tmpSprite = LoadSprite(dir, lines[i]);
+                        tmpSprite = LoadSprite(dir, lines[i], 170);//background is less resolution than props
                         if (!tmpSprite) {
                             errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
                             continue;
@@ -361,7 +361,7 @@ namespace PPBC {
             return value;
         }
 
-        static Sprite LoadSprite(string path, string name) {
+        static Sprite LoadSprite(string path, string name, int PPU = 512) {
             WWW tmp = new WWW("file:///" + path + name);
             while (!tmp.isDone) ;
             if (tmp == null) {
@@ -374,7 +374,7 @@ namespace PPBC {
             Texture2D tmpTex = tmp.texture;
             if (!tmpTex)
                 return null;
-            Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width/2, tmpTex.height/2), 512);
+            Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width/2, tmpTex.height/2), PPU);
             if (!value)
                 return null;
             value.name = name;

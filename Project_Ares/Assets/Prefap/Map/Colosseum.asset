@@ -36,9 +36,9 @@ MonoBehaviour:
     scale: {x: 1, y: 1}
   - type: 1
     index: 4
-    position: {x: 0, y: -1.6}
+    position: {x: 0, y: -2.016}
     rotation: 0
-    scale: {x: 0.45, y: 0.45}
+    scale: {x: 2.12, y: 2.12}
   - type: 4
     index: 1
     position: {x: -9.15, y: -0.42}

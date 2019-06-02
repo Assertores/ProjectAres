@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Level
   - Bin
+  - Laser
   layers:
   - Default
   - TransparentFX

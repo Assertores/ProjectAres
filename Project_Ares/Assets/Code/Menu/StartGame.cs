@@ -6,15 +6,15 @@ using UnityEngine.UI;
 namespace PPBC {
     public class StartGame : MonoBehaviour, IDamageableObject {
 
-        
 
-        #region IDamageableObject
 
+
+        #region Variables
         public bool m_alive { get; set; }
 
         [SerializeField]private int m_maxHealth = 100;
 
-        float m_currentHealth;
+        public float m_currentHealth;
 
         public Text m_healthText;
         public Text m_startText;
@@ -23,6 +23,8 @@ namespace PPBC {
         [SerializeField] private float m_regenTime;
         [SerializeField] private float m_regeneration;
 
+        #endregion
+        #region MonoBehaviour
         void Start()
         {
             m_currentHealth = m_maxHealth;
@@ -52,7 +54,8 @@ namespace PPBC {
             }
 
         }
-
+        #endregion
+        #region IDamageableObject
 
         public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
 

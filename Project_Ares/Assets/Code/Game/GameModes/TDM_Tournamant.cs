@@ -52,13 +52,17 @@ namespace PPBC {
         public void PlayerDied(Player player) {
             if(player.m_team >= 0 && player.m_team < m_lives.Count) {
                 m_lives[player.m_team]--;
-                if(m_lives[player.m_team] <= 0) {
+
+                List<Player> tmp = Player.s_references.FindAll(x => x.m_team == player.m_team);
+                foreach (var it in tmp) {
+                    it.m_stats.m_points = m_lives[player.m_team];
+                }
+
+                if (m_lives[player.m_team] <= 0) {
                     SceneManager.LoadScene(StringCollection.ENDSCREEN);
                     return;
                 }
-                foreach(var it in Player.s_references.FindAll(x => x.m_team == player.m_team)) {
-                    it.m_stats.m_points = m_lives[player.m_team];
-                }
+                
             }
 
             StartCoroutine(RespawnPlayer(player));
