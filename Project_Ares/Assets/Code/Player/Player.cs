@@ -60,7 +60,9 @@ namespace PPBC {
         [SerializeField] string m_characterName;
         [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
         [SerializeField] ModellRefHolder m_modellRefHolder;
-
+        //---- ----- Feedback ----- ----
+        [SerializeField] GameObject m_laserdeathVFX;
+        [SerializeField] GameObject m_deathVFX;
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
         
@@ -101,6 +103,7 @@ namespace PPBC {
 
         int m_currentName;
         bool m_isColliding;
+        bool m_isCollidingLaser;
 
         public Rigidbody2D m_rb { get; private set; }
 
@@ -108,6 +111,9 @@ namespace PPBC {
 
         public float m_joinTime { get; private set; }
         float m_weaponChangeTime;
+
+        //---- ----- Feedback ----- ----
+       
 
         #endregion
         #region MonoBehaviour
@@ -131,12 +137,15 @@ namespace PPBC {
             m_stats.m_deathBySuicide = 0;
 
             m_distanceToGround = transform.position.y - m_modelRef.position.y;
+
+            m_laserdeathVFX.SetActive(false);
+            m_deathVFX.SetActive(false);
     }
 
         void Start() {
         
             m_rb = GetComponent<Rigidbody2D>();
-
+            
             
         }
         private void OnDestroy() {
@@ -174,16 +183,19 @@ namespace PPBC {
             m_controlRef.rotation = m_weaponRef.rotation;
 
             //----- ----- Feedback ----- -----
-            if (m_isColliding) {
-                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
-                    m_modelAnim.animation.Play("02_Idle_Luft");//In stringCollection übertragen
-                }
-            } else {
-                if (m_modelAnim != null && !m_modelAnim.animation.isPlaying) {
-                    m_modelAnim.animation.Play("01_Idle");
+            if (m_modelAnim != null) {
+                if (m_modelAnim.animation.lastAnimationName != "05_Sterben") {
+                    if (m_isColliding) {
+                        if (!m_modelAnim.animation.isPlaying) {
+                            m_modelAnim.animation.Play("02_Idle_Luft");//In stringCollection übertragen
+                        }
+                    } else {
+                        if (!m_modelAnim.animation.isPlaying) {
+                            m_modelAnim.animation.Play("01_Idle");
+                        }
+                    }
                 }
             }
-
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
 
@@ -230,6 +242,7 @@ namespace PPBC {
           
             if (damage >= m_currentHealth) {
                 m_stats.m_damageTaken += m_currentHealth;
+                
                 m_stats.m_deaths++;
                 if (source) {
                     source.m_stats.m_damageDealt += m_currentHealth;
@@ -252,7 +265,7 @@ namespace PPBC {
 
                 InControle(false);
                 GameManager.s_singelton?.PlayerDied(this);
-
+                
                 //----- ----- Kill Feed ----- -----
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
@@ -303,12 +316,15 @@ namespace PPBC {
             m_currentHealth = 0;
             m_alive = false;
             m_rb.velocity = Vector2.zero;
-            gameObject.SetActive(false);
+            
 
             InControle(false);
-            GameManager.s_singelton.PlayerDied(this);
+            gameObject.SetActive(false);
+            GameManager.s_singelton?.PlayerDied(this);
 
-            if(source)
+
+
+            if (source)
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
                                         null,
@@ -324,9 +340,17 @@ namespace PPBC {
             //----- ----- Tracking ----- -----
             m_stats.m_deathBySuicide++;
             //---- ----- Feedback ----- ----
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play("05_Sterben",1);//In stringCollection übertragen
+            StartAnim("05_Sterben", 1);
+           /* if (m_isCollidingLaser) {
+                print("hit laser");
+                m_laserdeathVFX.SetActive(true);
+            } else {
+                print("dead");
+                m_deathVFX.SetActive(true);
             }
+            StartCoroutine(PlayerDie(1.0f));
+            */
+
         }
 
         public float GetHealth() {
@@ -447,6 +471,9 @@ namespace PPBC {
             gameObject.SetActive(true);
             m_respawntTime = Time.timeSinceLevelLoad;
             //---- ----- Feedback ----- ----
+            m_laserdeathVFX.SetActive(false);
+            m_isCollidingLaser = false;
+            m_deathVFX.SetActive(false);
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("06_Respawn",1);//In stringCollection übertragen
             }
@@ -708,6 +735,13 @@ namespace PPBC {
                     m_modelAnim.animation.Play("03_Aufprall", 1);//In stringCollection übertragen
                 }
             }
+           /* if (collision.gameObject.tag == "Laser") {
+                Vector2 tmp = (transform.position);
+                Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector2(tmp.x,tmp.y));
+                m_laserdeathVFX.transform.rotation = rotation;
+                m_isCollidingLaser = true;
+                print(m_isCollidingLaser);
+            }*/
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
                 foreach (var it in collision.contacts) {
@@ -726,5 +760,12 @@ namespace PPBC {
         }
 
         #endregion
+       /* IEnumerator PlayerDie(float m_wait) {
+
+            yield return new WaitForSeconds(m_wait);
+            gameObject.SetActive(false);
+            GameManager.s_singelton?.PlayerDied(this);
+
+        }*/
     }
 }
