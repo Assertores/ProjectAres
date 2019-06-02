@@ -19,7 +19,7 @@ MonoBehaviour:
   p_colors:
   - {r: 0, g: 0.33, b: 0.66, a: 1}
   p_music:
-  - {fileID: 8300000, guid: 2f91af574cad9f345acbccb9d929bb4e, type: 3}
+  - {fileID: 8300000, guid: 688004f028898084aaed5abf1e663e97, type: 3}
   p_props:
   - m_sprite: {fileID: 21300000, guid: fd446d8a961dffe488f727a4ba4d124f, type: 3}
     m_collider:
