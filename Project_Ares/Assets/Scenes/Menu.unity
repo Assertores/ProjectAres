@@ -3737,6 +3737,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c8fceeb082b1fd49a0bf62ed6d590cb, type: 2}
   - {fileID: 11400000, guid: 8a700600fdc07524182549cab5355f53, type: 2}
   - {fileID: 11400000, guid: 3efbea2a9120c7e4085c9bd7a6ad3224, type: 2}
+  - {fileID: 11400000, guid: f1bc422cf18e0594baee0c31b71ef577, type: 2}
+  - {fileID: 11400000, guid: d0b7350a069868142abc493f306f15ac, type: 2}
+  - {fileID: 11400000, guid: 0a3631f4cd4090c43b7c9afe3425af6b, type: 2}
   m_maps:
   - {fileID: 11400000, guid: 5789446c4f9b3b84ab646dcc7dcda4a6, type: 2}
   m_size:
@@ -3810,4 +3813,4 @@ MonoBehaviour:
   m_forground: []
   m_laserBariar: {fileID: 5438180597333384809, guid: 99ced5c182d0c1e4b8ea86d484bc7c8d,
     type: 3}
-  SaveToXML: {fileID: 11400000, guid: 326f0b297fb95dc4285785a8df7ff333, type: 2}
+  SaveToXML: {fileID: 0}
