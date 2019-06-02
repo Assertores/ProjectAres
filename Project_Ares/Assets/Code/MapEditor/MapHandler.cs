@@ -176,7 +176,6 @@ namespace PPBC {
             if (name == "") {
                 name = DataHolder.s_map;
             }
-            name += ".map";
             name = name.Replace('\\', '_');
             name = name.Replace('/', '_');
             name = name.Replace(':', '_');
