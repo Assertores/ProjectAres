@@ -89,6 +89,16 @@ PrefabInstance:
       propertyPath: m_halfVolumeRange
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5545514078711503098, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545514078711503098, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4162003346175362497, guid: 6b7233d7fc5c3f240b0f2a87624dbf6f,
         type: 3}
       propertyPath: m_LocalPosition.x
