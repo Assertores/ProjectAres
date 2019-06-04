@@ -3,89 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace PPBC {
     public class MenuManager : MonoBehaviour {
 
         #region Variables
 
-        [Header("References")]
-        [SerializeField] GameObject m_SpawnPoint;
-        [SerializeField] GameObject m_turnermantSprite;
-        [SerializeField] TMPro.TextMeshProUGUI m_modeRef;
+        ScriptQueueManager m_sqm = new ScriptQueueManager();
 
         #endregion
         #region MonoBehaviour
         #region Singelton
 
-        public static MenuManager _singelton = null;
-
-        private void Awake() {
-            if (_singelton)
-                Destroy(this);
-
-            _singelton = this;
-        }
-        private void OnDestroy() {
-            if (_singelton == this)
-                _singelton = null;
+        static MenuManager s_singelton_ = null;
+        public static MenuManager s_singelton {
+            get {
+                if (!s_singelton_)
+                    s_singelton_ = new GameObject {
+                        name = "MenuManager"
+                    }.AddComponent<MenuManager>();
+                return s_singelton_;
+            }
         }
 
-        #endregion
-
-        private void Start() {
-            foreach (var it in Player.s_references) {
-                it.DoReset();
-                it.Invincible(true);
-                it.transform.position = m_SpawnPoint.transform.position;
-                it.SetChangeCharAble(true);
+        void Awake() {
+            if (s_singelton_ == null) {
+                s_singelton_ = this;
+            } else if (s_singelton_ != this) {
+                Destroy(gameObject);
+                return;
             }
-            DataHolder.s_firstMatch = true;
         }
 
-        private void Update() {
-            if (Input.GetKeyUp(KeyCode.T)) {
-                if (DataHolder.s_gameMode != e_gameMode.FAIR_TOURNAMENT) {
-                    DataHolder.s_gameMode = e_gameMode.FAIR_TOURNAMENT;
-                    m_turnermantSprite.SetActive(true);
-                }  else {
-                    DataHolder.s_gameMode = e_gameMode.FFA_CASUAL;
-                    m_turnermantSprite.SetActive(false);
-                }
-            }
-            if (Input.GetKeyUp(KeyCode.P)) {
-                DataHolder.s_winnerPC = !DataHolder.s_winnerPC;
-                m_turnermantSprite.transform.Rotate(0, 0, 180);
-            }
-            if (Input.GetKeyUp(KeyCode.E)) {
-                if(DataHolder.s_gameMode != e_gameMode.COOP_EDIT) {
-                    DataHolder.s_gameMode = e_gameMode.COOP_EDIT;
-                } else {
-                    DataHolder.s_gameMode = e_gameMode.FFA_CASUAL;
-                }
-            }
-            m_modeRef.text = DataHolder.s_gameMode.ToString() + System.Environment.NewLine + DataHolder.s_map;
+        void OnDestroy() {
+            if (s_singelton_ == this)
+                s_singelton_ = null;
         }
 
         #endregion
 
-        public void StartGame() {
-
-            foreach(var it in Player.s_references) {
-                it.SetChangeCharAble(false);
-            }
-
-            SceneManager.LoadScene(DataHolder.s_level);
-            //SceneManager.LoadScene(StringCollection.EXAMPLESZENE);
-            //lade ausgewählte Szene im hintergrund
-            //spiel animation für szenenwechsel ab
-            //überblende die musik
-            //unload Menuszene
+        void Start() {
         }
 
-        public void Exit() {
-            print("Quitting the Game");
-            Application.Quit();
+        // Update is called once per frame
+        void Update() {
+            if (m_sqm.Tick()) {
+                SceneManager.LoadScene(StringCollection.INGAME);
+            }
+        }
+
+        #endregion
+
+        public void AddItem(IScriptQueueItem item, int sortingLayer) {
+            m_sqm.AddItemToQueue(item, sortingLayer);
         }
     }
 }

@@ -19,6 +19,8 @@ namespace PPBC {
                 return;
             }
             gameObject.SetActive(false);
+
+            DataHolder.s_gameModes[e_gameMode.COOP_EDIT] = this;
         }
 
         #endregion
@@ -43,6 +45,13 @@ namespace PPBC {
         public void PlayerDied(Player player) {
             player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
             
+        }
+
+        public void SetMenuSpecific(Transform specificRef) {
+        }
+
+        public bool ReadyToChange() {
+            return true;
         }
 
         #endregion

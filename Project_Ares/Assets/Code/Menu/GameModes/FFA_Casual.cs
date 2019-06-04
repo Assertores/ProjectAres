@@ -19,6 +19,8 @@ namespace PPBC {
 
         void Start() {
             Stop();
+
+            DataHolder.s_gameModes[e_gameMode.FFA_CASUAL] = this;
         }
 
         void Update() {
@@ -71,6 +73,13 @@ namespace PPBC {
             });
 
             StartCoroutine(RespawnPlayer(player));
+        }
+
+        public void SetMenuSpecific(Transform specificRef) {
+        }
+
+        public bool ReadyToChange() {
+            return true;
         }
 
         #endregion

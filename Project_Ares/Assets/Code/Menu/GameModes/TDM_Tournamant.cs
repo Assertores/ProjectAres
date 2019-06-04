@@ -20,6 +20,8 @@ namespace PPBC {
 
         void Start() {
             Stop();
+
+            DataHolder.s_gameModes[e_gameMode.TDM_TOURNAMENT] = this;
         }
         
         void Update() {
@@ -66,6 +68,14 @@ namespace PPBC {
             }
 
             StartCoroutine(RespawnPlayer(player));
+        }
+
+        public void SetMenuSpecific(Transform specificRef) {
+            throw new System.NotImplementedException();
+        }
+
+        public bool ReadyToChange() {
+            throw new System.NotImplementedException();
         }
 
         #endregion

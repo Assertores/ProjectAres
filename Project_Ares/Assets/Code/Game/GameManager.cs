@@ -5,11 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace PPBC {
 
-    [System.Serializable]
-    struct d_gmObjectItem {
-        public e_gameMode m_type;
-        public GameObject m_value;
-    }
+    
 
     public class GameManager : MonoBehaviour {
 
@@ -17,7 +13,7 @@ namespace PPBC {
 
         [Header("References")]
         public MapHandler m_mapHandler;
-        [SerializeField] d_gmObjectItem[] m_gmObject;
+        
 
         Dictionary<e_gameMode, IGameMode> m_gameModes = new Dictionary<e_gameMode, IGameMode>();
 
@@ -57,16 +53,6 @@ namespace PPBC {
             if(Player.s_references.Count == 0) {
                 SceneManager.LoadScene(StringCollection.MAINMENU);
                 return;
-            }
-
-            if (m_gmObject != null) {
-                foreach (d_gmObjectItem it in m_gmObject) {
-                    IGameMode tmp = it.m_value.GetComponent<IGameMode>();
-                    if (tmp != null) {
-                        m_gameModes[it.m_type] = tmp;
-                        tmp.Stop();
-                    }
-                }
             }
 
             if (m_mapHandler)
