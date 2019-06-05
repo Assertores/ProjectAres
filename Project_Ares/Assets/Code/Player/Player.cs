@@ -51,6 +51,7 @@ namespace PPBC {
         [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
 
+        [SerializeField] GameObject m_playerParent;
         [SerializeField] Image m_healthBar;
         [SerializeField] Image m_weaponValue;
         [SerializeField] GameObject m_controlObject;
@@ -61,8 +62,9 @@ namespace PPBC {
         [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
         [SerializeField] ModellRefHolder m_modellRefHolder;
         //---- ----- Feedback ----- ----
-        [SerializeField] GameObject m_laserdeathVFX;
-        [SerializeField] GameObject m_deathVFX;
+        [SerializeField] ParticleSystem m_laserdeathVFX;
+        [SerializeField] GameObject m_laserParent;
+        [SerializeField] ParticleSystem m_deathVFX;
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
         
@@ -138,8 +140,7 @@ namespace PPBC {
 
             m_distanceToGround = transform.position.y - m_modelRef.position.y;
 
-            m_laserdeathVFX.SetActive(false);
-            m_deathVFX.SetActive(false);
+           
     }
 
         void Start() {
@@ -152,21 +153,21 @@ namespace PPBC {
             s_references.Remove(this);
             s_sortedRef.Remove(this);
         }
-        
+
         void Update() {
-            
+
             if (m_control != null && m_currentHealth > 0) {
-                
+
                 m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
-                
+
 
                 if (m_currentHealth < m_maxHealth) {
                     if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
 
                         m_currentHealth += (m_regeneration * Time.deltaTime);
-                            if (m_currentHealth > m_maxHealth) {
-                                m_currentHealth = m_maxHealth;
-                            }
+                        if (m_currentHealth > m_maxHealth) {
+                            m_currentHealth = m_maxHealth;
+                        }
                     }
                 }
             }
@@ -182,20 +183,26 @@ namespace PPBC {
             m_controlRef.position = m_weaponRef.position;
             m_controlRef.rotation = m_weaponRef.rotation;
 
-            //----- ----- Feedback ----- -----
+            //----- ----- Feedback ----- -----                 
             if (m_modelAnim != null) {
-                if (m_modelAnim.animation.lastAnimationName != "05_Sterben") {
-                    if (m_isColliding) {
-                        if (!m_modelAnim.animation.isPlaying) {
-                            m_modelAnim.animation.Play("02_Idle_Luft");//In stringCollection übertragen
-                        }
-                    } else {
-                        if (!m_modelAnim.animation.isPlaying) {
-                            m_modelAnim.animation.Play("01_Idle");
-                        }
+                 if (!m_isColliding) {
+                
+                    if (!m_modelAnim.animation.isPlaying) {
+                        m_modelAnim.animation.Play("02_Idle_Luft");
+                        
                     }
-                }
+                 }
+                 else {
+                    if (!m_modelAnim.animation.isPlaying) {
+                        m_modelAnim.animation.Play("01_Idle");
+                        
+                    }
+                 }
             }
+
+            
+        
+            
             m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
             m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
 
@@ -258,20 +265,28 @@ namespace PPBC {
                 }
                 m_assistRefs.Clear();
 
-                m_currentHealth = 0;
-                m_alive = false;
-                m_rb.velocity = Vector2.zero;
-                gameObject.SetActive(false);
+                 m_currentHealth = 0;
+                 m_alive = false;
+                 m_rb.velocity = Vector2.zero;
+                 m_playerParent.SetActive(false);
 
-                InControle(false);
-                GameManager.s_singelton?.PlayerDied(this);
-                
+                 InControle(false);
+
+                m_deathVFX.transform.position = transform.position;
+               
+
+
                 //----- ----- Kill Feed ----- -----
                 KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
                                         icon,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
                                         DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+                //----- ----- Feedback ----- -----
+                StartAnim("05_Sterben", 1);
+                m_deathVFX.Play();
+
+                StartCoroutine(PlayerDie(1.0f));
             } else {
                 m_stats.m_damageTaken += damage;
                 m_rb.velocity += (force / m_rb.mass);//AddForce will irgendwie nicht funktionieren
@@ -289,8 +304,7 @@ namespace PPBC {
                 m_currentHealth -= damage;
                 m_time = Time.timeSinceLevelLoad;
                 
-                //----- ----- Feedback ----- -----
-                
+
             }
         }
 
@@ -319,8 +333,8 @@ namespace PPBC {
             
 
             InControle(false);
-            gameObject.SetActive(false);
-            GameManager.s_singelton?.PlayerDied(this);
+            m_playerParent.SetActive(false);
+            
 
 
 
@@ -340,16 +354,16 @@ namespace PPBC {
             //----- ----- Tracking ----- -----
             m_stats.m_deathBySuicide++;
             //---- ----- Feedback ----- ----
+            
+
+            m_laserParent.transform.position = transform.position;
             StartAnim("05_Sterben", 1);
-           /* if (m_isCollidingLaser) {
-                print("hit laser");
-                m_laserdeathVFX.SetActive(true);
-            } else {
-                print("dead");
-                m_deathVFX.SetActive(true);
-            }
+           
+            print("hit laser");
+            m_laserdeathVFX.Play();
+            
             StartCoroutine(PlayerDie(1.0f));
-            */
+            
 
         }
 
@@ -468,12 +482,10 @@ namespace PPBC {
                 _weapons[_currentWeapon].SetActive(true);
             }*/
             InControle(true);
-            gameObject.SetActive(true);
+            m_playerParent.SetActive(true);
             m_respawntTime = Time.timeSinceLevelLoad;
             //---- ----- Feedback ----- ----
-            m_laserdeathVFX.SetActive(false);
             m_isCollidingLaser = false;
-            m_deathVFX.SetActive(false);
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play("06_Respawn",1);//In stringCollection übertragen
             }
@@ -551,9 +563,7 @@ namespace PPBC {
             }*/
             m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
 
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play("Idle");//In stringCollection übertragen
-            }
+           
             m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
             m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
 
@@ -729,19 +739,22 @@ namespace PPBC {
                 if (Vector2.Dot(vel.normalized, tmp) < 0) {
                     m_rb.velocity = m_bounciness * ( Vector2.Reflect(vel, tmp));
                 }
-                m_isColliding = true;
+                
                 //---- ----- Feedback ----- ----
                 if (m_modelAnim != null) {
                     m_modelAnim.animation.Play("03_Aufprall", 1);//In stringCollection übertragen
                 }
             }
-           /* if (collision.gameObject.tag == "Laser") {
-                Vector2 tmp = (transform.position);
-                Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector2(tmp.x,tmp.y));
-                m_laserdeathVFX.transform.rotation = rotation;
-                m_isCollidingLaser = true;
-                print(m_isCollidingLaser);
-            }*/
+            if(collision.gameObject.tag == "Ground") {
+                m_isColliding = true;
+                print("is colliding wall" + m_isColliding);
+            }
+            if (collision.gameObject.tag == "Laser") {
+                Vector2 tmp = collision.contacts[0].normal; ;
+                Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector2(tmp.x, tmp.y));
+                m_laserParent.transform.rotation = rotation;
+            }
+
             if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
                 Vector2 tmpNormal = new Vector2(0, 0);
                 foreach (var it in collision.contacts) {
@@ -760,12 +773,11 @@ namespace PPBC {
         }
 
         #endregion
-       /* IEnumerator PlayerDie(float m_wait) {
+        IEnumerator PlayerDie(float m_wait) {
 
             yield return new WaitForSeconds(m_wait);
-            gameObject.SetActive(false);
             GameManager.s_singelton?.PlayerDied(this);
 
-        }*/
+        }
     }
 }
