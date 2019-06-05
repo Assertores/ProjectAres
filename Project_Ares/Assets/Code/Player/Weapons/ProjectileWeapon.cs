@@ -13,6 +13,7 @@ namespace PPBC {
         [SerializeField] AudioSource m_audio;
         [SerializeField] Sprite m_icon_;
         [SerializeField] GameObject m_explosionRef;
+        [SerializeField] GameObject VFX_overcharge;
 
         private DragonBones.UnityArmatureComponent m_modelAnim;
 
@@ -22,6 +23,7 @@ namespace PPBC {
         [SerializeField] float m_overchargeMaxTime;
         [SerializeField] float m_overchargeAdd;
         [SerializeField] float m_overchargeFail;
+        
 
         float m_overchargeValue = 1;
 
@@ -64,6 +66,7 @@ namespace PPBC {
                     m_overchargeValue = 1;
                     m_startShootingTime = Time.time;
                     m_value = 1;
+                    VFX_overcharge.SetActive(false);
                 }
             }
             
@@ -106,6 +109,9 @@ namespace PPBC {
 
             m_player.m_rb.velocity = Vector2.zero;
             m_player.m_rb.gravityScale = 0;
+            //---- ----- Feedback ----- ----
+            
+            VFX_overcharge.SetActive(true);
         }
 
         public void StopShooting() {
@@ -123,6 +129,9 @@ namespace PPBC {
             ShootBullet();
             m_value = 1;
             m_isShooting = false;
+            //---- ----- Feedback ----- ----
+            
+            VFX_overcharge.SetActive(false);
         }
 
         #endregion
