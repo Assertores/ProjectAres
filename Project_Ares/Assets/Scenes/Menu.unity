@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 104267800}
   m_Layer: 0
   m_Name: Pillar
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3112,7 +3112,7 @@ GameObject:
   - component: {fileID: 1878469668}
   m_Layer: 0
   m_Name: Pillar (1)
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3216,7 +3216,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c6d45c11203c9674499cac8e5b74e52b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c76197df1200a44e82791d99f08b1ab, type: 3}
   m_MaskAlphaCutoff: 0.2
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
