@@ -4768,7 +4768,7 @@ GameObject:
   - component: {fileID: 8612722535298338854}
   - component: {fileID: 8612722535298338855}
   m_Layer: 0
-  m_Name: FX_DEATH 1
+  m_Name: FX_DEATH_REWORK_FOR_MAXIMILIAN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28604,7 +28604,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -28773,7 +28773,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2.5
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
@@ -29867,7 +29867,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 37394
+        atime1: 47417
         atime2: 65535
         atime3: 0
         atime4: 0
