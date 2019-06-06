@@ -20,6 +20,10 @@ namespace PPBC {
             }
             gameObject.SetActive(false);
 
+            foreach(Transform it in transform) {
+                it.gameObject.SetActive(false);
+            }
+
             DataHolder.s_gameModes[e_gameMode.COOP_EDIT] = this;
         }
 
@@ -30,6 +34,10 @@ namespace PPBC {
             foreach(var it in Player.s_references) {
                 it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
                 it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
+            }
+
+            foreach (Transform it in transform) {
+                it.gameObject.SetActive(true);
             }
 
             gameObject.SetActive(true);
