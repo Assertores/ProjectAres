@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PPBC {
-    public class GameModeManager : MonoBehaviour, IScriptQueueItem {
+    public class GameModeManager : MonoBehaviour {
 
         static bool isInit = false;
 
@@ -11,6 +12,9 @@ namespace PPBC {
 
         [Header("References")]
         [SerializeField] GameObject m_gMParent;
+        [SerializeField] GameObject m_menuRef;
+
+        bool m_return = false;
 
         #endregion
         #region MonoBehaviour
@@ -51,26 +55,29 @@ namespace PPBC {
         #endregion
 
         void Start() {
-            MenuManager.s_singelton.AddItem(this, 4);
 
             this.gameObject.SetActive(false);
         }
 
-        #endregion
-        #region IScriptQueueItem
+        private void Update() {
+            if (DataHolder.s_gameModes.ContainsKey(DataHolder.s_gameMode) && DataHolder.s_gameModes[DataHolder.s_gameMode].ReadyToChange())
+                SceneManager.LoadScene(StringCollection.INGAME);
+        }
 
-        public bool FirstTick() {
-            DataHolder.s_gameModes[DataHolder.s_gameMode].SetMenuSpecific(this.transform);
+        #endregion
+
+        public void SetUp() {
+
+            foreach(Transform it in transform) {
+                Destroy(it.gameObject);
+            }
+
+            if(DataHolder.s_gameModes.ContainsKey(DataHolder.s_gameMode))
+                DataHolder.s_gameModes[DataHolder.s_gameMode].SetMenuSpecific(this.transform);
 
             this.gameObject.SetActive(true);
-
-            return DoTick();
+            m_menuRef.SetActive(false);
         }
 
-        public bool DoTick() {
-            return DataHolder.s_gameModes[DataHolder.s_gameMode].ReadyToChange();
-        }
-
-        #endregion
     }
 }

@@ -8,6 +8,8 @@ namespace PPBC {
 
         #region Variables
 
+        [Header("References")]
+        [SerializeField] GameObject m_specifics;
         [Header("Balancing")]
         [SerializeField] int m_teamCount = 2;
         [SerializeField] int m_teamLives = 5;
@@ -15,17 +17,29 @@ namespace PPBC {
 
         List<int> m_lives = new List<int>();
 
+        TDMHudRefHolder m_tdmhrh = null;
+
         #endregion
         #region MonoBehaviour
 
+        void Awake() {
+            if (!m_specifics) {
+                print("no specific prefab");
+                Destroy(this);
+                return;
+            }
+            if (!m_specifics.GetComponent<TDMHudRefHolder>()) {
+                print("specifics has no TDMHudRefHolder");
+                Destroy(this);
+                return;
+            }
+        }
+
         void Start() {
+
             Stop();
 
             DataHolder.s_gameModes[e_gameMode.TDM_TOURNAMENT] = this;
-        }
-        
-        void Update() {
-
         }
 
         #endregion
@@ -71,11 +85,11 @@ namespace PPBC {
         }
 
         public void SetMenuSpecific(Transform specificRef) {
-            throw new System.NotImplementedException();
+            m_tdmhrh = Instantiate(m_specifics, specificRef).GetComponent<TDMHudRefHolder>();
         }
 
         public bool ReadyToChange() {
-            throw new System.NotImplementedException();
+            return m_tdmhrh.m_teams[0].Count + m_tdmhrh.m_teams[1].Count >= Player.s_references.Count;
         }
 
         #endregion

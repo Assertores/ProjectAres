@@ -31,6 +31,8 @@ namespace PPBC {
         public static Dictionary<e_gameMode, IGameMode> s_gameModes = new Dictionary<e_gameMode, IGameMode>();
         public static e_gameMode s_gameMode = e_gameMode.COOP_EDIT;
 
+        public static Player s_hoPlayer;//handing over Player
+
         //===== ===== Fair_Tournament ===== =====
 
         public static bool s_winnerPC = true;

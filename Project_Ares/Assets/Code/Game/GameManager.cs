@@ -13,9 +13,6 @@ namespace PPBC {
 
         [Header("References")]
         public MapHandler m_mapHandler;
-        
-
-        Dictionary<e_gameMode, IGameMode> m_gameModes = new Dictionary<e_gameMode, IGameMode>();
 
         #endregion
         #region MonoBehaviour
@@ -69,7 +66,7 @@ namespace PPBC {
                 it.Invincible(false);
             }
 
-            m_gameModes[DataHolder.s_gameMode].Init();
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Init();
 
             foreach (var it in Player.s_references) {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
@@ -79,7 +76,7 @@ namespace PPBC {
         #endregion
 
         public void PlayerDied(Player player) {
-            m_gameModes[DataHolder.s_gameMode].PlayerDied(player);
+            DataHolder.s_gameModes[DataHolder.s_gameMode].PlayerDied(player);
         }
     }
 }
