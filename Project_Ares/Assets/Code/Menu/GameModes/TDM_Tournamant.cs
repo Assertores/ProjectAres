@@ -14,9 +14,11 @@ namespace PPBC {
         [SerializeField] int m_teamCount = 2;
         [SerializeField] int m_teamLives = 5;
         [SerializeField] float m_respawnTime = 2.0f;
+        [SerializeField] float m_minDelayToGame = 1;
 
         List<int> m_lives = new List<int>();
 
+        float m_specificStartTime;
         TDMHudRefHolder m_tdmhrh = null;
 
         #endregion
@@ -81,15 +83,28 @@ namespace PPBC {
                 
             }
 
+            Player.s_sortedRef.Sort(delegate (Player lhs, Player rhs) { return rhs.m_stats.m_points.CompareTo(lhs.m_stats.m_points); });
+
             StartCoroutine(RespawnPlayer(player));
         }
 
         public void SetMenuSpecific(Transform specificRef) {
             m_tdmhrh = Instantiate(m_specifics, specificRef).GetComponent<TDMHudRefHolder>();
+            m_specificStartTime = Time.time;
         }
 
         public bool ReadyToChange() {
-            return m_tdmhrh.m_teams[0].Count + m_tdmhrh.m_teams[1].Count >= Player.s_references.Count;
+            if (m_specificStartTime + m_minDelayToGame > Time.time) {
+                return false;
+            }
+            if (m_tdmhrh.m_teams[0].Count + m_tdmhrh.m_teams[1].Count < Player.s_references.Count) {
+                return false;
+            }
+            if (Mathf.Abs(m_tdmhrh.m_teams[0].Count - m_tdmhrh.m_teams[1].Count) > 1) {
+                return false;
+            }
+            return true;
+            //return m_specificStartTime + m_minDelayToGame > Time.time && m_tdmhrh.m_teams[0].Count + m_tdmhrh.m_teams[1].Count >= Player.s_references.Count && Mathf.Abs(m_tdmhrh.m_teams[0].Count - m_tdmhrh.m_teams[1].Count) <= 1;
         }
 
         #endregion
