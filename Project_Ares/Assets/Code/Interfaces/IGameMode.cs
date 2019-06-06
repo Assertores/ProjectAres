@@ -22,5 +22,16 @@ namespace PPBC {
         /// <param name="player">der spieler, der gestorben ist</param>
         void PlayerDied(Player player);
 
+        /// <summary>
+        /// function that will be called befor the menu changes to the ingame scene
+        /// </summary>
+        /// <param name="specificRef">the referenceobject to initialice evereything into</param>
+        void SetMenuSpecific(Transform specificRef);
+
+        /// <summary>
+        /// will be triggert every frame alfert SetMenuSpecific
+        /// </summary>
+        /// <returns>true to cary on with the game</returns>
+        bool ReadyToChange();
     }
 }

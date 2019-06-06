@@ -51,8 +51,8 @@ namespace PPBC {
 
         void ChangeSzene() {
             if (DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT && !DataHolder.s_firstMatch) {
-                print("restar level: " + DataHolder.s_level);
-                SceneManager.LoadScene(DataHolder.s_level);
+                print("restar level: " + DataHolder.s_map);
+                SceneManager.LoadScene(StringCollection.INGAME);
                 return;
             }
 

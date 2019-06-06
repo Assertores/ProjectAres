@@ -5,11 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace PPBC {
 
-    [System.Serializable]
-    struct d_gmObjectItem {
-        public e_gameMode m_type;
-        public GameObject m_value;
-    }
+    
 
     public class GameManager : MonoBehaviour {
 
@@ -17,9 +13,6 @@ namespace PPBC {
 
         [Header("References")]
         public MapHandler m_mapHandler;
-        [SerializeField] d_gmObjectItem[] m_gmObject;
-
-        Dictionary<e_gameMode, IGameMode> m_gameModes = new Dictionary<e_gameMode, IGameMode>();
 
         #endregion
         #region MonoBehaviour
@@ -59,16 +52,6 @@ namespace PPBC {
                 return;
             }
 
-            if (m_gmObject != null) {
-                foreach (d_gmObjectItem it in m_gmObject) {
-                    IGameMode tmp = it.m_value.GetComponent<IGameMode>();
-                    if (tmp != null) {
-                        m_gameModes[it.m_type] = tmp;
-                        tmp.Stop();
-                    }
-                }
-            }
-
             if (m_mapHandler)
                 m_mapHandler.LoadCurrentMap();
             
@@ -83,7 +66,7 @@ namespace PPBC {
                 it.Invincible(false);
             }
 
-            m_gameModes[DataHolder.s_gameMode].Init();
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Init();
 
             foreach (var it in Player.s_references) {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
@@ -93,7 +76,7 @@ namespace PPBC {
         #endregion
 
         public void PlayerDied(Player player) {
-            m_gameModes[DataHolder.s_gameMode].PlayerDied(player);
+            DataHolder.s_gameModes[DataHolder.s_gameMode].PlayerDied(player);
         }
     }
 }

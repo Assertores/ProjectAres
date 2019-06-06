@@ -28,8 +28,10 @@ namespace PPBC {
 
         public static Dictionary<string, MapDATA> s_maps = new Dictionary<string, MapDATA>();
         public static string s_map = "";
+        public static Dictionary<e_gameMode, IGameMode> s_gameModes = new Dictionary<e_gameMode, IGameMode>();
         public static e_gameMode s_gameMode = e_gameMode.COOP_EDIT;
-        public static string s_level;
+
+        public static Player s_hoPlayer;//handing over Player
 
         //===== ===== Fair_Tournament ===== =====
 
@@ -124,8 +126,7 @@ namespace PPBC {
             s_commonProps = m_props;
             s_commonSize = m_size;
             s_commonStage = m_stage;
-
-            s_level = StringCollection.INGAME;
+            
             s_gameMode = m_standardMode;
 
             isInit = true;
