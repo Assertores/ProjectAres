@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 614b7b927d3afd448bf8c9c30fde2e2f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 833d6d288c1ca1844b25892320d2ea24, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -33,7 +33,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _Cutoff: 0.5
+    - _CSEdge: 0.511
+    - _CSEdgeSmooth: 0.1
+    - _CSLight: 1
+    - _CSShadow: -0.18
+    - _Cutoff: 0.532
     - _EnableExternalAlpha: 0
     - _OutlineThickness: 2
     m_Colors:
