@@ -415,6 +415,7 @@ namespace PPBC {
             //---- ----- Feedback ----- ----
 
             m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            StartAnim("06_Respawn",1);
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
