@@ -38,7 +38,7 @@ namespace PPBC {
         }
 
         public void Stop() {
-            gameObject.SetActive(false);
+            gameObject?.SetActive(false);
         }
 
         public void PlayerDied(Player player) {

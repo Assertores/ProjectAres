@@ -47,7 +47,7 @@ namespace PPBC {
             foreach (var it in Player.s_references) {
                 it.EditAble(null);
             }
-            gameObject.SetActive(false);
+            gameObject?.SetActive(false);
         }
 
         public void PlayerDied(Player player) {
