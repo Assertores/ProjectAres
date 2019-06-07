@@ -21,7 +21,7 @@ namespace PPBC {
         [Tooltip("regenerated life points per second")]
         [SerializeField] float m_regSpeed = 2;
 
-        float m_currentLife;
+        public float m_currentLife { get; private set; }
         float m_lastHitTime;
 
         #endregion

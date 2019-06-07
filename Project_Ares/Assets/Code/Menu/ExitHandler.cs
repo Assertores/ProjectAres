@@ -10,9 +10,11 @@ namespace PPBC {
         [SerializeField] GameObject m_hatch;
         [SerializeField] TextMeshProUGUI m_ContdownText;
         [SerializeField] TextMeshProUGUI m_ExitText;
+        [SerializeField] ShootButton m_startButton;
 
         [Header("Balancing")]
         [SerializeField] float m_hatchDelay = 3;
+        [SerializeField] float m_blockLife;
 
         float m_triggerTime = float.MaxValue;
 
@@ -23,23 +25,30 @@ namespace PPBC {
 
         // Update is called once per frame
         void Update() {
-            if(m_triggerTime < Time.time) {
-                if(m_triggerTime+m_hatchDelay <= Time.time) {
+            if (m_triggerTime < Time.time) {
+                if (m_triggerTime + m_hatchDelay <= Time.time) {
                     m_ContdownText.text = "";
                     m_hatch.SetActive(false);
                 } else {
                     m_ContdownText.text = Mathf.RoundToInt(m_hatchDelay - (Time.time - m_triggerTime)).ToString();
                 }
             }
-            if(Player.s_references.Count > 1) {
-                m_ExitText.text = "Disconnect"; //Localisation
-            } else {
-                m_ExitText.text = "Quit"; //Localisation
+
+            if (m_startButton.m_currentLife < m_blockLife) {
+                m_ExitText.text = "Exit blocked";
+            } else { 
+                if (Player.s_references.Count > 1) {
+                    m_ExitText.text = "Disconnect"; //Localisation
+                } else {
+                    m_ExitText.text = "Quit"; //Localisation
+                }
             }
         }
 
         public void StartCountDown() {
-            m_triggerTime = Time.time;
+            if (m_startButton.m_currentLife > m_blockLife) {
+                m_triggerTime = Time.time;
+            } 
         }
 
         public void StopCountDown() {
