@@ -6,7 +6,11 @@
 		_BumpMap("Normalmap", 2D) = "bump" {}
 		_Color("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
-				_Cutoff("Alpha Cutoff", Range(0,1)) = 0.5
+		_Cutoff("Alpha Cutoff", Range(0,1)) = 0.5
+		_CSLight("Cell shading Light", Range(-1,1)) = 1
+		_CSShadow("Cell shading Shadow", Range(-1,1)) = 0
+		_CSEdge("Cell shading Edge", Range(0,1)) = 0.5
+		_CSEdgeSmooth("Cell shading Edge Smoothness", Range(0,0.2)) = 0.1
 
 	}
 
@@ -30,13 +34,17 @@
 			Fog { Mode Off }
 
 			CGPROGRAM
-			#pragma surface surf Lambert alpha vertex:vert addshadow alphatest:_Cutoff 
+			#pragma surface surf SimpleLambert alpha vertex:vert addshadow alphatest:_Cutoff 
 			#pragma multi_compile DUMMY PIXELSNAP_ON 
 
 			sampler2D _MainTex;
 			sampler2D _BumpMap;
 			fixed4 _Color;
 			float _ScaleX;
+			float _CSLight;
+			float _CSShadow;
+			float _CSEdge;
+			float _CSEdgeSmooth;
 
 			struct Input {
 				float2 uv_MainTex;
@@ -56,7 +64,7 @@
 				UNITY_INITIALIZE_OUTPUT(Input, o);
 				o.color += _Color;
 			}
-
+			
 			void surf(Input IN, inout SurfaceOutput o) {
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * IN.color;
 				o.Albedo = c.rgb;
@@ -64,6 +72,15 @@
 				o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
 				o.Normal.x *= -1;
 			}
+
+			half4 LightingSimpleLambert(SurfaceOutput s, half3 lightDir, half atten) {
+				half NdotL = dot(s.Normal, lightDir);
+				half4 c;
+				c.rgb = s.Albedo * _LightColor0.rgb * lerp(_CSShadow, _CSLight, smoothstep(_CSEdge - _CSEdgeSmooth, _CSEdge + _CSEdgeSmooth, NdotL * atten));
+				c.a = s.Alpha;
+				return c;
+			}
+
 			ENDCG
 
 			// Now render front faces first
@@ -73,13 +90,17 @@
 			Fog { Mode Off }
 
 			CGPROGRAM
-			#pragma surface surf Lambert alpha vertex:vert addshadow alphatest:_Cutoff 
+			#pragma surface surf SimpleLambert alpha vertex:vert addshadow alphatest:_Cutoff 
 			#pragma multi_compile DUMMY PIXELSNAP_ON 
 
 			sampler2D _MainTex;
 			sampler2D _BumpMap;
 			fixed4 _Color;
 			float _ScaleX;
+			float _CSLight;
+			float _CSShadow;
+			float _CSEdge;
+			float _CSEdgeSmooth;
 
 			struct Input {
 				float2 uv_MainTex;
@@ -99,15 +120,24 @@
 				UNITY_INITIALIZE_OUTPUT(Input, o);
 				o.color += _Color;
 			}
-
+			
 			void surf(Input IN, inout SurfaceOutput o) {
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * IN.color;
 				o.Albedo = c.rgb;
 				o.Alpha = c.a;
-				o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));					
+				o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
 				o.Normal.z *= -1;
 				o.Normal.x *= -1;
 			}
+
+			half4 LightingSimpleLambert(SurfaceOutput s, half3 lightDir, half atten) {
+				half NdotL = dot(s.Normal, lightDir);
+				half4 c;
+				c.rgb = s.Albedo * _LightColor0.rgb * lerp(_CSShadow, _CSLight, smoothstep(_CSEdge - _CSEdgeSmooth, _CSEdge + _CSEdgeSmooth, NdotL * atten));
+				c.a = s.Alpha;
+				return c;
+			}
+
 			ENDCG
 		}
 
