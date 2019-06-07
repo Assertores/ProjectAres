@@ -1,4 +1,4 @@
-﻿Shader "Sprites/Bumped Diffuse both sides with Shadows"
+﻿Shader "Sprites/LitBothSides"
 {
 	Properties
 	{
@@ -34,7 +34,7 @@
 			Fog { Mode Off }
 
 			CGPROGRAM
-			#pragma surface surf SimpleLambert alpha vertex:vert addshadow alphatest:_Cutoff 
+			#pragma surface surf Lambert alpha vertex:vert addshadow alphatest:_Cutoff 
 			#pragma multi_compile DUMMY PIXELSNAP_ON 
 
 			sampler2D _MainTex;
@@ -73,14 +73,6 @@
 				o.Normal.x *= -1;
 			}
 
-			half4 LightingSimpleLambert(SurfaceOutput s, half3 lightDir, half atten) {
-				half NdotL = dot(s.Normal, lightDir);
-				half4 c;
-				c.rgb = s.Albedo * _LightColor0.rgb * lerp(_CSShadow, _CSLight, smoothstep(_CSEdge - _CSEdgeSmooth, _CSEdge + _CSEdgeSmooth, NdotL * atten));
-				c.a = s.Alpha;
-				return c;
-			}
-
 			ENDCG
 
 			// Now render front faces first
@@ -90,7 +82,7 @@
 			Fog { Mode Off }
 
 			CGPROGRAM
-			#pragma surface surf SimpleLambert alpha vertex:vert addshadow alphatest:_Cutoff 
+			#pragma surface surf Lambert alpha vertex:vert addshadow alphatest:_Cutoff 
 			#pragma multi_compile DUMMY PIXELSNAP_ON 
 
 			sampler2D _MainTex;
@@ -128,14 +120,6 @@
 				o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
 				o.Normal.z *= -1;
 				o.Normal.x *= -1;
-			}
-
-			half4 LightingSimpleLambert(SurfaceOutput s, half3 lightDir, half atten) {
-				half NdotL = dot(s.Normal, lightDir);
-				half4 c;
-				c.rgb = s.Albedo * _LightColor0.rgb * lerp(_CSShadow, _CSLight, smoothstep(_CSEdge - _CSEdgeSmooth, _CSEdge + _CSEdgeSmooth, NdotL * atten));
-				c.a = s.Alpha;
-				return c;
 			}
 
 			ENDCG

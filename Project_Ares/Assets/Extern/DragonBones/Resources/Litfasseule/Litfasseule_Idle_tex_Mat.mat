@@ -33,10 +33,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _CSEdge: 0.511
-    - _CSEdgeSmooth: 0.1
+    - _CSEdge: 0.5
+    - _CSEdgeSmooth: 0.026
     - _CSLight: 1
-    - _CSShadow: -0.18
+    - _CSShadow: 0
     - _Cutoff: 0.532
     - _EnableExternalAlpha: 0
     - _OutlineThickness: 2
