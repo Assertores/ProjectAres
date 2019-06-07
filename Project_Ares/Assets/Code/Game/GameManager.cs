@@ -39,8 +39,13 @@ namespace PPBC {
         }
 
         void OnDestroy() {
-            if (s_singelton_ == this)
+            if (s_singelton_ == this) {
                 s_singelton_ = null;
+
+                foreach (var it in DataHolder.s_gameModes) {
+                    it.Value.Stop();
+                }
+            }
         }
 
         #endregion
@@ -66,6 +71,7 @@ namespace PPBC {
                 it.Invincible(false);
             }
 
+            
             DataHolder.s_gameModes[DataHolder.s_gameMode].Init();
 
             foreach (var it in Player.s_references) {
