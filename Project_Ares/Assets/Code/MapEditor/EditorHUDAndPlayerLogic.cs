@@ -75,6 +75,10 @@ namespace PPBC {
             }
         }
 
+        private void OnDisable() {
+            Drop();
+        }
+
         public void SetControlRef(IControl reference) {
             m_controlRef = reference;
         }
@@ -106,12 +110,13 @@ namespace PPBC {
                 }
                 ObjectReferenceHolder orh = it.GetComponent<ObjectReferenceHolder>();
                 if (orh != null) {
-                    if(orh.m_data.type == m_type) {
-                        m_mapObj = orh;
-                        m_isDraging = true;
+                    m_type = orh.m_data.type;
+                    CorrectIndex();
 
-                        m_typeRef.text = m_styple.ToString();
-                    }
+                    m_mapObj = orh;
+                    m_isDraging = true;
+
+                    m_typeRef.text = m_styple.ToString();
                     return;
                 }
             }
