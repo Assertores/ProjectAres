@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f496fe1145529ff41b493e13327661ab, type: 3}
+  m_Name: Annelore_Data
+  m_EditorClassIdentifier: 
+  dataName: Annelore
+  dragonBonesJSON: {fileID: 4900000, guid: 63184f444fa39204bb84da563dddaa40, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 182a9b300f3fb6347b3a49af2251f7e3, type: 3}
+    texture: {fileID: 2800000, guid: 7fed0b7384bf4c4438fe3a92b7dbe743, type: 3}
+    material: {fileID: 2100000, guid: 8668e4a10d0def04db4ed53248c7dc9b, type: 2}
+    uiMaterial: {fileID: 0}
