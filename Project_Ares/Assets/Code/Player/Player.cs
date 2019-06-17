@@ -47,19 +47,11 @@ namespace PPBC {
         #region Variables
 
         [Header("References")]
-        [SerializeField] Transform m_modelRef;
-        [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
 
-        [SerializeField] GameObject m_playerParent;
-        [SerializeField] Image m_healthBar;
-        [SerializeField] Image m_weaponValue;
-        [SerializeField] GameObject m_controlObject;
-        [SerializeField] LayerMask m_dashColliders;
+        [SerializeField] GameObject m_player;
         [SerializeField] PlayerGUIHandler m_GUIHandler;
-        [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
-        [SerializeField] string m_characterName;
-        [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
+        [SerializeField] Transform m_modelRef;
         [SerializeField] ModellRefHolder m_modellRefHolder;
         //---- ----- Feedback ----- ----
         [SerializeField] ParticleSystem m_laserdeathVFX;
@@ -125,42 +117,27 @@ namespace PPBC {
             s_references.Add(this);
             s_sortedRef.Add(this);
 
-            //----- ----- Tracking ----- -----
+            ResetTracking();
 
-            m_stats.m_spawnTimeSinceLevelLoad = float.MaxValue;
-            m_stats.m_firstShot = 0;
-            m_stats.m_firstWeaponChange = 0;
-            m_stats.m_firstCaracterChange = 0;
-            m_stats.m_firstNameChange = 0;
-            m_stats.m_sMGTime = 0;
-            m_stats.m_rocketTime = 0;
-            m_stats.m_timeInLobby = 0;
-            m_stats.m_weaponSwitchCount = 0;
-            m_stats.m_deathBySuicide = 0;
-
-            m_distanceToGround = transform.position.y - m_modelRef.position.y;
-
-           
+            //m_distanceToGround = transform.position.y - m_modelRef.position.y;//in modell auslagern
     }
 
-        void Start() {
-        
-            m_rb = GetComponent<Rigidbody2D>();
-            
-            
-        }
         private void OnDestroy() {
             s_references.Remove(this);
             s_sortedRef.Remove(this);
         }
 
-        void Update() {
+        void Start() {
+            m_rb = GetComponent<Rigidbody2D>();
+        }
 
+        void Update() {
             if (m_control != null && m_currentHealth > 0) {
 
-                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                //creating up vector from direction vector (vector at right angle)
+                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));
 
-
+                //health regen only
                 if (m_currentHealth < m_maxHealth) {
                     if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
 
@@ -172,53 +149,36 @@ namespace PPBC {
                 }
             }
 
+            //flipping weapon
             if (m_control.m_dir.x < 0) {
                 m_weaponRef.localScale = new Vector3(1, -1, 1);
             } else {
                 m_weaponRef.localScale = new Vector3(1, 1, 1);
             }
-            if (m_modellRefHolder != null) {
-                m_weaponRef.position = m_modellRefHolder.m_weaponPos.position;
-            }
-            m_controlRef.position = m_weaponRef.position;
-            m_controlRef.rotation = m_weaponRef.rotation;
 
-            //----- ----- Feedback ----- -----                 
-            if (m_modelAnim != null) {
-                 if (!m_isColliding) {
-                
-                    if (!m_modelAnim.animation.isPlaying) {
-                        m_modelAnim.animation.Play("02_Idle_Luft");
-                        
-                    }
-                 }
-                 else {
-                    if (!m_modelAnim.animation.isPlaying) {
-                        m_modelAnim.animation.Play("01_Idle");
-                        
-                    }
-                 }
+            //----- ----- Feedback ----- -----
+            if (!m_isColliding) {
+                if (!m_modelAnim.animation.isPlaying) {
+                    StartAnim("02_Idle_Luft");
+                }
+            } else {
+                if (!m_modelAnim.animation.isPlaying) {
+                    StartAnim("01_Idle");
+                }
             }
 
-            
-        
-            
-            m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
-            m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
-
-            m_GUIHandler.SetHealth(m_healthBar.fillAmount);
+            m_GUIHandler.m_health.fillAmount = (float)m_currentHealth / m_maxHealth;
+            m_GUIHandler.m_stamina.fillAmount = m_weapons[m_currentWeapon].m_value;
 
             if (!m_isInvincible) {
-                m_killsRef.text = m_stats.m_points.ToString();
+                m_GUIHandler.m_points.text = m_stats.m_points.ToString();
             } else {
-                m_killsRef.text = "";
+                m_GUIHandler.m_points.text = "";
             }
-                
-
-            m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
 
         void FixedUpdate() {
+            //save velosity of last tick to make rebounce heapon
             vel = m_rb.velocity;
         }
 
@@ -268,7 +228,7 @@ namespace PPBC {
                  m_currentHealth = 0;
                  m_alive = false;
                  m_rb.velocity = Vector2.zero;
-                 m_playerParent.SetActive(false);
+                 //m_playerParent.SetActive(false);
 
                  InControle(false);
 
@@ -333,7 +293,7 @@ namespace PPBC {
             
 
             InControle(false);
-            m_playerParent.SetActive(false);
+            //m_playerParent.SetActive(false);
             
 
 
@@ -395,8 +355,6 @@ namespace PPBC {
             }
 
             m_currentName = Random.Range(-1, DataHolder.s_playerNames.Count - 2);
-            ChangeName(true);
-            RepositionGUI();
 
             InControle(true);
 
@@ -418,15 +376,50 @@ namespace PPBC {
             StartAnim("06_Respawn",1);
         }
 
+        #region Resets
+
+        public void FullReset() {
+            ResetStatsFull();
+            DoReset();
+            InControle(true);
+        }
+
         public void DoReset() {//Reset ist von MonoBehaviour benutz
             if (!m_alive) {
                 Respawn(transform.position);
             }
-            //RepositionGUI();//eventuell over the top
+
             StopShooting();
+            ResetHealth();
+            ResetVelocity();
+        }
+
+        public void ResetHealth() {
             m_currentHealth = m_maxHealth;
-            if(m_rb)
+            m_alive = true;
+        }
+
+        public void ResetVelocity() {
+            if (m_rb)
                 m_rb.velocity = Vector2.zero;
+        }
+
+        public void ResetStatsFull() {
+            ResetTracking();
+            ResetStuts();
+        }
+
+        public void ResetTracking() {
+            m_stats.m_spawnTimeSinceLevelLoad = float.MaxValue;
+            m_stats.m_firstShot = 0;
+            m_stats.m_firstWeaponChange = 0;
+            m_stats.m_firstCaracterChange = 0;
+            m_stats.m_firstNameChange = 0;
+            m_stats.m_sMGTime = 0;
+            m_stats.m_rocketTime = 0;
+            m_stats.m_timeInLobby = 0;
+            m_stats.m_weaponSwitchCount = 0;
+            m_stats.m_deathBySuicide = 0;
         }
 
         public void ResetStuts() {
@@ -438,149 +431,130 @@ namespace PPBC {
             m_stats.m_damageTaken = 0;
         }
 
+        #endregion
+        #region Controlers
+
         public void InControle(bool controle) {
             if (controle) {
                 m_control.StartShooting = StartShooting;
                 m_control.StopShooting = StopShooting;
-                m_control.Dash = Dash;
-
-                m_control.SelectWeapon = SelectWeapon;
+                
 
                 m_control.ChangeWeapon = ChangeWeapon;
-                m_control.UseItem = UseItem;
                 m_control.Disconnect = Disconect;
             } else {
                 m_control.StartShooting = null;
                 m_control.StopShooting = null;
-                m_control.Dash = null;
-
-                m_control.SelectWeapon = null;
+                
                 m_control.ChangeCharacter = null;
                 m_control.ChangeWeapon = null;
-                m_control.UseItem = null;
                 m_control.Disconnect = null;
                 StopShooting();
             }
         }
-
-
+        
         public void SetChangeCharAble(bool able) {
             if (able) {
                 m_control.ChangeCharacter = ChangeCharacter;
-                m_GUIHandler.SetCharChangeActive(true);
-                m_control.ChangeName = ChangeName;
             } else {
                 m_control.ChangeCharacter = null;
-                m_GUIHandler.SetCharChangeActive(false);
-                m_control.ChangeName = null;
             }
         }
 
-        public void Respawn(Vector2 pos) {
-            transform.position = pos;
+        #endregion
 
-            StopShooting();
+        IEnumerator PlayerDie(float m_wait) {
+            InControle(false);
+            yield return new WaitForSeconds(m_wait);
+            GameManager.s_singelton?.PlayerDied(this);
 
-            if(m_rb)
-                m_rb.velocity = Vector2.zero;
+        }
+        
+        //gameobject einschalten
+        //respawn effect abfeuern
+        public IEnumerator Respawn(Vector2 pos, float delay = 0) {
+            float startTime = Time.time;
+            Vector2 starPos = transform.position;
 
-            m_currentHealth = m_maxHealth;
-            m_alive = true;
-            /*if(_currentWeapon != 0) {
-                _weapons[_currentWeapon].SetActive(false);
-                _currentWeapon = 0;
-                _weapons[_currentWeapon].SetActive(true);
-            }*/
-            InControle(true);
-            m_playerParent.SetActive(true);
-            m_respawntTime = Time.timeSinceLevelLoad;
-            //---- ----- Feedback ----- ----
-            m_isCollidingLaser = false;
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play("06_Respawn",1);//In stringCollection übertragen
+            while (startTime + delay > Time.time) {
+                //----- stuff that should happon in between -----
+                transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
+                yield return null;
             }
+
+            //----- stuff that should happon after -----
+            transform.position = pos;
+            if (m_rb)
+                m_rb.velocity = Vector2.zero;
+            StopShooting();
+            ResetHealth();
+            m_respawntTime = Time.timeSinceLevelLoad;
+
+            if (m_modelAnim != null) {
+                float tmp = StartAnim("06_Respawn", 1);//In stringCollection übertragen
+                if (tmp > 0)
+                    yield return new WaitForSeconds(tmp);
+            }
+
+            InControle(true);
+
+            //m_playerParent.SetActive(true);//TODO auf neues system umschreiben
+            
         }
 
         public void Invincible(bool inv) {
             m_isInvincible = inv;
         }
 
-        void SelectWeapon(int selectedWeapon) {
-            if (selectedWeapon >= m_weapons.Count || selectedWeapon < 0)
-                selectedWeapon = 0;
+        void ChangeCharacter(int newCaracter, bool relative = true) {//TODO: neues system
+            //if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
+            //    return;
+            //}
+            //if (m_weapons != null && m_isShooting) {
+            //    m_weapons[m_currentWeapon].StopShooting();
+            //    m_isShooting = false;
+            //}
 
-            //_weaponWheel.GetChild(selectedWeapon) highlight selected item
-        }
+            //m_weapons.Clear();
 
-        void ChangeName(bool next = true) {
-            if(!next && m_currentName <= 0) {
-                print("nameindex to low");
-                return;
-            }
+            //foreach(Transform it in m_modelRef) {
+            //    Destroy(it.gameObject);
+            //}
+            //foreach(Transform it in m_weaponRef) {
+            //    Destroy(it.gameObject);
+            //}
 
-            if (next) {
-                m_currentName++;
-            } else {
-                m_currentName--;
-            }
+            //if (relative) {
+            //    m_currentChar += newCaracter;
+            //    m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
+            //} else {
+            //    m_currentChar = newCaracter;
+            //}
 
-            m_stats.m_name = DataHolder.GetPlayerName(m_currentName);
-            m_GUIHandler.SetName(m_stats.m_name);
-
-            //----- ----- Tracking ----- -----
-            if (m_stats.m_firstNameChange == 0)
-                m_stats.m_firstNameChange = Time.time - m_joinTime;
-        }
-
-        void ChangeCharacter(int newCaracter, bool relative = true) {
-            if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
-                return;
-            }
-            if (m_weapons != null && m_isShooting) {
-                m_weapons[m_currentWeapon].StopShooting();
-                m_isShooting = false;
-            }
-
-            m_weapons.Clear();
-
-            foreach(Transform it in m_modelRef) {
-                Destroy(it.gameObject);
-            }
-            foreach(Transform it in m_weaponRef) {
-                Destroy(it.gameObject);
-            }
-
-            if (relative) {
-                m_currentChar += newCaracter;
-                m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
-            } else {
-                m_currentChar = newCaracter;
-            }
-
-            GameObject model = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef);
-            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
-            m_weapons[m_weapons.Count - 1].Init(this);
-            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
-            m_weapons[m_weapons.Count - 1].Init(this);
-            for (int i = 0; i < m_weapons.Count; i++) {
-                if(i != m_currentWeapon) {
-                    m_weapons[i].SetActive(false);
-                }
-            }
-            /*if (m_modellRefHolder != null) {
-                print("model found" + m_modellRefHolder.m_modelAnim);
-                m_modelAnim = m_modellRefHolder.m_modelAnim;
-            }*/
-            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            //GameObject model = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef);
+            //m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            //m_weapons[m_weapons.Count - 1].Init(this);
+            //m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
+            //m_weapons[m_weapons.Count - 1].Init(this);
+            //for (int i = 0; i < m_weapons.Count; i++) {
+            //    if(i != m_currentWeapon) {
+            //        m_weapons[i].SetActive(false);
+            //    }
+            //}
+            ///*if (m_modellRefHolder != null) {
+            //    print("model found" + m_modellRefHolder.m_modelAnim);
+            //    m_modelAnim = m_modellRefHolder.m_modelAnim;
+            //}*/
+            //m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
 
            
-            m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
-            m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
+            //m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
+            //m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
 
-            //----- ----- Tracking ----- -----
+            ////----- ----- Tracking ----- -----
 
-            if (m_stats.m_firstCaracterChange == 0)
-                m_stats.m_firstCaracterChange = Time.time - m_joinTime;
+            //if (m_stats.m_firstCaracterChange == 0)
+            //    m_stats.m_firstCaracterChange = Time.time - m_joinTime;
         }
 
         void ChangeWeapon(int newWeapon, bool relative = false) {
@@ -597,7 +571,6 @@ namespace PPBC {
                 }
 
                 m_weapons[m_currentWeapon].SetActive(true);
-                m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
 
                 if (m_isShooting)
                     m_weapons[m_currentWeapon].StartShooting();
@@ -626,9 +599,7 @@ namespace PPBC {
                 m_stats.m_firstShot = Time.time - m_joinTime;
             //---- ----- Feedback ----- ----
             if (m_currentWeapon == 1){
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("09_Zielen");//In stringCollection übertragen
-                }
+                StartAnim("09_Zielen");//In stringCollection übertragen
             }
         }
 
@@ -642,59 +613,27 @@ namespace PPBC {
             }
         }
 
-        void UseItem(int item) {
-            if(item < m_items.Count && item >= 0) {
-                m_items[item].Activate();
-                m_items.Remove(m_items[item]);
-            }
-        }
-
-        void Dash() {
-            Vector2 tmp = new Vector2(0, 0);
-            foreach(var it in m_collisionNormals) {
-                tmp += it.Value;
-            }
-            m_rb.AddForce(tmp.normalized * m_dashForce);
-        }
-
         public void Disconect() {
             Destroy(this.transform.root.gameObject);
             s_references.Remove(this);
             s_sortedRef.Remove(this);
-            RepositionGUI();
         }
 
-        void RepositionGUI() {
-            for (int i = 0; i < s_references.Count; i++) {
-                s_references[i].m_GUIHandler.Reposition(((float)i + 1) / (s_references.Count + 1));
-            }
-        }
-        
-
-        public void SetStatsAble(bool doable) {
-            if (doable) {
-                m_control.ShowStats = ShowStatsToGUI;
-            } else {
-                m_control.ShowStats = null;
-                m_GUIHandler.HideStats();
-            }
-
-        }
-
-        public void ShowStatsToGUI(bool doIt) {
-            if (doIt) {
-                m_GUIHandler.WriteStats(m_stats);
-            } else {
-                m_GUIHandler.HideStats();
-            }
-        }
-        public float StartAnim(string animName,int playTimes) {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="animName">the animation name</param>
+        /// <param name="playTimes">how often it should be played (-1 for loop)</param>
+        /// <returns>returns duration in seconds or min value if not valide</returns>
+        public float StartAnim(string animName,int playTimes = -1) {
             if (m_modelAnim != null) {
                 m_modelAnim.animation.Play(animName, playTimes);
                 return m_modelAnim.animation.animationConfig.duration;
             }
             return float.MinValue;
         }
+
+        #region Editor code
 
         EditorHUDAndPlayerLogic m_editHud;
         public void GoIntoEditMode(bool doEdit) {
@@ -740,6 +679,8 @@ namespace PPBC {
             }
         }
 
+        #endregion
+
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
@@ -783,11 +724,5 @@ namespace PPBC {
         }
 
         #endregion
-        IEnumerator PlayerDie(float m_wait) {
-
-            yield return new WaitForSeconds(m_wait);
-            GameManager.s_singelton?.PlayerDied(this);
-
-        }
     }
 }
