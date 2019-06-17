@@ -2231,7 +2231,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_singelTarget: 1
+  m_triggerType: 1
 --- !u!1 &595090511
 GameObject:
   m_ObjectHideFlags: 0
@@ -5121,7 +5121,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_singelTarget: 1
+  m_triggerType: 0
 --- !u!61 &1766640996
 BoxCollider2D:
   m_ObjectHideFlags: 0

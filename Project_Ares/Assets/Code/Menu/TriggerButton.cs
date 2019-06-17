@@ -6,6 +6,8 @@ using UnityEngine.Events;
 namespace PPBC {
     public class TriggerButton : MonoBehaviour {
 
+        enum e_triggerType { ONLYFIRST , EVERYTIME, ONTLYEVERYONE }
+
         #region Variables
 
         [Header("References")]
@@ -14,7 +16,7 @@ namespace PPBC {
 
         [Header("Balancing")]
         [Tooltip("true = triggers as soon as the trigger area isn't empty, false = triggers only if all players are within the trigger area")]
-        [SerializeField] bool m_singelTarget;
+        [SerializeField] e_triggerType m_triggerType = e_triggerType.ONLYFIRST;
 
         int m_count = 0;
 
@@ -28,7 +30,9 @@ namespace PPBC {
 
             m_count++;
 
-            if (m_singelTarget ? m_count == 1 : m_count == Player.s_references.Count) {
+            if (m_triggerType == e_triggerType.EVERYTIME ||
+               (m_triggerType == e_triggerType.ONLYFIRST && m_count == 1) ||
+               (m_triggerType == e_triggerType.ONTLYEVERYONE && m_count == Player.s_references.Count)) {
                 DataHolder.s_hoPlayer = p;
                 m_onEvent?.Invoke();
             }
@@ -40,7 +44,9 @@ namespace PPBC {
                 return;
             }
 
-            if (m_singelTarget ? m_count == 1 : m_count == Player.s_references.Count) {
+            if (m_triggerType == e_triggerType.EVERYTIME ||
+               (m_triggerType == e_triggerType.ONLYFIRST && m_count == 1) ||
+               (m_triggerType == e_triggerType.ONTLYEVERYONE && m_count == Player.s_references.Count)) {
                 DataHolder.s_hoPlayer = p;
                 m_offEvent?.Invoke();
             }
