@@ -103,6 +103,10 @@ namespace PPBC {
             if (Mathf.Abs(m_tdmhrh.m_teams[0].Count - m_tdmhrh.m_teams[1].Count) > 1) {
                 return false;
             }
+
+            foreach (var it in Player.s_references) {
+                it.DoReset();
+            }
             return true;
             //return m_specificStartTime + m_minDelayToGame > Time.time && m_tdmhrh.m_teams[0].Count + m_tdmhrh.m_teams[1].Count >= Player.s_references.Count && Mathf.Abs(m_tdmhrh.m_teams[0].Count - m_tdmhrh.m_teams[1].Count) <= 1;
         }

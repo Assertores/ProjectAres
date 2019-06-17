@@ -82,11 +82,13 @@ namespace PPBC {
         }
 
         public void SetMenuSpecific(Transform specificRef) {
-            throw new System.NotImplementedException();
         }
 
         public bool ReadyToChange() {
-            throw new System.NotImplementedException();
+            foreach (var it in Player.s_references) {
+                it.DoReset();
+            }
+            return true;
         }
 
         #endregion

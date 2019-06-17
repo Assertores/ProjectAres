@@ -59,6 +59,9 @@ namespace PPBC {
         }
 
         public bool ReadyToChange() {
+            foreach (var it in Player.s_references) {
+                it.DoReset();
+            }
             return true;
         }
 

@@ -429,6 +429,15 @@ namespace PPBC {
                 m_rb.velocity = Vector2.zero;
         }
 
+        public void ResetStuts() {
+            m_stats.m_points = 0;
+            m_stats.m_kills = 0;
+            m_stats.m_deaths = 0;
+            m_stats.m_assists = 0;
+            m_stats.m_damageDealt = 0;
+            m_stats.m_damageTaken = 0;
+        }
+
         public void InControle(bool controle) {
             if (controle) {
                 m_control.StartShooting = StartShooting;

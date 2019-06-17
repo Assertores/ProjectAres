@@ -41,7 +41,8 @@ namespace PPBC {
         }
 
         public void Stop() {
-            gameObject?.SetActive(false);
+            if(gameObject)
+                gameObject.SetActive(false);
         }
 
         public void PlayerDied(Player player) {
@@ -79,6 +80,9 @@ namespace PPBC {
         }
 
         public bool ReadyToChange() {
+            foreach(var it in Player.s_references) {
+                it.DoReset();
+            }
             return true;
         }
 
