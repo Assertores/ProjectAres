@@ -51,7 +51,7 @@ namespace PPBC {
         }
 
         public void PlayerDied(Player player) {
-            player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
+            StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position));
             
         }
 
