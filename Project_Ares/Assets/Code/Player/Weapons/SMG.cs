@@ -21,10 +21,9 @@ namespace PPBC {
 
         #region MonoBehaviour
         private void Start() {
-
-            m_player.m_modellRefHolder.m_sMG.m_modelAnim = this.GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            
             if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null) {
-                m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Idle");
+                //m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Idle");
             }
         }
 
@@ -52,8 +51,8 @@ namespace PPBC {
 
             m_value = m_shootingTime / m_player.m_modellRefHolder.m_sMG.m_shootForSec;
 
-            if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null && !m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.isPlaying) {
-                m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Idle");
+            if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null /*&& !m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.isPlaying*/) {
+                //m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Idle");
             }
 
         }
@@ -85,7 +84,7 @@ namespace PPBC {
             m_player.m_modellRefHolder.m_sMG.m_muzzleflash.SetActive(false);
             gameObject.SetActive(activate);
             if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null) {
-                m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Weapon_Change",1);
+                //m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Weapon_Change",1);
             }
         }
 
@@ -93,7 +92,7 @@ namespace PPBC {
             if (m_forceCoolDown)
                 return;
             if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null) {
-                m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Shoot");
+                //m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Shoot");
             }
             m_isShooting = true;
 
@@ -105,7 +104,7 @@ namespace PPBC {
         public void StopShooting() {
 
             if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null) {
-                m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Stop("SMG_Shoot");
+                //m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Stop("SMG_Shoot");
             }
 
             m_player.m_modellRefHolder.m_sMG.m_muzzleflash.SetActive(false);

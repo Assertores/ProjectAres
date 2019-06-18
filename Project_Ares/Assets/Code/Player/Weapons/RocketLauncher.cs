@@ -54,8 +54,8 @@ namespace PPBC {
                 }
             }
             
-            if (m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim != null && !m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.isPlaying) {
-                m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Idle");
+            if (m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim != null /*&& !m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.isPlaying*/) {
+                //m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Idle");
             }
         }
 
@@ -73,7 +73,7 @@ namespace PPBC {
         public void SetActive(bool activate) {
             m_player.m_modellRefHolder.m_rocketLauncher.gameObject.SetActive(activate);
             if (m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim != null) {
-                m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Weapon_Change",1);
+                //m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Weapon_Change",1);
             }
         }
 
@@ -83,7 +83,7 @@ namespace PPBC {
             }
 
             if (m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim != null) {
-                m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Charge");
+                //m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Charge");
             }
             m_time = Time.timeSinceLevelLoad;
             m_isShooting = true;
@@ -103,7 +103,7 @@ namespace PPBC {
                 return;
 
             if (m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim != null) {
-                m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Shoot", 1);
+                //m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Shoot", 1);
                 
             }
             m_overchargeValue = 1;

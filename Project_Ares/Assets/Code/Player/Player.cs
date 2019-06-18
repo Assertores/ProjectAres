@@ -160,11 +160,11 @@ namespace PPBC {
 
             //----- ----- Feedback ----- -----
             if (!m_isColliding) {
-                if (!m_modellRefHolder.m_modelAnim.animation.isPlaying) {
+                if (true/*!m_modellRefHolder.m_modelAnim.animation.isPlaying*/) {
                     StartAnim("02_Idle_Luft");
                 }
             } else {
-                if (!m_modellRefHolder.m_modelAnim.animation.isPlaying) {
+                if (true/*!m_modellRefHolder.m_modelAnim.animation.isPlaying*/) {
                     StartAnim("01_Idle");
                 }
             }
@@ -199,7 +199,7 @@ namespace PPBC {
             //---- ----- Feedback ----- ----
             if (m_modellRefHolder.m_modelAnim != null) {
                 print("hit");
-                m_modellRefHolder.m_modelAnim.animation.Play("04_Treffer", 1);
+                StartAnim("04_Treffer", 1);
             }
             if (m_isInvincible) {
                 return;
@@ -365,8 +365,7 @@ namespace PPBC {
             m_stats.m_spawnTimeSinceLevelLoad = Time.timeSinceLevelLoad;
 
             //---- ----- Feedback ----- ----
-
-            m_modellRefHolder.m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            
             StartAnim("06_Respawn",1);
         }
 
@@ -589,8 +588,8 @@ namespace PPBC {
         /// <returns>returns duration in seconds or min value if not valide</returns>
         public float StartAnim(string animName,int playTimes = -1) {
             if (m_modellRefHolder.m_modelAnim != null) {
-                m_modellRefHolder.m_modelAnim.animation.Play(animName, playTimes);
-                return m_modellRefHolder.m_modelAnim.animation.animationConfig.duration;
+                //m_modellRefHolder.m_modelAnim.animation.Play(animName, playTimes);
+                return -1;//m_modellRefHolder.m_modelAnim.animation.animationConfig.duration;
             }
             return float.MinValue;
         }
