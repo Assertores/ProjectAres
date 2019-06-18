@@ -39,6 +39,8 @@ namespace PPBC {
     }
     
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(SMG))]
+    [RequireComponent(typeof(RocketLauncher))]
     public class Player : MonoBehaviour, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>();
@@ -50,14 +52,15 @@ namespace PPBC {
         [SerializeField] Transform m_controlRef;
 
         [SerializeField] GameObject m_player;
-        [SerializeField] PlayerGUIHandler m_GUIHandler;
+        [SerializeField] PlayerGUIHandler m_GUIHandler_;
+        public PlayerGUIHandler m_GUIHandler { get { return m_GUIHandler_; } set { } }
         [SerializeField] Transform m_modelRef;
-        [SerializeField] ModellRefHolder m_modellRefHolder;
+        [SerializeField] ModellRefHolder m_modellRefHolder_;
+        public ModellRefHolder m_modellRefHolder { get { return m_modellRefHolder_; } set { } }
         //---- ----- Feedback ----- ----
         [SerializeField] ParticleSystem m_laserdeathVFX;
         [SerializeField] GameObject m_laserParent;
         [SerializeField] ParticleSystem m_deathVFX;
-        private DragonBones.UnityArmatureComponent m_modelAnim;
 
         
 
@@ -65,41 +68,37 @@ namespace PPBC {
         [SerializeField] private float m_regenTime;
         [SerializeField] private float m_regeneration;
         [SerializeField] float m_maxHealth = 100;
-        [SerializeField] float m_dashForce = 2;
         [Tooltip("Immer in Sekunden angeben")]
         [SerializeField] float m_iFrames = 1;
-        [SerializeField] float m_gravity = 1;
         [Range(0,1)]
-        [SerializeField] float m_airResistance = 0.25f;
-        [SerializeField] float m_bounciness = 0.5f;
+        [SerializeField] float m_bounciness = 0.3f;
 
         public int m_team;
-
         public d_playerData m_stats;
 
         public float m_distanceToGround;
 
         public IControl m_control { get; private set; }
-        List<IWeapon> m_weapons = new List<IWeapon>();
-        List<IItem> m_items = new List<IItem>();//eventuell obsolet
-
-        Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();//eventuel obsolet
+        
         List<Player> m_assistRefs = new List<Player>();
 
         float m_respawntTime = float.MaxValue;
         private float m_time;
         float m_currentHealth;
         public int m_currentChar { get; private set; } = 0;
-        int m_currentWeapon = 0;
+        int m_currentName;
+        bool m_useSMG = true;
+
         bool m_isShooting = false;
         bool m_isInvincible = false;
         Vector2 vel;
 
-        int m_currentName;
         bool m_isColliding;
         bool m_isCollidingLaser;
 
         public Rigidbody2D m_rb { get; private set; }
+        SMG m_smg;
+        RocketLauncher m_rocketLauncher;
 
         //----- ----- Tracking variables ----- -----
 
@@ -129,13 +128,16 @@ namespace PPBC {
 
         void Start() {
             m_rb = GetComponent<Rigidbody2D>();
+            m_smg = GetComponent<SMG>();
+            m_smg.Init(this);
+            m_rocketLauncher = GetComponent<RocketLauncher>();
+            m_rocketLauncher.Init(this);
         }
 
         void Update() {
             if (m_control != null && m_currentHealth > 0) {
 
-                //creating up vector from direction vector (vector at right angle)
-                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));
+                RotateWeapon();
 
                 //health regen only
                 if (m_currentHealth < m_maxHealth) {
@@ -151,24 +153,23 @@ namespace PPBC {
 
             //flipping weapon
             if (m_control.m_dir.x < 0) {
-                m_weaponRef.localScale = new Vector3(1, -1, 1);
+                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, -1, 1);
             } else {
-                m_weaponRef.localScale = new Vector3(1, 1, 1);
+                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, 1, 1);
             }
 
             //----- ----- Feedback ----- -----
             if (!m_isColliding) {
-                if (!m_modelAnim.animation.isPlaying) {
+                if (!m_modellRefHolder.m_modelAnim.animation.isPlaying) {
                     StartAnim("02_Idle_Luft");
                 }
             } else {
-                if (!m_modelAnim.animation.isPlaying) {
+                if (!m_modellRefHolder.m_modelAnim.animation.isPlaying) {
                     StartAnim("01_Idle");
                 }
             }
 
             m_GUIHandler.m_health.fillAmount = (float)m_currentHealth / m_maxHealth;
-            m_GUIHandler.m_stamina.fillAmount = m_weapons[m_currentWeapon].m_value;
 
             if (!m_isInvincible) {
                 m_GUIHandler.m_points.text = m_stats.m_points.ToString();
@@ -196,9 +197,9 @@ namespace PPBC {
                 return;
             }
             //---- ----- Feedback ----- ----
-            if (m_modelAnim != null) {
+            if (m_modellRefHolder.m_modelAnim != null) {
                 print("hit");
-                m_modelAnim.animation.Play("04_Treffer", 1);
+                m_modellRefHolder.m_modelAnim.animation.Play("04_Treffer", 1);
             }
             if (m_isInvincible) {
                 return;
@@ -338,31 +339,24 @@ namespace PPBC {
         /// </summary>
         public void Init(GameObject control) {//dirty wegen nicht direkt IControl übergeben
             if (control == null) {
-                if(m_controlObject == null) {
-                    DestroyImmediate(gameObject);
-                    return;
-                }
-                m_control = m_controlObject.GetComponent<IControl>();
-                if(m_control == null) {
-                    //Destroy(gameObject);
-                    DestroyImmediate(gameObject);
-                    return;
-                }
-            } else {
-                control.transform.parent = m_controlRef;
-                control.transform.localPosition = Vector3.zero;
-                m_control = control.GetComponent<IControl>();
+                Destroy(transform.root.gameObject);
+                return;
+            }
+            
+            control.transform.parent = m_controlRef;
+            control.transform.localPosition = Vector3.zero;
+            m_control = control.GetComponent<IControl>();
+
+            if(m_control == null) {
+                Destroy(transform.root.gameObject);
+                return;
             }
 
             m_currentName = Random.Range(-1, DataHolder.s_playerNames.Count - 2);
 
             InControle(true);
 
-            ChangeCharacter(0, false);//damit der erste Charakter ausgewählt ist
-            ChangeWeapon(0);//damit die erste waffe ausgewählt ist
-
             Respawn(transform.position);//hier die richtige position eingeben
-            //WeaponIcons in WheaponWheel einfügen;
 
             //----- ----- Tracking ----- -----
             m_joinTime = Time.time;
@@ -372,7 +366,7 @@ namespace PPBC {
 
             //---- ----- Feedback ----- ----
 
-            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            m_modellRefHolder.m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
             StartAnim("06_Respawn",1);
         }
 
@@ -490,7 +484,7 @@ namespace PPBC {
             ResetHealth();
             m_respawntTime = Time.timeSinceLevelLoad;
 
-            if (m_modelAnim != null) {
+            if (m_modellRefHolder.m_modelAnim != null) {
                 float tmp = StartAnim("06_Respawn", 1);//In stringCollection übertragen
                 if (tmp > 0)
                     yield return new WaitForSeconds(tmp);
@@ -506,110 +500,78 @@ namespace PPBC {
             m_isInvincible = inv;
         }
 
-        void ChangeCharacter(int newCaracter, bool relative = true) {//TODO: neues system
-            //if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
-            //    return;
-            //}
-            //if (m_weapons != null && m_isShooting) {
-            //    m_weapons[m_currentWeapon].StopShooting();
-            //    m_isShooting = false;
-            //}
+        void ChangeCharacter(bool next) {
+            StopShooting();
 
-            //m_weapons.Clear();
+            if (next)
+                m_currentChar++;
+            else
+                m_currentChar--;
 
-            //foreach(Transform it in m_modelRef) {
-            //    Destroy(it.gameObject);
-            //}
-            //foreach(Transform it in m_weaponRef) {
-            //    Destroy(it.gameObject);
-            //}
+            m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
 
-            //if (relative) {
-            //    m_currentChar += newCaracter;
-            //    m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
-            //} else {
-            //    m_currentChar = newCaracter;
-            //}
+            m_modellRefHolder_ = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef).GetComponent<ModellRefHolder>();
 
-            //GameObject model = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef);
-            //m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
-            //m_weapons[m_weapons.Count - 1].Init(this);
-            //m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
-            //m_weapons[m_weapons.Count - 1].Init(this);
-            //for (int i = 0; i < m_weapons.Count; i++) {
-            //    if(i != m_currentWeapon) {
-            //        m_weapons[i].SetActive(false);
-            //    }
-            //}
-            ///*if (m_modellRefHolder != null) {
-            //    print("model found" + m_modellRefHolder.m_modelAnim);
-            //    m_modelAnim = m_modellRefHolder.m_modelAnim;
-            //}*/
-            //m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
+            RotateWeapon();
 
-           
-            //m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
-            //m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
+            //----- ----- Tracking ----- -----
 
-            ////----- ----- Tracking ----- -----
-
-            //if (m_stats.m_firstCaracterChange == 0)
-            //    m_stats.m_firstCaracterChange = Time.time - m_joinTime;
+            if (m_stats.m_firstCaracterChange == 0)
+                m_stats.m_firstCaracterChange = Time.time - m_joinTime;
         }
 
-        void ChangeWeapon(int newWeapon, bool relative = false) {
-            if ((newWeapon < m_weapons.Count && newWeapon >= 0) || relative) {
-                m_weapons[m_currentWeapon].StopShooting();
-                m_weapons[m_currentWeapon].SetActive(false);
-
-                if (relative) {
-                    m_currentWeapon += newWeapon;
-                    m_currentWeapon = (m_currentWeapon % m_weapons.Count + m_weapons.Count) % m_weapons.Count;//https://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain/1082938
-                    //m_currentWeapon %= m_weapons.Count;//c# mod im negativen bereich ist scheise
-                } else {
-                    m_currentWeapon = newWeapon;
-                }
-
-                m_weapons[m_currentWeapon].SetActive(true);
-
+        void ChangeWeapon() {
+            if (m_useSMG) {
+                m_smg.SetActive(false);
+                m_rocketLauncher.SetActive(true);
                 if (m_isShooting)
-                    m_weapons[m_currentWeapon].StartShooting();
+                    m_rocketLauncher.StartShooting();
+            } else {
+                m_rocketLauncher.SetActive(false);
+                m_smg.SetActive(true);
+                if (m_isShooting)
+                    m_smg.StartShooting();
             }
-
+            
             //----- ----- Tracking ----- -----
             if (m_stats.m_firstWeaponChange == 0)
                 m_stats.m_firstWeaponChange = Time.time - m_joinTime;
 
             m_stats.m_weaponSwitchCount++;
-            if (m_currentWeapon - newWeapon == 0)
+            if (m_useSMG)
                 m_stats.m_sMGTime += Time.time - m_weaponChangeTime;
             else
                 m_stats.m_rocketTime += Time.time - m_weaponChangeTime;
 
             m_weaponChangeTime = Time.time;
+
+
+            m_useSMG = !m_useSMG;
         }
 
         void StartShooting() {
-            if(!m_isShooting)
-                m_weapons[m_currentWeapon].StartShooting();
+            if (!m_isShooting) {
+                if (m_useSMG) {
+                    m_smg.StartShooting();
+                } else {
+                    m_rocketLauncher.StartShooting();
+                    StartAnim("09_Zielen");//In stringCollection übertragen
+                }
+            }
             m_isShooting = true;
 
             //----- ----- Tracking ----- -----
             if (m_stats.m_firstShot == 0)
                 m_stats.m_firstShot = Time.time - m_joinTime;
-            //---- ----- Feedback ----- ----
-            if (m_currentWeapon == 1){
-                StartAnim("09_Zielen");//In stringCollection übertragen
-            }
         }
 
         void StopShooting() {
             m_isShooting = false;
-            m_weapons[m_currentWeapon].StopShooting();
-            if (m_currentWeapon == 1) {
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("11_RaketeSchießen",1);//In stringCollection übertragen
-                }
+            if (m_useSMG) {
+                m_smg.StopShooting();
+            } else {
+                m_rocketLauncher.StopShooting();
+                StartAnim("11_RaketeSchießen", 1);
             }
         }
 
@@ -626,11 +588,15 @@ namespace PPBC {
         /// <param name="playTimes">how often it should be played (-1 for loop)</param>
         /// <returns>returns duration in seconds or min value if not valide</returns>
         public float StartAnim(string animName,int playTimes = -1) {
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play(animName, playTimes);
-                return m_modelAnim.animation.animationConfig.duration;
+            if (m_modellRefHolder.m_modelAnim != null) {
+                m_modellRefHolder.m_modelAnim.animation.Play(animName, playTimes);
+                return m_modellRefHolder.m_modelAnim.animation.animationConfig.duration;
             }
             return float.MinValue;
+        }
+
+        void RotateWeapon() {
+            m_modellRefHolder.m_weaponRot.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));
         }
 
         #region Editor code
@@ -646,7 +612,7 @@ namespace PPBC {
                 m_rb.simulated = false;
 
                 m_control.StartShooting = m_editHud.DragHandler;
-                m_control.ChangeName = m_editHud.ChangeType;
+                //m_control.ChangeName = m_editHud.ChangeType;
                 m_control.ChangeCharacter = m_editHud.ChangeIndex;
             } else {
                 StopEdit();
@@ -655,7 +621,7 @@ namespace PPBC {
 
         public void StopEdit() {
             m_control.StartShooting = null;
-            m_control.ChangeName = null;
+            //m_control.ChangeName = null;
             m_control.ChangeCharacter = null;
 
             InControle(true);
@@ -669,9 +635,9 @@ namespace PPBC {
                 m_editHud.SetControlRef(m_control);
                 m_editHud.gameObject.SetActive(false);
 
-                m_control.ShowStats += GoIntoEditMode;
+                //m_control.ShowStats += GoIntoEditMode;
             } else {
-                m_control.ShowStats -= GoIntoEditMode;
+                //m_control.ShowStats -= GoIntoEditMode;
 
                 StopEdit();
                 if (m_editHud)
@@ -692,9 +658,8 @@ namespace PPBC {
                 }
                 
                 //---- ----- Feedback ----- ----
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("03_Aufprall", 1);//In stringCollection übertragen
-                }
+
+                StartAnim("03_Aufprall", 1);//In stringCollection übertragen
             }
             if(collision.gameObject.tag == "Ground") {
                 m_isColliding = true;
@@ -705,22 +670,7 @@ namespace PPBC {
                 Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector2(tmp.x, tmp.y));
                 m_laserParent.transform.rotation = rotation;
             }
-
-            if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
-                Vector2 tmpNormal = new Vector2(0, 0);
-                foreach (var it in collision.contacts) {
-                    tmpNormal += it.normal;
-                }
-                m_collisionNormals[collision.collider] = tmpNormal.normalized;
-            }
             
-        }
-
-        private void OnCollisionExit2D(Collision2D collision) {
-            m_isColliding = false;
-            if (m_dashColliders.value == (m_dashColliders | 1 << collision.gameObject.layer)) {
-                m_collisionNormals.Remove(collision.collider);
-            }
         }
 
         #endregion
