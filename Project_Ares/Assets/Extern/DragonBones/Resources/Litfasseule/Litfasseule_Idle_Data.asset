@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f496fe1145529ff41b493e13327661ab, type: 3}
+  m_Name: Litfasseule_Idle_Data
+  m_EditorClassIdentifier: 
+  dataName: Litfasseule_Idle
+  dragonBonesJSON: {fileID: 4900000, guid: 3e9eb65f5552988448194d7d3f84c2b0, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: a237de0f0c61a7546b8abfce0b4488cf, type: 3}
+    texture: {fileID: 2800000, guid: f7833493c1edde44e8cb5471ebb1040e, type: 3}
+    material: {fileID: 2100000, guid: 6ee62620afb5f0d4e9e4e95e3b9c77d8, type: 2}
+    uiMaterial: {fileID: 0}
