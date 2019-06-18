@@ -667,19 +667,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c2513983139bf4b91de650f8561343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_weaponRef: {fileID: 0}
   m_controlRef: {fileID: 0}
   m_player: {fileID: 0}
-  m_healthBar: {fileID: 5840008463104912062}
-  m_weaponValue: {fileID: 7892810267783094501}
-  m_controlObject: {fileID: 0}
-  m_dashColliders:
-    serializedVersion: 2
-    m_Bits: 256
   m_GUIHandler: {fileID: 0}
-  m_characterIcon: {fileID: 21300000, guid: cc77d2fe3dd1aa0419a8d1561f50fca6, type: 3}
-  m_characterName: Toasty-Chan
-  m_killsRef: {fileID: 754868780043255403}
+  m_modelRef: {fileID: 0}
   m_modellRefHolder: {fileID: 0}
   m_laserdeathVFX: {fileID: 242968859353934182}
   m_laserParent: {fileID: 8293032919373409796}
@@ -687,10 +678,7 @@ MonoBehaviour:
   m_regenTime: 5
   m_regeneration: 1
   m_maxHealth: 100
-  m_dashForce: 2
   m_iFrames: 1
-  m_gravity: 2
-  m_airResistance: 0.175
   m_bounciness: 0.3
   m_team: 0
   m_distanceToGround: 0
@@ -745,7 +733,7 @@ GameObject:
   - component: {fileID: 8192301611576829353}
   - component: {fileID: 6656861603934431744}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
