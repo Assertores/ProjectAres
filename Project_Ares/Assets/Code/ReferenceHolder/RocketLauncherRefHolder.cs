@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 namespace PPBC {
     public class RocketLauncherRefHolder : MonoBehaviour {
@@ -13,7 +14,7 @@ namespace PPBC {
         public GameObject m_explosionRef;
         public GameObject VFX_overcharge;
 
-        public DragonBones.UnityArmatureComponent m_modelAnim;
+        public SkeletonAnimation m_modelAnim;
 
         [Header("Balancing")]
         public float m_muzzleEnergy = 20000;

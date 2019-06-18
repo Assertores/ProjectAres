@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 namespace PPBC {
     public class SMGRefHolder : MonoBehaviour {
@@ -13,7 +14,7 @@ namespace PPBC {
         public Sprite m_icon_;
         public GameObject m_muzzleflash;
 
-        public DragonBones.UnityArmatureComponent m_modelAnim;
+        public SkeletonAnimation m_modelAnim;
 
         [Header("Balancing")]
         public float m_rPM = 500;
