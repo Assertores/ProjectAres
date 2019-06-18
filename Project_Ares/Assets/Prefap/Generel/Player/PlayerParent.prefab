@@ -632,6 +632,8 @@ GameObject:
   - component: {fileID: 5700115954412488011}
   - component: {fileID: 8924936815898551614}
   - component: {fileID: 7050589547134885413}
+  - component: {fileID: 76789006937272790}
+  - component: {fileID: 7459072931823235290}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Player
@@ -667,11 +669,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c2513983139bf4b91de650f8561343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_controlRef: {fileID: 0}
-  m_player: {fileID: 0}
-  m_GUIHandler: {fileID: 0}
-  m_modelRef: {fileID: 0}
-  m_modellRefHolder: {fileID: 0}
+  m_controlRef: {fileID: 7588671447724968877}
+  m_player: {fileID: 7092116907190573502}
+  m_GUIHandler_: {fileID: 6656861603934431744}
+  m_modelRef: {fileID: 3630967267209164424}
+  m_modellRefHolder_: {fileID: 0}
   m_laserdeathVFX: {fileID: 242968859353934182}
   m_laserParent: {fileID: 8293032919373409796}
   m_deathVFX: {fileID: 8251623860929672152}
@@ -719,6 +721,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.72, y: 1}
   m_Direction: 0
+--- !u!114 &76789006937272790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765014420153337895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33620c54241a1c94bb173ec9104b5322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7459072931823235290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765014420153337895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fc4bd3fb73798479183d17730aae35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7836777981111523159
 GameObject:
   m_ObjectHideFlags: 0

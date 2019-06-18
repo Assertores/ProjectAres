@@ -118,9 +118,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4162003346175362497}
-  - component: {fileID: 7651391310459712476}
   - component: {fileID: 5545514078711503098}
   - component: {fileID: 3738275278642140705}
+  - component: {fileID: 3526861701236737257}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -145,34 +145,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7651391310459712476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294756563320938153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33620c54241a1c94bb173ec9104b5322, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_bullet: {fileID: 6427757345274832488, guid: 484995188aeb7234c84e70ee518a544f,
-    type: 3}
-  m_barrel: {fileID: 8526788404880525850}
-  m_audio: {fileID: 5545514078711503098}
-  m_sounds:
-  - {fileID: 8300000, guid: 038e9098d8b08c14e8582aa7a89fd21d, type: 3}
-  - {fileID: 8300000, guid: 5eb02bd87a403aa4f878155cfca265a9, type: 3}
-  - {fileID: 8300000, guid: 12bcd84da2a4fad439337d14f748cbba, type: 3}
-  m_icon_: {fileID: 21300000, guid: 2d6ca3dfdfeb5f14292af7132c4f8315, type: 3}
-  m_muzzleflash: {fileID: 479988777259723651}
-  m_rPM: 500
-  m_muzzleEnergy: 2000
-  m_shootForSec: 4
-  m_coolDownRatio: 2
-  m_halfPitchRange: 0.1
-  m_halfVolumeRange: 0
 --- !u!82 &5545514078711503098
 AudioSource:
   m_ObjectHideFlags: 0
@@ -281,6 +253,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ebfeb084db3554e8626ec9dc250343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3526861701236737257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294756563320938153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0c6f65b7bb01543bfba55bc92aa6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bullet: {fileID: 0}
+  m_barrel: {fileID: 0}
+  m_audio: {fileID: 0}
+  m_sounds: []
+  m_icon_: {fileID: 0}
+  m_muzzleflash: {fileID: 0}
+  m_modelAnim: {fileID: 0}
+  m_rPM: 500
+  m_muzzleEnergy: 2000
+  m_shootForSec: 4
+  m_coolDownRatio: 2
+  m_halfPitchRange: 0.1
+  m_halfVolumeRange: 0
 --- !u!1001 &7545934430339482529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -296,16 +293,6 @@ PrefabInstance:
     - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931340723058321441, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: m_RenderAlignment
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931340723058321440, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,
@@ -363,14 +350,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7931340723058321441, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: m_RenderAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931340723058321440, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c751caebae1fed54d9af0de1f9ba7b41, type: 3}
---- !u!1 &479988777259723651 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
-    type: 3}
-  m_PrefabInstance: {fileID: 7545934430339482529}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &479988777259723654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,

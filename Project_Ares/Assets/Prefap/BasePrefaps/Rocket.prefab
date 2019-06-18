@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2352598480938561431}
-  - component: {fileID: 1508690974879307030}
   - component: {fileID: 3022745360682548735}
   - component: {fileID: 2749897468312515980}
+  - component: {fileID: 4542296950148524884}
   m_Layer: 9
   m_Name: Rocket
   m_TagString: Untagged
@@ -36,22 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1508690974879307030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508690974879307017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 276ca7ab68425d74180978cc99735d32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_explosionRef: {fileID: 3039136259464356723, guid: 973c7300ae2d07248ad89f8bd41128ea,
-    type: 3}
-  m_killDistance: 1000
-  m_damage: 3
 --- !u!61 &3022745360682548735
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -99,6 +83,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4542296950148524884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508690974879307017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba66be02353d26842b4d6d4d868eedaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bullet: {fileID: 0}
+  m_barrel: {fileID: 0}
+  m_audio: {fileID: 0}
+  m_icon_: {fileID: 0}
+  m_explosionRef: {fileID: 0}
+  VFX_overcharge: {fileID: 0}
+  m_modelAnim: {fileID: 0}
+  m_muzzleEnergy: 20000
+  m_shootDelay: 2
+  m_overchargeMaxTime: 4
+  m_overchargeAdd: 0.4
+  m_overchargeFail: 1.5
 --- !u!1 &8630363224220017646
 GameObject:
   m_ObjectHideFlags: 0
