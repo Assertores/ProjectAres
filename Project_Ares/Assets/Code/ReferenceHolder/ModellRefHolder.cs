@@ -6,9 +6,10 @@ namespace PPBC
 {
     public class ModellRefHolder : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField] public DragonBones.UnityArmatureComponent m_modelAnim;
-        [SerializeField] public Transform m_weaponPos;
+        public DragonBones.UnityArmatureComponent m_modelAnim;
+        public Transform m_weaponRot;
+        public SMGRefHolder m_sMG;
+        public RocketLauncherRefHolder m_rocketLauncher;
 
         
     }
