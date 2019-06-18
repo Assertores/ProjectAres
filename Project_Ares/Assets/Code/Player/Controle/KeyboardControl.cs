@@ -33,33 +33,15 @@ namespace PPBC {
                 StopShooting?.Invoke();
             }
 
-            if (Input.GetKeyUp(KeyCode.Alpha1)) {
-                ChangeWeapon?.Invoke(0, false);
-            } else if (Input.GetKeyUp(KeyCode.Alpha2)) {
-                ChangeWeapon?.Invoke(1, false);
-            }
             if (Input.GetKeyUp(KeyCode.Space)) {
-                ChangeWeapon?.Invoke(1, true);
+                ChangeWeapon?.Invoke();
             }
 
             if (Input.GetKeyDown(KeyCode.C)) {
-                ChangeCharacter?.Invoke(1, true);
+                ChangeCharacter?.Invoke(true);
             }
             if (Input.GetKeyDown(KeyCode.V)) {
-                ChangeCharacter?.Invoke(-1, true);
-            }
-
-            if (Input.GetKeyDown(KeyCode.M)) {
-                ChangeName?.Invoke(true);
-            }
-            if (Input.GetKeyDown(KeyCode.N)) {
-                ChangeName?.Invoke(false);
-            }
-            if (Input.GetKeyDown(KeyCode.X)) {
-                ShowStats?.Invoke(true);
-            }
-            if (Input.GetKeyUp(KeyCode.X)) {
-                ShowStats?.Invoke(false);
+                ChangeCharacter?.Invoke(false);
             }
 
             //if (_myCamera) {
@@ -83,14 +65,9 @@ namespace PPBC {
         public Vector2 m_dir { get; set; }
         public Action StartShooting { get; set; }
         public Action StopShooting { get; set; }
-        public Action Dash { get; set; }
-        public Action<int> SelectWeapon { get; set; }
-        public Action<bool> ChangeName { get; set; }
-        public Action<int, bool> ChangeCharacter { get; set; }
-        public Action<int, bool> ChangeWeapon { get; set; }
-        public Action<int> UseItem { get; set; }
+        public Action<bool> ChangeCharacter { get; set; }
+        public Action ChangeWeapon { get; set; }
         public Action Disconnect { get; set; }
-        public Action<bool> ShowStats { get; set; }
 
         public void DoDisconect() {
             DataHolder.s_players[4] = false;

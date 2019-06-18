@@ -68,38 +68,13 @@ namespace PPBC {
                 StopShooting?.Invoke();
             }
 
-            if(m_lastState.Buttons.LeftShoulder == ButtonState.Pressed && m_state.Buttons.LeftShoulder == ButtonState.Released) {
-                ChangeWeapon?.Invoke(-1, true);
-            }else if(m_lastState.Buttons.RightShoulder == ButtonState.Pressed && m_state.Buttons.RightShoulder == ButtonState.Released) {
-                ChangeWeapon?.Invoke(1, true);
+            if((m_lastState.Buttons.LeftShoulder == ButtonState.Pressed && m_state.Buttons.LeftShoulder == ButtonState.Released) ||
+              (m_lastState.Buttons.RightShoulder == ButtonState.Pressed && m_state.Buttons.RightShoulder == ButtonState.Released)) {
+                ChangeWeapon?.Invoke();
             }else if(m_lastState.DPad.Right == ButtonState.Pressed && m_state.DPad.Right == ButtonState.Released) {
-                ChangeCharacter?.Invoke(1, true);
+                ChangeCharacter?.Invoke(true);
             } else if (m_lastState.DPad.Left == ButtonState.Pressed && m_state.DPad.Left == ButtonState.Released) {
-                ChangeCharacter?.Invoke(-1, true);
-            } else if (m_lastState.DPad.Down == ButtonState.Pressed && m_state.DPad.Down == ButtonState.Released) {
-                ChangeName?.Invoke(true);
-            } else if (m_lastState.DPad.Up == ButtonState.Pressed && m_state.DPad.Up == ButtonState.Released) {
-                ChangeName?.Invoke(false);
-            }
-
-            if (m_lastState.Buttons.A == ButtonState.Released && m_state.Buttons.A == ButtonState.Pressed) {
-                ShowStats?.Invoke(true);
-            }
-            else if(m_lastState.Buttons.A == ButtonState.Pressed && m_state.Buttons.A == ButtonState.Released) {
-                ShowStats?.Invoke(false);
-            }
-            /* if (m_state.Triggers.Left > m_shootThreshold && m_lastState.Triggers.Left <= m_shootThreshold) {
-                Dash?.Invoke();
-            }*/
-
-            if(m_lastState.Buttons.Start == ButtonState.Pressed && m_state.Buttons.Start == ButtonState.Released) {
-                /*if(Time.timeScale > 0) {
-                    m_oldTimeScale = Time.timeScale;
-                    Time.timeScale = 0;
-                } else {
-                    Time.timeScale = m_oldTimeScale;
-                }*/
-                //Disconnect?.Invoke(); is foll dumm wenn man im spiel disconeckted und nichtmehr hinzu kommt
+                ChangeCharacter?.Invoke(false);
             }
         }
 
@@ -109,14 +84,9 @@ namespace PPBC {
         public Vector2 m_dir { get; set; }
         public Action StartShooting { get; set; }
         public Action StopShooting { get; set; }
-        public Action Dash { get; set; }
-        public Action<int> SelectWeapon { get; set; }
-        public Action<bool> ChangeName { get; set; }
-        public Action<int, bool> ChangeCharacter { get; set; }
-        public Action<int, bool> ChangeWeapon { get; set; }
-        public Action<int> UseItem { get; set; }
+        public Action<bool> ChangeCharacter { get; set; }
+        public Action ChangeWeapon { get; set; }
         public Action Disconnect { get; set; }
-        public Action<bool> ShowStats { get; set; }
         public void DoDisconect() {
             DataHolder.s_players[m_controlerIndex] = false;
             Disconnect?.Invoke();
