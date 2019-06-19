@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: Toasty_Atlas
+  m_Name: Chara_Toasty_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: 92fa7a10e9ea85e418721a8cd79b1876, type: 3}
-  materials: []
+  atlasFile: {fileID: 4900000, guid: 50100bc6a72a9964bb3e3a73444f6d66, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 592d8b50f6adb174e87c3a5b738c70a4, type: 2}
