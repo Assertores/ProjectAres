@@ -372,12 +372,14 @@ namespace PPBC {
         #region Resets
 
         public void FullReset() {
-            ResetStatsFull();
             DoReset();
+            ResetStatsFull();
             InControle(true);
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
+            StopAllCoroutines();
+
             if (!m_alive) {
                 Respawn(transform.position);
             }
