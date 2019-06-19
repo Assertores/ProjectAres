@@ -8,8 +8,7 @@ namespace PPBC {
 
     public struct d_playerData {
         public int m_points;
-
-        public string m_name;
+        
         public int m_kills;
         public int m_deaths;
         public int m_assists;
@@ -31,7 +30,7 @@ namespace PPBC {
 
 
         public override string ToString() {
-            return m_name + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
+            return "Removed Name" + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
         }
         public string StringWithNewLine() {
             return "Kills: " + m_kills + System.Environment.NewLine + "Deaths: " + m_deaths + System.Environment.NewLine + "Assists: " + m_assists + System.Environment.NewLine + "Damage Dealt: " + m_damageDealt + System.Environment.NewLine + "Damage Taken: " + m_damageTaken;
@@ -86,7 +85,6 @@ namespace PPBC {
         private float m_time;
         float m_currentHealth;
         public int m_currentChar { get; private set; } = 0;
-        int m_currentName;
         bool m_useSMG = true;
 
         byte m_doInit = 0;
@@ -237,11 +235,11 @@ namespace PPBC {
 
 
                 //----- ----- Kill Feed ----- -----
-                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                KillFeedHandler.AddKill("",
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
                                         icon,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
-                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+                                        "");//TODO: KillerWeapon herausfinden
                 //----- ----- Feedback ----- -----
                 StartAnim("05_Sterben", 1);
                 m_deathVFX.Play();
@@ -299,17 +297,17 @@ namespace PPBC {
 
 
             if (source)
-                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                KillFeedHandler.AddKill("",
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
                                         null,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
-                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+                                        "");//TODO: KillerWeapon herausfinden
             else
                 KillFeedHandler.AddKill("suicide",
                                         null,
                                         null,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
-                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+                                        "");//TODO: KillerWeapon herausfinden
 
             //----- ----- Tracking ----- -----
             m_stats.m_deathBySuicide++;
