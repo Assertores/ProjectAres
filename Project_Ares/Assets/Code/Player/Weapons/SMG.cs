@@ -50,6 +50,7 @@ namespace PPBC {
             }
 
             m_value = m_shootingTime / m_player.m_modellRefHolder.m_sMG.m_shootForSec;
+            m_player.m_GUIHandler.m_stamina.fillAmount = m_value;
 
             if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null /*&& !m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.isPlaying*/) {
                 //m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Idle");
