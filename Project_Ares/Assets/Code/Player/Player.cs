@@ -603,8 +603,11 @@ namespace PPBC {
         #region Editor code
 
         EditorHUDAndPlayerLogic m_editHud;
-        public void GoIntoEditMode(bool doEdit) {
-            if (doEdit)
+        bool m_doEdit = false;
+        public void GoIntoEditMode() {
+            m_doEdit = !m_doEdit;
+
+            if (m_doEdit)
                 m_editHud.gameObject.SetActive(!m_editHud.gameObject.activeSelf);
 
             if (m_editHud.gameObject.activeSelf) {
@@ -613,7 +616,7 @@ namespace PPBC {
                 m_rb.simulated = false;
 
                 m_control.StartShooting = m_editHud.DragHandler;
-                //m_control.ChangeName = m_editHud.ChangeType;
+                m_control.ChangeType = m_editHud.ChangeType;
                 m_control.ChangeCharacter = m_editHud.ChangeIndex;
             } else {
                 StopEdit();
@@ -622,7 +625,7 @@ namespace PPBC {
 
         public void StopEdit() {
             m_control.StartShooting = null;
-            //m_control.ChangeName = null;
+            m_control.ChangeType = null;
             m_control.ChangeCharacter = null;
 
             InControle(true);
@@ -636,9 +639,9 @@ namespace PPBC {
                 m_editHud.SetControlRef(m_control);
                 m_editHud.gameObject.SetActive(false);
 
-                //m_control.ShowStats += GoIntoEditMode;
+                m_control.Accept += GoIntoEditMode;
             } else {
-                //m_control.ShowStats -= GoIntoEditMode;
+                m_control.Accept -= GoIntoEditMode;
 
                 StopEdit();
                 if (m_editHud)
