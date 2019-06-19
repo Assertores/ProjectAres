@@ -33,7 +33,7 @@ namespace PPBC {
         public void Init() {
             foreach(var it in Player.s_references) {
                 it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
-                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
+                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
             }
 
             foreach (Transform it in transform) {
@@ -51,7 +51,7 @@ namespace PPBC {
         }
 
         public void PlayerDied(Player player) {
-            player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
+            StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position));
             
         }
 

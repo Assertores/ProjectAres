@@ -85,7 +85,7 @@ namespace PPBC {
 
             Player.s_sortedRef.Sort(delegate (Player lhs, Player rhs) { return rhs.m_stats.m_points.CompareTo(lhs.m_stats.m_points); });
 
-            StartCoroutine(RespawnPlayer(player));
+            DoRespawn(player);
         }
 
         public void SetMenuSpecific(Transform specificRef) {
@@ -113,19 +113,13 @@ namespace PPBC {
 
         #endregion
 
-        IEnumerator RespawnPlayer(Player player) {
-            yield return new WaitForSeconds(m_respawnTime);
-
-            DoRespawn(player);
-        }
-
         void DoRespawn(Player player) {
             List<PlayerStart> availableSpawns = PlayerStart.s_references.FindAll(x => x.m_team == player.m_team);
 
             if (availableSpawns.Count == 0) {
-                player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
+                StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position, m_respawnTime));
             } else {
-                player.Respawn(availableSpawns[Random.Range(0, availableSpawns.Count - 1)].transform.position);
+                StartCoroutine(player.Respawn(availableSpawns[Random.Range(0, availableSpawns.Count)].transform.position, m_respawnTime));
             }
         }
     }

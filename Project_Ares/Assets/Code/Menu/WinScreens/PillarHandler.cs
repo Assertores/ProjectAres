@@ -50,7 +50,6 @@ namespace PPBC {
 
                 //----- ----- FeedBack ----- -----
                 m_pillar[i].m_screen.text = "0";
-                m_pillar[i].m_playerName.text = Player.s_references[i].m_stats.m_name;
                 m_pillar[i].m_pillarGradient.gameObject.SetActive(false);
                 m_pillar[i].m_pillarField.text = "";
             }

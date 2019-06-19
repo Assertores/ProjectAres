@@ -8,8 +8,7 @@ namespace PPBC {
 
     public struct d_playerData {
         public int m_points;
-
-        public string m_name;
+        
         public int m_kills;
         public int m_deaths;
         public int m_assists;
@@ -31,7 +30,7 @@ namespace PPBC {
 
 
         public override string ToString() {
-            return m_name + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
+            return "Removed Name" + ";" + m_kills + ";" + m_deaths + ";" + m_assists + ";" + m_damageDealt + ";" + m_damageTaken;
         }
         public string StringWithNewLine() {
             return "Kills: " + m_kills + System.Environment.NewLine + "Deaths: " + m_deaths + System.Environment.NewLine + "Assists: " + m_assists + System.Environment.NewLine + "Damage Dealt: " + m_damageDealt + System.Environment.NewLine + "Damage Taken: " + m_damageTaken;
@@ -39,6 +38,8 @@ namespace PPBC {
     }
     
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(SMG))]
+    [RequireComponent(typeof(RocketLauncher))]
     public class Player : MonoBehaviour, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>();
@@ -47,25 +48,18 @@ namespace PPBC {
         #region Variables
 
         [Header("References")]
-        [SerializeField] Transform m_modelRef;
-        [SerializeField] Transform m_weaponRef;
         [SerializeField] Transform m_controlRef;
 
-        [SerializeField] GameObject m_playerParent;
-        [SerializeField] Image m_healthBar;
-        [SerializeField] Image m_weaponValue;
-        [SerializeField] GameObject m_controlObject;
-        [SerializeField] LayerMask m_dashColliders;
-        [SerializeField] PlayerGUIHandler m_GUIHandler;
-        [SerializeField] Sprite m_characterIcon;//muss von ausen veränderbar sein
-        [SerializeField] string m_characterName;
-        [SerializeField] TMPro.TextMeshProUGUI m_killsRef;
-        [SerializeField] ModellRefHolder m_modellRefHolder;
+        [SerializeField] GameObject m_player;
+        [SerializeField] PlayerGUIHandler m_GUIHandler_;
+        public PlayerGUIHandler m_GUIHandler { get { return m_GUIHandler_; } set { } }
+        [SerializeField] Transform m_modelRef;
+        [SerializeField] ModellRefHolder m_modellRefHolder_;
+        public ModellRefHolder m_modellRefHolder { get { return m_modellRefHolder_; } set { } }
         //---- ----- Feedback ----- ----
         [SerializeField] ParticleSystem m_laserdeathVFX;
         [SerializeField] GameObject m_laserParent;
         [SerializeField] ParticleSystem m_deathVFX;
-        private DragonBones.UnityArmatureComponent m_modelAnim;
 
         
 
@@ -73,41 +67,37 @@ namespace PPBC {
         [SerializeField] private float m_regenTime;
         [SerializeField] private float m_regeneration;
         [SerializeField] float m_maxHealth = 100;
-        [SerializeField] float m_dashForce = 2;
         [Tooltip("Immer in Sekunden angeben")]
         [SerializeField] float m_iFrames = 1;
-        [SerializeField] float m_gravity = 1;
         [Range(0,1)]
-        [SerializeField] float m_airResistance = 0.25f;
-        [SerializeField] float m_bounciness = 0.5f;
+        [SerializeField] float m_bounciness = 0.3f;
 
         public int m_team;
-
         public d_playerData m_stats;
 
         public float m_distanceToGround;
 
         public IControl m_control { get; private set; }
-        List<IWeapon> m_weapons = new List<IWeapon>();
-        List<IItem> m_items = new List<IItem>();//eventuell obsolet
-
-        Dictionary<Collider2D, Vector2> m_collisionNormals = new Dictionary<Collider2D, Vector2>();//eventuel obsolet
+        
         List<Player> m_assistRefs = new List<Player>();
 
         float m_respawntTime = float.MaxValue;
         private float m_time;
         float m_currentHealth;
         public int m_currentChar { get; private set; } = 0;
-        int m_currentWeapon = 0;
+        bool m_useSMG = true;
+
+        byte m_doInit = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
         Vector2 vel;
 
-        int m_currentName;
         bool m_isColliding;
         bool m_isCollidingLaser;
 
         public Rigidbody2D m_rb { get; private set; }
+        SMG m_smg;
+        RocketLauncher m_rocketLauncher;
 
         //----- ----- Tracking variables ----- -----
 
@@ -125,42 +115,33 @@ namespace PPBC {
             s_references.Add(this);
             s_sortedRef.Add(this);
 
-            //----- ----- Tracking ----- -----
+            ResetTracking();
 
-            m_stats.m_spawnTimeSinceLevelLoad = float.MaxValue;
-            m_stats.m_firstShot = 0;
-            m_stats.m_firstWeaponChange = 0;
-            m_stats.m_firstCaracterChange = 0;
-            m_stats.m_firstNameChange = 0;
-            m_stats.m_sMGTime = 0;
-            m_stats.m_rocketTime = 0;
-            m_stats.m_timeInLobby = 0;
-            m_stats.m_weaponSwitchCount = 0;
-            m_stats.m_deathBySuicide = 0;
-
-            m_distanceToGround = transform.position.y - m_modelRef.position.y;
-
-           
+            //m_distanceToGround = transform.position.y - m_modelRef.position.y;//in modell auslagern
     }
 
-        void Start() {
-        
-            m_rb = GetComponent<Rigidbody2D>();
-            
-            
-        }
         private void OnDestroy() {
             s_references.Remove(this);
             s_sortedRef.Remove(this);
         }
 
-        void Update() {
+        void Start() {
+            m_rb = GetComponent<Rigidbody2D>();
+            m_smg = GetComponent<SMG>();
+            m_rocketLauncher = GetComponent<RocketLauncher>();
 
+            if (m_doInit == 1) {
+                SaveInit();
+            }
+            m_doInit++;
+        }
+
+        void Update() {
             if (m_control != null && m_currentHealth > 0) {
 
-                m_weaponRef.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                RotateWeapon();
 
-
+                //health regen only
                 if (m_currentHealth < m_maxHealth) {
                     if (m_time + m_regenTime <= Time.timeSinceLevelLoad) {
 
@@ -172,53 +153,30 @@ namespace PPBC {
                 }
             }
 
-            if (m_control.m_dir.x < 0) {
-                m_weaponRef.localScale = new Vector3(1, -1, 1);
+            
+
+            //----- ----- Feedback ----- -----
+            if (!m_isColliding) {
+                if (m_modellRefHolder.m_modelAnim && m_modellRefHolder.m_modelAnim.state.GetCurrent(0) == null) {
+                    StartAnim("02_Idle_Luft");
+                }
             } else {
-                m_weaponRef.localScale = new Vector3(1, 1, 1);
-            }
-            if (m_modellRefHolder != null) {
-                m_weaponRef.position = m_modellRefHolder.m_weaponPos.position;
-            }
-            m_controlRef.position = m_weaponRef.position;
-            m_controlRef.rotation = m_weaponRef.rotation;
-
-            //----- ----- Feedback ----- -----                 
-            if (m_modelAnim != null) {
-                 if (!m_isColliding) {
-                
-                    if (!m_modelAnim.animation.isPlaying) {
-                        m_modelAnim.animation.Play("02_Idle_Luft");
-                        
-                    }
-                 }
-                 else {
-                    if (!m_modelAnim.animation.isPlaying) {
-                        m_modelAnim.animation.Play("01_Idle");
-                        
-                    }
-                 }
+                if (m_modellRefHolder.m_modelAnim && m_modellRefHolder.m_modelAnim.state.GetCurrent(0) == null) {
+                    StartAnim("01_Idle");
+                }
             }
 
-            
-        
-            
-            m_healthBar.fillAmount = (float)m_currentHealth / m_maxHealth;
-            m_weaponValue.fillAmount = m_weapons[m_currentWeapon].m_value;
-
-            m_GUIHandler.SetHealth(m_healthBar.fillAmount);
+            m_GUIHandler.m_health.fillAmount = (float)m_currentHealth / m_maxHealth;
 
             if (!m_isInvincible) {
-                m_killsRef.text = m_stats.m_points.ToString();
+                m_GUIHandler.m_points.text = m_stats.m_points.ToString();
             } else {
-                m_killsRef.text = "";
+                m_GUIHandler.m_points.text = "";
             }
-                
-
-            m_GUIHandler.m_debugStats.text = m_stats.StringWithNewLine();
         }
 
         void FixedUpdate() {
+            //save velosity of last tick to make rebounce heapon
             vel = m_rb.velocity;
         }
 
@@ -236,9 +194,9 @@ namespace PPBC {
                 return;
             }
             //---- ----- Feedback ----- ----
-            if (m_modelAnim != null) {
+            if (m_modellRefHolder.m_modelAnim != null) {
                 print("hit");
-                m_modelAnim.animation.Play("04_Treffer", 1);
+                StartAnim("04_Treffer", 1);
             }
             if (m_isInvincible) {
                 return;
@@ -268,7 +226,7 @@ namespace PPBC {
                  m_currentHealth = 0;
                  m_alive = false;
                  m_rb.velocity = Vector2.zero;
-                 m_playerParent.SetActive(false);
+                 //m_playerParent.SetActive(false);
 
                  InControle(false);
 
@@ -277,11 +235,11 @@ namespace PPBC {
 
 
                 //----- ----- Kill Feed ----- -----
-                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                KillFeedHandler.AddKill("",
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
                                         icon,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
-                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+                                        "");//TODO: KillerWeapon herausfinden
                 //----- ----- Feedback ----- -----
                 StartAnim("05_Sterben", 1);
                 m_deathVFX.Play();
@@ -333,23 +291,23 @@ namespace PPBC {
             
 
             InControle(false);
-            m_playerParent.SetActive(false);
+            //m_playerParent.SetActive(false);
             
 
 
 
             if (source)
-                KillFeedHandler.AddKill(DataHolder.s_playerNames[source.m_currentName],
+                KillFeedHandler.AddKill("",
                                         DataHolder.s_characterDatas[source.m_currentChar].m_icon,
                                         null,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
-                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+                                        "");//TODO: KillerWeapon herausfinden
             else
                 KillFeedHandler.AddKill("suicide",
                                         null,
                                         null,
                                         DataHolder.s_characterDatas[m_currentChar].m_icon,
-                                        DataHolder.s_playerNames[m_currentName]);//TODO: KillerWeapon herausfinden
+                                        "");//TODO: KillerWeapon herausfinden
 
             //----- ----- Tracking ----- -----
             m_stats.m_deathBySuicide++;
@@ -378,33 +336,37 @@ namespace PPBC {
         /// </summary>
         public void Init(GameObject control) {//dirty wegen nicht direkt IControl übergeben
             if (control == null) {
-                if(m_controlObject == null) {
-                    DestroyImmediate(gameObject);
-                    return;
-                }
-                m_control = m_controlObject.GetComponent<IControl>();
-                if(m_control == null) {
-                    //Destroy(gameObject);
-                    DestroyImmediate(gameObject);
-                    return;
-                }
-            } else {
-                control.transform.parent = m_controlRef;
-                control.transform.localPosition = Vector3.zero;
-                m_control = control.GetComponent<IControl>();
+                Destroy(transform.root.gameObject);
+                return;
+            }
+            
+            control.transform.parent = m_controlRef;
+            control.transform.localPosition = Vector3.zero;
+            m_control = control.GetComponent<IControl>();
+
+            if(m_control == null) {
+                Destroy(transform.root.gameObject);
+                return;
             }
 
-            m_currentName = Random.Range(-1, DataHolder.s_playerNames.Count - 2);
-            ChangeName(true);
-            RepositionGUI();
+            transform.root.position = Vector3.zero;
+
+            if (m_doInit == 1) {
+                SaveInit();
+            }
+            m_doInit++;
+        }
+
+        void SaveInit() {
+            m_modellRefHolder_ = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef).GetComponent<ModellRefHolder>();
+
+            m_smg.Init(this);
+
+            m_rocketLauncher.Init(this);
 
             InControle(true);
 
-            ChangeCharacter(0, false);//damit der erste Charakter ausgewählt ist
-            ChangeWeapon(0);//damit die erste waffe ausgewählt ist
-
-            Respawn(transform.position);//hier die richtige position eingeben
-            //WeaponIcons in WheaponWheel einfügen;
+            FullReset();
 
             //----- ----- Tracking ----- -----
             m_joinTime = Time.time;
@@ -414,19 +376,55 @@ namespace PPBC {
 
             //---- ----- Feedback ----- ----
 
-            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
-            StartAnim("06_Respawn",1);
+            StartAnim("06_Respawn", 1);
+        }
+
+        #region Resets
+
+        public void FullReset() {
+            DoReset();
+            ResetStatsFull();
+            InControle(true);
         }
 
         public void DoReset() {//Reset ist von MonoBehaviour benutz
+            StopAllCoroutines();
+
             if (!m_alive) {
                 Respawn(transform.position);
             }
-            //RepositionGUI();//eventuell over the top
+
             StopShooting();
+            ResetHealth();
+            ResetVelocity();
+        }
+
+        public void ResetHealth() {
             m_currentHealth = m_maxHealth;
-            if(m_rb)
+            m_alive = true;
+        }
+
+        public void ResetVelocity() {
+            if (m_rb)
                 m_rb.velocity = Vector2.zero;
+        }
+
+        public void ResetStatsFull() {
+            ResetTracking();
+            ResetStuts();
+        }
+
+        public void ResetTracking() {
+            m_stats.m_spawnTimeSinceLevelLoad = float.MaxValue;
+            m_stats.m_firstShot = 0;
+            m_stats.m_firstWeaponChange = 0;
+            m_stats.m_firstCaracterChange = 0;
+            m_stats.m_firstNameChange = 0;
+            m_stats.m_sMGTime = 0;
+            m_stats.m_rocketTime = 0;
+            m_stats.m_timeInLobby = 0;
+            m_stats.m_weaponSwitchCount = 0;
+            m_stats.m_deathBySuicide = 0;
         }
 
         public void ResetStuts() {
@@ -438,144 +436,97 @@ namespace PPBC {
             m_stats.m_damageTaken = 0;
         }
 
+        #endregion
+        #region Controlers
+
         public void InControle(bool controle) {
             if (controle) {
                 m_control.StartShooting = StartShooting;
                 m_control.StopShooting = StopShooting;
-                m_control.Dash = Dash;
-
-                m_control.SelectWeapon = SelectWeapon;
+                
 
                 m_control.ChangeWeapon = ChangeWeapon;
-                m_control.UseItem = UseItem;
                 m_control.Disconnect = Disconect;
             } else {
                 m_control.StartShooting = null;
                 m_control.StopShooting = null;
-                m_control.Dash = null;
-
-                m_control.SelectWeapon = null;
+                
                 m_control.ChangeCharacter = null;
                 m_control.ChangeWeapon = null;
-                m_control.UseItem = null;
                 m_control.Disconnect = null;
                 StopShooting();
             }
         }
-
-
+        
         public void SetChangeCharAble(bool able) {
             if (able) {
                 m_control.ChangeCharacter = ChangeCharacter;
-                m_GUIHandler.SetCharChangeActive(true);
-                m_control.ChangeName = ChangeName;
             } else {
                 m_control.ChangeCharacter = null;
-                m_GUIHandler.SetCharChangeActive(false);
-                m_control.ChangeName = null;
             }
         }
 
-        public void Respawn(Vector2 pos) {
-            transform.position = pos;
+        #endregion
 
-            StopShooting();
+        IEnumerator PlayerDie(float m_wait) {
+            InControle(false);
+            yield return new WaitForSeconds(m_wait);
+            GameManager.s_singelton?.PlayerDied(this);
 
-            if(m_rb)
-                m_rb.velocity = Vector2.zero;
+        }
+        
+        //gameobject einschalten
+        //respawn effect abfeuern
+        public IEnumerator Respawn(Vector2 pos, float delay = 0) {
+            float startTime = Time.time;
+            Vector2 starPos = transform.position;
 
-            m_currentHealth = m_maxHealth;
-            m_alive = true;
-            /*if(_currentWeapon != 0) {
-                _weapons[_currentWeapon].SetActive(false);
-                _currentWeapon = 0;
-                _weapons[_currentWeapon].SetActive(true);
-            }*/
-            InControle(true);
-            m_playerParent.SetActive(true);
-            m_respawntTime = Time.timeSinceLevelLoad;
-            //---- ----- Feedback ----- ----
-            m_isCollidingLaser = false;
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play("06_Respawn",1);//In stringCollection übertragen
+            while (startTime + delay > Time.time) {
+                //----- stuff that should happon in between -----
+                transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
+                yield return null;
             }
+
+            //----- stuff that should happon after -----
+            transform.position = pos;
+            if (m_rb)
+                m_rb.velocity = Vector2.zero;
+            StopShooting();
+            ResetHealth();
+            m_respawntTime = Time.timeSinceLevelLoad;
+
+            if (m_modellRefHolder.m_modelAnim != null) {
+                float tmp = StartAnim("06_Respawn", 1);//In stringCollection übertragen
+                if (tmp > 0)
+                    yield return new WaitForSeconds(tmp);
+            }
+
+            InControle(true);
+
+            //m_playerParent.SetActive(true);//TODO auf neues system umschreiben
+            
         }
 
         public void Invincible(bool inv) {
             m_isInvincible = inv;
         }
 
-        void SelectWeapon(int selectedWeapon) {
-            if (selectedWeapon >= m_weapons.Count || selectedWeapon < 0)
-                selectedWeapon = 0;
+        void ChangeCharacter(bool next) {
+            StopShooting();
 
-            //_weaponWheel.GetChild(selectedWeapon) highlight selected item
-        }
+            if (next)
+                m_currentChar++;
+            else
+                m_currentChar--;
 
-        void ChangeName(bool next = true) {
-            if(!next && m_currentName <= 0) {
-                print("nameindex to low");
-                return;
-            }
-
-            if (next) {
-                m_currentName++;
-            } else {
-                m_currentName--;
-            }
-
-            m_stats.m_name = DataHolder.GetPlayerName(m_currentName);
-            m_GUIHandler.SetName(m_stats.m_name);
-
-            //----- ----- Tracking ----- -----
-            if (m_stats.m_firstNameChange == 0)
-                m_stats.m_firstNameChange = Time.time - m_joinTime;
-        }
-
-        void ChangeCharacter(int newCaracter, bool relative = true) {
-            if(!relative && (newCaracter < 0 && newCaracter >= DataHolder.s_characterDatas.Count)) {
-                return;
-            }
-            if (m_weapons != null && m_isShooting) {
-                m_weapons[m_currentWeapon].StopShooting();
-                m_isShooting = false;
-            }
-
-            m_weapons.Clear();
+            m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
 
             foreach(Transform it in m_modelRef) {
-                Destroy(it.gameObject);
+                DestroyImmediate(it.gameObject);
             }
-            foreach(Transform it in m_weaponRef) {
-                Destroy(it.gameObject);
-            }
+            m_modellRefHolder_ = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef).GetComponent<ModellRefHolder>();
 
-            if (relative) {
-                m_currentChar += newCaracter;
-                m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
-            } else {
-                m_currentChar = newCaracter;
-            }
-
-            GameObject model = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef);
-            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_sMG, m_weaponRef).GetComponent<IWeapon>());//null reference test
-            m_weapons[m_weapons.Count - 1].Init(this);
-            m_weapons.Add(Instantiate(DataHolder.s_characterDatas[m_currentChar].m_rocked, m_weaponRef).GetComponent<IWeapon>());//null reference test
-            m_weapons[m_weapons.Count - 1].Init(this);
-            for (int i = 0; i < m_weapons.Count; i++) {
-                if(i != m_currentWeapon) {
-                    m_weapons[i].SetActive(false);
-                }
-            }
-            /*if (m_modellRefHolder != null) {
-                print("model found" + m_modellRefHolder.m_modelAnim);
-                m_modelAnim = m_modellRefHolder.m_modelAnim;
-            }*/
-            m_modelAnim = GetComponentInChildren<DragonBones.UnityArmatureComponent>();
-
-           
-            m_GUIHandler.ChangeCharacter(DataHolder.s_characterDatas[m_currentChar].m_icon, DataHolder.s_characterDatas[m_currentChar].m_name);
-            m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
+            RotateWeapon();
 
             //----- ----- Tracking ----- -----
 
@@ -583,122 +534,111 @@ namespace PPBC {
                 m_stats.m_firstCaracterChange = Time.time - m_joinTime;
         }
 
-        void ChangeWeapon(int newWeapon, bool relative = false) {
-            if ((newWeapon < m_weapons.Count && newWeapon >= 0) || relative) {
-                m_weapons[m_currentWeapon].StopShooting();
-                m_weapons[m_currentWeapon].SetActive(false);
-
-                if (relative) {
-                    m_currentWeapon += newWeapon;
-                    m_currentWeapon = (m_currentWeapon % m_weapons.Count + m_weapons.Count) % m_weapons.Count;//https://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain/1082938
-                    //m_currentWeapon %= m_weapons.Count;//c# mod im negativen bereich ist scheise
-                } else {
-                    m_currentWeapon = newWeapon;
-                }
-
-                m_weapons[m_currentWeapon].SetActive(true);
-                m_GUIHandler.ChangeWeapon(m_weapons[m_currentWeapon].m_icon);
-
+        void ChangeWeapon() {
+            if (m_useSMG) {
+                m_smg.SetActive(false);
+                m_rocketLauncher.SetActive(true);
                 if (m_isShooting)
-                    m_weapons[m_currentWeapon].StartShooting();
+                    m_rocketLauncher.StartShooting();
+            } else {
+                m_rocketLauncher.SetActive(false);
+                m_smg.SetActive(true);
+                if (m_isShooting)
+                    m_smg.StartShooting();
             }
-
+            
             //----- ----- Tracking ----- -----
             if (m_stats.m_firstWeaponChange == 0)
                 m_stats.m_firstWeaponChange = Time.time - m_joinTime;
 
             m_stats.m_weaponSwitchCount++;
-            if (m_currentWeapon - newWeapon == 0)
+            if (m_useSMG)
                 m_stats.m_sMGTime += Time.time - m_weaponChangeTime;
             else
                 m_stats.m_rocketTime += Time.time - m_weaponChangeTime;
 
             m_weaponChangeTime = Time.time;
+
+
+            m_useSMG = !m_useSMG;
         }
 
         void StartShooting() {
-            if(!m_isShooting)
-                m_weapons[m_currentWeapon].StartShooting();
+            if (!m_isShooting) {
+                if (m_useSMG) {
+                    m_smg.StartShooting();
+                } else {
+                    m_rocketLauncher.StartShooting();
+                    StartAnim("09_Zielen");//In stringCollection übertragen
+                }
+            }
             m_isShooting = true;
 
             //----- ----- Tracking ----- -----
             if (m_stats.m_firstShot == 0)
                 m_stats.m_firstShot = Time.time - m_joinTime;
-            //---- ----- Feedback ----- ----
-            if (m_currentWeapon == 1){
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("09_Zielen");//In stringCollection übertragen
-                }
-            }
         }
 
         void StopShooting() {
             m_isShooting = false;
-            m_weapons[m_currentWeapon].StopShooting();
-            if (m_currentWeapon == 1) {
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("11_RaketeSchießen",1);//In stringCollection übertragen
-                }
+            if (m_useSMG) {
+                m_smg.StopShooting();
+            } else {
+                m_rocketLauncher.StopShooting();
+                StartAnim("11_RaketeSchießen", 1);
             }
-        }
-
-        void UseItem(int item) {
-            if(item < m_items.Count && item >= 0) {
-                m_items[item].Activate();
-                m_items.Remove(m_items[item]);
-            }
-        }
-
-        void Dash() {
-            Vector2 tmp = new Vector2(0, 0);
-            foreach(var it in m_collisionNormals) {
-                tmp += it.Value;
-            }
-            m_rb.AddForce(tmp.normalized * m_dashForce);
         }
 
         public void Disconect() {
             Destroy(this.transform.root.gameObject);
             s_references.Remove(this);
             s_sortedRef.Remove(this);
-            RepositionGUI();
         }
 
-        void RepositionGUI() {
-            for (int i = 0; i < s_references.Count; i++) {
-                s_references[i].m_GUIHandler.Reposition(((float)i + 1) / (s_references.Count + 1));
-            }
-        }
-        
-
-        public void SetStatsAble(bool doable) {
-            if (doable) {
-                m_control.ShowStats = ShowStatsToGUI;
-            } else {
-                m_control.ShowStats = null;
-                m_GUIHandler.HideStats();
-            }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="animName">the animation name</param>
+        /// <param name="playTimes">how often it should be played (-1 for loop)</param>
+        /// <returns>returns duration in seconds or min value if not valide</returns>
+        public float StartAnim(string animName,int playTimes = -1) {
+            return StartAnimA(animName, playTimes < 0);
         }
 
-        public void ShowStatsToGUI(bool doIt) {
-            if (doIt) {
-                m_GUIHandler.WriteStats(m_stats);
-            } else {
-                m_GUIHandler.HideStats();
-            }
-        }
-        public float StartAnim(string animName,int playTimes) {
-            if (m_modelAnim != null) {
-                m_modelAnim.animation.Play(animName, playTimes);
-                return m_modelAnim.animation.animationConfig.duration;
+        /// <summary>
+        /// starts an specific animation
+        /// </summary>
+        /// <param name="animName"></param>
+        /// <param name="loop"></param>
+        /// <param name="track"></param>
+        /// <returns></returns>
+        public float StartAnimA(string animName, bool loop = false, int track = 0) {
+            if (m_modellRefHolder.m_modelAnim != null) {
+                return m_modellRefHolder.m_modelAnim.AnimationState.SetAnimation(track, animName, loop).Animation.Duration;
             }
             return float.MinValue;
         }
 
+        void RotateWeapon() {
+            //creating up vector from direction vector (vector at right angle)
+            m_modellRefHolder.m_weaponRot.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));
+
+            //flipping weapon
+            if (m_control.m_dir.x < 0) {
+                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, -1, 1);
+            } else {
+                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, 1, 1);
+            }
+        }
+
+        #region Editor code
+
         EditorHUDAndPlayerLogic m_editHud;
-        public void GoIntoEditMode(bool doEdit) {
-            if (doEdit)
+        bool m_doEdit = false;
+        public void GoIntoEditMode() {
+            m_doEdit = !m_doEdit;
+
+            if (m_doEdit)
                 m_editHud.gameObject.SetActive(!m_editHud.gameObject.activeSelf);
 
             if (m_editHud.gameObject.activeSelf) {
@@ -707,7 +647,7 @@ namespace PPBC {
                 m_rb.simulated = false;
 
                 m_control.StartShooting = m_editHud.DragHandler;
-                m_control.ChangeName = m_editHud.ChangeType;
+                m_control.ChangeType = m_editHud.ChangeType;
                 m_control.ChangeCharacter = m_editHud.ChangeIndex;
             } else {
                 StopEdit();
@@ -716,7 +656,7 @@ namespace PPBC {
 
         public void StopEdit() {
             m_control.StartShooting = null;
-            m_control.ChangeName = null;
+            m_control.ChangeType = null;
             m_control.ChangeCharacter = null;
 
             InControle(true);
@@ -730,15 +670,17 @@ namespace PPBC {
                 m_editHud.SetControlRef(m_control);
                 m_editHud.gameObject.SetActive(false);
 
-                m_control.ShowStats += GoIntoEditMode;
+                m_control.Accept += GoIntoEditMode;
             } else {
-                m_control.ShowStats -= GoIntoEditMode;
+                m_control.Accept -= GoIntoEditMode;
 
                 StopEdit();
                 if (m_editHud)
                     Destroy(m_editHud.gameObject);
             }
         }
+
+        #endregion
 
         #region Physics
 
@@ -751,9 +693,8 @@ namespace PPBC {
                 }
                 
                 //---- ----- Feedback ----- ----
-                if (m_modelAnim != null) {
-                    m_modelAnim.animation.Play("03_Aufprall", 1);//In stringCollection übertragen
-                }
+
+                StartAnim("03_Aufprall", 1);//In stringCollection übertragen
             }
             if(collision.gameObject.tag == "Ground") {
                 m_isColliding = true;
@@ -764,30 +705,13 @@ namespace PPBC {
                 Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector2(tmp.x, tmp.y));
                 m_laserParent.transform.rotation = rotation;
             }
-
-            if (m_dashColliders.value == (m_dashColliders | 1<<collision.gameObject.layer)) {//wir nehmen eine 1(true) und schieben es um collision.gameObject.layer nach links, nehmen dann die _dashColiders LayerMask, setzen dieses bool auf true und fragen dann ob dass was da rauskommt dass selbe ist wie die _dashColiders LayerMask
-                Vector2 tmpNormal = new Vector2(0, 0);
-                foreach (var it in collision.contacts) {
-                    tmpNormal += it.normal;
-                }
-                m_collisionNormals[collision.collider] = tmpNormal.normalized;
-            }
             
         }
 
         private void OnCollisionExit2D(Collision2D collision) {
             m_isColliding = false;
-            if (m_dashColliders.value == (m_dashColliders | 1 << collision.gameObject.layer)) {
-                m_collisionNormals.Remove(collision.collider);
-            }
         }
 
         #endregion
-        IEnumerator PlayerDie(float m_wait) {
-
-            yield return new WaitForSeconds(m_wait);
-            GameManager.s_singelton?.PlayerDied(this);
-
-        }
     }
 }

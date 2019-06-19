@@ -215,12 +215,11 @@ namespace PPBC {
             }
         }
 
-        public void ChangeIndex(int value, bool relative) {
-            if (relative) {
-                m_rawIndex += value;
-            } else {
-                m_rawIndex = value;
-            }
+        public void ChangeIndex(bool next) {
+            if (next)
+                m_rawIndex++;
+            else
+                m_rawIndex--;
 
             CorrectIndex();
 

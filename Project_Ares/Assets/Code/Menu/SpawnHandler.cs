@@ -68,23 +68,6 @@ namespace PPBC {
                 }
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
             }
-
-            if (Input.GetKeyDown(KeyCode.O)) {
-                GameObject tmp = Instantiate(m_playerRev);
-                if (tmp) {
-                    GameObject tmpController = new GameObject("KI Controller");
-                    //tmpControle.transform.parent = tmp.transform;
-
-                    IControl reference = tmpController.AddComponent<KI_Minion>();
-
-                    tmp.transform.position = m_SpawnPoint.transform.position;
-
-                    Player minion = tmp.GetComponentInChildren<Player>();
-                    minion.Init(tmpController);
-                    minion.Invincible(true);
-                    minion.SetChangeCharAble(true);
-                }
-            }
         }
 
         #endregion

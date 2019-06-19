@@ -32,7 +32,7 @@ namespace PPBC {
         public void Init() {
             m_startTime = Time.timeSinceLevelLoad;
             foreach (var it in Player.s_references) {
-                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
+                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
             }
             gameObject.SetActive(true);
         }
@@ -78,7 +78,7 @@ namespace PPBC {
                 return;
             }
 
-            StartCoroutine(RespawnPlayer(player));
+            RespawnPlayer(player);
         }
 
         public void SetMenuSpecific(Transform specificRef) {
@@ -93,10 +93,9 @@ namespace PPBC {
 
         #endregion
 
-        IEnumerator RespawnPlayer(Player player) {
-            yield return new WaitForSeconds(m_respawnTime);
+        void RespawnPlayer(Player player) {
 
-            player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position);
+            StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position, m_respawnTime));
 
         }
     }

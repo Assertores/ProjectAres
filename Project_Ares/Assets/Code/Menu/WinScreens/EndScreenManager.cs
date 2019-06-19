@@ -33,9 +33,6 @@ namespace PPBC {
             for (int i = 0; i < Player.s_references.Count; i++) {
                 Player.s_references[i].Invincible(true);
 
-                if (!Player.s_references[i].m_alive) {
-                    Player.s_references[i].Respawn(transform.position);
-                }
                 Player.s_references[i].DoReset();
                     
                 Player.s_references[i].InControle(false);
