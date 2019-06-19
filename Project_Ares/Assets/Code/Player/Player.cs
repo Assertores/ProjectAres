@@ -89,6 +89,7 @@ namespace PPBC {
         int m_currentName;
         bool m_useSMG = true;
 
+        byte m_doInit = 0;
         bool m_isShooting = false;
         bool m_isInvincible = false;
         Vector2 vel;
@@ -129,9 +130,12 @@ namespace PPBC {
         void Start() {
             m_rb = GetComponent<Rigidbody2D>();
             m_smg = GetComponent<SMG>();
-            m_smg.Init(this);
             m_rocketLauncher = GetComponent<RocketLauncher>();
-            m_rocketLauncher.Init(this);
+
+            if (m_doInit == 1) {
+                SaveInit();
+            }
+            m_doInit++;
         }
 
         void Update() {
@@ -151,12 +155,7 @@ namespace PPBC {
                 }
             }
 
-            //flipping weapon
-            if (m_control.m_dir.x < 0) {
-                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, -1, 1);
-            } else {
-                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, 1, 1);
-            }
+            
 
             //----- ----- Feedback ----- -----
             if (!m_isColliding) {
@@ -354,9 +353,22 @@ namespace PPBC {
 
             m_currentName = Random.Range(-1, DataHolder.s_playerNames.Count - 2);
 
+            if (m_doInit == 1) {
+                SaveInit();
+            }
+            m_doInit++;
+        }
+
+        void SaveInit() {
+            m_modellRefHolder_ = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef).GetComponent<ModellRefHolder>();
+
+            m_smg.Init(this);
+
+            m_rocketLauncher.Init(this);
+
             InControle(true);
 
-            Respawn(transform.position);//hier die richtige position eingeben
+            FullReset();
 
             //----- ----- Tracking ----- -----
             m_joinTime = Time.time;
@@ -365,8 +377,8 @@ namespace PPBC {
             m_stats.m_spawnTimeSinceLevelLoad = Time.timeSinceLevelLoad;
 
             //---- ----- Feedback ----- ----
-            
-            StartAnim("06_Respawn",1);
+
+            StartAnim("06_Respawn", 1);
         }
 
         #region Resets
@@ -597,7 +609,15 @@ namespace PPBC {
         }
 
         void RotateWeapon() {
+            //creating up vector from direction vector (vector at right angle)
             m_modellRefHolder.m_weaponRot.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_control.m_dir.y, m_control.m_dir.x));
+
+            //flipping weapon
+            if (m_control.m_dir.x < 0) {
+                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, -1, 1);
+            } else {
+                m_modellRefHolder.m_weaponRot.localScale = new Vector3(1, 1, 1);
+            }
         }
 
         #region Editor code
