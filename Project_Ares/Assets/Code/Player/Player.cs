@@ -157,11 +157,11 @@ namespace PPBC {
 
             //----- ----- Feedback ----- -----
             if (!m_isColliding) {
-                if (true/*!m_modellRefHolder.m_modelAnim.animation.isPlaying*/) {
+                if (m_modellRefHolder.m_modelAnim && m_modellRefHolder.m_modelAnim.state.GetCurrent(0) == null) {
                     StartAnim("02_Idle_Luft");
                 }
             } else {
-                if (true/*!m_modellRefHolder.m_modelAnim.animation.isPlaying*/) {
+                if (m_modellRefHolder.m_modelAnim && m_modellRefHolder.m_modelAnim.state.GetCurrent(0) == null) {
                     StartAnim("01_Idle");
                 }
             }
@@ -521,6 +521,9 @@ namespace PPBC {
 
             m_currentChar = (m_currentChar % DataHolder.s_characterDatas.Count + DataHolder.s_characterDatas.Count) % DataHolder.s_characterDatas.Count;
 
+            foreach(Transform it in m_modelRef) {
+                DestroyImmediate(it.gameObject);
+            }
             m_modellRefHolder_ = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef).GetComponent<ModellRefHolder>();
 
             RotateWeapon();
@@ -599,9 +602,19 @@ namespace PPBC {
         /// <param name="playTimes">how often it should be played (-1 for loop)</param>
         /// <returns>returns duration in seconds or min value if not valide</returns>
         public float StartAnim(string animName,int playTimes = -1) {
+            return StartAnimA(animName, playTimes < 0);
+        }
+
+        /// <summary>
+        /// starts an specific animation
+        /// </summary>
+        /// <param name="animName"></param>
+        /// <param name="loop"></param>
+        /// <param name="track"></param>
+        /// <returns></returns>
+        public float StartAnimA(string animName, bool loop = false, int track = 0) {
             if (m_modellRefHolder.m_modelAnim != null) {
-                //m_modellRefHolder.m_modelAnim.animation.Play(animName, playTimes);
-                return -1;//m_modellRefHolder.m_modelAnim.animation.animationConfig.duration;
+                return m_modellRefHolder.m_modelAnim.AnimationState.SetAnimation(track, animName, loop).Animation.Duration;
             }
             return float.MinValue;
         }
@@ -693,6 +706,10 @@ namespace PPBC {
                 m_laserParent.transform.rotation = rotation;
             }
             
+        }
+
+        private void OnCollisionExit2D(Collision2D collision) {
+            m_isColliding = false;
         }
 
         #endregion
