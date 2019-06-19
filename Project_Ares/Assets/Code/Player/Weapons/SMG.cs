@@ -65,8 +65,8 @@ namespace PPBC {
         public float m_value { get; private set; }
 
         public void Init(Player player) {
-            m_player.m_modellRefHolder.m_sMG.m_muzzleflash.SetActive(false);
             m_player = player;
+            m_player.m_modellRefHolder.m_sMG.m_muzzleflash.SetActive(false);
             m_startPitch = m_player.m_modellRefHolder.m_sMG.m_audio.pitch;
             m_startVolume = m_player.m_modellRefHolder.m_sMG.m_audio.volume;
         }
@@ -82,7 +82,7 @@ namespace PPBC {
                 }
             }
             m_player.m_modellRefHolder.m_sMG.m_muzzleflash.SetActive(false);
-            gameObject.SetActive(activate);
+            m_player.m_modellRefHolder.m_sMG.gameObject.SetActive(activate);
             if (m_player.m_modellRefHolder.m_sMG.m_modelAnim != null) {
                 //m_player.m_modellRefHolder.m_sMG.m_modelAnim.animation.Play("SMG_Weapon_Change",1);
             }
@@ -120,9 +120,9 @@ namespace PPBC {
             
             if (bulletRB) {
                 //bulletRB.velocity = m_player.m_rb.velocity;
-                bulletRB.AddForce(transform.right * srh.m_muzzleEnergy);
+                bulletRB.AddForce(srh.transform.right * srh.m_muzzleEnergy);
             }
-            m_player.m_rb.AddForce(-transform.right * srh.m_muzzleEnergy);
+            m_player.m_rb.AddForce(-srh.transform.right * srh.m_muzzleEnergy);
 
             if (srh.m_sounds.Length > 0) {
                 srh.m_audio.pitch = Random.Range(m_startPitch- srh.m_halfPitchRange, m_startPitch + srh.m_halfPitchRange);

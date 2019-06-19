@@ -127,12 +127,12 @@ namespace PPBC {
 
             if (bulletRB) {
                 //bulletRB.velocity = m_player.m_rb.velocity;
-                bulletRB.AddForce(transform.right * rlrh.m_muzzleEnergy * m_overchargeValue);
+                bulletRB.AddForce(rlrh.transform.right * rlrh.m_muzzleEnergy * m_overchargeValue);
             }
 
             //overwrites previous velocity
-            m_player.m_rb.velocity = -transform.right * rlrh.m_muzzleEnergy * m_player.m_rb.mass * (1 + m_overchargeValue / 4);
-            //m_player.m_rb.AddForce(-transform.right * m_player.m_modellRefHolder.m_rocketLauncher.m_muzzleEnergy * (1 + m_overchargeValue/4));
+            //m_player.m_rb.velocity = -rlrh.transform.right * rlrh.m_muzzleEnergy * m_player.m_rb.mass * (1 + m_overchargeValue / 4);
+            m_player.m_rb.AddForce(-rlrh.transform.right * rlrh.m_muzzleEnergy * (1 + m_overchargeValue/4));
         }
     }
 }
