@@ -33,6 +33,21 @@ namespace PPBC {
         Action ChangeWeapon { get; set; }
 
         /// <summary>
+        /// opens/closes the option menu
+        /// </summary>
+        Action OptionMenu { get; set; }
+
+        /// <summary>
+        /// a button press normally associated with accepting stuff
+        /// </summary>
+        Action Accept { get; set; }
+
+        /// <summary>
+        /// edited mode for changing type
+        /// </summary>
+        Action<bool> ChangeType { get; set; }
+
+        /// <summary>
         /// call this to leave the game
         /// </summary>
         Action Disconnect { get; set; }

@@ -13,15 +13,6 @@ namespace PPBC {
         #endregion
         #region MonoBehaviour
 
-        void Start() {
-            //if (CameraControler._singelton)
-            //    _myCamera = CameraControler._singelton.AddCamera();
-        }
-        private void OnDestroy() {
-            //if (_myCamera)
-            //    CameraControler._singelton.RemoveCamera(_myCamera);
-        }
-
         void Update() {
 
             m_dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
@@ -37,25 +28,32 @@ namespace PPBC {
                 ChangeWeapon?.Invoke();
             }
 
-            if (Input.GetKeyDown(KeyCode.C)) {
+            if (Input.GetKeyDown(KeyCode.RightArrow)) {
                 ChangeCharacter?.Invoke(true);
             }
-            if (Input.GetKeyDown(KeyCode.V)) {
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                 ChangeCharacter?.Invoke(false);
             }
 
-            //if (_myCamera) {
-            //    _myCamera.transform.position = new Vector3(transform.position.x, transform.position.y, _myCamera.transform.position.z);
-            //}
+            if (Input.GetKeyDown(KeyCode.UpArrow)) {
+                ChangeCharacter?.Invoke(true);
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow)) {
+                ChangeCharacter?.Invoke(false);
+            }
 
             if (Input.GetKeyUp(KeyCode.Escape)) {
-                if(Time.timeScale > 0) {
-                    Time.timeScale = 0;
-                } else {
-                    Time.timeScale = 1;
-                }
-                PauseAudioHandler.UpdateAudio();
-                //Disconnect?.Invoke();
+                OptionMenu?.Invoke();
+                //if(Time.timeScale > 0) {
+                //    Time.timeScale = 0;
+                //} else {
+                //    Time.timeScale = 1;
+                //}
+                //PauseAudioHandler.UpdateAudio();
+            }
+
+            if (Input.GetKeyUp(KeyCode.Return)) {
+                Accept?.Invoke();
             }
         }
 
@@ -67,6 +65,9 @@ namespace PPBC {
         public Action StopShooting { get; set; }
         public Action<bool> ChangeCharacter { get; set; }
         public Action ChangeWeapon { get; set; }
+        public Action OptionMenu { get; set; }
+        public Action Accept { get; set; }
+        public Action<bool> ChangeType { get; set; }
         public Action Disconnect { get; set; }
 
         public void DoDisconect() {
