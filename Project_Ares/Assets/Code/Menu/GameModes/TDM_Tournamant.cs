@@ -117,9 +117,9 @@ namespace PPBC {
             List<PlayerStart> availableSpawns = PlayerStart.s_references.FindAll(x => x.m_team == player.m_team);
 
             if (availableSpawns.Count == 0) {
-                StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count - 1)].transform.position, m_respawnTime));
+                StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position, m_respawnTime));
             } else {
-                StartCoroutine(player.Respawn(availableSpawns[Random.Range(0, availableSpawns.Count - 1)].transform.position, m_respawnTime));
+                StartCoroutine(player.Respawn(availableSpawns[Random.Range(0, availableSpawns.Count)].transform.position, m_respawnTime));
             }
         }
     }

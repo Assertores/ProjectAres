@@ -127,7 +127,7 @@ namespace PPBC {
             if (srh.m_sounds.Length > 0) {
                 srh.m_audio.pitch = Random.Range(m_startPitch- srh.m_halfPitchRange, m_startPitch + srh.m_halfPitchRange);
                 srh.m_audio.volume = Random.Range(m_startVolume - srh.m_halfVolumeRange, m_startVolume + srh.m_halfVolumeRange);
-                srh.m_audio.PlayOneShot(srh.m_sounds[Random.Range(0, srh.m_sounds.Length - 1)]);
+                srh.m_audio.PlayOneShot(srh.m_sounds[Random.Range(0, srh.m_sounds.Length)]);
             }
                 
 

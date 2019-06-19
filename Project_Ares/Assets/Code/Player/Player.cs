@@ -349,7 +349,7 @@ namespace PPBC {
                 return;
             }
 
-            m_currentName = Random.Range(-1, DataHolder.s_playerNames.Count - 2);
+            transform.root.position = Vector3.zero;
 
             if (m_doInit == 1) {
                 SaveInit();

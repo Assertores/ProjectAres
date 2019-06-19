@@ -54,7 +54,7 @@ namespace PPBC {
             if (m_sounds.Length > 0) {
                 m_audio.pitch = Random.Range(m_startPitch - m_halfPitchRange, m_startPitch + m_halfPitchRange);
                 m_audio.volume = Random.Range(m_startVolume - m_halfVolumeRange, m_startVolume + m_halfVolumeRange);
-                m_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length - 1)]);
+                m_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length)]);
             }
 
             CameraShake.DoCamerashake(0.1f, 0.7f);
