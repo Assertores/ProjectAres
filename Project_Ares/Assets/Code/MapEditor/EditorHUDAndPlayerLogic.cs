@@ -126,12 +126,15 @@ namespace PPBC {
         void Drop() {
             if (m_isDraging && m_mapObj) {
                 bool deleted = false;
-                Collider2D[] hits = Physics2D.OverlapPointAll(transform.position);
-                foreach (var it in hits) {
-                    if(it.tag == StringCollection.BIN) {
-                        Destroy(m_mapObj.gameObject);
-                        deleted = true;
-                        break;
+                if(!((m_mapObj.m_data.type == e_objType.PLAYERSTART && PlayerStart.s_references.Count <= 1) ||
+                    (m_mapObj.m_data.type == e_objType.BORDER && LaserSpawner.s_references.Count <= 2))) {
+                    Collider2D[] hits = Physics2D.OverlapPointAll(transform.position);
+                    foreach (var it in hits) {
+                        if (it.tag == StringCollection.BIN) {
+                            Destroy(m_mapObj.gameObject);
+                            deleted = true;
+                            break;
+                        }
                     }
                 }
                 if (!deleted) {
