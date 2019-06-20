@@ -601,18 +601,18 @@ namespace PPBC {
         /// <param name="animName">the animation name</param>
         /// <param name="playTimes">how often it should be played (-1 for loop)</param>
         /// <returns>returns duration in seconds or min value if not valide</returns>
-        public float StartAnim(string animName,int playTimes = -1) {
-            return StartAnimA(animName, playTimes < 0);
+        public float StartAnim(string animName,int playTimes) {
+            return StartAnim(animName, playTimes < 0);
         }
 
         /// <summary>
         /// starts an specific animation
         /// </summary>
-        /// <param name="animName"></param>
-        /// <param name="loop"></param>
-        /// <param name="track"></param>
-        /// <returns></returns>
-        public float StartAnimA(string animName, bool loop = false, int track = 0) {
+        /// <param name="animName">the animation name</param>
+        /// <param name="loop">is it loopend</param>
+        /// <param name="track">on whitch track should it be plaied</param>
+        /// <returns>returns duration in seconds or min value if not valide</returns>
+        public float StartAnim(string animName, bool loop = true, int track = 0) {
             if (m_modellRefHolder.m_modelAnim != null) {
                 return m_modellRefHolder.m_modelAnim.AnimationState.SetAnimation(track, animName, loop).Animation.Duration;
             }
