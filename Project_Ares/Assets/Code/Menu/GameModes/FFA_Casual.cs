@@ -41,7 +41,7 @@ namespace PPBC {
         }
 
         public void Stop() {
-            if(gameObject)
+            if(this && gameObject)
                 gameObject.SetActive(false);
         }
 
