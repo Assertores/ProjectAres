@@ -316,8 +316,7 @@ namespace PPBC {
 
             m_laserParent.transform.position = transform.position;
             StartAnim("05_Sterben", 1);
-           
-            print("hit laser");
+
             m_laserdeathVFX.Play();
             
             StartCoroutine(PlayerDie(1.0f));
