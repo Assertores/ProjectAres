@@ -20,6 +20,7 @@ namespace PPBC {
         [SerializeField] GameObject m_lightPrefab;
         [SerializeField] GameObject m_ObjectInteractPrefab;
         [SerializeField] Material m_spriteMaterial;
+        [SerializeField] Transform m_KillFeed;
 
         [HideInInspector]
         public List<Transform> m_borders { get; private set; } = new List<Transform>();
@@ -75,11 +76,18 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
+            if (!m_KillFeed) {
+                print("FATAL: no reference to KillFeed");
+                Destroy(this);
+                return;
+            }
         }
 
         private void OnDestroy() {
             m_borders = new List<Transform>();
         }
+
+        #region SetIndex
 
         public void SetBackgroundIndex(int index) {
             if (index >= -s_refMap.p_background.Length && index < DataHolder.s_commonBackground.Length)
@@ -88,11 +96,15 @@ namespace PPBC {
                 return;
 
             if (index >= 0) {
-                m_background.sprite = DataHolder.s_commonBackground[index];
+                m_background.sprite = DataHolder.s_commonBackground[index].background;
+                m_KillFeed.position = new Vector3(DataHolder.s_commonBackground[index].killFeed.x, DataHolder.s_commonBackground[index].killFeed.y, 0);
+                m_KillFeed.localScale = new Vector3(DataHolder.s_commonBackground[index].killFeed.z, DataHolder.s_commonBackground[index].killFeed.w, 1);
             } else {
                 index *= -1;
                 index--;
-                m_background.sprite = s_refMap.p_background[index];
+                m_background.sprite = s_refMap.p_background[index].background;
+                m_KillFeed.position = new Vector3(s_refMap.p_background[index].killFeed.x, s_refMap.p_background[index].killFeed.y, 0);
+                m_KillFeed.localScale = new Vector3(s_refMap.p_background[index].killFeed.z, s_refMap.p_background[index].killFeed.w, 1);
             }
         }
 
@@ -144,6 +156,8 @@ namespace PPBC {
             }
         }
 
+        #endregion
+
         public void LoadCurrentMap() {
             UnloadMap();
 
@@ -165,6 +179,26 @@ namespace PPBC {
             SetSizeIndex(s_refMap.m_size);
 
             foreach (var it in s_refMap.m_data) {
+                switch (it.type) {
+                case e_objType.BORDER:
+                    if (false)//gamemodes eintragen
+                        continue;
+                    break;
+                case e_objType.FLAG:
+                    if (DataHolder.s_gameMode == e_gameMode.FFA_CASUAL ||
+                        DataHolder.s_gameMode == e_gameMode.TDM_TOURNAMENT ||
+                        DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT)
+                        continue;
+                    break;
+                case e_objType.BASKETHOOP:
+                    if (DataHolder.s_gameMode == e_gameMode.FFA_CASUAL ||
+                        DataHolder.s_gameMode == e_gameMode.TDM_TOURNAMENT ||
+                        DataHolder.s_gameMode == e_gameMode.FAIR_TOURNAMENT)
+                        continue;
+                    break;
+                default:
+                    break;
+                }
                 LoadNewObj(it);
             }
 
@@ -236,8 +270,6 @@ namespace PPBC {
             SpriteMask msk;
 
             switch (obj.type) {
-            case e_objType.BACKGROUND:
-                return null;
             case e_objType.PROP:
                 if (obj.index < -s_refMap.p_props.Length || obj.index >= DataHolder.s_commonProps.Length)
                     return null;
@@ -321,7 +353,8 @@ namespace PPBC {
                     ren.sprite = DataHolder.s_commonStage[obj.index];
                 }
                 break;
-            case e_objType.BORDER:
+            case e_objType.BORDER://rework
+                /*
                 if (obj.index < -s_refMap.p_props.Length || obj.index >= DataHolder.s_commonProps.Length)
                     return null;
 
@@ -346,6 +379,11 @@ namespace PPBC {
                 msk.sprite = ren.sprite;
 
                 m_borders.Add(tmp.transform);
+                */
+                break;
+            case e_objType.FLAG:
+                break;
+            case e_objType.BASKETHOOP:
                 break;
             default:
                 return null;

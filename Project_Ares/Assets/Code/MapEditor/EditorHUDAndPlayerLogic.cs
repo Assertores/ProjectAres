@@ -25,7 +25,7 @@ namespace PPBC {
         e_objType m_type;
         int m_rawIndex;
         int m_index;
-        // Start is called before the first frame update
+
         void Start() {
             m_type = e_objType.BACKGROUND;
             m_typeRef.text = m_type.ToString();
@@ -34,8 +34,7 @@ namespace PPBC {
             m_index = m_rawIndex;
             m_IndexRef.text = m_index.ToString();
         }
-
-        // Update is called once per frame
+        
         void Update() {
             if(m_styple == e_editingStyle.MOVE) {
                 if(m_controlRef.m_dir.x > 1 || m_controlRef.m_dir.x < -1 || m_controlRef.m_dir.y > 1 || m_controlRef.m_dir.y < -1) {
@@ -55,7 +54,7 @@ namespace PPBC {
                 
                 switch (m_styple) {
                 case e_editingStyle.ROTATE:
-                    tmp.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_controlRef.m_dir.y, m_controlRef.m_dir.x));//vektor irgendwie drehen, damit es in der 2d plain bleibt
+                    tmp.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_controlRef.m_dir.y, m_controlRef.m_dir.x));
                     break;
                 case e_editingStyle.MOVE:
                     if (m_editorObj)
@@ -177,7 +176,7 @@ namespace PPBC {
             else
                 m_type--;
 
-            m_type = (e_objType)fixedMod((int)m_type, 10);//reference to object type;
+            m_type = (e_objType)fixedMod((int)m_type, (int)e_objType.ENUMLENGTH);
             m_typeRef.text = m_type.ToString();
 
             

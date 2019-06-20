@@ -44,7 +44,7 @@ namespace PPBC {
         //===== ===== Maps Common Objects ===== =====
 
         public static Vector2[] s_commonSize;
-        public static Sprite[] s_commonBackground;
+        public static d_mapBackground[] s_commonBackground;
         public static Color[] s_commonColors;
         public static AudioClip[] s_commonMusic;
 
@@ -62,7 +62,7 @@ namespace PPBC {
         [SerializeField] MapDATA[] m_maps;
 
         [SerializeField] Vector2[] m_size;
-        [SerializeField] Sprite[] m_background;
+        [SerializeField] d_mapBackground[] m_background;
         [SerializeField] Color[] m_colors;
         [SerializeField] AudioClip[] m_music;
 
