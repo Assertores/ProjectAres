@@ -51,6 +51,7 @@ namespace PPBC {
         public static d_prop[] s_commonProps;
         public static Sprite[] s_commonStage;
         public static Sprite[] s_commonForground;
+        public static GameObject s_commonLaserSpawner;
         public static GameObject s_commonLaserBariar;
 
         #region Variables
@@ -69,6 +70,7 @@ namespace PPBC {
         [SerializeField] d_prop[] m_props;
         [SerializeField] Sprite[] m_stage;
         [SerializeField] Sprite[] m_forground;
+        [SerializeField] GameObject m_laserSpawner;
         [SerializeField] GameObject m_laserBariar;
 
         [SerializeField] MapDATA SaveToXML;
@@ -121,6 +123,7 @@ namespace PPBC {
             s_commonBackground = m_background;
             s_commonColors = m_colors;
             s_commonForground = m_forground;
+            s_commonLaserSpawner = m_laserSpawner;
             s_commonLaserBariar = m_laserBariar;
             s_commonMusic = m_music;
             s_commonProps = m_props;

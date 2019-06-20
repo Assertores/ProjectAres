@@ -33,7 +33,7 @@ namespace PPBC {
 
             File.AppendAllText(StringCollection.DATAPATH + m_TrackingPath, "!=====" + System.Environment.NewLine);
 
-            return true; ;
+            return true;
         }
 
         #endregion
