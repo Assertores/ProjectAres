@@ -512,6 +512,7 @@ namespace PPBC {
             for(int i = 0; i < this.p_music.Length; i++) {
                 value.p_music[i] = this.p_music[i];
             }
+            value.p_ballSpawn = this.p_ballSpawn;
             value.p_props = new d_prop[this.p_props.Length];
             for(int i = 0; i < this.p_props.Length; i++) {
                 value.p_props[i] = this.p_props[i];
