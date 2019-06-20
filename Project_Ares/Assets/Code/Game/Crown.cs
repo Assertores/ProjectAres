@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class Crown : MonoBehaviour
+    public class Crown : Sauerbraten
     {
         #region Variables
         [Header("Balancing")]

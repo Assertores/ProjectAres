@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 using UnityEngine.UI;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC
 {
-    public class ModellRefHolder : MonoBehaviour
+    public class ModellRefHolder : Sauerbraten
     {
 
         public Image m_icon;

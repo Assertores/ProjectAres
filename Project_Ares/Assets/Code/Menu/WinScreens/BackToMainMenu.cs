@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
     [RequireComponent(typeof(Collider2D))]
-    public class BackToMainMenu : MonoBehaviour, IScriptQueueItem {
+    public class BackToMainMenu : Sauerbraten, IScriptQueueItem {
 
         #region Variables
 

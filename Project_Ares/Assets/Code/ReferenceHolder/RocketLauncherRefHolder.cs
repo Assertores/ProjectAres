@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class RocketLauncherRefHolder : MonoBehaviour {
+    public class RocketLauncherRefHolder : Sauerbraten {
 
         [Header("References")]
         public GameObject m_bullet;

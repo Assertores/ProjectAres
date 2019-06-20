@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class ExitEditor : MonoBehaviour, IDamageableObject {
+    public class ExitEditor : Sauerbraten, IDamageableObject {
 
         [Header("References")]
         [SerializeField] Coop_Edit m_gMRef;

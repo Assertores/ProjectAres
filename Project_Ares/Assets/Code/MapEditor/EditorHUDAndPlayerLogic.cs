@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class EditorHUDAndPlayerLogic : MonoBehaviour {
+    public class EditorHUDAndPlayerLogic : Sauerbraten {
 
         enum e_editingStyle { ROTATE = 0, MOVE = 1, SCALE = 2}
 

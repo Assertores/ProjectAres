@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class PillarHandler : MonoBehaviour, IScriptQueueItem {
+    public class PillarHandler : Sauerbraten, IScriptQueueItem {
 
         #region Variables
 

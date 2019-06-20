@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class GameModeManager : MonoBehaviour {
+    public class GameModeManager : Sauerbraten {
 
         static bool isInit = false;
 

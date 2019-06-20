@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
 
     
 
-    public class GameManager : MonoBehaviour {
+    public class GameManager : Sauerbraten {
 
         #region Variables
 

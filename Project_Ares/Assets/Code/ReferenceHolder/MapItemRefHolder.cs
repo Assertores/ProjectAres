@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class MapItemRefHolder : MonoBehaviour {
+    public class MapItemRefHolder : Sauerbraten {
 
         public TextMeshProUGUI m_mapName;
         public Image m_mapIcon;

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class KillFeedHandler : MonoBehaviour {
+    public class KillFeedHandler : Sauerbraten {
 
         static KillFeedHandler s_reference = null;
 

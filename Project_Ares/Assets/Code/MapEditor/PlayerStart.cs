@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class PlayerStart : MonoBehaviour {
+    public class PlayerStart : Sauerbraten {
 
         public static List<PlayerStart> s_references = new List<PlayerStart>();
 

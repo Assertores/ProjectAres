@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class Coop_Edit : MonoBehaviour, IGameMode {
+    public class Coop_Edit : Sauerbraten, IGameMode {
 
         #region Variables
 

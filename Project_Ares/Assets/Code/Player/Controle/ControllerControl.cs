@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class ControllerControl : MonoBehaviour, IControl {
+    public class ControllerControl : Sauerbraten, IControl {
 
         #region Variables
 

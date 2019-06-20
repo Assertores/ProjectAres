@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC
 {   [System.Serializable]
-    public class PlayerStatsRefHolder : MonoBehaviour
+    public class PlayerStatsRefHolder : Sauerbraten
     {
         public GameObject m_parentObject;
         public TextMeshProUGUI m_kills;

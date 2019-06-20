@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
+    public class LaserSpawner : Sauerbraten {
 
         public static List<LaserSpawner> s_references = new List<LaserSpawner>();
         public int m_index;

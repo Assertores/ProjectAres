@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class TDM_Tournamant : MonoBehaviour, IGameMode {
+    public class TDM_Tournamant : Sauerbraten, IGameMode {
 
         #region Variables
 

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class EndScreenAnimations : MonoBehaviour, IScriptQueueItem {
+    public class EndScreenAnimations : Sauerbraten, IScriptQueueItem {
 
         #region Variables
 

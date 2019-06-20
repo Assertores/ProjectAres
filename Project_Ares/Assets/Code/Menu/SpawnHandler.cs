@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class SpawnHandler : MonoBehaviour, IScriptQueueItem {
+    public class SpawnHandler : Sauerbraten, IScriptQueueItem {
 
         #region Variables
 

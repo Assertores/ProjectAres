@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class WriteStatsToCSV : MonoBehaviour, IScriptQueueItem {
+    public class WriteStatsToCSV : Sauerbraten, IScriptQueueItem {
 
         #region Variables
 

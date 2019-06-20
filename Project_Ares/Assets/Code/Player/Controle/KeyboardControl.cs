@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class KeyboardControl : MonoBehaviour, IControl {
+    public class KeyboardControl : Sauerbraten, IControl {
 
         #region Variables
 

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
     [RequireComponent(typeof(Camera))]
-    public class CameraStartAdaption : MonoBehaviour {
+    public class CameraStartAdaption : Sauerbraten {
 
         [SerializeField] BoxCollider2D m_boundingBox;
 

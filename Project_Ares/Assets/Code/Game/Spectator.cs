@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class Spectator : MonoBehaviour {
+    public class Spectator : Sauerbraten {
 
         //static Spectator _singelton = null;
 

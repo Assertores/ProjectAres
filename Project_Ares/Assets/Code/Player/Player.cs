@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
 
@@ -40,7 +40,7 @@ namespace PPBC {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SMG))]
     [RequireComponent(typeof(RocketLauncher))]
-    public class Player : MonoBehaviour, IDamageableObject {
+    public class Player : Sauerbraten, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>();
         public static List<Player> s_sortedRef = new List<Player>();

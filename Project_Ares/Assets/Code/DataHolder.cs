@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
 
@@ -13,7 +13,7 @@ namespace PPBC {
         TDM_TOURNAMENT
     }
 
-    public class DataHolder : MonoBehaviour {
+    public class DataHolder : Sauerbraten {
 
         static bool isInit = false;
 

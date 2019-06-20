@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class LoadSceneAfterVideo : MonoBehaviour
+    public class LoadSceneAfterVideo : Sauerbraten
     {
         [SerializeField] string m_sceneName;
         [SerializeField] VideoClip Clip;

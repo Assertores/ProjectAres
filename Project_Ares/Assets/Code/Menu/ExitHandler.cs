@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class ExitHandler : MonoBehaviour {
+    public class ExitHandler : Sauerbraten {
 
         [Header("References")]
         [SerializeField] GameObject m_hatch;

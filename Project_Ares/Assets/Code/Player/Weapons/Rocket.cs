@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class Rocket : MonoBehaviour, IHarmingObject {
+    public class Rocket : Sauerbraten, IHarmingObject {
 
         #region Variables
 

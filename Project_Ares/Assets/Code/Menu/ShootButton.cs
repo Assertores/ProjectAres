@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
     [RequireComponent(typeof(Collider2D))]
-    public class ShootButton : MonoBehaviour, IDamageableObject {
+    public class ShootButton : Sauerbraten, IDamageableObject {
 
         #region Variables
 

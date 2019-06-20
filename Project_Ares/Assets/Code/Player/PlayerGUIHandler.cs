@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class PlayerGUIHandler : MonoBehaviour {
+    public class PlayerGUIHandler : Sauerbraten {
 
         #region Variables
 

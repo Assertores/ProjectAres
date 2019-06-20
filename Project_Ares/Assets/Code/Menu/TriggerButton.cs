@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class TriggerButton : MonoBehaviour {
+    public class TriggerButton : Sauerbraten {
 
         enum e_triggerType { ONLYFIRST , EVERYTIME, ONTLYEVERYONE }
 

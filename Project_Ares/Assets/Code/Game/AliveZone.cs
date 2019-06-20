@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
     [RequireComponent(typeof(Collider2D))]
-    public class AliveZone : MonoBehaviour {
+    public class AliveZone : Sauerbraten {
 
         #region Physics
 
