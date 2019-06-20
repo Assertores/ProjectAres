@@ -162,9 +162,6 @@ namespace PPBC {
             UnloadMap();
 
             print("load map " + DataHolder.s_map);
-            foreach(var it in DataHolder.s_maps) {
-                print(it.Key);
-            }
 
             s_refMap = DataHolder.s_maps[DataHolder.s_map];
             if (!s_refMap) {
@@ -353,34 +350,9 @@ namespace PPBC {
                     ren.sprite = DataHolder.s_commonStage[obj.index];
                 }
                 break;
-            case e_objType.BORDER://rework
-                /*
-                if (obj.index < -s_refMap.p_props.Length || obj.index >= DataHolder.s_commonProps.Length)
-                    return null;
-
-                tmp = new GameObject("Prop " + obj.index);
-                tmp.transform.position = obj.position;
-                tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
-                tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
-                ren = tmp.AddComponent<SpriteRenderer>();
-                ren.material = m_spriteMaterial;
-                ren.sortingLayerName = StringCollection.PROPS;
-                col = tmp.AddComponent<PolygonCollider2D>();
-
-                if (obj.index < 0) {//specific
-                    ren.sprite = s_refMap.p_props[obj.index * -1 - 1].m_sprite;
-                    col.SetPath(0, s_refMap.p_props[obj.index * -1 - 1].m_collider);
-                } else {//common
-                    ren.sprite = DataHolder.s_commonProps[obj.index].m_sprite;
-                    col.SetPath(0, DataHolder.s_commonProps[obj.index].m_collider);
-                }
-
-                msk = tmp.AddComponent<SpriteMask>();
-                msk.sprite = ren.sprite;
-
-                m_borders.Add(tmp.transform);
-                */
-                break;
+            case e_objType.BORDER:
+                tmp = Instantiate(DataHolder.s_commonLaserSpawner, obj.position, Quaternion.Euler(Vector3.zero));
+                tmp.GetComponent<LaserSpawner>().Init(obj.index);break;
             case e_objType.FLAG:
                 break;
             case e_objType.BASKETHOOP:
