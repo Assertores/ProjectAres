@@ -19,7 +19,7 @@ namespace PPBC {
         /// <param name="specificRef">the referenceobject to initialice evereything into</param>
         void SetMenuSpecific(Transform specificRef);
 
-        void Start();
+        void StartGame();
 
         /// <summary>
         /// wird aufgerufen, wenn ein spieler stirbt
