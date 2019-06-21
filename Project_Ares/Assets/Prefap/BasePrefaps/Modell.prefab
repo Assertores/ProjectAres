@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_anim: {fileID: 0}
-  m_boneName: WeaponPosition
+  m_boneName: Weapon
 --- !u!1 &8021982208745273552
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,11 +103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3586050118370632703}
     m_Modifications:
-    - target: {fileID: 2582504901680775649, guid: 4cc16d7398c592647ae184ca6242637f,
-        type: 3}
-      propertyPath: m_Name
-      value: RockedLauncher
-      objectReference: {fileID: 0}
     - target: {fileID: 7568409528999598729, guid: 4cc16d7398c592647ae184ca6242637f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -162,6 +157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582504901680775649, guid: 4cc16d7398c592647ae184ca6242637f,
+        type: 3}
+      propertyPath: m_Name
+      value: RockedLauncher
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc16d7398c592647ae184ca6242637f, type: 3}
