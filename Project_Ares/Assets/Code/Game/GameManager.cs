@@ -42,10 +42,6 @@ namespace PPBC {
         void OnDestroy() {
             if (s_singelton_ == this) {
                 s_singelton_ = null;
-
-                foreach (var it in DataHolder.s_gameModes) {
-                    it.Value.Stop();
-                }
             }
         }
 
@@ -67,9 +63,6 @@ namespace PPBC {
                 it.DoReset();
                 it.Invincible(false);
             }
-
-            
-            DataHolder.s_gameModes[DataHolder.s_gameMode].Init();
 
             foreach (var it in Player.s_references) {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
