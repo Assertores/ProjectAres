@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
   m_Name: MissingTextureRocket
   m_EditorClassIdentifier: 
-  atlasAssets: []
+  atlasAssets:
+  - {fileID: 11400000, guid: d87fc00ceabd7b64d99e3290602b6614, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 0}
+  skeletonJSON: {fileID: 4900000, guid: 35f6497d8cb9b0c41bc4e496da5defb5, type: 3}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []

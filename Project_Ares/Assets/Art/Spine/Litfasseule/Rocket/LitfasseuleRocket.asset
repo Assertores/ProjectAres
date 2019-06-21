@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
   m_Name: LitfasseuleRocket
   m_EditorClassIdentifier: 
-  atlasAssets: []
+  atlasAssets:
+  - {fileID: 11400000, guid: d71fcd0ef5e16074ea3a6243d7a3485b, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 0}
+  skeletonJSON: {fileID: 4900000, guid: c7ff9ffd411f73b48b8aeb2fce705f42, type: 3}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []
