@@ -4,6 +4,7 @@ using UnityEngine;
 using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
+    [RequireComponent(typeof(Collider2D))]
     public class LaserBehaviour : Sauerbraten {
 
         #region Singelton
