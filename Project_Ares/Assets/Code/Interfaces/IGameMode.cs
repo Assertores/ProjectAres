@@ -5,16 +5,21 @@ using UnityEngine;
 namespace PPBC {
     public interface IGameMode {
 
-        /// <summary>
-        /// wird einmalig bei start des GameModes aufgerufen
-        /// </summary>
-        void Init();
+        Sprite m_icon { get; set; }
+
+        string m_text { get; set; }
+
+        void Unselect();
+
+        void Select();
 
         /// <summary>
-        /// wird aufgerufen um zu verhindern, dass mehrere Gamemodes gleichzeitig aktiv sind.
-        /// kann auch aufgerufen werden, selbst wenn der modus schon gestoppt ist.
+        /// function that will be called befor the menu changes to the ingame scene
         /// </summary>
-        void Stop();
+        /// <param name="specificRef">the referenceobject to initialice evereything into</param>
+        void SetMenuSpecific(Transform specificRef);
+
+        void Start();
 
         /// <summary>
         /// wird aufgerufen, wenn ein spieler stirbt
@@ -22,11 +27,7 @@ namespace PPBC {
         /// <param name="player">der spieler, der gestorben ist</param>
         void PlayerDied(Player player);
 
-        /// <summary>
-        /// function that will be called befor the menu changes to the ingame scene
-        /// </summary>
-        /// <param name="specificRef">the referenceobject to initialice evereything into</param>
-        void SetMenuSpecific(Transform specificRef);
+        void EndGame();
 
         /// <summary>
         /// will be triggert every frame alfert SetMenuSpecific
