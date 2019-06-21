@@ -9,41 +9,115 @@ namespace PPBC {
 
         #region Variables
 
+        [Header("References")]
+        [SerializeField] Sprite m_icon_;
+        [SerializeField] string m_text_;
         [Header("Balancing")]
         [SerializeField] int m_maxKills = 8;
         [SerializeField] float m_respawnTime = 2.0f;
         [SerializeField] float m_laserSwitchTime = 25f;
 
         float m_startTime;
-
+        
         #endregion
         #region MonoBehaviour
 
         void Start() {
-            Stop();
 
             DataHolder.s_gameModes[e_gameMode.FFA_CASUAL] = this;
         }
 
         #endregion
+        //#region IGameMode
+
+        //public void Init() {
+        //    m_startTime = Time.timeSinceLevelLoad;
+        //    foreach (var it in Player.s_references) {
+        //        it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
+        //    }
+        //    gameObject.SetActive(true);
+        //}
+
+        //public void Stop() {
+        //    StopAllCoroutines();
+        //    if (this && gameObject)
+        //        gameObject.SetActive(false);
+        //}
+
+        //public void PlayerDied(Player player) {
+
+        //    foreach (var it in Player.s_sortedRef) {
+        //        it.m_stats.m_points = it.m_stats.m_kills;
+        //    }
+        //    //----- ----- sorting players ----- -----
+        //    Player.s_sortedRef.Sort(delegate (Player lhs, Player rhs) {
+        //        if (lhs.m_stats.m_kills != rhs.m_stats.m_kills) {
+        //            return rhs.m_stats.m_kills.CompareTo(lhs.m_stats.m_kills);
+        //        }
+        //        if (lhs.m_stats.m_assists != rhs.m_stats.m_assists) {
+        //            return rhs.m_stats.m_assists.CompareTo(lhs.m_stats.m_assists);
+        //        }
+        //        if (lhs.m_stats.m_deaths != rhs.m_stats.m_deaths) {
+        //            return rhs.m_stats.m_deaths.CompareTo(lhs.m_stats.m_deaths);
+        //        }
+        //        if (lhs.m_stats.m_damageDealt != rhs.m_stats.m_damageDealt) {
+        //            return rhs.m_stats.m_damageDealt.CompareTo(lhs.m_stats.m_damageDealt);
+        //        }
+        //        if (lhs.m_stats.m_damageTaken != rhs.m_stats.m_damageTaken) {
+        //            return rhs.m_stats.m_damageTaken.CompareTo(lhs.m_stats.m_damageTaken);
+        //        }
+        //        if (lhs.GetHealth() != rhs.GetHealth()) {
+        //            return rhs.GetHealth().CompareTo(lhs.GetHealth());
+        //        }
+        //        return 0;
+        //    });
+
+        //    if (Player.s_sortedRef[0].m_stats.m_kills >= m_maxKills) {
+        //        StopAllCoroutines();
+        //        SceneManager.LoadScene(StringCollection.ENDSCREEN);
+        //        return;
+        //    }
+
+        //    RespawnPlayer(player);
+        //}
+
+        //public void SetMenuSpecific(Transform specificRef) {
+        //}
+
+        //public bool ReadyToChange() {
+        //    foreach(var it in Player.s_references) {
+        //        it.DoReset();
+        //    }
+        //    StartCoroutine(LaserHandler());
+        //    return true;
+        //}
+
+        //#endregion
         #region IGameMode
 
-        public void Init() {
+        public Sprite m_icon { get => m_icon_; set { } }
+        public string m_text { get => m_text_; set { } }
+
+        public void Unselect() {
+        }
+
+        public void Select() {
+        }
+
+        public void SetMenuSpecific(Transform specificRef) {
+        }
+
+        public void StartGame() {
+
             m_startTime = Time.timeSinceLevelLoad;
             foreach (var it in Player.s_references) {
                 it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
             }
-            gameObject.SetActive(true);
-        }
 
-        public void Stop() {
-            StopAllCoroutines();
-            if (this && gameObject)
-                gameObject.SetActive(false);
+            StartCoroutine(LaserHandler());
         }
 
         public void PlayerDied(Player player) {
-
             foreach (var it in Player.s_sortedRef) {
                 it.m_stats.m_points = it.m_stats.m_kills;
             }
@@ -79,14 +153,14 @@ namespace PPBC {
             RespawnPlayer(player);
         }
 
-        public void SetMenuSpecific(Transform specificRef) {
+        public void EndGame() {
+            StopAllCoroutines();
         }
 
         public bool ReadyToChange() {
-            foreach(var it in Player.s_references) {
+            foreach (var it in Player.s_references) {
                 it.DoReset();
             }
-            StartCoroutine(LaserHandler());
             return true;
         }
 
@@ -104,5 +178,7 @@ namespace PPBC {
                 StartCoroutine(LaserBehaviour.s_singelton.ChangePosition());
             }
         }
+
+        
     }
 }
