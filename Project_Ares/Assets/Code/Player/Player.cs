@@ -359,6 +359,8 @@ namespace PPBC {
 
         void SaveInit() {
             m_modellRefHolder_ = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef).GetComponent<ModellRefHolder>();
+            m_smg.SetActive(m_useSMG);
+            m_rocketLauncher.SetActive(!m_useSMG);
 
             m_smg.Init(this);
 
@@ -512,7 +514,6 @@ namespace PPBC {
         }
 
         void ChangeCharacter(bool next) {
-            StopShooting();
 
             if (next)
                 m_currentChar++;
@@ -528,6 +529,9 @@ namespace PPBC {
 
             RotateWeapon();
 
+            m_smg.SetActive(m_useSMG);
+            m_rocketLauncher.SetActive(!m_useSMG);
+
             //----- ----- Tracking ----- -----
 
             if (m_stats.m_firstCaracterChange == 0)
@@ -535,17 +539,11 @@ namespace PPBC {
         }
 
         void ChangeWeapon() {
-            if (m_useSMG) {
-                m_smg.SetActive(false);
-                m_rocketLauncher.SetActive(true);
-                if (m_isShooting)
-                    m_rocketLauncher.StartShooting();
-            } else {
-                m_rocketLauncher.SetActive(false);
-                m_smg.SetActive(true);
-                if (m_isShooting)
-                    m_smg.StartShooting();
-            }
+            m_smg.SetActive(!m_useSMG);
+            m_rocketLauncher.SetActive(m_useSMG);
+            if (m_isShooting)
+                m_rocketLauncher.StartShooting();
+            
             
             //----- ----- Tracking ----- -----
             if (m_stats.m_firstWeaponChange == 0)
