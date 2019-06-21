@@ -10,8 +10,9 @@ namespace PPBC {
         #region Variables
 
         [Header("Balancing")]
-        [SerializeField] float m_gameTime = 120.0f;
+        [SerializeField] int m_maxKills = 8;
         [SerializeField] float m_respawnTime = 2.0f;
+        [SerializeField] float m_laserSwitchTime = 25f;
 
         float m_startTime;
 
@@ -22,12 +23,6 @@ namespace PPBC {
             Stop();
 
             DataHolder.s_gameModes[e_gameMode.FFA_CASUAL] = this;
-        }
-
-        void Update() {
-            if (m_gameTime <=  Time.timeSinceLevelLoad - m_startTime) {
-                SceneManager.LoadScene(StringCollection.ENDSCREEN);
-            }
         }
 
         #endregion
@@ -42,7 +37,8 @@ namespace PPBC {
         }
 
         public void Stop() {
-            if(this && gameObject)
+            StopAllCoroutines();
+            if (this && gameObject)
                 gameObject.SetActive(false);
         }
 
@@ -74,6 +70,12 @@ namespace PPBC {
                 return 0;
             });
 
+            if (Player.s_sortedRef[0].m_stats.m_kills >= m_maxKills) {
+                StopAllCoroutines();
+                SceneManager.LoadScene(StringCollection.ENDSCREEN);
+                return;
+            }
+
             RespawnPlayer(player);
         }
 
@@ -84,6 +86,7 @@ namespace PPBC {
             foreach(var it in Player.s_references) {
                 it.DoReset();
             }
+            StartCoroutine(LaserHandler());
             return true;
         }
 
@@ -93,6 +96,13 @@ namespace PPBC {
 
             StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position, m_respawnTime));
 
+        }
+
+        IEnumerator LaserHandler() {
+            while (true) {
+                yield return new WaitForSeconds(m_laserSwitchTime);
+                StartCoroutine(LaserBehaviour.s_singelton.ChangePosition());
+            }
         }
     }
 }
