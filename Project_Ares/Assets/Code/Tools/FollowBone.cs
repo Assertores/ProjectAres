@@ -24,7 +24,7 @@ namespace PPBC {
         }
 
         void Update() {
-            transform.localPosition = new Vector2(m_target.X, m_target.Y);
+            transform.localPosition = new Vector2(m_target.WorldX, m_target.WorldY);
         }
     }
 }
