@@ -359,12 +359,13 @@ namespace PPBC {
 
         void SaveInit() {
             m_modellRefHolder_ = Instantiate(DataHolder.s_characterDatas[m_currentChar].m_model, m_modelRef).GetComponent<ModellRefHolder>();
-            m_smg.SetActive(m_useSMG);
-            m_rocketLauncher.SetActive(!m_useSMG);
 
             m_smg.Init(this);
 
             m_rocketLauncher.Init(this);
+
+            m_smg.SetActive(m_useSMG);
+            m_rocketLauncher.SetActive(!m_useSMG);
 
             InControle(true);
 
