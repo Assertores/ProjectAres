@@ -78,6 +78,8 @@ namespace PPBC {
             //===== ===== createing holder variables ===== =====
 
             MapDATA value = new MapDATA();
+            value.m_ballSpawn = Vector2.zero;
+            value.m_icon = null;
             value.m_background = 0;
             value.m_globalLight = 0;
             value.m_music = 0;
@@ -162,6 +164,12 @@ namespace PPBC {
                     continue;
                 } else if (lines[i] == "[DATA]") {
                     readType = e_objType.PLAYERSTART;//Playerstart = data
+                    continue;
+                } else if (lines[i] == "[BALLSPAWN]") {
+                    readType = e_objType.FLAG;//Flag = ball spawn
+                    continue;
+                } else if (lines[i] == "[ICON]") {
+                    readType = e_objType.BASKETHOOP;//BasketHoop = icon
                     continue;
                 }
 
@@ -316,6 +324,30 @@ namespace PPBC {
                     }
                 } else {
                     switch (readType) {
+                    case e_objType.FLAG://ball spawn
+                        tmpStgArr = lines[i].Split(';');
+                        if (tmpStgArr.Length < 2) {
+                            errorcodes.Add("values in line " + i + "cant be casted to at leased 2 values: " + lines[i]);
+                            continue;
+                        }
+                        if (!float.TryParse(tmpStgArr[0], out tmpV2.x)) {
+                            errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to e_objType enumerator in line " + i + ": " + lines[i]);
+                            continue;
+                        }
+                        if (!float.TryParse(tmpStgArr[1], out tmpV2.y)) {
+                            errorcodes.Add("unable to convert second value " + tmpStgArr[0] + " to int in line " + i + ": " + lines[i]);
+                            continue;
+                        }
+                        value.m_ballSpawn = tmpV2;
+                        break;
+                    case e_objType.BASKETHOOP://icon
+                        tmpSprite = LoadSprite(dir, lines[i]);
+                        if (!tmpSprite) {
+                            errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
+                            continue;
+                        }
+                        value.m_icon = tmpSprite;
+                        break;
                     case e_objType.BACKGROUND:
                         if (!int.TryParse(lines[i], out value.m_background)) {
                             errorcodes.Add("unable to convert" + lines[i] + " to float in line " + i + " and will be set to default value 0");
@@ -427,6 +459,8 @@ namespace PPBC {
         }
 
         public static void SaveMap(MapDATA data) {
+            Directory.CreateDirectory(StringCollection.MAPPARH + data.name);
+
             string value = "";
             value += "#Resources" + Environment.NewLine;
 
@@ -465,6 +499,14 @@ namespace PPBC {
 
             value += "#Data" + Environment.NewLine;
 
+            value += "[BALLSPAWN]" + Environment.NewLine + data.m_ballSpawn.x + ";" + data.m_ballSpawn.y + Environment.NewLine;
+            value += "[ICON]" + Environment.NewLine + data.m_icon.name + ".png" + Environment.NewLine;
+            GameManager.s_singelton.m_screenshotCamera.Render();
+            Texture2D tmp = new Texture2D(GameManager.s_singelton.m_screenshot.width, GameManager.s_singelton.m_screenshot.height);
+            tmp.ReadPixels(new Rect(0,0,tmp.width, tmp.height),0,0,false);
+            byte[] pngShot = tmp.EncodeToPNG();
+            File.WriteAllBytes(StringCollection.MAPPARH + data.name + "/" + data.m_icon.name + ".png", pngShot);
+
             value += "[SIZE]" + Environment.NewLine + data.m_size + Environment.NewLine;
             value += "[BACKGROUND]" + Environment.NewLine + data.m_background + Environment.NewLine;
             value += "[GLOBALLIGHT]" + Environment.NewLine + data.m_globalLight + Environment.NewLine;
@@ -474,7 +516,7 @@ namespace PPBC {
                 value += Environment.NewLine + data.m_data[i].ToString();
             }
 
-            Directory.CreateDirectory(StringCollection.MAPPARH + data.name);
+            
             StreamWriter saveFile = File.CreateText(StringCollection.MAPPARH + data.name + "/" + data.name + ".map");
             saveFile.Write(value);
             saveFile.Close();
@@ -512,7 +554,7 @@ namespace PPBC {
             for(int i = 0; i < this.p_music.Length; i++) {
                 value.p_music[i] = this.p_music[i];
             }
-            value.p_ballSpawn = this.p_ballSpawn;
+
             value.p_props = new d_prop[this.p_props.Length];
             for(int i = 0; i < this.p_props.Length; i++) {
                 value.p_props[i] = this.p_props[i];
@@ -526,6 +568,9 @@ namespace PPBC {
                 value.p_stage[i] = this.p_stage[i];
             }
 
+            value.m_ballSpawn = this.m_ballSpawn;
+            value.m_icon = this.m_icon;
+
             return value;
         }
 
@@ -533,11 +578,13 @@ namespace PPBC {
         public d_mapBackground[] p_background;
         public Color[] p_colors;
         public AudioClip[] p_music;
-        public Vector2 p_ballSpawn;//toBeSaved
 
         public d_prop[] p_props;
         public Sprite[] p_stage;
         public Sprite[] p_forground;
+
+        public Vector2 m_ballSpawn;//toBeSaved
+        public Sprite m_icon;//toBeSaved
 
         public int m_size;
         public int m_background;

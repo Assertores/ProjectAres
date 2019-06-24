@@ -14,6 +14,8 @@ namespace PPBC {
 
         [Header("References")]
         public MapHandler m_mapHandler;
+        public Camera m_screenshotCamera;
+        public RenderTexture m_screenshot;
 
         #endregion
         #region MonoBehaviour

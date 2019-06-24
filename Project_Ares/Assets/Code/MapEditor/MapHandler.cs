@@ -6,6 +6,8 @@ using Sauerbraten = UnityEngine.MonoBehaviour;
 namespace PPBC {
     public class MapHandler : Sauerbraten {
 
+        public static MapDATA s_refMap { get; private set; }
+
         #region Variables
 
         [Header("References")]
@@ -25,8 +27,6 @@ namespace PPBC {
 
         [HideInInspector]
         public List<Transform> m_borders { get; private set; } = new List<Transform>();
-
-        public static MapDATA s_refMap { get; private set; }
 
         #endregion
 
