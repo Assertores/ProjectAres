@@ -583,8 +583,8 @@ namespace PPBC {
         public Sprite[] p_stage;
         public Sprite[] p_forground;
 
-        public Vector2 m_ballSpawn;//toBeSaved
-        public Sprite m_icon;//toBeSaved
+        public Vector2 m_ballSpawn;
+        public Sprite m_icon;
 
         public int m_size;
         public int m_background;
