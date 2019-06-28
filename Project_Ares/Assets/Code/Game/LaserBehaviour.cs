@@ -6,6 +6,14 @@ using Sauerbraten = UnityEngine.MonoBehaviour;
 namespace PPBC {
     [RequireComponent(typeof(Collider2D))]
     public class LaserBehaviour : Sauerbraten {
+        #region Variables
+        [Header("References")]
+        [SerializeField] ParticleSystem VFX_laserStart;
+        [SerializeField] ParticleSystem VFX_laserLoop;
+        [SerializeField] ParticleSystem VFX_laserEnd;
+
+        #endregion
+
 
         #region Singelton
 
