@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a57df7da8592934299d1062ea5136fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VFX_laserStart: {fileID: 0}
+  VFX_laserLoop: {fileID: 0}
+  VFX_laserEnd: {fileID: 0}
 --- !u!61 &6105254281211322439
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -20,9 +20,9 @@ namespace PPBC {
         #endregion
         #region MonoBehaviour
         private void Start() {
-            //if (m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim != null) {//muss irgendwie bei denn modellen rein
+            if (m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim != null) {//muss irgendwie bei denn modellen rein
             //    m_player.m_modellRefHolder.m_rocketLauncher.m_modelAnim.animation.Play("Rocket_Idle");
-            //}
+            }
         }
 
         void Update() {
