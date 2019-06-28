@@ -8,7 +8,9 @@ namespace PPBC {
     public class Coop_Edit : Sauerbraten, IGameMode {
 
         #region Variables
-
+        [Header("References")]
+        [SerializeField] Sprite m_icon_;
+        [SerializeField] string m_text_;
         [SerializeField] GameObject m_EditingHUD;
 
         #endregion
@@ -29,40 +31,77 @@ namespace PPBC {
         }
 
         #endregion
+        //#region IGameMode
+
+        //public void Init() {
+        //    foreach(var it in Player.s_references) {
+        //        it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
+        //        it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
+        //    }
+
+        //    foreach (Transform it in transform) {
+        //        it.gameObject.SetActive(true);
+        //    }
+
+        //    gameObject.SetActive(true);
+        //}
+
+        //public void Stop() {
+        //    foreach (var it in Player.s_references) {
+        //        it.EditAble(null);
+        //    }
+        //    gameObject?.SetActive(false);
+        //}
+
+        //public void PlayerDied(Player player) {
+        //    StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position));
+
+        //}
+
+        //public void SetMenuSpecific(Transform specificRef) {
+        //}
+
+        //public bool ReadyToChange() {
+        //    foreach (var it in Player.s_references) {
+        //        it.DoReset();
+        //    }
+        //    return true;
+        //}
+
+        //#endregion
         #region IGameMode
 
-        public void Init() {
-            foreach(var it in Player.s_references) {
-                it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
-                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
-            }
+        public Sprite m_icon { get => m_icon_; set { } }
+        public string m_text { get => m_text_; set { } }
 
-            foreach (Transform it in transform) {
-                it.gameObject.SetActive(true);
-            }
+        public void Unselect() {
+            gameObject.SetActive(false);
+        }
 
+        public void Select() {
             gameObject.SetActive(true);
-        }
-
-        public void Stop() {
-            foreach (var it in Player.s_references) {
-                it.EditAble(null);
-            }
-            gameObject?.SetActive(false);
-        }
-
-        public void PlayerDied(Player player) {
-            StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position));
-            
         }
 
         public void SetMenuSpecific(Transform specificRef) {
         }
 
-        public bool ReadyToChange() {
+        public void StartGame() {
             foreach (var it in Player.s_references) {
-                it.DoReset();
+                it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
+                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
             }
+        }
+
+        public void PlayerDied(Player player) {
+            StartCoroutine(player.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position));
+        }
+
+        public void EndGame() {
+
+            SceneManager.LoadScene(StringCollection.MAINMENU);
+        }
+
+        public bool ReadyToChange() {
             return true;
         }
 
@@ -70,8 +109,7 @@ namespace PPBC {
 
         public void SaveAndExit() {
             GameManager.s_singelton.m_mapHandler.SaveMap(System.DateTime.Now.ToString());
-            Stop();
-            SceneManager.LoadScene(StringCollection.MAINMENU);
+            EndGame();
         }
     }
 }

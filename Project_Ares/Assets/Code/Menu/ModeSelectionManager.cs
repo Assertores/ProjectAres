@@ -87,20 +87,28 @@ namespace PPBC {
         #endregion
 
         public void NextMode() {
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Unselect();
+
             m_index++;
             m_index %= m_modes.Count;
 
             DataHolder.s_gameMode = m_modes[m_index];
             m_finished = false;
+
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Select();
         }
 
         public void PreviousMode() {
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Unselect();
+
             m_index--;
             if (m_index < 0)
                 m_index += m_modes.Count;
 
             DataHolder.s_gameMode = m_modes[m_index];
             m_finished = false;
+
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Select();
         }
     }
 }
