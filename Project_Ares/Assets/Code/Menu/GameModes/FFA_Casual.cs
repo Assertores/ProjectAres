@@ -99,9 +99,11 @@ namespace PPBC {
         public string m_text { get => m_text_; set { } }
 
         public void Unselect() {
+            gameObject.SetActive(false);
         }
 
         public void Select() {
+            gameObject.SetActive(true);
         }
 
         public void SetMenuSpecific(Transform specificRef) {
@@ -145,8 +147,7 @@ namespace PPBC {
             });
 
             if (Player.s_sortedRef[0].m_stats.m_kills >= m_maxKills) {
-                StopAllCoroutines();
-                SceneManager.LoadScene(StringCollection.ENDSCREEN);
+                EndGame();
                 return;
             }
 
@@ -155,6 +156,7 @@ namespace PPBC {
 
         public void EndGame() {
             StopAllCoroutines();
+            SceneManager.LoadScene(StringCollection.ENDSCREEN);
         }
 
         public bool ReadyToChange() {

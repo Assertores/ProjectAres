@@ -75,9 +75,11 @@ namespace PPBC {
         public string m_text { get => m_text_; set { } }
 
         public void Unselect() {
+            gameObject.SetActive(false);
         }
 
         public void Select() {
+            gameObject.SetActive(true);
         }
 
         public void SetMenuSpecific(Transform specificRef) {
@@ -107,7 +109,7 @@ namespace PPBC {
 
         public void SaveAndExit() {
             GameManager.s_singelton.m_mapHandler.SaveMap(System.DateTime.Now.ToString());
-            SceneManager.LoadScene(StringCollection.MAINMENU);
+            EndGame();
         }
     }
 }

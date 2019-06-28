@@ -120,9 +120,11 @@ namespace PPBC {
         public string m_text { get => m_text_; set { } }
 
         public void Unselect() {
+            gameObject.SetActive(false);
         }
 
         public void Select() {
+            gameObject.SetActive(true);
         }
 
         public void SetMenuSpecific(Transform specificRef) {
@@ -133,11 +135,52 @@ namespace PPBC {
         }
 
         public void PlayerDied(Player player) {
+            if (player.m_team >= 0 && player.m_team < m_lives.Count) {
+                m_lives[player.m_team]--;
+
+                List<Player> tmp = Player.s_references.FindAll(x => x.m_team == player.m_team);
+                foreach (var it in tmp) {
+                    it.m_stats.m_points = m_lives[player.m_team];
+                }
+
+                if (m_lives[player.m_team] <= 0) {
+                    EndGame();
+                    return;
+                }
+
+            }
+
+            Player.s_sortedRef.Sort(delegate (Player lhs, Player rhs) {
+                if(lhs.m_stats.m_points != rhs.m_stats.m_points) {
+                    return rhs.m_stats.m_points.CompareTo(lhs.m_stats.m_points);
+                }
+                if (lhs.m_stats.m_kills != rhs.m_stats.m_kills) {
+                    return rhs.m_stats.m_kills.CompareTo(lhs.m_stats.m_kills);
+                }
+                if (lhs.m_stats.m_assists != rhs.m_stats.m_assists) {
+                    return rhs.m_stats.m_assists.CompareTo(lhs.m_stats.m_assists);
+                }
+                if (lhs.m_stats.m_deaths != rhs.m_stats.m_deaths) {
+                    return rhs.m_stats.m_deaths.CompareTo(lhs.m_stats.m_deaths);
+                }
+                if (lhs.m_stats.m_damageDealt != rhs.m_stats.m_damageDealt) {
+                    return rhs.m_stats.m_damageDealt.CompareTo(lhs.m_stats.m_damageDealt);
+                }
+                if (lhs.m_stats.m_damageTaken != rhs.m_stats.m_damageTaken) {
+                    return rhs.m_stats.m_damageTaken.CompareTo(lhs.m_stats.m_damageTaken);
+                }
+                if (lhs.GetHealth() != rhs.GetHealth()) {
+                    return rhs.GetHealth().CompareTo(lhs.GetHealth());
+                }
+                return 0;
+            });
+
             RespawnPlayer(player);
         }
 
         public void EndGame() {
             StopAllCoroutines();
+            SceneManager.LoadScene(StringCollection.ENDSCREEN);
         }
 
         public bool ReadyToChange() {

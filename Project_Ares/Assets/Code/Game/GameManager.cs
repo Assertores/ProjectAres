@@ -67,6 +67,8 @@ namespace PPBC {
             foreach (var it in Player.s_references) {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
             }
+
+            DataHolder.s_gameModes[DataHolder.s_gameMode].StartGame();
         }
 
         #endregion
