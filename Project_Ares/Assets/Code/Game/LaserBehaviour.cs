@@ -45,18 +45,21 @@ namespace PPBC {
         public IEnumerator ChangePosition() {
             StopAllCoroutines();
 
-            float delay = 1;//make stop animaton
-            yield return new WaitForSeconds(delay);
+            //float delay = 1;
+            VFX_laserEnd.Play();
+            
+            yield return new WaitForSeconds(VFX_laserLoop.main.duration);
 
             int newIndex = Random.Range(0, LaserSpawner.s_references.Count);
             transform.position = LaserSpawner.s_references[newIndex].transform.position;
             Vector2 target = LaserSpawner.s_references[newIndex + 1 % LaserSpawner.s_references.Count].transform.position;
             transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-(target.y - transform.position.y), target.x - transform.position.x));
 
-            delay = 1;//make start animation
-            yield return new WaitForSeconds(delay);
+            //delay = 1;
+            VFX_laserStart.Play();
+            yield return new WaitForSeconds(VFX_laserStart.main.duration);
 
-            //make loop animation
+            VFX_laserLoop.Play();
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
