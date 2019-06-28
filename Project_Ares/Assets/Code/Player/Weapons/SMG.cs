@@ -24,7 +24,7 @@ namespace PPBC {
 
         private void Update()
         {
-            m_player.m_modellRefHolder.m_sMG.m_muzzleflash.transform.rotation = transform.rotation;
+            //m_player.m_modellRefHolder.m_sMG.m_muzzleflash.transform.rotation = transform.rotation;
             if (m_isShooting)
             {
                 m_shootingTime += Time.deltaTime;
