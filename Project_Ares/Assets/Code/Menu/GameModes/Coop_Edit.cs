@@ -86,9 +86,11 @@ namespace PPBC {
         }
 
         public void StartGame() {
+            print("im here");
             foreach (var it in Player.s_references) {
                 it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
-                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
+                StartCoroutine(it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position));
+                it.Invincible(false);
             }
             foreach(Transform it in transform) {
                 it.gameObject.SetActive(true);

@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_icon_: {fileID: 0}
-  m_text_: 
+  m_text_: get 8 kills
   m_maxKills: 8
   m_respawnTime: 2
   m_laserSwitchTime: 25
@@ -2845,7 +2845,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1474378964}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &799356948
 GameObject:
@@ -3311,49 +3311,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091563303}
   m_CullTransparentMesh: 0
---- !u!1 &1113762844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1113762845}
-  - component: {fileID: 1113762846}
-  m_Layer: 0
-  m_Name: Fair_Tournament
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1113762845
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113762844}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1474378964}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1113762846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113762844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d1271fc53f674e46a75fc693dfaa2d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1128984954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4211,7 +4168,6 @@ Transform:
   - {fileID: 195454292}
   - {fileID: 1827081985}
   - {fileID: 2133485892}
-  - {fileID: 1113762845}
   - {fileID: 783605294}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -5271,7 +5227,7 @@ MonoBehaviour:
   m_specifics: {fileID: 4292459261262365343, guid: 43dceda1d6421c94aac190ab8eab9b70,
     type: 3}
   m_icon_: {fileID: 0}
-  m_text_: 
+  m_text_: kill enemy team 5 times
   m_teamCount: 2
   m_teamLives: 5
   m_respawnTime: 2
@@ -5965,7 +5921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_icon_: {fileID: 0}
-  m_text_: 
+  m_text_: edit a game
   m_EditingHUD: {fileID: 6432499979848163405, guid: ee9a223e689757149903d6bde308e578,
     type: 3}
 --- !u!1001 &7387355938351007967

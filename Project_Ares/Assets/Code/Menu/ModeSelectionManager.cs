@@ -49,6 +49,7 @@ namespace PPBC {
                 m_contentHolder.sizeDelta += new Vector2(m_itemWidth, 0);
 
                 tmp.m_mapName.text = it.Key.ToString();
+                tmp.m_mapSize.text = it.Value.m_text;
                 //if (it.Value.m_size >= 0) {//TODO gamemodes mit beschreibungstexten versehen
                 //    tmp.m_mapSize.text = DataHolder.s_commonSize[it.Value.m_size].ToString();
                 //} else {
@@ -56,8 +57,10 @@ namespace PPBC {
                 //}
                 //tmp.m_mapIcon = it.Value.m_icon;//TODO integrate preview pictures to maps
                 m_modes.Add(it.Key);
+                it.Value.Unselect();
             }
             DataHolder.s_gameMode = m_modes[m_index];
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Select();
         }
 
         void Update() {

@@ -70,6 +70,8 @@ namespace PPBC {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
             }
 
+            print("starting: " + DataHolder.s_gameMode);
+            print(DataHolder.s_gameModes[DataHolder.s_gameMode]);
             DataHolder.s_gameModes[DataHolder.s_gameMode].StartGame();
         }
 

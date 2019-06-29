@@ -110,10 +110,11 @@ namespace PPBC {
         }
 
         public void StartGame() {
-
+            print("test");
             m_startTime = Time.timeSinceLevelLoad;
             foreach (var it in Player.s_references) {
-                it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
+                StartCoroutine(it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position));
+                it.Invincible(false);
             }
 
             //StartCoroutine(LaserHandler());

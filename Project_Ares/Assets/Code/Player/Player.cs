@@ -489,6 +489,8 @@ namespace PPBC {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
 
+            m_player.SetActive(false);
+
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
@@ -502,7 +504,7 @@ namespace PPBC {
             StopShooting();
             ResetHealth();
             m_respawntTime = Time.timeSinceLevelLoad;
-
+            m_player.SetActive(true);
             if (m_modellRefHolder.m_modelAnim != null) {
                 float tmp = StartAnim("06_Respawn", 1);//In stringCollection übertragen
                 if (tmp > 0)
