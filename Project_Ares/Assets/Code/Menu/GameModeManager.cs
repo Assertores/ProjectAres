@@ -62,7 +62,7 @@ namespace PPBC {
 
         private void Update() {
             if (DataHolder.s_gameModes.ContainsKey(DataHolder.s_gameMode) && DataHolder.s_gameModes[DataHolder.s_gameMode].ReadyToChange()) {
-                SceneManager.LoadScene(StringCollection.INGAME);
+                SceneManager.LoadScene("TransitionScreen");
             }
         }
 
