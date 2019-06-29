@@ -45,6 +45,7 @@ namespace PPBC {
                     //tmp.GetComponentInChildren<Player>().Init(reference);//null reference checks
                     tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                     tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
+                    tmp.GetComponentInChildren<Player>().ChangeColor(DataHolder.s_colors[4]);
                 }
             }
             for (int i = 0; i < 4; i++) {
@@ -64,7 +65,7 @@ namespace PPBC {
                         //tmp.GetComponent<Player>().Init(reference);//null reference checks
                         tmp.GetComponentInChildren<Player>().Invincible(true);//TODO: playerscript wird doppeld gesucht
                         tmp.GetComponentInChildren<Player>().SetChangeCharAble(true);
-
+                        tmp.GetComponentInChildren<Player>().ChangeColor(DataHolder.s_colors[i]);
                     }
                 }
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
