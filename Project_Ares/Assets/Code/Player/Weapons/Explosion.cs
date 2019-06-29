@@ -72,7 +72,7 @@ namespace PPBC {
         }
 
         #endregion
-        //#region Physics
+        #region Physics
 
         //private void OnCollisionEnter2D(Collision2D collision) {
         //    IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
@@ -83,6 +83,6 @@ namespace PPBC {
         //    }
         //}
 
-        //#endregion
+        #endregion
     }
 }
