@@ -11,10 +11,12 @@ namespace PPBC {
         [SerializeField] ParticleSystem VFX_laserStart;
         [SerializeField] ParticleSystem VFX_laserLoop;
         [SerializeField] ParticleSystem VFX_laserEnd;
+        [SerializeField] ContactFilter2D m_contFilter;
 
         List<GameObject> collisionObjects = new List<GameObject>();
         #endregion
 
+        BoxCollider2D m_collider;
 
         #region Singelton
 
@@ -43,6 +45,10 @@ namespace PPBC {
 
         #endregion
 
+        private void Start() {
+            m_collider = GetComponent<BoxCollider2D>();
+        }
+
         public IEnumerator ChangePosition() {
             StopAllCoroutines();
 
@@ -62,6 +68,15 @@ namespace PPBC {
 
             //delay = 1;
             VFX_laserStart.Play();
+
+            
+            Collider2D[] tmp = new Collider2D[10];
+            int count = m_collider.OverlapCollider(m_contFilter, tmp);
+            for (int i = 0; i < count; i++) {
+                collisionObjects.Add(tmp[i].gameObject);
+                tmp[i].gameObject.SetActive(false);
+            }
+
             yield return new WaitForSeconds(VFX_laserStart.main.duration);
 
             VFX_laserLoop.Play();
@@ -75,11 +90,11 @@ namespace PPBC {
                 Destroy(collision.gameObject);
             }
 
-            if (collision.gameObject.tag == "Level") {
-                collisionObjects.Add(collision.gameObject);
-                collision.gameObject.SetActive(false);
+            //if (collision.gameObject.tag == "Level") {
+            //    collisionObjects.Add(collision.gameObject);
+            //    collision.gameObject.SetActive(false);
 
-            }
+            //}
         }
     }
 }

@@ -5906,6 +5906,12 @@ MonoBehaviour:
     - {x: -0.09637672, y: -1.13}
     - {x: 0.1353683, y: -1.000603}
     - {x: 0.1782715, y: -0.2724509}
+  - m_sprite: {fileID: 21300000, guid: 34b1048f7ebc895428b6205383ea0d1c, type: 3}
+    m_collider:
+    - {x: -4.02, y: 0.55}
+    - {x: -3.94, y: -0.51}
+    - {x: 3.94, y: -0.51}
+    - {x: 4.02, y: 0.55}
   m_stage: []
   m_forground: []
   m_laserSpawner: {fileID: 1805873996626158536, guid: 1a4ccb50593a4e243b166c19ec3f4c1b,

@@ -298,7 +298,7 @@ namespace PPBC {
                             errorcodes.Add("line " + i + " is no valide audio: " + lines[i]);
                             continue;
                         }
-                        tmpMusic.name = lines[i];
+                        tmpMusic.name = Path.GetFileNameWithoutExtension(lines[i]);
                         musics.Add(tmpMusic);
                         break;
                     }
@@ -500,12 +500,17 @@ namespace PPBC {
             value += "#Data" + Environment.NewLine;
 
             value += "[BALLSPAWN]" + Environment.NewLine + data.m_ballSpawn.x + ";" + data.m_ballSpawn.y + Environment.NewLine;
-            value += "[ICON]" + Environment.NewLine + data.m_icon.name + ".png" + Environment.NewLine;
+            GameManager.s_singelton.m_screenshotCamera.gameObject.SetActive(true);
             GameManager.s_singelton.m_screenshotCamera.Render();
+            GameManager.s_singelton.m_screenshotCamera.gameObject.SetActive(false);
             Texture2D tmp = new Texture2D(GameManager.s_singelton.m_screenshot.width, GameManager.s_singelton.m_screenshot.height);
+            var holder = RenderTexture.active;
+            RenderTexture.active = GameManager.s_singelton.m_screenshot;
             tmp.ReadPixels(new Rect(0,0,tmp.width, tmp.height),0,0,false);
+            RenderTexture.active = holder;
             byte[] pngShot = tmp.EncodeToPNG();
-            File.WriteAllBytes(StringCollection.MAPPARH + data.name + "/" + data.m_icon.name + ".png", pngShot);
+            File.WriteAllBytes(StringCollection.MAPPARH + data.name + "/" + "icon.png", pngShot);
+            value += "[ICON]" + Environment.NewLine + "icon.png" + Environment.NewLine;
 
             value += "[SIZE]" + Environment.NewLine + data.m_size + Environment.NewLine;
             value += "[BACKGROUND]" + Environment.NewLine + data.m_background + Environment.NewLine;

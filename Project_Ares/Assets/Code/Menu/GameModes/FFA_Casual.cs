@@ -116,7 +116,7 @@ namespace PPBC {
                 it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
             }
 
-            StartCoroutine(LaserHandler());
+            //StartCoroutine(LaserHandler());
         }
 
         public void PlayerDied(Player player) {
@@ -176,8 +176,8 @@ namespace PPBC {
 
         IEnumerator LaserHandler() {
             while (true) {
-                yield return new WaitForSeconds(m_laserSwitchTime);
                 StartCoroutine(LaserBehaviour.s_singelton.ChangePosition());
+                yield return new WaitForSeconds(m_laserSwitchTime);
             }
         }
 

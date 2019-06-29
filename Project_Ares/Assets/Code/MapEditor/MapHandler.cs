@@ -273,6 +273,7 @@ namespace PPBC {
                     return null;
                 
                 tmp = new GameObject("Prop " + obj.index);
+                tmp.tag = "Level";
                 tmp.transform.position = obj.position;
                 tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);

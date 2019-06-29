@@ -100,7 +100,9 @@ namespace PPBC {
         }
 
         public void EndGame() {
-
+            foreach(Transform it in transform) {
+                it.gameObject.SetActive(false);
+            }
             SceneManager.LoadScene(StringCollection.MAINMENU);
         }
 
