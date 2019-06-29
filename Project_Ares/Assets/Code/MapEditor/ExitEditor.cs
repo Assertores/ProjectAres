@@ -46,9 +46,13 @@ namespace PPBC {
         }
 
         public void TakeDamage(float damage, Player source, Vector2 force, Sprite icon) {
+            if (m_currentLife <= 0)
+                return;
+
             m_currentLife -= damage;
             m_lastHit = Time.timeSinceLevelLoad;
             if(m_currentLife <= 0) {
+                print("1");
                 m_gMRef.SaveAndExit();
             }
         }

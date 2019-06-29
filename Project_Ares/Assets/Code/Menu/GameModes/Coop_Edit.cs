@@ -90,6 +90,9 @@ namespace PPBC {
                 it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
                 it.Respawn(PlayerStart.s_references[Random.Range(0, PlayerStart.s_references.Count)].transform.position);
             }
+            foreach(Transform it in transform) {
+                it.gameObject.SetActive(true);
+            }
         }
 
         public void PlayerDied(Player player) {

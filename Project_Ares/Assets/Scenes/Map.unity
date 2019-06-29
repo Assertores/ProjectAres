@@ -225,7 +225,6 @@ GameObject:
   m_Component:
   - component: {fileID: 511372729}
   - component: {fileID: 511372728}
-  - component: {fileID: 511372727}
   - component: {fileID: 511372726}
   m_Layer: 0
   m_Name: ScreenShotCamera
@@ -247,14 +246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_boundingBox: {fileID: 1136272779}
---- !u!81 &511372727
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511372725}
-  m_Enabled: 1
 --- !u!20 &511372728
 Camera:
   m_ObjectHideFlags: 0
