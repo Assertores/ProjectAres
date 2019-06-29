@@ -60,7 +60,7 @@ namespace PPBC {
         [SerializeField] ParticleSystem m_laserdeathVFX;
         [SerializeField] GameObject m_laserParent;
         [SerializeField] ParticleSystem m_deathVFX;
-
+        [SerializeField] SpriteRenderer m_glow;
         
 
         [Header("Balancing")]
@@ -73,6 +73,7 @@ namespace PPBC {
         [SerializeField] float m_bounciness = 0.3f;
 
         public int m_team;
+        Color m_color;
         public d_playerData m_stats;
 
         public float m_distanceToGround;
@@ -379,6 +380,11 @@ namespace PPBC {
             //---- ----- Feedback ----- ----
 
             StartAnim("06_Respawn", 1);
+        }
+
+        public void ChangeColor(Color newColor) {
+            m_color = newColor;
+            m_glow.color = newColor;
         }
 
         #region Resets

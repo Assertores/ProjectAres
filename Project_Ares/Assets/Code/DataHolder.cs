@@ -31,6 +31,8 @@ namespace PPBC {
         public static Dictionary<e_gameMode, IGameMode> s_gameModes = new Dictionary<e_gameMode, IGameMode>();
         public static e_gameMode s_gameMode = e_gameMode.COOP_EDIT;
 
+        public static List<Color> s_colors = new List<Color>();
+
         public static Player s_hoPlayer;//handing over Player
 
         //===== ===== Fair_Tournament ===== =====
@@ -60,6 +62,7 @@ namespace PPBC {
         [SerializeField] string m_mapName;
         [SerializeField] string[] m_names;
         [SerializeField] CharacterData[] m_characters;
+        [SerializeField] Color[] m_glowColors;
         [SerializeField] MapDATA[] m_maps;
 
         [SerializeField] Vector2[] m_size;
@@ -95,6 +98,11 @@ namespace PPBC {
                     s_characterDatas.Add(it);
                 }
             }
+
+            foreach (Color it in m_glowColors) {
+                s_colors.Add(it);
+            }
+
             if (SaveToXML) {
                 MapDATA.SaveMap(SaveToXML);
             }
