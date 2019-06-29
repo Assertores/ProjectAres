@@ -12,6 +12,7 @@ namespace PPBC {
         [SerializeField] ParticleSystem VFX_laserLoop;
         [SerializeField] ParticleSystem VFX_laserEnd;
 
+        List<GameObject> collisionObjects = new List<GameObject>();
         #endregion
 
 
@@ -50,6 +51,10 @@ namespace PPBC {
             
             yield return new WaitForSeconds(VFX_laserLoop.main.duration);
 
+            for (int i = 0; i < collisionObjects.Count; i++) {
+                collisionObjects[i].SetActive(true);
+            }
+            collisionObjects.Clear();
             int newIndex = Random.Range(0, LaserSpawner.s_references.Count);
             transform.position = LaserSpawner.s_references[newIndex].transform.position;
             Vector2 target = LaserSpawner.s_references[newIndex + 1 % LaserSpawner.s_references.Count].transform.position;
@@ -68,6 +73,12 @@ namespace PPBC {
                 tmp.Die(null);
             } else {
                 Destroy(collision.gameObject);
+            }
+
+            if (collision.gameObject.tag == "Level") {
+                collisionObjects.Add(collision.gameObject);
+                collision.gameObject.SetActive(false);
+
             }
         }
     }
