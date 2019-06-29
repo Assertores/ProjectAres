@@ -2528,6 +2528,7 @@ GameObject:
   - component: {fileID: 714017351}
   - component: {fileID: 714017353}
   - component: {fileID: 714017352}
+  - component: {fileID: 714017354}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -2678,6 +2679,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714017350}
   m_CullTransparentMesh: 0
+--- !u!111 &714017354
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714017350}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 07010e3c30243d3489274c394ef4d161, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 07010e3c30243d3489274c394ef4d161, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &725071296
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,59 +3354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1271fc53f674e46a75fc693dfaa2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_maxKills: 8
-  m_respawnTime: 2
-  m_startTime: 0
 --- !u!1 &1128984954
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,7 +3524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1140441460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3603,6 +3567,7 @@ GameObject:
   - component: {fileID: 1159674066}
   - component: {fileID: 1159674068}
   - component: {fileID: 1159674067}
+  - component: {fileID: 1159674069}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -3753,6 +3718,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159674065}
   m_CullTransparentMesh: 0
+--- !u!111 &1159674069
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159674065}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4e055b8724d9fe849933634310b238a5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 4e055b8724d9fe849933634310b238a5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1183362295
 GameObject:
   m_ObjectHideFlags: 0
