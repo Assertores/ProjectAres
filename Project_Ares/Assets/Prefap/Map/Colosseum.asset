@@ -19,6 +19,8 @@ MonoBehaviour:
   p_props: []
   p_stage: []
   p_forground: []
+  m_ballSpawn: {x: 0, y: 0}
+  m_icon: {fileID: 21300000, guid: cac49717807f3804b92cda6d47138d06, type: 3}
   m_size: 0
   m_background: 0
   m_globalLight: 0
@@ -61,21 +63,41 @@ MonoBehaviour:
     scale: {x: 0, y: 0}
   - type: 6
     index: 2
-    position: {x: 0, y: -6}
-    rotation: 0
-    scale: {x: 100, y: 4.171}
-  - type: 6
-    index: 0
-    position: {x: 10.54, y: 0}
+    position: {x: -10.84796, y: -5.964806}
     rotation: 0
     scale: {x: 1, y: 1}
   - type: 6
     index: 1
-    position: {x: 0, y: 5.74}
+    position: {x: 11.04672, y: -6.023454}
     rotation: 0
     scale: {x: 1, y: 1}
   - type: 6
     index: 0
-    position: {x: -10.56, y: 0}
+    position: {x: 11.09013, y: 5.846635}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 6
+    index: 3
+    position: {x: -10.97656, y: 5.852171}
     rotation: 0
     scale: {x: -1, y: 1}
+  - type: 1
+    index: 8
+    position: {x: -0.07929664, y: 6.406802}
+    rotation: 0
+    scale: {x: 2.55206, y: 2.55206}
+  - type: 1
+    index: 8
+    position: {x: 10.9946, y: -0.1076983}
+    rotation: 270
+    scale: {x: 1.714351, y: 1.714351}
+  - type: 1
+    index: 8
+    position: {x: 0.06871083, y: -6.819638}
+    rotation: 180
+    scale: {x: -2.557914, y: -2.557914}
+  - type: 1
+    index: 8
+    position: {x: -10.97111, y: -0.1306317}
+    rotation: 90
+    scale: {x: 1.714351, y: 1.714351}

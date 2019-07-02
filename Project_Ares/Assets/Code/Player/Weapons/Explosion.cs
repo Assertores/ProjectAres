@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class Explosion : MonoBehaviour, IHarmingObject {
+    public class Explosion : Sauerbraten, IHarmingObject {
 
         #region Variables
         [Header("References")]
@@ -71,7 +72,7 @@ namespace PPBC {
         }
 
         #endregion
-        //#region Physics
+        #region Physics
 
         //private void OnCollisionEnter2D(Collision2D collision) {
         //    IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
@@ -82,6 +83,6 @@ namespace PPBC {
         //    }
         //}
 
-        //#endregion
+        #endregion
     }
 }

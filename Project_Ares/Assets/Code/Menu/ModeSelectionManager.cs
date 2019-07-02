@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class ModeSelectionManager : MonoBehaviour {
+    public class ModeSelectionManager : Sauerbraten {
 
         [Header("References")]
         [SerializeField] GameObject m_itemPrefab;
@@ -48,6 +49,7 @@ namespace PPBC {
                 m_contentHolder.sizeDelta += new Vector2(m_itemWidth, 0);
 
                 tmp.m_mapName.text = it.Key.ToString();
+                tmp.m_mapSize.text = it.Value.m_text;
                 //if (it.Value.m_size >= 0) {//TODO gamemodes mit beschreibungstexten versehen
                 //    tmp.m_mapSize.text = DataHolder.s_commonSize[it.Value.m_size].ToString();
                 //} else {
@@ -55,8 +57,10 @@ namespace PPBC {
                 //}
                 //tmp.m_mapIcon = it.Value.m_icon;//TODO integrate preview pictures to maps
                 m_modes.Add(it.Key);
+                it.Value.Unselect();
             }
             DataHolder.s_gameMode = m_modes[m_index];
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Select();
         }
 
         void Update() {
@@ -86,20 +90,28 @@ namespace PPBC {
         #endregion
 
         public void NextMode() {
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Unselect();
+
             m_index++;
             m_index %= m_modes.Count;
 
             DataHolder.s_gameMode = m_modes[m_index];
             m_finished = false;
+
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Select();
         }
 
         public void PreviousMode() {
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Unselect();
+
             m_index--;
             if (m_index < 0)
                 m_index += m_modes.Count;
 
             DataHolder.s_gameMode = m_modes[m_index];
             m_finished = false;
+
+            DataHolder.s_gameModes[DataHolder.s_gameMode].Select();
         }
     }
 }

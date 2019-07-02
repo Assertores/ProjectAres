@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
 
-    public class MovingCircle : MonoBehaviour, IDamageableObject {
+    public class MovingCircle : Sauerbraten, IDamageableObject {
         public bool m_alive { get; set; }
 
         public void Die(Player source) {

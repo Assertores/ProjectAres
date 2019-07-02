@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class ObjectReferenceHolder : MonoBehaviour {
+    public class ObjectReferenceHolder : Sauerbraten {
 
         public static List<ObjectReferenceHolder> s_references = new List<ObjectReferenceHolder>();
 

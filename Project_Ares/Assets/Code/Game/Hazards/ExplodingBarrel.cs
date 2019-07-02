@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
+
 namespace PPBC
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class ExplodingBarrel : MonoBehaviour, IDamageableObject
+    public class ExplodingBarrel : Sauerbraten, IDamageableObject
     {
         #region Variables
         [Header("References")]

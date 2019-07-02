@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class ExitHandler : MonoBehaviour {
+    public class ExitHandler : Sauerbraten {
 
         [Header("References")]
         [SerializeField] GameObject m_hatch;
@@ -34,9 +35,9 @@ namespace PPBC {
                 }
             }
 
-            if (m_startButton.m_currentLife < m_blockLife) {
+            /*if (m_startButton.m_currentLife < m_blockLife) {
                 m_ExitText.text = "Exit blocked";
-            } else { 
+            } else */{ 
                 if (Player.s_references.Count > 1) {
                     m_ExitText.text = "Disconnect"; //Localisation
                 } else {
@@ -46,9 +47,9 @@ namespace PPBC {
         }
 
         public void StartCountDown() {
-            if (m_startButton.m_currentLife > m_blockLife) {
+            //if (m_startButton.m_currentLife > m_blockLife) {
                 m_triggerTime = Time.time;
-            } 
+            //}
         }
 
         public void StopCountDown() {

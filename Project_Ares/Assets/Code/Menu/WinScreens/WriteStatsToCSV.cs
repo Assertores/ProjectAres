@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class WriteStatsToCSV : MonoBehaviour, IScriptQueueItem {
+    public class WriteStatsToCSV : Sauerbraten, IScriptQueueItem {
 
         #region Variables
 
@@ -33,7 +34,7 @@ namespace PPBC {
 
             File.AppendAllText(StringCollection.DATAPATH + m_TrackingPath, "!=====" + System.Environment.NewLine);
 
-            return true; ;
+            return true;
         }
 
         #endregion

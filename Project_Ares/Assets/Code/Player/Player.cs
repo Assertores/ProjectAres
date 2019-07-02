@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
 
@@ -40,7 +40,7 @@ namespace PPBC {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SMG))]
     [RequireComponent(typeof(RocketLauncher))]
-    public class Player : MonoBehaviour, IDamageableObject {
+    public class Player : Sauerbraten, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>();
         public static List<Player> s_sortedRef = new List<Player>();
@@ -60,7 +60,7 @@ namespace PPBC {
         [SerializeField] ParticleSystem m_laserdeathVFX;
         [SerializeField] GameObject m_laserParent;
         [SerializeField] ParticleSystem m_deathVFX;
-
+        [SerializeField] SpriteRenderer m_glow;
         
 
         [Header("Balancing")]
@@ -73,6 +73,7 @@ namespace PPBC {
         [SerializeField] float m_bounciness = 0.3f;
 
         public int m_team;
+        Color m_color;
         public d_playerData m_stats;
 
         public float m_distanceToGround;
@@ -316,8 +317,7 @@ namespace PPBC {
 
             m_laserParent.transform.position = transform.position;
             StartAnim("05_Sterben", 1);
-           
-            print("hit laser");
+
             m_laserdeathVFX.Play();
             
             StartCoroutine(PlayerDie(1.0f));
@@ -380,6 +380,11 @@ namespace PPBC {
             //---- ----- Feedback ----- ----
 
             StartAnim("06_Respawn", 1);
+        }
+
+        public void ChangeColor(Color newColor) {
+            m_color = newColor;
+            m_glow.color = newColor;
         }
 
         #region Resets
@@ -484,6 +489,8 @@ namespace PPBC {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
 
+            m_player.SetActive(false);
+
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
@@ -497,7 +504,7 @@ namespace PPBC {
             StopShooting();
             ResetHealth();
             m_respawntTime = Time.timeSinceLevelLoad;
-
+            m_player.SetActive(true);
             if (m_modellRefHolder.m_modelAnim != null) {
                 float tmp = StartAnim("06_Respawn", 1);//In stringCollection übertragen
                 if (tmp > 0)

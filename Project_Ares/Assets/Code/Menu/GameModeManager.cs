@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class GameModeManager : MonoBehaviour {
+    public class GameModeManager : Sauerbraten {
 
         static bool isInit = false;
 
@@ -60,8 +61,9 @@ namespace PPBC {
         }
 
         private void Update() {
-            if (DataHolder.s_gameModes.ContainsKey(DataHolder.s_gameMode) && DataHolder.s_gameModes[DataHolder.s_gameMode].ReadyToChange())
-                SceneManager.LoadScene(StringCollection.INGAME);
+            if (DataHolder.s_gameModes.ContainsKey(DataHolder.s_gameMode) && DataHolder.s_gameModes[DataHolder.s_gameMode].ReadyToChange()) {
+                SceneManager.LoadScene("TransitionScreen");
+            }
         }
 
         #endregion

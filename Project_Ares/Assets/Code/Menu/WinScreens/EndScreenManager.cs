@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class EndScreenManager : MonoBehaviour {
+    public class EndScreenManager : Sauerbraten {
 
         public static EndScreenManager s_ref = null;
 

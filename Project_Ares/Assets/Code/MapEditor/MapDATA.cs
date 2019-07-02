@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using System.IO;
-using System.Xml.Serialization;
 using System;
 
 namespace PPBC {
-    public enum e_objType { BACKGROUND, PROP, STAGE, PLAYERSTART, LIGHT, FORGROUND, BORDER, GLOBALLIGHT, MUSIC, SIZE }
+    public enum e_objType { BACKGROUND = 0, PROP, STAGE, PLAYERSTART, LIGHT, FORGROUND, BORDER, GLOBALLIGHT, MUSIC, SIZE, FLAG, BASKETHOOP, ENUMLENGTH}
 
-    [System.Serializable]
+    [Serializable]
     public struct d_mapData {
         public e_objType type;
         public int index;
@@ -22,7 +21,7 @@ namespace PPBC {
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct d_prop {
         public Sprite m_sprite;
         public Vector2[] m_collider;
@@ -31,6 +30,22 @@ namespace PPBC {
             value = m_sprite.name + ".png";
             return value;
         }
+    }
+
+    [Serializable]
+    public struct d_mapLights {
+        public Vector2 position;
+        public Color color;
+    }
+    [Serializable]
+    public struct d_mapPlayerStart {
+        public Vector2 position;
+        public int team;
+    }
+    [Serializable]
+    public struct d_mapBackground {
+        public Sprite background;
+        public Vector4 killFeed;//xcenter, ycenter, zwidth, whight
     }
 
     [CreateAssetMenu(menuName = "Map")]
@@ -63,13 +78,15 @@ namespace PPBC {
             //===== ===== createing holder variables ===== =====
 
             MapDATA value = new MapDATA();
+            value.m_ballSpawn = Vector2.zero;
+            value.m_icon = null;
             value.m_background = 0;
             value.m_globalLight = 0;
             value.m_music = 0;
             value.m_size = 0;
 
             List<Vector2> sizes = new List<Vector2>();
-            List<Sprite> backgrounds = new List<Sprite>();
+            List<d_mapBackground> backgrounds = new List<d_mapBackground>();
             List<Color> colors = new List<Color>();
             List<AudioClip> musics = new List<AudioClip>();
             List<d_prop> props = new List<d_prop>();
@@ -90,6 +107,11 @@ namespace PPBC {
             d_mapData tmpMData;
             string[] tmpStgArr;
             int propLine = 0;
+            int bgdLine = 0;
+            d_mapBackground tmpBgd;
+            tmpBgd.background = null;
+            tmpBgd.killFeed = new Vector4();
+            Vector4 tmpV4;
 
             int readPos = 0;//1 = Resource, 2 = Data
             e_objType readType = e_objType.BORDER;//Border = non
@@ -143,6 +165,12 @@ namespace PPBC {
                 } else if (lines[i] == "[DATA]") {
                     readType = e_objType.PLAYERSTART;//Playerstart = data
                     continue;
+                } else if (lines[i] == "[BALLSPAWN]") {
+                    readType = e_objType.FLAG;//Flag = ball spawn
+                    continue;
+                } else if (lines[i] == "[ICON]") {
+                    readType = e_objType.BASKETHOOP;//BasketHoop = icon
+                    continue;
                 }
 
                 if (readType == e_objType.BORDER) {
@@ -154,12 +182,37 @@ namespace PPBC {
                 if (readPos == 1) {
                     switch (readType) {
                     case e_objType.BACKGROUND:
-                        tmpSprite = LoadSprite(dir, lines[i], 170);//background is less resolution than props
-                        if (!tmpSprite) {
-                            errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
-                            continue;
+                        if(bgdLine == 1) {
+                            tmpStgArr = lines[i].Split(';');
+                            if (tmpStgArr.Length < 4) {
+                                bgdLine = 0;
+                            } else {
+                                if (!float.TryParse(tmpStgArr[0], out tmpV4.x)) {
+                                    errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
+                                    continue;
+                                } else if (!float.TryParse(tmpStgArr[1], out tmpV4.y)) {
+                                    errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
+                                    continue;
+                                } else if (!float.TryParse(tmpStgArr[2], out tmpV4.z)) {
+                                    errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
+                                    continue;
+                                } else if (!float.TryParse(tmpStgArr[3], out tmpV4.w)) {
+                                    errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to float in line " + i + ": " + lines[i]);
+                                    continue;
+                                }
+                                tmpBgd.killFeed = tmpV4;
+                                backgrounds.Add(tmpBgd);
+                            }
                         }
-                        backgrounds.Add(tmpSprite);
+                        if(bgdLine == 0) {
+                            tmpSprite = LoadSprite(dir, lines[i], 170);//background is less resolution than props
+                            if (!tmpSprite) {
+                                errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
+                                continue;
+                            }
+                            tmpBgd.background = tmpSprite;
+                            bgdLine = 1;
+                        }
                         break;
                     case e_objType.PROP:
                         if(propLine == 1) {
@@ -245,7 +298,7 @@ namespace PPBC {
                             errorcodes.Add("line " + i + " is no valide audio: " + lines[i]);
                             continue;
                         }
-                        tmpMusic.name = lines[i];
+                        tmpMusic.name = Path.GetFileNameWithoutExtension(lines[i]);
                         musics.Add(tmpMusic);
                         break;
                     }
@@ -271,6 +324,30 @@ namespace PPBC {
                     }
                 } else {
                     switch (readType) {
+                    case e_objType.FLAG://ball spawn
+                        tmpStgArr = lines[i].Split(';');
+                        if (tmpStgArr.Length < 2) {
+                            errorcodes.Add("values in line " + i + "cant be casted to at leased 2 values: " + lines[i]);
+                            continue;
+                        }
+                        if (!float.TryParse(tmpStgArr[0], out tmpV2.x)) {
+                            errorcodes.Add("unable to convert first value " + tmpStgArr[0] + " to e_objType enumerator in line " + i + ": " + lines[i]);
+                            continue;
+                        }
+                        if (!float.TryParse(tmpStgArr[1], out tmpV2.y)) {
+                            errorcodes.Add("unable to convert second value " + tmpStgArr[0] + " to int in line " + i + ": " + lines[i]);
+                            continue;
+                        }
+                        value.m_ballSpawn = tmpV2;
+                        break;
+                    case e_objType.BASKETHOOP://icon
+                        tmpSprite = LoadSprite(dir, lines[i]);
+                        if (!tmpSprite) {
+                            errorcodes.Add("line " + i + " is no valide sprite: " + lines[i]);
+                            continue;
+                        }
+                        value.m_icon = tmpSprite;
+                        break;
                     case e_objType.BACKGROUND:
                         if (!int.TryParse(lines[i], out value.m_background)) {
                             errorcodes.Add("unable to convert" + lines[i] + " to float in line " + i + " and will be set to default value 0");
@@ -382,6 +459,8 @@ namespace PPBC {
         }
 
         public static void SaveMap(MapDATA data) {
+            Directory.CreateDirectory(StringCollection.MAPPARH + data.name);
+
             string value = "";
             value += "#Resources" + Environment.NewLine;
 
@@ -391,7 +470,8 @@ namespace PPBC {
             }
             value += "[BACKGROUND]" + Environment.NewLine;
             for (int i = 0; i < data.p_background.Length; i++) {
-                value += data.p_background[i].name + ".png" + Environment.NewLine;
+                value += data.p_background[i].background.name + ".png" + Environment.NewLine;
+                value += data.p_background[i].killFeed.x + ";" + data.p_background[i].killFeed.y + ";" + data.p_background[i].killFeed.z + ";" + data.p_background[i].killFeed.w;
             }
             value += "[COLOR]" + Environment.NewLine;
             for (int i = 0; i < data.p_colors.Length; i++) {
@@ -419,6 +499,19 @@ namespace PPBC {
 
             value += "#Data" + Environment.NewLine;
 
+            value += "[BALLSPAWN]" + Environment.NewLine + data.m_ballSpawn.x + ";" + data.m_ballSpawn.y + Environment.NewLine;
+            GameManager.s_singelton.m_screenshotCamera.gameObject.SetActive(true);
+            GameManager.s_singelton.m_screenshotCamera.Render();
+            GameManager.s_singelton.m_screenshotCamera.gameObject.SetActive(false);
+            Texture2D tmp = new Texture2D(GameManager.s_singelton.m_screenshot.width, GameManager.s_singelton.m_screenshot.height);
+            var holder = RenderTexture.active;
+            RenderTexture.active = GameManager.s_singelton.m_screenshot;
+            tmp.ReadPixels(new Rect(0,0,tmp.width, tmp.height),0,0,false);
+            RenderTexture.active = holder;
+            byte[] pngShot = tmp.EncodeToPNG();
+            File.WriteAllBytes(StringCollection.MAPPARH + data.name + "/" + "icon.png", pngShot);
+            value += "[ICON]" + Environment.NewLine + "icon.png" + Environment.NewLine;
+
             value += "[SIZE]" + Environment.NewLine + data.m_size + Environment.NewLine;
             value += "[BACKGROUND]" + Environment.NewLine + data.m_background + Environment.NewLine;
             value += "[GLOBALLIGHT]" + Environment.NewLine + data.m_globalLight + Environment.NewLine;
@@ -428,13 +521,14 @@ namespace PPBC {
                 value += Environment.NewLine + data.m_data[i].ToString();
             }
 
-            Directory.CreateDirectory(StringCollection.MAPPARH + data.name);
+            
             StreamWriter saveFile = File.CreateText(StringCollection.MAPPARH + data.name + "/" + data.name + ".map");
             saveFile.Write(value);
             saveFile.Close();
         }
 
         public MapDATA Copy() {
+
             MapDATA value = new MapDATA();
 
             value.hideFlags = this.hideFlags;
@@ -449,7 +543,7 @@ namespace PPBC {
             value.m_music = this.m_music;
             value.m_size = this.m_size;
 
-            value.p_background = new Sprite[this.p_background.Length];
+            value.p_background = new d_mapBackground[this.p_background.Length];
             for(int i = 0; i < this.p_background.Length; i++) {
                 value.p_background[i] = this.p_background[i];
             }
@@ -465,6 +559,7 @@ namespace PPBC {
             for(int i = 0; i < this.p_music.Length; i++) {
                 value.p_music[i] = this.p_music[i];
             }
+
             value.p_props = new d_prop[this.p_props.Length];
             for(int i = 0; i < this.p_props.Length; i++) {
                 value.p_props[i] = this.p_props[i];
@@ -478,22 +573,14 @@ namespace PPBC {
                 value.p_stage[i] = this.p_stage[i];
             }
 
+            value.m_ballSpawn = this.m_ballSpawn;
+            value.m_icon = this.m_icon;
+
             return value;
-        }
-        
-        [System.Serializable]
-        public struct d_mapLights {
-            public Vector2 position;
-            public Color color;
-        }
-        [System.Serializable]
-        public struct d_mapPlayerStart {
-            public Vector2 position;
-            public int team;
         }
 
         public Vector2[] p_size;
-        public Sprite[] p_background;
+        public d_mapBackground[] p_background;
         public Color[] p_colors;
         public AudioClip[] p_music;
 
@@ -501,10 +588,14 @@ namespace PPBC {
         public Sprite[] p_stage;
         public Sprite[] p_forground;
 
+        public Vector2 m_ballSpawn;
+        public Sprite m_icon;
+
         public int m_size;
         public int m_background;
         public int m_globalLight;
         public int m_music;
+        
 
         public d_mapData[] m_data;
         

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class SMG : MonoBehaviour, IWeapon {
+    public class SMG : Sauerbraten, IWeapon {
 
         #region Variables
 
@@ -23,7 +24,7 @@ namespace PPBC {
 
         private void Update()
         {
-            m_player.m_modellRefHolder.m_sMG.m_muzzleflash.transform.rotation = transform.rotation;
+            //m_player.m_modellRefHolder.m_sMG.m_muzzleflash.transform.rotation = transform.rotation;
             if (m_isShooting)
             {
                 m_shootingTime += Time.deltaTime;

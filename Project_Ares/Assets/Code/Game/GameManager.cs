@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
 
     
 
-    public class GameManager : MonoBehaviour {
+    public class GameManager : Sauerbraten {
 
         #region Variables
 
         [Header("References")]
         public MapHandler m_mapHandler;
+        public Camera m_screenshotCamera;
+        public RenderTexture m_screenshot;
 
         #endregion
         #region MonoBehaviour
@@ -41,10 +44,6 @@ namespace PPBC {
         void OnDestroy() {
             if (s_singelton_ == this) {
                 s_singelton_ = null;
-
-                foreach (var it in DataHolder.s_gameModes) {
-                    it.Value.Stop();
-                }
             }
         }
 
@@ -67,12 +66,13 @@ namespace PPBC {
                 it.Invincible(false);
             }
 
-            
-            DataHolder.s_gameModes[DataHolder.s_gameMode].Init();
-
             foreach (var it in Player.s_references) {
                 it.m_stats.m_timeInLobby = Time.time - it.m_joinTime;
             }
+
+            print("starting: " + DataHolder.s_gameMode);
+            print(DataHolder.s_gameModes[DataHolder.s_gameMode]);
+            DataHolder.s_gameModes[DataHolder.s_gameMode].StartGame();
         }
 
         #endregion

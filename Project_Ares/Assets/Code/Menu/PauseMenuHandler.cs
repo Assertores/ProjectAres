@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC
 {
-    public class PauseMenuHandler : MonoBehaviour
+    public class PauseMenuHandler : Sauerbraten
     {
         #region Variables
 

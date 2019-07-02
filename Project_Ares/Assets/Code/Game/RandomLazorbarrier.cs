@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC
 {
     
-    public class RandomLazorbarrier : MonoBehaviour
+    public class RandomLazorbarrier : Sauerbraten
     {
         #region Variables
         [Header("References")]

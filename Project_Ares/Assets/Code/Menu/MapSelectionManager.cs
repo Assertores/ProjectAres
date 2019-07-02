@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
-    public class MapSelectionManager : MonoBehaviour {
+    public class MapSelectionManager : Sauerbraten {
 
         [Header("References")]
         [SerializeField] GameObject m_itemPrefab;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
 
@@ -13,7 +13,7 @@ namespace PPBC {
         TDM_TOURNAMENT
     }
 
-    public class DataHolder : MonoBehaviour {
+    public class DataHolder : Sauerbraten {
 
         static bool isInit = false;
 
@@ -31,6 +31,8 @@ namespace PPBC {
         public static Dictionary<e_gameMode, IGameMode> s_gameModes = new Dictionary<e_gameMode, IGameMode>();
         public static e_gameMode s_gameMode = e_gameMode.COOP_EDIT;
 
+        public static List<Color> s_colors = new List<Color>();
+
         public static Player s_hoPlayer;//handing over Player
 
         //===== ===== Fair_Tournament ===== =====
@@ -44,13 +46,14 @@ namespace PPBC {
         //===== ===== Maps Common Objects ===== =====
 
         public static Vector2[] s_commonSize;
-        public static Sprite[] s_commonBackground;
+        public static d_mapBackground[] s_commonBackground;
         public static Color[] s_commonColors;
         public static AudioClip[] s_commonMusic;
 
         public static d_prop[] s_commonProps;
         public static Sprite[] s_commonStage;
         public static Sprite[] s_commonForground;
+        public static GameObject s_commonLaserSpawner;
         public static GameObject s_commonLaserBariar;
 
         #region Variables
@@ -59,16 +62,18 @@ namespace PPBC {
         [SerializeField] string m_mapName;
         [SerializeField] string[] m_names;
         [SerializeField] CharacterData[] m_characters;
+        [SerializeField] Color[] m_glowColors;
         [SerializeField] MapDATA[] m_maps;
 
         [SerializeField] Vector2[] m_size;
-        [SerializeField] Sprite[] m_background;
+        [SerializeField] d_mapBackground[] m_background;
         [SerializeField] Color[] m_colors;
         [SerializeField] AudioClip[] m_music;
 
         [SerializeField] d_prop[] m_props;
         [SerializeField] Sprite[] m_stage;
         [SerializeField] Sprite[] m_forground;
+        [SerializeField] GameObject m_laserSpawner;
         [SerializeField] GameObject m_laserBariar;
 
         [SerializeField] MapDATA SaveToXML;
@@ -93,6 +98,11 @@ namespace PPBC {
                     s_characterDatas.Add(it);
                 }
             }
+
+            foreach (Color it in m_glowColors) {
+                s_colors.Add(it);
+            }
+
             if (SaveToXML) {
                 MapDATA.SaveMap(SaveToXML);
             }
@@ -121,6 +131,7 @@ namespace PPBC {
             s_commonBackground = m_background;
             s_commonColors = m_colors;
             s_commonForground = m_forground;
+            s_commonLaserSpawner = m_laserSpawner;
             s_commonLaserBariar = m_laserBariar;
             s_commonMusic = m_music;
             s_commonProps = m_props;

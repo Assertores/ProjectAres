@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class MovingObject : MonoBehaviour {
+    public class MovingObject : Sauerbraten {
         #region Variables
         [Header("Balancing")]
         [Tooltip("Muss am besten zwischen 1 und 2 liegen")]
