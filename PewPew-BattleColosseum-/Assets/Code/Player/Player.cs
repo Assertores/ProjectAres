@@ -19,12 +19,15 @@ namespace PPBC {
         float m_currentHealth;
         [SerializeField] float m_iFrameTime = 1;
 
-        public int m_team = -1;
-        public float m_distanceToGround = 0.5f;
-        public float m_distanceToTop = 0.75f;
+        [HideInInspector] public int m_team = -1;
+        [HideInInspector] public float m_distanceToGround = 0.5f;
+        [HideInInspector] public float m_distanceToTop = 0.75f;
+
+        ModelRefHolder m_modelRef = null;
+        Rigidbody2D m_rb = null;
 
         bool m_invincible = false;
-        Rigidbody2D m_rb = null;
+        int m_levelColCount = 0;
 
         #endregion
         #region MonoBehaviour
@@ -51,6 +54,19 @@ namespace PPBC {
             ResetFull();
         }
 
+        void Update() {
+            string currentAnim = GetCurrentAnim();
+            if(m_levelColCount > 0) {//Air
+                if(currentAnim == null || currentAnim == StringCollection.A_IDLE) {
+                    StartAnim(StringCollection.A_IDLEAIR);
+                }
+            } else {//Gronded
+                if (currentAnim == null || currentAnim == StringCollection.A_IDLEAIR) {
+                    StartAnim(StringCollection.A_IDLE);
+                }
+            }
+        }
+
         #endregion
         #region IDamageableObject
 
@@ -64,7 +80,17 @@ namespace PPBC {
 
             //--> can die && should die <--
 
+            StartCoroutine(IEDie(source));
+        }
+
+        IEnumerator IEDie(IHarmingObject source) {
+            m_alive = false;
+
+            yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
+
             r_player.SetActive(false);
+
+            //TODO: GameMode player died
         }
 
         public void TakeDamage(IHarmingObject source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
@@ -84,16 +110,22 @@ namespace PPBC {
 
             //--> damage is valid && won't die from it <--
 
+            m_currentHealth -= damage;
+            StartAnim(StringCollection.A_HIT, false);
         }
 
         #endregion
         #region Resets
 
         public void ResetFull() {
-
+            Respawn(transform.position);
         }
 
-        public IEnumerator Respawn(Vector2 pos, float delay = 0) {
+        public void Respawn(Vector2 pos, float delay = 0) {
+            StartCoroutine(IERespawn(pos, delay));
+        }
+
+        IEnumerator IERespawn(Vector2 pos, float delay = 0) {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
 
@@ -110,8 +142,8 @@ namespace PPBC {
 
             //StopShooting();
             r_player.SetActive(true);
-            StartCoroutine(DoIFrame());
-            yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
+            StartCoroutine(IEIFrame());
+            yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN, false));
             //InControle(true);
 
         }
@@ -127,7 +159,7 @@ namespace PPBC {
 
         #endregion
 
-        IEnumerator DoIFrame() {
+        IEnumerator IEIFrame() {
             IsInvincable(true);
             yield return new WaitForSeconds(m_iFrameTime);
             IsInvincable(false);
@@ -137,8 +169,46 @@ namespace PPBC {
             m_invincible = value;
         }
 
+        /// <summary>
+        /// starts the animation if it isn't already running
+        /// </summary>
+        /// <param name="animName"></param>
+        /// <param name="loop"></param>
+        /// <param name="track"></param>
+        /// <returns>the time of the animation in seconds (-1 if looping) (float.MinValue if animation is already running or Anim not found)</returns>
         float StartAnim(string animName, bool loop = true, int track = 0) {
+            if(GetCurrentAnim() == animName) {
+                return float.MinValue;
+            }
+            if (m_modelRef.r_modelAnim != null) {
+                float time = m_modelRef.r_modelAnim.AnimationState.SetAnimation(track, animName, loop).Animation.Duration;
+                return loop ? -1 : time;
+            }
             return float.MinValue;
         }
+
+        /// <summary>
+        /// use this to check whitch animation is running;
+        /// </summary>
+        /// <returns>string of current animation or null if no animation is running</returns>
+        string GetCurrentAnim() {
+            return m_modelRef.r_modelAnim.state.GetCurrent(0)?.Animation.Name;
+        }
+
+        #region Physics
+
+        private void OnCollisionEnter2D(Collision2D collision) {
+            if(collision.gameObject.tag == StringCollection.T_LEVEL) {
+                m_levelColCount++;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision) {
+            if (collision.gameObject.tag == StringCollection.T_LEVEL) {
+                m_levelColCount--;
+            }
+        }
+
+        #endregion
     }
 }

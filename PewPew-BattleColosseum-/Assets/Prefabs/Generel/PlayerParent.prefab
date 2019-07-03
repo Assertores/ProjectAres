@@ -124,7 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07a0df55365ad04db9018cf31750224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r_player: {fileID: 1364380459742812675}
+  r_model: {fileID: 5250936507362504116}
   m_maxHealth: 100
+  m_iFrameTime: 1
   m_team: 0
   m_distanceToGround: 0
   m_distanceToTop: 0

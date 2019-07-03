@@ -61,7 +61,7 @@ namespace PPBC {
         public static string A_AIM = "09_Zielen";
         public static string A_CHARGING = "10_Überhitzen";
         public static string A_SHOOTROCKET = "11_RaketeSchießen";
-        public static string AR_CHARGEING = "Rocket_Charge";
+        public static string AR_CHARGING = "Rocket_Charge";
         public static string AR_IDLE = "Rocket_Idle";
         public static string AR_SHOOT = "Rocket_Shoot";
         public static string AR_CHANGE = "Rocket_Weapon_Change";
