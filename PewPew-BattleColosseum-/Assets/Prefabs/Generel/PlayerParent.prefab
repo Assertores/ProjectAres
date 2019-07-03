@@ -39,6 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 429485049979522825}
+  - component: {fileID: 6854193599218580080}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -62,6 +63,22 @@ Transform:
   m_Father: {fileID: 5858828456232748880}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &6854193599218580080
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364380459742812675}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.72, y: 1}
+  m_Direction: 0
 --- !u!1 &2256606542879858850
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5858828456232748880}
+  - component: {fileID: 11838954102811637}
   m_Layer: 0
   m_Name: PlayerHandler
   m_TagString: Untagged
@@ -94,6 +112,22 @@ Transform:
   m_Father: {fileID: 8565748604744640151}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11838954102811637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2256606542879858850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07a0df55365ad04db9018cf31750224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxHealth: 100
+  m_team: 0
+  m_distanceToGround: 0
+  m_distanceToTop: 0
 --- !u!1 &2969680719362787696
 GameObject:
   m_ObjectHideFlags: 0
