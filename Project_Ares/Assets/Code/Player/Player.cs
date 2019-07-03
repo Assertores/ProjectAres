@@ -61,6 +61,9 @@ namespace PPBC {
         [SerializeField] GameObject m_laserParent;
         [SerializeField] ParticleSystem m_deathVFX;
         [SerializeField] SpriteRenderer m_glow;
+        [SerializeField] ParticleSystem FX_respawn;
+        [SerializeField] GameObject r_playerClashParent;
+        [SerializeField] ParticleSystem FX_playerClash;
         
 
         [Header("Balancing")]
@@ -498,11 +501,14 @@ namespace PPBC {
             }
 
             //----- stuff that should happon after -----
+            
             transform.position = pos;
             if (m_rb)
                 m_rb.velocity = Vector2.zero;
             StopShooting();
             ResetHealth();
+            FX_respawn.Play();
+            yield return new WaitForSeconds(FX_respawn.main.duration + 0.7f);
             m_respawntTime = Time.timeSinceLevelLoad;
             m_player.SetActive(true);
             if (m_modellRefHolder.m_modelAnim != null) {
@@ -692,17 +698,26 @@ namespace PPBC {
 
         private void OnCollisionEnter2D(Collision2D collision) {
            
-            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Level") {
+            if (collision.gameObject.tag == "Level") {
                 Vector2 tmp = collision.contacts[0].normal;               
                 if (Vector2.Dot(vel.normalized, tmp) < 0) {
                     m_rb.velocity = m_bounciness * ( Vector2.Reflect(vel, tmp));
                 }
-                
-                //---- ----- Feedback ----- ----
-
                 StartAnim("03_Aufprall", 1);//In stringCollection übertragen
             }
-            if(collision.gameObject.tag == "Ground") {
+            if (collision.gameObject.tag == "Player") {
+                Vector2 tmp = collision.contacts[0].normal;
+                if (Vector2.Dot(vel.normalized, tmp) < 0) {
+                    m_rb.velocity = m_bounciness * (Vector2.Reflect(vel, tmp));
+                }
+                print("clash rotation before " + r_playerClashParent.transform.rotation + "/n" + "clash position before " + r_playerClashParent.transform.rotation);
+                StartAnim("03_Aufprall", 1);
+                r_playerClashParent.transform.rotation = Quaternion.LookRotation(transform.forward,collision.contacts[0].normal);
+                r_playerClashParent.transform.position = collision.contacts[0].collider.transform.position;
+                FX_playerClash.Play();
+                print("clash rotation " + r_playerClashParent.transform.rotation + "/n" + "clash position " + r_playerClashParent.transform.rotation);
+            }
+                if (collision.gameObject.tag == "Ground") {
                 m_isColliding = true;
                 print("is colliding wall" + m_isColliding);
             }
