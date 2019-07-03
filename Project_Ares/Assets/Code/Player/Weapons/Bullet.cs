@@ -7,6 +7,9 @@ namespace PPBC {
     public class Bullet : Sauerbraten, IHarmingObject {
 
         #region Variables
+        [Header("References")]
+        [SerializeField] ParticleSystem FX_wallHit;
+        [SerializeField] GameObject m_spriteParent;
 
         [Header("Balancing")]
         [SerializeField] float m_killDistance = 1000;
@@ -55,10 +58,21 @@ namespace PPBC {
                 tmp.TakeDamage(m_damage, m_source, m_rb.velocity * m_rb.mass, m_icon);
             }
             //CameraShake.DoCamerashake(0.01f, 0.1f);
-
-            Destroy(gameObject);
+            
+            StartCoroutine(BulletDie(0.1f));
+            
+            
         }
 
         #endregion
+
+        IEnumerator BulletDie(float m_wait) {
+            m_rb.velocity = new Vector2(0,0);
+            m_spriteParent.SetActive(false);
+            FX_wallHit.Play();
+            yield return new WaitForSeconds(m_wait);
+            Destroy(gameObject);
+
+        }
     }
 }
