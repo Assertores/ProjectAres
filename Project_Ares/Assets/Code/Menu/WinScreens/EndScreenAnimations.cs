@@ -9,7 +9,7 @@ namespace PPBC {
         #region Variables
 
         [SerializeField] float m_animationPlayTime = 1.67f;
-
+        [SerializeField] ParticleSystem FX_firework;
         #endregion
         #region MonoBehaviour
 
@@ -25,6 +25,8 @@ namespace PPBC {
             for (int i = 0; i < Player.s_sortedRef.Count; i++) {
                 if(i == 0) {
                     tmp = Player.s_sortedRef[i].StartAnim("07_Win", 1);
+                    FX_firework.transform.position = Player.s_sortedRef[i].transform.position;
+                    FX_firework.Play();
                 } else {
                     tmp = Player.s_sortedRef[i].StartAnim("08_Lose", 1);
                 }
