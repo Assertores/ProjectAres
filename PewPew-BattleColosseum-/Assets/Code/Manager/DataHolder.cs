@@ -8,7 +8,7 @@ namespace PPBC {
 
     public class DataHolder : MonoBehaviour {
         
-        static bool isInit = false;
+        public static bool isInit { get; private set; } = false;
         [HideInInspector]public static bool[] s_players = new bool[5];
 
         public static Color[] s_playerColors;
