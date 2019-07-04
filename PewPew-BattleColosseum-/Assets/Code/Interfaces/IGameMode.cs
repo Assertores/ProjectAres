@@ -18,7 +18,10 @@ namespace PPBC {
 
         void AbortGame();
 
-        System.Action EndGame { get; set; }
+        /// <summary>
+        /// true if normal, false if abort
+        /// </summary>
+        System.Action<bool> EndGame { get; set; }
 
         e_mileStones[] GetMileStones();
 
