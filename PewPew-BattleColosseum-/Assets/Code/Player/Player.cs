@@ -33,7 +33,6 @@ namespace PPBC {
         #region MonoBehaviour
 
         void Awake() {
-            DontDestroyOnLoad(transform.root);
             s_references.Add(this);
             s_sortRef.Add(this);
         }
