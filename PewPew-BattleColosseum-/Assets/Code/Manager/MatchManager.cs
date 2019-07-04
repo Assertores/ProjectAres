@@ -81,11 +81,28 @@ namespace PPBC {
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame -= GMEnded;
 
             if (normal) {
-
+                TransitionHandler.ReadyToChange += BackToMainMenu;
             } else {
-
+                TransitionHandler.ReadyToChange += ContinueToWinScreen;
             }
         }
+
+        void BackToMainMenu() {
+            TransitionHandler.ReadyToChange -= BackToMainMenu;
+
+            SceneManager.LoadScene(StringCollection.S_MAINMENU);
+        }
+
+        void ContinueToWinScreen() {
+            TransitionHandler.ReadyToChange -= ContinueToWinScreen;
+
+            SceneManager.LoadScene(StringCollection.S_WINSCREEN);
+        }
+
+        #endregion
+        #region WinScreen
+
+
 
         #endregion
     }
