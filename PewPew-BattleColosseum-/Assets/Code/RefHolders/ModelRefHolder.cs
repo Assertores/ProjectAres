@@ -10,6 +10,7 @@ namespace PPBC {
         [System.Serializable]
         public struct d_rocketLauncherData {
             [Header("References")]
+            public GameObject r_weapon;
             public Sprite m_Icon;
             public SkeletonAnimation r_RocketAnim;
 
@@ -31,6 +32,7 @@ namespace PPBC {
         [System.Serializable]
         public struct d_smgData {
             [Header("References")]
+            public GameObject r_weapon;
             public Sprite m_Icon;
             public SkeletonAnimation r_sMGAnim;
 

@@ -15,6 +15,7 @@ namespace PPBC {
         /// will be called once after instanciating
         /// </summary>
         /// <param name="trace">the source object</param>
-        void Init(IHarmingObject trace);
+        /// <returns>a rigitbody to aply a force or null</returns>
+        Rigidbody2D Init(IHarmingObject trace);
     }
 }

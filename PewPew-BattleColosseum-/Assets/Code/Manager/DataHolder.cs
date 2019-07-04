@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace PPBC {
@@ -63,6 +64,11 @@ namespace PPBC {
 
             isInit = true;
             Destroy(this);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int FixedMod(int lhs, int rhs) {
+            return ((lhs % rhs) + rhs) % rhs;
         }
     }
 }

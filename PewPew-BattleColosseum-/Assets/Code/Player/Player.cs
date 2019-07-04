@@ -14,6 +14,7 @@ namespace PPBC {
         [SerializeField] GameObject r_player;
         [SerializeField] GameObject r_model;
         [SerializeField] GameObject r_static;
+        [SerializeField] SMG r_smg;
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
@@ -21,15 +22,18 @@ namespace PPBC {
         [SerializeField] float m_iFrameTime = 1;
 
         [HideInInspector] public int m_team = -1;
-        [HideInInspector] public float m_distanceToGround = 0.5f;
-        [HideInInspector] public float m_distanceToTop = 0.75f;
+        [HideInInspector] public float m_distanceToGround = 0.5f;//TODO: auto create
+        [HideInInspector] public float m_distanceToTop = 0.75f;//TODO: auto create
 
-        ModelRefHolder m_modelRef = null;
-        Rigidbody2D m_rb = null;
-        IControl m_controler = null;
+        public ModelRefHolder m_modelRef { get; private set; }
+        public Rigidbody2D m_rb { get; private set; }
+        public IControl m_controler { get; private set; }
 
         bool m_invincible = false;
         int m_levelColCount = 0;
+
+        int m_currentCaracter = 0;
+        bool m_useSMG = true;
 
         #endregion
         #region MonoBehaviour
@@ -193,6 +197,27 @@ namespace PPBC {
         public void IsInvincable(bool value) {
             m_invincible = value;
         }
+
+        #region Control stuff
+
+        void ChangeChar(bool next) {
+            if (next)
+                m_currentCaracter++;
+            else
+                m_currentCaracter--;
+            m_currentCaracter = DataHolder.FixedMod(m_currentCaracter, DataHolder.s_characters.Length);
+
+            //remove old char
+            //load new char
+        }
+
+        void ChangeWeapon() {
+            m_useSMG = !m_useSMG;
+            r_smg.ChangeWeapon(m_useSMG);
+            //r_rocket.ChangeWeapon(!m_useSMG);
+        }
+
+        #endregion
 
         /// <summary>
         /// starts the animation if it isn't already running
