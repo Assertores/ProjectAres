@@ -13,6 +13,7 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] GameObject r_player;
         [SerializeField] GameObject r_model;
+        [SerializeField] GameObject r_static;
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
@@ -25,6 +26,7 @@ namespace PPBC {
 
         ModelRefHolder m_modelRef = null;
         Rigidbody2D m_rb = null;
+        IControl m_controler = null;
 
         bool m_invincible = false;
         int m_levelColCount = 0;
@@ -114,6 +116,26 @@ namespace PPBC {
         }
 
         #endregion
+
+        public IControl Init(int index) {
+            switch (index) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                m_controler = r_static.AddComponent<ControlerControl>();
+                break;
+            case 4:
+                m_controler = r_static.AddComponent<KeyboardControl>();
+                break;
+            default:
+                break;
+            }
+            m_controler.index = index;
+
+            return m_controler;
+        }
+
         #region Resets
 
         public void ResetFull() {

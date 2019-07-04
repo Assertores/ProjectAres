@@ -54,7 +54,12 @@ namespace PPBC {
 
             //TODO: map.shalow load;
 
-            s_characters = m_characters;
+            List<GameObject> tmp = new List<GameObject>();
+            foreach (var it in m_characters) {
+                if (it.GetComponent<ModelRefHolder>())
+                    tmp.Add(it);
+            }
+            s_characters = tmp.ToArray();
 
             isInit = true;
             Destroy(this);
