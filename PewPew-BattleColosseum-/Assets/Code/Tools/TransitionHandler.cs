@@ -5,10 +5,10 @@ using UnityEngine;
 namespace PPBC {
     public class TransitionHandler : MonoBehaviour {
 
-        public static TransitionHandler s_singelton = null;
+        static TransitionHandler s_singelton = null;
 
-        public System.Action ReadyToStart;
-        public System.Action ReadyToChange;
+        public static System.Action ReadyToStart;
+        public static System.Action ReadyToChange;
 
         #region Variables
 
@@ -41,9 +41,9 @@ namespace PPBC {
 
         #endregion
 
-        public void StartOutTransition() {
-            if (r_anim)
-                StartCoroutine(IEOutTransition());
+        public static void StartOutTransition() {
+            if (s_singelton.r_anim)
+                s_singelton.StartCoroutine(s_singelton.IEOutTransition());
             else
                 ReadyToChange?.Invoke();
         }
