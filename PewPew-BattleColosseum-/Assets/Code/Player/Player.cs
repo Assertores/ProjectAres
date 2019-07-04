@@ -132,6 +132,7 @@ namespace PPBC {
                 break;
             }
             m_controler.index = index;
+            DataHolder.s_players[index] = true;
 
             return m_controler;
         }
@@ -175,6 +176,9 @@ namespace PPBC {
         }
 
         public void ResetVelocity() {
+            if(!m_rb)
+                m_rb = r_player.GetComponent<Rigidbody2D>();
+
             m_rb.velocity = Vector2.zero;
         }
 
@@ -201,7 +205,7 @@ namespace PPBC {
             if(GetCurrentAnim() == animName) {
                 return float.MinValue;
             }
-            if (m_modelRef.r_modelAnim != null) {
+            if (m_modelRef != null && m_modelRef.r_modelAnim != null) {
                 float time = m_modelRef.r_modelAnim.AnimationState.SetAnimation(track, animName, loop).Animation.Duration;
                 return loop ? -1 : time;
             }
@@ -213,7 +217,7 @@ namespace PPBC {
         /// </summary>
         /// <returns>string of current animation or null if no animation is running</returns>
         string GetCurrentAnim() {
-            return m_modelRef.r_modelAnim.state.GetCurrent(0)?.Animation.Name;
+            return m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
         }
 
         #region Physics
