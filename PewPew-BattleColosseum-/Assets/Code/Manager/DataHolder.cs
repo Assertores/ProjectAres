@@ -22,8 +22,6 @@ namespace PPBC {
 
         public static GameObject[] s_characters;
 
-        public static Player s_hoPlayer;//handing over Player
-
         #region Variables
 
         public Color[] m_playerColors;
