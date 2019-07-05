@@ -117,7 +117,7 @@ namespace PPBC {
                 it.Invincible(false);
             }
 
-            //StartCoroutine(LaserHandler());
+            StartCoroutine(LaserHandler());
         }
 
         public void PlayerDied(Player player) {

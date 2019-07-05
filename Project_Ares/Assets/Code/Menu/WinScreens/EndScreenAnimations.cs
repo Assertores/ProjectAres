@@ -25,7 +25,7 @@ namespace PPBC {
             for (int i = 0; i < Player.s_sortedRef.Count; i++) {
                 if(i == 0) {
                     tmp = Player.s_sortedRef[i].StartAnim("07_Win", 1);
-                    FX_firework.transform.position = Player.s_sortedRef[i].transform.position;
+                    FX_firework.transform.position =new Vector2( Player.s_sortedRef[i].transform.position.x, Player.s_sortedRef[i].transform.position.y - 5);
                     FX_firework.Play();
                 } else {
                     tmp = Player.s_sortedRef[i].StartAnim("08_Lose", 1);

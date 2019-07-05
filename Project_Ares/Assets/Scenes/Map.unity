@@ -300,7 +300,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &969551266 stripped
 Transform:
@@ -678,7 +678,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2102653144}
     m_Modifications:
     - target: {fileID: 7740023226444817918, guid: 01920191354ab3e4bbd5cc1bdd54e122,
         type: 3}
@@ -703,17 +703,17 @@ PrefabInstance:
     - target: {fileID: 8547792509295841193, guid: 01920191354ab3e4bbd5cc1bdd54e122,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8547792509295841193, guid: 01920191354ab3e4bbd5cc1bdd54e122,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8547792509295841193, guid: 01920191354ab3e4bbd5cc1bdd54e122,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8547792509295841193, guid: 01920191354ab3e4bbd5cc1bdd54e122,
         type: 3}
@@ -723,7 +723,7 @@ PrefabInstance:
     - target: {fileID: 8547792509295841193, guid: 01920191354ab3e4bbd5cc1bdd54e122,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8547792509295841193, guid: 01920191354ab3e4bbd5cc1bdd54e122,
         type: 3}
@@ -742,6 +742,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01920191354ab3e4bbd5cc1bdd54e122, type: 3}
+--- !u!4 &1337243470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8547792509295841193, guid: 01920191354ab3e4bbd5cc1bdd54e122,
+    type: 3}
+  m_PrefabInstance: {fileID: 1337243469}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1405239017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,8 +1191,9 @@ Transform:
   - {fileID: 1035203349}
   - {fileID: 969551266}
   - {fileID: 2026742623}
+  - {fileID: 1337243470}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2476072715520657575
 PrefabInstance:
