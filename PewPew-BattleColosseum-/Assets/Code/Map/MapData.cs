@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
 
 namespace PPBC {
     public enum e_objType { BACKGROUND = 0, STAGE, PROP, LASERSPAWN, SPAWNPOINT, FLAG, BASKETHOOP, FORGROUND, LIGHT, GLOBALLIGHT, MUSIC, SIZE, ENUMLENGTH }
@@ -178,6 +179,21 @@ namespace PPBC {
                 return null;
             value.name = name;
             return value;
+        }
+
+        IEnumerator IELoadSprite(Sprite value, string path, string name, int PPU = 512) {
+            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture("file:///" + path + name)) {
+
+                yield return uwr.SendWebRequest();
+
+                if (uwr.isNetworkError || uwr.isHttpError) {
+                    Debug.Log(uwr.error);
+                } else {
+                    // Get downloaded asset bundle
+                    var tmpTex = DownloadHandlerTexture.GetContent(uwr);
+                    value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width / 2, tmpTex.height / 2), PPU);
+                }
+            }
         }
 
         //===== ===== DATA ===== =====
