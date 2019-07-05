@@ -12,6 +12,8 @@ namespace PPBC {
 
         bool m_isTeamMode { get; }
 
+        void StartTransition();
+
         void StartGame();
 
         void DoEndGame();

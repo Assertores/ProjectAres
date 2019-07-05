@@ -8,6 +8,12 @@ namespace PPBC {
 
         public static MatchManager s_currentMatch;
 
+        #region Variables
+
+        public int m_matchCount { get; private set; } = 1;
+        public Dictionary<Player, int> m_teamHolder = new Dictionary<Player, int>();
+
+        #endregion
         #region MonoBehaviour
 
         private void Awake() {
@@ -24,6 +30,10 @@ namespace PPBC {
             if (h_startGameOngoing)
                 return;
             h_startGameOngoing = true;
+
+            foreach(var it in Player.s_references) {
+                it.ResetMatchStats();
+            }
 
             TransitionHandler.ReadyToChange += ContinueToNextMatch;
             TransitionHandler.StartOutTransition();
@@ -45,6 +55,8 @@ namespace PPBC {
             if (h_startGameOngoing)
                 return;
             h_startGameOngoing = true;
+
+            DataHolder.s_modis[DataHolder.s_currentModi].StartTransition();
 
             TransitionHandler.ReadyToChange += ContinueToNextMap;
             TransitionHandler.StartOutTransition();
@@ -74,6 +86,11 @@ namespace PPBC {
             TransitionHandler.ReadyToStart -= StartMap;
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame += GMEnded;
 
+            foreach(var it in Player.s_references) {
+                it.ResetGameStats();
+                it.Invincable(false);
+            }
+
             DataHolder.s_modis[DataHolder.s_currentModi].StartGame();
         }
 
@@ -95,6 +112,7 @@ namespace PPBC {
 
         void ContinueToWinScreen() {
             TransitionHandler.ReadyToChange -= ContinueToWinScreen;
+            TransitionHandler.ReadyToStart += InWinScreen;
 
             SceneManager.LoadScene(StringCollection.S_WINSCREEN);
         }
@@ -102,7 +120,18 @@ namespace PPBC {
         #endregion
         #region WinScreen
 
+        void InWinScreen() {
+            TransitionHandler.ReadyToStart -= InWinScreen;
 
+            m_matchCount--;
+            if(m_matchCount > 0) {
+                TransitionHandler.ReadyToChange += ContinueToNextMatch;
+            } else {
+                TransitionHandler.ReadyToChange += BackToMainMenu;
+            }
+
+            WinScreenManager.s_singelton.Init();
+        }
 
         #endregion
     }

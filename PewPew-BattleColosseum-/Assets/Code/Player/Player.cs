@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PPBC {
+
+    public struct d_playerStuts {
+        public float m_points;
+        public int m_matchPoints;
+    }
+
     public class Player : MonoBehaviour, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>(8);
@@ -21,16 +27,19 @@ namespace PPBC {
         float m_currentHealth;
         [SerializeField] float m_iFrameTime = 1;
 
+        [HideInInspector] public d_playerStuts m_stats;
+
         [HideInInspector] public int m_team = -1;
-        [HideInInspector] public float m_distanceToGround = 0.5f;//TODO: auto create
-        [HideInInspector] public float m_distanceToTop = 0.75f;//TODO: auto create
+        [HideInInspector] public PillarRefHolder r_pillar;
+        public float m_distanceToGround { get; private set; } = 0.5f;//TODO: auto create
+        public float m_distanceToTop { get; private set; } = 0.75f;//TODO: auto create
 
         public ModelRefHolder m_modelRef { get; private set; }
         public Rigidbody2D m_rb { get; private set; }
         public IControl m_controler { get; private set; }
 
         bool m_invincible = false;
-        int m_levelColCount = 0;
+        int m_levelColCount = 0;//collider count with level layer
 
         int m_currentCaracter = 0;
         bool m_useSMG = true;
@@ -46,6 +55,10 @@ namespace PPBC {
         void OnDestroy() {
             s_references.Remove(this);
             s_sortRef.Remove(this);
+
+            if (r_pillar) {
+                Destroy(r_pillar.gameObject);
+            }
         }
 
         void Start() {
@@ -63,11 +76,11 @@ namespace PPBC {
             string currentAnim = GetCurrentAnim();
             if(m_levelColCount > 0) {//Air
                 if(currentAnim == null || currentAnim == StringCollection.A_IDLE) {
-                    StartAnim(StringCollection.A_IDLEAIR);
+                    StartAnim(StringCollection.A_IDLEAIR, true);
                 }
             } else {//Gronded
                 if (currentAnim == null || currentAnim == StringCollection.A_IDLEAIR) {
-                    StartAnim(StringCollection.A_IDLE);
+                    StartAnim(StringCollection.A_IDLE, true);
                 }
             }
         }
@@ -116,7 +129,7 @@ namespace PPBC {
             //--> damage is valid && won't die from it <--
 
             m_currentHealth -= damage;
-            StartAnim(StringCollection.A_HIT, false);
+            StartAnim(StringCollection.A_HIT);
         }
 
         #endregion
@@ -145,6 +158,7 @@ namespace PPBC {
 
         public void ResetFull() {
             Respawn(transform.position);
+            ResetStatsFull();
         }
 
         public void Respawn(Vector2 pos, float delay = 0) {
@@ -169,7 +183,7 @@ namespace PPBC {
             //StopShooting();
             r_player.SetActive(true);
             StartCoroutine(IEIFrame());
-            yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN, false));
+            yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             //InControle(true);
 
         }
@@ -186,15 +200,32 @@ namespace PPBC {
             m_rb.velocity = Vector2.zero;
         }
 
+        public void ResetStatsFull() {
+            ResetGameStats();
+            ResetMatchStats();
+        }
+
+        public void ResetGameStats() {
+            m_stats.m_points = 0;
+        }
+
+        public void ResetMatchStats() {
+            m_stats.m_matchPoints = 0;
+        }
+
+        public void InControle(bool controle) {
+
+        }
+
         #endregion
 
         IEnumerator IEIFrame() {
-            IsInvincable(true);
+            Invincable(true);
             yield return new WaitForSeconds(m_iFrameTime);
-            IsInvincable(false);
+            Invincable(false);
         }
 
-        public void IsInvincable(bool value) {
+        public void Invincable(bool value) {
             m_invincible = value;
         }
 
@@ -226,7 +257,7 @@ namespace PPBC {
         /// <param name="loop"></param>
         /// <param name="track"></param>
         /// <returns>the time of the animation in seconds (-1 if looping) (float.MinValue if animation is already running or Anim not found)</returns>
-        float StartAnim(string animName, bool loop = true, int track = 0) {
+        public float StartAnim(string animName, bool loop = false, int track = 0) {
             if(GetCurrentAnim() == animName) {
                 return float.MinValue;
             }
