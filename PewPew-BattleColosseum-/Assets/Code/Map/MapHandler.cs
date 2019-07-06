@@ -21,7 +21,7 @@ namespace PPBC {
         [SerializeField] GameObject m_lightPrefab;
         [SerializeField] GameObject m_ObjectInteractPrefab;
         [SerializeField] Material m_spriteMaterial;
-        [SerializeField] Transform m_KillFeed;
+        [SerializeField] RectTransform m_KillFeed;
 
         [HideInInspector]
         public List<Transform> m_borders { get; private set; } = new List<Transform>();
@@ -82,13 +82,13 @@ namespace PPBC {
             if (index >= 0) {
                 m_background.sprite = DataHolder.s_commonBackgrounds[index].m_image;
                 m_KillFeed.position = DataHolder.s_commonBackgrounds[index].m_position;
-                m_KillFeed.localScale = DataHolder.s_commonBackgrounds[index].m_size;//TODO: don't scale
+                m_KillFeed.sizeDelta = DataHolder.s_commonBackgrounds[index].m_size;
             } else {
                 index *= -1;
                 index--;
                 m_background.sprite = s_refMap.p_backgrounds[index].m_image;
                 m_KillFeed.position = s_refMap.p_backgrounds[index].m_position;
-                m_KillFeed.localScale = s_refMap.p_backgrounds[index].m_size;//TODO: don't scale
+                m_KillFeed.sizeDelta = s_refMap.p_backgrounds[index].m_size;
             }
         }
 
