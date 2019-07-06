@@ -90,6 +90,7 @@ namespace PPBC {
             foreach(var it in Player.s_references) {
                 it.ResetGameStats();
                 it.Invincable(false);
+                it.InControle(true);
             }
 
             DataHolder.s_modis[DataHolder.s_currentModi].StartGame();

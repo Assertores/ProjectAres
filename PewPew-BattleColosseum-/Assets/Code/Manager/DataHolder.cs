@@ -61,6 +61,7 @@ namespace PPBC {
 
         #endregion
 
+        //int enumSize = System.Enum.GetNames(typeof(e_mileStones)).Length;//https://stackoverflow.com/questions/856154/total-number-of-items-defined-in-an-enum
         private void Awake() {
             if (isInit) {
                 Destroy(this);

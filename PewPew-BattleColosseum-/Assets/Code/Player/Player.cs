@@ -7,6 +7,12 @@ namespace PPBC {
     public struct d_playerStuts {
         public float m_points;
         public int m_matchPoints;
+
+        public int m_kills;
+        public int m_deaths;
+
+        public float m_damageDealt;
+        public float m_damageTaken;
     }
 
     public class Player : MonoBehaviour, IDamageableObject {
@@ -108,6 +114,10 @@ namespace PPBC {
 
             //--> can die && should die <--
 
+            m_stats.m_deaths++;
+            if(source != null && source.m_owner != null)
+                source.m_owner.m_stats.m_kills++;
+
             StartCoroutine(IEDie(source));
         }
 
@@ -132,11 +142,19 @@ namespace PPBC {
                 return;
 
             if (damage >= m_currentHealth) {
+                m_stats.m_damageTaken += m_currentHealth;
+                if (source != null && source.m_owner != null)
+                    source.m_owner.m_stats.m_damageDealt += m_currentHealth;
+
                 Die(source, doTeamDamage);
                 return;
             }
 
             //--> damage is valid && won't die from it <--
+
+            m_stats.m_damageTaken += damage;
+            if (source != null && source.m_owner != null)
+                source.m_owner.m_stats.m_damageDealt += damage;
 
             m_currentHealth -= damage;
             StartAnim(StringCollection.A_HIT);
