@@ -94,15 +94,7 @@ namespace PPBC {
             value.m_ballSpawn = this.m_ballSpawn;
 
             value.m_icon = "icon.png";
-            ScreenshotCam.m_camera.gameObject.SetActive(true);
-            ScreenshotCam.m_camera.Render();
-            ScreenshotCam.m_camera.gameObject.SetActive(false);
-            Texture2D tmp = new Texture2D(ScreenshotCam.m_texture.width, ScreenshotCam.m_texture.height);
-            var holder = RenderTexture.active;
-            RenderTexture.active = ScreenshotCam.m_texture;
-            tmp.ReadPixels(new Rect(0, 0, tmp.width, tmp.height), 0, 0, false);
-            RenderTexture.active = holder;
-            byte[] pngShot = tmp.EncodeToPNG();
+            byte[] pngShot = ScreenshotCam.TakeScreenShot().EncodeToPNG();
             File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + "icon.png", pngShot);
 
             value.m_name = this.m_name;
