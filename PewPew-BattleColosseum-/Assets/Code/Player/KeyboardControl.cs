@@ -15,7 +15,7 @@ namespace PPBC {
         #endregion
         #region IControl
 
-        public int index { get; set; }
+        public int m_index { get; set; }
 
         public Vector2 m_dir { get; private set; }
 
