@@ -111,6 +111,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5858828456232748880}
   - component: {fileID: 11838954102811637}
+  - component: {fileID: 4820248741756427071}
+  - component: {fileID: 5245385892947505954}
   m_Layer: 0
   m_Name: PlayerHandler
   m_TagString: Untagged
@@ -149,11 +151,36 @@ MonoBehaviour:
   r_player: {fileID: 1364380459742812675}
   r_model: {fileID: 5250936507362504116}
   r_static: {fileID: 3880191296282554290}
+  r_smg: {fileID: 4820248741756427071}
+  r_rocket: {fileID: 5245385892947505954}
   m_maxHealth: 100
   m_iFrameTime: 1
   m_team: 0
-  m_distanceToGround: 0
-  m_distanceToTop: 0
+  r_pillar: {fileID: 0}
+--- !u!114 &4820248741756427071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2256606542879858850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab37b8bd4ecaab42989e283dbaa3565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5245385892947505954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2256606542879858850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b37b8524340764eaaddb18e9d5a21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2969680719362787696
 GameObject:
   m_ObjectHideFlags: 0
