@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PPBC {
-    [RequireComponent(typeof(Camera))]
     [RequireComponent(typeof(BoxCollider2D))]
     public class FitCameraToAABB : MonoBehaviour {
         static FitCameraToAABB s_singelton = null;
@@ -13,12 +12,20 @@ namespace PPBC {
 
         private void Awake() {
             if (s_singelton != null && s_singelton != this) {
+                BoxCollider2D tmp = GetComponent<BoxCollider2D>();
+                m_aABB.offset = tmp.offset;
+                m_aABB.size = tmp.size;
                 Destroy(this);
                 return;
             }
 
             m_aABB = GetComponent<BoxCollider2D>();
             m_cam = GetComponent<Camera>();
+
+            if (!m_cam) {
+                Destroy(this);
+                return;
+            }
 
             s_singelton = this;
         }
