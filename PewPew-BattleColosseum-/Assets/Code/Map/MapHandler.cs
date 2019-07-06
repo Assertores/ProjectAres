@@ -10,9 +10,8 @@ namespace PPBC {
         #region Variables
 
         [Header("References")]
-        [SerializeField] BoxCollider2D m_cameraSize;
+        BoxCollider2D m_cameraSize;
         int m_cameraSizeIndex;
-        [SerializeField] AudioSource m_backgroundAudio;//global object
         int m_backgroundAudioIndex;
         [SerializeField] SpriteRenderer m_background;
         int m_backgroundIndex;
@@ -30,22 +29,7 @@ namespace PPBC {
         #endregion
 
         private void Start() {
-            if (!m_cameraSize) {
-                print("FATAL: no Camera");
-                m_cameraSize = Camera.main.GetComponent<BoxCollider2D>();
-                if (m_cameraSize) {
-                    print("tryed to fix it");
-                } else {
-                    Destroy(this);
-                    return;
-                }
-            }
-            if (!m_backgroundAudio) {
-                print("no Background audio");
-                GameObject tmp = new GameObject("AUTO_BackgroundMusic");
-                m_backgroundAudio = tmp.AddComponent<AudioSource>();
-                m_backgroundAudio.loop = true;
-            }
+            m_cameraSize = Camera.main.GetComponent<BoxCollider2D>();
             if (!m_background) {
                 print("no Background Sprite");
                 GameObject tmp = new GameObject("AUTO_BackgroundSprite");
@@ -115,15 +99,12 @@ namespace PPBC {
                 return;
 
             if (index >= 0) {
-                m_backgroundAudio.clip = DataHolder.s_commonMusics[index];
+                GlobalAudioManager.ChangeAudio(DataHolder.s_commonMusics[index]);
             } else {
                 index *= -1;
                 index--;
-                m_backgroundAudio.clip = s_refMap.p_musics[index];
+                GlobalAudioManager.ChangeAudio(s_refMap.p_musics[index]);
             }
-
-            if (!m_backgroundAudio.isPlaying)
-                m_backgroundAudio.Play();
         }
 
         public void SetGlobalLightColorIndex(int index) {
