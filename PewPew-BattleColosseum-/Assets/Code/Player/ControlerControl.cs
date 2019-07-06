@@ -27,7 +27,7 @@ namespace PPBC {
         public Action<bool> ChangeType { get; set; }
         public Action Disconnect { get; set; }
         public void DoDisconnect() {
-            DataHolder.s_players[index] = false;
+            DataHolder.s_players[m_index] = false;
             Disconnect?.Invoke();
         }
 
