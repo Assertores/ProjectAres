@@ -10,7 +10,7 @@ namespace PPBC {
     public class DataHolder : MonoBehaviour {
         
         public static bool isInit { get; private set; } = false;
-        [HideInInspector]public static bool[] s_players = new bool[5];
+        public static bool[] s_players = new bool[5];
 
         public static Color[] s_playerColors;
         public static Color[] s_teamColors;
@@ -18,10 +18,23 @@ namespace PPBC {
         public static IGameMode[] s_modis;
         public static int s_currentModi = 0;
 
-        //public static MapData[] s_maps;
+        public static List<MapData> s_maps;
         public static int s_currentMap = 0;
 
         public static GameObject[] s_characters;
+
+        //===== ===== Maps Common Objects ===== =====
+
+        public static Vector2[] s_commonSizes;
+        public static BackgroundData[] s_commonBackgrounds;
+        public static Color[] s_commonColors;
+        public static AudioClip[] s_commonMusics;
+
+        public static PropData[] s_commonProps;
+        public static Sprite[] s_commonStages;
+        public static Sprite[] s_commonForgrounds;
+        public static GameObject s_commonLaserSpawner;
+        public static GameObject s_commonLaserBariar;
 
         #region Variables
 
@@ -30,9 +43,21 @@ namespace PPBC {
 
         public GameObject[] m_modis;
 
-        //public MapData[] m_maps;
+        public MapData[] m_maps;
 
         public GameObject[] m_characters;
+
+        [Header("CommonObjects")]
+        public Vector2[] m_commonSizes;
+        public BackgroundData[] m_commonBackgrounds;
+        public Color[] m_commonColors;
+        public AudioClip[] m_commonMusics;
+
+        public PropData[] m_commonProps;
+        public Sprite[] m_commonStages;
+        public Sprite[] m_commonForgrounds;
+        public GameObject m_commonLaserSpawner;
+        public GameObject m_commonLaserBariar;
 
         #endregion
 
@@ -52,7 +77,10 @@ namespace PPBC {
                     s_modis[i] = mode;
                 }
             }
-
+            
+            foreach(var it in m_maps) {
+                s_maps.Add(it);
+            }
             //TODO: map.shalow load;
 
             List<GameObject> tmp = new List<GameObject>();
@@ -61,6 +89,16 @@ namespace PPBC {
                     tmp.Add(it);
             }
             s_characters = tmp.ToArray();
+
+            s_commonSizes = m_commonSizes;
+            s_commonBackgrounds = m_commonBackgrounds;
+            s_commonColors = m_commonColors;
+            s_commonMusics = m_commonMusics;
+            s_commonProps = m_commonProps;
+            s_commonStages = m_commonStages;
+            s_commonForgrounds = m_commonForgrounds;
+            s_commonLaserSpawner = m_commonLaserSpawner;
+            s_commonLaserBariar = m_commonLaserBariar;
 
             isInit = true;
             Destroy(this);

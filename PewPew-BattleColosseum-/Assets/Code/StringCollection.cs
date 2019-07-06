@@ -70,5 +70,21 @@ namespace PPBC {
         public static string AS_CHANGE = "SMG_Weapon_Change";
 
         #endregion
+        #region ModiNames
+
+        public static string M_FFA = "Free for All";
+        public static string M_TDM = "Team Death Match";
+        public static string M_CTF = "Capture the Flag";
+        public static string M_KOTH = "King of the Hill";
+        public static string M_COOPEDIT = "Coop Edit";
+        public static string M_LMS = "Last man standing";
+        public static string M_BR = "Battle Royal";
+        public static string M_BASKETBALL = "Basketball";
+        public static string M_FOOTBALL = "Football";
+        public static string M_PAINT = "Paint";
+        public static string M_JUG = "Juggernaut";
+        public static string M_SZ = "SaveZone";
+
+        #endregion
     }
 }

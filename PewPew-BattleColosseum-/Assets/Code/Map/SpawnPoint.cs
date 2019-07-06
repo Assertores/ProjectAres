@@ -7,7 +7,7 @@ namespace PPBC {
 
         public static List<SpawnPoint> s_references = new List<SpawnPoint>();
 
-        public int team;
+        public int m_team;
 
         private void Awake() {
             s_references.Add(this);

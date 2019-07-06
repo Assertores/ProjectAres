@@ -19,6 +19,8 @@ namespace PPBC {
     [CreateAssetMenu(menuName = "Map/Map")]
     public class MapData : ScriptableObject {
 
+        enum e_loadedType { NOT, SHALLOW, PLAYABLE, EDITABLE }
+
         public void SaveToJSON() {
             Directory.CreateDirectory(StringCollection.P_MAPPARH + this.m_name);
 
@@ -117,19 +119,96 @@ namespace PPBC {
             saveFile.Close();
         }
 
-        public void Load() {
+        public void Boot() {
+            if (m_booted != e_loadedType.SHALLOW)
+                return;
+
+            throw new System.NotImplementedException();
+
             MapJSON value = JsonUtility.FromJson<MapJSON>(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
             //size, background, light, music
 
             //foreach (prop)
-        }
-        public void EditLoad() {
-            MapJSON value = JsonUtility.FromJson<MapJSON>(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
 
-            //load everything
+            m_booted = e_loadedType.PLAYABLE;
+        }
+
+        public void EditBoot() {
+            if (m_booted == e_loadedType.EDITABLE || m_booted == e_loadedType.NOT)
+                return;
+
+            string path = StringCollection.P_MAPPARH + this.name + "/";
+
+            MapJSON value = JsonUtility.FromJson<MapJSON>(path + this.name + ".map");
+
+            List<BackgroundData> bgdt = new List<BackgroundData>();
+            foreach(var it in value.p_backgrounds) {
+                BackgroundData element = new BackgroundData();
+                element.m_image = LoadSprite(path, it.m_image, 128);
+                element.m_position = it.m_position;
+                element.m_size = it.m_size;
+
+                bgdt.Add(element);
+            }
+            this.p_backgrounds = bgdt.ToArray();
+
+            List<Color> colors = new List<Color>();
+            foreach(var it in value.p_colors) {
+                colors.Add(new Color(it.x, it.y, it.z));
+            }
+            this.p_colors = colors.ToArray();
+
+            List<AudioClip> ac = new List<AudioClip>();
+            foreach(var it in value.p_musics) {
+                WWW form = new WWW("file:///" + path + it);
+                while (!form.isDone) ;
+                if (form == null) {
+                    continue;
+                }
+                if (form.error != null) {
+                    continue;
+                }
+                AudioClip tmpMusic = form.GetAudioClip();
+                if (!tmpMusic) {
+                    continue;
+                }
+                tmpMusic.name = Path.GetFileNameWithoutExtension(it);
+                ac.Add(tmpMusic);
+            }
+            this.p_musics = ac.ToArray();
+
+            List<Sprite> spriteList = new List<Sprite>();
+            foreach(var it in value.p_stages) {
+                spriteList.Add(LoadSprite(path, it, 512));
+            }
+            this.p_stages = spriteList.ToArray();
+
+            List<PropData> pdata = new List<PropData>();
+            foreach(var it in value.p_props) {
+                PropData element = new PropData();
+                element.m_image = LoadSprite(path, it.m_image, 512);
+                element.m_collider = it.m_collider;
+            }
+            this.p_props = pdata.ToArray();
+
+            spriteList.Clear();
+            foreach(var it in value.p_forgrounds) {
+                spriteList.Add(LoadSprite(path, it, 128));
+            }
+            this.p_forgrounds = spriteList.ToArray();
+
+            this.m_ballSpawn = value.m_ballSpawn;
+            this.m_background = value.m_background;
+            this.m_globalLight = value.m_globalLight;
+            this.m_music = value.m_music;
+
+            this.m_data = value.m_data;
+
+            m_booted = e_loadedType.EDITABLE;
         }
 
         public MapData() {
+            m_booted = e_loadedType.NOT;
         }
         public MapData(MapData original) {
             original.p_sizes.CopyTo(this.p_sizes, 0);
@@ -151,14 +230,23 @@ namespace PPBC {
             this.m_music = original.m_music;
 
             original.m_data.CopyTo(this.m_data, 0);
+
+            this.m_booted = original.m_booted;
         }
         public MapData(string name) {
+            if (m_booted != e_loadedType.NOT)
+                return;
+
             this.name = name;
 
             MapJSON value = JsonUtility.FromJson<MapJSON>(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
 
             this.m_icon = LoadSprite(StringCollection.P_MAPPARH + this.name, value.m_icon);
             this.m_name = value.m_name;
+            this.p_sizes = value.p_sizes;
+            this.m_size = value.m_size;
+
+            this.m_booted = e_loadedType.SHALLOW;
         }
 
         static Sprite LoadSprite(string path, string name, int PPU = 512) {
@@ -195,6 +283,8 @@ namespace PPBC {
                 }
             }
         }
+
+        e_loadedType m_booted = e_loadedType.EDITABLE;
 
         //===== ===== DATA ===== =====
 
