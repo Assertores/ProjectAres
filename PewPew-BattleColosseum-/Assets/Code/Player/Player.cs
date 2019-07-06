@@ -21,6 +21,7 @@ namespace PPBC {
         [SerializeField] GameObject r_model;
         [SerializeField] GameObject r_static;
         [SerializeField] SMG r_smg;
+        [SerializeField] RocketLauncher r_rocket;
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
@@ -85,7 +86,11 @@ namespace PPBC {
             }
 
             //health to gui
-            //if(smg) stamina to gui
+            if (m_useSMG) {
+                //stamina = r_smg.stamina;
+            } else {
+                //stamina = r_rocket.stamina;
+            }
         }
 
         #endregion
@@ -153,6 +158,9 @@ namespace PPBC {
             }
             m_controler.index = index;
             DataHolder.s_players[index] = true;
+
+            r_smg.Init(this);
+            r_rocket.Init(this);
 
             return m_controler;
         }
@@ -248,7 +256,23 @@ namespace PPBC {
         void ChangeWeapon() {
             m_useSMG = !m_useSMG;
             r_smg.ChangeWeapon(m_useSMG);
-            //r_rocket.ChangeWeapon(!m_useSMG);
+            r_rocket.ChangeWeapon(!m_useSMG);
+        }
+
+        void StartShooting() {
+            if (m_useSMG) {
+                r_smg.StartShooting();
+            } else {
+                r_rocket.StartShooting();
+            }
+        }
+
+        void StopShooting() {
+            if (m_useSMG) {
+                r_smg.StopShooting();
+            } else {
+                r_rocket.StopShooting();
+            }
         }
 
         #endregion
