@@ -83,6 +83,9 @@ namespace PPBC {
                     StartAnim(StringCollection.A_IDLE, true);
                 }
             }
+
+            //health to gui
+            //if(smg) stamina to gui
         }
 
         #endregion

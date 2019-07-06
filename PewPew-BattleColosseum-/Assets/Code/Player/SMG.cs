@@ -8,7 +8,7 @@ namespace PPBC {
         #region Variables
 
         float m_lastShot = float.MinValue;
-        float m_stamina = 0;
+        public float m_stamina { get; private set; } = 0;
 
         bool m_imActive;
         bool m_shootng;
