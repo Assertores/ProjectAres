@@ -12,7 +12,7 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] BoxCollider2D m_cameraSize;
         int m_cameraSizeIndex;
-        [SerializeField] AudioSource m_backgroundAudio;
+        [SerializeField] AudioSource m_backgroundAudio;//global object
         int m_backgroundAudioIndex;
         [SerializeField] SpriteRenderer m_background;
         int m_backgroundIndex;
