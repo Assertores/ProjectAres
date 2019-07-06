@@ -319,8 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70464b5fb1ad3c842a638bf4bf23f3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cameraSize: {fileID: 0}
-  m_backgroundAudio: {fileID: 0}
   m_background: {fileID: 0}
   m_directionalLight: {fileID: 4133859110255589437}
   m_levelHolder: {fileID: 0}

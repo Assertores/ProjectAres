@@ -6,18 +6,23 @@ namespace PPBC {
     [RequireComponent(typeof(Camera))]
     public class ScreenshotCam : MonoBehaviour {
 
-        public static Camera m_camera;
+        public static Camera m_cam;
         public static RenderTexture m_texture;
 
         private void Awake() {
-            m_camera = GetComponent<Camera>();
-            m_texture = m_camera.targetTexture;
+            m_cam = GetComponent<Camera>();
+            m_texture = m_cam.targetTexture;
         }
 
         public static Texture2D TakeScreenShot() {
-            m_camera.gameObject.SetActive(true);
-            m_camera.Render();
-            m_camera.gameObject.SetActive(false);
+            m_cam.orthographicSize = FitCameraToAABB.m_aABB.size.y / 2;
+            if (m_cam.orthographicSize * m_cam.aspect < FitCameraToAABB.m_aABB.size.x / 2) {
+                m_cam.orthographicSize = (FitCameraToAABB.m_aABB.size.x / 2) / m_cam.aspect;
+            }
+
+            m_cam.gameObject.SetActive(true);
+            m_cam.Render();
+            m_cam.gameObject.SetActive(false);
 
             Texture2D value = new Texture2D(m_texture.width, m_texture.height);
             var holder = RenderTexture.active;
