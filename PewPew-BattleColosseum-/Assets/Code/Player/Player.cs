@@ -91,6 +91,8 @@ namespace PPBC {
             } else {
                 //stamina = r_rocket.stamina;
             }
+
+            RotateWeapon();
         }
 
         #endregion
@@ -156,7 +158,7 @@ namespace PPBC {
             default:
                 break;
             }
-            m_controler.index = index;
+            m_controler.m_index = index;
             DataHolder.s_players[index] = true;
 
             r_smg.Init(this);
@@ -224,8 +226,36 @@ namespace PPBC {
             m_stats.m_matchPoints = 0;
         }
 
-        public void InControle(bool controle) {
+        bool h_CanChangeCharacter = false;
+        public void CanChangeCharacter(bool character) {
+            if (h_CanChangeCharacter == character)
+                return;
 
+            if (character) {
+                m_controler.ChangeCharacter += ChangeChar;
+            } else {
+                m_controler.ChangeCharacter -= ChangeChar;
+            }
+
+            h_CanChangeCharacter = character;
+        }
+
+        bool h_inControle = false;
+        public void InControle(bool controle) {
+            if (h_inControle == controle)
+                return;
+
+            if (controle) {
+                m_controler.ChangeWeapon += ChangeWeapon;
+                m_controler.TriggerDown += StartShooting;
+                m_controler.TriggerUp += StopShooting;
+            } else {
+                m_controler.ChangeWeapon -= ChangeWeapon;
+                m_controler.TriggerDown -= StartShooting;
+                m_controler.TriggerUp -= StopShooting;
+            }
+
+            h_inControle = controle;
         }
 
         #endregion
@@ -249,8 +279,10 @@ namespace PPBC {
                 m_currentCaracter--;
             m_currentCaracter = DataHolder.FixedMod(m_currentCaracter, DataHolder.s_characters.Length);
 
-            //remove old char
-            //load new char
+            Destroy(r_model.transform.GetChild(0).gameObject);
+            Instantiate(DataHolder.s_characters[m_currentCaracter], r_model.transform);
+            m_modelRef = r_model.transform.GetChild(0).GetComponent<ModelRefHolder>();
+            RotateWeapon();
         }
 
         void ChangeWeapon() {
@@ -276,6 +308,18 @@ namespace PPBC {
         }
 
         #endregion
+
+        void RotateWeapon() {
+            //creating up vector from direction vector (vector at right angle)
+            m_modelRef.r_weaponRot.transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-m_controler.m_dir.y, m_controler.m_dir.x));
+
+            //flipping weapon
+            if (m_controler.m_dir.x < 0) {
+                m_modelRef.r_weaponRot.transform.localScale = new Vector3(1, -1, 1);
+            } else {
+                m_modelRef.r_weaponRot.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
 
         /// <summary>
         /// starts the animation if it isn't already running

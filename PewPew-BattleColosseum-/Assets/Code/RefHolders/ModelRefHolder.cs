@@ -57,7 +57,7 @@ namespace PPBC {
         public AudioSource fx_ModelAudio;
 
         public AudioSource fx_WeaponAudio;
-        public GameObject r_WeaponRot;
+        public GameObject r_weaponRot;
         public d_rocketLauncherData m_rocket;
         public d_smgData m_sMG;
     }

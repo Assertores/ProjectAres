@@ -106,6 +106,9 @@ namespace PPBC {
                         PositionPlayer(it, Vector3.Lerp(it.r_pillar.m_holderPos, it.r_pillar.m_targetPos, m_GameMatchPillarLerpTime / (Time.time - m_startLerpTime)));
                     }
                 } else {
+                    foreach(var it in Player.s_references) {
+                        it.InControle(true);
+                    }
                     if(MatchManager.s_currentMatch.m_matchCount == 0) {
                         m_state = e_winScreenState.CONTINUE;
                         Continue();

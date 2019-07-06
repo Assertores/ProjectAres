@@ -33,6 +33,7 @@ namespace PPBC {
 
             foreach(var it in Player.s_references) {
                 it.ResetMatchStats();
+                it.CanChangeCharacter(false);
             }
 
             TransitionHandler.ReadyToChange += ContinueToNextMatch;

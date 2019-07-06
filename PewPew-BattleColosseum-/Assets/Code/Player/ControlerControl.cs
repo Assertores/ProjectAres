@@ -17,7 +17,7 @@ namespace PPBC {
 
         public int index { get; set; }
 
-        public Vector2 dir { get; private set; }
+        public Vector2 m_dir { get; private set; }
 
         public Action TriggerDown { get; set; }
         public Action TriggerUp { get; set; }

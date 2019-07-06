@@ -6,12 +6,12 @@ using System;
 namespace PPBC {
     public interface IControl {
 
-        int index { get; set; }
+        int m_index { get; set; }
 
         /// <summary>
         /// direction of the weapon
         /// </summary>
-        Vector2 dir { get; }
+        Vector2 m_dir { get; }
 
         /// <summary>
         /// trigger of some sort to start shooting or charging
