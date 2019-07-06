@@ -118,7 +118,7 @@ namespace PPBC {
 
             r_player.SetActive(false);
 
-            //TODO: GameMode player died
+            DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
 
         public void TakeDamage(IHarmingObject source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
