@@ -59,13 +59,14 @@ inline fixed3 calculateLightDiffuse(VertexOutput input, float3 normalWorld, inou
 	
 	float attenuation = LIGHT_ATTENUATION(input);
 	float angleDot = max(0, dot(normalWorld, lightWorldDirection));
-	
+	/*
 #if defined(_DIFFUSE_RAMP)
 	fixed3 lightDiffuse = calculateRampedDiffuse(_LightColor0.rgb, attenuation, angleDot);
 #else
 	fixed3 lightDiffuse = _LightColor0.rgb * (attenuation * angleDot);
 #endif // _DIFFUSE_RAMP
-	
+	*/
+	fixed3 lightDiffuse = _LightColor0.rgb * lerp(0, 1, smoothstep(0.45, 0.55, angleDot));
 	return lightDiffuse;
 }
 
