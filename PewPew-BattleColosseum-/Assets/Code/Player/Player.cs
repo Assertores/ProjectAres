@@ -179,6 +179,9 @@ namespace PPBC {
             m_controler.m_index = index;
             DataHolder.s_players[index] = true;
 
+            m_currentCaracter = -1;
+            ChangeChar(true);
+
             r_smg.Init(this);
             r_rocket.Init(this);
 
@@ -297,7 +300,9 @@ namespace PPBC {
                 m_currentCaracter--;
             m_currentCaracter = DataHolder.FixedMod(m_currentCaracter, DataHolder.s_characters.Length);
 
-            Destroy(r_model.transform.GetChild(0).gameObject);
+            foreach(Transform it in r_model.transform) {
+                Destroy(it.gameObject);
+            }
             Instantiate(DataHolder.s_characters[m_currentCaracter], r_model.transform);
             m_modelRef = r_model.transform.GetChild(0).GetComponent<ModelRefHolder>();
             RotateWeapon();
