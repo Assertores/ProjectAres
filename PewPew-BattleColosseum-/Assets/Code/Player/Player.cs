@@ -15,6 +15,8 @@ namespace PPBC {
         public float m_damageTaken;
     }
 
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
     public class Player : MonoBehaviour, IDamageableObject {
 
         public static List<Player> s_references = new List<Player>(8);
@@ -43,6 +45,7 @@ namespace PPBC {
 
         public ModelRefHolder m_modelRef { get; private set; }
         public Rigidbody2D m_rb { get; private set; }
+        Collider2D m_col;
         public IControl m_controler { get; private set; }
 
         bool m_invincible = false;
@@ -69,25 +72,21 @@ namespace PPBC {
         }
 
         void Start() {
-            m_rb = r_player.GetComponent<Rigidbody2D>();
-            if (!m_rb) {
-                print("Player: no RigitBody");
-                Destroy(this);
-                return;
-            }
+            m_rb = GetComponent<Rigidbody2D>();
+            m_col = GetComponent<Collider2D>();
 
             ResetFull();
         }
 
         void Update() {
             string currentAnim = GetCurrentAnim();
-            if(m_levelColCount > 0) {//Air
-                if(currentAnim == null || currentAnim == StringCollection.A_IDLE) {
-                    StartAnim(StringCollection.A_IDLEAIR, true);
-                }
-            } else {//Gronded
+            if(m_levelColCount > 0) {//Grounded
                 if (currentAnim == null || currentAnim == StringCollection.A_IDLEAIR) {
                     StartAnim(StringCollection.A_IDLE, true);
+                }
+            } else {//Air
+                if (currentAnim == null || currentAnim == StringCollection.A_IDLE) {
+                    StartAnim(StringCollection.A_IDLEAIR, true);
                 }
             }
 
@@ -126,7 +125,7 @@ namespace PPBC {
 
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
 
-            r_player.SetActive(false);
+            SetPlayerActive(false);
 
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
@@ -214,11 +213,11 @@ namespace PPBC {
             ResetVelocity();
             ResetHealth();
 
-            //StopShooting();
-            r_player.SetActive(true);
+            StopShooting();
+            SetPlayerActive(true);
             StartCoroutine(IEIFrame());
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
-            //InControle(true);
+            InControle(true);
 
         }
 
@@ -229,7 +228,7 @@ namespace PPBC {
 
         public void ResetVelocity() {
             if(!m_rb)
-                m_rb = r_player.GetComponent<Rigidbody2D>();
+                m_rb = GetComponent<Rigidbody2D>();
 
             m_rb.velocity = Vector2.zero;
         }
@@ -344,6 +343,16 @@ namespace PPBC {
             }
         }
 
+        void SetPlayerActive(bool value) {
+            r_player.SetActive(value);
+            if (!m_rb)
+                m_rb = GetComponent<Rigidbody2D>();
+            m_rb.isKinematic = !value;
+            if (!m_col)
+                m_col = GetComponent<Collider2D>();
+            m_col.enabled = value;
+        }
+
         /// <summary>
         /// starts the animation if it isn't already running
         /// </summary>
@@ -367,7 +376,10 @@ namespace PPBC {
         /// </summary>
         /// <returns>string of current animation or null if no animation is running</returns>
         string GetCurrentAnim() {
-            return m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
+            if (!m_modelRef || !m_modelRef.r_modelAnim || m_modelRef.r_modelAnim.state.GetCurrent(0) == null)
+                return null;
+
+            return m_modelRef.r_modelAnim.state.GetCurrent(0).IsComplete ? null : m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
         }
 
         #region Physics
