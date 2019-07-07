@@ -33,10 +33,12 @@ namespace PPBC {
         }
 
         private void Start() {
-            if (r_anim)
+            if (r_anim) {
+                r_anim.gameObject.SetActive(true);
                 StartCoroutine(IEInTransition());
-            else
+            } else {
                 ReadyToStart?.Invoke();
+            }
         }
 
         #endregion

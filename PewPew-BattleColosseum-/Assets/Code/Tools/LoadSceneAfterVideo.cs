@@ -20,6 +20,7 @@ namespace PPBC {
                 SceneManager.LoadScene(m_nextScene);
             }
 
+            r_player.targetCamera = Camera.main;
             m_length = (float)r_player.clip.length;
         }
 
