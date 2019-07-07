@@ -26,7 +26,7 @@ namespace PPBC {
         #region NextMatch
 
         bool h_startGameOngoing = false;
-        public void StartGame() {
+        public void StartGame() {//TODO: move to IEnumerator to make countDown
             if (h_startGameOngoing)
                 return;
             h_startGameOngoing = true;
