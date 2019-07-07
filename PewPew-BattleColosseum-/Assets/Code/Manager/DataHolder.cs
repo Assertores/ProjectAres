@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -82,7 +83,19 @@ namespace PPBC {
             foreach(var it in m_maps) {
                 s_maps.Add(it);
             }
-            //TODO: map.shalow load;
+            if (Directory.Exists(StringCollection.P_MAPPARH)) {
+                DirectoryInfo info = new DirectoryInfo(StringCollection.P_MAPPARH);
+                foreach (var it in info.EnumerateDirectories()) {
+                    if (!s_maps.Find(x => x.m_name == it.Name)) {
+                        MapData map = new MapData(it.Name);
+                        if (!map) {
+                            print("map " + it.Name + " was unable to load");
+                            continue;
+                        }
+                        s_maps.Add(map);
+                    }
+                }
+            }
 
             List<GameObject> tmp = new List<GameObject>();
             foreach (var it in m_characters) {
