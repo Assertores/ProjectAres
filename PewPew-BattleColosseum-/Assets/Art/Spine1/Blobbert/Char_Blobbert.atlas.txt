@@ -1,0 +1,132 @@
+
+Char_Blobbert.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Blob_Puppet/body
+  rotate: false
+  xy: 2, 111
+  size: 459, 397
+  orig: 459, 397
+  offset: 0, 0
+  index: -1
+Blob_Puppet/l_eye
+  rotate: false
+  xy: 516, 525
+  size: 59, 53
+  orig: 59, 53
+  offset: 0, 0
+  index: -1
+Blob_Puppet/l_leg
+  rotate: true
+  xy: 307, 35
+  size: 74, 112
+  orig: 74, 112
+  offset: 0, 0
+  index: -1
+Blob_Puppet/l_tear
+  rotate: false
+  xy: 881, 726
+  size: 62, 42
+  orig: 62, 42
+  offset: 0, 0
+  index: -1
+Blob_Puppet/mouth
+  rotate: false
+  xy: 2, 2
+  size: 303, 107
+  orig: 303, 107
+  offset: 0, 0
+  index: -1
+Blob_Puppet/mouth_2_happy
+  rotate: true
+  xy: 516, 580
+  size: 312, 104
+  orig: 312, 104
+  offset: 0, 0
+  index: -1
+Blob_Puppet/mouth_3_sad
+  rotate: false
+  xy: 516, 894
+  size: 288, 128
+  orig: 288, 128
+  offset: 0, 0
+  index: -1
+Blob_Puppet/mouth_4_surprised
+  rotate: true
+  xy: 622, 605
+  size: 287, 127
+  orig: 287, 127
+  offset: 0, 0
+  index: -1
+Blob_Puppet/r_eye
+  rotate: false
+  xy: 962, 969
+  size: 59, 53
+  orig: 59, 53
+  offset: 0, 0
+  index: -1
+Blob_Puppet/r_leg
+  rotate: false
+  xy: 881, 770
+  size: 74, 111
+  orig: 74, 111
+  offset: 0, 0
+  index: -1
+Blob_Puppet/r_tear
+  rotate: true
+  xy: 463, 442
+  size: 66, 40
+  orig: 66, 40
+  offset: 0, 0
+  index: -1
+Tear_r
+  rotate: false
+  xy: 751, 753
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+Transparent2
+  rotate: false
+  xy: 622, 593
+  size: 20, 10
+  orig: 20, 10
+  offset: 0, 0
+  index: -1
+l_eye_closed
+  rotate: true
+  xy: 421, 54
+  size: 55, 34
+  orig: 55, 34
+  offset: 0, 0
+  index: -1
+r_eye_closed
+  rotate: false
+  xy: 962, 933
+  size: 55, 34
+  orig: 55, 34
+  offset: 0, 0
+  index: -1
+tail
+  rotate: false
+  xy: 806, 883
+  size: 154, 139
+  orig: 154, 139
+  offset: 0, 0
+  index: -1
+tear_l
+  rotate: false
+  xy: 751, 623
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+tears
+  rotate: false
+  xy: 2, 510
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
