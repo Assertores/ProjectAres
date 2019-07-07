@@ -5,6 +5,7 @@ using UnityEngine;
 namespace PPBC {
     public class MapHandler : MonoBehaviour {
 
+        public static MapHandler s_singelton;
         public static MapData s_refMap { get; private set; }
 
         #region Variables
@@ -23,10 +24,16 @@ namespace PPBC {
         [SerializeField] Material m_spriteMaterial;
         [SerializeField] RectTransform m_KillFeed;
 
-        [HideInInspector]
-        public List<Transform> m_borders { get; private set; } = new List<Transform>();
-
         #endregion
+
+        private void Awake() {
+            if(s_singelton != null && s_singelton != this) {
+                Destroy(this);
+                return;
+            }
+
+            s_singelton = this;
+        }
 
         private void Start() {
             m_cameraSize = Camera.main.GetComponent<BoxCollider2D>();
@@ -70,7 +77,9 @@ namespace PPBC {
         }
 
         private void OnDestroy() {
-            m_borders = new List<Transform>();
+            if(s_singelton == this) {
+                s_singelton = null;
+            }
         }
 
         #region SetIndex
@@ -190,8 +199,16 @@ namespace PPBC {
         }
 
         public void SaveMap(string name) {
+            MapData map = CreateMapData(name);
+            map.SaveToJSON();
+
+            DataHolder.s_currentMap = DataHolder.s_maps.Count;
+            DataHolder.s_maps.Add(map);
+        }
+
+        public MapData CreateMapData(string name = "") {
             if (name == "") {
-                name = "MAP" + Random.Range(0, int.MaxValue);
+                name = s_refMap.name;
             }
 
             name = name.Replace('\\', '_');
@@ -218,18 +235,16 @@ namespace PPBC {
                 tmp.Add(it.Update());
             }
             map.m_data = tmp.ToArray();
-            map.SaveToJSON();
 
-            DataHolder.s_currentMap = DataHolder.s_maps.Count;
-            DataHolder.s_maps.Add(map);
+            return map;
         }
 
-        public void LoadNewObj(d_mapData obj) {
+        public void LoadNewObj(d_mapData obj, bool withHolder = false) {
             GameObject tmp = LoadObj(obj);
             if (!tmp)
                 return;
-
-            if (DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
+            
+            if (withHolder || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
                 ObjRefHolder orh = Instantiate(m_ObjectInteractPrefab, m_levelHolder).GetComponent<ObjRefHolder>();
                 orh.name = "[EDIT]_" + tmp.name;
                 orh.m_data = obj;
@@ -254,6 +269,18 @@ namespace PPBC {
             SpriteMask msk;
 
             switch (obj.type) {
+            case e_objType.BACKGROUND:
+                SetBackgroundIndex(obj.index);
+                break;
+            case e_objType.GLOBALLIGHT:
+                SetGlobalLightColorIndex(obj.index);
+                break;
+            case e_objType.MUSIC:
+                SetMusicIndex(obj.index);
+                break;
+            case e_objType.SIZE:
+                SetSizeIndex(obj.index);
+                break;
             case e_objType.PROP:
                 if (obj.index < -s_refMap.p_props.Length || obj.index >= DataHolder.s_commonProps.Length)
                     return null;
@@ -357,7 +384,6 @@ namespace PPBC {
             foreach (Transform it in m_levelHolder) {
                 Destroy(it.gameObject);
             }
-            m_borders = new List<Transform>();
         }
     }
 }

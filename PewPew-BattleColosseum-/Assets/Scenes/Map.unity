@@ -342,7 +342,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_globalObjects: {fileID: 4154827916869104311, guid: 87b9a3731f8c23648988273bdaaefa90,
     type: 3}
-  r_globalObjects: {fileID: 0}
   m_name: 
   m_newObj:
     type: 0
@@ -350,6 +349,7 @@ MonoBehaviour:
     position: {x: 0, y: 0}
     rotation: 0
     scale: {x: 0, y: 0}
+  m_editMap: 1
 --- !u!1 &1578188428
 GameObject:
   m_ObjectHideFlags: 0

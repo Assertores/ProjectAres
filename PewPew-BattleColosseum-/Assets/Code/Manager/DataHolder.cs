@@ -9,7 +9,7 @@ namespace PPBC {
 
     public class DataHolder : MonoBehaviour {
         
-        public static bool isInit { get; private set; } = false;
+        public static bool s_isInit { get; private set; } = false;
         public static bool[] s_players = new bool[5];
 
         public static Color[] s_playerColors;
@@ -63,7 +63,7 @@ namespace PPBC {
 
         //int enumSize = System.Enum.GetNames(typeof(e_mileStones)).Length;//https://stackoverflow.com/questions/856154/total-number-of-items-defined-in-an-enum
         private void Awake() {
-            if (isInit) {
+            if (s_isInit) {
                 Destroy(this);
                 return;
             }
@@ -101,7 +101,7 @@ namespace PPBC {
             s_commonLaserSpawner = m_commonLaserSpawner;
             s_commonLaserBariar = m_commonLaserBariar;
 
-            isInit = true;
+            s_isInit = true;
             Destroy(this);
         }
 

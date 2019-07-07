@@ -7,7 +7,7 @@ namespace PPBC {
     public class SaveStart : MonoBehaviour {
 
         private void Awake() {
-            if (!DataHolder.isInit)
+            if (!DataHolder.s_isInit)
                 SceneManager.LoadScene(StringCollection.S_GASS);
             else
                 Destroy(this.gameObject);
