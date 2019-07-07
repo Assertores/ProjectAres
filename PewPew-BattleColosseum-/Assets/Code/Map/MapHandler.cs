@@ -65,6 +65,8 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
+
+            LoadCurrentMap();
         }
 
         private void OnDestroy() {
