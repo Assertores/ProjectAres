@@ -55,7 +55,7 @@ namespace PPBC {
                 fx_audio.PlayOneShot(m_sounds[Random.Range(0, m_sounds.Length)]);
             }
 
-            //CameraShake.DoCamerashake(0.1f, 0.7f);//TODO: reimpliment
+            CameraShake.DoCamerashake(0.1f, 0.7f);
 
             foreach (var it in Physics2D.OverlapCircleAll(transform.position, m_radius)) {
                 IDamageableObject tmp = it.gameObject.GetComponent<IDamageableObject>();
