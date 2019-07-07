@@ -65,17 +65,19 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
-            
+            s_isInit = true;
+
             s_playerColors = m_playerColors;
             s_teamColors = m_teamColors;
 
-            IGameMode mode;
+            List<IGameMode> gmList = new List<IGameMode>();
             for (int i = 0; i < m_modis.Length; i++) {
-                mode = m_modis[i].GetComponent<IGameMode>();
+                IGameMode mode = m_modis[i].GetComponent<IGameMode>();
                 if(mode != null) {
-                    s_modis[i] = mode;
+                    gmList.Add(mode);
                 }
             }
+            s_modis = gmList.ToArray();
             
             foreach(var it in m_maps) {
                 s_maps.Add(it);
@@ -97,8 +99,7 @@ namespace PPBC {
             s_commonStages = m_commonStages;
             s_commonForgrounds = m_commonForgrounds;
             s_commonLaserSpawner = m_commonLaserSpawner;
-
-            s_isInit = true;
+            
             Destroy(this);
         }
 
