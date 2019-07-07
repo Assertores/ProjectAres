@@ -39,6 +39,7 @@ namespace PPBC {
         public static string L_VFX = "VFX";
         public static string L_GUI = "GUI";
         public static string L_FORGROUND = "Forground";
+        public static string L_LEVEL = "Level";
 
         #endregion
         #region Paths

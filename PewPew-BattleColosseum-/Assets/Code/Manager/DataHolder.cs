@@ -34,7 +34,6 @@ namespace PPBC {
         public static Sprite[] s_commonStages;
         public static Sprite[] s_commonForgrounds;
         public static GameObject s_commonLaserSpawner;
-        public static GameObject s_commonLaserBariar;
 
         #region Variables
 
@@ -57,7 +56,6 @@ namespace PPBC {
         public Sprite[] m_commonStages;
         public Sprite[] m_commonForgrounds;
         public GameObject m_commonLaserSpawner;
-        public GameObject m_commonLaserBariar;
 
         #endregion
 
@@ -99,7 +97,6 @@ namespace PPBC {
             s_commonStages = m_commonStages;
             s_commonForgrounds = m_commonForgrounds;
             s_commonLaserSpawner = m_commonLaserSpawner;
-            s_commonLaserBariar = m_commonLaserBariar;
 
             s_isInit = true;
             Destroy(this);

@@ -233,7 +233,8 @@ MonoBehaviour:
   m_commonProps: []
   m_commonStages: []
   m_commonForgrounds: []
-  m_commonLaserSpawner: {fileID: 0}
+  m_commonLaserSpawner: {fileID: 802966571650542862, guid: 408365e2b1e050d4d96e6238017d3524,
+    type: 3}
   m_commonLaserBariar: {fileID: 0}
 --- !u!1 &7363573733610744735
 GameObject:

@@ -194,8 +194,8 @@ namespace PPBC {
                 LoadNewObj(it);
             }
 
-            GameObject a = Instantiate(DataHolder.s_commonLaserBariar);
-            a.transform.parent = m_levelHolder;
+            //GameObject a = Instantiate(DataHolder.s_commonLaserBariar);
+            //a.transform.parent = m_levelHolder;
         }
 
         public void SaveMap(string name) {
@@ -290,6 +290,8 @@ namespace PPBC {
                 tmp.transform.position = obj.position;
                 tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
+                tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
+
                 ren = tmp.AddComponent<SpriteRenderer>();
                 ren.material = m_spriteMaterial;
                 ren.sortingLayerName = StringCollection.L_PROPS;
@@ -314,6 +316,7 @@ namespace PPBC {
                 tmp.transform.position = obj.position;
                 tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
+                tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
 
                 ren = tmp.AddComponent<SpriteRenderer>();
                 ren.material = m_spriteMaterial;
@@ -354,6 +357,7 @@ namespace PPBC {
                 tmp.transform.position = obj.position;
                 tmp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, obj.rotation));
                 tmp.transform.localScale = new Vector3(obj.scale.x, obj.scale.y, 1);
+                tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
 
                 ren = tmp.AddComponent<SpriteRenderer>();
                 ren.material = m_spriteMaterial;
@@ -367,7 +371,8 @@ namespace PPBC {
                 break;
             case e_objType.LASERSPAWN:
                 tmp = Instantiate(DataHolder.s_commonLaserSpawner, obj.position, Quaternion.Euler(Vector3.zero));
-                //tmp.GetComponent<LaserSpawner>().Init(obj.index);//TODO: Laser machen
+                tmp.GetComponent<LaserSpawner>().Init(obj.index);
+                tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
                 break;
             case e_objType.FLAG:
                 break;
