@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7310322136630659699}
   - component: {fileID: 3751839624945460523}
+  - component: {fileID: 7408559091363849317}
   m_Layer: 0
   m_Name: WeaponRot
   m_TagString: Untagged
@@ -127,6 +128,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7408559091363849317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947745387099054667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e55f4919e903c74aba88387a8d3a3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_anim: {fileID: 0}
+  m_boneName: Weapon
 --- !u!1 &5151474522508839637
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,8 +192,9 @@ MonoBehaviour:
   r_modelAnim: {fileID: 0}
   fx_ModelAudio: {fileID: 7353004879546632628}
   fx_WeaponAudio: {fileID: 3751839624945460523}
-  r_WeaponRot: {fileID: 1947745387099054667}
+  r_weaponRot: {fileID: 0}
   m_rocket:
+    r_weapon: {fileID: 0}
     m_Icon: {fileID: 0}
     r_RocketAnim: {fileID: 0}
     r_barrel: {fileID: 0}
@@ -192,6 +208,7 @@ MonoBehaviour:
     m_overchargeAdd: 0
     m_overchargeFail: 0
   m_sMG:
+    r_weapon: {fileID: 0}
     m_Icon: {fileID: 0}
     r_sMGAnim: {fileID: 0}
     r_barrel: {fileID: 0}
