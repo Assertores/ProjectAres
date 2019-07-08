@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Weapon_Smg_Annelore_Atlas
   m_EditorClassIdentifier: 
   atlasFile: {fileID: 4900000, guid: 33acf48565f7d0a478150879f20cec90, type: 3}
-  materials: []
+  materials:
+  - {fileID: 2100000, guid: 795e287e72af7b14b8f3afa8919449bd, type: 2}
