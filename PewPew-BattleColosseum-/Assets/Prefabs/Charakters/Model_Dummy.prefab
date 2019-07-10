@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7310322136630659699}
   - component: {fileID: 3751839624945460523}
-  - component: {fileID: 7408559091363849317}
+  - component: {fileID: 3747380136110304292}
   m_Layer: 0
   m_Name: WeaponRot
   m_TagString: Untagged
@@ -28,7 +28,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 566590245470296792}
+  - {fileID: 320658823280375582}
   m_Father: {fileID: 5756044568108131086}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,7 +130,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7408559091363849317
+--- !u!114 &3747380136110304292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,6 +144,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_anim: {fileID: 0}
   m_boneName: Weapon
+--- !u!1 &2232629002305699750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 320658823280375582}
+  m_Layer: 0
+  m_Name: RocketLauncher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &320658823280375582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2232629002305699750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2389421337681415382}
+  - {fileID: 8794891821540208064}
+  m_Father: {fileID: 7310322136630659699}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4202559835188982062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2389421337681415382}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2389421337681415382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4202559835188982062}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 320658823280375582}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5151474522508839637
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +218,7 @@ GameObject:
   - component: {fileID: 1317956718743503135}
   - component: {fileID: 7353004879546632628}
   m_Layer: 0
-  m_Name: Model
+  m_Name: Model_Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,38 +252,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_icon: {fileID: 0}
-  m_name: 
+  m_name: Annelore
   r_modelAnim: {fileID: 0}
   fx_ModelAudio: {fileID: 7353004879546632628}
   fx_WeaponAudio: {fileID: 3751839624945460523}
-  r_weaponRot: {fileID: 0}
+  r_weaponRot: {fileID: 1947745387099054667}
   m_rocket:
-    r_weapon: {fileID: 0}
+    r_weapon: {fileID: 2232629002305699750}
     m_Icon: {fileID: 0}
     r_RocketAnim: {fileID: 0}
-    r_barrel: {fileID: 0}
+    r_barrel: {fileID: 2389421337681415382}
     m_sounds: []
-    r_overcharge: {fileID: 0}
+    r_overcharge: {fileID: 5417430618871238678}
     p_rocket: {fileID: 0}
     p_explosion: {fileID: 0}
-    m_muzzleEnergy: 0
-    m_shootDelay: 0
-    m_overchargeMaxTime: 0
-    m_overchargeAdd: 0
-    m_overchargeFail: 0
+    m_muzzleEnergy: 20000
+    m_shootDelay: 2
+    m_overchargeMaxTime: 4
+    m_overchargeAdd: 0.4
+    m_overchargeFail: 1.5
   m_sMG:
-    r_weapon: {fileID: 0}
+    r_weapon: {fileID: 8019218014111275184}
     m_Icon: {fileID: 0}
     r_sMGAnim: {fileID: 0}
-    r_barrel: {fileID: 0}
+    r_barrel: {fileID: 1736652266734118144}
     m_sounds: []
-    r_muzzleFlashParent: {fileID: 0}
+    r_muzzleFlashParent: {fileID: 6627446527604369376}
     p_bullet: {fileID: 0}
-    m_rPM: 0
-    m_muzzleEnergy: 0
-    m_shootForSec: 0
-    m_coolDownRatio: 0
-    m_halfPitchRange: 0
+    m_rPM: 500
+    m_muzzleEnergy: 2000
+    m_shootForSec: 4
+    m_coolDownRatio: 2
+    m_halfPitchRange: 0.1
     m_halfVolumeRange: 0
 --- !u!82 &7353004879546632628
 AudioSource:
@@ -317,3 +381,125 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &5399541717270294292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736652266734118144}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1736652266734118144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399541717270294292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 566590245470296792}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5417430618871238678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8794891821540208064}
+  m_Layer: 0
+  m_Name: OverCharge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8794891821540208064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5417430618871238678}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 320658823280375582}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6627446527604369376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9049426049345977205}
+  m_Layer: 0
+  m_Name: MuzzleFlashParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9049426049345977205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6627446527604369376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 566590245470296792}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8019218014111275184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 566590245470296792}
+  m_Layer: 0
+  m_Name: SMG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &566590245470296792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8019218014111275184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1736652266734118144}
+  - {fileID: 9049426049345977205}
+  m_Father: {fileID: 7310322136630659699}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

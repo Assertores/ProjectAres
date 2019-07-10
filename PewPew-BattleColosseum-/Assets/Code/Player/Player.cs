@@ -162,6 +162,9 @@ namespace PPBC {
         #endregion
 
         public IControl Init(int index) {
+            if (DataHolder.s_players[index])
+                return null;
+
             switch (index) {
             case 0:
             case 1:
@@ -176,13 +179,20 @@ namespace PPBC {
                 break;
             }
             m_controler.m_index = index;
+            print(index);
+            print(m_controler.m_index);
             DataHolder.s_players[index] = true;
+            
+            r_smg.Init(this);
+            r_rocket.Init(this);
 
             m_currentCaracter = -1;
             ChangeChar(true);
 
-            r_smg.Init(this);
-            r_rocket.Init(this);
+            m_useSMG = false;
+            ChangeWeapon();
+
+            InControle(true);
 
             return m_controler;
         }
@@ -302,9 +312,12 @@ namespace PPBC {
             foreach(Transform it in r_model.transform) {
                 Destroy(it.gameObject);
             }
-            Instantiate(DataHolder.s_characters[m_currentCaracter], r_model.transform);
-            m_modelRef = r_model.transform.GetChild(0).GetComponent<ModelRefHolder>();
+            GameObject model = Instantiate(DataHolder.s_characters[m_currentCaracter], r_model.transform);
+            m_modelRef = model.GetComponent<ModelRefHolder>();
+            print(m_modelRef);
             RotateWeapon();
+            ChangeWeapon();
+            ChangeWeapon();
         }
 
         void ChangeWeapon() {

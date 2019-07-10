@@ -319,7 +319,8 @@ MonoBehaviour:
   - {fileID: 3644178638876045426}
   m_maps: []
   m_characters:
-  - {fileID: 5151474522508839637, guid: 2e84eaa16ec883942ad7857503157b15, type: 3}
+  - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
+  - {fileID: 5151474522508839637, guid: e8af030f08ae55546bfc31495cd00de2, type: 3}
   m_commonSizes: []
   m_commonBackgrounds: []
   m_commonColors: []

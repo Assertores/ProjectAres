@@ -12,8 +12,6 @@ namespace PPBC {
         float m_shootThreshold = 0.9f;
         float m_stickDeadZone = 0.2f;
 
-        public int m_controlerIndex = int.MinValue;
-
         GamePadState m_state;
         GamePadState m_lastState;
 
@@ -25,13 +23,13 @@ namespace PPBC {
 
         // Start is called before the first frame update
         void Start() {
-            m_state = GamePad.GetState((PlayerIndex)m_controlerIndex);
+            m_state = GamePad.GetState((PlayerIndex)m_index);
             m_lastState = m_state;
         }
 
         // Update is called once per frame
         void Update() {
-            if (m_controlerIndex == int.MinValue)
+            if (m_index == int.MinValue)
                 return;
 
             if (!m_lastState.IsConnected) {
@@ -40,7 +38,7 @@ namespace PPBC {
             }
 
             m_lastState = m_state;
-            m_state = GamePad.GetState((PlayerIndex)m_controlerIndex);
+            m_state = GamePad.GetState((PlayerIndex)m_index);
             //_dir = new Vector2 (_state.ThumbSticks.Right.X * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.Y * _state.ThumbSticks.Right.Y) / 2), _state.ThumbSticks.Right.Y * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.X * _state.ThumbSticks.Right.X) / 2));//unnötig http://mathproofs.blogspot.com/2005/07/mapping-square-to-circle.html
 
 

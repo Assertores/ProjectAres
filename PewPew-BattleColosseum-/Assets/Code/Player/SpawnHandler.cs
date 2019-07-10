@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 namespace PPBC {
     public class SpawnHandler : MonoBehaviour {
@@ -10,7 +11,7 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] GameObject p_player;
 
-        [HideInInspector] public bool m_spawnEnabled = true;
+        GamePadState[] m_lastStates = new GamePadState[4];
 
         #endregion
         #region MonoBehaviour
@@ -30,18 +31,27 @@ namespace PPBC {
 
         // Update is called once per frame
         void Update() {
-            if (m_spawnEnabled) {
-                Player newPlayer = null;
-                if (!DataHolder.s_players[4] && Input.anyKey) {
+            Player newPlayer = null;
+            if (!DataHolder.s_players[4] && Input.GetKeyUp(KeyCode.Space)) {
+                newPlayer = Instantiate(p_player).GetComponentInChildren<Player>();
+                newPlayer.Init(4);
+            }
+            for (int i = 0; i < 4; i++) {
+                if (!DataHolder.s_players[i] && m_lastStates[i].IsConnected &&
+                    m_lastStates[i].Buttons.Start == ButtonState.Pressed &&
+                    GamePad.GetState((PlayerIndex)i).Buttons.Start == ButtonState.Released) {
+
                     newPlayer = Instantiate(p_player).GetComponentInChildren<Player>();
-                    newPlayer.Init(4);
+                    newPlayer.Init(i);
                 }
 
-                if (newPlayer) {
-                    newPlayer.ResetFull();
-                    //change charakter true
-                    newPlayer.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
-                }
+                m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
+            }
+
+            if (newPlayer) {
+                newPlayer.ResetFull();
+                newPlayer.CanChangeCharacter(true);
+                newPlayer.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
             }
         }
 
