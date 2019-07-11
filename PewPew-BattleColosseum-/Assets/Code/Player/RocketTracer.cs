@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PPBC {
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
     public class RocketTracer : MonoBehaviour, ITracer {
 
         #region Variables
 
         [Header("References")]
         [SerializeField] GameObject p_explosion;
+        [SerializeField] ContactFilter2D m_filter;
 
         [Header("Balancing")]
         [Tooltip("distance form levelorigion to autodestry")]
@@ -16,9 +19,24 @@ namespace PPBC {
         [SerializeField] float m_damage;
 
         Rigidbody2D m_rb;
+        Collider2D m_col;
+
+        bool m_spawnInCollider = false;
 
         #endregion
         #region MonoBehaviour
+
+        private void Awake() {
+            if (!m_rb)
+                m_rb = GetComponent<Rigidbody2D>();
+            if (!m_col)
+                m_col = GetComponent<Collider2D>();
+
+            Collider2D[] tmp = new Collider2D[1];
+            if (Physics2D.OverlapCollider(m_col, m_filter, tmp) > 0) {
+                m_spawnInCollider = true;
+            }
+        }
 
         void Update() {
             if (transform.position.magnitude > m_killDistance) {
@@ -58,6 +76,11 @@ namespace PPBC {
             }
 
             Destroy(gameObject);//TODO: objectPooling
+        }
+
+        private void OnTriggerExit2D(Collider2D collision) {
+            if (m_spawnInCollider)
+                m_spawnInCollider = false;
         }
 
         #endregion

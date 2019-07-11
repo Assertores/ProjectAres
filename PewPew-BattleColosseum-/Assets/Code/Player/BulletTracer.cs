@@ -11,6 +11,7 @@ namespace PPBC {
 
         [Header("References")]
         [SerializeField] GameObject r_bullet;
+        [SerializeField] ContactFilter2D m_filter;
 
         [Header("Balancing")]
         [SerializeField] float m_killDistance = 1000;
@@ -19,7 +20,21 @@ namespace PPBC {
         Rigidbody2D m_rb;
         Collider2D m_col;
 
+        bool m_spawnInCollider = false;
+
         #endregion
+
+        private void Awake() {
+            if(!m_rb)
+                m_rb = GetComponent<Rigidbody2D>();
+            if(!m_col)
+                m_col = GetComponent<Collider2D>();
+
+            Collider2D[] tmp = new Collider2D[1];
+            if(Physics2D.OverlapCollider(m_col, m_filter, tmp) > 0) {
+                m_spawnInCollider = true;
+            }
+        }
 
         private void Update() {
             if (transform.position.magnitude > m_killDistance) {
@@ -53,6 +68,8 @@ namespace PPBC {
         #region Physics
 
         private void OnTriggerEnter2D(Collider2D collision) {
+            if (m_spawnInCollider)
+                return;
             IDamageableObject hit = collision.gameObject.GetComponent<IDamageableObject>();
             if (hit != null) {
                 hit.TakeDamage(m_trace, m_damage, m_rb.velocity * m_rb.mass);
@@ -63,6 +80,11 @@ namespace PPBC {
             r_bullet.SetActive(false);
 
             StartCoroutine(IEEffects());
+        }
+
+        private void OnTriggerExit2D(Collider2D collision) {
+            if (m_spawnInCollider)
+                m_spawnInCollider = false;
         }
 
         #endregion
