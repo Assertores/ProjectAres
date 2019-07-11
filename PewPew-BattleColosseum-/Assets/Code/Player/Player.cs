@@ -290,7 +290,7 @@ namespace PPBC {
 
         IEnumerator IEIFrame() {
             Invincable(true);
-            yield return new WaitForSeconds(m_iFrameTime);
+            yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
             Invincable(false);
         }
 
