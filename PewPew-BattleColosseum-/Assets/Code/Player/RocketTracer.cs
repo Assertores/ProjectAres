@@ -61,6 +61,9 @@ namespace PPBC {
 
         bool h_exploded = false;
         private void OnTriggerEnter2D(Collider2D collision) {
+            if (m_spawnInCollider)
+                return;
+
             if (h_exploded)
                 return;
             h_exploded = true;
