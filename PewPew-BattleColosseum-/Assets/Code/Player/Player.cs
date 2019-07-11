@@ -313,6 +313,7 @@ namespace PPBC {
             GameObject model = Instantiate(DataHolder.s_characters[m_currentCaracter], r_model.transform);
             m_modelRef = model.GetComponent<ModelRefHolder>();
             RotateWeapon();
+            //TODO: schön machen
             ChangeWeapon();
             ChangeWeapon();
         }

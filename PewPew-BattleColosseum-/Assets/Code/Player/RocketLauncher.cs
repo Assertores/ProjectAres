@@ -50,12 +50,16 @@ namespace PPBC {
         public void StartShooting() {
             m_startChargeTime = Time.time;
             m_charging = true;
+
+            //TODO: in der luft stehen bleiben
         }
 
         public void StopShooting() {
             if (m_charging)
                 ShootBullet();
             m_charging = false;
+
+            //TODO: weider normal gravitiy
         }
 
         public void ChangeWeapon(bool toMe) {
