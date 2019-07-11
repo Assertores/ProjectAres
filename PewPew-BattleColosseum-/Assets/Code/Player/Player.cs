@@ -179,8 +179,6 @@ namespace PPBC {
                 break;
             }
             m_controler.m_index = index;
-            print(index);
-            print(m_controler.m_index);
             DataHolder.s_players[index] = true;
             
             r_smg.Init(this);
@@ -314,7 +312,6 @@ namespace PPBC {
             }
             GameObject model = Instantiate(DataHolder.s_characters[m_currentCaracter], r_model.transform);
             m_modelRef = model.GetComponent<ModelRefHolder>();
-            print(m_modelRef);
             RotateWeapon();
             ChangeWeapon();
             ChangeWeapon();
