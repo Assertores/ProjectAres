@@ -145,7 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_player: {fileID: 2969680719362787696, guid: bae830850d0acce45b8060718330fbd6,
     type: 3}
-  m_spawnEnabled: 1
 --- !u!4 &30683074
 Transform:
   m_ObjectHideFlags: 0
@@ -212,7 +211,7 @@ GameObject:
   - component: {fileID: 431349328}
   m_Layer: 11
   m_Name: DummySprite
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -530,7 +529,7 @@ GameObject:
   - component: {fileID: 1066876162}
   m_Layer: 11
   m_Name: DummySprite
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -742,7 +741,7 @@ GameObject:
   - component: {fileID: 1156716969}
   m_Layer: 11
   m_Name: DummySprite
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1081,7 +1080,7 @@ GameObject:
   - component: {fileID: 1522342910}
   m_Layer: 11
   m_Name: DummySprite
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
