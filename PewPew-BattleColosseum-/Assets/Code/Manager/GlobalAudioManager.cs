@@ -49,32 +49,58 @@ namespace PPBC {
 
             s_singelton.FadeAudio(fadeTime);
         }
+
+        public static void ChangeVolume(float newVolume, float fadeTime = 0.5f) {
+            s_singelton.IEVolume(newVolume, fadeTime);
+        }
         
         IEnumerator FadeAudio(float fadeTime) {
             float fadeStartTime = Time.time;
             float volume = m_currentAS1 ? m_as1.volume : m_as2.volume;
             
             while(fadeStartTime + fadeTime > Time.time) {
-                if (m_currentAS1) {
+                (m_currentAS1 ? m_as1 : m_as2).volume = Mathf.Lerp(volume, 0, (Time.time - fadeStartTime) / fadeTime);
+                (!m_currentAS1 ? m_as1 : m_as2).volume = Mathf.Lerp(volume, 0, (Time.time - fadeStartTime) / fadeTime);
+                /*if (m_currentAS1) {
                     m_as1.volume = Mathf.Lerp(volume, 0, (Time.time - fadeStartTime) / fadeTime);
                     m_as2.volume = Mathf.Lerp(0, volume, (Time.time - fadeStartTime) / fadeTime);
                 } else {
                     m_as1.volume = Mathf.Lerp(0, volume, (Time.time - fadeStartTime) / fadeTime);
                     m_as2.volume = Mathf.Lerp(volume, 0, (Time.time - fadeStartTime) / fadeTime);
-                }
+                }*/
 
                 yield return null;
             }
 
-            if (m_currentAS1) {
+            (m_currentAS1 ? m_as1 : m_as2).Stop();
+            (!m_currentAS1 ? m_as1 : m_as2).volume = volume;
+            /*if (m_currentAS1) {
                 m_as1.Stop();
                 m_as2.volume = volume;
             } else {
                 m_as1.volume = volume;
                 m_as2.Stop();
-            }
+            }*/
             
             m_currentAS1 = !m_currentAS1;
+        }
+
+        IEnumerator IEVolume(float newVolume, float fadeTime) {
+            float fadeStartTime = Time.time;
+            float volume = (m_currentAS1 ? m_as1 : m_as2).volume;
+
+            while (fadeStartTime + fadeTime > Time.time) {
+                (m_currentAS1 ? m_as1 : m_as2).volume = Mathf.Lerp(volume, newVolume, (Time.time - fadeStartTime) / fadeTime);
+                /*if (m_currentAS1) {
+                    m_as1.volume = Mathf.Lerp(volume, newVolume, (Time.time - fadeStartTime) / fadeTime);
+                } else {
+                    m_as2.volume = Mathf.Lerp(volume, newVolume, (Time.time - fadeStartTime) / fadeTime);
+                }*/
+
+                yield return null;
+            }
+
+            (m_currentAS1 ? m_as1 : m_as2).volume = newVolume;
         }
     }
 }
