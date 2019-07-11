@@ -32,8 +32,8 @@ namespace PPBC {
         void Update() {
             if (m_time + m_explosionTime < Time.timeSinceLevelLoad) {
                 Destroy(r_explosion);
-                r_explosionStains.SetActive(true);
-                Destroy(this.gameObject);
+                r_explosionStains.SetActive(true);//TODO: https://unity3d.com/de/learn/tutorials/topics/scripting/drawing-decals-particles
+                Destroy(this.gameObject);//TODO: objectPooling
 
             }
         }

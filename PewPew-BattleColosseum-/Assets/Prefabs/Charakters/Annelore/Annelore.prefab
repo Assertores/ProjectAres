@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 1317956718743503135}
   - component: {fileID: 7353004879546632628}
   m_Layer: 0
-  m_Name: Model
+  m_Name: Annelore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,8 +379,10 @@ MonoBehaviour:
     r_barrel: {fileID: 2389421337681415382}
     m_sounds: []
     r_overcharge: {fileID: 5417430618871238678}
-    p_rocket: {fileID: 0}
-    p_explosion: {fileID: 0}
+    p_rocket: {fileID: 9103369776508484593, guid: fc6d68047a5d5ab4fa7d1d1d832bc6c2,
+      type: 3}
+    p_explosion: {fileID: 1755098847994500336, guid: 6860f9811bc30d740be9f77178e164b8,
+      type: 3}
     m_muzzleEnergy: 20000
     m_shootDelay: 2
     m_overchargeMaxTime: 4
@@ -393,7 +395,8 @@ MonoBehaviour:
     r_barrel: {fileID: 1736652266734118144}
     m_sounds: []
     r_muzzleFlashParent: {fileID: 6627446527604369376}
-    p_bullet: {fileID: 0}
+    p_bullet: {fileID: 1481206135090748021, guid: cd6b4c2796c8b8e4fa9dc93615eba75d,
+      type: 3}
     m_rPM: 500
     m_muzzleEnergy: 2000
     m_shootForSec: 4

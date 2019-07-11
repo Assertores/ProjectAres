@@ -37,6 +37,7 @@ namespace PPBC {
                         m_forceCooldown = false;
                     }
                 }
+                return;
             }
 
             if (m_forceCooldown)
@@ -86,8 +87,8 @@ namespace PPBC {
         }
 
         void ShootBullet() {
-            Rigidbody2D bulletRB = Instantiate(m_owner.m_modelRef.m_sMG.p_bullet, m_owner.m_modelRef.m_sMG.r_barrel.position, m_owner.m_modelRef.m_sMG.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);
-
+            Rigidbody2D bulletRB = Instantiate(m_owner.m_modelRef.m_sMG.p_bullet, m_owner.m_modelRef.m_sMG.r_barrel.position, m_owner.m_modelRef.m_sMG.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);//TODO: objectPooling
+            
             if (bulletRB) {
                 bulletRB.AddForce(m_owner.m_modelRef.m_sMG.r_weapon.transform.right * m_owner.m_modelRef.m_sMG.m_muzzleEnergy);
             }

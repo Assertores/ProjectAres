@@ -8,7 +8,7 @@ namespace PPBC {
         #region Variables
 
         [Header("References")]
-        [SerializeField] GameObject p_explosionRef;
+        [SerializeField] GameObject p_explosion;
 
         [Header("Balancing")]
         [Tooltip("distance form levelorigion to autodestry")]
@@ -42,22 +42,22 @@ namespace PPBC {
         #region Physics
 
         bool h_exploded = false;
-        private void OnCollisionEnter2D(Collision2D collision) {
+        private void OnTriggerEnter2D(Collider2D collision) {
             if (h_exploded)
                 return;
             h_exploded = true;
 
-            if (p_explosionRef) {
-                GameObject temp = Instantiate(p_explosionRef, transform.position, transform.rotation);
+            if (p_explosion) {
+                GameObject temp = Instantiate(p_explosion, transform.position, transform.rotation);//TODO: objectPooling
                 temp.GetComponentInChildren<ITracer>()?.Init(m_trace);
             }
 
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.TakeDamage(m_trace, m_damage, Vector2.zero/*m_rb.velocity * m_rb.mass*/);//rocket wont give recoil to the hit one
+                tmp.TakeDamage(m_trace, m_damage, Vector2.zero);//rocket wont give recoil to the hit one
             }
 
-            Destroy(gameObject);
+            Destroy(gameObject);//TODO: objectPooling
         }
 
         #endregion
