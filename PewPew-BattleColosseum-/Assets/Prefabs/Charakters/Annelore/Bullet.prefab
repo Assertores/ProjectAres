@@ -68,7 +68,7 @@ SpriteRenderer:
   m_SortingLayerID: -316638963
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ccedc91fb9280df459e7c40313299c64, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee619a7c0e5ed024dbaa0adad0527ef4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,6 +174,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_bullet: {fileID: 563056656829959484}
+  m_filter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   m_killDistance: 1000
   m_damage: 1
 --- !u!1 &6694471125919789466
