@@ -538,7 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b23da2fe318d8047ac024e0c339b881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_globalObjects: {fileID: 0}
+  p_globalObjects: {fileID: 4154827916869104311, guid: 87b9a3731f8c23648988273bdaaefa90,
+    type: 3}
   m_name: 
   m_newObj:
     type: 0
