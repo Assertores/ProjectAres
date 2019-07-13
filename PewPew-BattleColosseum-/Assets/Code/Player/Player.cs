@@ -30,14 +30,18 @@ namespace PPBC {
         [SerializeField] GameObject r_static;
         [SerializeField] SMG r_smg;
         [SerializeField] RocketLauncher r_rocket;
+        [SerializeField] GameObject r_playerClashParent;
+        [SerializeField] ParticleSystem FX_playerClash;
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
         float m_currentHealth;
         [SerializeField] float m_iFrameTime = 1;
+        [SerializeField] float m_bounciness = 0.75f;
 
         [HideInInspector] public d_playerStuts m_stats;
 
+        int m_playerIndex = -1;
         [HideInInspector] public int m_team = -1;
         [HideInInspector] public PillarRefHolder r_pillar;
         public float m_distanceToGround { get; private set; } = 0.5f;//TODO: auto create
@@ -50,6 +54,7 @@ namespace PPBC {
 
         bool m_invincible = false;
         int m_levelColCount = 0;//collider count with level layer
+        Vector2 m_inVel; //velocity befor collision
 
         int m_currentCaracter = 0;
         bool m_useSMG = true;
@@ -98,6 +103,8 @@ namespace PPBC {
             }
 
             RotateWeapon();
+
+            m_inVel = m_rb.velocity;
         }
 
         #endregion
@@ -179,6 +186,7 @@ namespace PPBC {
                 break;
             }
             m_controler.m_index = index;
+            m_playerIndex = index;
             DataHolder.s_players[index] = true;
             
             r_smg.Init(this);
@@ -248,10 +256,18 @@ namespace PPBC {
 
         public void ResetGameStats() {
             m_stats.m_points = 0;
+            m_stats.m_kills = 0;
+            m_stats.m_deaths = 0;
+            m_stats.m_damageDealt = 0;
+            m_stats.m_damageTaken = 0;
         }
 
         public void ResetMatchStats() {
             m_stats.m_matchPoints = 0;
+        }
+
+        public void ResetTeam() {
+            m_team = -1;
         }
 
         bool h_CanChangeCharacter = false;
@@ -393,11 +409,34 @@ namespace PPBC {
             return m_modelRef.r_modelAnim.state.GetCurrent(0).IsComplete ? null : m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
         }
 
+        public Color GetPlayerColor() {
+            if(m_team >= 0) {
+                return DataHolder.s_teamColors[m_team];
+            } else {
+                return DataHolder.s_playerColors[m_playerIndex];
+            }
+        }
+
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {
+            bool doEffect = false;
             if(collision.gameObject.tag == StringCollection.T_LEVEL) {
                 m_levelColCount++;
+                doEffect = true;
+            }
+            if(collision.gameObject.tag == StringCollection.T_PLAYER) {
+                r_playerClashParent.transform.rotation = Quaternion.LookRotation(transform.forward, collision.contacts[0].normal);
+                r_playerClashParent.transform.position = collision.contacts[0].collider.transform.position;
+                FX_playerClash.Play();
+                doEffect = true;
+            }
+            if (doEffect) {
+                Vector2 tmp = collision.contacts[0].normal;
+                if (Vector2.Dot(m_inVel.normalized, tmp) < 0) {
+                    m_rb.velocity = m_bounciness * (Vector2.Reflect(m_inVel, tmp));
+                }
+                StartAnim(StringCollection.A_IMPACT);
             }
         }
 

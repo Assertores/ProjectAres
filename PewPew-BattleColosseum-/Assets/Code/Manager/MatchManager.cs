@@ -125,6 +125,7 @@ namespace PPBC {
 
         void InWinScreen() {
             TransitionHandler.ReadyToStart -= InWinScreen;
+            TransitionHandler.ReadyToChange += ResetTeam;
 
             m_matchCount--;
             if(m_matchCount > 0) {
@@ -134,6 +135,12 @@ namespace PPBC {
             }
 
             WinScreenManager.s_singelton.Init();
+        }
+
+        void ResetTeam() {
+            foreach(var it in Player.s_references) {
+                it.ResetTeam();
+            }
         }
 
         #endregion
