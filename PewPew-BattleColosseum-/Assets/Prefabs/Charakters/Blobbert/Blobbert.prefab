@@ -156,7 +156,8 @@ AudioSource:
   m_GameObject: {fileID: 1947745387099054667}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243499012703872730, guid: 83da80f7e9092f44598b31f6b30776db,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -558,7 +559,7 @@ GameObject:
   - component: {fileID: 1317956718743503135}
   - component: {fileID: 7353004879546632628}
   m_Layer: 0
-  m_Name: Model
+  m_Name: Blobbert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -635,7 +636,8 @@ AudioSource:
   m_GameObject: {fileID: 5151474522508839637}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243499012703872730, guid: 83da80f7e9092f44598b31f6b30776db,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
