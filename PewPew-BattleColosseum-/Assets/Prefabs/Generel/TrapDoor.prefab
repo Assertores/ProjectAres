@@ -487,4 +487,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_exitHatch: {fileID: 1437433921851527244}
   m_countdownText: {fileID: 1437433921976280036}
-  m_exitTime: 0
+  m_exitTime: 5

@@ -87,5 +87,12 @@ namespace PPBC {
         public static string M_SZ = "SaveZone";
 
         #endregion
+        #region Audio Groups
+
+        public static string G_MASTER = "Master";
+        public static string G_MUSIC = "Music";
+        public static string G_EFFECTS = "Effects";
+
+        #endregion
     }
 }
