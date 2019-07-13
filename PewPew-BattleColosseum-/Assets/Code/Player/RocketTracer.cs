@@ -21,7 +21,7 @@ namespace PPBC {
         Rigidbody2D m_rb;
         Collider2D m_col;
 
-        bool m_spawnInCollider = false;
+        Collider2D m_spawnInCollider = null;
 
         #endregion
         #region MonoBehaviour
@@ -34,7 +34,7 @@ namespace PPBC {
 
             Collider2D[] tmp = new Collider2D[1];
             if (Physics2D.OverlapCollider(m_col, m_filter, tmp) > 0) {
-                m_spawnInCollider = true;
+                m_spawnInCollider = tmp[0];
             }
         }
 
@@ -61,7 +61,7 @@ namespace PPBC {
 
         bool h_exploded = false;
         private void OnTriggerEnter2D(Collider2D collision) {
-            if (m_spawnInCollider)
+            if (collision == m_spawnInCollider)
                 return;
 
             if (h_exploded)
@@ -82,8 +82,8 @@ namespace PPBC {
         }
 
         private void OnTriggerExit2D(Collider2D collision) {
-            if (m_spawnInCollider)
-                m_spawnInCollider = false;
+            if (m_spawnInCollider = collision)
+                m_spawnInCollider = null;
         }
 
         #endregion
