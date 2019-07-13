@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nico_Charakter_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets: []
-  scale: 0.01
+  scale: 0.001953125
   skeletonJSON: {fileID: 4900000, guid: cd4367ea546aca147a899592ccad24e2, type: 3}
   skeletonDataModifiers: []
   fromAnimation: []
