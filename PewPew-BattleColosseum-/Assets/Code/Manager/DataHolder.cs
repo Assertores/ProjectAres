@@ -19,7 +19,7 @@ namespace PPBC {
         public static IGameMode[] s_modis;
         public static int s_currentModi = 0;
 
-        public static List<MapData> s_maps;
+        public static List<MapData> s_maps = new List<MapData>();
         public static int s_currentMap = 0;
 
         public static GameObject[] s_characters;

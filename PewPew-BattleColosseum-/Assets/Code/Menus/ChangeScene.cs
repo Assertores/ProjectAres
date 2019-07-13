@@ -8,7 +8,7 @@ namespace PPBC {
 
         #region Variables
 
-        [SerializeField] string m_nextScene = StringCollection.S_MAINMENU;
+        [SerializeField] string m_nextScene ;
 
         #endregion
 
