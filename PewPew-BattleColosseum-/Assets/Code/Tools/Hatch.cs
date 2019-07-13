@@ -40,7 +40,7 @@ namespace PPBC {
                     m_exitHatch.SetActive(false);
                     m_countdownText.text = "";
                 } else {
-                    m_countdownText.text = Mathf.RoundToInt(m_exitTime+ m_time - Time.time).ToString();
+                    m_countdownText.text = Mathf.CeilToInt(m_exitTime+ m_time - Time.time).ToString();
                 }
             } else {
                 m_exitHatch.SetActive(true);
