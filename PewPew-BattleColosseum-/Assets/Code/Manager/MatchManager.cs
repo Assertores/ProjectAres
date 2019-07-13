@@ -72,6 +72,7 @@ namespace PPBC {
         }
 
         void FinishedContinueToNextMatch() {
+            TransitionHandler.ReadyToStart -= FinishedContinueToNextMatch;
             h_startGameOngoing = false;
         }
 
