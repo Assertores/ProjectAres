@@ -51,6 +51,7 @@ namespace PPBC {
         #endregion
         #region Physics
 
+        //connect to button
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision.GetComponent<Player>()) {
                 m_collInd++;

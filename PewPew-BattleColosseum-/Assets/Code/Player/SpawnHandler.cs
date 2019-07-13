@@ -32,7 +32,7 @@ namespace PPBC {
         // Update is called once per frame
         void Update() {
             Player newPlayer = null;
-            if (!DataHolder.s_players[4] && Input.GetKeyUp(KeyCode.Space)) {
+            if (!DataHolder.s_players[4] && Input.GetKeyUp(KeyCode.Return)) {
                 newPlayer = Instantiate(p_player).GetComponentInChildren<Player>();
                 newPlayer.Init(4);
             }

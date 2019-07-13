@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PPBC {
     public class DDOLScript : MonoBehaviour {
-        private void Awake() {
+        private void Start() {
             DontDestroyOnLoad(this.gameObject);
             Destroy(this);
         }
