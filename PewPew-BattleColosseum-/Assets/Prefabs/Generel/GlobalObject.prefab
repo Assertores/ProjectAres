@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9d59370af6b7d479eb0131381693ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_icon_: {fileID: 0}
-  r_text_: 
+  r_icon_: {fileID: 21300000, guid: ccedc91fb9280df459e7c40313299c64, type: 3}
+  r_text_: get 5 kills
   m_killsToWin: 5
   m_respawnDelay: 2
 --- !u!1 &3841625167925513082
@@ -317,7 +317,8 @@ MonoBehaviour:
   - {r: 0, g: 0.6313726, b: 0.9686275, a: 1}
   m_modis:
   - {fileID: 3644178638876045426}
-  m_maps: []
+  m_maps:
+  - {fileID: 11400000, guid: ce96c9af92c4b554d90fb7cc318ee683, type: 2}
   m_characters:
   - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
   - {fileID: 5151474522508839637, guid: e8af030f08ae55546bfc31495cd00de2, type: 3}
