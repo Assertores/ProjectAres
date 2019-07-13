@@ -9,12 +9,15 @@ namespace PPBC {
     public class ChangeGraphics : MonoBehaviour {
 
         [Header("References")]
+        [SerializeField] Slider s_fullScreen;
         [SerializeField] TextMeshProUGUI r_fullScreen;
+        [SerializeField] Slider s_quality;
         [SerializeField] TextMeshProUGUI r_quality;
+        [SerializeField] Slider s_brightness;
         [SerializeField] PostProcessProfile p_profile;
         ColorGrading m_gamma;
-        [SerializeField] Slider r_res;
-        [SerializeField] TextMeshProUGUI r_resText;
+        [SerializeField] Slider s_res;
+        [SerializeField] TextMeshProUGUI r_res;
 
         [Header("Balancing")]
         [SerializeField] string[] m_TF;
@@ -23,12 +26,18 @@ namespace PPBC {
         private void Awake() {
             p_profile.TryGetSettings(out m_gamma);
 
-            r_res.maxValue = Screen.resolutions.Length-1;
+            s_fullScreen.value = Screen.fullScreen ? 0 : 1;
+            Fullscreen(s_fullScreen.value);
+            s_quality.value = QualitySettings.GetQualityLevel();
+            Quality(s_quality.value);
+            s_brightness.value = Mathf.RoundToInt((m_gamma.gamma.value.w + 1) * 5);
+
+            s_res.maxValue = Screen.resolutions.Length-1;
             int i = 0;
             for (; i < Screen.resolutions.Length && (Screen.resolutions[i].width != Screen.currentResolution.width || Screen.resolutions[i].height != Screen.currentResolution.height); i++)
                 ;
-            r_res.value = i;
-            r_resText.text = Screen.currentResolution.width + " x " + Screen.currentResolution.height;
+            s_res.value = i;
+            r_res.text = Screen.currentResolution.width + " x " + Screen.currentResolution.height;
         }
 
         public void Fullscreen(float value) {// 0 or 1
@@ -46,7 +55,7 @@ namespace PPBC {
         public void ChangeResolution(float value) {
             Resolution tmp = Screen.resolutions[Mathf.RoundToInt(value)];
             Screen.SetResolution(tmp.width, tmp.height, Screen.fullScreen);
-            r_resText.text = tmp.width + " x " + tmp.height;
+            r_res.text = tmp.width + " x " + tmp.height;
         }
 
         public void Quality(float value) {// 0, 1 or 2
