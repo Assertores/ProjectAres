@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 360007536}
   - component: {fileID: 360007535}
-  - component: {fileID: 360007534}
   - component: {fileID: 360007533}
   m_Layer: 0
   m_Name: ScreenShotCamera
@@ -130,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &360007533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,14 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb13fcd9f1ef09543981a3faa2b4c1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &360007534
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360007532}
-  m_Enabled: 1
 --- !u!20 &360007535
 Camera:
   m_ObjectHideFlags: 0
@@ -181,7 +172,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 6144
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: f9600da2e191e844b9e0e23229ce8e35, type: 2}
   m_TargetDisplay: 0
@@ -201,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360007532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -765,8 +756,9 @@ MonoBehaviour:
   m_levelHolder: {fileID: 0}
   m_lightPrefab: {fileID: 86690619132911133, guid: 5bd6bf616ae57c94fa2b18a155157a7a,
     type: 3}
-  m_ObjectInteractPrefab: {fileID: 0}
-  m_spriteMaterial: {fileID: 0}
+  m_ObjectInteractPrefab: {fileID: 2651066386915364357, guid: 8f14111e2114c8c48a59263a513bd365,
+    type: 3}
+  m_spriteMaterial: {fileID: 2100000, guid: 10eec8f41627ecd42bd8c76eba442b62, type: 2}
   m_KillFeed: {fileID: 1227174746}
 --- !u!114 &1330273458
 MonoBehaviour:

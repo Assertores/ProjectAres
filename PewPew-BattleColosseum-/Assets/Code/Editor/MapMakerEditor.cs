@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 namespace PPBC {
     [CustomEditor(typeof(MapMaker))]
@@ -32,9 +33,24 @@ namespace PPBC {
             }
 
             if(GUILayout.Button("Save Map")) {
-                MapData value = MapHandler.s_singelton.CreateMapData(myTarget.m_name);
+                bool mapExists = true;
 
-                AssetDatabase.CreateAsset(value, "Assets/Prefabs/Map/m_" + value.name + ".asset");
+                MapData value = (MapData)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Map/m_" + myTarget.m_name + ".asset", typeof(MapData));
+                if (!value) {
+                    mapExists = false;
+                }
+                value = MapHandler.s_singelton.CreateMapData(myTarget.m_name);
+
+                if(myTarget.m_name != "") {
+                    value.m_name = myTarget.m_name;
+                }
+
+                byte[] pngShot = ScreenshotCam.TakeScreenShot().EncodeToPNG();
+                File.WriteAllBytes("Assets/Prefabs/Map/m_" + value.m_name + "_icon.png", pngShot);
+
+                if(!mapExists)
+                    AssetDatabase.CreateAsset(value, "Assets/Prefabs/Map/m_" + value.m_name + ".asset");
+
                 AssetDatabase.SaveAssets();
 
                 EditorUtility.FocusProjectWindow();

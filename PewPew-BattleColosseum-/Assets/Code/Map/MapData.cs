@@ -203,13 +203,20 @@ namespace PPBC {
             m_booted = e_loadedType.NOT;
         }
         public MapData(MapData original) {
+            this.p_sizes = new Vector2[original.p_sizes.Length];
             original.p_sizes.CopyTo(this.p_sizes, 0);
+            this.p_backgrounds = new BackgroundData[original.p_backgrounds.Length];
             original.p_backgrounds.CopyTo(this.p_backgrounds, 0);
+            this.p_colors = new Color[original.p_colors.Length];
             original.p_colors.CopyTo(this.p_colors, 0);
+            this.p_musics = new AudioClip[original.p_musics.Length];
             original.p_musics.CopyTo(this.p_musics, 0);
-            
+
+            this.p_stages = new Sprite[original.p_stages.Length];
             original.p_stages.CopyTo(this.p_stages, 0);
+            this.p_props = new PropData[original.p_props.Length];
             original.p_props.CopyTo(this.p_stages, 0);
+            this.p_forgrounds = new Sprite[original.p_forgrounds.Length];
             original.p_forgrounds.CopyTo(this.p_forgrounds, 0);
 
             this.m_ballSpawn = original.m_ballSpawn;
@@ -221,6 +228,7 @@ namespace PPBC {
             this.m_globalLight = original.m_globalLight;
             this.m_music = original.m_music;
 
+            this.m_data = new d_mapData[original.m_data.Length];
             original.m_data.CopyTo(this.m_data, 0);
 
             this.m_booted = original.m_booted;
@@ -252,11 +260,13 @@ namespace PPBC {
                 return null;
             }
             Texture2D tmpTex = tmp.texture;
-            if (!tmpTex)
+            if (!tmpTex) {
                 return null;
+            }
             Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width / 2, tmpTex.height / 2), PPU);
-            if (!value)
+            if (!value) {
                 return null;
+            }
             value.name = name;
             return value;
         }

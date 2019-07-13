@@ -10,11 +10,16 @@ namespace PPBC {
         public static RenderTexture m_texture;
 
         private void Awake() {
+            gameObject.SetActive(true);
             m_cam = GetComponent<Camera>();
             m_texture = m_cam.targetTexture;
+            gameObject.SetActive(false);
         }
 
         public static Texture2D TakeScreenShot() {
+            print(FitCameraToAABB.m_aABB);
+            print(m_cam);
+            print(m_cam.orthographicSize);
             m_cam.orthographicSize = FitCameraToAABB.m_aABB.size.y / 2;
             if (m_cam.orthographicSize * m_cam.aspect < FitCameraToAABB.m_aABB.size.x / 2) {
                 m_cam.orthographicSize = (FitCameraToAABB.m_aABB.size.x / 2) / m_cam.aspect;

@@ -25,6 +25,7 @@ namespace PPBC {
                 r_globalObjects = Instantiate(p_globalObjects);
                 r_globalObjects.name = "Temporary Global Objects";
                 EditorApplication.playModeStateChanged += ModeChanged;
+                DataHolder.s_currentModi = -1;
             }
         }
 

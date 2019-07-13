@@ -40,6 +40,8 @@ namespace PPBC {
             if (!m_background) {
                 print("no Background Sprite");
                 GameObject tmp = new GameObject("AUTO_BackgroundSprite");
+                tmp.layer = LayerMask.NameToLayer(StringCollection.L_BACKGROUND);
+
                 m_background = tmp.AddComponent<SpriteRenderer>();
                 m_background.sortingLayerName = StringCollection.L_BACKGROUND;
                 if (m_spriteMaterial) {
@@ -62,7 +64,8 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
-            if (DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT && (!m_ObjectInteractPrefab || !m_ObjectInteractPrefab.GetComponent<ObjRefHolder>() || !m_ObjectInteractPrefab.GetComponent<ObjRefHolder>().m_objectHolder)) {
+            if ((DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) &&
+                (!m_ObjectInteractPrefab || !m_ObjectInteractPrefab.GetComponent<ObjRefHolder>() || !m_ObjectInteractPrefab.GetComponent<ObjRefHolder>().m_objectHolder)) {
                 print("FATAL: no object Interaction Prefab");
                 Destroy(this);
                 return;
@@ -72,8 +75,12 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
-
-            LoadCurrentMap();
+            if (DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
+                DataHolder.s_currentModi = 0;
+                LoadCurrentMap(true);
+            } else {
+                LoadCurrentMap();
+            }
         }
 
         private void OnDestroy() {
@@ -150,7 +157,7 @@ namespace PPBC {
 
         #endregion
 
-        public void LoadCurrentMap() {
+        public void LoadCurrentMap(bool withHolder = false) {
             UnloadMap();
 
             print("load map " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
@@ -158,7 +165,7 @@ namespace PPBC {
             s_refMap = DataHolder.s_maps[DataHolder.s_currentMap];
             if (!s_refMap) {
                 print("map was not pre loaded");
-                if(DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
+                if((DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT)) {
                     s_refMap.EditBoot();
                 } else {
                     s_refMap.EditBoot();//TODO: change to Boot
@@ -191,7 +198,7 @@ namespace PPBC {
                 default:
                     break;
                 }
-                LoadNewObj(it);
+                LoadNewObj(it, withHolder);
             }
 
             //GameObject a = Instantiate(DataHolder.s_commonLaserBariar);
