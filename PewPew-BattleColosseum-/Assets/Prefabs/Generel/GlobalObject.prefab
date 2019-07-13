@@ -321,11 +321,15 @@ MonoBehaviour:
   m_characters:
   - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
   - {fileID: 5151474522508839637, guid: e8af030f08ae55546bfc31495cd00de2, type: 3}
-  m_commonSizes: []
-  m_commonBackgrounds: []
-  m_commonColors: []
+  m_commonSizes:
+  - {x: 18, y: 10}
+  m_commonBackgrounds:
+  - {fileID: 11400000, guid: 20a323a50673cdd458b5a9517201353e, type: 2}
+  m_commonColors:
+  - {r: 0, g: 0.6877341, b: 1, a: 1}
   m_commonMusics: []
-  m_commonProps: []
+  m_commonProps:
+  - {fileID: 11400000, guid: 10c318fd01632a74b9dbf7b372be78e0, type: 2}
   m_commonStages: []
   m_commonForgrounds: []
   m_commonLaserSpawner: {fileID: 802966571650542862, guid: 408365e2b1e050d4d96e6238017d3524,
