@@ -18,6 +18,7 @@ namespace PPBC {
             if (!EditorApplication.isPlaying && !h_inStartUp) {
                 if(GUILayout.Button("Start Editing")) {
                     h_inStartUp = true;
+                    EditorUtility.SetDirty(myTarget);
                     myTarget.m_editMap = true;
                     EditorApplication.ExecuteMenuItem("Edit/Play");
                     
