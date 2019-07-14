@@ -18,6 +18,8 @@ namespace PPBC {
         ColorGrading m_gamma;
         [SerializeField] Slider s_res;
         [SerializeField] TextMeshProUGUI r_res;
+        [SerializeField] Slider s_vSync;
+        [SerializeField] TextMeshProUGUI r_vSync;
 
         [Header("Balancing")]
         [SerializeField] string[] m_TF;
@@ -38,6 +40,9 @@ namespace PPBC {
                 ;
             s_res.value = i;
             r_res.text = Screen.currentResolution.width + " x " + Screen.currentResolution.height;
+
+            s_vSync.value = QualitySettings.vSyncCount;
+            VSync(s_vSync.value);
         }
 
         public void Fullscreen(float value) {// 0 or 1
@@ -74,6 +79,17 @@ namespace PPBC {
 
         public void Brightness(float value) {// from 0 to 10
             m_gamma.gamma.value.w = value / 5 - 1;
+        }
+
+        public void VSync(float value) {
+            if (value > 0) {
+                //yes
+                r_vSync.text = m_TF[0];
+            } else {
+                //no
+                r_vSync.text = m_TF[1];
+            }
+            QualitySettings.vSyncCount = Mathf.RoundToInt(value);
         }
     }
 }
