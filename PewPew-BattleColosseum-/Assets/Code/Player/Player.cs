@@ -147,7 +147,7 @@ namespace PPBC {
             if (!m_alive)
                 return;
             
-            m_rb.velocity += recoilDir / m_rb.mass; //m_rb.AddForce(recoilDir);// somehow not working
+            m_rb.AddForce(recoilDir, ForceMode2D.Impulse);
 
             if (source.m_owner == this)
                 return;
@@ -197,6 +197,8 @@ namespace PPBC {
             m_controler.m_index = index;
             m_playerIndex = index;
             DataHolder.s_players[index] = true;
+
+            m_rb = GetComponent<Rigidbody2D>();
             
             r_smg.Init(this);
             r_rocket.Init(this);

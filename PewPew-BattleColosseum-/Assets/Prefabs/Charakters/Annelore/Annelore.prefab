@@ -384,7 +384,7 @@ MonoBehaviour:
       type: 3}
     p_explosion: {fileID: 1755098847994500336, guid: 6860f9811bc30d740be9f77178e164b8,
       type: 3}
-    m_muzzleEnergy: 20000
+    m_muzzleEnergy: 500
     m_shootDelay: 2
     m_overchargeMaxTime: 4
     m_overchargeAdd: 0.4
@@ -399,7 +399,7 @@ MonoBehaviour:
     p_bullet: {fileID: 1481206135090748021, guid: cd6b4c2796c8b8e4fa9dc93615eba75d,
       type: 3}
     m_rPM: 500
-    m_muzzleEnergy: 2000
+    m_muzzleEnergy: 50
     m_shootForSec: 4
     m_coolDownRatio: 2
     m_halfPitchRange: 0.1
