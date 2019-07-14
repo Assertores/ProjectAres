@@ -84,16 +84,7 @@ namespace PPBC {
         }
 
         void Update() {
-            string currentAnim = GetCurrentAnim();
-            if(m_levelColCount > 0) {//Grounded
-                if (currentAnim == null || currentAnim == StringCollection.A_IDLEAIR) {
-                    StartAnim(StringCollection.A_IDLE, true);
-                }
-            } else {//Air
-                if (currentAnim == null || currentAnim == StringCollection.A_IDLE) {
-                    StartAnim(StringCollection.A_IDLEAIR, true);
-                }
-            }
+            
 
             //health to gui
             if (m_useSMG) {
@@ -103,6 +94,21 @@ namespace PPBC {
             }
 
             RotateWeapon();
+
+            
+        }
+
+        private void FixedUpdate() {
+            string currentAnim = GetCurrentAnim();
+            if (m_levelColCount > 0) {//Grounded
+                if (currentAnim == null || currentAnim == StringCollection.A_IDLEAIR) {
+                    StartAnim(StringCollection.A_IDLE, true);
+                }
+            } else {//Air
+                if (currentAnim == null || currentAnim == StringCollection.A_IDLE) {
+                    StartAnim(StringCollection.A_IDLEAIR, true);
+                }
+            }
 
             m_inVel = m_rb.velocity;
         }
