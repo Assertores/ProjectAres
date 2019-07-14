@@ -201,8 +201,7 @@ namespace PPBC {
                 LoadNewObj(it, withHolder);
             }
 
-            //GameObject a = Instantiate(DataHolder.s_commonLaserBariar);
-            //a.transform.parent = m_levelHolder;
+            DataHolder.s_modis[DataHolder.s_currentModi].SetUpGame();
         }
 
         public void SaveMap(string name) {

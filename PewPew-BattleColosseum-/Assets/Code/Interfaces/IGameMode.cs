@@ -14,6 +14,8 @@ namespace PPBC {
 
         void StartTransition();
 
+        void SetUpGame();
+
         void StartGame();
 
         void DoEndGame();

@@ -37,10 +37,14 @@ namespace PPBC {
             //Player transition
         }
 
-        public void StartGame() {
-            foreach(var it in Player.s_references) {
+        public void SetUpGame() {
+            foreach (var it in Player.s_references) {
                 it.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
             }
+        }
+
+        public void StartGame() {
+            
         }
 
         public void AbortGame() {

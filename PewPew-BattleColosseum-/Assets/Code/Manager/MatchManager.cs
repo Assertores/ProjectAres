@@ -68,6 +68,12 @@ namespace PPBC {
             TransitionHandler.ReadyToStart += FinishedContinueToNextMatch;
             TransitionHandler.ReadyToStart += StartMap;
 
+            foreach (var it in Player.s_references) {
+                it.ResetGameStats();
+                it.Invincable(false);
+                it.InControle(true);
+            }
+
             SceneManager.LoadScene(StringCollection.S_MAP);
         }
 
@@ -87,12 +93,6 @@ namespace PPBC {
 
             TransitionHandler.ReadyToStart -= StartMap;
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame += GMEnded;
-
-            foreach(var it in Player.s_references) {
-                it.ResetGameStats();
-                it.Invincable(false);
-                it.InControle(true);
-            }
 
             DataHolder.s_modis[DataHolder.s_currentModi].StartGame();
         }
