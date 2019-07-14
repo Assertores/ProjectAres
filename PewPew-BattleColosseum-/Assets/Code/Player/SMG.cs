@@ -86,6 +86,10 @@ namespace PPBC {
             m_owner.m_modelRef?.m_sMG.r_weapon.SetActive(toMe);
         }
 
+        public float GetStamina() {
+            return m_stamina / m_owner.m_modelRef.m_sMG.m_shootForSec;
+        }
+
         void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_owner.m_modelRef.m_sMG.p_bullet, m_owner.m_modelRef.m_sMG.r_barrel.position, m_owner.m_modelRef.m_sMG.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);//TODO: objectPooling
             

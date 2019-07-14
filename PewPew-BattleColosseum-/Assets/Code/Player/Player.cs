@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace PPBC {
 
@@ -32,6 +34,9 @@ namespace PPBC {
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
         [SerializeField] ParticleSystem FX_playerClash;
+        [SerializeField] Image r_healthBar;
+        [SerializeField] Image r_staminaBar;
+        [SerializeField] TextMeshProUGUI r_points;
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
@@ -84,18 +89,13 @@ namespace PPBC {
         }
 
         void Update() {
-            
+            r_healthBar.fillAmount = m_currentHealth / m_maxHealth;
 
-            //health to gui
-            if (m_useSMG) {
-                //stamina = r_smg.stamina;
-            } else {
-                //stamina = r_rocket.stamina;
-            }
+            r_staminaBar.fillAmount = m_useSMG ? r_smg.GetStamina() : r_rocket.GetStamina();
+
+            r_points.text = m_stats.m_points.ToString();
 
             RotateWeapon();
-
-            
         }
 
         private void FixedUpdate() {
@@ -146,6 +146,9 @@ namespace PPBC {
         public void TakeDamage(IHarmingObject source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
             if (!m_alive)
                 return;
+            
+            m_rb.velocity += recoilDir / m_rb.mass; //m_rb.AddForce(recoilDir);// somehow not working
+
             if (source.m_owner == this)
                 return;
             if (m_invincible)
