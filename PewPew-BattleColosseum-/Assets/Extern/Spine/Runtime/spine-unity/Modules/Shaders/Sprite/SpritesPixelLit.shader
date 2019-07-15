@@ -100,7 +100,8 @@ Shader "Spine/Sprite/Pixel Lit"
 		{     
 			Name "FORWARD_DELTA"
 			Tags { "LightMode" = "ForwardAdd" }
-			Blend [_SrcBlend] One
+			//BlendOp Multiply
+			//Blend SrcAlpha DstAlpha
 			ZWrite Off
 			ZTest LEqual
 			Cull [_Cull]

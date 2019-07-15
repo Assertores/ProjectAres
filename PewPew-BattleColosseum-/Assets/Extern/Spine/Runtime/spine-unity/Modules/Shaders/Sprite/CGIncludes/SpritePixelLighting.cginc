@@ -66,7 +66,9 @@ inline fixed3 calculateLightDiffuse(VertexOutput input, float3 normalWorld, inou
 	fixed3 lightDiffuse = _LightColor0.rgb * (attenuation * angleDot);
 #endif // _DIFFUSE_RAMP
 	*/
-	fixed3 lightDiffuse = _LightColor0.rgb * lerp(0, 1, smoothstep(0.45, 0.55, angleDot));
+	float shadow = smoothstep(0.15, 0.25, angleDot);//schattengröße und kantenschärfe
+	float3 shadowColor = {0.7,0,0.25};//schattenfarbe {0.6627451, 0.5372549, 0.6117647};
+	fixed3 lightDiffuse = lerp(shadowColor.rgb, _LightColor0.rgb, lerp(0.3 /*schatten deckkraft*/, 1, shadow));
 	return lightDiffuse;
 }
 
