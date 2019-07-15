@@ -9,8 +9,10 @@ namespace PPBC {
         #region Variables
 
         [Header("References")]
-        [SerializeField] TextMeshProUGUI r_speachBubble;
-        [SerializeField] TextMeshProUGUI[] r_replySpeachBubble;
+        [SerializeField] GameObject r_speachBubble;
+        [SerializeField] TextMeshProUGUI t_speachBubble;
+        [SerializeField] GameObject[] r_replySpeachBubble;
+        [SerializeField] TextMeshProUGUI[] t_replySpeachBubble;
 
         [Header("Balancing")]
         [TextArea]
@@ -33,8 +35,13 @@ namespace PPBC {
                 print("No Replys");
             }
 
-            foreach(var it in r_replySpeachBubble) {
+            foreach(var it in t_replySpeachBubble) {
                 it.text = m_reply;
+            }
+
+            r_speachBubble.SetActive(false);
+            foreach(var it in r_replySpeachBubble) {
+                it.SetActive(false);
             }
         }
 
@@ -54,7 +61,7 @@ namespace PPBC {
         #endregion
 
         void ShowPun() {
-            r_speachBubble.text = m_puns[Random.Range(0, m_puns.Length)];
+            t_speachBubble.text = m_puns[Random.Range(0, m_puns.Length)];
 
             r_speachBubble.gameObject.SetActive(true);
             foreach(var it in r_replySpeachBubble) {
