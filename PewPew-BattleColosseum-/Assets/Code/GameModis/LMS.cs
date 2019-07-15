@@ -60,8 +60,8 @@ namespace PPBC {
             victim.m_stats.m_points--;
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {
-                if (lhs.m_stats.m_kills != rhs.m_stats.m_kills) {
-                    return rhs.m_stats.m_kills.CompareTo(lhs.m_stats.m_kills);
+                if (lhs.m_stats.m_points != rhs.m_stats.m_points) {
+                    return rhs.m_stats.m_points.CompareTo(lhs.m_stats.m_points);
                 }
                 if (lhs.m_stats.m_deaths != rhs.m_stats.m_deaths) {
                     return rhs.m_stats.m_deaths.CompareTo(lhs.m_stats.m_deaths);
@@ -75,12 +75,16 @@ namespace PPBC {
                 return 0;
             });
 
-            if (victim.m_stats.m_points < 0) {
+            if (victim.m_stats.m_points >= 0) {
+                victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
+                return;
+            }
+            if(Player.s_references.FindAll(x => x.m_alive).Count <= 1) {
                 DoEndGame();
                 return;
             }
 
-            victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
+            
         }
 
         public void ScorePoint(Player scorer) {

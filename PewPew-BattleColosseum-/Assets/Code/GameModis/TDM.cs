@@ -63,8 +63,8 @@ namespace PPBC {
             }
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {
-                if (lhs.m_stats.m_kills != rhs.m_stats.m_kills) {
-                    return rhs.m_stats.m_kills.CompareTo(lhs.m_stats.m_kills);
+                if (lhs.m_stats.m_points != rhs.m_stats.m_points) {
+                    return rhs.m_stats.m_points.CompareTo(lhs.m_stats.m_points);
                 }
                 if (lhs.m_stats.m_deaths != rhs.m_stats.m_deaths) {
                     return rhs.m_stats.m_deaths.CompareTo(lhs.m_stats.m_deaths);
