@@ -24,6 +24,8 @@ namespace PPBC {
 
         public static GameObject[] s_characters;
 
+        public static Light s_dirLight;
+
         //===== ===== Maps Common Objects ===== =====
 
         public static Vector2[] s_commonSizes;
@@ -46,6 +48,8 @@ namespace PPBC {
         public MapData[] m_maps;
 
         public GameObject[] m_characters;
+
+        public Light m_dirLight;
 
         [Header("CommonObjects")]
         public Vector2[] m_commonSizes;
@@ -103,6 +107,8 @@ namespace PPBC {
                     tmp.Add(it);
             }
             s_characters = tmp.ToArray();
+
+            s_dirLight = m_dirLight;
 
             s_commonSizes = m_commonSizes;
             s_commonBackgrounds = m_commonBackgrounds;

@@ -16,7 +16,6 @@ namespace PPBC {
         int m_backgroundAudioIndex;
         [SerializeField] SpriteRenderer m_background;
         int m_backgroundIndex;
-        [SerializeField] Light m_directionalLight;
         int m_directionalLightIndex;
         [SerializeField] Transform m_levelHolder;
         [SerializeField] GameObject m_lightPrefab;
@@ -47,13 +46,6 @@ namespace PPBC {
                 if (m_spriteMaterial) {
                     m_background.material = m_spriteMaterial;
                 }
-            }
-            if (!m_directionalLight) {
-                print("no global light");
-                GameObject tmp = new GameObject("AUTO_GlobalLight");
-                tmp.transform.rotation = Quaternion.Euler(40.385f, -57.437f, -55.158f);
-                m_directionalLight = tmp.AddComponent<Light>();
-                m_directionalLight.type = LightType.Directional;
             }
             if (!m_levelHolder) {
                 print("no gameobject to cast all levelelements to");
@@ -132,11 +124,11 @@ namespace PPBC {
                 return;
 
             if (index >= 0) {
-                m_directionalLight.color = DataHolder.s_commonColors[index];
+                DataHolder.s_dirLight.color = DataHolder.s_commonColors[index];
             } else {
                 index *= -1;
                 index--;
-                m_directionalLight.color = s_refMap.p_colors[index];
+                DataHolder.s_dirLight.color = s_refMap.p_colors[index];
             }
         }
 
