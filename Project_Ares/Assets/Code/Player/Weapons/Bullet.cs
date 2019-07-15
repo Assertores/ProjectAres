@@ -10,7 +10,9 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] ParticleSystem FX_wallHit;
         [SerializeField] GameObject m_spriteParent;
-
+        [SerializeField] AudioClip[] SFX_wallHit;
+        [SerializeField] AudioSource m_audioSource;
+        
         [Header("Balancing")]
         [SerializeField] float m_killDistance = 1000;
         [SerializeField] float m_damage = 1;
@@ -67,6 +69,8 @@ namespace PPBC {
         #endregion
 
         IEnumerator BulletDie(float m_wait) {
+            int index = Random.Range(0, SFX_wallHit.Length);
+            m_audioSource.PlayOneShot(SFX_wallHit[index]);
             m_rb.velocity = new Vector2(0,0);
             m_spriteParent.SetActive(false);
             FX_wallHit.Play();

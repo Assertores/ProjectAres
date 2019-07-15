@@ -55,10 +55,11 @@ namespace PPBC {
             //float delay = 1;
             VFX_laserEnd.Play();
             
-            yield return new WaitForSeconds(VFX_laserLoop.main.duration);
-
-            for (int i = 0; i < collisionObjects.Count; i++) {
-                collisionObjects[i].SetActive(true);
+            yield return new WaitForSeconds(VFX_laserEnd.main.duration);
+            if (collisionObjects.Count < 0) {
+                for (int i = 0; i < collisionObjects.Count; i++) {
+                    collisionObjects[i].SetActive(true);
+                }
             }
             collisionObjects.Clear();
             int newIndex = Random.Range(0, LaserSpawner.s_references.Count);
@@ -75,14 +76,15 @@ namespace PPBC {
             for (int i = 0; i < count; i++) {
                 collisionObjects.Add(tmp[i].gameObject);
                 tmp[i].gameObject.SetActive(false);
+                print(tmp[i] + "  ");
             }
 
-            yield return new WaitForSeconds(VFX_laserStart.main.duration);
+            yield return new WaitForSeconds(VFX_laserStart.main.duration + 1.8f);
 
             VFX_laserLoop.Play();
         }
 
-        private void OnCollisionEnter2D(Collision2D collision) {
+        private void OnTriggerEnter2D(Collision2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
                 tmp.Die(null);

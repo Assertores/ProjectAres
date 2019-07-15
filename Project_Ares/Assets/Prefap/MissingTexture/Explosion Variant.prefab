@@ -50,7 +50,7 @@ PrefabInstance:
     - target: {fileID: 8702112468908311103, guid: 33acb3e5b32cc5a4daf72481604a1df9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8702112468908311103, guid: 33acb3e5b32cc5a4daf72481604a1df9,
         type: 3}
@@ -197,6 +197,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3293680556011053861, guid: 973c7300ae2d07248ad89f8bd41128ea,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b4d158e282a8fd94c9543d876bcaac5d, type: 3}
     - target: {fileID: 5424249025874711400, guid: 973c7300ae2d07248ad89f8bd41128ea,
         type: 3}
       propertyPath: m_IsActive
