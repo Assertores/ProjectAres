@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1437433920922312603}
   - component: {fileID: 1437433920922312596}
   - component: {fileID: 1437433920922312597}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,9 +111,9 @@ GameObject:
   - component: {fileID: 1437433921851527344}
   - component: {fileID: 1437433921851527345}
   - component: {fileID: 1437433921851527346}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 1437433921976280042}
   - component: {fileID: 1437433921976280043}
   - component: {fileID: 1437433921976280036}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 1437433922111461305}
   - component: {fileID: 1437433922111461306}
   - component: {fileID: 1437433922111461307}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TrapDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
