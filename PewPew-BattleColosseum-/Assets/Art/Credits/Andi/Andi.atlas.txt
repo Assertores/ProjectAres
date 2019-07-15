@@ -1,0 +1,13 @@
+
+Andi.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Andi
+  rotate: true
+  xy: 2, 2
+  size: 256, 512
+  orig: 256, 512
+  offset: 0, 0
+  index: -1

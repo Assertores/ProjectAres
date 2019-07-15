@@ -1,0 +1,55 @@
+
+Raoul.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm1
+  rotate: false
+  xy: 2, 2
+  size: 174, 156
+  orig: 174, 156
+  offset: 0, 0
+  index: -1
+Arm2
+  rotate: false
+  xy: 516, 809
+  size: 255, 174
+  orig: 255, 174
+  offset: 0, 0
+  index: -1
+Bc Cards
+  rotate: false
+  xy: 2, 160
+  size: 297, 309
+  orig: 297, 309
+  offset: 0, 0
+  index: -1
+Body
+  rotate: false
+  xy: 2, 471
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+Card1
+  rotate: false
+  xy: 773, 912
+  size: 92, 71
+  orig: 92, 71
+  offset: 0, 0
+  index: -1
+Card2
+  rotate: false
+  xy: 516, 674
+  size: 140, 133
+  orig: 140, 133
+  offset: 0, 0
+  index: -1
+Marketing
+  rotate: false
+  xy: 301, 338
+  size: 176, 131
+  orig: 176, 131
+  offset: 0, 0
+  index: -1

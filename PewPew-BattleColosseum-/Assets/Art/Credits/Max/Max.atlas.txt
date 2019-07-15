@@ -1,0 +1,34 @@
+
+Max.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: false
+  xy: 2, 94
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+Gloriole
+  rotate: false
+  xy: 2, 2
+  size: 101, 20
+  orig: 101, 20
+  offset: 0, 0
+  index: -1
+Wing L
+  rotate: false
+  xy: 2, 24
+  size: 130, 68
+  orig: 130, 68
+  offset: 0, 0
+  index: -1
+Wing R
+  rotate: false
+  xy: 516, 538
+  size: 130, 68
+  orig: 130, 68
+  offset: 0, 0
+  index: -1

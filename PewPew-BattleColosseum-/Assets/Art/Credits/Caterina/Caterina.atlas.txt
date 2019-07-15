@@ -1,0 +1,48 @@
+
+Caterina.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Caterina_
+  rotate: true
+  xy: 2, 32
+  size: 192, 484
+  orig: 192, 484
+  offset: 0, 0
+  index: -1
+Tears_1
+  rotate: false
+  xy: 488, 143
+  size: 115, 81
+  orig: 115, 81
+  offset: 0, 0
+  index: -1
+Tears_2_
+  rotate: false
+  xy: 488, 65
+  size: 109, 76
+  orig: 109, 76
+  offset: 0, 0
+  index: -1
+heart_1
+  rotate: false
+  xy: 2, 2
+  size: 24, 28
+  orig: 24, 28
+  offset: 0, 0
+  index: -1
+heart_2
+  rotate: false
+  xy: 488, 39
+  size: 27, 24
+  orig: 27, 24
+  offset: 0, 0
+  index: -1
+heart_3
+  rotate: false
+  xy: 605, 198
+  size: 26, 26
+  orig: 26, 26
+  offset: 0, 0
+  index: -1
