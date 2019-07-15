@@ -13,7 +13,9 @@ namespace PPBC {
         [SerializeField] TextMeshProUGUI[] r_replySpeachBubble;
 
         [Header("Balancing")]
+        [TextArea]
         [SerializeField] string[] m_puns;
+        [TextArea]
         [SerializeField] string m_reply = "-_-";
         [SerializeField] float m_punDelay = 15;
         [SerializeField] float m_punDuration = 5;
