@@ -1237,7 +1237,7 @@ MonoBehaviour:
   m_commonMusics:
   - {fileID: 8300000, guid: 42e0a74a90369d5449e0c24171e7f820, type: 3}
   m_commonProps:
-  - {fileID: 11400000, guid: 10c318fd01632a74b9dbf7b372be78e0, type: 2}
+  - {fileID: 11400000, guid: 21d4bb3886b0ab449a991f7fdcbf9277, type: 2}
   m_commonStages: []
   m_commonForgrounds: []
   m_commonLaserSpawner: {fileID: 802966571650542862, guid: 408365e2b1e050d4d96e6238017d3524,
