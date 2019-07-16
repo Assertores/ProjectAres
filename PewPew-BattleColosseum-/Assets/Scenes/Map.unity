@@ -752,7 +752,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_background: {fileID: 0}
-  m_directionalLight: {fileID: 0}
   m_levelHolder: {fileID: 0}
   m_lightPrefab: {fileID: 86690619132911133, guid: 5bd6bf616ae57c94fa2b18a155157a7a,
     type: 3}
