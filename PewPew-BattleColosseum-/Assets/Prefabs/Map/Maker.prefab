@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2767226503400559513
 Transform:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 32, y: 32}
+    oldSize: {x: 20.48, y: 20.48}
     newSize: {x: 32, y: 32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -224,9 +224,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 95c2badbaec939847b6bfaa23f253e5a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d01d02ace78e7d4b9ace8aa74350eb2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.47070312, y: 7.9921875}
@@ -252,7 +252,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.47070312, y: 7.9921875}
+    oldSize: {x: 9.98, y: 7.9}
     newSize: {x: 0.47070312, y: 7.9921875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -260,10 +260,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.21179491, y: 3.9811509}
-      - {x: -0.17895603, y: -3.9918206}
-      - {x: 0.19694018, y: -3.9918203}
-      - {x: 0.18699563, y: 3.9811506}
+    - - {x: 0.36977255, y: 2.9785104}
+      - {x: -0.42630398, y: 2.9785104}
+      - {x: -0.40941572, y: -2.9355333}
+      - {x: 0.2156043, y: -2.9355333}
 --- !u!114 &3962103130131633678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df719617019d1c94195a318ff22465bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: MiddelWall
+  m_name: MiddleWall
   m_sprite: {fileID: 3497210229228720244}
   m_col: {fileID: 8922998582040542921}
