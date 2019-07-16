@@ -62,7 +62,7 @@ namespace PPBC {
                 if (tmp != null) {
                     Vector2 dir = it.transform.position - transform.position;
                     float fallOff = m_fallOff.Evaluate(dir.magnitude / m_radius);
-                    tmp.TakeDamage(m_trace, (fallOff * m_baseDamage), dir.normalized * fallOff * m_baseKnockback);
+                    tmp.TakeDamage(this, (fallOff * m_baseDamage), dir.normalized * fallOff * m_baseKnockback);
                 }
             }
             return null;

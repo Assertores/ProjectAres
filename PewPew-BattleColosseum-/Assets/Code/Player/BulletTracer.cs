@@ -75,7 +75,7 @@ namespace PPBC {
 
             IDamageableObject hit = collision.gameObject.GetComponent<IDamageableObject>();
             if (hit != null) {
-                hit.TakeDamage(m_trace, m_damage, m_rb.velocity * m_rb.mass);
+                hit.TakeDamage(this, m_damage, m_rb.velocity * m_rb.mass);
             }
             
             m_rb.isKinematic = true;

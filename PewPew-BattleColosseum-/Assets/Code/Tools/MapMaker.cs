@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace PPBC {
+    [ExecuteInEditMode]
     public class MapMaker : MonoBehaviour {
 
 

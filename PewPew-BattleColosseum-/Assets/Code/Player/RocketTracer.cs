@@ -77,7 +77,7 @@ namespace PPBC {
 
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.TakeDamage(m_trace, m_damage, Vector2.zero);//rocket wont give recoil to the hit one
+                tmp.TakeDamage(this, m_damage, Vector2.zero);//rocket wont give recoil to the hit one
             }
 
             Destroy(gameObject);//TODO: objectPooling
