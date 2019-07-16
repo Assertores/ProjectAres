@@ -25,8 +25,12 @@ namespace PPBC {
 
         float m_lastShot;
 
+        GameObject Vfx_overcharge;
         #endregion
         #region MonoBehaviour
+        private void Start() {
+            Vfx_overcharge = m_owner.m_modelRef.m_rocket.r_overcharge;
+        }
 
         void Update() {
             if (!m_owner || !m_owner.m_modelRef)
@@ -42,6 +46,8 @@ namespace PPBC {
             } else {
                 m_stamina = 0;
             }
+            Vfx_overcharge.transform.position = m_owner.m_modelRef.m_rocket.r_barrel.transform.position;
+            Vfx_overcharge.transform.rotation = transform.rotation;
         }
 
         #endregion

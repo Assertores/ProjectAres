@@ -9,6 +9,7 @@ namespace PPBC {
 
         float m_lastShot = float.MinValue;
         public float m_stamina { get; private set; } = 0;
+        GameObject Vfx_muzzleflash;
 
         bool m_imActive;
         bool m_shootng;
@@ -16,6 +17,9 @@ namespace PPBC {
 
         #endregion
         #region MonoBehaviour
+        private void Start() {
+            Vfx_muzzleflash = m_owner.m_modelRef.m_sMG.r_muzzleFlashParent;
+        }
 
         void Update() {
             if (!m_owner || !m_owner.m_modelRef)
@@ -70,10 +74,15 @@ namespace PPBC {
                 return;
 
             m_shootng = true;
+            //---- ----- Feedback ----- ----
+            Vfx_muzzleflash.transform.position = m_owner.m_modelRef.m_sMG.r_barrel.transform.position;
+            Vfx_muzzleflash.transform.rotation = transform.rotation;
+            Vfx_muzzleflash.SetActive(true);
         }
 
         public void StopShooting() {
             m_shootng = false;
+            Vfx_muzzleflash.SetActive(false);
         }
 
         public void ChangeWeapon(bool toMe) {
