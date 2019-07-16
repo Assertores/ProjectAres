@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 9099067497036275784}
   m_Layer: 0
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: Projectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,11 +229,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95530655763000585}
     m_Modifications:
-    - target: {fileID: 8451197073844213806, guid: d068893b8bc975540b90c356ccf1750b,
-        type: 3}
-      propertyPath: m_Name
-      value: ROCKET_TRAIL
-      objectReference: {fileID: 0}
     - target: {fileID: 8457153009134150506, guid: d068893b8bc975540b90c356ccf1750b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -288,6 +283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451197073844213806, guid: d068893b8bc975540b90c356ccf1750b,
+        type: 3}
+      propertyPath: m_Name
+      value: ROCKET_TRAIL
       objectReference: {fileID: 0}
     - target: {fileID: 8613196402970008122, guid: d068893b8bc975540b90c356ccf1750b,
         type: 3}
