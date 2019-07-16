@@ -34,7 +34,7 @@ namespace PPBC {
         }
 
         void Update() {
-            if (m_time > 0) {
+            if (m_time > 0 && Time.timeScale > 0) {
                 float duration = Time.timeSinceLevelLoad - m_startTime;
                 m_currentMagnitude = m_magnitude * (1 - duration / m_time);
 

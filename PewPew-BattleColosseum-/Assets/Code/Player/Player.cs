@@ -181,19 +181,7 @@ namespace PPBC {
             if (DataHolder.s_players[index])
                 return null;
 
-            switch (index) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-                m_controler = r_static.AddComponent<ControlerControl>();
-                break;
-            case 4:
-                m_controler = r_static.AddComponent<KeyboardControl>();
-                break;
-            default:
-                break;
-            }
+            m_controler = r_static.AddComponent<ControlerControl>();
             m_controler.m_index = index;
             m_playerIndex = index;
             DataHolder.s_players[index] = true;

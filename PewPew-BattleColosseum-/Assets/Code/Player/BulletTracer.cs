@@ -70,6 +70,8 @@ namespace PPBC {
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision == m_spawnInCollider)
                 return;
+            if (collision.isTrigger)
+                return;
 
             IDamageableObject hit = collision.gameObject.GetComponent<IDamageableObject>();
             if (hit != null) {
