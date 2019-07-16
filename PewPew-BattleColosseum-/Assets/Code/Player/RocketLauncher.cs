@@ -26,26 +26,31 @@ namespace PPBC {
         float m_lastShot;
 
         GameObject Vfx_overcharge;
+        GameObject Vfx_muzzleFlash;
         #endregion
         #region MonoBehaviour
-        private void Start() {
-            Vfx_overcharge = m_owner.m_modelRef.m_rocket.r_overcharge;
-        }
 
         void Update() {
+            Vfx_overcharge = m_owner.m_modelRef.m_rocket.r_overcharge;
+            Vfx_muzzleFlash = m_owner.m_modelRef.m_rocket.r_muzzleFlashParent;
             if (!m_owner || !m_owner.m_modelRef)
                 return;
 
             if (m_charging) {
                 m_stamina += Time.deltaTime;
-
+                Vfx_muzzleFlash.transform.rotation = transform.rotation;
+                Vfx_muzzleFlash.SetActive(false);
+                Vfx_overcharge.SetActive(true);
                 if (m_stamina > m_owner.m_modelRef.m_rocket.m_overchargeMaxTime) {
                     Overcharged();
                     m_charging = false;
                 }
             } else {
                 m_stamina = 0;
+                Vfx_overcharge.SetActive(false);
+                
             }
+            
             Vfx_overcharge.transform.position = m_owner.m_modelRef.m_rocket.r_barrel.transform.position;
             Vfx_overcharge.transform.rotation = transform.rotation;
         }
@@ -72,12 +77,15 @@ namespace PPBC {
 
             m_startChargeTime = Time.time;
             m_charging = true;
+            
         }
 
         public void StopShooting() {
             if (m_charging)
                 ShootBullet();
             m_charging = false;
+            
+            //Vfx_overcharge.SetActive(false);
         }
 
         public void ChangeWeapon(bool toMe) {
@@ -96,7 +104,7 @@ namespace PPBC {
 
         void ShootBullet() {
             m_lastShot = Time.time;
-
+            Vfx_muzzleFlash.SetActive(true);
             Rigidbody2D bulletRB = Instantiate(m_owner.m_modelRef.m_rocket.p_rocket, m_owner.m_modelRef.m_rocket.r_barrel.position, m_owner.m_modelRef.m_rocket.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);//TODO: objectPooling
             
             if (bulletRB) {

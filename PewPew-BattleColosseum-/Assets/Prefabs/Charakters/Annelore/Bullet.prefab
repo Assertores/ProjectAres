@@ -188,6 +188,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  r_wallHitParent: {fileID: 6694471125919789466}
+  Vfx_wallHit: {fileID: 5968497551779209001}
   m_killDistance: 1000
   m_damage: 1
 --- !u!1 &6694471125919789466
@@ -400,6 +402,12 @@ PrefabInstance:
 --- !u!4 &8840344944165149492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5300036958407268441, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3684706916621927277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5968497551779209001 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
     type: 3}
   m_PrefabInstance: {fileID: 3684706916621927277}
   m_PrefabAsset: {fileID: 0}

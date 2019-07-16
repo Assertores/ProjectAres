@@ -17,6 +17,7 @@ namespace PPBC {
             public Transform r_barrel;
             public AudioClip[] m_sounds;
             public GameObject r_overcharge;
+            public GameObject r_muzzleFlashParent;
 
             public GameObject p_rocket;
             public GameObject p_explosion;

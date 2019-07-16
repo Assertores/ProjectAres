@@ -17,18 +17,18 @@ namespace PPBC {
 
         #endregion
         #region MonoBehaviour
-        private void Start() {
-            Vfx_muzzleflash = m_owner.m_modelRef.m_sMG.r_muzzleFlashParent;
-        }
 
         void Update() {
+            Vfx_muzzleflash = m_owner.m_modelRef.m_sMG.r_muzzleFlashParent;
+            
             if (!m_owner || !m_owner.m_modelRef)
                 return;
 
             if (m_shootng) {
                 m_stamina += Time.deltaTime;
-
-                if(m_stamina > m_owner.m_modelRef.m_sMG.m_shootForSec) {
+                Vfx_muzzleflash.SetActive(true);
+                Vfx_muzzleflash.transform.rotation = transform.rotation;
+                if (m_stamina > m_owner.m_modelRef.m_sMG.m_shootForSec) {
                     m_forceCooldown = true;
                     m_shootng = false;
                 }
@@ -41,6 +41,7 @@ namespace PPBC {
                         m_forceCooldown = false;
                     }
                 }
+                Vfx_muzzleflash.SetActive(false);
                 return;
             }
 
@@ -67,6 +68,7 @@ namespace PPBC {
 
         public void Init(Player owner) {
             m_owner = owner;
+            
         }
 
         public void StartShooting() {
@@ -76,13 +78,13 @@ namespace PPBC {
             m_shootng = true;
             //---- ----- Feedback ----- ----
             Vfx_muzzleflash.transform.position = m_owner.m_modelRef.m_sMG.r_barrel.transform.position;
-            Vfx_muzzleflash.transform.rotation = transform.rotation;
-            Vfx_muzzleflash.SetActive(true);
+            
+            
         }
 
         public void StopShooting() {
             m_shootng = false;
-            Vfx_muzzleflash.SetActive(false);
+            
         }
 
         public void ChangeWeapon(bool toMe) {

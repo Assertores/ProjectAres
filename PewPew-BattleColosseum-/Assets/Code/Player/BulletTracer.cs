@@ -12,6 +12,8 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] GameObject r_bullet;
         [SerializeField] ContactFilter2D m_filter;
+        [SerializeField] GameObject r_wallHitParent;
+        [SerializeField] ParticleSystem Vfx_wallHit;
 
         [Header("Balancing")]
         [SerializeField] float m_killDistance = 1000;
@@ -56,12 +58,12 @@ namespace PPBC {
 
         #endregion
 
-        IEnumerator IEEffects() {//TODO: hand over angle
-            //TODO: rotate effect
-            //TODO: start effects
+        IEnumerator IEEffects() {
+            r_wallHitParent.transform.rotation = Quaternion.LookRotation(-transform.forward,transform.up);
+            Vfx_wallHit.Play();
             //Play Audio
 
-            yield return null;//TODO: wait for effect finish
+            yield return Vfx_wallHit.main.duration;
             Destroy(this.gameObject);//TODO: objectPooling
         }
 
