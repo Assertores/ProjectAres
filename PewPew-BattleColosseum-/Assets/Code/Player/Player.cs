@@ -30,6 +30,7 @@ namespace PPBC {
         [SerializeField] GameObject r_player;
         [SerializeField] GameObject r_model;
         [SerializeField] GameObject r_static;
+        [SerializeField] GameObject r_vfx;
         [SerializeField] SMG r_smg;
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
@@ -420,12 +421,9 @@ namespace PPBC {
         #region Editor code
 
         EditorHUDAndPlayerLogic m_editHud;
-        bool m_doEdit = false;
         public void GoIntoEditMode() {
-            m_doEdit = !m_doEdit;
 
-            if (m_doEdit)
-                m_editHud.gameObject.SetActive(!m_editHud.gameObject.activeSelf);
+            m_editHud.gameObject.SetActive(!m_editHud.gameObject.activeSelf);
 
             if (m_editHud.gameObject.activeSelf) {
                 InControle(false);

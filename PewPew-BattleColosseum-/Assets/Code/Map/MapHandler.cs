@@ -68,7 +68,8 @@ namespace PPBC {
                 return;
             }
             if (DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
-                DataHolder.s_currentModi = 0;
+                if(DataHolder.s_currentModi == -1)
+                    DataHolder.s_currentModi = 0;
                 LoadCurrentMap(true);
             } else {
                 LoadCurrentMap();
@@ -155,15 +156,13 @@ namespace PPBC {
             print("load map " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
 
             s_refMap = DataHolder.s_maps[DataHolder.s_currentMap];
-            if (!s_refMap) {
-                print("map was not pre loaded");
-                if((DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT)) {
-                    s_refMap.EditBoot();
-                } else {
-                    s_refMap.EditBoot();//TODO: change to Boot
-                }
-                DataHolder.s_maps[DataHolder.s_currentMap] = s_refMap;
+
+            if((DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT)) {
+                s_refMap.EditBoot();
+            } else {
+                s_refMap.EditBoot();//TODO: change to Boot
             }
+            DataHolder.s_maps[DataHolder.s_currentMap] = s_refMap;
 
             SetBackgroundIndex(s_refMap.m_background);
             SetGlobalLightColorIndex(s_refMap.m_globalLight);
@@ -192,7 +191,7 @@ namespace PPBC {
                 }
                 LoadNewObj(it, withHolder);
             }
-
+            
             DataHolder.s_modis[DataHolder.s_currentModi].SetUpGame();
         }
 
@@ -222,6 +221,7 @@ namespace PPBC {
 
             MapData map = new MapData(s_refMap);
             map.name = name;
+            map.m_name = name;
 
             map.m_background = m_backgroundIndex;
             map.m_globalLight = m_directionalLightIndex;

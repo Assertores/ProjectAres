@@ -34,6 +34,9 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
+            float starVolume = m_as1.volume;
+            m_as1.volume = 0;
+            ChangeVolume(starVolume, 3);
         }
 
         public static void ChangeAudio(AudioClip newClip, float fadeTime = 0.5f) {
@@ -47,11 +50,11 @@ namespace PPBC {
                 s_singelton.m_as1.Play();
             }
 
-            s_singelton.FadeAudio(fadeTime);
+            s_singelton.StartCoroutine(s_singelton.FadeAudio(fadeTime));
         }
 
         public static void ChangeVolume(float newVolume, float fadeTime = 0.5f) {
-            s_singelton.IEVolume(newVolume, fadeTime);
+            s_singelton.StartCoroutine(s_singelton.IEVolume(newVolume, fadeTime));
         }
         
         IEnumerator FadeAudio(float fadeTime) {
@@ -60,7 +63,7 @@ namespace PPBC {
             
             while(fadeStartTime + fadeTime > Time.time) {
                 (m_currentAS1 ? m_as1 : m_as2).volume = Mathf.Lerp(volume, 0, (Time.time - fadeStartTime) / fadeTime);
-                (!m_currentAS1 ? m_as1 : m_as2).volume = Mathf.Lerp(volume, 0, (Time.time - fadeStartTime) / fadeTime);
+                (!m_currentAS1 ? m_as1 : m_as2).volume = Mathf.Lerp(0, volume, (Time.time - fadeStartTime) / fadeTime);
                 /*if (m_currentAS1) {
                     m_as1.volume = Mathf.Lerp(volume, 0, (Time.time - fadeStartTime) / fadeTime);
                     m_as2.volume = Mathf.Lerp(0, volume, (Time.time - fadeStartTime) / fadeTime);

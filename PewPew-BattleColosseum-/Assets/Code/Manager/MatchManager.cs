@@ -57,6 +57,8 @@ namespace PPBC {
                 return;
             h_startGameOngoing = true;
 
+            print("starting modi: " + DataHolder.s_modis[DataHolder.s_currentModi].m_name);
+
             DataHolder.s_modis[DataHolder.s_currentModi].StartTransition();
 
             TransitionHandler.ReadyToChange += ContinueToNextMap;
@@ -98,6 +100,8 @@ namespace PPBC {
         }
 
         void GMEnded(bool normal) {
+            h_OngoingGame = false;
+
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame -= GMEnded;
 
             if (normal) {
@@ -105,6 +109,8 @@ namespace PPBC {
             } else {
                 TransitionHandler.ReadyToChange += BackToMainMenu;
             }
+
+            TransitionHandler.StartOutTransition();
         }
 
         void BackToMainMenu() {

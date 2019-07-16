@@ -17,9 +17,6 @@ namespace PPBC {
         }
 
         public static Texture2D TakeScreenShot() {
-            print(FitCameraToAABB.m_aABB);
-            print(m_cam);
-            print(m_cam.orthographicSize);
             m_cam.orthographicSize = FitCameraToAABB.m_aABB.size.y / 2;
             if (m_cam.orthographicSize * m_cam.aspect < FitCameraToAABB.m_aABB.size.x / 2) {
                 m_cam.orthographicSize = (FitCameraToAABB.m_aABB.size.x / 2) / m_cam.aspect;
