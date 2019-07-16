@@ -9524,7 +9524,7 @@ GameObject:
   - component: {fileID: 8429783779932302739}
   - component: {fileID: 8429783779932302738}
   m_Layer: 0
-  m_Name: BUTTERSPLODE
+  m_Name: FX_BUTTERSPLODE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
