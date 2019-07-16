@@ -10,13 +10,21 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] Sprite r_icon_;
         [SerializeField] string r_text_;
+        [SerializeField] GameObject p_EditingHUD;
 
         #endregion
+
+        private void Start() {
+            foreach (Transform it in transform) {
+                it.gameObject.SetActive(false);
+            }
+        }
+
         #region IGameMode
 
         public Sprite m_icon => r_icon_;
 
-        public string m_name => StringCollection.M_FFA;
+        public string m_name => StringCollection.M_COOPEDIT;
 
         public string m_text => r_text_;
 
@@ -30,22 +38,33 @@ namespace PPBC {
 
         public void SetUpGame() {
             foreach (var it in Player.s_references) {
-                //it.EditAble(Instantiate(m_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
+                it.EditAble(Instantiate(p_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());
                 it.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
             }
         }
 
         public void StartGame() {
-
+            foreach(Transform it in transform) {
+                it.gameObject.SetActive(true);
+            }
         }
 
         public void AbortGame() {
+            foreach (Transform it in transform) {
+                it.gameObject.SetActive(false);
+            }
+
+            foreach(var it in Player.s_references) {
+                it.EditAble(null);
+            }
+
             EndGame?.Invoke(false);
         }
 
         public void DoEndGame() {
             MapHandler.s_singelton.SaveMap(System.DateTime.Now.ToString());
-            EndGame?.Invoke(false);
+
+            AbortGame();
         }
 
         public e_mileStones[] GetMileStones() {

@@ -95,7 +95,7 @@ namespace PPBC {
 
             value.m_icon = "icon.png";
             byte[] pngShot = ScreenshotCam.TakeScreenShot().EncodeToPNG();
-            File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + "icon.png", pngShot);
+            File.WriteAllBytes(StringCollection.P_MAPPARH + this.name  + "/" + "icon.png", pngShot);
 
             value.m_name = this.m_name;
 
@@ -117,7 +117,8 @@ namespace PPBC {
 
             throw new System.NotImplementedException();
 
-            MapJSON value = JsonUtility.FromJson<MapJSON>(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
+            string json = File.ReadAllText(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
+            MapJSON value = JsonUtility.FromJson<MapJSON>(json);
             //size, background, light, music
 
             //foreach (prop)
@@ -128,15 +129,16 @@ namespace PPBC {
         public void EditBoot() {
             if (m_booted == e_loadedType.EDITABLE || m_booted == e_loadedType.NOT)
                 return;
-
+            
             string path = StringCollection.P_MAPPARH + this.name + "/";
 
-            MapJSON value = JsonUtility.FromJson<MapJSON>(path + this.name + ".map");
-
+            string json = File.ReadAllText(path + this.name + ".map");
+            MapJSON value = JsonUtility.FromJson<MapJSON>(json);
+            
             List<BackgroundData> bgdt = new List<BackgroundData>();
             foreach(var it in value.p_backgrounds) {
                 BackgroundData element = new BackgroundData();
-                element.m_image = LoadSprite(path, it.m_image, 128);
+                element.m_image = LoadSprite(path, it.m_image, 200);
                 element.m_position = it.m_position;
                 element.m_size = it.m_size;
 
@@ -171,21 +173,21 @@ namespace PPBC {
 
             List<Sprite> spriteList = new List<Sprite>();
             foreach(var it in value.p_stages) {
-                spriteList.Add(LoadSprite(path, it, 512));
+                spriteList.Add(LoadSprite(path, it, 200));
             }
             this.p_stages = spriteList.ToArray();
 
             List<PropData> pdata = new List<PropData>();
             foreach(var it in value.p_props) {
                 PropData element = new PropData();
-                element.m_image = LoadSprite(path, it.m_image, 512);
+                element.m_image = LoadSprite(path, it.m_image, 200);
                 element.m_collider = it.m_collider;
             }
             this.p_props = pdata.ToArray();
 
             spriteList.Clear();
             foreach(var it in value.p_forgrounds) {
-                spriteList.Add(LoadSprite(path, it, 128));
+                spriteList.Add(LoadSprite(path, it, 200));
             }
             this.p_forgrounds = spriteList.ToArray();
 
@@ -195,7 +197,7 @@ namespace PPBC {
             this.m_music = value.m_music;
 
             this.m_data = value.m_data;
-
+            
             m_booted = e_loadedType.EDITABLE;
         }
 
@@ -234,14 +236,14 @@ namespace PPBC {
             this.m_booted = original.m_booted;
         }
         public MapData(string name) {
-            if (m_booted != e_loadedType.NOT)
-                return;
 
             this.name = name;
 
-            MapJSON value = JsonUtility.FromJson<MapJSON>(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
+            string json = File.ReadAllText(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
 
-            this.m_icon = LoadSprite(StringCollection.P_MAPPARH + this.name, value.m_icon);
+            MapJSON value = JsonUtility.FromJson<MapJSON>(json);
+
+            this.m_icon = LoadSprite(StringCollection.P_MAPPARH + this.name + "/", value.m_icon);
             this.m_name = value.m_name;
             this.p_sizes = value.p_sizes;
             this.m_size = value.m_size;

@@ -24,8 +24,8 @@ namespace PPBC {
 
         public d_mapData Update() {
             m_data.position = transform.position;
-            m_data.rotation = transform.rotation.eulerAngles.z;
-            m_data.scale = transform.localScale;
+            m_data.rotation = m_objectHolder.rotation.eulerAngles.z;
+            m_data.scale = m_objectHolder.localScale;
 
             return m_data;
         }

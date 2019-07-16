@@ -366,6 +366,7 @@ MonoBehaviour:
   r_player: {fileID: 1364380459742812675}
   r_model: {fileID: 5250936507362504116}
   r_static: {fileID: 3880191296282554290}
+  r_vfx: {fileID: 3463887965809616940}
   r_smg: {fileID: 4820248741756427071}
   r_rocket: {fileID: 5245385892947505954}
   r_playerClashParent: {fileID: 0}

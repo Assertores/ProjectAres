@@ -80,12 +80,12 @@ namespace PPBC {
                 IGameMode mode = m_modis[i].GetComponent<IGameMode>();
                 if(mode != null) {
                     gmList.Add(mode);
-                    m_modis[i].SetActive(false);
                 }
             }
-            s_modis = gmList.ToArray();
             
-            foreach(var it in m_maps) {
+            s_modis = gmList.ToArray();
+
+            foreach (var it in m_maps) {
                 s_maps.Add(it);
             }
             if (Directory.Exists(StringCollection.P_MAPPARH)) {

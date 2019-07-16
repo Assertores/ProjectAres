@@ -90,7 +90,7 @@ namespace PPBC {
 
             Collider2D[] hits = Physics2D.OverlapPointAll(transform.position);
             foreach (var it in hits) {
-                if (it.tag == StringCollection.T_BIN || it.tag == StringCollection.T_BIN) {
+                if (it.tag == StringCollection.T_BIN || it.tag == StringCollection.T_EXIT) {
                     m_editorObj = it.transform;
                     m_mapObj = null;
                     m_isDraging = true;

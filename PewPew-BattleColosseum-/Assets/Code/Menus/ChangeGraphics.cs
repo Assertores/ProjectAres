@@ -36,8 +36,8 @@ namespace PPBC {
 
             s_res.maxValue = Screen.resolutions.Length-1;
             int i = 0;
-            for (; i < Screen.resolutions.Length && (Screen.resolutions[i].width != Screen.currentResolution.width || Screen.resolutions[i].height != Screen.currentResolution.height); i++)
-                ;
+            for (; i < Screen.resolutions.Length && (Screen.resolutions[i].width != Screen.currentResolution.width || Screen.resolutions[i].height != Screen.currentResolution.height)/*refresh time*/; i++) ;
+            
             s_res.value = i;
             r_res.text = Screen.currentResolution.width + " x " + Screen.currentResolution.height;
 
