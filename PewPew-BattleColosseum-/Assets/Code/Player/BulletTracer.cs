@@ -59,11 +59,10 @@ namespace PPBC {
         #endregion
 
         IEnumerator IEEffects() {
-            r_wallHitParent.transform.rotation = Quaternion.LookRotation(-transform.forward,transform.up);
             Vfx_wallHit.Play();
             //Play Audio
 
-            yield return Vfx_wallHit.main.duration;
+            yield return new WaitForSeconds(Vfx_wallHit.main.duration);
             Destroy(this.gameObject);//TODO: objectPooling
         }
 
@@ -81,6 +80,8 @@ namespace PPBC {
             }
             
             m_rb.isKinematic = true;
+            m_rb.velocity = Vector3.zero;
+            transform.position = Physics2D.Raycast(transform.position, -transform.right).point;
             m_col.enabled = false;
             r_bullet.SetActive(false);
 

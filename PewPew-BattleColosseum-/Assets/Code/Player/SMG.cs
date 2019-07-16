@@ -27,7 +27,6 @@ namespace PPBC {
             if (m_shootng) {
                 m_stamina += Time.deltaTime;
                 Vfx_muzzleflash.SetActive(true);
-                Vfx_muzzleflash.transform.rotation = transform.rotation;
                 if (m_stamina > m_owner.m_modelRef.m_sMG.m_shootForSec) {
                     m_forceCooldown = true;
                     m_shootng = false;
@@ -76,10 +75,6 @@ namespace PPBC {
                 return;
 
             m_shootng = true;
-            //---- ----- Feedback ----- ----
-            Vfx_muzzleflash.transform.position = m_owner.m_modelRef.m_sMG.r_barrel.transform.position;
-            
-            
         }
 
         public void StopShooting() {
