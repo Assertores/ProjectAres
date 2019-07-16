@@ -49,7 +49,7 @@ namespace PPBC {
 
         public bool m_alive => true;
 
-        public void Die(IHarmingObject source, bool doTeamDamage = true) {
+        public void Die(ITracer source, bool doTeamDamage = true) {
             if(m_maxLife <= 0 && source.m_type != e_HarmingObjectType.ROCKED)
                 return;
 
@@ -58,7 +58,7 @@ namespace PPBC {
             m_currentLife = m_maxLife;
         }
 
-        public void TakeDamage(IHarmingObject source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
+        public void TakeDamage(ITracer source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
             m_lastHitTime = Time.time;
             m_currentLife -= damage;
 

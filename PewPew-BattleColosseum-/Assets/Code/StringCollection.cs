@@ -25,6 +25,7 @@ namespace PPBC {
         public static string T_LEVEL = "Level";
         public static string T_PROJECTILES = "Projectiles";
         public static string T_BIN = "Bin";
+        public static string T_EXIT = "Exit";
         public static string T_CAMBB = "CameraBoundingBox";
 
         #endregion

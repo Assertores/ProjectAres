@@ -8,6 +8,7 @@ TagManager:
   - Projectiles
   - Bin
   - CameraBoundingBox
+  - Exit
   layers:
   - Default
   - TransparentFX

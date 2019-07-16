@@ -17,13 +17,13 @@ namespace PPBC {
         /// <param name="damage">the amound of damage it should take</param>
         /// <param name="recoilDir">the direction it sould flie of</param>
         /// <param name="doTeamDamage">if it should care for the team flag or not</param>
-        void TakeDamage(IHarmingObject source, float damage, Vector2 recoilDir, bool doTeamDamage = true);
+        void TakeDamage(ITracer source, float damage, Vector2 recoilDir, bool doTeamDamage = true);
 
         /// <summary>
         /// this function should be called if the object should die (alsow from inside)
         /// </summary>
         /// <param name="source">the source object, whitch enflickted the damage</param>
         /// <param name="doTeamDamage">if it should care for the team flag or not</param>
-        void Die(IHarmingObject source, bool doTeamDamage = true);
+        void Die(ITracer source, bool doTeamDamage = true);
     }
 }

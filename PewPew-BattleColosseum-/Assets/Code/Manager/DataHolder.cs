@@ -80,6 +80,7 @@ namespace PPBC {
                 IGameMode mode = m_modis[i].GetComponent<IGameMode>();
                 if(mode != null) {
                     gmList.Add(mode);
+                    m_modis[i].SetActive(false);
                 }
             }
             s_modis = gmList.ToArray();

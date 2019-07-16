@@ -118,19 +118,19 @@ namespace PPBC {
 
         public bool m_alive { get; private set; }
 
-        public void Die(IHarmingObject source, bool doTeamDamage = true) {
+        public void Die(ITracer source, bool doTeamDamage = true) {
             if (!m_alive)
                 return;
-            if (!doTeamDamage && source.m_owner && source.m_owner.m_team == m_team)
+            if (!doTeamDamage && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
                 return;
 
             //--> can die && should die <--
 
             m_stats.m_deaths++;
-            if(source != null && source.m_owner != null)
-                source.m_owner.m_stats.m_kills++;
+            if(source != null && source.m_trace.m_owner != null)
+                source.m_trace.m_owner.m_stats.m_kills++;
 
-            StartCoroutine(IEDie(source));
+            StartCoroutine(IEDie(source.m_trace));
         }
 
         IEnumerator IEDie(IHarmingObject source) {
@@ -143,23 +143,23 @@ namespace PPBC {
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
 
-        public void TakeDamage(IHarmingObject source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
+        public void TakeDamage(ITracer source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
             if (!m_alive)
                 return;
             
             m_rb.AddForce(recoilDir, ForceMode2D.Impulse);
 
-            if (source.m_owner == this)
+            if (source.m_trace.m_owner == this)
                 return;
             if (m_invincible)
                 return;
-            if (!doTeamDamage && source.m_owner && source.m_owner.m_team == m_team)
+            if (!doTeamDamage && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
                 return;
 
             if (damage >= m_currentHealth) {
                 m_stats.m_damageTaken += m_currentHealth;
-                if (source != null && source.m_owner != null)
-                    source.m_owner.m_stats.m_damageDealt += m_currentHealth;
+                if (source != null && source.m_trace.m_owner != null)
+                    source.m_trace.m_owner.m_stats.m_damageDealt += m_currentHealth;
 
                 Die(source, doTeamDamage);
                 return;
@@ -168,8 +168,8 @@ namespace PPBC {
             //--> damage is valid && won't die from it <--
 
             m_stats.m_damageTaken += damage;
-            if (source != null && source.m_owner != null)
-                source.m_owner.m_stats.m_damageDealt += damage;
+            if (source != null && source.m_trace.m_owner != null)
+                source.m_trace.m_owner.m_stats.m_damageDealt += damage;
 
             m_currentHealth -= damage;
             StartAnim(StringCollection.A_HIT);
@@ -416,6 +416,58 @@ namespace PPBC {
             }
         }
 
+
+        #region Editor code
+
+        EditorHUDAndPlayerLogic m_editHud;
+        bool m_doEdit = false;
+        public void GoIntoEditMode() {
+            m_doEdit = !m_doEdit;
+
+            if (m_doEdit)
+                m_editHud.gameObject.SetActive(!m_editHud.gameObject.activeSelf);
+
+            if (m_editHud.gameObject.activeSelf) {
+                InControle(false);
+                Invincable(true);
+                m_rb.simulated = false;
+
+                m_controler.TriggerDown += m_editHud.DragHandler;
+                m_controler.ChangeType += m_editHud.ChangeType;
+                m_controler.ChangeCharacter += m_editHud.ChangeIndex;
+            } else {
+                m_controler.TriggerDown -= m_editHud.DragHandler;
+                m_controler.ChangeType -= m_editHud.ChangeType;
+                m_controler.ChangeCharacter -= m_editHud.ChangeIndex;
+
+                StopEdit();
+            }
+        }
+
+        public void StopEdit() {
+
+            InControle(true);
+            Invincable(false);
+            m_rb.simulated = true;
+        }
+
+        public void EditAble(EditorHUDAndPlayerLogic hud) {
+            if (hud != null) {
+                m_editHud = hud;
+                m_editHud.SetControlRef(m_controler);
+                m_editHud.gameObject.SetActive(false);
+
+                m_controler.Accept += GoIntoEditMode;
+            } else {
+                m_controler.Accept -= GoIntoEditMode;
+
+                StopEdit();
+                if (m_editHud)
+                    Destroy(m_editHud.gameObject);
+            }
+        }
+
+        #endregion
         #region Physics
 
         private void OnCollisionEnter2D(Collision2D collision) {

@@ -25,11 +25,11 @@ namespace PPBC {
 
         public bool m_alive => true;
 
-        public void Die(IHarmingObject source, bool doTeamDamage = true) {
+        public void Die(ITracer source, bool doTeamDamage = true) {
             return;
         }
 
-        public void TakeDamage(IHarmingObject source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
+        public void TakeDamage(ITracer source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
             m_rb.AddForce(recoilDir);
         }
 
