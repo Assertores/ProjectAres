@@ -507,7 +507,7 @@ MonoBehaviour:
   m_sMG:
     r_weapon: {fileID: 8019218014111275184}
     m_Icon: {fileID: 0}
-    r_sMGAnim: {fileID: 0}
+    r_sMGAnim: {fileID: 1740558602136339707}
     r_barrel: {fileID: 1736652266734118144}
     m_sounds: []
     r_muzzleFlashParent: {fileID: 6627446527604369376}
@@ -1097,11 +1097,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9049426049345977205}
     m_Modifications:
-    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: m_Name
-      value: MUZZLEFLASH_SMG
-      objectReference: {fileID: 0}
     - target: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1156,6 +1151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: m_Name
+      value: MUZZLEFLASH_SMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c751caebae1fed54d9af0de1f9ba7b41, type: 3}
