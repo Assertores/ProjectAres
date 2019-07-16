@@ -101,9 +101,9 @@ namespace PPBC {
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame -= GMEnded;
 
             if (normal) {
-                TransitionHandler.ReadyToChange += BackToMainMenu;
-            } else {
                 TransitionHandler.ReadyToChange += ContinueToWinScreen;
+            } else {
+                TransitionHandler.ReadyToChange += BackToMainMenu;
             }
         }
 
