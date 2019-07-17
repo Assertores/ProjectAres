@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sauerbraten = UnityEngine.MonoBehaviour;
 
 namespace PPBC {
     [RequireComponent(typeof(LineRenderer))]
-    public class LaserPointer : Sauerbraten {
+    public class LaserPointer : MonoBehaviour {
 
         [SerializeField] LayerMask m_layerMask;
 
