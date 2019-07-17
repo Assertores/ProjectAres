@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7310322136630659699}
   - component: {fileID: 3751839624945460523}
   - component: {fileID: 3747380136110304292}
+  - component: {fileID: 4316064246058589024}
   m_Layer: 0
   m_Name: WeaponRot
   m_TagString: Untagged
@@ -146,6 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_anim: {fileID: 1728048761181632481}
   m_boneName: Weapon
+--- !u!114 &4316064246058589024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947745387099054667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20e4807e705240a2d932fe8e0de73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sources: []
 --- !u!1 &2232629002305699750
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +461,7 @@ GameObject:
   - component: {fileID: 5756044568108131086}
   - component: {fileID: 1317956718743503135}
   - component: {fileID: 7353004879546632628}
+  - component: {fileID: 890526115313754423}
   m_Layer: 0
   m_Name: Annelore
   m_TagString: Untagged
@@ -617,6 +632,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &890526115313754423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5151474522508839637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20e4807e705240a2d932fe8e0de73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sources: []
 --- !u!1 &5399541717270294292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,16 +1063,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8794891821540208064}
     m_Modifications:
-    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
-        type: 3}
-      propertyPath: m_Name
-      value: ROCKETLAUNCHER_CHARGE
-      objectReference: {fileID: 0}
-    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3269910909919600068, guid: 192d7c32744c9c14d9c23404c6912454,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1099,6 +1117,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
+        type: 3}
+      propertyPath: m_Name
+      value: ROCKETLAUNCHER_CHARGE
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3269910909919600070, guid: 192d7c32744c9c14d9c23404c6912454,
         type: 3}
@@ -1155,15 +1183,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6934450244164812206}
     m_Modifications:
-    - target: {fileID: 6107276889172965055, guid: ced6568b6b7735f428440b66873228a0,
-        type: 3}
-      propertyPath: m_Name
-      value: MUZZLEFLASH_ROCKETLAUNCHER
-      objectReference: {fileID: 0}
     - target: {fileID: 6107276889172965053, guid: ced6568b6b7735f428440b66873228a0,
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107276889172965055, guid: ced6568b6b7735f428440b66873228a0,
+        type: 3}
+      propertyPath: m_Name
+      value: MUZZLEFLASH_ROCKETLAUNCHER
       objectReference: {fileID: 0}
     - target: {fileID: 6107276889172965052, guid: ced6568b6b7735f428440b66873228a0,
         type: 3}
@@ -1251,11 +1279,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9049426049345977205}
     m_Modifications:
-    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: m_Name
-      value: MUZZLEFLASH_SMG
-      objectReference: {fileID: 0}
     - target: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1310,6 +1333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: m_Name
+      value: MUZZLEFLASH_SMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c751caebae1fed54d9af0de1f9ba7b41, type: 3}

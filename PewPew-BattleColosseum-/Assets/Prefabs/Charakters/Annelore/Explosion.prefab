@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1866758271560595264}
   - component: {fileID: 1645913827660812904}
   - component: {fileID: 1695942168106580824}
+  - component: {fileID: 8435746331961226123}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -176,6 +177,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8435746331961226123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755098847994500336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20e4807e705240a2d932fe8e0de73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sources: []
 --- !u!1 &2365114697049478548
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,12 +346,12 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8906914261813274104, guid: 88098fb69340d314781319be3b6c86c4,
+    - target: {fileID: 8906914262375047730, guid: 88098fb69340d314781319be3b6c86c4,
         type: 3}
       propertyPath: m_SortingLayerID
       value: -1681753075
       objectReference: {fileID: 0}
-    - target: {fileID: 8906914261813274104, guid: 88098fb69340d314781319be3b6c86c4,
+    - target: {fileID: 8906914262375047730, guid: 88098fb69340d314781319be3b6c86c4,
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -352,12 +366,12 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8906914262375047730, guid: 88098fb69340d314781319be3b6c86c4,
+    - target: {fileID: 8906914261813274104, guid: 88098fb69340d314781319be3b6c86c4,
         type: 3}
       propertyPath: m_SortingLayerID
       value: -1681753075
       objectReference: {fileID: 0}
-    - target: {fileID: 8906914262375047730, guid: 88098fb69340d314781319be3b6c86c4,
+    - target: {fileID: 8906914261813274104, guid: 88098fb69340d314781319be3b6c86c4,
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
