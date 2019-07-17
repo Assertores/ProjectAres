@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace PPBC {
     public class PillarRefHolder : MonoBehaviour {
 
+        public TextMeshProUGUI r_points;
+
         //calculation variables
-        public Vector3 m_holderPos;
-        public Vector3 m_middlePos;
-        public Vector3 m_targetPos;
-        public int m_previousMatchPoints;
+        [HideInInspector] public Vector3 m_holderPos;
+        [HideInInspector] public Vector3 m_middlePos;
+        [HideInInspector] public Vector3 m_targetPos;
+        [HideInInspector] public int m_previousMatchPoints;
     }
 }
