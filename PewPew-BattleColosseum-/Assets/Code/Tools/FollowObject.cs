@@ -14,7 +14,7 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
-            m_offset = m_target.position - transform.position;
+            m_offset = transform.position - m_target.position;
         }
 
         void Update() {
