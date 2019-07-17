@@ -24,6 +24,7 @@ namespace PPBC {
         [SerializeField] RectTransform m_KillFeed;
 
         #endregion
+        #region MonoBehaviour
 
         private void Awake() {
             if(s_singelton != null && s_singelton != this) {
@@ -82,6 +83,7 @@ namespace PPBC {
             }
         }
 
+        #endregion
         #region SetIndex
 
         public void SetBackgroundIndex(int index) {
@@ -386,6 +388,19 @@ namespace PPBC {
         public void UnloadMap() {
             foreach (Transform it in m_levelHolder) {
                 Destroy(it.gameObject);
+            }
+        }
+
+        public Vector2 GetSize() {
+
+            int index = m_cameraSizeIndex;
+
+            if (index >= 0) {
+                return DataHolder.s_commonSizes[index];
+            } else {
+                index *= -1;
+                index--;
+                return s_refMap.p_sizes[index];
             }
         }
     }

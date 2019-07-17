@@ -87,7 +87,7 @@ namespace PPBC {
             
         }
 
-        public void ScorePoint(Player scorer) {
+        public void ScorePoint(Player scorer, float amount) {
         }
 
         #endregion

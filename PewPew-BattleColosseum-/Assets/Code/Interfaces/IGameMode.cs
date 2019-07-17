@@ -51,6 +51,6 @@ namespace PPBC {
 
         void PlayerDied(IHarmingObject killer, Player victim);
 
-        void ScorePoint(Player scorer);
+        void ScorePoint(Player scorer, float amount);
     }
 }

@@ -24,7 +24,7 @@ namespace PPBC {
 
         public string m_text => r_text_;
 
-        public bool m_isTeamMode => false;
+        public bool m_isTeamMode => true;
 
         public System.Action<bool> EndGame { get; set; }
 
@@ -86,7 +86,7 @@ namespace PPBC {
             victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
         }
 
-        public void ScorePoint(Player scorer) {
+        public void ScorePoint(Player scorer, float amount) {
         }
 
         #endregion
