@@ -280,7 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e92c6092b0f19f41ac59836e637994b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_pillar: {fileID: 0}
+  p_pillar: {fileID: 4624950864733590498, guid: ddd24ea87a00d92458982cc6016c34dd,
+    type: 3}
   r_rightMostPlayer: {fileID: 843603826}
   r_leftMostPlayer: {fileID: 1704224553}
   r_maxHeight: {fileID: 1248723336}
@@ -598,7 +599,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.6508865
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

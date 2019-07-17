@@ -329,6 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 678723385}
+  - component: {fileID: 678723386}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -352,6 +353,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &678723386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678723384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872b74636af986b4784b94ae455fd7c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_laserStart: {fileID: 0}
+  fx_laserLoop: {fileID: 0}
+  fx_laserEnd: {fileID: 0}
+  m_contFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 2048
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!1 &840021135
 GameObject:
   m_ObjectHideFlags: 0
