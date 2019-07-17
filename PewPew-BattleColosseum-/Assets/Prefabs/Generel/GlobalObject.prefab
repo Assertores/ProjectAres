@@ -1247,7 +1247,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7dd6d0e253eb081489038615ef750897, type: 2}
   - {fileID: 11400000, guid: 0e6a2efcde2f3ac49888f3dd5d40a345, type: 2}
   - {fileID: 11400000, guid: 0d7f6dea232bf4e47884c6248d5759a7, type: 2}
-  m_commonStages: []
+  m_commonStages:
+  - {fileID: 21300000, guid: 7aed04438b393004c9f98d9bf6ed4856, type: 3}
   m_commonForgrounds: []
   m_commonLaserSpawner: {fileID: 802966571650542862, guid: 408365e2b1e050d4d96e6238017d3524,
     type: 3}
