@@ -93,9 +93,12 @@ namespace PPBC {
             case e_winScreenState.LERPTOMATCH:
                 if (m_GameMatchPillarLerpTime < Time.time - m_startLerpTime) {
                     foreach (var it in Player.s_references) {
-                        PositionPlayer(it, Vector3.Lerp(it.r_pillar.m_holderPos, it.r_pillar.m_middlePos, m_GameMatchPillarLerpTime / (Time.time - m_startLerpTime)));
+                        PositionPlayer(it, Vector3.Lerp(it.r_pillar.m_holderPos, it.r_pillar.m_middlePos, m_GameMatchPillarLerpTime / (Time.time - m_startLerpTime)), it.r_pillar.m_previousMatchPoints);
                     }
                 } else {
+                    foreach(var it in Player.s_references) {
+                        it.r_pillar.r_points.text = it.r_pillar.m_previousMatchPoints.ToString();
+                    }
                     m_state = e_winScreenState.MATCHPILLAR;
                     m_startLerpTime = Time.time;
                 }
@@ -103,7 +106,7 @@ namespace PPBC {
             case e_winScreenState.MATCHPILLAR://eventuell anders cooler
                 if (m_GameMatchPillarLerpTime < Time.time - m_startLerpTime) {
                     foreach (var it in Player.s_references) {
-                        PositionPlayer(it, Vector3.Lerp(it.r_pillar.m_holderPos, it.r_pillar.m_targetPos, m_GameMatchPillarLerpTime / (Time.time - m_startLerpTime)));
+                        PositionPlayer(it, Vector3.Lerp(it.r_pillar.m_holderPos, it.r_pillar.m_targetPos, m_GameMatchPillarLerpTime / (Time.time - m_startLerpTime)), Mathf.FloorToInt(Mathf.Lerp(it.r_pillar.m_previousMatchPoints, it.m_stats.m_matchPoints, m_GameMatchPillarLerpTime / (Time.time - m_startLerpTime))));
                     }
                 } else {
                     foreach(var it in Player.s_references) {
@@ -144,7 +147,7 @@ namespace PPBC {
                 GameObject pillar = Instantiate(p_pillar);
                 Player.s_references[i].r_pillar = pillar.GetComponent<PillarRefHolder>();
 
-                PositionPlayer(Player.s_references[i], Vector3.Lerp(r_leftMostPlayer.position, r_rightMostPlayer.position, ((float)i + 1) / (Player.s_references.Count + 1)));
+                PositionPlayer(Player.s_references[i], Vector3.Lerp(r_leftMostPlayer.position, r_rightMostPlayer.position, ((float)i + 1) / (Player.s_references.Count + 1)),0);
             }
 
             m_startTime = Time.time;
@@ -155,15 +158,16 @@ namespace PPBC {
         void RisePillar() {
             foreach(var it in Player.s_references) {
                 if(m_hightPerKill * it.m_stats.m_points > it.transform.position.y - r_leftMostPlayer.position.y) {
-                    PositionPlayer(it, it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0));
+                    PositionPlayer(it, it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0), Mathf.FloorToInt((it.transform.position.y - r_leftMostPlayer.position.y) / m_hightPerKill));
                 }
             }
         }
 
-        void PositionPlayer(Player player, Vector3 position) {
+        void PositionPlayer(Player player, Vector3 position, int points) {
             player.transform.position = position;
             player.r_pillar.transform.position = position;
             player.r_pillar.transform.position -= new Vector3(0, player.m_distanceToGround, 0);
+            player.r_pillar.r_points.text = points.ToString();
         }
 
         IEnumerator IEStartAnim() {
