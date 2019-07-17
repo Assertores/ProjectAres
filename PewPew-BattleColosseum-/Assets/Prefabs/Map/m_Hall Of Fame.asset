@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a21d8870baf91645a2e3ff23c89b862, type: 3}
+  m_Name: m_Hall Of Fame
+  m_EditorClassIdentifier: 
+  p_sizes: []
+  p_backgrounds: []
+  p_colors: []
+  p_musics: []
+  p_stages: []
+  p_props: []
+  p_forgrounds: []
+  m_ballSpawn: {x: 0, y: 0}
+  m_icon: {fileID: 21300000, guid: 191448b2a2122ab4f8ff72640c1c194c, type: 3}
+  m_name: Hall Of Fame
+  m_size: 0
+  m_background: 1
+  m_globalLight: 0
+  m_music: 0
+  m_data:
+  - type: 2
+    index: 0
+    position: {x: 0, y: -1.02}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 4
+    index: 0
+    position: {x: -5.7, y: -0.85}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 4
+    index: 1
+    position: {x: 5.63, y: -0.91}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 1
+    position: {x: -9.47, y: 5.4069996}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 2
+    position: {x: -6.54, y: 5.41}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 3
+    position: {x: -9.464, y: -5.761}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 4
+    position: {x: -6.557, y: -5.762}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 5
+    position: {x: 9.76, y: -6.16}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 6
+    position: {x: 9.74, y: -9.53}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 7
+    position: {x: 9.76, y: 0.29}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 8
+    position: {x: 9.759, y: 6.57}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 9
+    position: {x: 9.73, y: 9.7}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 10
+    position: {x: -0.01, y: 5.368}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 11
+    position: {x: -0.02, y: -5.764}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 1
+    position: {x: 9.46, y: 5.408}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 2
+    position: {x: 6.566, y: 5.407}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 3
+    position: {x: 9.462, y: -5.767}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 4
+    position: {x: 6.518, y: -5.767}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 5
+    position: {x: -9.726, y: -6.22}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 6
+    position: {x: -9.73, y: -9.584}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 7
+    position: {x: -9.728, y: 0.32}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 8
+    position: {x: -9.727, y: 6.609}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 9
+    position: {x: -9.714, y: 9.741}
+    rotation: 0
+    scale: {x: -1, y: 1}
+  - type: 2
+    index: 12
+    position: {x: -5.6, y: -1.8}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 2
+    index: 12
+    position: {x: 5.6, y: -1.8}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 1
+    index: 0
+    position: {x: 5.58, y: -0.2}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 1
+    index: 0
+    position: {x: -5.62, y: -0.198}
+    rotation: 0
+    scale: {x: 1, y: 1}

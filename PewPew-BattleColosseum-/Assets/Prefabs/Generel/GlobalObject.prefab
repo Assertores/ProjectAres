@@ -1222,13 +1222,13 @@ MonoBehaviour:
   - {fileID: 187300853746218177}
   - {fileID: 4926554247960900137}
   m_maps:
-  - {fileID: 11400000, guid: ce96c9af92c4b554d90fb7cc318ee683, type: 2}
+  - {fileID: 11400000, guid: 0cf1fd58bfd4a0247b735f22784166f7, type: 2}
   m_characters:
   - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
   - {fileID: 5151474522508839637, guid: e8af030f08ae55546bfc31495cd00de2, type: 3}
   m_dirLight: {fileID: 347431681967975084}
   m_commonSizes:
-  - {x: 32, y: 16}
+  - {x: 20, y: 10}
   m_commonBackgrounds:
   - {fileID: 11400000, guid: 20a323a50673cdd458b5a9517201353e, type: 2}
   - {fileID: 11400000, guid: 264dacf0f8e2ea7449b687a67188d48c, type: 2}
@@ -1239,13 +1239,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 42e0a74a90369d5449e0c24171e7f820, type: 3}
   m_commonProps:
   - {fileID: 11400000, guid: 21d4bb3886b0ab449a991f7fdcbf9277, type: 2}
-  - {fileID: 11400000, guid: 64e0562615325d349bed9dd5c07acb1f, type: 2}
+  - {fileID: 11400000, guid: d20eebfd2684551439a627461c9b31a7, type: 2}
+  - {fileID: 11400000, guid: 3c66f73af1bfa964a9839a83451bbae6, type: 2}
+  - {fileID: 11400000, guid: 53bb852eb4b4681489b79ffb5206ef88, type: 2}
+  - {fileID: 11400000, guid: 6c5185ea0c0744c4a8d6d8fb6bb27f9b, type: 2}
+  - {fileID: 11400000, guid: 89bd309b249b3df479c72f20950d4bd5, type: 2}
+  - {fileID: 11400000, guid: 40f00695920a964499490a203eeddd4f, type: 2}
+  - {fileID: 11400000, guid: 7053055d2a9f84f49b1eebd8501f80c1, type: 2}
+  - {fileID: 11400000, guid: 3adc69a2d6dc89c4698e18fefb727373, type: 2}
+  - {fileID: 11400000, guid: 4400f6b44d5147b46acd418e9e219e6a, type: 2}
   - {fileID: 11400000, guid: 8b854155d2f129f4a8a07fbd9c890d70, type: 2}
-  - {fileID: 11400000, guid: 692b90bebf914484c9dee78e9e9578fd, type: 2}
   - {fileID: 11400000, guid: 41d16488ffa12a246955d9779cf32ce7, type: 2}
-  - {fileID: 11400000, guid: 32da64506214fa34380da6cfc969a87b, type: 2}
-  - {fileID: 11400000, guid: 7dd6d0e253eb081489038615ef750897, type: 2}
-  - {fileID: 11400000, guid: 0e6a2efcde2f3ac49888f3dd5d40a345, type: 2}
   - {fileID: 11400000, guid: 0d7f6dea232bf4e47884c6248d5759a7, type: 2}
   m_commonStages:
   - {fileID: 21300000, guid: 7aed04438b393004c9f98d9bf6ed4856, type: 3}
