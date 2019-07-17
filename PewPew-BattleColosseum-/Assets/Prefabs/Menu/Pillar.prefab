@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b4f7ae90d74cb45a1e3876a06bef00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_points: {fileID: 0}
+  r_points: {fileID: 4627766783627036008}
   m_holderPos: {x: 0, y: 0, z: 0}
   m_middlePos: {x: 0, y: 0, z: 0}
   m_targetPos: {x: 0, y: 0, z: 0}

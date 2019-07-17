@@ -231,7 +231,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 10eec8f41627ecd42bd8c76eba442b62, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -937,7 +937,7 @@ PrefabInstance:
     - target: {fileID: 5758624050399813553, guid: 2f0a0db8b65a7084983ffab35970df48,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5758624050399813553, guid: 2f0a0db8b65a7084983ffab35970df48,
         type: 3}
@@ -952,12 +952,17 @@ PrefabInstance:
     - target: {fileID: 5758624050399813553, guid: 2f0a0db8b65a7084983ffab35970df48,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5758624050399813553, guid: 2f0a0db8b65a7084983ffab35970df48,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758624050399813553, guid: 2f0a0db8b65a7084983ffab35970df48,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5758624049820770270, guid: 2f0a0db8b65a7084983ffab35970df48,
         type: 3}
