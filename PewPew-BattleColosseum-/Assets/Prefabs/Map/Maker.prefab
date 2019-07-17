@@ -102,7 +102,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7280f95d7362f4545b833ebaa3cc4bbb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e57f5d3b342689e429bc2c934a0dda32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12589896, y: 6.033868}
+  m_Offset: {x: -0.089677215, y: 3.7699747}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -137,7 +137,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.922433, y: 4.4058475}
+  m_Size: {x: 4.531762, y: 2.8120632}
   m_EdgeRadius: 0
 --- !u!114 &8897134492762983501
 MonoBehaviour:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37763fe3cf07c33429400a4b6b8f09a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: Colosseum
+  m_name: Hall of Fame
   m_sprite: {fileID: 6118906473947933576}
   m_col: {fileID: 2765471168823715540}
 --- !u!1 &4900567361617642173
@@ -224,12 +224,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4d01d02ace78e7d4b9ace8aa74350eb2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b480da695523fd48acb8dafbccbb132, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.47070312, y: 7.9921875}
+  m_Size: {x: 1.205, y: 20.460001}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -252,18 +252,18 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.98, y: 7.9}
-    newSize: {x: 0.47070312, y: 7.9921875}
+    oldSize: {x: 0.99, y: 6.22}
+    newSize: {x: 1.205, y: 20.460001}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.36977255, y: 2.9785104}
-      - {x: -0.42630398, y: 2.9785104}
-      - {x: -0.40941572, y: -2.9355333}
-      - {x: 0.2156043, y: -2.9355333}
+    - - {x: 0.5, y: 3.1}
+      - {x: 0.5, y: -3.1}
+      - {x: -0.5, y: -3.1}
+      - {x: -0.5, y: 3.1}
 --- !u!114 &3962103130131633678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df719617019d1c94195a318ff22465bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: MiddleWall
+  m_name: WallRightOne
   m_sprite: {fileID: 3497210229228720244}
   m_col: {fileID: 8922998582040542921}
