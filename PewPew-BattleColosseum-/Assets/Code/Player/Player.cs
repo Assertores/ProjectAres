@@ -140,6 +140,7 @@ namespace PPBC {
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
 
             SetPlayerActive(false);
+            r_player.SetActive(false);
 
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
@@ -231,6 +232,7 @@ namespace PPBC {
 
             StopShooting();
             SetPlayerActive(true);
+            r_player.SetActive(true);
             StartCoroutine(IEIFrame());
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             InControle(true);
@@ -370,8 +372,7 @@ namespace PPBC {
             }
         }
 
-        void SetPlayerActive(bool value) {
-            r_player.SetActive(value);
+        public void SetPlayerActive(bool value) {
             if (!m_rb)
                 m_rb = GetComponent<Rigidbody2D>();
             m_rb.isKinematic = !value;
