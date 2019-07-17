@@ -89,7 +89,7 @@ namespace PPBC {
             victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
         }
 
-        public void ScorePoint(Player scorer) {
+        public void ScorePoint(Player scorer, float amount) {
         }
 
         #endregion
