@@ -1092,6 +1092,7 @@ Transform:
   - {fileID: 4837991965380692419}
   - {fileID: 3646146192147303888}
   - {fileID: 8596509084002650787}
+  - {fileID: 5655617691227887009}
   m_Father: {fileID: 4592457637797627904}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1221,6 +1222,7 @@ MonoBehaviour:
   - {fileID: 3889535056802774937}
   - {fileID: 187300853746218177}
   - {fileID: 4926554247960900137}
+  - {fileID: 7278471807788177484}
   m_maps:
   - {fileID: 11400000, guid: 0cf1fd58bfd4a0247b735f22784166f7, type: 2}
   m_characters:
@@ -1570,6 +1572,64 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7278471807788177484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5655617691227887009}
+  - component: {fileID: 1704097608543210533}
+  m_Layer: 0
+  m_Name: KotH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5655617691227887009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7278471807788177484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3743258474041728101}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1704097608543210533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7278471807788177484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0875cd9a5573e842b94aeb216590a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_icon_: {fileID: 21300000, guid: b7ade6e6cd16d4a4aa82c5fcc5c80e1b, type: 3}
+  r_text_: Stay in the green Area
+  p_hill: {fileID: 700622219197246419, guid: e6cce23abb042ff42a790f314ae61f7d, type: 3}
+  p_valley: {fileID: 1494409770337928004, guid: 00f9551defb2ea1458c30e0caf5ef0d9,
+    type: 3}
+  m_PointsToWin: 50
+  m_respawnDelay: 2
+  m_valleyCount: 1
+  m_zoneMoveDelay: 20
+  m_zoneTimeInBetween: 2
+  m_pointGainPerSeconds: 2
+  m_pointLossPerSeconds: 1
+  m_hillDiameter: 5
+  m_valleyDiameter: 2
+  m_timeThreshold: 1
 --- !u!1 &7363573733610744735
 GameObject:
   m_ObjectHideFlags: 0

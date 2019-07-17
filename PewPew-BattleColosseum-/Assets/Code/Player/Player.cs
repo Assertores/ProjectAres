@@ -94,7 +94,7 @@ namespace PPBC {
 
             r_staminaBar.fillAmount = m_useSMG ? r_smg.GetStamina() : r_rocket.GetStamina();
 
-            r_points.text = m_stats.m_points.ToString();
+            r_points.text = Mathf.RoundToInt(m_stats.m_points).ToString();
 
             RotateWeapon();
         }

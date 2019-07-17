@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202557465563293080}
   - component: {fileID: 6059931494804323125}
+  - component: {fileID: 2774313923986538313}
   m_Layer: 0
   m_Name: Hill
   m_TagString: Untagged
@@ -48,6 +49,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &2774313923986538313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700622219197246419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26b927b835fd1247a3815593b91fbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1167723183869660599
 GameObject:
   m_ObjectHideFlags: 0

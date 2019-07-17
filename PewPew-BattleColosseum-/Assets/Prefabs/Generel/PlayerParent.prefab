@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4717950219567490469}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 107918381570067965}
   - component: {fileID: 1711265827648776435}
   - component: {fileID: 7492189458927727737}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 6797456039942928523}
   - component: {fileID: 7982161259852923878}
   - component: {fileID: 1484343866722907417}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 429485049979522825}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 5968811431862923336}
   - component: {fileID: 5369548773323958109}
   - component: {fileID: 9215880255326991687}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Backdrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,9 +328,9 @@ GameObject:
   - component: {fileID: 5245385892947505954}
   - component: {fileID: 271708082470901396}
   - component: {fileID: 6775468055883516254}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerHandler
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,7 +450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8565748604744640151}
   - component: {fileID: 7883819762096366493}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 2471897366832305843}
   - component: {fileID: 8328565505189505533}
   - component: {fileID: 353568712528435262}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1338731524726757376}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 2323224181894176765}
   - component: {fileID: 7264870541000153159}
   - component: {fileID: 5904446482702199486}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3518862814386137492}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 226138741928638601}
   - component: {fileID: 3280121611626578466}
   - component: {fileID: 76871785139548832}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Backdrop_Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,7 +778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6923550424526346721}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ModelHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 6178744803401542900}
   - component: {fileID: 7741689134871669378}
   - component: {fileID: 1363227964029492153}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 4620709130721218125}
   - component: {fileID: 752511578456682499}
   - component: {fileID: 7734053662153061205}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
