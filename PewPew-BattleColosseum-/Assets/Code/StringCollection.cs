@@ -41,6 +41,7 @@ namespace PPBC {
         public static string L_GUI = "GUI";
         public static string L_FORGROUND = "Forground";
         public static string L_LEVEL = "Level";
+        public static string L_NOCOL = "NoCollision";
 
         #endregion
         #region Paths
