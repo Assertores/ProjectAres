@@ -117,9 +117,9 @@ namespace PPBC {
             
             m_rb.isKinematic = true;
             m_rb.velocity = Vector3.zero;
-            RaycastHit2D ray = Physics2D.Raycast(transform.position, -transform.right, 2);
+            /*RaycastHit2D ray = Physics2D.Raycast(transform.position, -transform.right, 2);
             if(ray)
-                transform.position = ray.point;
+                transform.position = ray.point;*/
 
             m_col.enabled = false;
             r_bullet.SetActive(false);

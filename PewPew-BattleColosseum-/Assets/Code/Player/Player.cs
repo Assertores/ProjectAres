@@ -95,6 +95,7 @@ namespace PPBC {
             m_col = GetComponent<Collider2D>();
 
             ResetFull();
+            InControle(false);
         }
 
         void Update() {
@@ -219,8 +220,6 @@ namespace PPBC {
             m_useSMG = false;
             ChangeWeapon();
 
-            InControle(true);
-
             r_outline.color = GetPlayerColor();
 
             return m_controler;
@@ -237,6 +236,7 @@ namespace PPBC {
         }
 
         IEnumerator IERespawn(Vector2 pos, float delay = 0) {
+            InControle(false);
             r_player.SetActive(false);
             float startTime = Time.time;
             Vector2 starPos = transform.position;
@@ -257,12 +257,12 @@ namespace PPBC {
             StopShooting();
 
             StartCoroutine(IEIFrame());
-            r_player.SetActive(true);
-            r_respawnParent.SetActive(false);
+            
+            r_respawnParent.SetActive(true);
 
             yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
-
-            r_respawnParent.SetActive(true);
+            r_player.SetActive(true);
+            r_respawnParent.SetActive(false);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             SetPlayerActive(true);
             InControle(true);
