@@ -22,6 +22,8 @@ namespace PPBC {
         [SerializeField] Transform r_leftMostPlayer;
         [SerializeField] Transform r_maxHeight;
         [SerializeField] GameObject r_selectParent;
+        [SerializeField] GameObject r_fireworkParent;
+        [SerializeField] ParticleSystem FX_firework;
 
         [Header("Balancing")]
         [SerializeField] float m_pillarRiseTime;
@@ -179,7 +181,7 @@ namespace PPBC {
                 if(MatchManager.s_currentMatch.m_teamHolder != null ?
                     it.m_team == Player.s_sortRef[0].m_team :
                     it == Player.s_sortRef[0]) {
-
+                    r_fireworkParent.transform.position = new Vector2(it.r_pillar.transform.position.x, r_leftMostPlayer.position.y);
                     time = it.StartAnim(StringCollection.A_WIN);
                 } else {
                     time = it.StartAnim(StringCollection.A_LOSE);
@@ -188,6 +190,7 @@ namespace PPBC {
                 if (time > maxTime)
                     maxTime = time;
             }
+            
             yield return new WaitForSeconds(maxTime);
 
             if(MatchManager.s_currentMatch.m_matchCount == 0) {
