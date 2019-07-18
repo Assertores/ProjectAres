@@ -148,7 +148,9 @@ namespace PPBC {
             
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
             if (source.m_type == e_HarmingObjectType.LASOR) {
-                r_laserDeathParent.SetActive(true);
+                r_laserDeathParent.transform.position = transform.position;
+                r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-transform.position.x, -transform.position.y));
+                FX_laserDeath.Play();
             }
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
                 r_deathParent.SetActive(true);
@@ -230,6 +232,7 @@ namespace PPBC {
         }
 
         IEnumerator IERespawn(Vector2 pos, float delay = 0) {
+            r_player.SetActive(false);
             float startTime = Time.time;
             Vector2 starPos = transform.position;
             r_laserDeathParent.SetActive(false);
@@ -246,12 +249,15 @@ namespace PPBC {
             ResetHealth();
 
             StopShooting();
+            r_respawnParent.SetActive(true);
+
+            yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
+
+            r_respawnParent.SetActive(false);
             SetPlayerActive(true);
             r_player.SetActive(true);
             StartCoroutine(IEIFrame());
 
-            r_respawnParent.SetActive(true);
-            yield return new WaitForSeconds(FX_respawn.main.duration + 0.5f);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             InControle(true);
 
