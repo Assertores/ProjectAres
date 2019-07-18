@@ -993,7 +993,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e42535e2a4b62745b5e3fd891aec1f5, type: 2}
   m_characters:
   - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
-  - {fileID: 5151474522508839637, guid: e8af030f08ae55546bfc31495cd00de2, type: 3}
+  - {fileID: 5151474522508839637, guid: d19a7c04a2737184680765c1267cf949, type: 3}
   m_dirLight: {fileID: 347431681967975084}
   m_commonSizes:
   - {x: 20, y: 10}
