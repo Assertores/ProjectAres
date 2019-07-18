@@ -326,6 +326,10 @@ namespace PPBC {
                 m_controler.ChangeWeapon -= ChangeWeapon;
                 m_controler.TriggerDown -= StartShooting;
                 m_controler.TriggerUp -= StopShooting;
+                if (m_useSMG)
+                    r_smg.StopShooting();
+                else
+                    r_rocket.StopShooting();
             }
 
             h_inControle = controle;
