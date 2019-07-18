@@ -129,15 +129,12 @@ namespace PPBC {
         public bool m_alive { get; private set; }
 
         public void Die(ITracer source, bool doTeamDamage = true) {
-            print("test1");
             if (!m_alive)
                 return;
             if (!doTeamDamage && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
                 return;
 
             //--> can die && should die <--
-
-            print("test2");
 
             m_stats.m_deaths++;
             if(source != null && source.m_trace.m_owner != null)
@@ -150,10 +147,7 @@ namespace PPBC {
             m_alive = false;
             SetPlayerActive(false);
             InControle(false);
-            
-            yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
-            print(source);
-            print(source.m_type);
+
             if (source.m_type == e_HarmingObjectType.LASOR) {
                 r_laserDeathParent.transform.position = transform.position;
                 r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-transform.position.x, -transform.position.y));
@@ -162,6 +156,9 @@ namespace PPBC {
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
                 r_deathParent.SetActive(true);
             }
+
+            yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
+            
             r_player.SetActive(false);
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
