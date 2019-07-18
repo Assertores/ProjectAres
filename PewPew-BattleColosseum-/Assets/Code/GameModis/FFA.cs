@@ -14,11 +14,7 @@ namespace PPBC {
         [Header("Balancing")]
         [SerializeField] int m_killsToWin = 5;
         [SerializeField] float m_respawnDelay = 2;
-
-        #endregion
-        #region MonoBehaviour
-
-
+        [SerializeField] float m_laserDelay = 25;
 
         #endregion
         #region IGameMode
@@ -44,7 +40,8 @@ namespace PPBC {
         }
 
         public void StartGame() {
-            
+            EndGame += IsEndGame;
+            StartCoroutine(IELaser());
         }
 
         public void AbortGame() {
@@ -93,5 +90,17 @@ namespace PPBC {
         }
 
         #endregion
+
+        void IsEndGame(bool value) {
+            StopAllCoroutines();
+        }
+
+        IEnumerator IELaser() {
+            while (true) {
+                LaserBehavior.s_singelton.ChangePosition();
+                yield return new WaitForSeconds(m_laserDelay);
+            }
+
+        }
     }
 }

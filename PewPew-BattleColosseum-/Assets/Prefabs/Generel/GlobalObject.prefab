@@ -47,6 +47,7 @@ MonoBehaviour:
   r_text_: stay alive together
   m_lifes: 10
   m_respawnDelay: 2
+  m_laserDelay: 25
 --- !u!1 &877945053789648422
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +825,7 @@ MonoBehaviour:
   r_text_: get 5 kills
   m_killsToWin: 5
   m_respawnDelay: 2
+  m_laserDelay: 25
 --- !u!1 &3841625167925513082
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +908,7 @@ MonoBehaviour:
   r_text_: stay alive
   m_lifes: 5
   m_respawnDelay: 2
+  m_laserDelay: 25
 --- !u!1 &4154827916869104311
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +990,7 @@ MonoBehaviour:
   - {fileID: 4926554247960900137}
   - {fileID: 7278471807788177484}
   m_maps:
-  - {fileID: 11400000, guid: 0cf1fd58bfd4a0247b735f22784166f7, type: 2}
+  - {fileID: 11400000, guid: 3e42535e2a4b62745b5e3fd891aec1f5, type: 2}
   m_characters:
   - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
   - {fileID: 5151474522508839637, guid: e8af030f08ae55546bfc31495cd00de2, type: 3}

@@ -95,6 +95,7 @@ namespace PPBC {
             m_col = GetComponent<Collider2D>();
 
             ResetFull();
+            InControle(false);
         }
 
         void Update() {
@@ -128,6 +129,7 @@ namespace PPBC {
         public bool m_alive { get; private set; }
 
         public void Die(ITracer source, bool doTeamDamage = true) {
+            print("test1");
             if (!m_alive)
                 return;
             if (!doTeamDamage && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
@@ -135,18 +137,23 @@ namespace PPBC {
 
             //--> can die && should die <--
 
+            print("test2");
+
             m_stats.m_deaths++;
             if(source != null && source.m_trace.m_owner != null)
                 source.m_trace.m_owner.m_stats.m_kills++;
-
+            
             StartCoroutine(IEDie(source.m_trace));
         }
 
         IEnumerator IEDie(IHarmingObject source) {
             m_alive = false;
-            
+            SetPlayerActive(false);
+            InControle(false);
             
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
+            print(source);
+            print(source.m_type);
             if (source.m_type == e_HarmingObjectType.LASOR) {
                 r_laserDeathParent.transform.position = transform.position;
                 r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-transform.position.x, -transform.position.y));
@@ -155,7 +162,6 @@ namespace PPBC {
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
                 r_deathParent.SetActive(true);
             }
-            SetPlayerActive(false);
             r_player.SetActive(false);
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
@@ -214,8 +220,6 @@ namespace PPBC {
             m_useSMG = false;
             ChangeWeapon();
 
-            InControle(true);
-
             r_outline.color = GetPlayerColor();
 
             return m_controler;
@@ -232,10 +236,12 @@ namespace PPBC {
         }
 
         IEnumerator IERespawn(Vector2 pos, float delay = 0) {
+            InControle(false);
             r_player.SetActive(false);
             float startTime = Time.time;
             Vector2 starPos = transform.position;
             r_laserDeathParent.SetActive(false);
+
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
@@ -249,16 +255,16 @@ namespace PPBC {
             ResetHealth();
 
             StopShooting();
+
+            StartCoroutine(IEIFrame());
+            
             r_respawnParent.SetActive(true);
 
             yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
-
-            r_respawnParent.SetActive(false);
-            SetPlayerActive(true);
             r_player.SetActive(true);
-            StartCoroutine(IEIFrame());
-
+            r_respawnParent.SetActive(false);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
+            SetPlayerActive(true);
             InControle(true);
 
         }
@@ -399,7 +405,11 @@ namespace PPBC {
         public void SetPlayerActive(bool value) {
             if (!m_rb)
                 m_rb = GetComponent<Rigidbody2D>();
+
             m_rb.isKinematic = !value;
+            if (!value)
+                ResetVelocity();
+
             if (!m_col)
                 m_col = GetComponent<Collider2D>();
             m_col.enabled = value;

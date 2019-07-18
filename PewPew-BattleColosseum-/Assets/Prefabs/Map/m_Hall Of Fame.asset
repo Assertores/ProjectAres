@@ -20,8 +20,8 @@ MonoBehaviour:
   p_props: []
   p_forgrounds: []
   m_ballSpawn: {x: 0, y: 0}
-  m_icon: {fileID: 21300000, guid: 191448b2a2122ab4f8ff72640c1c194c, type: 3}
-  m_name: Hall Of Fame
+  m_icon: {fileID: 21300000, guid: 16539ba0bff52704c8bb1be6ab1bfa60, type: 3}
+  m_name: Hall of Fame
   m_size: 0
   m_background: 1
   m_globalLight: 0
@@ -160,5 +160,25 @@ MonoBehaviour:
   - type: 1
     index: 0
     position: {x: -5.62, y: -0.198}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 3
+    index: 0
+    position: {x: -9.64, y: -5.32}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 3
+    index: 1
+    position: {x: 9.6, y: -5.26}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 3
+    index: 2
+    position: {x: 9.66, y: 4.781}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 3
+    index: 3
+    position: {x: -9.586, y: 4.81}
     rotation: 0
     scale: {x: 1, y: 1}
