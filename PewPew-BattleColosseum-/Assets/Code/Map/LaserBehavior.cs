@@ -97,7 +97,7 @@ namespace PPBC {
             
             fx_laserStart.Play();
 
-            yield return null;
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
             
             if(!m_collider)
                 m_collider = GetComponent<BoxCollider2D>();
