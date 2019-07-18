@@ -21,6 +21,7 @@ namespace PPBC {
         #region Tags
 
         public static string T_PLAYER = "Player";
+        public static string T_CREOBJ = "CreditsObject";
         public static string T_MAINCAM = "MainCamera";
         public static string T_LEVEL = "Level";
         public static string T_PROJECTILES = "Projectiles";

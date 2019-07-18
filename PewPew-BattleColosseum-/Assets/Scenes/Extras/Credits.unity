@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 173561421}
   m_Layer: 0
   m_Name: CreditObj (2)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1363,7 +1363,7 @@ GameObject:
   - component: {fileID: 308406535}
   m_Layer: 0
   m_Name: CreditObj (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1984,7 +1984,7 @@ GameObject:
   - component: {fileID: 458755911}
   m_Layer: 0
   m_Name: CreditObj
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4546,7 +4546,7 @@ GameObject:
   - component: {fileID: 908418308}
   m_Layer: 0
   m_Name: CreditObj (6)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6260,7 +6260,7 @@ GameObject:
   - component: {fileID: 1250432089}
   m_Layer: 0
   m_Name: CreditObj (5)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10375,7 +10375,7 @@ GameObject:
   - component: {fileID: 2047507019}
   m_Layer: 0
   m_Name: CreditObj (3)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10652,7 +10652,7 @@ GameObject:
   - component: {fileID: 2090695516}
   m_Layer: 0
   m_Name: CreditObj (4)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

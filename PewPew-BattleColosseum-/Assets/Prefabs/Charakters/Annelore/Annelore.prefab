@@ -508,7 +508,8 @@ MonoBehaviour:
     m_Icon: {fileID: 0}
     r_RocketAnim: {fileID: 3318599734280814684}
     r_barrel: {fileID: 2389421337681415382}
-    m_sounds: []
+    m_sounds:
+    - {fileID: 8300000, guid: 8f46b2e355e8d40409617f5cb58ef45f, type: 3}
     r_overcharge: {fileID: 5417430618871238678}
     fx_muzzleFlash: {fileID: 9197930513112448125}
     p_rocket: {fileID: 9103369776508484593, guid: fc6d68047a5d5ab4fa7d1d1d832bc6c2,
@@ -525,7 +526,8 @@ MonoBehaviour:
     m_Icon: {fileID: 0}
     r_sMGAnim: {fileID: 1740558602136339707}
     r_barrel: {fileID: 1736652266734118144}
-    m_sounds: []
+    m_sounds:
+    - {fileID: 8300000, guid: 8848eab5b272a644bb64ca2f238a0c0a, type: 3}
     r_muzzleFlashParent: {fileID: 6627446527604369376}
     p_bullet: {fileID: 1481206135090748021, guid: cd6b4c2796c8b8e4fa9dc93615eba75d,
       type: 3}
@@ -1063,6 +1065,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8794891821540208064}
     m_Modifications:
+    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
+        type: 3}
+      propertyPath: m_Name
+      value: ROCKETLAUNCHER_CHARGE
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3269910909919600068, guid: 192d7c32744c9c14d9c23404c6912454,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1117,16 +1129,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
-        type: 3}
-      propertyPath: m_Name
-      value: ROCKETLAUNCHER_CHARGE
-      objectReference: {fileID: 0}
-    - target: {fileID: 3269910909919600071, guid: 192d7c32744c9c14d9c23404c6912454,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3269910909919600070, guid: 192d7c32744c9c14d9c23404c6912454,
         type: 3}
@@ -1183,15 +1185,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6934450244164812206}
     m_Modifications:
-    - target: {fileID: 6107276889172965053, guid: ced6568b6b7735f428440b66873228a0,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6107276889172965055, guid: ced6568b6b7735f428440b66873228a0,
         type: 3}
       propertyPath: m_Name
       value: MUZZLEFLASH_ROCKETLAUNCHER
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107276889172965053, guid: ced6568b6b7735f428440b66873228a0,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6107276889172965052, guid: ced6568b6b7735f428440b66873228a0,
         type: 3}
@@ -1279,6 +1281,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9049426049345977205}
     m_Modifications:
+    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: m_Name
+      value: MUZZLEFLASH_SMG
+      objectReference: {fileID: 0}
     - target: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1333,11 +1340,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: m_Name
-      value: MUZZLEFLASH_SMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c751caebae1fed54d9af0de1f9ba7b41, type: 3}
