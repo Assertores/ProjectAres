@@ -17,6 +17,8 @@ namespace PPBC {
         List<GameObject> collisionObjects = new List<GameObject>();
         BoxCollider2D m_collider;
 
+        int m_lastIndex = -1;
+
         #endregion
         #region MonoBehaviour
 
@@ -89,7 +91,10 @@ namespace PPBC {
                 collisionObjects[i].SetActive(true);
             }
             collisionObjects.Clear();
-            int newIndex = Random.Range(0, LaserSpawner.s_references.Count);
+            int newIndex;
+            while(m_lastIndex == (newIndex = Random.Range(0, LaserSpawner.s_references.Count)));
+            m_lastIndex = newIndex;
+
             transform.position = LaserSpawner.s_references[newIndex].transform.position;
             Vector3 target = LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].transform.position;
             transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-(target.y - transform.position.y), target.x - transform.position.x));
@@ -97,7 +102,7 @@ namespace PPBC {
             
             fx_laserStart.Play();
 
-            yield return null;
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
             
             if(!m_collider)
                 m_collider = GetComponent<BoxCollider2D>();

@@ -52,6 +52,7 @@ namespace PPBC {
                 element.r_image.sprite = DataHolder.s_modis[i].m_icon;
                 element.r_text.text = DataHolder.s_modis[i].m_text;
             }
+            m_finished = false;
         }
 
         void Update() {

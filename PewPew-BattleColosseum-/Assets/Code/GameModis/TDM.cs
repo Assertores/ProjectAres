@@ -21,7 +21,7 @@ namespace PPBC {
 
         public Sprite m_icon => r_icon_;
 
-        public string m_name => StringCollection.M_LMS;
+        public string m_name => StringCollection.M_TDM;
 
         public string m_text => r_text_;
 
