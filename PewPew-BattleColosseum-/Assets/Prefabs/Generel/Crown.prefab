@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2476072715936556293}
+  - component: {fileID: 296704407}
   m_Layer: 0
   m_Name: Crown
   m_TagString: Untagged
@@ -32,6 +33,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &296704407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2476072715936556294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2386c227fdeeb24f934d4a3fff4b8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_lerpTime: 0.2
+  m_crownOffset: 0.7
 --- !u!1 &2476072717072093056
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +115,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 155767401
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 48f2462bf893ba14589c48c113b2bdf5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -218,11 +233,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayerID
       value: 155767401
-      objectReference: {fileID: 0}
-    - target: {fileID: 6639759636505028313, guid: c2cd0ec1015cae141919d98df5861b5d,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6639759636505028313, guid: c2cd0ec1015cae141919d98df5861b5d,
         type: 3}

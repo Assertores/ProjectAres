@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PPBC {
-    public class LaserBehavior : MonoBehaviour {
+    public class LaserBehavior : MonoBehaviour, IHarmingObject, ITracer {
+
+        public static LaserBehavior s_singelton { get; private set; }
 
         #region Variables
         [Header("References")]
@@ -17,8 +19,6 @@ namespace PPBC {
 
         #endregion
         #region MonoBehaviour
-
-        public static LaserBehavior s_singelton { get; private set; }
 
         void Awake() {
             if (s_singelton != null && s_singelton != this) {
@@ -55,9 +55,31 @@ namespace PPBC {
         }
 
         #endregion
+        #region IHarmingObject
 
-        public IEnumerator ChangePosition() {
+        public Sprite m_icon => null;
+
+        public e_HarmingObjectType m_type => e_HarmingObjectType.LASOR;
+
+        public Player m_owner => null;
+
+        #endregion
+        #region ITracer
+
+        public IHarmingObject m_trace => this;
+
+        public Rigidbody2D Init(IHarmingObject trace) {
+            return null;
+        }
+
+        #endregion
+
+        public void ChangePosition() {
             StopAllCoroutines();
+            StartCoroutine(IEChangePosition());
+        }
+
+        IEnumerator IEChangePosition() {
             
             fx_laserEnd.Play();
 
@@ -69,14 +91,20 @@ namespace PPBC {
             collisionObjects.Clear();
             int newIndex = Random.Range(0, LaserSpawner.s_references.Count);
             transform.position = LaserSpawner.s_references[newIndex].transform.position;
-            Vector2 target = LaserSpawner.s_references[newIndex + 1 % LaserSpawner.s_references.Count].transform.position;
+            Vector3 target = LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].transform.position;
             transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-(target.y - transform.position.y), target.x - transform.position.x));
+            transform.localScale = new Vector3((transform.position - target).magnitude, 1, 1);
             
             fx_laserStart.Play();
 
+            yield return null;
+            
+            if(!m_collider)
+                m_collider = GetComponent<BoxCollider2D>();
 
+            //int count = m_collider.OverlapCollider(m_contFilter, tmp);
             Collider2D[] tmp = new Collider2D[10];
-            int count = m_collider.OverlapCollider(m_contFilter, tmp);
+            int count = Physics2D.OverlapCollider(m_collider, m_contFilter, tmp);
             for (int i = 0; i < count; i++) {
                 collisionObjects.Add(tmp[i].gameObject);
                 tmp[i].gameObject.SetActive(false);
@@ -89,15 +117,15 @@ namespace PPBC {
 
         #region Physics
 
-        private void OnCollisionEnter2D(Collision2D collision) {
+        private void OnTriggerEnter2D(Collider2D collision) {
             IDamageableObject tmp = collision.gameObject.GetComponent<IDamageableObject>();
             if (tmp != null) {
-                tmp.Die(null);
+                tmp.Die(this);
             } else {
                 Destroy(collision.gameObject);
             }
         }
-
+        
         #endregion
     }
 }
