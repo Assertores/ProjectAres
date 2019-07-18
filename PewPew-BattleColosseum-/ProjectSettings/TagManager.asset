@@ -52,11 +52,11 @@ TagManager:
   - name: Animated
     uniqueID: 2776329763
     locked: 0
-  - name: Props
-    uniqueID: 1771276227
-    locked: 0
   - name: Stage
     uniqueID: 3824544639
+    locked: 0
+  - name: Props
+    uniqueID: 1771276227
     locked: 0
   - name: Player
     uniqueID: 617476197

@@ -190,6 +190,43 @@ MonoBehaviour:
     maxNormalAngle: 0
   r_wallHitParent: {fileID: 6694471125919789466}
   Vfx_wallHit: {fileID: 5968497551779209001}
+  m_audio: {fileID: 3763472148897078328}
+  m_sounds:
+  - m_type: 0
+    m_clips:
+    - {fileID: 8300000, guid: 7c673c2b31db01144b1f61195ede75d0, type: 3}
+    - {fileID: 8300000, guid: aae478c0c8c2c87499a4bee260a6dc26, type: 3}
+    - {fileID: 8300000, guid: 525cb4f75f8b8f24983940c76738dcf6, type: 3}
+    - {fileID: 8300000, guid: eaedd0c0c49881d4c8acc4c37ac5a1ed, type: 3}
+    - {fileID: 8300000, guid: 9775302d08f15ba44a943b290222f1c2, type: 3}
+    - {fileID: 8300000, guid: dce729e794878374db98e6e3dbfd086b, type: 3}
+    - {fileID: 8300000, guid: 1bf744aaf260dde4884e3054299ab929, type: 3}
+    - {fileID: 8300000, guid: 33e2c290947329c47b1176d191951f74, type: 3}
+    - {fileID: 8300000, guid: 412344854f68deb4c98642e3c8004ba7, type: 3}
+    - {fileID: 8300000, guid: 264c7f023eae2764ebc7c7d2eef04cc2, type: 3}
+    - {fileID: 8300000, guid: c705b921187695b4b90788ee7d366ae4, type: 3}
+    - {fileID: 8300000, guid: 48b0b46b9b467ef40a79bf7d4dfff855, type: 3}
+    m_typeString: 
+  - m_type: 1
+    m_clips:
+    - {fileID: 8300000, guid: 881afde3e3b77ac4286072d2a4ad08d9, type: 3}
+    - {fileID: 8300000, guid: 08717c6e52dbbad4c936a53b4f2dc93f, type: 3}
+    m_typeString: 
+  - m_type: 2
+    m_clips:
+    - {fileID: 8300000, guid: 7c673c2b31db01144b1f61195ede75d0, type: 3}
+    - {fileID: 8300000, guid: aae478c0c8c2c87499a4bee260a6dc26, type: 3}
+    - {fileID: 8300000, guid: 525cb4f75f8b8f24983940c76738dcf6, type: 3}
+    - {fileID: 8300000, guid: eaedd0c0c49881d4c8acc4c37ac5a1ed, type: 3}
+    - {fileID: 8300000, guid: 9775302d08f15ba44a943b290222f1c2, type: 3}
+    - {fileID: 8300000, guid: dce729e794878374db98e6e3dbfd086b, type: 3}
+    - {fileID: 8300000, guid: 1bf744aaf260dde4884e3054299ab929, type: 3}
+    - {fileID: 8300000, guid: 33e2c290947329c47b1176d191951f74, type: 3}
+    - {fileID: 8300000, guid: 412344854f68deb4c98642e3c8004ba7, type: 3}
+    - {fileID: 8300000, guid: 264c7f023eae2764ebc7c7d2eef04cc2, type: 3}
+    - {fileID: 8300000, guid: c705b921187695b4b90788ee7d366ae4, type: 3}
+    - {fileID: 8300000, guid: 48b0b46b9b467ef40a79bf7d4dfff855, type: 3}
+    m_typeString: 
   m_killDistance: 1000
   m_damage: 1
 --- !u!1 &6694471125919789466
@@ -236,7 +273,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -341,15 +378,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4597775431430855174}
     m_Modifications:
-    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4704396094684868177, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}
       propertyPath: m_Name
       value: SMG_WALLHIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5300036958407268441, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}

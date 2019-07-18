@@ -50,7 +50,8 @@ MonoBehaviour:
   r_explosion: {fileID: 408232961687989920}
   r_explosionStains: {fileID: 2365114697049478548}
   fx_audio: {fileID: 1695942168106580824}
-  m_sounds: []
+  m_sounds:
+  - {fileID: 8300000, guid: 3964bc095013e774fbe7ea6d7324e6d8, type: 3}
   m_baseDamage: 40
   m_radius: 2
   m_baseKnockback: 1000
@@ -91,7 +92,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3964bc095013e774fbe7ea6d7324e6d8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
