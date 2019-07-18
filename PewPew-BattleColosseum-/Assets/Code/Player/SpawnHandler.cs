@@ -49,7 +49,6 @@ namespace PPBC {
             }
 
             if (newPlayer) {
-                newPlayer.ResetFull();
                 newPlayer.CanChangeCharacter(true);
                 newPlayer.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
             }

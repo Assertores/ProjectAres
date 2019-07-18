@@ -44,6 +44,7 @@ namespace PPBC {
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
+        [SerializeField] SpriteRenderer r_outline;
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
@@ -54,7 +55,8 @@ namespace PPBC {
         [HideInInspector] public d_playerStuts m_stats;
 
         int m_playerIndex = -1;
-        [HideInInspector] public int m_team = -1;
+        int m_team_ = -1;
+        [HideInInspector] public int m_team { get => m_team_; set { m_team_ = value; r_outline.color = GetPlayerColor(); } }
         [HideInInspector] public PillarRefHolder r_pillar;
         public float m_distanceToGround { get; private set; } = 0.5f;//TODO: auto create
         public float m_distanceToTop { get; private set; } = 0.75f;//TODO: auto create
@@ -212,13 +214,14 @@ namespace PPBC {
 
             InControle(true);
 
+            r_outline.color = GetPlayerColor();
+
             return m_controler;
         }
 
         #region Resets
 
         public void ResetFull() {
-            Respawn(transform.position);
             ResetStatsFull();
         }
 
@@ -237,8 +240,7 @@ namespace PPBC {
             }
 
             //----- stuff that should happon after -----
-            r_respawnParent.SetActive(true);
-            yield return new WaitForSeconds(FX_respawn.main.duration + 0.5f);
+            
             transform.position = pos;
             ResetVelocity();
             ResetHealth();
@@ -247,6 +249,9 @@ namespace PPBC {
             SetPlayerActive(true);
             r_player.SetActive(true);
             StartCoroutine(IEIFrame());
+
+            r_respawnParent.SetActive(true);
+            yield return new WaitForSeconds(FX_respawn.main.duration + 0.5f);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             InControle(true);
 
