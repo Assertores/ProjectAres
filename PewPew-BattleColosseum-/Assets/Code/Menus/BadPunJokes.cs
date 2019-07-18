@@ -21,6 +21,7 @@ namespace PPBC {
         [SerializeField] string m_reply = "-_-";
         [SerializeField] float m_punDelay = 15;
         [SerializeField] float m_punDuration = 5;
+        [SerializeField] float m_replayDelay = 0.5f;
 
         #endregion
         #region MonoBehaviour
@@ -50,7 +51,7 @@ namespace PPBC {
             if(Time.time % m_punDelay < m_punDuration) {
                 if (!h_doOnce) {
                     h_doOnce = true;
-                    ShowPun();
+                    StartCoroutine(ShowPun());
                 }
             }else if (h_doOnce) {
                 h_doOnce = false;
@@ -60,10 +61,13 @@ namespace PPBC {
 
         #endregion
 
-        void ShowPun() {
+        IEnumerator ShowPun() {
             t_speachBubble.text = m_puns[Random.Range(0, m_puns.Length)];
 
             r_speachBubble.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(m_replayDelay);
+
             foreach(var it in r_replySpeachBubble) {
                 it.gameObject.SetActive(true);
             }
