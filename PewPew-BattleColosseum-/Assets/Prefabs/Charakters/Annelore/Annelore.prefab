@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f76e5832ff36a41b97a921dd201e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_icon: {fileID: 0}
+  m_icon: {fileID: 21300000, guid: f45701ebe61d4f04e93aea8255df1cfd, type: 3}
   m_name: Annelore
   r_modelAnim: {fileID: 1728048761181632481}
   fx_ModelAudio: {fileID: 7353004879546632628}
@@ -505,7 +505,7 @@ MonoBehaviour:
   r_weaponRot: {fileID: 1947745387099054667}
   m_rocket:
     r_weapon: {fileID: 2232629002305699750}
-    m_Icon: {fileID: 0}
+    m_Icon: {fileID: 21300000, guid: 726612247b3351a47b32297c1516b0c5, type: 3}
     r_RocketAnim: {fileID: 3318599734280814684}
     r_barrel: {fileID: 2389421337681415382}
     m_sounds:
@@ -516,14 +516,14 @@ MonoBehaviour:
       type: 3}
     p_explosion: {fileID: 1755098847994500336, guid: 6860f9811bc30d740be9f77178e164b8,
       type: 3}
-    m_muzzleEnergy: 500
+    m_muzzleEnergy: 600
     m_shootDelay: 2
     m_overchargeMaxTime: 4
     m_overchargeAdd: 0.4
     m_overchargeFail: 1.5
   m_sMG:
     r_weapon: {fileID: 8019218014111275184}
-    m_Icon: {fileID: 0}
+    m_Icon: {fileID: 21300000, guid: 2bf7b239c8e5d6a45a32286bedb8af39, type: 3}
     r_sMGAnim: {fileID: 1740558602136339707}
     r_barrel: {fileID: 1736652266734118144}
     m_sounds:

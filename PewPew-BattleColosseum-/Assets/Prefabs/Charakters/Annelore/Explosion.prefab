@@ -53,8 +53,8 @@ MonoBehaviour:
   m_sounds:
   - {fileID: 8300000, guid: 3964bc095013e774fbe7ea6d7324e6d8, type: 3}
   m_baseDamage: 40
-  m_radius: 2
-  m_baseKnockback: 1000
+  m_radius: 1.5
+  m_baseKnockback: 800
   m_fallOff:
     serializedVersion: 2
     m_Curve:
@@ -217,7 +217,7 @@ Transform:
   m_GameObject: {fileID: 2365114697049478548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1866758271560595264}
   m_RootOrder: 0
