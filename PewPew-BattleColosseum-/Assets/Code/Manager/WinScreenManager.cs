@@ -182,6 +182,7 @@ namespace PPBC {
                     it.m_team == Player.s_sortRef[0].m_team :
                     it == Player.s_sortRef[0]) {
                     r_fireworkParent.transform.position = new Vector2(it.r_pillar.transform.position.x, r_leftMostPlayer.position.y);
+                    FX_firework.Play();
                     time = it.StartAnim(StringCollection.A_WIN);
                 } else {
                     time = it.StartAnim(StringCollection.A_LOSE);

@@ -150,8 +150,9 @@ namespace PPBC {
 
             if (source.m_type == e_HarmingObjectType.LASOR) {
                 r_laserDeathParent.transform.position = transform.position;
-                r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-transform.position.x, -transform.position.y));
+                r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, m_inVel);
                 FX_laserDeath.Play();
+                
             }
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
                 r_deathParent.SetActive(true);
@@ -237,7 +238,6 @@ namespace PPBC {
             r_player.SetActive(false);
             float startTime = Time.time;
             Vector2 starPos = transform.position;
-            r_laserDeathParent.SetActive(false);
 
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
