@@ -35,6 +35,12 @@ namespace PPBC {
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
         [SerializeField] ParticleSystem FX_playerClash;
+        [SerializeField] GameObject r_deathParent;
+        [SerializeField] ParticleSystem FX_death;
+        [SerializeField] GameObject r_laserDeathParent;
+        [SerializeField] ParticleSystem FX_laserDeath;
+        [SerializeField] GameObject r_respawnParent;
+        [SerializeField] ParticleSystem FX_respawn;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
@@ -136,12 +142,17 @@ namespace PPBC {
 
         IEnumerator IEDie(IHarmingObject source) {
             m_alive = false;
-
+            
+            
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
-
+            if (source.m_type == e_HarmingObjectType.LASOR) {
+                r_laserDeathParent.SetActive(true);
+            }
+            if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
+                r_deathParent.SetActive(true);
+            }
             SetPlayerActive(false);
             r_player.SetActive(false);
-
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
 
@@ -218,7 +229,7 @@ namespace PPBC {
         IEnumerator IERespawn(Vector2 pos, float delay = 0) {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
-
+            r_laserDeathParent.SetActive(false);
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
@@ -226,6 +237,8 @@ namespace PPBC {
             }
 
             //----- stuff that should happon after -----
+            r_respawnParent.SetActive(true);
+            yield return new WaitForSeconds(FX_respawn.main.duration + 0.5f);
             transform.position = pos;
             ResetVelocity();
             ResetHealth();
