@@ -7,6 +7,7 @@ namespace PPBC {
 
         public static List<LaserSpawner> s_references = new List<LaserSpawner>();
         public int m_index;
+        public GameObject fx_on;
 
         private void Awake() {
             s_references.Add(this);

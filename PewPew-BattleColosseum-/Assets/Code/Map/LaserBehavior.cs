@@ -82,8 +82,17 @@ namespace PPBC {
         }
 
         IEnumerator IEChangePosition() {
-            
+
+            fx_laserLoop.Stop();
+
             fx_laserEnd.Play();
+
+            int newIndex;
+            while (m_lastIndex == (newIndex = Random.Range(0, LaserSpawner.s_references.Count))) ;
+            m_lastIndex = newIndex;
+
+            LaserSpawner.s_references[newIndex].fx_on.SetActive(true);
+            LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(true);
 
             yield return new WaitForSeconds(fx_laserLoop.main.duration);
 
@@ -91,9 +100,7 @@ namespace PPBC {
                 collisionObjects[i].SetActive(true);
             }
             collisionObjects.Clear();
-            int newIndex;
-            while(m_lastIndex == (newIndex = Random.Range(0, LaserSpawner.s_references.Count)));
-            m_lastIndex = newIndex;
+            
 
             transform.position = LaserSpawner.s_references[newIndex].transform.position;
             Vector3 target = LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].transform.position;
@@ -116,6 +123,9 @@ namespace PPBC {
             }
 
             yield return new WaitForSeconds(fx_laserStart.main.duration);
+
+            LaserSpawner.s_references[newIndex].fx_on.SetActive(false);
+            LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(false);
 
             fx_laserLoop.Play();
         }
