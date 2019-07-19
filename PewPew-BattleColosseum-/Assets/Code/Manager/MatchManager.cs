@@ -47,8 +47,16 @@ namespace PPBC {
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
                 SceneManager.LoadScene(StringCollection.S_TEAMSELECT);
             } else {
-                SceneManager.LoadScene(StringCollection.S_MAP);
+
+                foreach (var it in Player.s_references) {
+                    it.ResetGameStats();
+                    it.Invincable(false);
+                    it.InControle(true);
+                }
+
                 TransitionHandler.ReadyToStart += StartMap;
+                
+                SceneManager.LoadScene(StringCollection.S_MAP);
             }
         }
 
@@ -92,6 +100,8 @@ namespace PPBC {
             if (h_OngoingGame)
                 return;
             h_OngoingGame = true;
+
+            
 
             TransitionHandler.ReadyToStart -= StartMap;
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame += GMEnded;

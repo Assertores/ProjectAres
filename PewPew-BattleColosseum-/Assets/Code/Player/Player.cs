@@ -258,7 +258,7 @@ namespace PPBC {
             ResetHealth();
 
             StopShooting();
-
+            
             StartCoroutine(IEIFrame());
             
             r_respawnParent.SetActive(true);
@@ -343,13 +343,16 @@ namespace PPBC {
 
         #endregion
 
+        bool h_startInv;
         IEnumerator IEIFrame() {
+            h_startInv = m_invincible;
             Invincable(true);
             yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
-            Invincable(false);
+            Invincable(h_startInv);
         }
 
         public void Invincable(bool value) {
+            print("test: " + value);
             m_invincible = value;
         }
 
