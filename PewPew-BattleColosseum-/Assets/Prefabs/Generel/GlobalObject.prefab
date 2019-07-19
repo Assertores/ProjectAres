@@ -990,7 +990,7 @@ MonoBehaviour:
   - {fileID: 4926554247960900137}
   - {fileID: 7278471807788177484}
   m_maps:
-  - {fileID: 11400000, guid: 3e42535e2a4b62745b5e3fd891aec1f5, type: 2}
+  - {fileID: 11400000, guid: bf15724bd7b3c3a4ab30c2a53c3c345a, type: 2}
   m_characters:
   - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
   - {fileID: 5151474522508839637, guid: d19a7c04a2737184680765c1267cf949, type: 3}
@@ -999,7 +999,7 @@ MonoBehaviour:
   - {x: 20, y: 10}
   m_commonBackgrounds:
   - {fileID: 11400000, guid: 20a323a50673cdd458b5a9517201353e, type: 2}
-  - {fileID: 11400000, guid: 264dacf0f8e2ea7449b687a67188d48c, type: 2}
+  - {fileID: 11400000, guid: 31259e7d32fbe2944b781f2426cf7258, type: 2}
   m_commonColors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0, g: 0.6862745, b: 1, a: 1}
@@ -1009,18 +1009,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 21d4bb3886b0ab449a991f7fdcbf9277, type: 2}
   - {fileID: 11400000, guid: d20eebfd2684551439a627461c9b31a7, type: 2}
   - {fileID: 11400000, guid: 3c66f73af1bfa964a9839a83451bbae6, type: 2}
-  - {fileID: 11400000, guid: 53bb852eb4b4681489b79ffb5206ef88, type: 2}
-  - {fileID: 11400000, guid: 6c5185ea0c0744c4a8d6d8fb6bb27f9b, type: 2}
-  - {fileID: 11400000, guid: 89bd309b249b3df479c72f20950d4bd5, type: 2}
-  - {fileID: 11400000, guid: 40f00695920a964499490a203eeddd4f, type: 2}
-  - {fileID: 11400000, guid: 7053055d2a9f84f49b1eebd8501f80c1, type: 2}
-  - {fileID: 11400000, guid: 3adc69a2d6dc89c4698e18fefb727373, type: 2}
-  - {fileID: 11400000, guid: 4400f6b44d5147b46acd418e9e219e6a, type: 2}
+  - {fileID: 11400000, guid: e99af8d0cec8aa74ca866b4e41ef0ac0, type: 2}
+  - {fileID: 11400000, guid: 4637ff36e3bb3164d980e61f1fcad67d, type: 2}
+  - {fileID: 11400000, guid: 3df182551bcb466418bdb1de2f41da07, type: 2}
+  - {fileID: 11400000, guid: d269526ba58a91c40b048c57b78f4257, type: 2}
+  - {fileID: 11400000, guid: e9b45a6d4c0413a43a1083e81005d957, type: 2}
+  - {fileID: 11400000, guid: 344877c23e512794eb00da8652a9fb14, type: 2}
+  - {fileID: 11400000, guid: b5ea7cff1464dbc469e11e7e246cd158, type: 2}
   - {fileID: 11400000, guid: 8b854155d2f129f4a8a07fbd9c890d70, type: 2}
   - {fileID: 11400000, guid: 41d16488ffa12a246955d9779cf32ce7, type: 2}
   - {fileID: 11400000, guid: 0d7f6dea232bf4e47884c6248d5759a7, type: 2}
+  - {fileID: 11400000, guid: 7dd6d0e253eb081489038615ef750897, type: 2}
   m_commonStages:
   - {fileID: 21300000, guid: 7aed04438b393004c9f98d9bf6ed4856, type: 3}
+  - {fileID: 21300000, guid: 1dd2c20c8090c734aa8c12b3463747f4, type: 3}
+  - {fileID: 21300000, guid: f06f8689c0a3857459b90df9ac1a2a0b, type: 3}
+  - {fileID: 21300000, guid: 08c127bd37927c34d90f8f870d8d28e1, type: 3}
+  - {fileID: 21300000, guid: 13d55a78b8c644a41b178e870ae68ffe, type: 3}
+  - {fileID: 21300000, guid: 5644ff0862941cc47b87c48698f08c88, type: 3}
   m_commonForgrounds: []
   m_commonLaserSpawner: {fileID: 802966571650542862, guid: 408365e2b1e050d4d96e6238017d3524,
     type: 3}
