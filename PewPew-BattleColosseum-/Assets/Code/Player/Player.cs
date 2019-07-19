@@ -220,7 +220,13 @@ namespace PPBC {
 
             r_outline.color = GetPlayerColor();
 
+            m_controler.Disconnect += Disconnect;
+
             return m_controler;
+        }
+
+        public void Disconnect() {
+            Destroy(transform.root);
         }
 
         #region Resets
