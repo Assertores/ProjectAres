@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-//#if UNITY_EDITOR
 using UnityEngine;
 
 namespace PPBC {
@@ -46,4 +46,4 @@ namespace PPBC {
         }
     }
 }
-//#endif
+#endif
