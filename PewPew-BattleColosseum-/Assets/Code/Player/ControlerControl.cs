@@ -35,14 +35,13 @@ namespace PPBC {
             if (m_index == int.MinValue)
                 return;
 
+            m_lastState = m_state;
             m_state = GamePad.GetState((PlayerIndex)m_index);
 
             if (!m_state.IsConnected) {
                 DoDisconnect();
                 return;
             }
-
-            m_lastState = m_state;
             
             //_dir = new Vector2 (_state.ThumbSticks.Right.X * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.Y * _state.ThumbSticks.Right.Y) / 2), _state.ThumbSticks.Right.Y * Mathf.Sqrt(1 - (_state.ThumbSticks.Right.X * _state.ThumbSticks.Right.X) / 2));//unnötig http://mathproofs.blogspot.com/2005/07/mapping-square-to-circle.html
 
