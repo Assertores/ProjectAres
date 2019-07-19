@@ -994,6 +994,16 @@ MonoBehaviour:
   m_characters:
   - {fileID: 5151474522508839637, guid: 97fc0ecdfc679484bbafe93ee9e42510, type: 3}
   - {fileID: 5151474522508839637, guid: d19a7c04a2737184680765c1267cf949, type: 3}
+  - {fileID: 5151474522508839637, guid: a8f8ddb6a577d744fa5dc7faa06b4c5c, type: 3}
+  - {fileID: 5151474522508839637, guid: 78bd694007440ab4fbdabec2f1daf823, type: 3}
+  - {fileID: 5151474522508839637, guid: 8a852f5d57a189b4ca00ae46ef18c29d, type: 3}
+  - {fileID: 5151474522508839637, guid: 45f3d27d159af5b44831460caab865b6, type: 3}
+  - {fileID: 5151474522508839637, guid: fff6624e0a3905a4ba46232e4b6858d3, type: 3}
+  - {fileID: 5151474522508839637, guid: 3c81bd3729e4898498fd46cbdeb1e9d2, type: 3}
+  - {fileID: 5151474522508839637, guid: 6fa73309e6b355546ab8eb3062b6d070, type: 3}
+  - {fileID: 5151474522508839637, guid: b47f7c6ae77d9dd4da16ba455725cf4a, type: 3}
+  - {fileID: 5151474522508839637, guid: d0ab6ad948adf5f4d86647e0ed65973c, type: 3}
+  - {fileID: 5151474522508839637, guid: 2f59479768908e145800506948735ae5, type: 3}
   m_dirLight: {fileID: 347431681967975084}
   m_commonSizes:
   - {x: 20, y: 10}

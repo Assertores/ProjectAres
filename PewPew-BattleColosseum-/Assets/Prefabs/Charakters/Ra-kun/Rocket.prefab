@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac171b00d1cbffb41bb9574a03f7a698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_explosion: {fileID: 1755098847994500336, guid: 6860f9811bc30d740be9f77178e164b8,
+  p_explosion: {fileID: 1755098847994500336, guid: 64f04b9e3cbf5d143bcf029c70b83f7e,
     type: 3}
   m_filter:
     useTriggers: 0

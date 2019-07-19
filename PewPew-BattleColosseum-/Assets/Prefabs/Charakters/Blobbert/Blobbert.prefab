@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e55f4919e903c74aba88387a8d3a3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_anim: {fileID: 0}
+  m_anim: {fileID: 1533105821481469530}
   m_boneName: Weapon
 --- !u!114 &4316064246058589024
 MonoBehaviour:
