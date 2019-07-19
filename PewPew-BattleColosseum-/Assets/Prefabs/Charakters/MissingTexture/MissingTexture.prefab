@@ -364,7 +364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4430898646664787529}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.013, y: -0.034, z: 0}
+  m_LocalPosition: {x: 0.008, y: 0.053, z: 0}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children: []
   m_Father: {fileID: 566590245470296792}
@@ -972,7 +972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8199313298841271261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.029, y: -0.088, z: 0}
+  m_LocalPosition: {x: 0.029, y: -0.032, z: 0}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children: []
   m_Father: {fileID: 320658823280375582}
@@ -1281,6 +1281,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9049426049345977205}
     m_Modifications:
+    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: m_Name
+      value: MUZZLEFLASH_SMG
+      objectReference: {fileID: 0}
     - target: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1335,11 +1340,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: m_Name
-      value: MUZZLEFLASH_SMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c751caebae1fed54d9af0de1f9ba7b41, type: 3}
