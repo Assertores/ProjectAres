@@ -1,0 +1,41 @@
+
+Benjamin.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: true
+  xy: 2, 252
+  size: 256, 512
+  orig: 256, 512
+  offset: 0, 0
+  index: -1
+Glow
+  rotate: true
+  xy: 2, 2
+  size: 248, 268
+  orig: 248, 268
+  offset: 0, 0
+  index: -1
+Music1
+  rotate: false
+  xy: 516, 465
+  size: 35, 43
+  orig: 35, 43
+  offset: 0, 0
+  index: -1
+Music2
+  rotate: false
+  xy: 272, 215
+  size: 42, 35
+  orig: 42, 35
+  offset: 0, 0
+  index: -1
+Music3
+  rotate: false
+  xy: 516, 423
+  size: 21, 40
+  orig: 21, 40
+  offset: 0, 0
+  index: -1

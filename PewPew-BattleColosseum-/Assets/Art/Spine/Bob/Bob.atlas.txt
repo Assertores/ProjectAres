@@ -1,0 +1,118 @@
+
+Bob.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BobDerFisch_Puppet/Layer_1
+  rotate: true
+  xy: 665, 319
+  size: 109, 106
+  orig: 109, 106
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/body
+  rotate: false
+  xy: 2, 78
+  size: 411, 431
+  orig: 411, 431
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/eyes_dead
+  rotate: false
+  xy: 415, 430
+  size: 341, 79
+  orig: 341, 79
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/l_eye2
+  rotate: false
+  xy: 208, 9
+  size: 81, 67
+  orig: 81, 67
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/l_eye_
+  rotate: true
+  xy: 758, 445
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/l_eyebrow
+  rotate: false
+  xy: 111, 17
+  size: 95, 59
+  orig: 95, 59
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/l_leg
+  rotate: false
+  xy: 545, 316
+  size: 118, 112
+  orig: 118, 112
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/mouth
+  rotate: false
+  xy: 415, 99
+  size: 110, 69
+  orig: 110, 69
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/mouth2
+  rotate: false
+  xy: 2, 2
+  size: 107, 74
+  orig: 107, 74
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/r_eye
+  rotate: false
+  xy: 665, 214
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/r_eye_2
+  rotate: false
+  xy: 291, 9
+  size: 81, 67
+  orig: 81, 67
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/r_eyebrow
+  rotate: false
+  xy: 863, 450
+  size: 95, 59
+  orig: 95, 59
+  offset: 0, 0
+  index: -1
+BobDerFisch_Puppet/r_leg
+  rotate: false
+  xy: 545, 202
+  size: 118, 112
+  orig: 118, 112
+  offset: 0, 0
+  index: -1
+Tear_r
+  rotate: false
+  xy: 415, 300
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+Transparent2
+  rotate: false
+  xy: 545, 190
+  size: 20, 10
+  orig: 20, 10
+  offset: 0, 0
+  index: -1
+tear_l
+  rotate: false
+  xy: 415, 170
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

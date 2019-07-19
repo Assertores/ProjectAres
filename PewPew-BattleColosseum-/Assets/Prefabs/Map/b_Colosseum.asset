@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2d81027e815e545943d4a53f9affa5, type: 3}
+  m_Name: b_Colosseum
+  m_EditorClassIdentifier: 
+  m_image: {fileID: 21300000, guid: 7280f95d7362f4545b833ebaa3cc4bbb, type: 3}
+  m_position: {x: -0.12589896, y: 6.033868}
+  m_size: {x: 6.922433, y: 4.4058475}

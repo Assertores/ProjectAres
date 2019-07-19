@@ -1,0 +1,41 @@
+
+Paul.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Magic1
+  rotate: false
+  xy: 2, 2
+  size: 28, 90
+  orig: 28, 90
+  offset: 0, 0
+  index: -1
+Magic_2
+  rotate: false
+  xy: 43, 126
+  size: 24, 83
+  orig: 24, 83
+  offset: 0, 0
+  index: -1
+Paul_2_Copy
+  rotate: true
+  xy: 2, 211
+  size: 256, 512
+  orig: 256, 512
+  offset: 0, 0
+  index: -1
+Sparkles
+  rotate: false
+  xy: 516, 371
+  size: 38, 96
+  orig: 38, 96
+  offset: 0, 0
+  index: -1
+Sparkles_1
+  rotate: false
+  xy: 2, 94
+  size: 39, 115
+  orig: 39, 115
+  offset: 0, 0
+  index: -1
