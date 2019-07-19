@@ -35,7 +35,7 @@ namespace PPBC {
 
         void Update() {
             if (m_time > 0 && Time.timeScale > 0) {
-                float duration = Time.timeSinceLevelLoad - m_startTime;
+                float duration = Time.time - m_startTime;
                 m_currentMagnitude = m_magnitude * (1 - duration / m_time);
 
                 if (duration > m_time) {
@@ -55,7 +55,7 @@ namespace PPBC {
                 if (it.m_currentMagnitude < magnitude) {
                     it.m_magnitude = magnitude;
                     it.m_time = time;
-                    it.m_startTime = Time.timeSinceLevelLoad;
+                    it.m_startTime = Time.time;
                 }
 
             }
