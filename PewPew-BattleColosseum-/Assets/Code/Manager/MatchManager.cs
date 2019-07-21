@@ -23,6 +23,9 @@ namespace PPBC {
 
             foreach(var it in Player.s_references) {
                 it.ResetStatsFull();
+                it.InControle(true);
+                it.CanChangeCharacter(true);
+                it.Invincable(true);
             }
         }
 
