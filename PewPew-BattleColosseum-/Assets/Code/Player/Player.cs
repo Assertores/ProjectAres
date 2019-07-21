@@ -56,7 +56,7 @@ namespace PPBC {
 
         int m_playerIndex = -1;
         int m_team_ = -1;
-        [HideInInspector] public int m_team { get => m_team_; set { m_team_ = value; r_outline.color = GetPlayerColor(); } }
+        [HideInInspector] public int m_team { get => m_team_; set { m_team_ = value; OnColorChange(); } }
         [HideInInspector] public PillarRefHolder r_pillar;
         public float m_distanceToGround { get; private set; } = 0.5f;//TODO: auto create
         public float m_distanceToTop { get; private set; } = 0.75f;//TODO: auto create
@@ -403,6 +403,10 @@ namespace PPBC {
         }
 
         #endregion
+
+        void OnColorChange() {
+            r_outline.color = GetPlayerColor();
+        }
 
         void RotateWeapon() {
             //creating up vector from direction vector (vector at right angle)
