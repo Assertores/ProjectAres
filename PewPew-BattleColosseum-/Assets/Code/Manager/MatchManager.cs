@@ -20,6 +20,10 @@ namespace PPBC {
             if (s_currentMatch)
                 Destroy(s_currentMatch.gameObject);
             s_currentMatch = this;
+
+            foreach(var it in Player.s_references) {
+                it.ResetStatsFull();
+            }
         }
 
         #endregion
