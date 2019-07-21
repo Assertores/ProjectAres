@@ -126,12 +126,22 @@ namespace PPBC {
         void BackToMainMenu() {
             TransitionHandler.ReadyToChange -= BackToMainMenu;
 
+            foreach(var it in Player.s_references) {
+                it.Invincable(true);
+                it.Respawn(transform.position);
+            }
+
             SceneManager.LoadScene(StringCollection.S_MAINMENU);
         }
 
         void ContinueToWinScreen() {
             TransitionHandler.ReadyToChange -= ContinueToWinScreen;
             TransitionHandler.ReadyToStart += InWinScreen;
+
+            foreach (var it in Player.s_references) {
+                it.Invincable(true);
+                it.Respawn(transform.position);
+            }
 
             SceneManager.LoadScene(StringCollection.S_WINSCREEN);
         }
