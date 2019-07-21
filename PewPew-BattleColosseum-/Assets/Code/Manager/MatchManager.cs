@@ -177,5 +177,14 @@ namespace PPBC {
         }
 
         #endregion
+
+        public void StopGame() {
+            if (h_OngoingGame) {
+                DataHolder.s_modis[DataHolder.s_currentModi].AbortGame();
+            } else {
+                TransitionHandler.ReadyToChange = BackToMainMenu;//overwriting all other handlers;
+                TransitionHandler.StartOutTransition();
+            }
+        }
     }
 }
