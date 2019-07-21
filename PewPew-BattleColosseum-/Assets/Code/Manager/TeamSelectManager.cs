@@ -8,8 +8,7 @@ namespace PPBC {
 
         [Header("Balancing")]
         [SerializeField] float m_delay;
-
-        Dictionary<Player, int> m_teams = new Dictionary<Player, int>();
+        
         int m_playerCount = 0;
         float m_startTime;
 
@@ -18,7 +17,11 @@ namespace PPBC {
                 if(Time.time - m_startTime < m_delay) {
                     //TODO: doCountDown
                 } else {
-                    if(MatchManager.s_currentMatch.m_teamHolder != null && MatchManager.s_currentMatch.m_teamHolder.Count == 0) {
+                    Dictionary<Player, int> m_teams = new Dictionary<Player, int>();
+                    foreach(var it in Player.s_references) {
+                        m_teams[it] = it.m_team;
+                    }
+                    if (MatchManager.s_currentMatch.m_teamHolder != null && MatchManager.s_currentMatch.m_teamHolder.Count == 0) {
                         MatchManager.s_currentMatch.m_teamHolder = m_teams;
                     } else {
                         bool sameTeams = true;
@@ -42,7 +45,7 @@ namespace PPBC {
         }
 
         public void AddToFirstTeam() {
-            m_teams[TriggerButton.s_hoPlayer] = 0;
+            TriggerButton.s_hoPlayer.m_team = 0;
             m_playerCount++;
             if(m_playerCount >= Player.s_references.Count) {
                 m_startTime = Time.time;
@@ -50,7 +53,7 @@ namespace PPBC {
         }
 
         public void AddToSecondTeam() {
-            m_teams[TriggerButton.s_hoPlayer] = 1;
+            TriggerButton.s_hoPlayer.m_team = 1;
             m_playerCount++;
             if (m_playerCount >= Player.s_references.Count) {
                 m_startTime = Time.time;
@@ -58,7 +61,7 @@ namespace PPBC {
         }
 
         public void RemoveOfTeam() {
-            m_teams[TriggerButton.s_hoPlayer] = -1;
+            TriggerButton.s_hoPlayer.m_team = -1;
             m_playerCount--;
             m_startTime = float.MaxValue;
         }
