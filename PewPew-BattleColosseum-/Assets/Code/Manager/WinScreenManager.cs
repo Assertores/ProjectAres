@@ -149,7 +149,7 @@ namespace PPBC {
                 GameObject pillar = Instantiate(p_pillar);
                 Player.s_references[i].r_pillar = pillar.GetComponent<PillarRefHolder>();
                 Player.s_references[i].SetPlayerActive(false);
-                PositionPlayer(Player.s_references[i], Vector3.Lerp(r_leftMostPlayer.position, r_rightMostPlayer.position, ((float)i + 1) / (Player.s_references.Count + 1)),0);
+                PositionPlayer(Player.s_references[i], Vector3.Lerp(r_leftMostPlayer.position, r_rightMostPlayer.position, Player.s_references.Count == 1 ? 0.5f : ((float)i) / (Player.s_references.Count - 1)),0);//1[0.5], 2[0, 1], 3[0, 0.5, 1], 4[0, 0.33, 0.66, 1], 5[0, 0.25, 0.5, 0.75, 1]
             }
 
             m_startTime = Time.time;
