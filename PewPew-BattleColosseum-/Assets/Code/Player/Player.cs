@@ -226,7 +226,9 @@ namespace PPBC {
         }
 
         public void Disconnect() {
-            Destroy(transform.root);
+            Destroy(transform.root.gameObject);
+            s_references.Remove(this);
+            s_sortRef.Remove(this);
         }
 
         #region Resets
