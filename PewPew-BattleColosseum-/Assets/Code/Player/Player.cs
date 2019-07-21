@@ -262,10 +262,12 @@ namespace PPBC {
             StopShooting();
             
             StartCoroutine(IEIFrame());
-            
-            r_respawnParent.SetActive(true);
 
-            yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
+            if (delay > 0) {
+                r_respawnParent.SetActive(true);
+                yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
+            }
+
             r_player.SetActive(true);
             r_respawnParent.SetActive(false);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));

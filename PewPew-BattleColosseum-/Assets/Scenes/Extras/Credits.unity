@@ -4198,7 +4198,7 @@ Transform:
   m_GameObject: {fileID: 766617989}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 0.91, z: 1}
   m_Children: []
   m_Father: {fileID: 428487191}
   m_RootOrder: 0
@@ -8688,7 +8688,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -8735,7 +8735,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.004, y: 0.029}
-  m_SizeDelta: {x: 1.31, y: 0.85}
+  m_SizeDelta: {x: 1.85, y: 0.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1506946220
 GameObject:
