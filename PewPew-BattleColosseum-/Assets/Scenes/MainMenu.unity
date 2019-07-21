@@ -705,7 +705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_item: {fileID: 2982821213059243070, guid: 9e31912de162d094a9a43f9199334522, type: 3}
   r_contentHolder: {fileID: 1008685679}
-  m_changeSpeed: 1
+  m_changeSpeed: 3
 --- !u!4 &137288861
 Transform:
   m_ObjectHideFlags: 0
@@ -3648,7 +3648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_item: {fileID: 2982821213059243070, guid: 9e31912de162d094a9a43f9199334522, type: 3}
   r_contentHolder: {fileID: 1641818453}
-  m_changeSpeed: 1
+  m_changeSpeed: 3
 --- !u!4 &1659211464
 Transform:
   m_ObjectHideFlags: 0

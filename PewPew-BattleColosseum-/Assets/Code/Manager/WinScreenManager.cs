@@ -29,6 +29,8 @@ namespace PPBC {
         [SerializeField] float m_pillarRiseTime;
         [SerializeField] float m_GameMatchPillarLerpTime;
         [SerializeField] int m_upperMatchPoints = 200;
+        [SerializeField] Color m_winColor = Color.green;
+        [SerializeField] Color m_loseColor = Color.red;
 
         [SerializeField] int[] m_matchPoints;
 
@@ -185,9 +187,12 @@ namespace PPBC {
                     r_fireworkParent.transform.position = new Vector2(it.r_pillar.transform.position.x, r_leftMostPlayer.position.y);
                     FX_firework.Play();
                     time = it.StartAnim(StringCollection.A_WIN);
+                    it.r_pillar.r_light.color = m_winColor;
                 } else {
                     time = it.StartAnim(StringCollection.A_LOSE);
+                    it.r_pillar.r_light.color = m_loseColor;
                 }
+                it.r_pillar.r_light.gameObject.SetActive(true);
 
                 if (time > maxTime)
                     maxTime = time;
@@ -201,6 +206,10 @@ namespace PPBC {
             } else {
                 m_startLerpTime = Time.time;
                 CalcMatchPoints();
+
+                foreach(var it in Player.s_references) {
+                    it.r_pillar.r_light.gameObject.SetActive(false);
+                }
 
                 m_state = e_winScreenState.LERPTOMATCH;
             }
