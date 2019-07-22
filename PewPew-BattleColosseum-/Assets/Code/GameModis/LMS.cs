@@ -50,6 +50,10 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
+            Player.s_sortRef[0].m_stats.m_points = 1;
+            for(int i = 1; i < Player.s_sortRef.Count; i++) {
+                Player.s_sortRef[i].m_stats.m_points = 0;
+            }
             EndGame?.Invoke(true);
         }
 

@@ -19,6 +19,8 @@ namespace PPBC {
 
         int m_lastIndex = -1;
 
+        System.Random m_randomDevice;
+
         #endregion
         #region MonoBehaviour
 
@@ -43,6 +45,8 @@ namespace PPBC {
                 Destroy(gameObject);
                 return;
             }
+
+            m_randomDevice = new System.Random(DataHolder.s_currentMap);
 
             s_singelton = this;
         }
@@ -88,7 +92,7 @@ namespace PPBC {
             fx_laserEnd.Play();
 
             int newIndex;
-            while (m_lastIndex == (newIndex = Random.Range(0, LaserSpawner.s_references.Count))) ;
+            while (m_lastIndex == (newIndex = m_randomDevice.Next(0, LaserSpawner.s_references.Count))) ;
             m_lastIndex = newIndex;
 
             LaserSpawner.s_references[newIndex].fx_on.SetActive(true);
@@ -121,6 +125,8 @@ namespace PPBC {
                 collisionObjects.Add(tmp[i].gameObject);
                 tmp[i].gameObject.SetActive(false);
             }
+            LaserSpawner.s_references[newIndex].Reactivate();
+            LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].Reactivate();
 
             yield return new WaitForSeconds(fx_laserStart.main.duration);
 

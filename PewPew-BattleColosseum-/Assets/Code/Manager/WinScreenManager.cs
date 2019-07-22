@@ -29,6 +29,8 @@ namespace PPBC {
         [SerializeField] float m_pillarRiseTime;
         [SerializeField] float m_GameMatchPillarLerpTime;
         [SerializeField] int m_upperMatchPoints = 200;
+        [SerializeField] Color m_winColor = Color.green;
+        [SerializeField] Color m_loseColor = Color.red;
 
         [SerializeField] int[] m_matchPoints;
 
@@ -149,7 +151,7 @@ namespace PPBC {
                 GameObject pillar = Instantiate(p_pillar);
                 Player.s_references[i].r_pillar = pillar.GetComponent<PillarRefHolder>();
                 Player.s_references[i].SetPlayerActive(false);
-                PositionPlayer(Player.s_references[i], Vector3.Lerp(r_leftMostPlayer.position, r_rightMostPlayer.position, ((float)i + 1) / (Player.s_references.Count + 1)),0);
+                PositionPlayer(Player.s_references[i], Vector3.Lerp(r_leftMostPlayer.position, r_rightMostPlayer.position, Player.s_references.Count == 1 ? 0.5f : ((float)i) / (Player.s_references.Count - 1)),0);//1[0.5], 2[0, 1], 3[0, 0.5, 1], 4[0, 0.33, 0.66, 1], 5[0, 0.25, 0.5, 0.75, 1]
             }
 
             m_startTime = Time.time;
@@ -181,12 +183,16 @@ namespace PPBC {
                 if(MatchManager.s_currentMatch.m_teamHolder != null ?
                     it.m_team == Player.s_sortRef[0].m_team :
                     it == Player.s_sortRef[0]) {
+
                     r_fireworkParent.transform.position = new Vector2(it.r_pillar.transform.position.x, r_leftMostPlayer.position.y);
                     FX_firework.Play();
                     time = it.StartAnim(StringCollection.A_WIN);
+                    it.r_pillar.r_light.color = m_winColor;
                 } else {
                     time = it.StartAnim(StringCollection.A_LOSE);
+                    it.r_pillar.r_light.color = m_loseColor;
                 }
+                it.r_pillar.r_light.gameObject.SetActive(true);
 
                 if (time > maxTime)
                     maxTime = time;
@@ -200,6 +206,10 @@ namespace PPBC {
             } else {
                 m_startLerpTime = Time.time;
                 CalcMatchPoints();
+
+                foreach(var it in Player.s_references) {
+                    it.r_pillar.r_light.gameObject.SetActive(false);
+                }
 
                 m_state = e_winScreenState.LERPTOMATCH;
             }

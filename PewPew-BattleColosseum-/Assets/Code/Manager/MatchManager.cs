@@ -20,6 +20,13 @@ namespace PPBC {
             if (s_currentMatch)
                 Destroy(s_currentMatch.gameObject);
             s_currentMatch = this;
+
+            foreach(var it in Player.s_references) {
+                it.ResetStatsFull();
+                it.InControle(true);
+                it.CanChangeCharacter(true);
+                it.Invincable(true);
+            }
         }
 
         #endregion
@@ -47,8 +54,16 @@ namespace PPBC {
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
                 SceneManager.LoadScene(StringCollection.S_TEAMSELECT);
             } else {
-                SceneManager.LoadScene(StringCollection.S_MAP);
+
+                foreach (var it in Player.s_references) {
+                    it.ResetGameStats();
+                    it.Invincable(false);
+                    it.InControle(true);
+                }
+
                 TransitionHandler.ReadyToStart += StartMap;
+                
+                SceneManager.LoadScene(StringCollection.S_MAP);
             }
         }
 
@@ -93,6 +108,8 @@ namespace PPBC {
                 return;
             h_OngoingGame = true;
 
+            
+
             TransitionHandler.ReadyToStart -= StartMap;
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame += GMEnded;
 
@@ -116,12 +133,22 @@ namespace PPBC {
         void BackToMainMenu() {
             TransitionHandler.ReadyToChange -= BackToMainMenu;
 
+            foreach(var it in Player.s_references) {
+                it.Invincable(true);
+                it.Respawn(transform.position);
+            }
+
             SceneManager.LoadScene(StringCollection.S_MAINMENU);
         }
 
         void ContinueToWinScreen() {
             TransitionHandler.ReadyToChange -= ContinueToWinScreen;
             TransitionHandler.ReadyToStart += InWinScreen;
+
+            foreach (var it in Player.s_references) {
+                it.Invincable(true);
+                it.Respawn(transform.position);
+            }
 
             SceneManager.LoadScene(StringCollection.S_WINSCREEN);
         }
@@ -150,5 +177,14 @@ namespace PPBC {
         }
 
         #endregion
+
+        public void StopGame() {
+            if (h_OngoingGame) {
+                DataHolder.s_modis[DataHolder.s_currentModi].AbortGame();
+            } else {
+                TransitionHandler.ReadyToChange = BackToMainMenu;//overwriting all other handlers;
+                TransitionHandler.StartOutTransition();
+            }
+        }
     }
 }

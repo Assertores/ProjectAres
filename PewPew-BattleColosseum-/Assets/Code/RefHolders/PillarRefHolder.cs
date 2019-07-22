@@ -7,6 +7,7 @@ namespace PPBC {
     public class PillarRefHolder : MonoBehaviour {
 
         public TextMeshProUGUI r_points;
+        public SpriteRenderer r_light;
 
         //calculation variables
         [HideInInspector] public Vector3 m_holderPos;

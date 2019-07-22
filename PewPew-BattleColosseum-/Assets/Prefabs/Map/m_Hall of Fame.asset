@@ -187,3 +187,13 @@ MonoBehaviour:
     position: {x: -6.98, y: -5.83}
     rotation: 0
     scale: {x: 1, y: 1}
+  - type: 4
+    index: 0
+    position: {x: -4.79, y: 0.24}
+    rotation: 0
+    scale: {x: 1, y: 1}
+  - type: 4
+    index: 1
+    position: {x: 4.79, y: 0.24}
+    rotation: 0
+    scale: {x: 1, y: 1}

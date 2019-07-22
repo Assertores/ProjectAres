@@ -14,16 +14,7 @@ namespace PPBC {
 
         float m_startGravityScale;
         bool m_charging_;
-        bool m_charging {get => m_charging_; set {
-                m_charging_ = value;
-                if (value) {
-                    m_owner.m_rb.gravityScale = 0;
-                    m_owner.ResetVelocity();
-                    m_owner.m_modelRef.m_rocket.r_overcharge.SetActive(true);
-                } else {
-                    m_owner.m_rb.gravityScale = m_startGravityScale;
-                    m_owner.m_modelRef.m_rocket.r_overcharge.SetActive(false);
-                } } }
+        bool m_charging {get => m_charging_; set { m_charging_ = value; OnChargingChange(); } }
 
         float m_lastShot;
         
@@ -91,6 +82,17 @@ namespace PPBC {
 
         public float GetStamina() {
             return  m_charging ? m_stamina / m_owner.m_modelRef.m_rocket.m_overchargeMaxTime : 1-(Time.time - m_lastShot) / m_owner.m_modelRef.m_rocket.m_shootDelay;
+        }
+
+        void OnChargingChange() {
+            if (m_charging) {
+                m_owner.m_rb.gravityScale = 0;
+                m_owner.ResetVelocity();
+                m_owner.m_modelRef.m_rocket.r_overcharge.SetActive(true);
+            } else {
+                m_owner.m_rb.gravityScale = m_startGravityScale;
+                m_owner.m_modelRef.m_rocket.r_overcharge.SetActive(false);
+            }
         }
 
         void ShootBullet() {

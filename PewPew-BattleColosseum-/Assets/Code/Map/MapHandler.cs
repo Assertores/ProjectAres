@@ -328,8 +328,8 @@ namespace PPBC {
                     ren.sprite = DataHolder.s_commonStages[obj.index];
                 }
 
-                msk = tmp.AddComponent<SpriteMask>();
-                msk.sprite = ren.sprite;
+                //msk = tmp.AddComponent<SpriteMask>();
+                //msk.sprite = ren.sprite;
                 break;
             case e_objType.SPAWNPOINT:
                 tmp = new GameObject("PlayerSpawn " + obj.index);
@@ -372,7 +372,7 @@ namespace PPBC {
             case e_objType.LASERSPAWN:
                 tmp = Instantiate(DataHolder.s_commonLaserSpawner, obj.position, Quaternion.Euler(Vector3.zero));
                 tmp.GetComponent<LaserSpawner>().Init(obj.index);
-                tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
+                //tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
                 break;
             case e_objType.FLAG:
                 break;

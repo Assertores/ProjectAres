@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df8b4541e6ac9d47a27d816050cc5c7, type: 3}
   m_Name: p_CeilingCorner
   m_EditorClassIdentifier: 
-  m_image: {fileID: 21300000, guid: 7014e85cb1c516f4cb9c14772995566a, type: 3}
+  m_image: {fileID: 21300000, guid: 63034f7df5ee9264181651a4ccf0cae9, type: 3}
   m_collider:
   - {x: 0.5, y: 0.98}
   - {x: 0.5, y: -0.98}

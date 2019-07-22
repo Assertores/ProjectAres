@@ -40,6 +40,11 @@ namespace PPBC {
         }
 
         public static void ChangeAudio(AudioClip newClip, float fadeTime = 0.5f) {
+            if (newClip == (s_singelton.m_currentAS1 ? s_singelton.m_as1 : s_singelton.m_as2).clip)
+                return;
+
+            //--> new clip to fade to <--
+
             if (s_singelton.m_currentAS1) {
                 s_singelton.m_as2.clip = newClip;
                 s_singelton.m_as2.volume = 0;

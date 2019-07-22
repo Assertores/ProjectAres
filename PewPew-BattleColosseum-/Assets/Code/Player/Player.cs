@@ -56,7 +56,7 @@ namespace PPBC {
 
         int m_playerIndex = -1;
         int m_team_ = -1;
-        [HideInInspector] public int m_team { get => m_team_; set { m_team_ = value; r_outline.color = GetPlayerColor(); } }
+        [HideInInspector] public int m_team { get => m_team_; set { m_team_ = value; OnColorChange(); } }
         [HideInInspector] public PillarRefHolder r_pillar;
         public float m_distanceToGround { get; private set; } = 0.5f;//TODO: auto create
         public float m_distanceToTop { get; private set; } = 0.75f;//TODO: auto create
@@ -226,7 +226,9 @@ namespace PPBC {
         }
 
         public void Disconnect() {
-            Destroy(transform.root);
+            Destroy(transform.root.gameObject);
+            s_references.Remove(this);
+            s_sortRef.Remove(this);
         }
 
         #region Resets
@@ -258,12 +260,14 @@ namespace PPBC {
             ResetHealth();
 
             StopShooting();
-
-            StartCoroutine(IEIFrame());
             
-            r_respawnParent.SetActive(true);
+            StartCoroutine(IEIFrame());
 
-            yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
+            if (delay > 0) {
+                r_respawnParent.SetActive(true);
+                yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
+            }
+
             r_player.SetActive(true);
             r_respawnParent.SetActive(false);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
@@ -343,13 +347,16 @@ namespace PPBC {
 
         #endregion
 
+        bool h_startInv;
         IEnumerator IEIFrame() {
+            h_startInv = m_invincible;
             Invincable(true);
             yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
-            Invincable(false);
+            Invincable(h_startInv);
         }
 
         public void Invincable(bool value) {
+            print("test: " + value);
             m_invincible = value;
         }
 
@@ -396,6 +403,10 @@ namespace PPBC {
         }
 
         #endregion
+
+        void OnColorChange() {
+            r_outline.color = GetPlayerColor();
+        }
 
         void RotateWeapon() {
             //creating up vector from direction vector (vector at right angle)
