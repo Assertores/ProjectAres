@@ -22,8 +22,7 @@ namespace PPBC {
         [SerializeField] Transform r_leftMostPlayer;
         [SerializeField] Transform r_maxHeight;
         [SerializeField] GameObject r_selectParent;
-        [SerializeField] GameObject r_fireworkParent;
-        [SerializeField] ParticleSystem FX_firework;
+        [SerializeField] GameObject p_fireworkParent;
 
         [Header("Balancing")]
         [SerializeField] float m_pillarRiseTime;
@@ -79,6 +78,8 @@ namespace PPBC {
             }
 
             r_selectParent.SetActive(false);
+
+            Init();
         }
 
         private void Update() {
@@ -132,7 +133,16 @@ namespace PPBC {
 
         #endregion
 
+        bool h_initOnce = false;
         public void Init() {
+            if (h_initOnce)
+                return;
+            h_initOnce = true;
+
+            if(MatchManager.s_currentMatch.m_teamHolder.Count == 0) {
+                MatchManager.s_currentMatch.m_teamHolder = null;
+            }
+
             foreach(var it in Player.s_references) {
                 it.InControle(false);
                 it.ResetVelocity();
@@ -184,8 +194,8 @@ namespace PPBC {
                     it.m_team == Player.s_sortRef[0].m_team :
                     it == Player.s_sortRef[0]) {
 
-                    r_fireworkParent.transform.position = new Vector2(it.r_pillar.transform.position.x, r_leftMostPlayer.position.y);
-                    FX_firework.Play();
+                    GameObject fwHolder = Instantiate(p_fireworkParent);
+                    fwHolder.transform.position = new Vector2(it.r_pillar.transform.position.x, r_leftMostPlayer.position.y);
                     time = it.StartAnim(StringCollection.A_WIN);
                     it.r_pillar.r_light.color = m_winColor;
                 } else {

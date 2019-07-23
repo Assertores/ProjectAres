@@ -110,7 +110,7 @@ SpriteRenderer:
   m_Size: {x: 32, y: 32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &2765471168823715540
@@ -260,10 +260,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5, y: 3.11}
-      - {x: 0.5, y: -3.11}
-      - {x: -0.5, y: -3.11}
-      - {x: -0.5, y: 3.11}
+    - - {x: 0.5, y: -1.88}
+      - {x: 0.5, y: -3.05}
+      - {x: -0.5, y: -3.05}
+      - {x: -0.5, y: -1.88}
 --- !u!114 &3962103130131633678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df719617019d1c94195a318ff22465bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: Wall Top Corner
+  m_name: Wall top Corner
   m_sprite: {fileID: 3497210229228720244}
   m_col: {fileID: 8922998582040542921}

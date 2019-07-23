@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9df8b4541e6ac9d47a27d816050cc5c7, type: 3}
-  m_Name: p_Wall Down Corner
+  m_Name: p_Wall Top Corner 2
   m_EditorClassIdentifier: 
-  m_image: {fileID: 21300000, guid: 943fcaa7d6bc75d438dc4af3effc2ec7, type: 3}
+  m_image: {fileID: 21300000, guid: a09d495fadd75a64d8c1e16f60a43ef7, type: 3}
   m_collider:
-  - {x: 0.5, y: 3.21}
-  - {x: 0.5, y: 1.7}
-  - {x: -0.5, y: 1.7}
-  - {x: -0.5, y: 3.21}
+  - {x: 0.5, y: 3.11}
+  - {x: 0.5, y: 0.2}
+  - {x: -0.5, y: 0.2}
+  - {x: -0.5, y: 3.11}

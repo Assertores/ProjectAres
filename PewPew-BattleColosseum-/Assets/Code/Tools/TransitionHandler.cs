@@ -13,6 +13,7 @@ namespace PPBC {
         #region Variables
 
         [Header("References")]
+        [Tooltip("animator with bool named 'FadeOut' whitch will be set to true when the fadeout should start")]
         [SerializeField] Animator r_anim;
 
         #endregion
