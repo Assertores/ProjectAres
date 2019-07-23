@@ -48,8 +48,8 @@ namespace PPBC {
 
         // Update is called once per frame
         void Update() {
-            if (((RectTransform)transform).anchoredPosition.y < ((RectTransform)transform).rect.height) {
-                transform.position += new Vector3(0, m_scrollSpeed * Time.deltaTime, 0);
+            if (r_content.anchoredPosition.y < r_content.sizeDelta.y) {
+                r_content.anchoredPosition += new Vector2(0, m_scrollSpeed * Time.deltaTime);
             }
         }
 

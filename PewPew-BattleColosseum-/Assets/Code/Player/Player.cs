@@ -139,7 +139,9 @@ namespace PPBC {
             m_stats.m_deaths++;
             if(source != null && source.m_trace.m_owner != null)
                 source.m_trace.m_owner.m_stats.m_kills++;
-            
+
+            KillFeed.AddKill(source.m_trace.m_owner?.m_modelRef.m_icon, source.m_trace.m_icon, m_modelRef.m_icon);
+
             StartCoroutine(IEDie(source.m_trace));
         }
 
