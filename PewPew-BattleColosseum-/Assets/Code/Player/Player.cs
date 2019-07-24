@@ -368,7 +368,6 @@ namespace PPBC {
         }
 
         public void Invincable(bool value) {
-            print("test: " + value);
             m_invincible = value;
         }
 
@@ -417,7 +416,6 @@ namespace PPBC {
         #endregion
 
         void OnColorChange() {
-            print("test");
             r_outline.color = GetPlayerColor();
         }
 

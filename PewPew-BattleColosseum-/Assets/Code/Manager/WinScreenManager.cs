@@ -165,14 +165,12 @@ namespace PPBC {
         void RisePillar() {
             foreach(var it in Player.s_references) {
                 if(m_hightPerKill * it.m_stats.m_points > it.transform.position.y - r_leftMostPlayer.position.y) {
-                    print("rise: " + it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0));
                     PositionPlayer(it, it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0), Mathf.FloorToInt((it.transform.position.y - r_leftMostPlayer.position.y) / m_hightPerKill));
                 }
             }
         }
 
         void PositionPlayer(Player player, Vector3 position, int points) {
-            print("Position: " + position);
             player.transform.position = position;
             player.r_pillar.transform.position = position;
             player.r_pillar.transform.position -= new Vector3(0, player.m_distanceToGround, 0);
