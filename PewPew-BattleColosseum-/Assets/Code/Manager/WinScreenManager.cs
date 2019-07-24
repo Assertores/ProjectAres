@@ -143,13 +143,6 @@ namespace PPBC {
                 MatchManager.s_currentMatch.m_teamHolder = null;
             }
 
-            foreach(var it in Player.s_references) {
-                it.InControle(false);
-                it.ResetVelocity();
-                it.Respawn(transform.position);
-                it.Invincable(true);
-            }
-
             m_pillarSpeed = (r_maxHeight.position.y - r_rightMostPlayer.position.y) / m_pillarRiseTime;
             m_hightPerKill = (r_maxHeight.position.y - r_rightMostPlayer.position.y) / Player.s_sortRef[0].m_stats.m_points;
 
