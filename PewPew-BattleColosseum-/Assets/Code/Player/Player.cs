@@ -51,6 +51,7 @@ namespace PPBC {
         float m_currentHealth;
         [SerializeField] float m_iFrameTime = 1;
         [SerializeField] float m_bounciness = 0.75f;
+        [SerializeField] float m_assistTime = 1;
 
         [HideInInspector] public d_playerStuts m_stats;
 
@@ -72,6 +73,8 @@ namespace PPBC {
 
         int m_currentCaracter = 0;
         bool m_useSMG = true;
+
+        System.Tuple<Player, float> lastHit = null;
 
         #endregion
         #region MonoBehaviour
@@ -139,6 +142,9 @@ namespace PPBC {
             m_stats.m_deaths++;
             if(source != null && source.m_trace.m_owner != null)
                 source.m_trace.m_owner.m_stats.m_kills++;
+            else if (lastHit != null && Time.time - lastHit.Item2 <= m_assistTime) {
+                lastHit.Item1.m_stats.m_kills++;
+            }
 
             KillFeed.AddKill(source.m_trace.m_owner?.m_modelRef.m_icon, source.m_trace.m_icon, m_modelRef.m_icon);
 
@@ -191,8 +197,10 @@ namespace PPBC {
             //--> damage is valid && won't die from it <--
 
             m_stats.m_damageTaken += damage;
-            if (source != null && source.m_trace.m_owner != null)
+            if (source != null && source.m_trace.m_owner != null) {
                 source.m_trace.m_owner.m_stats.m_damageDealt += damage;
+                lastHit = new System.Tuple<Player, float>(source.m_trace.m_owner, Time.time);
+            }
 
             m_currentHealth -= damage;
             StartAnim(StringCollection.A_HIT);
