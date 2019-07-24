@@ -4710,7 +4710,7 @@ GameObject:
   - component: {fileID: 2570069402163137170}
   - component: {fileID: 8859330231902607343}
   m_Layer: 0
-  m_Name: FX_LAZOR_START 1 1
+  m_Name: FX_LAZOR_START_REWORK_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4743,7 +4743,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860303945815617005}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 2.7
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
