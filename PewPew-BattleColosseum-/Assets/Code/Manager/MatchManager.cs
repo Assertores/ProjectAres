@@ -20,165 +20,273 @@ namespace PPBC {
             if (s_currentMatch)
                 Destroy(s_currentMatch.gameObject);
             s_currentMatch = this;
-
-            
         }
 
         #endregion
-        #region NextMatch
+        #region Logic
 
-        bool h_startGameOngoing = false;
-        public void StartGame() {//TODO: move to IEnumerator to make countDown
-            if (h_startGameOngoing)
-                return;
-            h_startGameOngoing = true;
+        /// <summary>
+        /// entrance to Match
+        /// </summary>
+        public void StartMatch() {
 
-            foreach(var it in Player.s_references) {
+            foreach (var it in Player.s_references) {
                 it.ResetMatchStats();
                 it.CanChangeCharacter(false);
             }
 
-            TransitionHandler.ReadyToChange += ContinueToNextMatch;
-            TransitionHandler.StartOutTransition();
+            StartNextGame();
         }
 
-        void ContinueToNextMatch() {
-            TransitionHandler.ReadyToChange -= ContinueToNextMatch;
-            TransitionHandler.ReadyToStart += FinishedContinueToNextMatch;
+        /// <summary>
+        /// entrance to next game
+        /// </summary>
+        void StartNextGame() {
+            print("starting modi: " + DataHolder.s_modis[DataHolder.s_currentModi].m_name);
 
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
-                SceneManager.LoadScene(StringCollection.S_TEAMSELECT);
+                TeamSelect();
             } else {
-
-                foreach (var it in Player.s_references) {
-                    it.ResetGameStats();
-                    it.Invincable(false);
-                    it.InControle(true);
-                }
-
-                TransitionHandler.ReadyToStart += StartMap;
-                
-                SceneManager.LoadScene(StringCollection.S_MAP);
+                StartMap();
             }
         }
 
-        public void ContinueToMap() {
-            if (h_startGameOngoing)
-                return;
-            h_startGameOngoing = true;
-
-            print("starting modi: " + DataHolder.s_modis[DataHolder.s_currentModi].m_name);
-
-            DataHolder.s_modis[DataHolder.s_currentModi].StartTransition();
-
-            TransitionHandler.ReadyToChange += ContinueToNextMap;
-            TransitionHandler.StartOutTransition();
+        void TeamSelect() {
+            TeamSelectI();
+            SceneManager.LoadScene(StringCollection.S_TEAMSELECT);
         }
 
-        void ContinueToNextMap() {
-            TransitionHandler.ReadyToChange -= ContinueToNextMap;
-            TransitionHandler.ReadyToStart += FinishedContinueToNextMatch;
-            TransitionHandler.ReadyToStart += StartMap;
+        /// <summary>
+        /// entrance to map
+        /// </summary>
+        void StartMap() {
+            StartCoroutine(IEStartMap(DataHolder.s_modis[DataHolder.s_currentModi].StartTransition()));
+        }
+
+        
+        IEnumerator IEStartMap(float delay) {
+            yield return new WaitForSeconds(delay);
+
+            MapI();
+
+            SceneManager.LoadScene(StringCollection.S_MAP);
 
             foreach (var it in Player.s_references) {
                 it.ResetGameStats();
                 it.Invincable(false);
                 it.InControle(true);
             }
-
-            SceneManager.LoadScene(StringCollection.S_MAP);
         }
 
-        void FinishedContinueToNextMatch() {
-            TransitionHandler.ReadyToStart -= FinishedContinueToNextMatch;
-            h_startGameOngoing = false;
-        }
+        void ExitMap(bool normal) {
 
-        #endregion
-        #region InGame
-
-        bool h_OngoingGame = false;
-        void StartMap() {
-            if (h_OngoingGame)
-                return;
-            h_OngoingGame = true;
-
-            
-
-            TransitionHandler.ReadyToStart -= StartMap;
-            DataHolder.s_modis[DataHolder.s_currentModi].EndGame += GMEnded;
-
-            DataHolder.s_modis[DataHolder.s_currentModi].StartGame();
-        }
-
-        void GMEnded(bool normal) {
-            h_OngoingGame = false;
-
-            DataHolder.s_modis[DataHolder.s_currentModi].EndGame -= GMEnded;
-
-            if (normal) {
-                TransitionHandler.ReadyToChange += ContinueToWinScreen;
-            } else {
-                TransitionHandler.ReadyToChange += BackToMainMenu;
-            }
-
-            TransitionHandler.StartOutTransition();
-        }
-
-        void BackToMainMenu() {
-            TransitionHandler.ReadyToChange -= BackToMainMenu;
-
-            foreach(var it in Player.s_references) {
-                it.Invincable(true);
-                it.Respawn(transform.position);
-            }
-
-            SceneManager.LoadScene(StringCollection.S_MAINMENU);
-        }
-
-        void ContinueToWinScreen() {
-            TransitionHandler.ReadyToChange -= ContinueToWinScreen;
-            TransitionHandler.ReadyToStart += InWinScreen;
-
+            //reset global stuff
             foreach (var it in Player.s_references) {
                 it.Invincable(true);
                 it.Respawn(transform.position);
             }
 
+            if (normal) {
+                WinScreen();
+            } else {
+                BackToMM();
+            }
+        }
+
+        void WinScreen() {
+            WinScreenI();
+
             SceneManager.LoadScene(StringCollection.S_WINSCREEN);
+
+            foreach (var it in Player.s_references) {
+                it.InControle(false);
+                it.ResetVelocity();
+            }
+        }
+
+        void StartWinScreen() {
+            WinScreenManager.s_singelton.Init();
+        }
+
+        void EndWinScreen() {
+            m_matchCount--;
+            if (m_matchCount > 0) {
+                StartNextGame();
+            } else {
+                BackToMM();
+            }
+        }
+
+        /// <summary>
+        /// exit of Match
+        /// </summary>
+        public void BackToMM() {
+            SceneManager.LoadScene(StringCollection.S_MAINMENU);
+
+            foreach (var it in Player.s_references) {
+                it.InControle(true);
+                it.Invincable(true);
+                it.Respawn(transform.position);
+                it.CanChangeCharacter(true);
+            }
+        }
+
+        #endregion
+        #region Comunication
+        //void SceneI(); //IN:    will be loaded next
+        //void SceneR(); //READY: Transition has endet
+        //void SceneE(); //EXIT:  start out Transition
+        //void SceneO(); //OUT:   Ready to Change to next scene
+
+        #region MainMenu
+
+        bool h_singleMM = false;
+        void MainMenuE() {
+            if (h_singleMM)
+                return;
+            h_singleMM = true;
+
+            TransitionHandler.ReadyToChange += MainMenuO;
+
+            TransitionHandler.StartOutTransition();
+        }
+
+        void MainMenuO() {
+            TransitionHandler.ReadyToChange -= MainMenuO;
+
+            StartMatch();
+
+            h_singleMM = false;
+        }
+
+        #endregion
+        #region TeamSelect
+
+        bool h_singleTS = false;
+        void TeamSelectI() {
+            if (h_singleTS)
+                return;
+            h_singleTS = true;
+
+            TransitionHandler.ReadyToChange += TeamSelectO;
+            
+        }
+
+        void TeamSelectE() {
+            TransitionHandler.StartOutTransition();
+        }
+
+        void TeamSelectO() {
+            TransitionHandler.ReadyToChange -= TeamSelectO;
+
+            StartMap();
+
+            h_singleTS = false;
+        }
+
+        #endregion
+        #region Map
+
+        bool h_singleMap = false;
+        void MapI() {
+            if (h_singleMap)
+                return;
+            h_singleMap = true;
+
+            DataHolder.s_modis[DataHolder.s_currentModi].EndGame += MapE;
+            TransitionHandler.ReadyToStart += MapR;
+        }
+
+        void MapR() {
+            TransitionHandler.ReadyToStart -= MapR;
+
+            DataHolder.s_modis[DataHolder.s_currentModi].StartGame();
+        }
+
+        bool h_mapEnd;
+        void MapE(bool normal) {
+            DataHolder.s_modis[DataHolder.s_currentModi].EndGame -= MapE;
+            TransitionHandler.ReadyToChange += MapO;
+
+            h_mapEnd = normal;
+
+            TransitionHandler.StartOutTransition();
+        }
+
+        void MapO() {
+            TransitionHandler.ReadyToChange -= MapO;
+
+            ExitMap(h_mapEnd);
+
+            h_singleMap = false;
         }
 
         #endregion
         #region WinScreen
 
-        void InWinScreen() {
-            TransitionHandler.ReadyToStart -= InWinScreen;
-            TransitionHandler.ReadyToChange += ResetTeam;
+        bool h_singleWS = false;
+        void WinScreenI() {
+            if (h_singleWS)
+                return;
+            h_singleWS = true;
 
-            m_matchCount--;
-            if(m_matchCount > 0) {
-                TransitionHandler.ReadyToChange += ContinueToNextMatch;
-            } else {
-                TransitionHandler.ReadyToChange += BackToMainMenu;
-            }
-
-            WinScreenManager.s_singelton.Init();
+            TransitionHandler.ReadyToChange += WinScreenO;
+            TransitionHandler.ReadyToStart += WinScreenR;
         }
 
-        void ResetTeam() {
-            foreach(var it in Player.s_references) {
-                it.ResetTeam();
-            }
+        void WinScreenR() {
+            StartWinScreen();
+        }
+
+        void WinScreenO() {
+            TransitionHandler.ReadyToChange -= WinScreenO;
+
+            WinScreen();
+
+            h_singleWS = false;
         }
 
         #endregion
+        #endregion
+
+        public void StartGame() {
+            StartCoroutine(IEStartGame());
+        }
+
+        public void AbortStartGame() {
+            StopCoroutine(IEStartGame());
+        }
+
+        IEnumerator IEStartGame() {
+            yield return null;//TODO: add countdown
+            MainMenuE();
+        }
+
+        public void ContinueToMap() {
+            StartCoroutine(IEContinueToMap());
+        }
+
+        public void AbortContinueToMap() {
+            StopCoroutine(IEContinueToMap());
+        }
+
+        IEnumerator IEContinueToMap() {
+            yield return null;//TODO: add countdown
+            TeamSelectE();
+        }
+
 
         public void StopGame() {
-            if (h_OngoingGame) {
+            if (h_singleMap) {
                 DataHolder.s_modis[DataHolder.s_currentModi].AbortGame();
             } else {
-                TransitionHandler.ReadyToChange = BackToMainMenu;//overwriting all other handlers;
-                TransitionHandler.StartOutTransition();
+                BackToMM();
+            }
+        }
+
+        void ResetTeam() {
+            foreach (var it in Player.s_references) {
+                it.ResetTeam();
             }
         }
     }
