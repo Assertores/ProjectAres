@@ -39,6 +39,7 @@ namespace PPBC {
         [SerializeField] GameObject r_laserDeathParent;
         [SerializeField] ParticleSystem FX_laserDeath;
         [SerializeField] ParticleSystem FX_respawn;
+        [SerializeField] GameObject r_DeathOrb;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
@@ -257,11 +258,13 @@ namespace PPBC {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
 
+            r_DeathOrb.SetActive(true);
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
                 yield return null;
             }
+            r_DeathOrb.SetActive(false);
 
             //----- stuff that should happon after -----
             
