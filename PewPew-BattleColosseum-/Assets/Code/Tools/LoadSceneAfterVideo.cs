@@ -9,10 +9,13 @@ namespace PPBC {
 
         [Header("References")]
         [SerializeField] VideoPlayer r_player;
+        [SerializeField] Animator r_anim;
+        [SerializeField] GameObject r_animParent;
 
         [Header("Balancing")]
         [SerializeField] string m_nextScene;
-
+        
+        
         float m_length;
 
         private void Start() {
@@ -25,8 +28,19 @@ namespace PPBC {
         }
 
         private void Update() {
-            if (Time.timeSinceLevelLoad > m_length)
-                SceneManager.LoadScene(m_nextScene);
+            if (Time.timeSinceLevelLoad > m_length) {
+                
+                StartCoroutine(IEOutTransition());
+            }
+        }
+
+        IEnumerator IEOutTransition() {
+            if (r_anim) {
+                r_animParent.SetActive(true);
+                r_anim.Play("FadeToBlackOUT");
+                yield return new WaitForSeconds(r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+            }
+            SceneManager.LoadScene(m_nextScene); 
         }
     }
 }
