@@ -109,6 +109,8 @@ namespace PPBC {
         }
 
         void EndWinScreen() {
+            ResetTeam();
+
             m_matchCount--;
             if (m_matchCount > 0) {
                 StartNextGame();
@@ -121,6 +123,8 @@ namespace PPBC {
         /// exit of Match
         /// </summary>
         public void BackToMM() {
+            ResetTeam();
+
             SceneManager.LoadScene(StringCollection.S_MAINMENU);
 
             foreach (var it in Player.s_references) {
@@ -274,7 +278,6 @@ namespace PPBC {
             yield return null;//TODO: add countdown
             TeamSelectE();
         }
-
 
         public void StopGame() {
             if (h_singleMap) {
