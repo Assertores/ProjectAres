@@ -29,6 +29,7 @@ namespace PPBC {
         /// entrance to Match
         /// </summary>
         public void StartMatch() {
+            print("starting a new match");
 
             foreach (var it in Player.s_references) {
                 it.ResetMatchStats();
@@ -52,6 +53,8 @@ namespace PPBC {
         }
 
         void TeamSelect() {
+            print("selecting team");
+
             TeamSelectI();
             SceneManager.LoadScene(StringCollection.S_TEAMSELECT);
         }
@@ -60,6 +63,8 @@ namespace PPBC {
         /// entrance to map
         /// </summary>
         void StartMap() {
+            print("starting map: " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
+
             StartCoroutine(IEStartMap(DataHolder.s_modis[DataHolder.s_currentModi].StartTransition()));
         }
 
@@ -79,6 +84,7 @@ namespace PPBC {
         }
 
         void ExitMap(bool normal) {
+            print("stopt map " + (normal ? "normal" : "ireguler"));
 
             //reset global stuff
             foreach (var it in Player.s_references) {
@@ -94,7 +100,11 @@ namespace PPBC {
         }
 
         void WinScreen() {
+            print("started the winscreen");
+
             WinScreenI();
+
+            m_matchCount--;
 
             SceneManager.LoadScene(StringCollection.S_WINSCREEN);
 
@@ -105,13 +115,16 @@ namespace PPBC {
         }
 
         void StartWinScreen() {
+            print("initialiced winscreen");
+
             WinScreenManager.s_singelton.Init();
         }
 
         void EndWinScreen() {
-            ResetTeam();
+            print("stoped winscreen");
 
-            m_matchCount--;
+            ResetTeam();
+            
             if (m_matchCount > 0) {
                 StartNextGame();
             } else {
@@ -123,6 +136,8 @@ namespace PPBC {
         /// exit of Match
         /// </summary>
         public void BackToMM() {
+            print("resumed back to Main menu");
+
             ResetTeam();
 
             SceneManager.LoadScene(StringCollection.S_MAINMENU);
@@ -146,9 +161,13 @@ namespace PPBC {
 
         bool h_singleMM = false;
         void MainMenuE() {
+            print("MainMenuE everytime");
+
             if (h_singleMM)
                 return;
             h_singleMM = true;
+
+            print("MainMenuE once");
 
             TransitionHandler.ReadyToChange += MainMenuO;
 
@@ -156,6 +175,8 @@ namespace PPBC {
         }
 
         void MainMenuO() {
+            print("MainMenuO");
+
             TransitionHandler.ReadyToChange -= MainMenuO;
 
             StartMatch();
@@ -168,19 +189,27 @@ namespace PPBC {
 
         bool h_singleTS = false;
         void TeamSelectI() {
+            print("TeamSelectI everytime");
+
             if (h_singleTS)
                 return;
             h_singleTS = true;
+
+            print("TeamSelectI once");
 
             TransitionHandler.ReadyToChange += TeamSelectO;
             
         }
 
         void TeamSelectE() {
+            print("TeamSelectE");
+
             TransitionHandler.StartOutTransition();
         }
 
         void TeamSelectO() {
+            print("TeamSelectO");
+
             TransitionHandler.ReadyToChange -= TeamSelectO;
 
             StartMap();
@@ -193,15 +222,21 @@ namespace PPBC {
 
         bool h_singleMap = false;
         void MapI() {
+            print("MapI everytime");
+
             if (h_singleMap)
                 return;
             h_singleMap = true;
+
+            print("MapI once");
 
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame += MapE;
             TransitionHandler.ReadyToStart += MapR;
         }
 
         void MapR() {
+            print("MapR");
+
             TransitionHandler.ReadyToStart -= MapR;
 
             DataHolder.s_modis[DataHolder.s_currentModi].StartGame();
@@ -209,6 +244,8 @@ namespace PPBC {
 
         bool h_mapEnd;
         void MapE(bool normal) {
+            print("MapE");
+
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame -= MapE;
             TransitionHandler.ReadyToChange += MapO;
 
@@ -218,6 +255,8 @@ namespace PPBC {
         }
 
         void MapO() {
+            print("MapO");
+
             TransitionHandler.ReadyToChange -= MapO;
 
             ExitMap(h_mapEnd);
@@ -230,22 +269,32 @@ namespace PPBC {
 
         bool h_singleWS = false;
         void WinScreenI() {
+            print("WinScreenI everytime");
+
             if (h_singleWS)
                 return;
             h_singleWS = true;
+
+            print("WinScreenI once");
 
             TransitionHandler.ReadyToChange += WinScreenO;
             TransitionHandler.ReadyToStart += WinScreenR;
         }
 
         void WinScreenR() {
+            print("WinScreenR");
+
+            TransitionHandler.ReadyToStart -= WinScreenR;
+
             StartWinScreen();
         }
 
         void WinScreenO() {
+            print("WinScreenO");
+
             TransitionHandler.ReadyToChange -= WinScreenO;
 
-            WinScreen();
+            EndWinScreen();
 
             h_singleWS = false;
         }
@@ -265,8 +314,9 @@ namespace PPBC {
             yield return null;//TODO: add countdown
             MainMenuE();
         }
-
+        
         public void ContinueToMap() {
+
             StartCoroutine(IEContinueToMap());
         }
 

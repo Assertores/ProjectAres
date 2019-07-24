@@ -36,7 +36,7 @@ namespace PPBC {
 
         public void SetUpGame() {
             foreach (var it in Player.s_references) {
-                it.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
+                DoRespawn(it);
                 it.m_stats.m_points = m_lifes;
             }
         }
@@ -87,13 +87,21 @@ namespace PPBC {
                 return;
             }
 
-            victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
+            DoRespawn(victim);
         }
 
         public void ScorePoint(Player scorer, float amount) {
         }
 
         #endregion
+
+        void DoRespawn(Player player) {
+            var spawns = SpawnPoint.s_references.FindAll(x => x.m_team == player.m_team);
+            if (spawns.Count > 0)
+                player.Respawn(spawns[Random.Range(0, spawns.Count)].transform.position, m_respawnDelay);
+            else
+                player.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
+        }
 
         void IsEndGame(bool value) {
             StopAllCoroutines();
