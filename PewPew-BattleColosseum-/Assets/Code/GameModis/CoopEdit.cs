@@ -32,8 +32,9 @@ namespace PPBC {
 
         public System.Action<bool> EndGame { get; set; }
 
-        public void StartTransition() {
+        public float StartTransition() {
             //Player transition
+            return 0;
         }
 
         public void SetUpGame() {

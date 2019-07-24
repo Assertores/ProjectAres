@@ -46,7 +46,7 @@ namespace PPBC {
                 return;
             }
 
-            m_randomDevice = new System.Random(DataHolder.s_currentMap);
+            m_randomDevice = new System.Random(DataHolder.s_maps[DataHolder.s_currentMap].m_name.GetHashCode());
 
             s_singelton = this;
         }
@@ -98,13 +98,14 @@ namespace PPBC {
             LaserSpawner.s_references[newIndex].fx_on.SetActive(true);
             LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(true);
 
-            yield return new WaitForSeconds(fx_laserLoop.main.duration);
+            
 
             for (int i = 0; i < collisionObjects.Count; i++) {
                 collisionObjects[i].SetActive(true);
             }
             collisionObjects.Clear();
-            
+            yield return new WaitForSeconds(4.0f);
+
 
             transform.position = LaserSpawner.s_references[newIndex].transform.position;
             Vector3 target = LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].transform.position;
@@ -113,7 +114,7 @@ namespace PPBC {
             
             fx_laserStart.Play();
 
-            yield return new WaitForSeconds(Time.fixedDeltaTime);
+            yield return new WaitForSeconds(fx_laserStart.main.duration/*Time.fixedDeltaTime*/);
             
             if(!m_collider)
                 m_collider = GetComponent<BoxCollider2D>();
@@ -128,7 +129,7 @@ namespace PPBC {
             LaserSpawner.s_references[newIndex].Reactivate();
             LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].Reactivate();
 
-            yield return new WaitForSeconds(fx_laserStart.main.duration);
+           // yield return new WaitForSeconds(fx_laserStart.main.duration);
 
             LaserSpawner.s_references[newIndex].fx_on.SetActive(false);
             LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(false);

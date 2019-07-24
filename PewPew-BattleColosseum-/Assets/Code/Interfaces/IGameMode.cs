@@ -18,7 +18,7 @@ namespace PPBC {
         /// <summary>
         /// will be called to start the custom transition befor scenechange
         /// </summary>
-        void StartTransition();
+        float StartTransition();
 
         /// <summary>
         /// will be called when the map is finished loading

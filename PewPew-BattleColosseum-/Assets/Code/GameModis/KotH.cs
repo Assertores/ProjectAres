@@ -91,8 +91,9 @@ namespace PPBC {
             });
         }
 
-        public void StartTransition() {
+        public float StartTransition() {
             //Player transition
+            return 0;
         }
 
         public void SetUpGame() {

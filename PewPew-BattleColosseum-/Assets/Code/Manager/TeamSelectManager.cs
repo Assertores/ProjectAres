@@ -11,9 +11,10 @@ namespace PPBC {
         
         int m_playerCount = 0;
         float m_startTime;
+        bool m_finished = false;
 
         private void Update() {
-            if(m_playerCount >= Player.s_references.Count) {
+            if(!m_finished && m_playerCount >= Player.s_references.Count) {
                 if(Time.time - m_startTime < m_delay) {
                     //TODO: doCountDown
                 } else {
@@ -40,6 +41,7 @@ namespace PPBC {
                     }
                     
                     MatchManager.s_currentMatch.ContinueToMap();
+                    m_finished = true;
                 }
             }
         }

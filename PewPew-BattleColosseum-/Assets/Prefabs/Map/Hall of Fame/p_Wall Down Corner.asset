@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_image: {fileID: 21300000, guid: 943fcaa7d6bc75d438dc4af3effc2ec7, type: 3}
   m_collider:
-  - {x: 0.5, y: 3.21}
-  - {x: 0.5, y: 1.7}
-  - {x: -0.5, y: 1.7}
-  - {x: -0.5, y: 3.21}
+  - {x: 0.5, y: 3.43}
+  - {x: 0.5, y: 1.85}
+  - {x: -0.5, y: 1.85}
+  - {x: -0.5, y: 3.43}

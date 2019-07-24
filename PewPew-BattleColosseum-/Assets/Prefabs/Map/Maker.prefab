@@ -224,7 +224,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a09d495fadd75a64d8c1e16f60a43ef7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 943fcaa7d6bc75d438dc4af3effc2ec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -252,7 +252,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.01, y: 6.22}
+    oldSize: {x: 1, y: 6.87}
     newSize: {x: 8.13, y: 1.96}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -260,10 +260,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5, y: -1.88}
-      - {x: 0.5, y: -3.05}
-      - {x: -0.5, y: -3.05}
-      - {x: -0.5, y: -1.88}
+    - - {x: 0.5, y: 3.43}
+      - {x: 0.5, y: 1.85}
+      - {x: -0.5, y: 1.85}
+      - {x: -0.5, y: 3.43}
 --- !u!114 &3962103130131633678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df719617019d1c94195a318ff22465bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: Wall top Corner
+  m_name: Wall Down Corner
   m_sprite: {fileID: 3497210229228720244}
   m_col: {fileID: 8922998582040542921}

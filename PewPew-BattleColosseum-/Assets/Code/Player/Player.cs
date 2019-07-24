@@ -35,12 +35,11 @@ namespace PPBC {
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
         [SerializeField] ParticleSystem FX_playerClash;
-        [SerializeField] GameObject r_deathParent;
         [SerializeField] ParticleSystem FX_death;
         [SerializeField] GameObject r_laserDeathParent;
         [SerializeField] ParticleSystem FX_laserDeath;
-        [SerializeField] GameObject r_respawnParent;
         [SerializeField] ParticleSystem FX_respawn;
+        [SerializeField] GameObject r_DeathOrb;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
@@ -51,6 +50,7 @@ namespace PPBC {
         float m_currentHealth;
         [SerializeField] float m_iFrameTime = 1;
         [SerializeField] float m_bounciness = 0.75f;
+        [SerializeField] float m_assistTime = 1;
 
         [HideInInspector] public d_playerStuts m_stats;
 
@@ -72,6 +72,8 @@ namespace PPBC {
 
         int m_currentCaracter = 0;
         bool m_useSMG = true;
+
+        System.Tuple<Player, float> lastHit = null;
 
         #endregion
         #region MonoBehaviour
@@ -139,6 +141,10 @@ namespace PPBC {
             m_stats.m_deaths++;
             if(source != null && source.m_trace.m_owner != null)
                 source.m_trace.m_owner.m_stats.m_kills++;
+            else if (lastHit != null && Time.time - lastHit.Item2 <= m_assistTime) {
+                lastHit.Item1.m_stats.m_kills++;
+            }
+            lastHit = null;
 
             KillFeed.AddKill(source.m_trace.m_owner?.m_modelRef.m_icon, source.m_trace.m_icon, m_modelRef.m_icon);
 
@@ -151,14 +157,15 @@ namespace PPBC {
             InControle(false);
 
             if (source.m_type == e_HarmingObjectType.LASOR) {
-                r_laserDeathParent.transform.position = transform.position;
                 r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, m_inVel);
                 FX_laserDeath.Play();
                 
             }
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
-                r_deathParent.SetActive(true);
+                FX_death.Play();
             }
+
+            
 
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
             
@@ -191,8 +198,10 @@ namespace PPBC {
             //--> damage is valid && won't die from it <--
 
             m_stats.m_damageTaken += damage;
-            if (source != null && source.m_trace.m_owner != null)
+            if (source != null && source.m_trace.m_owner != null) {
                 source.m_trace.m_owner.m_stats.m_damageDealt += damage;
+                lastHit = new System.Tuple<Player, float>(source.m_trace.m_owner, Time.time);
+            }
 
             m_currentHealth -= damage;
             StartAnim(StringCollection.A_HIT);
@@ -249,11 +258,13 @@ namespace PPBC {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
 
+            r_DeathOrb.SetActive(true);
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
                 yield return null;
             }
+            r_DeathOrb.SetActive(false);
 
             //----- stuff that should happon after -----
             
@@ -265,13 +276,15 @@ namespace PPBC {
             
             StartCoroutine(IEIFrame());
 
+            if (!m_useSMG)
+                ChangeWeapon();
+
             if (delay > 0) {
-                r_respawnParent.SetActive(true);
+                FX_respawn.Play();
                 yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
             }
 
             r_player.SetActive(true);
-            r_respawnParent.SetActive(false);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             SetPlayerActive(true);
             InControle(true);
@@ -358,7 +371,6 @@ namespace PPBC {
         }
 
         public void Invincable(bool value) {
-            print("test: " + value);
             m_invincible = value;
         }
 

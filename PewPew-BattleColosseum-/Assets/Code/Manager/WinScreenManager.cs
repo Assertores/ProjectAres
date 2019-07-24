@@ -143,13 +143,6 @@ namespace PPBC {
                 MatchManager.s_currentMatch.m_teamHolder = null;
             }
 
-            foreach(var it in Player.s_references) {
-                it.InControle(false);
-                it.ResetVelocity();
-                it.Respawn(transform.position);
-                it.Invincable(true);
-            }
-
             m_pillarSpeed = (r_maxHeight.position.y - r_rightMostPlayer.position.y) / m_pillarRiseTime;
             m_hightPerKill = (r_maxHeight.position.y - r_rightMostPlayer.position.y) / Player.s_sortRef[0].m_stats.m_points;
 
@@ -172,14 +165,12 @@ namespace PPBC {
         void RisePillar() {
             foreach(var it in Player.s_references) {
                 if(m_hightPerKill * it.m_stats.m_points > it.transform.position.y - r_leftMostPlayer.position.y) {
-                    print("rise: " + it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0));
                     PositionPlayer(it, it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0), Mathf.FloorToInt((it.transform.position.y - r_leftMostPlayer.position.y) / m_hightPerKill));
                 }
             }
         }
 
         void PositionPlayer(Player player, Vector3 position, int points) {
-            print("Position: " + position);
             player.transform.position = position;
             player.r_pillar.transform.position = position;
             player.r_pillar.transform.position -= new Vector3(0, player.m_distanceToGround, 0);
