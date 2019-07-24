@@ -35,11 +35,9 @@ namespace PPBC {
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
         [SerializeField] ParticleSystem FX_playerClash;
-        [SerializeField] GameObject r_deathParent;
         [SerializeField] ParticleSystem FX_death;
         [SerializeField] GameObject r_laserDeathParent;
         [SerializeField] ParticleSystem FX_laserDeath;
-        [SerializeField] GameObject r_respawnParent;
         [SerializeField] ParticleSystem FX_respawn;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
@@ -145,6 +143,7 @@ namespace PPBC {
             else if (lastHit != null && Time.time - lastHit.Item2 <= m_assistTime) {
                 lastHit.Item1.m_stats.m_kills++;
             }
+            lastHit = null;
 
             KillFeed.AddKill(source.m_trace.m_owner?.m_modelRef.m_icon, source.m_trace.m_icon, m_modelRef.m_icon);
 
@@ -157,14 +156,15 @@ namespace PPBC {
             InControle(false);
 
             if (source.m_type == e_HarmingObjectType.LASOR) {
-                r_laserDeathParent.transform.position = transform.position;
                 r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, m_inVel);
                 FX_laserDeath.Play();
                 
             }
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
-                r_deathParent.SetActive(true);
+                FX_death.Play();
             }
+
+            
 
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
             
@@ -273,13 +273,15 @@ namespace PPBC {
             
             StartCoroutine(IEIFrame());
 
+            if (!m_useSMG)
+                ChangeWeapon();
+
             if (delay > 0) {
-                r_respawnParent.SetActive(true);
+                FX_respawn.Play();
                 yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
             }
 
             r_player.SetActive(true);
-            r_respawnParent.SetActive(false);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             SetPlayerActive(true);
             InControle(true);
