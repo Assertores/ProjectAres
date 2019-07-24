@@ -21,12 +21,7 @@ namespace PPBC {
                 Destroy(s_currentMatch.gameObject);
             s_currentMatch = this;
 
-            foreach(var it in Player.s_references) {
-                it.ResetStatsFull();
-                it.InControle(true);
-                it.CanChangeCharacter(true);
-                it.Invincable(true);
-            }
+            
         }
 
         #endregion

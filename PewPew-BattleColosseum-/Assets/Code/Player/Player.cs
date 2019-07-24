@@ -417,6 +417,7 @@ namespace PPBC {
         #endregion
 
         void OnColorChange() {
+            print("test");
             r_outline.color = GetPlayerColor();
         }
 
