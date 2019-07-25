@@ -66,13 +66,12 @@ namespace PPBC {
                 it.InControle(false);
             }
 
-            StartCoroutine(IERestoreTimeScale());
+            TransitionHandler.ReadyToChange += RestoreTimeScale;
 
             return m_delay;
         }
 
-        IEnumerator IERestoreTimeScale() {
-            yield return new WaitForSecondsRealtime(m_delay + 0.1f);
+        void RestoreTimeScale() {
             Time.timeScale = m_startTimeScale;
         }
     }

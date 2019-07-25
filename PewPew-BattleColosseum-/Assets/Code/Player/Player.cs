@@ -147,7 +147,10 @@ namespace PPBC {
         public void Die(ITracer source, bool doTeamDamage = true) {
             if (!m_alive)
                 return;
-            if (!doTeamDamage && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
+            if (source.m_trace.m_owner != null && source.m_trace.m_owner == this)
+                return;
+
+            if (!doTeamDamage && DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
                 return;
 
             //--> can die && should die <--
