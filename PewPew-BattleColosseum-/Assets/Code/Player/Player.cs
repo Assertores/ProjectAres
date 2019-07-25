@@ -31,7 +31,8 @@ namespace PPBC {
         [SerializeField] GameObject r_model;
         [SerializeField] GameObject r_static;
         [SerializeField] GameObject r_vfx;
-        [SerializeField] SMG r_smg;
+        [SerializeField] GameObject r_canChangeColorEffects;
+         [SerializeField] SMG r_smg;
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
         [SerializeField] ParticleSystem FX_playerClash;
@@ -39,7 +40,7 @@ namespace PPBC {
         [SerializeField] GameObject r_laserDeathParent;
         [SerializeField] ParticleSystem FX_laserDeath;
         [SerializeField] ParticleSystem FX_respawn;
-        [SerializeField] GameObject r_DeathOrb;
+        [SerializeField] GameObject r_deathOrbParent;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
@@ -53,6 +54,8 @@ namespace PPBC {
         [SerializeField] float m_assistTime = 1;
 
         [HideInInspector] public d_playerStuts m_stats;
+
+        public ParticleSystem.MainModule[] m_systemsToChangeColor;
 
         int m_playerIndex = -1;
         int m_team_ = -1;
@@ -98,6 +101,15 @@ namespace PPBC {
 
             ResetFull();
             InControle(false);
+
+            r_deathOrbParent.SetActive(true);
+            ParticleSystem[] holder = r_canChangeColorEffects.GetComponentsInChildren<ParticleSystem>();
+            m_systemsToChangeColor = new ParticleSystem.MainModule[holder.Length];
+            for (int i = 0; i < holder.Length; i++) {
+                m_systemsToChangeColor[i] = holder[i].main;
+            }
+            OnColorChange();
+            r_deathOrbParent.SetActive(false);
         }
 
         void Update() {
@@ -229,7 +241,7 @@ namespace PPBC {
             m_useSMG = false;
             ChangeWeapon();
 
-            r_outline.color = GetPlayerColor();
+            
 
             m_controler.Disconnect += Disconnect;
 
@@ -258,13 +270,13 @@ namespace PPBC {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
 
-            r_DeathOrb.SetActive(true);
+            r_deathOrbParent.SetActive(true);
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
                 yield return null;
             }
-            r_DeathOrb.SetActive(false);
+            r_deathOrbParent.SetActive(false);
 
             //----- stuff that should happon after -----
             
@@ -420,6 +432,9 @@ namespace PPBC {
 
         void OnColorChange() {
             r_outline.color = GetPlayerColor();
+            for (int i = 0; i < m_systemsToChangeColor.Length; i++) {
+                    m_systemsToChangeColor[i].startColor = GetPlayerColor();
+            }
         }
 
         void RotateWeapon() {
