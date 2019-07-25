@@ -189,6 +189,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 211435514425805279, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3425109615125641304, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -198,6 +203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3425109615125641304, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4706756588572407633, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
         type: 3}
@@ -209,6 +219,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4706756588572407633, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1573238984239175620, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -218,6 +233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573238984239175620, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 424750898185225440, guid: 4b8bf9fcfab4ede4f8498a111877a7e2,
         type: 3}
@@ -510,6 +530,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8859330231902607343, guid: d7197604fb015624bafe83ff487dbdeb,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7900294152225576063, guid: d7197604fb015624bafe83ff487dbdeb,
         type: 3}
       propertyPath: scalingMode
@@ -524,6 +549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378469309463606879, guid: d7197604fb015624bafe83ff487dbdeb,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 182696523038557355, guid: d7197604fb015624bafe83ff487dbdeb,
         type: 3}
@@ -540,6 +570,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 433903454886791727, guid: d7197604fb015624bafe83ff487dbdeb,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 30555528469658694, guid: d7197604fb015624bafe83ff487dbdeb,
         type: 3}
       propertyPath: scalingMode
@@ -554,6 +589,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723716870036748350, guid: d7197604fb015624bafe83ff487dbdeb,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1154549261083121289, guid: d7197604fb015624bafe83ff487dbdeb,
         type: 3}
@@ -570,6 +610,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1680761596117082013, guid: d7197604fb015624bafe83ff487dbdeb,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1133262274333730013, guid: d7197604fb015624bafe83ff487dbdeb,
         type: 3}
       propertyPath: scalingMode
@@ -584,6 +629,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595626809863145765, guid: d7197604fb015624bafe83ff487dbdeb,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7197604fb015624bafe83ff487dbdeb, type: 3}
@@ -1362,6 +1412,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6036168730487926069, guid: 29e0f4af8afafdf4e95c7d926071ce50,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6036168730090481595, guid: 29e0f4af8afafdf4e95c7d926071ce50,
         type: 3}
       propertyPath: scalingMode
@@ -1377,6 +1432,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6036168730090481594, guid: 29e0f4af8afafdf4e95c7d926071ce50,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6036168730184324021, guid: 29e0f4af8afafdf4e95c7d926071ce50,
         type: 3}
       propertyPath: scalingMode
@@ -1391,6 +1451,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036168730184324020, guid: 29e0f4af8afafdf4e95c7d926071ce50,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29e0f4af8afafdf4e95c7d926071ce50, type: 3}
