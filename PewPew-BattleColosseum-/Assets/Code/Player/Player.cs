@@ -41,6 +41,8 @@ namespace PPBC {
         [SerializeField] ParticleSystem FX_laserDeath;
         [SerializeField] ParticleSystem FX_respawn;
         [SerializeField] GameObject r_deathOrbParent;
+        [SerializeField] GameObject r_wallSmokeParent;
+        [SerializeField] ParticleSystem FX_wallSmoke;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
@@ -554,6 +556,9 @@ namespace PPBC {
             bool doEffect = false;
             if(collision.gameObject.tag == StringCollection.T_LEVEL) {
                 m_levelColCount++;
+                r_wallSmokeParent.transform.position = collision.contacts[0].point;
+                r_wallSmokeParent.transform.rotation = Quaternion.LookRotation(transform.forward, collision.contacts[0].normal);
+                FX_wallSmoke.Play();
                 doEffect = true;
             }
             if(collision.gameObject.tag == StringCollection.T_PLAYER) {
@@ -568,6 +573,7 @@ namespace PPBC {
                     m_rb.velocity = m_bounciness * (Vector2.Reflect(m_inVel, tmp));
                 }
                 StartAnim(StringCollection.A_IMPACT);
+                
             }
         }
 
