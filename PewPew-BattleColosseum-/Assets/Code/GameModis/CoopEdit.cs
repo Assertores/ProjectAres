@@ -30,6 +30,8 @@ namespace PPBC {
 
         public bool m_isTeamMode => false;
 
+        public bool m_isActive { get; private set; } = false;
+
         public System.Action<bool> EndGame { get; set; }
 
         public float StartTransition() {
@@ -48,6 +50,7 @@ namespace PPBC {
             foreach(Transform it in transform) {
                 it.gameObject.SetActive(true);
             }
+            m_isActive = true;
         }
 
         public void AbortGame() {
@@ -59,6 +62,7 @@ namespace PPBC {
                 it.EditAble(null);
             }
 
+            m_isActive = false;
             EndGame?.Invoke(false);
         }
 
@@ -75,6 +79,8 @@ namespace PPBC {
         }
 
         public void PlayerDied(IHarmingObject killer, Player victim) {
+            if (!m_isActive)
+                return;
 
             victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
         }

@@ -78,7 +78,7 @@ namespace PPBC {
         int m_currentCaracter = 0;
         bool m_useSMG = true;
 
-        System.Tuple<Player, float> lastHit = null;
+        public System.Tuple<Player, float> lastHit { get; private set; } = null;
 
         #endregion
         #region MonoBehaviour
@@ -161,7 +161,6 @@ namespace PPBC {
             else if (lastHit != null && Time.time - lastHit.Item2 <= m_assistTime) {
                 lastHit.Item1.m_stats.m_kills++;
             }
-            lastHit = null;
 
             KillFeed.AddKill(source.m_trace.m_owner?.m_modelRef.m_icon, source.m_trace.m_icon, m_modelRef.m_icon);
 
@@ -188,6 +187,7 @@ namespace PPBC {
             
             r_player.SetActive(false);
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
+            lastHit = null;
         }
 
         public void TakeDamage(ITracer source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {

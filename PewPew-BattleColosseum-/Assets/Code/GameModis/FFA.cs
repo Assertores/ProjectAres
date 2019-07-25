@@ -27,6 +27,8 @@ namespace PPBC {
 
         public bool m_isTeamMode => false;
 
+        public bool m_isActive { get; private set; } = false;
+
         public System.Action<bool> EndGame { get; set; }
 
         public float StartTransition() {
@@ -43,6 +45,7 @@ namespace PPBC {
         public void StartGame() {
             EndGame += IsEndGame;
             StartCoroutine(IELaser());
+            m_isActive = true;
         }
 
         public void AbortGame() {
@@ -56,6 +59,9 @@ namespace PPBC {
         IEnumerator IEEndGame(float delay) {
             if (delay < 0)
                 yield break;
+            if (!m_isActive)
+                yield break;
+            m_isActive = false;
 
             yield return new WaitForSeconds(delay);
             EndGame?.Invoke(true);
@@ -68,8 +74,14 @@ namespace PPBC {
         }
 
         public void PlayerDied(IHarmingObject killer, Player victim) {
+            if (!m_isActive)
+                return;
+
             if (killer.m_owner)
                 killer.m_owner.m_stats.m_points = killer.m_owner.m_stats.m_kills;
+            else if (victim.lastHit != null)
+                victim.lastHit.Item1.m_stats.m_points = victim.lastHit.Item1.m_stats.m_kills;
+
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {
                 if (lhs.m_stats.m_kills != rhs.m_stats.m_kills) {

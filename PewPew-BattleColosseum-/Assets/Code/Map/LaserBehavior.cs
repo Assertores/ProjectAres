@@ -46,8 +46,6 @@ namespace PPBC {
                 return;
             }
 
-            m_randomDevice = new System.Random(DataHolder.s_maps[DataHolder.s_currentMap].m_name.GetHashCode());
-
             s_singelton = this;
         }
 
@@ -58,6 +56,8 @@ namespace PPBC {
 
         private void Start() {
             m_collider = GetComponent<BoxCollider2D>();
+
+            m_randomDevice = new System.Random(DataHolder.s_maps[DataHolder.s_currentMap].m_name.GetHashCode());
         }
 
         #endregion
