@@ -139,7 +139,7 @@ namespace PPBC {
                 return;
             h_initOnce = true;
 
-            if(MatchManager.s_currentMatch.m_teamHolder.Count == 0) {
+            if(MatchManager.s_currentMatch.m_teamHolder?.Count == 0) {
                 MatchManager.s_currentMatch.m_teamHolder = null;
             }
 

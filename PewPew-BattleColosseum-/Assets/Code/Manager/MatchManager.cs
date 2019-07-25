@@ -48,6 +48,7 @@ namespace PPBC {
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
                 TeamSelect();
             } else {
+                m_teamHolder = null;
                 StartMap();
             }
         }

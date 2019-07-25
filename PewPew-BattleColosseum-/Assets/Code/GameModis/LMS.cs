@@ -55,6 +55,14 @@ namespace PPBC {
             for(int i = 1; i < Player.s_sortRef.Count; i++) {
                 Player.s_sortRef[i].m_stats.m_points = 0;
             }
+            StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
+        }
+
+        IEnumerator IEEndGame(float delay) {
+            if (delay < 0)
+                yield break;
+
+            yield return new WaitForSeconds(delay);
             EndGame?.Invoke(true);
         }
 

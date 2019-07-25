@@ -48,7 +48,15 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
-            EndGame(true);
+            StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
+        }
+
+        IEnumerator IEEndGame(float delay) {
+            if (delay < 0)
+                yield break;
+
+            yield return new WaitForSeconds(delay);
+            EndGame?.Invoke(true);
         }
 
         public e_mileStones[] GetMileStones() {
@@ -68,7 +76,7 @@ namespace PPBC {
                 scorer.m_stats.m_points = 0;
             
             if(scorer.m_stats.m_points >= m_PointsToWin) {
-                EndGame?.Invoke(true);
+                DoEndGame();
             }
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {

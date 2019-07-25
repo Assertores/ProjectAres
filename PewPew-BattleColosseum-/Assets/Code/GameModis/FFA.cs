@@ -50,6 +50,14 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
+            StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
+        }
+
+        IEnumerator IEEndGame(float delay) {
+            if (delay < 0)
+                yield break;
+
+            yield return new WaitForSeconds(delay);
             EndGame?.Invoke(true);
         }
 
