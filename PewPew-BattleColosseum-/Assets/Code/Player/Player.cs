@@ -43,6 +43,8 @@ namespace PPBC {
         [SerializeField] GameObject r_deathOrbParent;
         [SerializeField] GameObject r_wallSmokeParent;
         [SerializeField] ParticleSystem FX_wallSmoke;
+        [SerializeField] GameObject r_shockwaveExplosionParent;
+        [SerializeField] ParticleSystem FX_shockwaveExplosion;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
@@ -180,9 +182,10 @@ namespace PPBC {
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
                 FX_death.Play();
             }
-
+            if(source.m_type == e_HarmingObjectType.SHOCKWAVE) {
+                FX_shockwaveExplosion.Play();
+            }
             
-
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
             
             r_player.SetActive(false);
