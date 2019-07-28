@@ -319,6 +319,10 @@ namespace PPBC {
         IEnumerator IEStartGame() {
 
             yield return new WaitForSeconds(m_delay);
+            foreach (var it in Player.s_references) {
+                it.StartBeam();
+            }
+            yield return new WaitForSeconds(0.6f);
             MainMenuE();
 
         }

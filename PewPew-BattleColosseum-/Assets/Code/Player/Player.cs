@@ -532,9 +532,8 @@ namespace PPBC {
             }
         }
         public void StartBeam() {
-            foreach (var Player in s_references) {
-                Player.FX_beam.Play();
-            }
+            FX_beam.Play();
+            
         }
 
         #region Editor code

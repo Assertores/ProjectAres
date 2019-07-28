@@ -581,7 +581,7 @@ MonoBehaviour:
   m_maxHealth: 100
   m_iFrameTime: 1
   m_bounciness: 0.85
-  m_assistTime: 1
+  m_assistTime: 3
   m_rocket:
     m_muzzleEnergy: 500
     m_shootDelay: 2
@@ -867,7 +867,6 @@ Transform:
   - {fileID: 1403341365237431161}
   - {fileID: 646553317731230916}
   - {fileID: 4352842126647924407}
-  - {fileID: 5006404361502715737}
   m_Father: {fileID: 5858828456232748880}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1251,12 +1250,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5804787937805837328}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 7273946308819027425}
-  m_Father: {fileID: 1338731524726757376}
+  m_Father: {fileID: 4352842126647924407}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7273604555572226447
@@ -1290,6 +1289,7 @@ Transform:
   - {fileID: 9129323274464931413}
   - {fileID: 7486667765130776781}
   - {fileID: 5589236369318772404}
+  - {fileID: 5006404361502715737}
   m_Father: {fileID: 1338731524726757376}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1999,7 +1999,7 @@ PrefabInstance:
     - target: {fileID: 3979524956369044497, guid: d19de331aadbc8948b6ded8fc0937d45,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.385
       objectReference: {fileID: 0}
     - target: {fileID: 3979524956369044497, guid: d19de331aadbc8948b6ded8fc0937d45,
         type: 3}
@@ -2045,6 +2045,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979524956369044498, guid: d19de331aadbc8948b6ded8fc0937d45,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979524956369044499, guid: d19de331aadbc8948b6ded8fc0937d45,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d19de331aadbc8948b6ded8fc0937d45, type: 3}
