@@ -69,7 +69,7 @@ namespace PPBC {
             yield return new WaitForSeconds(delay);
 
             foreach (var it in Player.s_sortRef)
-                it.m_stats.m_points += Player.s_sortRef.Count - 1;
+                it.m_stats.m_points += Player.s_sortRef.Count;
 
             EndGame?.Invoke(true);
         }
@@ -109,7 +109,7 @@ namespace PPBC {
                 return;
             }
 
-            foreach (var it in Player.s_references.FindAll(x => x.m_stats.m_points <= 0))
+            foreach (var it in Player.s_references.FindAll(x => x.m_stats.m_points < 0))
                 it.m_stats.m_points--;
 
             if (Player.s_references.FindAll(x => x.m_alive).Count <= 1) {

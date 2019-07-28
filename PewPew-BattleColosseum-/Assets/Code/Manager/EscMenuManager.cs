@@ -35,14 +35,21 @@ namespace PPBC {
         float h_timeScale = 1;
         void ToggleEscMenu() {
             if (!h_inEscMenu) {
+                if (SceneManager.GetSceneByName(StringCollection.S_ESCMENU).isLoaded) {
+                    h_inEscMenu = true;
+                    return;
+                }
                 SceneManager.LoadScene(StringCollection.S_ESCMENU, LoadSceneMode.Additive);
                 h_timeScale = Time.timeScale;
                 Time.timeScale = 0;
+                h_inEscMenu = !h_inEscMenu;
             } else {
-                SceneManager.UnloadScene(StringCollection.S_ESCMENU);
-                Time.timeScale = h_timeScale;
+                if (SceneManager.UnloadScene(StringCollection.S_ESCMENU)) {
+                    Time.timeScale = h_timeScale;
+                    h_inEscMenu = !h_inEscMenu;
+                }
             }
-            h_inEscMenu = !h_inEscMenu;
+            
         }
     }
 }
