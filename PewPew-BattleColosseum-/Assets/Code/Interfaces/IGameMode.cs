@@ -16,6 +16,11 @@ namespace PPBC {
         bool m_isTeamMode { get; }
 
         /// <summary>
+        /// if bool false then the gamemode is no longer active
+        /// </summary>
+        bool m_isActive { get; }
+
+        /// <summary>
         /// will be called to start the custom transition befor scenechange
         /// </summary>
         float StartTransition();

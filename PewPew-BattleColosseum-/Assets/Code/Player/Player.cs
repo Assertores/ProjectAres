@@ -6,6 +6,23 @@ using TMPro;
 
 namespace PPBC {
 
+    [System.Serializable]
+    public struct d_rocketBalancingData {
+        public float m_muzzleEnergy;
+        public float m_shootDelay;
+        public float m_overchargeMaxTime;
+        public float m_overchargeAdd;
+        public float m_overchargeFail;
+    }
+
+    [System.Serializable]
+    public struct d_smgBalancingData {
+        public float m_rPM;
+        public float m_muzzleEnergy;
+        public float m_shootForSec;
+        public float m_coolDownRatio;
+    }
+
     public struct d_playerStuts {
         public float m_points;
         public int m_matchPoints;
@@ -31,6 +48,7 @@ namespace PPBC {
         [SerializeField] GameObject r_model;
         [SerializeField] GameObject r_static;
         [SerializeField] GameObject r_vfx;
+        [SerializeField] GameObject r_canChangeColorEffects;
         [SerializeField] SMG r_smg;
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
@@ -38,21 +56,33 @@ namespace PPBC {
         [SerializeField] ParticleSystem FX_death;
         [SerializeField] GameObject r_laserDeathParent;
         [SerializeField] ParticleSystem FX_laserDeath;
+        [SerializeField] GameObject r_respawnParent;
         [SerializeField] ParticleSystem FX_respawn;
-        [SerializeField] GameObject r_DeathOrb;
+        [SerializeField] GameObject r_deathOrbParent;
+        [SerializeField] GameObject r_wallSmokeParent;
+        [SerializeField] ParticleSystem FX_wallSmoke;
+        [SerializeField] GameObject r_shockwaveExplosionParent;
+        [SerializeField] ParticleSystem FX_shockwaveExplosion;
+        [SerializeField] ParticleSystem FX_beam;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
         [SerializeField] SpriteRenderer r_outline;
 
+        AudioSource SFX_respawnAudio;
+
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
-        float m_currentHealth;
+        public float m_currentHealth { get; private set; }
         [SerializeField] float m_iFrameTime = 1;
         [SerializeField] float m_bounciness = 0.75f;
         [SerializeField] float m_assistTime = 1;
+        public d_rocketBalancingData m_rocket;
+        public d_smgBalancingData m_sMG;
 
         [HideInInspector] public d_playerStuts m_stats;
+
+        public ParticleSystem.MainModule[] m_systemsToChangeColor;
 
         int m_playerIndex = -1;
         int m_team_ = -1;
@@ -73,7 +103,7 @@ namespace PPBC {
         int m_currentCaracter = 0;
         bool m_useSMG = true;
 
-        System.Tuple<Player, float> lastHit = null;
+        public System.Tuple<Player, float> lastHit { get; private set; } = null;
 
         #endregion
         #region MonoBehaviour
@@ -95,9 +125,19 @@ namespace PPBC {
         void Start() {
             m_rb = GetComponent<Rigidbody2D>();
             m_col = GetComponent<Collider2D>();
+            SFX_respawnAudio = r_respawnParent.GetComponent<AudioSource>();
 
             ResetFull();
             InControle(false);
+
+            r_deathOrbParent.SetActive(true);
+            ParticleSystem[] holder = r_canChangeColorEffects.GetComponentsInChildren<ParticleSystem>();
+            m_systemsToChangeColor = new ParticleSystem.MainModule[holder.Length];
+            for (int i = 0; i < holder.Length; i++) {
+                m_systemsToChangeColor[i] = holder[i].main;
+            }
+            OnColorChange();
+            r_deathOrbParent.SetActive(false);
         }
 
         void Update() {
@@ -133,7 +173,10 @@ namespace PPBC {
         public void Die(ITracer source, bool doTeamDamage = true) {
             if (!m_alive)
                 return;
-            if (!doTeamDamage && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
+            if (source.m_trace.m_owner != null && source.m_trace.m_owner == this)
+                return;
+
+            if (!doTeamDamage && DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
                 return;
 
             //--> can die && should die <--
@@ -144,7 +187,6 @@ namespace PPBC {
             else if (lastHit != null && Time.time - lastHit.Item2 <= m_assistTime) {
                 lastHit.Item1.m_stats.m_kills++;
             }
-            lastHit = null;
 
             KillFeed.AddKill(source.m_trace.m_owner?.m_modelRef.m_icon, source.m_trace.m_icon, m_modelRef.m_icon);
 
@@ -164,13 +206,15 @@ namespace PPBC {
             if (source.m_type == e_HarmingObjectType.ROCKED || source.m_type == e_HarmingObjectType.SMG) {
                 FX_death.Play();
             }
-
+            if(source.m_type == e_HarmingObjectType.SHOCKWAVE) {
+                FX_shockwaveExplosion.Play();
+            }
             
-
             yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
             
             r_player.SetActive(false);
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
+            lastHit = null;
         }
 
         public void TakeDamage(ITracer source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
@@ -229,7 +273,7 @@ namespace PPBC {
             m_useSMG = false;
             ChangeWeapon();
 
-            r_outline.color = GetPlayerColor();
+            
 
             m_controler.Disconnect += Disconnect;
 
@@ -258,13 +302,13 @@ namespace PPBC {
             float startTime = Time.time;
             Vector2 starPos = transform.position;
 
-            r_DeathOrb.SetActive(true);
+            r_deathOrbParent.SetActive(true);
             while (startTime + delay > Time.time) {
                 //----- stuff that should happon in between -----
                 transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
                 yield return null;
             }
-            r_DeathOrb.SetActive(false);
+            r_deathOrbParent.SetActive(false);
 
             //----- stuff that should happon after -----
             
@@ -281,6 +325,7 @@ namespace PPBC {
 
             if (delay > 0) {
                 FX_respawn.Play();
+                SFX_respawnAudio.Play();
                 yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
             }
 
@@ -420,6 +465,9 @@ namespace PPBC {
 
         void OnColorChange() {
             r_outline.color = GetPlayerColor();
+            for (int i = 0; i < m_systemsToChangeColor.Length; i++) {
+                    m_systemsToChangeColor[i].startColor = GetPlayerColor();
+            }
         }
 
         void RotateWeapon() {
@@ -483,7 +531,10 @@ namespace PPBC {
                 return DataHolder.s_playerColors[m_playerIndex];
             }
         }
-
+        public void StartBeam() {
+            FX_beam.Play();
+            
+        }
 
         #region Editor code
 
@@ -539,6 +590,9 @@ namespace PPBC {
             bool doEffect = false;
             if(collision.gameObject.tag == StringCollection.T_LEVEL) {
                 m_levelColCount++;
+                r_wallSmokeParent.transform.position = collision.contacts[0].point;
+                r_wallSmokeParent.transform.rotation = Quaternion.LookRotation(transform.forward, collision.contacts[0].normal);
+                FX_wallSmoke.Play();
                 doEffect = true;
             }
             if(collision.gameObject.tag == StringCollection.T_PLAYER) {
@@ -550,9 +604,10 @@ namespace PPBC {
             if (doEffect) {
                 Vector2 tmp = collision.contacts[0].normal;
                 if (Vector2.Dot(m_inVel.normalized, tmp) < 0) {
-                    m_rb.velocity = m_bounciness * (Vector2.Reflect(m_inVel, tmp));
+                    m_rb.velocity = (Vector2.Reflect(m_inVel,m_bounciness * tmp));
                 }
                 StartAnim(StringCollection.A_IMPACT);
+                
             }
         }
 

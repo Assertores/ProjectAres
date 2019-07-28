@@ -41,6 +41,8 @@ namespace PPBC {
 
         public bool m_isTeamMode => false;
 
+        public bool m_isActive { get; private set; } = false;
+
         public System.Action<bool> EndGame { get; set; }
 
         public void AbortGame() {
@@ -48,7 +50,18 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
-            EndGame(true);
+            StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
+        }
+
+        IEnumerator IEEndGame(float delay) {
+            if (delay < 0)
+                yield break;
+            if (!m_isActive)
+                yield break;
+            m_isActive = false;
+
+            yield return new WaitForSeconds(delay);
+            EndGame?.Invoke(true);
         }
 
         public e_mileStones[] GetMileStones() {
@@ -58,17 +71,23 @@ namespace PPBC {
         }
 
         public void PlayerDied(IHarmingObject killer, Player victim) {
+            if (!m_isActive)
+                return;
+
             victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
         }
 
         public void ScorePoint(Player scorer, float amount) {
+            if (!m_isActive)
+                return;
+
             scorer.m_stats.m_points += amount;
 
             if (scorer.m_stats.m_points < 0)
                 scorer.m_stats.m_points = 0;
             
             if(scorer.m_stats.m_points >= m_PointsToWin) {
-                EndGame?.Invoke(true);
+                DoEndGame();
             }
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {
@@ -107,6 +126,7 @@ namespace PPBC {
             for(int i = 0; i < m_valleyCount; i++) {
                 Instantiate(p_valley).GetComponent<Zone>().Init(this, m_zoneMoveDelay, m_zoneTimeInBetween, -m_pointLossPerSeconds, m_valleyDiameter, m_timeThreshold);
             }
+            m_isActive = true;
         }
 
         #endregion

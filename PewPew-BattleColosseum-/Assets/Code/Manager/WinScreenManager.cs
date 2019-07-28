@@ -139,7 +139,7 @@ namespace PPBC {
                 return;
             h_initOnce = true;
 
-            if(MatchManager.s_currentMatch.m_teamHolder.Count == 0) {
+            if(MatchManager.s_currentMatch.m_teamHolder?.Count == 0) {
                 MatchManager.s_currentMatch.m_teamHolder = null;
             }
 
@@ -165,7 +165,7 @@ namespace PPBC {
         void RisePillar() {
             foreach(var it in Player.s_references) {
                 if(m_hightPerKill * it.m_stats.m_points > it.transform.position.y - r_leftMostPlayer.position.y) {
-                    PositionPlayer(it, it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0), Mathf.FloorToInt((it.transform.position.y - r_leftMostPlayer.position.y) / m_hightPerKill));
+                    PositionPlayer(it, it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0), Mathf.RoundToInt((it.transform.position.y - r_leftMostPlayer.position.y) / m_hightPerKill));
                 }
             }
         }

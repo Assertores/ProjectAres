@@ -30,6 +30,9 @@ namespace PPBC {
         }
 
         private void Update() {
+            if (!r_refGM.m_isActive)
+                return;
+
             foreach(var it in players) {
                 if(Time.time > it.Item2 + m_threashold) {
 

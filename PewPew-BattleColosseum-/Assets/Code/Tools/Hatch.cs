@@ -9,7 +9,7 @@ namespace PPBC {
 
         #region Variables
         [Header("References")]
-        [SerializeField] GameObject m_exitHatch;
+        [SerializeField] Animator r_animator;
         [SerializeField] TextMeshProUGUI m_countdownText;
 
         [Header("Variables")]
@@ -22,7 +22,7 @@ namespace PPBC {
         #region MonoBehaviour
 
         private void Awake() {
-            if (!m_exitHatch) {
+            if (!r_animator) {
                 print("no exit hatch");
                 Destroy(this);
                 return;
@@ -37,13 +37,13 @@ namespace PPBC {
         private void Update() {
             if(m_collInd > 0) {
                 if (m_exitTime + m_time <= Time.time) {
-                    m_exitHatch.SetActive(false);
+                    r_animator.SetBool("DoOpen", true);
                     m_countdownText.text = "";
                 } else {
                     m_countdownText.text = Mathf.CeilToInt(m_exitTime+ m_time - Time.time).ToString();
                 }
             } else {
-                m_exitHatch.SetActive(true);
+                r_animator.SetBool("DoOpen", false);
                 m_countdownText.text = "";
             }
         }

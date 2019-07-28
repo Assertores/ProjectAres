@@ -27,6 +27,8 @@ namespace PPBC {
 
         public bool m_isTeamMode => false;
 
+        public bool m_isActive { get; private set; } = false;
+
         public System.Action<bool> EndGame { get; set; }
 
         public float StartTransition() {
@@ -44,6 +46,7 @@ namespace PPBC {
         public void StartGame() {
             EndGame += IsEndGame;
             StartCoroutine(IELaser());
+            m_isActive = true;
         }
 
         public void AbortGame() {
@@ -51,10 +54,23 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
-            Player.s_sortRef[0].m_stats.m_points = 1;
-            for(int i = 1; i < Player.s_sortRef.Count; i++) {
-                Player.s_sortRef[i].m_stats.m_points = 0;
-            }
+            
+
+            StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
+        }
+
+        IEnumerator IEEndGame(float delay) {
+            if (delay < 0)
+                yield break;
+            if (!m_isActive)
+                yield break;
+            m_isActive = false;
+
+            yield return new WaitForSeconds(delay);
+
+            foreach (var it in Player.s_sortRef)
+                it.m_stats.m_points += Player.s_sortRef.Count - 1;
+
             EndGame?.Invoke(true);
         }
 
@@ -65,12 +81,17 @@ namespace PPBC {
         }
 
         public void PlayerDied(IHarmingObject killer, Player victim) {
+            if (!m_isActive)
+                return;
+
             victim.m_stats.m_points--;
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {
                 if (lhs.m_stats.m_points != rhs.m_stats.m_points) {
                     return rhs.m_stats.m_points.CompareTo(lhs.m_stats.m_points);
                 }
+                if (lhs.m_currentHealth != rhs.m_currentHealth)
+                    return rhs.m_currentHealth.CompareTo(lhs.m_currentHealth);
                 if (lhs.m_stats.m_deaths != rhs.m_stats.m_deaths) {
                     return rhs.m_stats.m_deaths.CompareTo(lhs.m_stats.m_deaths);
                 }
@@ -87,7 +108,12 @@ namespace PPBC {
                 victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
                 return;
             }
-            if(Player.s_references.FindAll(x => x.m_alive).Count <= 1) {
+
+            foreach (var it in Player.s_references.FindAll(x => x.m_stats.m_points <= 0))
+                it.m_stats.m_points--;
+
+            if (Player.s_references.FindAll(x => x.m_alive).Count <= 1) {
+
                 DoEndGame();
                 return;
             }

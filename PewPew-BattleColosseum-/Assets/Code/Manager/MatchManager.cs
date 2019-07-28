@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace PPBC {
     public class MatchManager : MonoBehaviour {
@@ -12,6 +13,7 @@ namespace PPBC {
 
         public int m_matchCount { get; private set; } = 1;
         public Dictionary<Player, int> m_teamHolder = new Dictionary<Player, int>();
+        [SerializeField] float m_delay;
 
         #endregion
         #region MonoBehaviour
@@ -48,6 +50,7 @@ namespace PPBC {
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
                 TeamSelect();
             } else {
+                m_teamHolder = null;
                 StartMap();
             }
         }
@@ -302,26 +305,36 @@ namespace PPBC {
         #endregion
         #endregion
 
+        Coroutine h_startGame;
         public void StartGame() {
-            StartCoroutine(IEStartGame());
+            h_startGame = StartCoroutine(IEStartGame());
+            Timer.StartTimer(m_delay);
         }
 
         public void AbortStartGame() {
-            StopCoroutine(IEStartGame());
+            StopCoroutine(h_startGame);
+            Timer.AbortTimer();
         }
 
         IEnumerator IEStartGame() {
-            yield return null;//TODO: add countdown
+
+            yield return new WaitForSeconds(m_delay);
+            foreach (var it in Player.s_references) {
+                it.StartBeam();
+            }
+            yield return new WaitForSeconds(0.6f);
             MainMenuE();
+
         }
-        
+
+        Coroutine h_cTM;
         public void ContinueToMap() {
 
-            StartCoroutine(IEContinueToMap());
+            h_cTM = StartCoroutine(IEContinueToMap());
         }
 
         public void AbortContinueToMap() {
-            StopCoroutine(IEContinueToMap());
+            StopCoroutine(h_cTM);
         }
 
         IEnumerator IEContinueToMap() {

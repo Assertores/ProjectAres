@@ -260,7 +260,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d95e90dfc01f8644b90b25c8879d73cb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -277,11 +277,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1866758271560595264}
     m_Modifications:
-    - target: {fileID: 7308929532263634151, guid: f99715ef680390d4b8f2f8638a240606,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_POPCORN_EXPLOSION 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7308929532263634148, guid: f99715ef680390d4b8f2f8638a240606,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -336,6 +331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308929532263634151, guid: f99715ef680390d4b8f2f8638a240606,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_POPCORN_EXPLOSION 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99715ef680390d4b8f2f8638a240606, type: 3}

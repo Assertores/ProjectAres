@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace PPBC {
-    public enum e_HarmingObjectType { SMG, ROCKED, LASOR } //TODO: find name for wave at the end of the game
+    public enum e_HarmingObjectType { SMG, ROCKED, LASOR, SHOCKWAVE } //TODO: find name for wave at the end of the game
     public interface IHarmingObject {
 
         /// <summary>

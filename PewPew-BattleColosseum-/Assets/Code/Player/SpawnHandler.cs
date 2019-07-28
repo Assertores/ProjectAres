@@ -32,10 +32,6 @@ namespace PPBC {
         // Update is called once per frame
         void Update() {
             Player newPlayer = null;
-            if (!DataHolder.s_players[4] && Input.GetKeyUp(KeyCode.Return)) {
-                newPlayer = Instantiate(p_player).GetComponentInChildren<Player>();
-                newPlayer.Init(4);
-            }
             for (int i = 0; i < 4; i++) {
                 if (!DataHolder.s_players[i] && m_lastStates[i].IsConnected &&
                     m_lastStates[i].Buttons.Start == ButtonState.Pressed &&
@@ -43,16 +39,12 @@ namespace PPBC {
 
                     newPlayer = Instantiate(p_player).GetComponentInChildren<Player>();
                     newPlayer.Init(i);
+                    newPlayer.CanChangeCharacter(true);
+                    newPlayer.Invincable(true);
+                    newPlayer.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
                 }
 
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);
-            }
-
-            if (newPlayer) {
-                newPlayer.CanChangeCharacter(true);
-                newPlayer.Invincable(true);
-                newPlayer.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
-                
             }
         }
 

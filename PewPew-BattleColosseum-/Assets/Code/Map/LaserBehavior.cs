@@ -14,6 +14,9 @@ namespace PPBC {
         [SerializeField] ParticleSystem fx_laserEnd;
         [SerializeField] ContactFilter2D m_contFilter;
 
+        AudioSource SFX_laserOff;
+        AudioSource SFX_laserOn;
+
         List<GameObject> collisionObjects = new List<GameObject>();
         BoxCollider2D m_collider;
 
@@ -46,8 +49,6 @@ namespace PPBC {
                 return;
             }
 
-            m_randomDevice = new System.Random(DataHolder.s_maps[DataHolder.s_currentMap].m_name.GetHashCode());
-
             s_singelton = this;
         }
 
@@ -58,6 +59,10 @@ namespace PPBC {
 
         private void Start() {
             m_collider = GetComponent<BoxCollider2D>();
+            SFX_laserOff = fx_laserEnd.GetComponent<AudioSource>();
+            SFX_laserOn = fx_laserStart.GetComponent<AudioSource>();
+
+            m_randomDevice = new System.Random(DataHolder.s_maps[DataHolder.s_currentMap].m_name.GetHashCode());
         }
 
         #endregion
@@ -88,8 +93,10 @@ namespace PPBC {
         IEnumerator IEChangePosition() {
 
             fx_laserLoop.Stop();
+            
 
             fx_laserEnd.Play();
+            SFX_laserOff.Play();
 
             int newIndex;
             while (m_lastIndex == (newIndex = m_randomDevice.Next(0, LaserSpawner.s_references.Count))) ;
@@ -113,10 +120,11 @@ namespace PPBC {
             transform.localScale = new Vector3((transform.position - target).magnitude, 1, 1);
             
             fx_laserStart.Play();
-
-            yield return new WaitForSeconds(fx_laserStart.main.duration/*Time.fixedDeltaTime*/);
             
-            if(!m_collider)
+            yield return new WaitForSeconds(fx_laserStart.main.duration/*Time.fixedDeltaTime*/);
+            SFX_laserOn.Play();
+
+            if (!m_collider)
                 m_collider = GetComponent<BoxCollider2D>();
 
             //int count = m_collider.OverlapCollider(m_contFilter, tmp);

@@ -27,9 +27,11 @@ namespace PPBC {
 
             if (m_charging) {
                 m_stamina += Time.deltaTime;
-                if (m_stamina > m_owner.m_modelRef.m_rocket.m_overchargeMaxTime) {
+                if (m_stamina > m_owner.m_rocket.m_overchargeMaxTime) {
                     Overcharged();
                     m_charging = false;
+                } else {
+                    //TODO: overcharge add effect
                 }
             } else {
                 m_stamina = 0;
@@ -54,7 +56,7 @@ namespace PPBC {
         }
 
         public void StartShooting() {
-            if (Time.time - m_lastShot < m_owner.m_modelRef.m_rocket.m_shootDelay)
+            if (Time.time - m_lastShot < m_owner.m_rocket.m_shootDelay)
                 return;
 
             m_startChargeTime = Time.time;
@@ -81,7 +83,7 @@ namespace PPBC {
         }
 
         public float GetStamina() {
-            return  m_charging ? m_stamina / m_owner.m_modelRef.m_rocket.m_overchargeMaxTime : 1-(Time.time - m_lastShot) / m_owner.m_modelRef.m_rocket.m_shootDelay;
+            return  m_charging ? m_stamina / m_owner.m_rocket.m_overchargeMaxTime : 1-(Time.time - m_lastShot) / m_owner.m_rocket.m_shootDelay;
         }
 
         void OnChargingChange() {
@@ -103,10 +105,10 @@ namespace PPBC {
             Rigidbody2D bulletRB = Instantiate(m_owner.m_modelRef.m_rocket.p_rocket, m_owner.m_modelRef.m_rocket.r_barrel.position, m_owner.m_modelRef.m_rocket.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);//TODO: objectPooling
             
             if (bulletRB) {
-                bulletRB.AddForce(m_owner.m_modelRef.m_rocket.r_weapon.transform.right * m_owner.m_modelRef.m_rocket.m_muzzleEnergy, ForceMode2D.Impulse);
+                bulletRB.AddForce(m_owner.m_modelRef.m_rocket.r_weapon.transform.right * m_owner.m_rocket.m_muzzleEnergy, ForceMode2D.Impulse);
             }
 
-            m_owner.m_rb.AddForce(-m_owner.m_modelRef.m_rocket.r_weapon.transform.right * m_owner.m_modelRef.m_rocket.m_muzzleEnergy,ForceMode2D.Impulse);
+            m_owner.m_rb.AddForce(-m_owner.m_modelRef.m_rocket.r_weapon.transform.right * m_owner.m_rocket.m_muzzleEnergy, ForceMode2D.Impulse);
         }
 
         void Overcharged() {

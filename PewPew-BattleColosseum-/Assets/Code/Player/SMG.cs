@@ -27,13 +27,13 @@ namespace PPBC {
             if (m_shootng) {
                 m_stamina += Time.deltaTime;
                 Vfx_muzzleflash.SetActive(true);
-                if (m_stamina > m_owner.m_modelRef.m_sMG.m_shootForSec) {
+                if (m_stamina > m_owner.m_sMG.m_shootForSec) {
                     m_forceCooldown = true;
                     m_shootng = false;
                 }
             } else {
                 if(m_stamina > 0) {
-                    m_stamina -= Time.deltaTime * m_owner.m_modelRef.m_sMG.m_coolDownRatio;
+                    m_stamina -= Time.deltaTime * m_owner.m_sMG.m_coolDownRatio;
 
                     if (m_stamina < 0) {
                         m_stamina = 0;
@@ -47,7 +47,7 @@ namespace PPBC {
             if (m_forceCooldown)
                 return;
 
-            if(Time.time > m_lastShot + 60 / m_owner.m_modelRef.m_sMG.m_rPM) {
+            if(Time.time > m_lastShot + 60 / m_owner.m_sMG.m_rPM) {
                 ShootBullet();
 
                 m_lastShot = Time.time;
@@ -93,20 +93,20 @@ namespace PPBC {
         }
 
         public float GetStamina() {
-            if (!m_owner || !m_owner.m_modelRef)
+            if (!m_owner)
                 return 0;
 
-            return m_stamina / m_owner.m_modelRef.m_sMG.m_shootForSec;
+            return m_stamina / m_owner.m_sMG.m_shootForSec;
         }
 
         void ShootBullet() {
             Rigidbody2D bulletRB = Instantiate(m_owner.m_modelRef.m_sMG.p_bullet, m_owner.m_modelRef.m_sMG.r_barrel.position, m_owner.m_modelRef.m_sMG.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);//TODO: objectPooling
             
             if (bulletRB) {
-                bulletRB.AddForce(m_owner.m_modelRef.m_sMG.r_weapon.transform.right * m_owner.m_modelRef.m_sMG.m_muzzleEnergy, ForceMode2D.Impulse);
+                bulletRB.AddForce(m_owner.m_modelRef.m_sMG.r_weapon.transform.right * m_owner.m_sMG.m_muzzleEnergy, ForceMode2D.Impulse);
             }
 
-            m_owner.m_rb.AddForce(-m_owner.m_modelRef.m_sMG.r_weapon.transform.right * m_owner.m_modelRef.m_sMG.m_muzzleEnergy, ForceMode2D.Impulse);
+            m_owner.m_rb.AddForce(-m_owner.m_modelRef.m_sMG.r_weapon.transform.right * m_owner.m_sMG.m_muzzleEnergy, ForceMode2D.Impulse);
 
             if (m_owner.m_modelRef.m_sMG.m_sounds.Length > 0) {
                 //m_owner.m_modelRef.fx_WeaponAudio.pitch = Random.Range(m_startPitch - srh.m_halfPitchRange, m_startPitch + srh.m_halfPitchRange);

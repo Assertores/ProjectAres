@@ -37,7 +37,7 @@ namespace PPBC {
         IEnumerator IEOutTransition() {
             if (r_anim) {
                 r_animParent.SetActive(true);
-                r_anim.Play("FadeToBlackOUT");
+                r_anim.Play(r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
                 yield return new WaitForSeconds(r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
             }
             SceneManager.LoadScene(m_nextScene); 
