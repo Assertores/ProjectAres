@@ -580,7 +580,7 @@ MonoBehaviour:
   r_outline: {fileID: 6706022077143054475}
   m_maxHealth: 100
   m_iFrameTime: 1
-  m_bounciness: 0.85
+  m_bounciness: 0.75
   m_assistTime: 3
   m_rocket:
     m_muzzleEnergy: 500
@@ -1589,6 +1589,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 875844963822952730, guid: b915d04d544a99d45b01d9c3127a9e94,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 875844963822952730, guid: b915d04d544a99d45b01d9c3127a9e94,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 875844963822952730, guid: b915d04d544a99d45b01d9c3127a9e94,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9217262860929983401, guid: b915d04d544a99d45b01d9c3127a9e94,
         type: 3}
       propertyPath: m_Name
@@ -1603,6 +1618,16 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 567849732298375084, guid: b915d04d544a99d45b01d9c3127a9e94,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 567849732298375084, guid: b915d04d544a99d45b01d9c3127a9e94,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1938166219608161823, guid: b915d04d544a99d45b01d9c3127a9e94,
         type: 3}
