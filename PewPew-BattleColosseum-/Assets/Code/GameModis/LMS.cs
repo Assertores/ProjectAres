@@ -54,8 +54,7 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
-            foreach (var it in Player.s_sortRef)
-                it.m_stats.m_points += Player.s_sortRef.Count - 1;
+            
 
             StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
         }
@@ -68,6 +67,10 @@ namespace PPBC {
             m_isActive = false;
 
             yield return new WaitForSeconds(delay);
+
+            foreach (var it in Player.s_sortRef)
+                it.m_stats.m_points += Player.s_sortRef.Count - 1;
+
             EndGame?.Invoke(true);
         }
 
