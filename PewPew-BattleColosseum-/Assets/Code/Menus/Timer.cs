@@ -11,9 +11,10 @@ namespace PPBC
         static Timer s_singelton;
 
         #region Variables
-
-        [SerializeField] Canvas r_timerCanvas;
+        
         [SerializeField] TextMeshProUGUI r_countdownText;
+
+        float m_endTime = float.MinValue;
 
         #endregion
 
@@ -26,16 +27,27 @@ namespace PPBC
             s_singelton = this;
         }
 
+        private void Update() {
+            float duration = m_endTime - Time.time;
+
+            if(duration < 0) {
+                r_countdownText.text = "";
+            } else {
+                r_countdownText.text = Mathf.CeilToInt(duration).ToString();
+            }
+        }
+
         private void OnDestroy() {
             if (s_singelton == this)
                 s_singelton = null;
         }
 
         public static void StartTimer(float delay) {
-
+            s_singelton.m_endTime = Time.time + delay;
         }
+
         public static void AbortTimer() {
-            s_singelton.r_timerCanvas.gameObject.SetActive(false);
+            s_singelton.m_endTime = float.MinValue;
         }
     }
 }
