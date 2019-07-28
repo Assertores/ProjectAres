@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 563056656829959484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 4263845384044741699}
   m_RootOrder: 0
@@ -271,10 +271,11 @@ AudioSource:
   m_GameObject: {fileID: 6694471125919789466}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243499012703872730, guid: 83da80f7e9092f44598b31f6b30776db,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -378,15 +379,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4597775431430855174}
     m_Modifications:
-    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4704396094684868177, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}
       propertyPath: m_Name
       value: SMG_WALLHIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5300036958407268441, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}

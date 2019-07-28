@@ -49,7 +49,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -516,11 +516,6 @@ MonoBehaviour:
       type: 3}
     p_explosion: {fileID: 1755098847994500336, guid: 1cb629364d3002447b387b17f5d04a87,
       type: 3}
-    m_muzzleEnergy: 600
-    m_shootDelay: 2
-    m_overchargeMaxTime: 4
-    m_overchargeAdd: 0.4
-    m_overchargeFail: 1.5
   m_sMG:
     r_weapon: {fileID: 8019218014111275184}
     m_Icon: {fileID: 21300000, guid: a137b30051c3b984ea38b5f5c3a325a9, type: 3}
@@ -540,10 +535,6 @@ MonoBehaviour:
     r_muzzleFlashParent: {fileID: 6627446527604369376}
     p_bullet: {fileID: 1481206135090748021, guid: 4ac837e15b167054dbf99c061e7f37ac,
       type: 3}
-    m_rPM: 500
-    m_muzzleEnergy: 50
-    m_shootForSec: 4
-    m_coolDownRatio: 2
     m_halfPitchRange: 0.1
     m_halfVolumeRange: 0
 --- !u!82 &7353004879546632628
@@ -1290,6 +1281,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9049426049345977205}
     m_Modifications:
+    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: m_Name
+      value: MUZZLEFLASH_SMG
+      objectReference: {fileID: 0}
     - target: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1344,11 +1340,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: m_Name
-      value: MUZZLEFLASH_SMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c751caebae1fed54d9af0de1f9ba7b41, type: 3}

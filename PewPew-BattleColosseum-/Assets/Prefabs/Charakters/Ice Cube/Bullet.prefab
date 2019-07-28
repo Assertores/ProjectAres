@@ -271,10 +271,11 @@ AudioSource:
   m_GameObject: {fileID: 6694471125919789466}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243499012703872730, guid: 83da80f7e9092f44598b31f6b30776db,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -378,15 +379,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4597775431430855174}
     m_Modifications:
-    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4704396094684868177, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}
       propertyPath: m_Name
       value: SMG_WALLHIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5300036958407268441, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}
