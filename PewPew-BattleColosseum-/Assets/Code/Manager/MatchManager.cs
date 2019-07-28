@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace PPBC {
     public class MatchManager : MonoBehaviour {
@@ -12,6 +13,7 @@ namespace PPBC {
 
         public int m_matchCount { get; private set; } = 1;
         public Dictionary<Player, int> m_teamHolder = new Dictionary<Player, int>();
+        [SerializeField] float m_delay;
 
         #endregion
         #region MonoBehaviour
@@ -305,15 +307,20 @@ namespace PPBC {
 
         public void StartGame() {
             StartCoroutine(IEStartGame());
+            Timer.StartTimer(m_delay);
         }
 
         public void AbortStartGame() {
             StopCoroutine(IEStartGame());
+            Timer.AbortTimer();
         }
 
         IEnumerator IEStartGame() {
-            yield return null;//TODO: add countdown
+
+            yield return new WaitForSeconds(m_delay);
+            
             MainMenuE();
+
         }
         
         public void ContinueToMap() {

@@ -62,6 +62,7 @@ namespace PPBC {
         [SerializeField] ParticleSystem FX_wallSmoke;
         [SerializeField] GameObject r_shockwaveExplosionParent;
         [SerializeField] ParticleSystem FX_shockwaveExplosion;
+        [SerializeField] ParticleSystem FX_beam;
         [SerializeField] Image r_healthBar;
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
@@ -525,7 +526,11 @@ namespace PPBC {
                 return DataHolder.s_playerColors[m_playerIndex];
             }
         }
-
+        public void StartBeam() {
+            foreach (var Player in s_references) {
+                Player.FX_beam.Play();
+            }
+        }
 
         #region Editor code
 
