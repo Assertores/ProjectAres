@@ -305,31 +305,36 @@ namespace PPBC {
         #endregion
         #endregion
 
+        Coroutine h_startGame;
         public void StartGame() {
-            StartCoroutine(IEStartGame());
+            h_startGame = StartCoroutine(IEStartGame());
             Timer.StartTimer(m_delay);
         }
 
         public void AbortStartGame() {
-            StopCoroutine(IEStartGame());
+            print("a");
+            StopCoroutine(h_startGame);
+            print("c");
             Timer.AbortTimer();
         }
 
         IEnumerator IEStartGame() {
 
             yield return new WaitForSeconds(m_delay);
-            
+
+            print("b");
             MainMenuE();
 
         }
-        
+
+        Coroutine h_cTM;
         public void ContinueToMap() {
 
-            StartCoroutine(IEContinueToMap());
+            h_cTM = StartCoroutine(IEContinueToMap());
         }
 
         public void AbortContinueToMap() {
-            StopCoroutine(IEContinueToMap());
+            StopCoroutine(h_cTM);
         }
 
         IEnumerator IEContinueToMap() {
