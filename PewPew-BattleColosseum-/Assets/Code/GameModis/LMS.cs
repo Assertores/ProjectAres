@@ -54,10 +54,9 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
-            Player.s_sortRef[0].m_stats.m_points = 1;
-            for(int i = 1; i < Player.s_sortRef.Count; i++) {
-                Player.s_sortRef[i].m_stats.m_points = 0;
-            }
+            foreach (var it in Player.s_sortRef)
+                it.m_stats.m_points += Player.s_sortRef.Count - 1;
+
             StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
         }
 
@@ -106,7 +105,12 @@ namespace PPBC {
                 victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
                 return;
             }
-            if(Player.s_references.FindAll(x => x.m_alive).Count <= 1) {
+
+            foreach (var it in Player.s_references.FindAll(x => x.m_stats.m_points <= 0))
+                it.m_stats.m_points--;
+
+            if (Player.s_references.FindAll(x => x.m_alive).Count <= 1) {
+
                 DoEndGame();
                 return;
             }

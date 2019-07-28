@@ -54,6 +54,9 @@ namespace PPBC {
         }
 
         public void DoEndGame() {
+            foreach(var it in Player.s_sortRef) {
+                it.m_stats.m_points++;
+            }
             StartCoroutine(IEEndGame(ShockWaveSpawner.SpawnShockWaves()));
         }
 
