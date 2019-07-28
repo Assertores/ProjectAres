@@ -232,7 +232,8 @@ AudioSource:
   m_GameObject: {fileID: 9103369776508484593}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243499012703872730, guid: 83da80f7e9092f44598b31f6b30776db,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0167e59373f7ab64a99c5d38f0b4d661, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -326,6 +327,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95530655763000585}
     m_Modifications:
+    - target: {fileID: 8451197073844213806, guid: d068893b8bc975540b90c356ccf1750b,
+        type: 3}
+      propertyPath: m_Name
+      value: ROCKET_TRAIL
+      objectReference: {fileID: 0}
     - target: {fileID: 8457153009134150506, guid: d068893b8bc975540b90c356ccf1750b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -380,11 +386,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8451197073844213806, guid: d068893b8bc975540b90c356ccf1750b,
-        type: 3}
-      propertyPath: m_Name
-      value: ROCKET_TRAIL
       objectReference: {fileID: 0}
     - target: {fileID: 8613196402970008122, guid: d068893b8bc975540b90c356ccf1750b,
         type: 3}

@@ -91,7 +91,8 @@ AudioSource:
   m_GameObject: {fileID: 1755098847994500336}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243499012703872730, guid: 83da80f7e9092f44598b31f6b30776db,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 3964bc095013e774fbe7ea6d7324e6d8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -277,6 +278,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1866758271560595264}
     m_Modifications:
+    - target: {fileID: 7308929532263634151, guid: f99715ef680390d4b8f2f8638a240606,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_POPCORN_EXPLOSION 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7308929532263634148, guid: f99715ef680390d4b8f2f8638a240606,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -331,11 +337,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308929532263634151, guid: f99715ef680390d4b8f2f8638a240606,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_POPCORN_EXPLOSION 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f99715ef680390d4b8f2f8638a240606, type: 3}
