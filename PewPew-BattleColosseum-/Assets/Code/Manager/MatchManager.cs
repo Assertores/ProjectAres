@@ -312,17 +312,13 @@ namespace PPBC {
         }
 
         public void AbortStartGame() {
-            print("a");
             StopCoroutine(h_startGame);
-            print("c");
             Timer.AbortTimer();
         }
 
         IEnumerator IEStartGame() {
 
             yield return new WaitForSeconds(m_delay);
-
-            print("b");
             MainMenuE();
 
         }
