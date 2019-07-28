@@ -56,6 +56,7 @@ namespace PPBC {
         [SerializeField] ParticleSystem FX_death;
         [SerializeField] GameObject r_laserDeathParent;
         [SerializeField] ParticleSystem FX_laserDeath;
+        [SerializeField] GameObject r_respawnParent;
         [SerializeField] ParticleSystem FX_respawn;
         [SerializeField] GameObject r_deathOrbParent;
         [SerializeField] GameObject r_wallSmokeParent;
@@ -67,6 +68,8 @@ namespace PPBC {
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
         [SerializeField] SpriteRenderer r_outline;
+
+        AudioSource SFX_respawnAudio;
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
@@ -122,6 +125,7 @@ namespace PPBC {
         void Start() {
             m_rb = GetComponent<Rigidbody2D>();
             m_col = GetComponent<Collider2D>();
+            SFX_respawnAudio = r_respawnParent.GetComponent<AudioSource>();
 
             ResetFull();
             InControle(false);
@@ -321,6 +325,7 @@ namespace PPBC {
 
             if (delay > 0) {
                 FX_respawn.Play();
+                SFX_respawnAudio.Play();
                 yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
             }
 
