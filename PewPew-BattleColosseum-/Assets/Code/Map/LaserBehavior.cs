@@ -98,6 +98,8 @@ namespace PPBC {
             fx_laserEnd.Play();
             SFX_laserOff.Play();
 
+            m_collider.enabled = false;
+
             int newIndex;
             while (m_lastIndex == (newIndex = m_randomDevice.Next(0, LaserSpawner.s_references.Count))) ;
             m_lastIndex = newIndex;
@@ -120,6 +122,7 @@ namespace PPBC {
             transform.localScale = new Vector3((transform.position - target).magnitude, 1, 1);
             
             fx_laserStart.Play();
+            m_collider.enabled = true;
             
             yield return new WaitForSeconds(fx_laserStart.main.duration/*Time.fixedDeltaTime*/);
             SFX_laserOn.Play();
