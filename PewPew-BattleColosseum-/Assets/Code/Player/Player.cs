@@ -6,6 +6,23 @@ using TMPro;
 
 namespace PPBC {
 
+    [System.Serializable]
+    public struct d_rocketBalancingData {
+        public float m_muzzleEnergy;
+        public float m_shootDelay;
+        public float m_overchargeMaxTime;
+        public float m_overchargeAdd;
+        public float m_overchargeFail;
+    }
+
+    [System.Serializable]
+    public struct d_smgBalancingData {
+        public float m_rPM;
+        public float m_muzzleEnergy;
+        public float m_shootForSec;
+        public float m_coolDownRatio;
+    }
+
     public struct d_playerStuts {
         public float m_points;
         public int m_matchPoints;
@@ -32,7 +49,7 @@ namespace PPBC {
         [SerializeField] GameObject r_static;
         [SerializeField] GameObject r_vfx;
         [SerializeField] GameObject r_canChangeColorEffects;
-         [SerializeField] SMG r_smg;
+        [SerializeField] SMG r_smg;
         [SerializeField] RocketLauncher r_rocket;
         [SerializeField] GameObject r_playerClashParent;
         [SerializeField] ParticleSystem FX_playerClash;
@@ -56,6 +73,8 @@ namespace PPBC {
         [SerializeField] float m_iFrameTime = 1;
         [SerializeField] float m_bounciness = 0.75f;
         [SerializeField] float m_assistTime = 1;
+        public d_rocketBalancingData m_rocket;
+        public d_smgBalancingData m_sMG;
 
         [HideInInspector] public d_playerStuts m_stats;
 
@@ -576,7 +595,7 @@ namespace PPBC {
             if (doEffect) {
                 Vector2 tmp = collision.contacts[0].normal;
                 if (Vector2.Dot(m_inVel.normalized, tmp) < 0) {
-                    m_rb.velocity = m_bounciness * (Vector2.Reflect(m_inVel, tmp));
+                    m_rb.velocity = (Vector2.Reflect(m_inVel,m_bounciness * tmp));
                 }
                 StartAnim(StringCollection.A_IMPACT);
                 

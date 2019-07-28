@@ -228,7 +228,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 48b0b46b9b467ef40a79bf7d4dfff855, type: 3}
     m_typeString: 
   m_killDistance: 1000
-  m_damage: 1
+  m_damage: 3
 --- !u!1 &6694471125919789466
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,15 +378,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4597775431430855174}
     m_Modifications:
-    - target: {fileID: 4704396094684868177, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
-        type: 3}
-      propertyPath: m_Name
-      value: SMG_WALLHIT
-      objectReference: {fileID: 0}
     - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704396094684868177, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
+        type: 3}
+      propertyPath: m_Name
+      value: SMG_WALLHIT
       objectReference: {fileID: 0}
     - target: {fileID: 5300036958407268441, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}

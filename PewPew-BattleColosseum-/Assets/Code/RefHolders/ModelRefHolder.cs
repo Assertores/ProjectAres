@@ -21,13 +21,6 @@ namespace PPBC {
 
             public GameObject p_rocket;
             public GameObject p_explosion;
-
-            [Header("Balancing")]
-            public float m_muzzleEnergy;
-            public float m_shootDelay;
-            public float m_overchargeMaxTime;
-            public float m_overchargeAdd;
-            public float m_overchargeFail;
         }
 
         [System.Serializable]
@@ -44,10 +37,6 @@ namespace PPBC {
             public GameObject p_bullet;
 
             [Header("Balancing")]
-            public float m_rPM;
-            public float m_muzzleEnergy;
-            public float m_shootForSec;
-            public float m_coolDownRatio;
             public float m_halfPitchRange;
             public float m_halfVolumeRange;
         }
