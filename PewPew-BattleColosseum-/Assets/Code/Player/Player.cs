@@ -69,7 +69,7 @@ namespace PPBC {
 
         [Header("Balancing")]
         [SerializeField] float m_maxHealth = 100;
-        float m_currentHealth;
+        public float m_currentHealth { get; private set; }
         [SerializeField] float m_iFrameTime = 1;
         [SerializeField] float m_bounciness = 0.75f;
         [SerializeField] float m_assistTime = 1;

@@ -88,6 +88,8 @@ namespace PPBC {
                 if (lhs.m_stats.m_points != rhs.m_stats.m_points) {
                     return rhs.m_stats.m_points.CompareTo(lhs.m_stats.m_points);
                 }
+                if (lhs.m_currentHealth != rhs.m_currentHealth)
+                    return rhs.m_currentHealth.CompareTo(lhs.m_currentHealth);
                 if (lhs.m_stats.m_deaths != rhs.m_stats.m_deaths) {
                     return rhs.m_stats.m_deaths.CompareTo(lhs.m_stats.m_deaths);
                 }
