@@ -128,7 +128,6 @@ namespace PPBC {
             SFX_respawnAudio = r_respawnParent.GetComponent<AudioSource>();
 
             ResetFull();
-            InControle(false);
 
             r_deathOrbParent.SetActive(true);
             ParticleSystem[] holder = r_canChangeColorEffects.GetComponentsInChildren<ParticleSystem>();
@@ -297,7 +296,9 @@ namespace PPBC {
         }
 
         IEnumerator IERespawn(Vector2 pos, float delay = 0) {
-            InControle(false);
+            if(delay > 0)
+                InControle(false);
+
             r_player.SetActive(false);
             float startTime = Time.time;
             Vector2 starPos = transform.position;
@@ -332,7 +333,9 @@ namespace PPBC {
             r_player.SetActive(true);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             SetPlayerActive(true);
-            InControle(true);
+
+            if (delay > 0)
+                InControle(true);
 
         }
 
@@ -385,6 +388,7 @@ namespace PPBC {
 
         bool h_inControle = false;
         public void InControle(bool controle) {
+            print(controle + ", " + h_inControle);
             if (h_inControle == controle)
                 return;
 
