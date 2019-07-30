@@ -128,7 +128,7 @@ namespace PPBC {
         }
 
         private void OnTriggerExit2D(Collider2D collision) {
-            if (m_spawnInCollider = collision)
+            if (m_spawnInCollider == collision)
                 m_spawnInCollider = null;
         }
 
