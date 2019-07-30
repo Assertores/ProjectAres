@@ -34,6 +34,11 @@ namespace PPBC {
                 return;
 
             foreach(var it in players) {
+                if (!it.Item1.m_alive) {
+                    players.Remove(it);
+                    continue;
+                }
+
                 if(Time.time > it.Item2 + m_threashold) {
 
                     r_refGM.ScorePoint(it.Item1, m_pPS * Time.deltaTime);
@@ -74,7 +79,39 @@ namespace PPBC {
         void Reposition() {
             players.Clear();
 
-            transform.position = new Vector2(Random.Range(-m_size.x / 2, m_size.x / 2), Random.Range(-m_size.y / 2, m_size.y / 2));
+
+
+            float minDistance = 0;
+            for (int i = 0; i < 10 && (minDistance < (transform.localScale.x / 2) + 0.5f); i++) {
+                minDistance = float.MaxValue;
+
+                transform.position = new Vector2(Random.Range(-m_size.x / 2, m_size.x / 2), Random.Range(-m_size.y / 2, m_size.y / 2));
+
+                print(transform.position);
+                if (SpawnPoint.s_references != null) {
+                    foreach (var it in SpawnPoint.s_references) {
+                        float dist = (transform.position - it.transform.position).magnitude;
+                        minDistance = Mathf.Min(minDistance, dist);
+                    }
+                }
+            }
+            /*
+            do {
+                transform.position = new Vector2(Random.Range(-m_size.x / 2, m_size.x / 2), Random.Range(-m_size.y / 2, m_size.y / 2));
+
+                Debug.Log("1");
+                if (SpawnPoint.s_references != null) {
+                    Debug.Log("2");
+                    foreach (var it in SpawnPoint.s_references) {
+                        Debug.Log("3");
+                        float dist = (transform.position - it.transform.position).magnitude;
+                        Debug.Log(dist);
+                        minDistance = Mathf.Min(minDistance, dist);
+                    }
+                    Debug.Log("===== " + ((transform.localScale.x / 2) + 0.5f) + " ===== " + minDistance + " =====");
+                }
+                Debug.Log(minDistance < (transform.localScale.x / 2) + 0.5f);
+            } while (false);//minDistance < (transform.localScale.x/2) + 0.5f);//*/
 
             Collider2D[] result = new Collider2D[10];
             int count = Physics2D.OverlapCollider(m_col, m_filter, result);
