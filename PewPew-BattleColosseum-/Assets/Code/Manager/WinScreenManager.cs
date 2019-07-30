@@ -28,6 +28,7 @@ namespace PPBC {
         [SerializeField] float m_pillarRiseTime;
         [SerializeField] float m_GameMatchPillarLerpTime;
         [SerializeField] int m_upperMatchPoints = 200;
+        [SerializeField] float m_timeToReturn = 5f;
         [SerializeField] Color m_winColor = Color.green;
         [SerializeField] Color m_loseColor = Color.red;
 
@@ -119,7 +120,7 @@ namespace PPBC {
                     }
                     if(MatchManager.s_currentMatch.m_matchCount == 0) {
                         m_state = e_winScreenState.CONTINUE;
-                        Continue();
+                        StartCoroutine(IEContinue());
                     } else {
                         m_state = e_winScreenState.SELECT;
                         InitSelect();
@@ -203,7 +204,7 @@ namespace PPBC {
 
             if(MatchManager.s_currentMatch.m_matchCount == 0) {
                 m_state = e_winScreenState.CONTINUE;
-                Continue();
+                StartCoroutine(IEContinue());
             } else {
                 m_startLerpTime = Time.time;
                 CalcMatchPoints();
@@ -270,10 +271,13 @@ namespace PPBC {
             DataHolder.s_currentMap = m_nextGames[index].first;
             DataHolder.s_currentModi = m_nextGames[index].second;
 
-            Continue();
+            m_state = e_winScreenState.CONTINUE;
+            StartCoroutine(IEContinue());
         }
 
-        void Continue() {
+        IEnumerator IEContinue() {
+            Timer.StartTimer(m_timeToReturn);
+            yield return new WaitForSeconds(m_timeToReturn);
             TransitionHandler.StartOutTransition();
         }
     }
