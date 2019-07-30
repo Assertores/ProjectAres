@@ -317,13 +317,13 @@ namespace PPBC {
             ResetHealth();
 
             StopShooting();
-            
-            StartCoroutine(IEIFrame());
 
             if (!m_useSMG)
                 ChangeWeapon();
 
             if (delay > 0) {
+                StartCoroutine(IEIFrame());
+
                 FX_respawn.Play();
                 SFX_respawnAudio.Play();
                 yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
@@ -406,13 +406,11 @@ namespace PPBC {
         }
 
         #endregion
-
-        bool h_startInv;
+        
         IEnumerator IEIFrame() {
-            h_startInv = m_invincible;
             Invincable(true);
             yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
-            Invincable(h_startInv);
+            Invincable(false);
         }
 
         public void Invincable(bool value) {
