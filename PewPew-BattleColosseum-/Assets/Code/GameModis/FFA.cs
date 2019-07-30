@@ -77,9 +77,10 @@ namespace PPBC {
             if (!m_isActive)
                 return;
 
-            if (killer.m_owner)
+            if (killer.m_owner) {
                 killer.m_owner.m_stats.m_points = killer.m_owner.m_stats.m_kills;
-            else if (victim.lastHit != null)
+                killer.m_owner.r_plusOneAnim.Play();
+            } else if (victim.lastHit != null)
                 victim.lastHit.Item1.m_stats.m_points = victim.lastHit.Item1.m_stats.m_kills;
 
 

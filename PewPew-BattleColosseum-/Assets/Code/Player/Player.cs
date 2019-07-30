@@ -69,6 +69,9 @@ namespace PPBC {
         [SerializeField] TextMeshProUGUI r_points;
         [SerializeField] SpriteRenderer r_outline;
 
+        public Animation r_plusOneAnim;
+        public Animation r_minusOneAnim;
+
         AudioSource SFX_respawnAudio;
 
         [Header("Balancing")]
