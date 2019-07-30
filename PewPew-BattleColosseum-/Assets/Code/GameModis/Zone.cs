@@ -95,23 +95,6 @@ namespace PPBC {
                     }
                 }
             }
-            /*
-            do {
-                transform.position = new Vector2(Random.Range(-m_size.x / 2, m_size.x / 2), Random.Range(-m_size.y / 2, m_size.y / 2));
-
-                Debug.Log("1");
-                if (SpawnPoint.s_references != null) {
-                    Debug.Log("2");
-                    foreach (var it in SpawnPoint.s_references) {
-                        Debug.Log("3");
-                        float dist = (transform.position - it.transform.position).magnitude;
-                        Debug.Log(dist);
-                        minDistance = Mathf.Min(minDistance, dist);
-                    }
-                    Debug.Log("===== " + ((transform.localScale.x / 2) + 0.5f) + " ===== " + minDistance + " =====");
-                }
-                Debug.Log(minDistance < (transform.localScale.x / 2) + 0.5f);
-            } while (false);//minDistance < (transform.localScale.x/2) + 0.5f);//*/
 
             Collider2D[] result = new Collider2D[10];
             int count = Physics2D.OverlapCollider(m_col, m_filter, result);
