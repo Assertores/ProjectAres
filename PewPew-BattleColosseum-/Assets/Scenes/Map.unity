@@ -695,6 +695,7 @@ GameObject:
   - component: {fileID: 678723385}
   - component: {fileID: 678723386}
   - component: {fileID: 678723387}
+  - component: {fileID: 678723388}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -730,6 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872b74636af986b4784b94ae455fd7c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r_animation: {fileID: 678723388}
   fx_laserStart: {fileID: 511054062}
   fx_laserLoop: {fileID: 1580980225}
   fx_laserEnd: {fileID: 73424097}
@@ -773,6 +775,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.95, y: 0.1}
   m_EdgeRadius: 0
+--- !u!111 &678723388
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678723384}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: cf401c67c05a57d40bb028859ab97d2f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: cf401c67c05a57d40bb028859ab97d2f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &782313529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 860303945815617005, guid: d7197604fb015624bafe83ff487dbdeb,
