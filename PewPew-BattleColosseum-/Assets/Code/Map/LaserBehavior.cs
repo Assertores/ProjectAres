@@ -19,6 +19,7 @@ namespace PPBC {
 
         AudioSource SFX_laserOff;
         AudioSource SFX_laserOn;
+        AudioSource SFX_laserLoop;
 
         List<GameObject> collisionObjects = new List<GameObject>();
         BoxCollider2D m_collider;
@@ -64,6 +65,7 @@ namespace PPBC {
             m_collider = GetComponent<BoxCollider2D>();
             SFX_laserOff = fx_laserEnd.GetComponent<AudioSource>();
             SFX_laserOn = fx_laserStart.GetComponent<AudioSource>();
+            SFX_laserLoop = fx_laserLoop.GetComponent<AudioSource>();
 
             m_randomDevice = new System.Random(DataHolder.s_maps[DataHolder.s_currentMap].m_name.GetHashCode());
         }
@@ -159,7 +161,7 @@ namespace PPBC {
         }
 
         public void StopLoopSound() {
-
+            SFX_laserLoop.Stop();
         }
         
         public void PlayDeactivateSound() {
@@ -171,7 +173,7 @@ namespace PPBC {
         }
 
         public void PlayLoopSound() {
-
+            SFX_laserLoop.Play();
         }
 
         #endregion

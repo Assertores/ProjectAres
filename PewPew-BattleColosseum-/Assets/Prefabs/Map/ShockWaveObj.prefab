@@ -67,20 +67,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 4.990503
-      outSlope: 4.990503
-      tangentMode: 34
+      inSlope: 0.6631958
+      outSlope: 0.6631958
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.09806738
     - serializedVersion: 3
-      time: 1.0000118
-      value: 4.990562
-      inSlope: 4.990503
-      outSlope: 4.990503
-      tangentMode: 34
+      time: 7.0540533
+      value: 19.848337
+      inSlope: 8.090483
+      outSlope: 8.090483
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.05366392
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -106,6 +106,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8651783015316787404}
     m_Modifications:
+    - target: {fileID: 5417421022324288927, guid: 7efcb847539c7e545ad5ff9ed141bf5d,
+        type: 3}
+      propertyPath: m_Name
+      value: SHOCKWAVE
+      objectReference: {fileID: 0}
     - target: {fileID: 5417421022324288992, guid: 7efcb847539c7e545ad5ff9ed141bf5d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -160,11 +165,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5417421022324288927, guid: 7efcb847539c7e545ad5ff9ed141bf5d,
-        type: 3}
-      propertyPath: m_Name
-      value: SHOCKWAVE
       objectReference: {fileID: 0}
     - target: {fileID: 5417421022324288993, guid: 7efcb847539c7e545ad5ff9ed141bf5d,
         type: 3}
