@@ -42,6 +42,7 @@ namespace PPBC {
                     newPlayer.CanChangeCharacter(true);
                     newPlayer.Invincable(true);
                     newPlayer.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
+                    newPlayer.InControle(true);
                 }
 
                 m_lastStates[i] = GamePad.GetState((PlayerIndex)i);

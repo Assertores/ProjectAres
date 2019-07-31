@@ -1031,6 +1031,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41d16488ffa12a246955d9779cf32ce7, type: 2}
   - {fileID: 11400000, guid: 0d7f6dea232bf4e47884c6248d5759a7, type: 2}
   - {fileID: 11400000, guid: 7dd6d0e253eb081489038615ef750897, type: 2}
+  - {fileID: 11400000, guid: 8dac15f88015b6a4c9d951e11d6a1e51, type: 2}
+  - {fileID: 11400000, guid: 0c85f9aae8d6c8b428547174bc07d047, type: 2}
+  - {fileID: 11400000, guid: 9fc17f657d048ee488a32624db7d37e6, type: 2}
   m_commonStages:
   - {fileID: 21300000, guid: 7aed04438b393004c9f98d9bf6ed4856, type: 3}
   - {fileID: 21300000, guid: 26b061451d12dd14484d3ad9e0baadd4, type: 3}

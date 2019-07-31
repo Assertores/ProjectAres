@@ -24,7 +24,18 @@ namespace PPBC {
     }
 
     public struct d_playerStuts {
-        public float m_points;
+        public Player owner;
+        float m_points_;
+        public float m_points { get => m_points_; set {
+                int startScore = Mathf.RoundToInt(m_points);
+                m_points_ = value;
+                int endScore = Mathf.RoundToInt(m_points);
+                if(startScore > endScore) {
+                    owner.r_minusOneAnim.PlayQueued(owner.r_minusOneAnim.clip.name, QueueMode.PlayNow);
+                } else if(startScore < endScore) {
+                    owner.r_plusOneAnim.PlayQueued(owner.r_plusOneAnim.clip.name, QueueMode.PlayNow);
+                }
+            } }
         public int m_matchPoints;
 
         public int m_kills;
@@ -69,6 +80,9 @@ namespace PPBC {
         [SerializeField] TextMeshProUGUI r_points;
         [SerializeField] SpriteRenderer r_outline;
 
+        public Animation r_plusOneAnim;
+        public Animation r_minusOneAnim;
+
         AudioSource SFX_respawnAudio;
 
         [Header("Balancing")]
@@ -111,6 +125,7 @@ namespace PPBC {
         void Awake() {
             s_references.Add(this);
             s_sortRef.Add(this);
+            m_stats.owner = this;
         }
 
         void OnDestroy() {
@@ -128,7 +143,6 @@ namespace PPBC {
             SFX_respawnAudio = r_respawnParent.GetComponent<AudioSource>();
 
             ResetFull();
-            InControle(false);
 
             r_deathOrbParent.SetActive(true);
             ParticleSystem[] holder = r_canChangeColorEffects.GetComponentsInChildren<ParticleSystem>();
@@ -297,7 +311,9 @@ namespace PPBC {
         }
 
         IEnumerator IERespawn(Vector2 pos, float delay = 0) {
-            InControle(false);
+            if(delay > 0)
+                InControle(false);
+
             r_player.SetActive(false);
             float startTime = Time.time;
             Vector2 starPos = transform.position;
@@ -317,13 +333,13 @@ namespace PPBC {
             ResetHealth();
 
             StopShooting();
-            
-            StartCoroutine(IEIFrame());
 
             if (!m_useSMG)
                 ChangeWeapon();
 
             if (delay > 0) {
+                StartCoroutine(IEIFrame());
+
                 FX_respawn.Play();
                 SFX_respawnAudio.Play();
                 yield return new WaitForSeconds(FX_respawn.main.duration + 0.4f);
@@ -332,7 +348,9 @@ namespace PPBC {
             r_player.SetActive(true);
             yield return new WaitForSeconds(StartAnim(StringCollection.A_RESPAWN));
             SetPlayerActive(true);
-            InControle(true);
+
+            if (delay > 0)
+                InControle(true);
 
         }
 
@@ -406,13 +424,11 @@ namespace PPBC {
         }
 
         #endregion
-
-        bool h_startInv;
+        
         IEnumerator IEIFrame() {
-            h_startInv = m_invincible;
             Invincable(true);
             yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
-            Invincable(h_startInv);
+            Invincable(false);
         }
 
         public void Invincable(bool value) {

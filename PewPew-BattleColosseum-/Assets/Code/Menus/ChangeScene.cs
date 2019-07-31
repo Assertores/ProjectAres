@@ -19,6 +19,8 @@ namespace PPBC {
         }
 
         public void ChangeSceneImmediately() {
+            TransitionHandler.ReadyToChange -= ChangeSceneImmediately;
+
             SceneManager.LoadScene(m_nextScene);
         }
     }

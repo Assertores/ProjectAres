@@ -9,6 +9,9 @@ namespace PPBC {
 
         #region Variables
         [Header("References")]
+        [SerializeField] Animation r_animation;
+        [SerializeField] Sprite m_icon_;
+        [Header("Lagecy")]
         [SerializeField] ParticleSystem fx_laserStart;
         [SerializeField] ParticleSystem fx_laserLoop;
         [SerializeField] ParticleSystem fx_laserEnd;
@@ -16,6 +19,7 @@ namespace PPBC {
 
         AudioSource SFX_laserOff;
         AudioSource SFX_laserOn;
+        AudioSource SFX_laserLoop;
 
         List<GameObject> collisionObjects = new List<GameObject>();
         BoxCollider2D m_collider;
@@ -61,6 +65,7 @@ namespace PPBC {
             m_collider = GetComponent<BoxCollider2D>();
             SFX_laserOff = fx_laserEnd.GetComponent<AudioSource>();
             SFX_laserOn = fx_laserStart.GetComponent<AudioSource>();
+            SFX_laserLoop = fx_laserLoop.GetComponent<AudioSource>();
 
             m_randomDevice = new System.Random(DataHolder.s_maps[DataHolder.s_currentMap].m_name.GetHashCode());
         }
@@ -68,7 +73,7 @@ namespace PPBC {
         #endregion
         #region IHarmingObject
 
-        public Sprite m_icon => null;
+        public Sprite m_icon => m_icon_;
 
         public e_HarmingObjectType m_type => e_HarmingObjectType.LASOR;
 
@@ -86,68 +91,92 @@ namespace PPBC {
         #endregion
 
         public void ChangePosition() {
-            StopAllCoroutines();
-            StartCoroutine(IEChangePosition());
-        }
-
-        IEnumerator IEChangePosition() {
-
-            fx_laserLoop.Stop();
+            if (!m_collider)
+                m_collider = GetComponent<BoxCollider2D>();
             
-
-            fx_laserEnd.Play();
-            SFX_laserOff.Play();
-
-            m_collider.enabled = false;
-
             int newIndex;
             while (m_lastIndex == (newIndex = m_randomDevice.Next(0, LaserSpawner.s_references.Count))) ;
             m_lastIndex = newIndex;
 
-            LaserSpawner.s_references[newIndex].fx_on.SetActive(true);
-            LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(true);
+            r_animation.Play();
+        }
 
-            
+        #region AnimCalls
 
+        public void DoEndEffect() {
+            fx_laserLoop.Stop();
+            fx_laserEnd.Play();
+        }
+
+        public void DoStartEffect() {
+            fx_laserStart.Play();
+        }
+
+        public void DoLoopEffect() {
+            fx_laserLoop.Play();
+        }
+
+        public void DoLaserSpawnerEffect() {
+            LaserSpawner.s_references[m_lastIndex].fx_on.SetActive(true);
+            LaserSpawner.s_references[(m_lastIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(true);
+        }
+
+        public void StopLaserSpawnerEffect() {
+            LaserSpawner.s_references[m_lastIndex].fx_on.SetActive(false);
+            LaserSpawner.s_references[(m_lastIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(false);
+        }
+
+        public void Move() {
+            transform.position = LaserSpawner.s_references[m_lastIndex].transform.position;
+            Vector3 target = LaserSpawner.s_references[(m_lastIndex + 1) % LaserSpawner.s_references.Count].transform.position;
+            transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-(target.y - transform.position.y), target.x - transform.position.x));
+            transform.localScale = new Vector3((transform.position - target).magnitude, 1, 1);
+        }
+
+        public void ActivateOldProps() {
             for (int i = 0; i < collisionObjects.Count; i++) {
                 collisionObjects[i].SetActive(true);
             }
             collisionObjects.Clear();
-            yield return new WaitForSeconds(4.0f);
+        }
 
-
-            transform.position = LaserSpawner.s_references[newIndex].transform.position;
-            Vector3 target = LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].transform.position;
-            transform.rotation = Quaternion.LookRotation(transform.forward, new Vector2(-(target.y - transform.position.y), target.x - transform.position.x));
-            transform.localScale = new Vector3((transform.position - target).magnitude, 1, 1);
-            
-            fx_laserStart.Play();
-            m_collider.enabled = true;
-            
-            yield return new WaitForSeconds(fx_laserStart.main.duration/*Time.fixedDeltaTime*/);
-            SFX_laserOn.Play();
-
-            if (!m_collider)
-                m_collider = GetComponent<BoxCollider2D>();
-
-            //int count = m_collider.OverlapCollider(m_contFilter, tmp);
+        public void DeactivateNewProps() {
             Collider2D[] tmp = new Collider2D[10];
             int count = Physics2D.OverlapCollider(m_collider, m_contFilter, tmp);
             for (int i = 0; i < count; i++) {
                 collisionObjects.Add(tmp[i].gameObject);
                 tmp[i].gameObject.SetActive(false);
             }
-            LaserSpawner.s_references[newIndex].Reactivate();
-            LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].Reactivate();
 
-           // yield return new WaitForSeconds(fx_laserStart.main.duration);
-
-            LaserSpawner.s_references[newIndex].fx_on.SetActive(false);
-            LaserSpawner.s_references[(newIndex + 1) % LaserSpawner.s_references.Count].fx_on.SetActive(false);
-
-            fx_laserLoop.Play();
+            LaserSpawner.s_references[m_lastIndex].Reactivate();
+            LaserSpawner.s_references[(m_lastIndex + 1) % LaserSpawner.s_references.Count].Reactivate();
         }
 
+        public void DeactivateCollider() {
+            m_collider.enabled = false;
+        }
+
+        public void ActivateCollider() {
+            m_collider.enabled = true;
+        }
+
+        public void StopLoopSound() {
+            SFX_laserLoop.Stop();
+        }
+        
+        public void PlayDeactivateSound() {
+            SFX_laserOff.Play();
+        }
+
+        public void PlayActivateSound() {
+            SFX_laserOn.Play();
+        }
+
+        public void PlayLoopSound() {
+            SFX_laserLoop.Play();
+        }
+
+        #endregion
         #region Physics
 
         private void OnTriggerEnter2D(Collider2D collision) {

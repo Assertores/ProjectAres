@@ -80,11 +80,12 @@ namespace PPBC {
         public void ScorePoint(Player scorer, float amount) {
             if (!m_isActive)
                 return;
-
+            
             scorer.m_stats.m_points += amount;
 
-            if (scorer.m_stats.m_points < 0)
+            if (scorer.m_stats.m_points < 0) {
                 scorer.m_stats.m_points = 0;
+            }
             
             if(scorer.m_stats.m_points >= m_PointsToWin) {
                 DoEndGame();

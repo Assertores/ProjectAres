@@ -69,7 +69,7 @@ namespace PPBC {
             yield return new WaitForSeconds(delay);
 
             foreach (var it in Player.s_sortRef)
-                it.m_stats.m_points += Player.s_sortRef.Count;
+                it.m_stats.m_points += Player.s_sortRef.Count - 1;
 
             EndGame?.Invoke(true);
         }
@@ -104,12 +104,12 @@ namespace PPBC {
                 return 0;
             });
 
-            if (victim.m_stats.m_points >= 0) {
+            if (victim.m_stats.m_points > 0) {
                 victim.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position, m_respawnDelay);
                 return;
             }
 
-            foreach (var it in Player.s_references.FindAll(x => x.m_stats.m_points < 0))
+            foreach (var it in Player.s_references.FindAll(x => x.m_stats.m_points <= 0))
                 it.m_stats.m_points--;
 
             if (Player.s_references.FindAll(x => x.m_alive).Count <= 1) {
