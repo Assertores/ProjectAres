@@ -85,7 +85,6 @@ namespace PPBC {
                 return;
 
             victim.m_stats.m_points--;
-            victim.r_minusOneAnim.Play();
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {
                 if (lhs.m_stats.m_points != rhs.m_stats.m_points) {

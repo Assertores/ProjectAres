@@ -24,7 +24,18 @@ namespace PPBC {
     }
 
     public struct d_playerStuts {
-        public float m_points;
+        public Player owner;
+        float m_points_;
+        public float m_points { get => m_points_; set {
+                int startScore = Mathf.RoundToInt(m_points);
+                m_points_ = value;
+                int endScore = Mathf.RoundToInt(m_points);
+                if(startScore > endScore) {
+                    owner.r_minusOneAnim.PlayQueued(owner.r_minusOneAnim.clip.name, QueueMode.PlayNow);
+                } else if(startScore < endScore) {
+                    owner.r_plusOneAnim.PlayQueued(owner.r_plusOneAnim.clip.name, QueueMode.PlayNow);
+                }
+            } }
         public int m_matchPoints;
 
         public int m_kills;
@@ -114,6 +125,7 @@ namespace PPBC {
         void Awake() {
             s_references.Add(this);
             s_sortRef.Add(this);
+            m_stats.owner = this;
         }
 
         void OnDestroy() {

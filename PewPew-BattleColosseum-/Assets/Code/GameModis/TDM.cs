@@ -85,7 +85,6 @@ namespace PPBC {
 
             foreach (var it in Player.s_references.FindAll(x => x.m_team == victim.m_team)) {
                 it.m_stats.m_points--;
-                it.r_minusOneAnim.Play();
             }
 
             Player.s_sortRef.Sort(delegate (Player lhs, Player rhs) {
