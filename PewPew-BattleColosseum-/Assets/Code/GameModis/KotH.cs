@@ -81,10 +81,17 @@ namespace PPBC {
             if (!m_isActive)
                 return;
 
+            int startScore = Mathf.RoundToInt(scorer.m_stats.m_points);
             scorer.m_stats.m_points += amount;
+            int endScore = Mathf.RoundToInt(scorer.m_stats.m_points);
 
-            if (scorer.m_stats.m_points < 0)
+            if (scorer.m_stats.m_points < 0) {
                 scorer.m_stats.m_points = 0;
+            }else if(startScore < endScore) {
+                scorer.r_plusOneAnim.PlayQueued(scorer.r_plusOneAnim.clip.name, QueueMode.PlayNow);
+            }else if(startScore > endScore) {
+                scorer.r_minusOneAnim.PlayQueued(scorer.r_minusOneAnim.clip.name, QueueMode.PlayNow);
+            }
             
             if(scorer.m_stats.m_points >= m_PointsToWin) {
                 DoEndGame();
