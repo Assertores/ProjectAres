@@ -732,6 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_animation: {fileID: 678723388}
+  m_icon_: {fileID: 21300000, guid: c82ead3df41606c47ae764e183931c90, type: 3}
   fx_laserStart: {fileID: 511054062}
   fx_laserLoop: {fileID: 1580980225}
   fx_laserEnd: {fileID: 73424097}

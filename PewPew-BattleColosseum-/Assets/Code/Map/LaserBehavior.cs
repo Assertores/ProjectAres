@@ -10,6 +10,7 @@ namespace PPBC {
         #region Variables
         [Header("References")]
         [SerializeField] Animation r_animation;
+        [SerializeField] Sprite m_icon_;
         [Header("Lagecy")]
         [SerializeField] ParticleSystem fx_laserStart;
         [SerializeField] ParticleSystem fx_laserLoop;
@@ -70,7 +71,7 @@ namespace PPBC {
         #endregion
         #region IHarmingObject
 
-        public Sprite m_icon => null;
+        public Sprite m_icon => m_icon_;
 
         public e_HarmingObjectType m_type => e_HarmingObjectType.LASOR;
 
