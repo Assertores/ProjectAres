@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df8b4541e6ac9d47a27d816050cc5c7, type: 3}
+  m_Name: p_Sci-Fi Boxes
+  m_EditorClassIdentifier: 
+  m_image: {fileID: 21300000, guid: 520e1d1b0afb3174f87dfc68895956fe, type: 3}
+  m_collider:
+  - {x: 0.060918003, y: 1.6199834}
+  - {x: 0.042146415, y: 1.2789477}
+  - {x: 0.9848522, y: 1.2885692}
+  - {x: 0.90404356, y: -1.644977}
+  - {x: -0.8636392, y: -1.685381}
+  - {x: -0.8838413, y: 1.6522082}
