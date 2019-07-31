@@ -391,7 +391,6 @@ namespace PPBC {
 
         bool h_inControle = false;
         public void InControle(bool controle) {
-            print(controle + ", " + h_inControle);
             if (h_inControle == controle)
                 return;
 
