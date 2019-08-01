@@ -11,11 +11,18 @@ namespace PPBC {
                 MatchManager.s_currentMatch.StopGame();
             } else {
                 TransitionHandler.ReadyToChange = BackToMMImideatly;
+                foreach (var it in Player.s_references) {
+                    TransitionHandler.ReadyToChange += it.DoColliderListClear;
+                }
+
                 TransitionHandler.StartOutTransition();
             }
         }
 
         void BackToMMImideatly() {
+            TransitionHandler.ReadyToChange -= BackToMMImideatly;
+            
+
             SceneManager.LoadScene(StringCollection.S_MAINMENU);
         }
     }

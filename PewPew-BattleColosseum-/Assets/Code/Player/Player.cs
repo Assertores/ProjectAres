@@ -138,6 +138,8 @@ namespace PPBC {
             if (r_pillar) {
                 Destroy(r_pillar.gameObject);
             }
+
+            TransitionHandler.ReadyToChange -= DoColliderListClear;
         }
 
         void Start() {
@@ -155,6 +157,8 @@ namespace PPBC {
             }
             OnColorChange();
             r_deathOrbParent.SetActive(false);
+
+            TransitionHandler.ReadyToChange += DoColliderListClear;
         }
 
         void Update() {
@@ -502,6 +506,10 @@ namespace PPBC {
             if (!m_col)
                 m_col = GetComponent<Collider2D>();
             m_col.enabled = value;
+        }
+
+        public void DoColliderListClear() {
+            m_levelColCount = 0;
         }
 
         #endregion
