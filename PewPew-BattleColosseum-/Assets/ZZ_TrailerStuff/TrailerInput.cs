@@ -4,7 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PPBC {
+    [RequireComponent(typeof(Animation))]
     public class TrailerInput : MonoBehaviour, IControl {
+
+        Animation m_anim;
+        [SerializeField] Transform r_weaponRot;
+
+        private void Start() {
+            m_anim = GetComponent<Animation>();
+        }
+
+        private void Update() {
+            m_dir = r_weaponRot.TransformDirection(Vector3.right);
+        }
+
+        #region IControl
+
         public int m_index { get; set; }
 
         public Vector2 m_dir { get; private set; }
@@ -19,6 +34,34 @@ namespace PPBC {
 
         public void DoDisconnect() {
             Disconnect?.Invoke();
+        }
+
+        #endregion
+
+        public float StartAnim() {
+            m_anim.Play();
+            return m_anim.clip.length;
+        }
+
+        public void DoTriggerDown() {
+            TriggerDown?.Invoke();
+        }
+
+        public void DoTriggerUp() {
+            TriggerUp?.Invoke();
+        }
+
+        public void DoChangeWeapon() {
+            ChangeWeapon?.Invoke();
+        }
+
+        public void DoChangeCharacterOnce() {
+            ChangeCharacter?.Invoke(true);
+        }
+
+        public void DoChangeCharacterTwice() {
+            ChangeCharacter?.Invoke(true);
+            ChangeCharacter?.Invoke(true);
         }
     }
 }

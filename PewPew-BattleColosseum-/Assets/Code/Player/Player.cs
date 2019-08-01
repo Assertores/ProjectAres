@@ -240,7 +240,7 @@ namespace PPBC {
                 FX_shockwaveExplosion.Play();
             }
             
-            yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
+            yield return new WaitForSeconds(r_dieLogic.clip.length);
             
             r_player.SetActive(false);
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
