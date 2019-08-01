@@ -213,14 +213,18 @@ namespace PPBC {
 
             m_killerType = source.m_trace.m_type;
 
-            
-
-            DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source.m_trace, this);
+            StartCoroutine(IEWaitToDie(source.m_trace));
 
             lastHit = null;
 
             r_dieLogic.Play();
             //*/
+        }
+
+        IEnumerator IEWaitToDie(IHarmingObject source) {
+            yield return new WaitForSeconds(r_dieLogic.clip.length);
+
+            DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
 
         IEnumerator IEDie(IHarmingObject source) {
@@ -239,7 +243,7 @@ namespace PPBC {
             if(source.m_type == e_HarmingObjectType.SHOCKWAVE) {
                 FX_shockwaveExplosion.Play();
             }
-            
+
             yield return new WaitForSeconds(r_dieLogic.clip.length);
             
             r_player.SetActive(false);
