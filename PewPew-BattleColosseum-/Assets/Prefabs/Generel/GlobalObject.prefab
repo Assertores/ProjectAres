@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_pointGainPerSeconds: 1
   m_pointLossPerSeconds: 2
   m_hillDiameter: 4
-  m_valleyDiameter: 3
+  m_valleyDiameter: 4
   m_timeThreshold: 1
 --- !u!1 &7363573733610744735
 GameObject:
