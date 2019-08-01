@@ -6356,7 +6356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_shockWave: {fileID: 8651783015316787402, guid: cc948917c3e0cfd4ead8c696f9007a73,
     type: 3}
-  m_delay: 8
+  m_delay: 6
   m_newTimeScale: 0.75
 --- !u!1 &1578188428
 GameObject:
