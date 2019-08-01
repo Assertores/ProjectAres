@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 5245385892947505954}
   - component: {fileID: 271708082470901396}
   - component: {fileID: 6775468055883516254}
+  - component: {fileID: 4509492182426865198}
   m_Layer: 10
   m_Name: PlayerHandler
   m_TagString: Player
@@ -772,6 +773,8 @@ MonoBehaviour:
   r_staminaBar: {fileID: 1484343866722907417}
   r_points: {fileID: 1363227964029492153}
   r_outline: {fileID: 6706022077143054475}
+  r_respawnLogic: {fileID: 0}
+  r_dieLogic: {fileID: 0}
   r_plusOneAnim: {fileID: 6299461937318211276}
   r_minusOneAnim: {fileID: 3084280794737149416}
   m_maxHealth: 100
@@ -851,6 +854,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4509492182426865198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2256606542879858850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fb2985b306dc64eb173560f3b5e30f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2568096280084173987
 GameObject:
   m_ObjectHideFlags: 0
