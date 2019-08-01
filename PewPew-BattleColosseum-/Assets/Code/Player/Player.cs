@@ -334,7 +334,7 @@ namespace PPBC {
         }
 
         public void Respawn(Vector2 pos, float delay = 0) {
-            //*
+            /*
             StartCoroutine(IERespawn(pos, delay));
             /*/
             if (delay > 0)
