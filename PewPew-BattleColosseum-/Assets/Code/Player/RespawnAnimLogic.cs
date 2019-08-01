@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PPBC {
-    [RequireComponent(typeof(Player))]
     public class RespawnAnimLogic : MonoBehaviour {
 
-        Player m_owner;
-
-        private void Start() {
-            m_owner = GetComponent<Player>();
-        }
+        [SerializeField] Player m_owner;
 
         #region AnimCalls
 
