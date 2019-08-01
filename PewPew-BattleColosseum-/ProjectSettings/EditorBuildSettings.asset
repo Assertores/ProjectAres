@@ -32,7 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Extras/EscMenu.unity
     guid: 996057fb0ae9f4b488941d8433cf8fe1
-  - enabled: 1
-    path: Assets/ZZ_TrailerStuff/Trailer.unity
-    guid: c558376459173b143a48a2bacab05415
   m_configObjects: {}

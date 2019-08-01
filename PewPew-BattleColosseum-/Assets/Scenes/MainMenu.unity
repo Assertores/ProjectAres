@@ -412,54 +412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fb7bbcf3872b14e98af8171c5222b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &61588637
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 61588639}
-  - component: {fileID: 61588638}
-  m_Layer: 0
-  m_Name: TrailerListener
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &61588638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61588637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f96c149cad0e24092736203bc52b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p_player: {fileID: 2969680719362787696, guid: bae830850d0acce45b8060718330fbd6,
-    type: 3}
-  p_controler:
-  - {fileID: 6039973370121310187, guid: 99526c9328597dd419b09233b264113d, type: 3}
-  - {fileID: 6835399081744906177, guid: c6703cbf5850a934eb5f565fa3b7d77c, type: 3}
---- !u!4 &61588639
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61588637}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &67493833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,8 +1654,9 @@ GameObject:
   - component: {fileID: 863838044}
   - component: {fileID: 863838046}
   - component: {fileID: 863838045}
+  - component: {fileID: 863838047}
   m_Layer: 5
-  m_Name: TextMeshPro Text
+  m_Name: JoinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1852,6 +1805,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863838043}
   m_CullTransparentMesh: 0
+--- !u!95 &863838047
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863838043}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d5519396e5bc7a418009268680ddffe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &894262035
 GameObject:
   m_ObjectHideFlags: 0
