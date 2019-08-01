@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 0.6571066, y: 1.9647925, z: 1}
   m_Children: []
   m_Father: {fileID: 3043407609977061117}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4986645567339063808
 SpriteRenderer:
@@ -503,7 +503,7 @@ Transform:
   m_LocalScale: {x: 0.6571066, y: 1.9650474, z: 1}
   m_Children: []
   m_Father: {fileID: 3043407609977061117}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3522684411340215896
 SpriteRenderer:
@@ -562,6 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3043407609977061117}
+  - component: {fileID: 5369346943826138134}
   m_Layer: 0
   m_Name: TransitionFFA3
   m_TagString: Untagged
@@ -585,13 +586,34 @@ Transform:
   - {fileID: 5970941795936429587}
   - {fileID: 3028757496430783222}
   - {fileID: 3782738931835176715}
-  - {fileID: 3217265517718207746}
   - {fileID: 8466636084706251106}
+  - {fileID: 3217265517718207746}
   - {fileID: 6485598883988346970}
   - {fileID: 2373118159150645561}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5369346943826138134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276301499759482600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb19cfe3a2362274eb5130794e1518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_anim: {fileID: 0}
+  r_p1: {fileID: 3219358307947986946}
+  r_p2: {fileID: 6090989070369908188}
+  r_p3: {fileID: 8731294768233212787}
+  r_p4: {fileID: 0}
+  r_p1Background: {fileID: 7251976455690842351}
+  r_p2Background: {fileID: 3522684411340215896}
+  r_p3Background: {fileID: 4986645567339063808}
+  r_p4Background: {fileID: 0}
 --- !u!1001 &5473072517014813336
 PrefabInstance:
   m_ObjectHideFlags: 0

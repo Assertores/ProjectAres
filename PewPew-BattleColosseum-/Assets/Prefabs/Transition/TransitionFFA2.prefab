@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 3043407609977061117}
   - component: {fileID: 1165136267807960044}
   - component: {fileID: 5396056764430816067}
+  - component: {fileID: 941049328424511382}
   m_Layer: 0
   m_Name: TransitionFFA2
   m_TagString: Untagged
@@ -385,6 +386,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FX_vsEffect: {fileID: 63438042653591196}
+--- !u!114 &941049328424511382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276301499759482600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb19cfe3a2362274eb5130794e1518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_anim: {fileID: 1165136267807960044}
+  r_p1: {fileID: 3219358307947986946}
+  r_p2: {fileID: 8731294768233212787}
+  r_p3: {fileID: 0}
+  r_p4: {fileID: 0}
+  r_p1Background: {fileID: 7251976455690842351}
+  r_p2Background: {fileID: 4986645567339063808}
+  r_p3Background: {fileID: 0}
+  r_p4Background: {fileID: 0}
 --- !u!1001 &5473072517014813336
 PrefabInstance:
   m_ObjectHideFlags: 0

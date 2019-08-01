@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 3043407609977061117}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8731294768233212787
 SpriteRenderer:
@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 3043407609977061117}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1093267372174857611
 SpriteRenderer:
@@ -266,7 +266,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 3043407609977061117}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &708425480529971790
 SpriteRenderer:
@@ -483,6 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3043407609977061117}
+  - component: {fileID: 3638338057181298929}
   m_Layer: 0
   m_Name: TransitionTeam22
   m_TagString: Untagged
@@ -503,14 +504,35 @@ Transform:
   m_Children:
   - {fileID: 63438042653591195}
   - {fileID: 778588542683864405}
-  - {fileID: 3028757496430783222}
+  - {fileID: 2368515573603137929}
   - {fileID: 3782738931835176715}
   - {fileID: 3217265517718207746}
+  - {fileID: 3028757496430783222}
   - {fileID: 4001992688408860642}
-  - {fileID: 2368515573603137929}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3638338057181298929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276301499759482600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb19cfe3a2362274eb5130794e1518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_anim: {fileID: 0}
+  r_p1: {fileID: 3219358307947986946}
+  r_p2: {fileID: 708425480529971790}
+  r_p3: {fileID: 8731294768233212787}
+  r_p4: {fileID: 1093267372174857611}
+  r_p1Background: {fileID: 7251976455690842351}
+  r_p2Background: {fileID: 4986645567339063808}
+  r_p3Background: {fileID: 0}
+  r_p4Background: {fileID: 0}
 --- !u!1001 &5473072517014813336
 PrefabInstance:
   m_ObjectHideFlags: 0
