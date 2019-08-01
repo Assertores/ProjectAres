@@ -84,6 +84,12 @@ namespace PPBC {
                     //team 3vs1
                 }else if(teamA.Count == 1 && teamB.Count == 3) {
                     //team 1vs3
+                }else if(teamA.Count == 1 && teamB.Count == 2) {
+                    //team 1vs2
+                }else if(teamA.Count == 2 && teamB.Count == 1) {
+                    //team 2vs1
+                }else if(teamA.Count == 1 && teamB.Count == 1) {
+                    //team 1vs1(ffa2)
                 }
             } else {
                 switch (Player.s_references.Count) {
