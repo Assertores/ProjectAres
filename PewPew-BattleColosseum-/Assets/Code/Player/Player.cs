@@ -514,15 +514,13 @@ namespace PPBC {
 
         public void DoDeathEffect() {
             if (m_killerType == e_HarmingObjectType.LASOR) {
-                r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, m_inVel);
+                r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, -m_inVel);
                 FX_laserDeath.Play();
 
-            }
-            if (m_killerType == e_HarmingObjectType.ROCKED || m_killerType == e_HarmingObjectType.SMG) {
-                FX_death.Play();
-            }
-            if (m_killerType == e_HarmingObjectType.SHOCKWAVE) {
+            }else if (m_killerType == e_HarmingObjectType.SHOCKWAVE) {
                 FX_shockwaveExplosion.Play();
+            } else {
+                FX_death.Play();
             }
         }
 
