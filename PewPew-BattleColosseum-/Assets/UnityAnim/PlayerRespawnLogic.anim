@@ -72,15 +72,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.11666667
-    functionName: StopDeathOrbs
+  - time: 0.6666667
+    functionName: PlayRespawnSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
-    functionName: PlayRespawnSound
+  - time: 1.6666666
+    functionName: StopDeathOrbs
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

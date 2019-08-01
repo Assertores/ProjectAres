@@ -812,7 +812,7 @@ MonoBehaviour:
   m_maxHealth: 100
   m_iFrameTime: 1
   m_bounciness: 0.75
-  m_assistTime: 3
+  m_assistTime: 4
   m_rocket:
     m_muzzleEnergy: 500
     m_shootDelay: 2
