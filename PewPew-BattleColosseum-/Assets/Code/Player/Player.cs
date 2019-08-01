@@ -287,8 +287,13 @@ namespace PPBC {
             if (DataHolder.s_players[index])
                 return null;
 
-            m_controler = r_static.AddComponent<ControlerControl>();
-            m_controler.m_index = index;
+            if(index < 0) {//only for Trailer Stuff
+                m_controler = r_static.AddComponent<TrailerInput>();
+            } else {
+                m_controler = r_static.AddComponent<ControlerControl>();
+                m_controler.m_index = index;
+            }
+
             m_playerIndex = index;
             DataHolder.s_players[index] = true;
 
