@@ -295,11 +295,8 @@ namespace PPBC {
             if (DataHolder.s_players[index])
                 return null;
 
-            if(index < 0) {//only for Trailer Stuff
-            } else {
-                m_controler = r_static.AddComponent<ControlerControl>();
-                m_controler.m_index = index;
-            }
+            m_controler = r_static.AddComponent<ControlerControl>();
+            m_controler.m_index = index;
 
             m_playerIndex = index;
             DataHolder.s_players[index] = true;
@@ -315,8 +312,6 @@ namespace PPBC {
             m_useSMG = false;
             ChangeWeapon();
 
-            
-
             m_controler.Disconnect += Disconnect;
 
             return m_controler;
@@ -324,8 +319,22 @@ namespace PPBC {
 
         //only for Trailer Stuff
         public void ChangeControlerUnsave(IControl newControler) {
-            m_controler.Disconnect -= Disconnect;
+
             m_controler = newControler;
+
+            m_playerIndex = m_controler.m_index;
+
+            m_rb = GetComponent<Rigidbody2D>();
+
+            r_smg.Init(this);
+            r_rocket.Init(this);
+
+            m_currentCaracter = -1;
+            ChangeChar(true);
+
+            m_useSMG = false;
+            ChangeWeapon();
+
             m_controler.Disconnect += Disconnect;
         }
 

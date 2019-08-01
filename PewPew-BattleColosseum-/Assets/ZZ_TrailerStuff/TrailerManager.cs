@@ -9,12 +9,21 @@ namespace PPBC {
         [SerializeField] Transform r_pos1;
         [SerializeField] Transform r_pos2;
 
+        float m_startTimeScale;
+
         private void Start() {
             TransitionHandler.ReadyToStart += MakeTrailer;
         }
 
         void MakeTrailer() {
             TransitionHandler.ReadyToStart -= MakeTrailer;
+
+            m_startTimeScale = Time.timeScale;
+            Time.timeScale = 0.75f;
+            foreach(var it in Player.s_references) {
+                it.InControle(true);
+                it.Invincable(false);
+            }
 
             StartCoroutine(IEMakeTrailer());
         }
@@ -33,7 +42,7 @@ namespace PPBC {
                     max = Mathf.Max(max, it.StartAnim());
                 }
 
-                yield return new WaitForSeconds(max + 1);
+                yield return new WaitForSeconds(5);
 
                 foreach(var it in StartTrailerStuff.s_controlers) {
                     it.DoChangeCharacterTwice();
@@ -44,6 +53,7 @@ namespace PPBC {
                 it.DoDisconnect();
             }
 
+            Time.timeScale = m_startTimeScale;
             SceneManager.LoadScene(StringCollection.S_MAINMENU);
         }
     }

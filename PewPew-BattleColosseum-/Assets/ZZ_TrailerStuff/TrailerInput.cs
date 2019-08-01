@@ -39,6 +39,7 @@ namespace PPBC {
         #endregion
 
         public float StartAnim() {
+            print("1");
             m_anim.Play();
             return m_anim.clip.length;
         }
