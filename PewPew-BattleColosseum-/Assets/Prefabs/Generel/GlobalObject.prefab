@@ -1350,14 +1350,14 @@ MonoBehaviour:
   p_valley: {fileID: 1494409770337928004, guid: 00f9551defb2ea1458c30e0caf5ef0d9,
     type: 3}
   m_PointsToWin: 100
-  m_respawnDelay: 2
+  m_respawnDelay: 1
   m_valleyCount: 2
   m_zoneMoveDelay: 20
   m_zoneTimeInBetween: 2
-  m_pointGainPerSeconds: 2
-  m_pointLossPerSeconds: 1
-  m_hillDiameter: 5
-  m_valleyDiameter: 2
+  m_pointGainPerSeconds: 1
+  m_pointLossPerSeconds: 2
+  m_hillDiameter: 4
+  m_valleyDiameter: 3
   m_timeThreshold: 1
 --- !u!1 &7363573733610744735
 GameObject:
