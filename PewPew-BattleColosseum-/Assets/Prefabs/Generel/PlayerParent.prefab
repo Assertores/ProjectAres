@@ -1722,11 +1722,11 @@ Animation:
   m_GameObject: {fileID: 6407038037477641076}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 2d1f9f3583702114c924df10179fe2c8, type: 2}
+  m_Animation: {fileID: 7400000, guid: cb0bfb45904fd2c47945f6fa6640b19d, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 2d1f9f3583702114c924df10179fe2c8, type: 2}
+  - {fileID: 7400000, guid: cb0bfb45904fd2c47945f6fa6640b19d, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &8753162486335344936
@@ -1783,11 +1783,11 @@ Animation:
   m_GameObject: {fileID: 7065348926114864360}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 38176e5e9acffb94a96d43211a2b7fb5, type: 2}
+  m_Animation: {fileID: 7400000, guid: 9e0bd865c9a10984d88425db47ac39fa, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 38176e5e9acffb94a96d43211a2b7fb5, type: 2}
+  - {fileID: 7400000, guid: 9e0bd865c9a10984d88425db47ac39fa, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &2438044211665521907
