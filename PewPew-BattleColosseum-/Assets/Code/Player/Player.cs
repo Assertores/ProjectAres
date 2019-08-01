@@ -182,8 +182,8 @@ namespace PPBC {
                     StartAnim(StringCollection.A_IDLEAIR, true);
                 }
             }
-
-            m_inVel = m_rb.velocity;
+            if(m_alive)
+                m_inVel = m_rb.velocity;
         }
 
         #endregion
