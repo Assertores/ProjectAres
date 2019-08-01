@@ -45,12 +45,24 @@ namespace PPBC {
             m_owner.DeathOrb(false);
         }
 
+        public void PlayRespawnEffect() {
+            m_owner.DoRespawnEffect();
+        }
+
         public void PlayDieAnim() {
             m_owner.StartAnim(StringCollection.A_DIE);
         }
 
         public void PlayRespawnAnim() {
             m_owner.StartAnim(StringCollection.A_RESPAWN);
+        }
+
+        public void PlayDieSound() {
+            m_owner.DoDieSFX();
+        }
+
+        public void PlayRespawnSound() {
+            m_owner.DoRespawnSFX();
         }
 
         #endregion

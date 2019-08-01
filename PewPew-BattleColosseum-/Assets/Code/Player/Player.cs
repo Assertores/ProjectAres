@@ -288,7 +288,6 @@ namespace PPBC {
                 return null;
 
             if(index < 0) {//only for Trailer Stuff
-                m_controler = r_static.AddComponent<TrailerInput>();
             } else {
                 m_controler = r_static.AddComponent<ControlerControl>();
                 m_controler.m_index = index;
@@ -313,6 +312,13 @@ namespace PPBC {
             m_controler.Disconnect += Disconnect;
 
             return m_controler;
+        }
+
+        //only for Trailer Stuff
+        public void ChangeControlerUnsave(IControl newControler) {
+            m_controler.Disconnect -= Disconnect;
+            m_controler = newControler;
+            m_controler.Disconnect += Disconnect;
         }
 
         public void Disconnect() {
@@ -522,6 +528,18 @@ namespace PPBC {
 
         public void DeathOrb(bool value) {
             r_deathOrbParent.SetActive(value);
+        }
+
+        public void DoRespawnEffect() {
+            FX_respawn.Play();
+        }
+
+        public void DoRespawnSFX() {
+            SFX_respawnAudio.Play();
+        }
+
+        public void DoDieSFX() {
+
         }
 
         #region Control stuff
