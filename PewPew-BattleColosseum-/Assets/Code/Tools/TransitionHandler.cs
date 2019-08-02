@@ -175,19 +175,16 @@ namespace PPBC {
                 }
             }
 
-            ReadyToChange?.Invoke();
-
             if (animRef) {
                 animRef.r_name.text = DataHolder.s_modis[DataHolder.s_currentModi].m_name;
                 animRef.r_flavour.text = DataHolder.s_modis[DataHolder.s_currentModi].m_text;
 
                 animRef.gameObject.SetActive(true);
                 animRef.r_anim.Play(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-                yield return new WaitForSeconds(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-                animRef.gameObject.SetActive(false);
+                float GameClipLength = animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+                yield return new WaitForSeconds(GameClipLength);
+                StartOutTransition();
             }
-
-            ReadyToStart?.Invoke();
         }
     }
 }

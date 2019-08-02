@@ -34,11 +34,6 @@ namespace PPBC {
 
         public System.Action<bool> EndGame { get; set; }
 
-        public float StartTransition() {
-            //Player transition
-            return 0;
-        }
-
         public void SetUpGame() {
             foreach (var it in Player.s_references) {
                 it.EditAble(Instantiate(p_EditingHUD, it.transform).GetComponent<EditorHUDAndPlayerLogic>());

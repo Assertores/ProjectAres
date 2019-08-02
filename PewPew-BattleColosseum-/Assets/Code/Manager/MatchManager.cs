@@ -68,14 +68,12 @@ namespace PPBC {
         void StartMap() {
             print("starting map: " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
 
-            StartCoroutine(IEStartMap(DataHolder.s_modis[DataHolder.s_currentModi].StartTransition()));
+            TransitionHandler.ReadyToChange += MapI;
+
+            TransitionHandler.StartGameTransition();
         }
-
         
-        IEnumerator IEStartMap(float delay) {
-            yield return new WaitForSeconds(delay);
-
-            MapI();
+        void DoStartMap() {
 
             SceneManager.LoadScene(StringCollection.S_MAP);
 
@@ -230,6 +228,10 @@ namespace PPBC {
             if (h_singleMap)
                 return;
             h_singleMap = true;
+
+            TransitionHandler.ReadyToChange -= MapI;
+
+            DoStartMap();
 
             print("MapI once");
 

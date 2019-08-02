@@ -21,11 +21,6 @@ namespace PPBC {
         bool m_isActive { get; }
 
         /// <summary>
-        /// will be called to start the custom transition befor scenechange
-        /// </summary>
-        float StartTransition();
-
-        /// <summary>
         /// will be called when the map is finished loading
         /// </summary>
         void SetUpGame();
