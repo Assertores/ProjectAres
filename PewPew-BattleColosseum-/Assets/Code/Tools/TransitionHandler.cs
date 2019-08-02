@@ -15,6 +15,15 @@ namespace PPBC {
         [Header("References")]
         [Tooltip("animator with bool named 'FadeOut' whitch will be set to true when the fadeout should start")]
         [SerializeField] Animator r_anim;
+        [SerializeField] GameTransitionRefHolder r_ffa2;
+        [SerializeField] GameTransitionRefHolder r_ffa3;
+        [SerializeField] GameTransitionRefHolder r_ffa4;
+        [SerializeField] GameTransitionRefHolder r_team1v1;
+        [SerializeField] GameTransitionRefHolder r_team2v1;
+        [SerializeField] GameTransitionRefHolder r_team1v2;
+        [SerializeField] GameTransitionRefHolder r_team3v1;
+        [SerializeField] GameTransitionRefHolder r_team2v2;
+        [SerializeField] GameTransitionRefHolder r_team1v3;
 
         #endregion
         #region MonoBehaviour
@@ -40,6 +49,16 @@ namespace PPBC {
             } else {
                 ReadyToStart?.Invoke();
             }
+
+            r_ffa2.gameObject.SetActive(false);
+            r_ffa3.gameObject.SetActive(false);
+            r_ffa4.gameObject.SetActive(false);
+            r_team1v1.gameObject.SetActive(false);
+            r_team2v1.gameObject.SetActive(false);
+            r_team1v2.gameObject.SetActive(false);
+            r_team3v1.gameObject.SetActive(false);
+            r_team2v2.gameObject.SetActive(false);
+            r_team1v3.gameObject.SetActive(false);
         }
 
         #endregion
@@ -70,48 +89,102 @@ namespace PPBC {
         }
 
         IEnumerator IEGameTransition() {
-            ReadyToChange?.Invoke();
-            Animation anim = null;
+            GameTransitionRefHolder animRef = null;
 
-            //richtige animation auswählen
-            //richtige informationen in animation geben
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
                 List<Player> teamA = Player.s_references.FindAll(x => x.m_team == 0);
                 List<Player> teamB = Player.s_references.FindAll(x => x.m_team == 1);
                 if(teamA.Count == 2 && teamB.Count == 2) {
-                    //team 2vs2
-                }else if(teamA.Count == 3 && teamB.Count == 1) {
-                    //team 3vs1
-                }else if(teamA.Count == 1 && teamB.Count == 3) {
-                    //team 1vs3
-                }else if(teamA.Count == 1 && teamB.Count == 2) {
-                    //team 1vs2
-                }else if(teamA.Count == 2 && teamB.Count == 1) {
-                    //team 2vs1
-                }else if(teamA.Count == 1 && teamB.Count == 1) {
-                    //team 1vs1(ffa2)
+                    animRef = r_team2v2;
+
+                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
+                    animRef.r_p2.sprite = teamA[1].m_modelRef.m_icon;
+                    animRef.r_p3.sprite = teamB[0].m_modelRef.m_icon;
+                    animRef.r_p4.sprite = teamB[1].m_modelRef.m_icon;
+                } else if(teamA.Count == 3 && teamB.Count == 1) {
+                    animRef = r_team3v1;
+
+                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
+                    animRef.r_p2.sprite = teamA[1].m_modelRef.m_icon;
+                    animRef.r_p3.sprite = teamA[2].m_modelRef.m_icon;
+                    animRef.r_p4.sprite = teamB[1].m_modelRef.m_icon;
+                } else if(teamA.Count == 1 && teamB.Count == 3) {
+                    animRef = r_team1v3;
+
+                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
+                    animRef.r_p2.sprite = teamB[0].m_modelRef.m_icon;
+                    animRef.r_p3.sprite = teamB[1].m_modelRef.m_icon;
+                    animRef.r_p4.sprite = teamB[2].m_modelRef.m_icon;
+                } else if(teamA.Count == 1 && teamB.Count == 2) {
+                    animRef = r_team1v2;
+
+                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
+                    animRef.r_p2.sprite = teamB[0].m_modelRef.m_icon;
+                    animRef.r_p3.sprite = teamB[1].m_modelRef.m_icon;
+                } else if(teamA.Count == 2 && teamB.Count == 1) {
+                    animRef = r_team2v1;
+
+                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
+                    animRef.r_p2.sprite = teamA[1].m_modelRef.m_icon;
+                    animRef.r_p3.sprite = teamB[0].m_modelRef.m_icon;
+                } else if(teamA.Count == 1 && teamB.Count == 1) {
+                    animRef = r_team1v1;
+
+                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
+                    animRef.r_p2.sprite = teamB[0].m_modelRef.m_icon;
+                }
+
+                if (animRef) {
+                    animRef.r_p1Background.color = DataHolder.s_teamColors[0];
+                    animRef.r_p2Background.color = DataHolder.s_teamColors[1];
                 }
             } else {
                 switch (Player.s_references.Count) {
                 case 2:
-                    //ffa 2
+                    animRef = r_ffa2;
+
+                    animRef.r_p1.sprite = Player.s_references[0].m_modelRef.m_icon;
+                    animRef.r_p1Background.color = Player.s_references[0].GetPlayerColor();
+                    animRef.r_p2.sprite = Player.s_references[1].m_modelRef.m_icon;
+                    animRef.r_p2Background.color = Player.s_references[1].GetPlayerColor();
                     break;
                 case 3:
-                    //ffa 3
+                    animRef = r_ffa3;
+
+                    animRef.r_p1.sprite = Player.s_references[0].m_modelRef.m_icon;
+                    animRef.r_p1Background.color = Player.s_references[0].GetPlayerColor();
+                    animRef.r_p2.sprite = Player.s_references[1].m_modelRef.m_icon;
+                    animRef.r_p2Background.color = Player.s_references[1].GetPlayerColor();
+                    animRef.r_p3.sprite = Player.s_references[2].m_modelRef.m_icon;
+                    animRef.r_p3Background.color = Player.s_references[2].GetPlayerColor();
                     break;
                 case 4:
-                    //ffa 4
+                    animRef = r_ffa4;
+
+                    animRef.r_p1.sprite = Player.s_references[0].m_modelRef.m_icon;
+                    animRef.r_p1Background.color = Player.s_references[0].GetPlayerColor();
+                    animRef.r_p2.sprite = Player.s_references[1].m_modelRef.m_icon;
+                    animRef.r_p2Background.color = Player.s_references[1].GetPlayerColor();
+                    animRef.r_p3.sprite = Player.s_references[2].m_modelRef.m_icon;
+                    animRef.r_p3Background.color = Player.s_references[2].GetPlayerColor();
+                    animRef.r_p4.sprite = Player.s_references[3].m_modelRef.m_icon;
+                    animRef.r_p4Background.color = Player.s_references[3].GetPlayerColor();
                     break;
                 default:
                     break;
                 }
             }
 
-            if (anim) {
-                anim.gameObject.SetActive(true);
-                anim.Play();
-                yield return new WaitForSeconds(anim.clip.length);
-                anim.gameObject.SetActive(false);
+            ReadyToChange?.Invoke();
+
+            if (animRef) {
+                animRef.r_name.text = DataHolder.s_modis[DataHolder.s_currentModi].m_name;
+                animRef.r_flavour.text = DataHolder.s_modis[DataHolder.s_currentModi].m_text;
+
+                animRef.gameObject.SetActive(true);
+                animRef.r_anim.Play(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+                yield return new WaitForSeconds(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+                animRef.gameObject.SetActive(false);
             }
 
             ReadyToStart?.Invoke();

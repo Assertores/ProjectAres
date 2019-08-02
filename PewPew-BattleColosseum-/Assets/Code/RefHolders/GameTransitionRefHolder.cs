@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace PPBC {
     public class GameTransitionRefHolder : MonoBehaviour {
@@ -18,5 +19,8 @@ namespace PPBC {
         public SpriteRenderer r_p2Background;
         public SpriteRenderer r_p3Background;
         public SpriteRenderer r_p4Background;
+
+        public TextMeshProUGUI r_name;
+        public TextMeshProUGUI r_flavour;
     }
 }
