@@ -26,6 +26,8 @@ namespace PPBC {
 
         public static Light s_dirLight;
 
+        public static EscMenuManager s_escMenu;
+
         //===== ===== Maps Common Objects ===== =====
 
         public static Vector2[] s_commonSizes;
@@ -50,6 +52,8 @@ namespace PPBC {
         public GameObject[] m_characters;
 
         public Light m_dirLight;
+
+        [SerializeField] EscMenuManager m_escMenu;
 
         [Header("CommonObjects")]
         public Vector2[] m_commonSizes;
@@ -110,6 +114,8 @@ namespace PPBC {
             s_characters = tmp.ToArray();
 
             s_dirLight = m_dirLight;
+
+            s_escMenu = m_escMenu;
 
             s_commonSizes = m_commonSizes;
             s_commonBackgrounds = m_commonBackgrounds;
