@@ -98,7 +98,7 @@ namespace PPBC {
                 return 0;
             });
 
-            if (victim.m_stats.m_points < 0) {
+            if (victim.m_stats.m_points <= 0) {
                 DoEndGame();
                 return;
             }

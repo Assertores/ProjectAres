@@ -50,15 +50,17 @@ namespace PPBC {
                 ReadyToStart?.Invoke();
             }
 
-            r_ffa2.gameObject.SetActive(false);
-            r_ffa3.gameObject.SetActive(false);
-            r_ffa4.gameObject.SetActive(false);
-            r_team1v1.gameObject.SetActive(false);
-            r_team2v1.gameObject.SetActive(false);
-            r_team1v2.gameObject.SetActive(false);
-            r_team3v1.gameObject.SetActive(false);
-            r_team2v2.gameObject.SetActive(false);
-            r_team1v3.gameObject.SetActive(false);
+            if (r_ffa2) {
+                r_ffa2.gameObject.SetActive(false);
+                r_ffa3.gameObject.SetActive(false);
+                r_ffa4.gameObject.SetActive(false);
+                r_team1v1.gameObject.SetActive(false);
+                r_team2v1.gameObject.SetActive(false);
+                r_team1v2.gameObject.SetActive(false);
+                r_team3v1.gameObject.SetActive(false);
+                r_team2v2.gameObject.SetActive(false);
+                r_team1v3.gameObject.SetActive(false);
+            }
         }
 
         #endregion
@@ -183,8 +185,8 @@ namespace PPBC {
                 animRef.r_anim.Play(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
                 float GameClipLength = animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
                 yield return new WaitForSeconds(GameClipLength);
-                StartOutTransition();
             }
+            StartOutTransition();
         }
     }
 }

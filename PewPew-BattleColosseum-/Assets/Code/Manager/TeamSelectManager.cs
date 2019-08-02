@@ -14,7 +14,7 @@ namespace PPBC {
         bool m_finished = false;
 
         private void Update() {
-            if(!m_finished && m_playerCount >= Player.s_references.Count) {
+            if(!m_finished && m_playerCount >= Player.s_references.Count && (Player.s_references.Find(x => x.m_team == 0) && Player.s_references.Find(x => x.m_team == 1))) {
                 if(Time.time - m_startTime < m_delay) {
                     //TODO: doCountDown
                 } else {
