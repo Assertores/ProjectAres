@@ -81,6 +81,7 @@ namespace PPBC {
         [SerializeField] SpriteRenderer r_outline;
         [SerializeField] Animation r_respawnLogic;
         [SerializeField] Animation r_dieLogic;
+        [SerializeField] Animation r_iFrame;
 
         public Animation r_plusOneAnim;
         public Animation r_minusOneAnim;
@@ -525,7 +526,9 @@ namespace PPBC {
 
         IEnumerator IEIFrame() {
             Invincable(true);
+            r_iFrame.Play();
             yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
+            r_iFrame.Stop();
             Invincable(false);
         }
 
