@@ -6,10 +6,12 @@ namespace PPBC {
 
     public class ParticleAnimEvent : MonoBehaviour
     {
-        [SerializeField] ParticleSystem FX_smokeCurtain;
+        [SerializeField] ParticleSystem FX_smoke;
 
         public void DoSmokeEffect() {
-            FX_smokeCurtain.Play();
+            FX_smoke.Play();
+            Debug.Log(FX_smoke.isPlaying);
         }
+
     }
 }

@@ -4804,9 +4804,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1681753075
-  m_SortingLayer: 7
-  m_SortingOrder: 0
+  m_SortingLayerID: -807225137
+  m_SortingLayer: 9
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4817,7 +4817,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 3
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -5091,7 +5091,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 8b5d59dbdf1ff07419ae4ce79d9241fa, type: 2}
   m_Animations: []
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &1360119050056109754
@@ -5106,7 +5106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e781bd092d8a72c408f9d87357abe26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FX_smokeCurtain: {fileID: 6530230794795473058}
+  FX_smoke: {fileID: 0}
 --- !u!1 &9129374294196144578
 GameObject:
   m_ObjectHideFlags: 0
