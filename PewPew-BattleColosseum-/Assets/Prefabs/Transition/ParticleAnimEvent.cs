@@ -10,7 +10,6 @@ namespace PPBC {
 
         public void DoImpactSound() {
             SFX_Curtainimpact.Play();
-            CameraShake.DoCamerashake(2, 0.5f);
         }
     }
 }
