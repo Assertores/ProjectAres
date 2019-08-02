@@ -229,6 +229,8 @@ namespace PPBC {
         IEnumerator IEWaitToDie(IHarmingObject source) {
             yield return new WaitForSeconds(r_dieLogic.clip.length);
 
+            m_levelColCount = 0;
+
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
         }
 

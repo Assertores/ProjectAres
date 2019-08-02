@@ -1006,6 +1006,7 @@ MonoBehaviour:
   - {fileID: 5151474522508839637, guid: d0ab6ad948adf5f4d86647e0ed65973c, type: 3}
   - {fileID: 5151474522508839637, guid: 2f59479768908e145800506948735ae5, type: 3}
   m_dirLight: {fileID: 347431681967975084}
+  m_escMenu: {fileID: 4129946222036553813}
   m_commonSizes:
   - {x: 20, y: 10}
   m_commonBackgrounds:
