@@ -1299,6 +1299,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   r_healthText: {fileID: 7371877667959130542}
+  r_buttonAnim: {fileID: 0}
   m_maxLife: 100
   m_regDelay: 2
   m_regSpeed: 2
@@ -1351,7 +1352,7 @@ MonoBehaviour:
   p_valley: {fileID: 1494409770337928004, guid: 00f9551defb2ea1458c30e0caf5ef0d9,
     type: 3}
   m_PointsToWin: 75
-  m_respawnDelay: 1
+  m_respawnDelay: 2
   m_valleyCount: 2
   m_zoneMoveDelay: 20
   m_zoneTimeInBetween: 2

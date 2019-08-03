@@ -528,9 +528,9 @@ namespace PPBC {
 
         IEnumerator IEIFrame() {
             Invincable(true);
+            yield return new WaitForSeconds(r_respawnLogic.clip.length);
             r_iFrame.Play();
-            yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
-            r_iFrame.Stop();
+            yield return new WaitForSeconds(m_iFrameTime);
             Invincable(false);
         }
 

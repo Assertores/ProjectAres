@@ -807,7 +807,7 @@ MonoBehaviour:
   r_outline: {fileID: 6706022077143054475}
   r_respawnLogic: {fileID: 5212051754545285008}
   r_dieLogic: {fileID: 2143134950089849311}
-  r_iFrame: {fileID: 0}
+  r_iFrame: {fileID: 6586910988821748866}
   r_plusOneAnim: {fileID: 6299461937318211276}
   r_minusOneAnim: {fileID: 3084280794737149416}
   m_maxHealth: 100
