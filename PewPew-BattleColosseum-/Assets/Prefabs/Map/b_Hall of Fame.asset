@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: b_Hall of Fame
   m_EditorClassIdentifier: 
   m_image: {fileID: 21300000, guid: e57f5d3b342689e429bc2c934a0dda32, type: 3}
-  m_position: {x: -0.08967733, y: 3.4}
-  m_size: {x: 4.3, y: 2.74}
+  m_position: {x: -0.12, y: 3.37}
+  m_size: {x: 4, y: 2.2}
