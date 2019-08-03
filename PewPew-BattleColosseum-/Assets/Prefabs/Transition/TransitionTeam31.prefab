@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb19cfe3a2362274eb5130794e1518b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_anim: {fileID: 0}
+  r_anim: {fileID: 5118219230010829183}
   r_p1: {fileID: 1093267372174857611}
   r_p2: {fileID: 3219358307947986946}
   r_p3: {fileID: 8731294768233212787}

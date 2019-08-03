@@ -1231,6 +1231,7 @@ GameObject:
   - component: {fileID: 5973170285712299569}
   - component: {fileID: 5727957389048857943}
   - component: {fileID: 3848793871529747527}
+  - component: {fileID: 1063659603571034372}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Exit
@@ -1299,10 +1300,29 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   r_healthText: {fileID: 7371877667959130542}
-  r_buttonAnim: {fileID: 0}
+  r_buttonAnim: {fileID: 1063659603571034372}
   m_maxLife: 100
   m_regDelay: 2
   m_regSpeed: 2
+--- !u!95 &1063659603571034372
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5530538735433997040}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 53b47a27c454b97438b2a367d5979bdc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7278471807788177484
 GameObject:
   m_ObjectHideFlags: 0
