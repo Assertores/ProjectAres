@@ -62,20 +62,29 @@ namespace PPBC {
 
             TeamSelectI();
             SceneManager.LoadScene(StringCollection.S_TEAMSELECT);
+
+            m_isNextSceneMap = true;
         }
 
         /// <summary>
         /// entrance to map
         /// </summary>
         void StartMap() {
+            /*
             print("starting map: " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
 
             TransitionHandler.ReadyToChange += MapI;
 
             TransitionHandler.StartOutTransition();
+            /*/
+            DoStartMap();
+            //*/
         }
         
         void DoStartMap() {
+            print("starting map: " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
+
+            MapI();
 
             SceneManager.LoadScene(StringCollection.S_MAP);
 

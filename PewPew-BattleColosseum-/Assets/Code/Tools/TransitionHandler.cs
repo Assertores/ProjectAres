@@ -71,6 +71,10 @@ namespace PPBC {
                 return;
             }
 
+            StartOutTransitionForReal();
+        }
+
+        static void StartOutTransitionForReal() {
             if (s_singelton.r_anim)
                 s_singelton.StartCoroutine(s_singelton.IEOutTransition());
             else
@@ -189,9 +193,10 @@ namespace PPBC {
                 animRef.gameObject.SetActive(true);
                 animRef.r_anim.Play(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
                 float GameClipLength = animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+                print(GameClipLength);
                 yield return new WaitForSeconds(GameClipLength);
             }
-            StartOutTransition();
+            StartOutTransitionForReal();
         }
     }
 }
