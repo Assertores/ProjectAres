@@ -497,7 +497,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e781bd092d8a72c408f9d87357abe26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Curtainimpact: {fileID: 4388541742920105803}
+  r_curtain: {fileID: 4388541742920105803}
+  SFX_rattle: {fileID: 8300000, guid: 475dad6956ad3554b8d0e4329e79bcf4, type: 3}
+  SFX_impact: {fileID: 8300000, guid: 7bb5ddd896d709246a842d2824ab8e49, type: 3}
+  SFX_pullUp: {fileID: 8300000, guid: 15758d88333490b4695ac869a53b5d9c, type: 3}
+  SFX_hum: {fileID: 8300000, guid: 8d9cce22ef876864caa45a8956a12c7b, type: 3}
 --- !u!82 &4388541742920105803
 AudioSource:
   m_ObjectHideFlags: 0
