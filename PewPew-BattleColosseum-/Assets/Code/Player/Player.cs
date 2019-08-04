@@ -96,6 +96,8 @@ namespace PPBC {
         [SerializeField] float m_assistTime = 1;
         public d_rocketBalancingData m_rocket;
         public d_smgBalancingData m_sMG;
+        [SerializeField] Color m_chargeStarColor;
+        [SerializeField] Color m_changeEndColor;
 
         [HideInInspector] public d_playerStuts m_stats;
         e_HarmingObjectType m_killerType;
@@ -166,6 +168,7 @@ namespace PPBC {
             r_healthBar.fillAmount = m_currentHealth / m_maxHealth;
 
             r_staminaBar.fillAmount = m_useSMG ? r_smg.GetStamina() : r_rocket.GetStamina();
+            r_staminaBar.color = Color.Lerp(m_chargeStarColor, m_changeEndColor, r_staminaBar.fillAmount);
 
             r_points.text = Mathf.RoundToInt(m_stats.m_points).ToString();
 
