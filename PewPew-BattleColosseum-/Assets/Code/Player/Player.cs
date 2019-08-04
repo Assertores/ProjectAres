@@ -220,8 +220,6 @@ namespace PPBC {
 
             StartCoroutine(IEWaitToDie(source.m_trace));
 
-            lastHit = null;
-
             r_dieLogic.Play();
             //*/
         }
@@ -232,6 +230,8 @@ namespace PPBC {
             m_levelColCount = 0;
 
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
+
+            lastHit = null;
         }
 
         IEnumerator IEDie(IHarmingObject source) {
