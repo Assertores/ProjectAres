@@ -11,6 +11,7 @@ namespace PPBC {
         [Header("References")]
         [SerializeField] TextMeshProUGUI m_typeRef;
         [SerializeField] TextMeshProUGUI m_IndexRef;
+        [SerializeField] AudioSource fx_audio;
 
         [Header("Balancing")]
         [SerializeField] float m_scalerDampaning = 110;
@@ -112,6 +113,7 @@ namespace PPBC {
                 }
             }
 
+            fx_audio.Play();
             MapHandler.s_singelton.LoadNewObj(CreateData());
         }
 
@@ -134,6 +136,10 @@ namespace PPBC {
                     m_mapObj.m_data.rotation = m_mapObj.m_objectHolder.rotation.eulerAngles.z;
                     m_mapObj.m_data.scale = m_mapObj.m_objectHolder.localScale;
                 }
+            }
+
+            if (m_isDraging) {
+                fx_audio.Play();
             }
 
             m_isDraging = false;
