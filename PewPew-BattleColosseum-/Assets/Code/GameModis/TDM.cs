@@ -62,9 +62,6 @@ namespace PPBC {
 
             yield return new WaitForSeconds(delay);
 
-            foreach (var it in Player.s_sortRef)
-                it.m_stats.m_points++;
-
             EndGame?.Invoke(true);
         }
 
