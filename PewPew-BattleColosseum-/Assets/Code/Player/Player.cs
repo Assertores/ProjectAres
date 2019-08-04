@@ -201,6 +201,9 @@ namespace PPBC {
             if (!doTeamDamage && DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
                 return;
 
+            if (m_editHud)
+                return;
+
             //--> can die && should die <--
 
             m_stats.m_deaths++;
@@ -539,7 +542,7 @@ namespace PPBC {
         }
 
         public void DoDeathEffect() {
-            if (m_killerType == e_HarmingObjectType.LASOR) {
+            if (m_killerType == e_HarmingObjectType.LASOR || m_killerType == e_HarmingObjectType.DEATHZONE) {
                 r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, m_inVel);
                 FX_laserDeath.Play();
 
@@ -681,6 +684,7 @@ namespace PPBC {
 
             if (m_editHud.gameObject.activeSelf) {
                 InControle(false);
+                ResetVelocity();
                 Invincable(true);
                 m_rb.simulated = false;
 
