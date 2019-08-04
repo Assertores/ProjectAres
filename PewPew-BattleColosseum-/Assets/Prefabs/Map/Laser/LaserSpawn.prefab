@@ -175,6 +175,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1919819364196717715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3501383867536249499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20e4807e705240a2d932fe8e0de73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sources:
+  - {fileID: 8760723799683566716}
 --- !u!1 &5562444792645757822
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +306,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2752167643391804271}
     m_Modifications:
+    - target: {fileID: 5336887192799339401, guid: ca849033a49a50348b7a2ef2d22d37a8,
+        type: 3}
+      propertyPath: m_Name
+      value: "L\xC4MP"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5336887192799339401, guid: ca849033a49a50348b7a2ef2d22d37a8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5336887192799339412, guid: ca849033a49a50348b7a2ef2d22d37a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -346,16 +370,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5336887192799339401, guid: ca849033a49a50348b7a2ef2d22d37a8,
-        type: 3}
-      propertyPath: m_Name
-      value: "L\xC4MP"
-      objectReference: {fileID: 0}
-    - target: {fileID: 5336887192799339401, guid: ca849033a49a50348b7a2ef2d22d37a8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5336887192799339402, guid: ca849033a49a50348b7a2ef2d22d37a8,
         type: 3}

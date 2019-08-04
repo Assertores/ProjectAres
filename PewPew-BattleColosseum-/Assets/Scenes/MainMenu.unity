@@ -1151,6 +1151,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition
       objectReference: {fileID: 0}
+    - target: {fileID: 5321305834552527966, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5321305834552527960, guid: 32137c3c70b1bcc47915539f056afb02,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1709,8 +1714,9 @@ Animation:
   m_GameObject: {fileID: 520179363}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
+  m_Animation: {fileID: 7400000, guid: ccb3647707b82764bbd1d6ac84ab6d6f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ccb3647707b82764bbd1d6ac84ab6d6f, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
