@@ -66,6 +66,11 @@ namespace PPBC {
         #endregion
 
         public static void StartOutTransition() {
+            if (MatchManager.s_currentMatch.m_isNextSceneMap) {
+                StartGameTransition();
+                return;
+            }
+
             if (s_singelton.r_anim)
                 s_singelton.StartCoroutine(s_singelton.IEOutTransition());
             else

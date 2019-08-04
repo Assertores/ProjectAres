@@ -15,6 +15,8 @@ namespace PPBC {
         public Dictionary<Player, int> m_teamHolder = new Dictionary<Player, int>();
         [SerializeField] float m_delay;
 
+        public bool m_isNextSceneMap = false;
+
         #endregion
         #region MonoBehaviour
 
@@ -70,7 +72,7 @@ namespace PPBC {
 
             TransitionHandler.ReadyToChange += MapI;
 
-            TransitionHandler.StartGameTransition();
+            TransitionHandler.StartOutTransition();
         }
         
         void DoStartMap() {
@@ -82,6 +84,8 @@ namespace PPBC {
                 it.Invincable(false);
                 it.InControle(true);
             }
+
+            m_isNextSceneMap = false;
         }
 
         void ExitMap(bool normal) {
@@ -319,6 +323,8 @@ namespace PPBC {
         }
 
         IEnumerator IEStartGame() {
+
+            m_isNextSceneMap = !DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode;
 
             yield return new WaitForSeconds(m_delay);
             foreach (var it in Player.s_references) {
