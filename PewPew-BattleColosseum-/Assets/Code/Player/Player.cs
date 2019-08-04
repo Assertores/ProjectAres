@@ -96,6 +96,7 @@ namespace PPBC {
         [SerializeField] float m_assistTime = 1;
         public d_rocketBalancingData m_rocket;
         public d_smgBalancingData m_sMG;
+        [SerializeField] Gradient m_color;
         [SerializeField] Color m_chargeStarColor;
         [SerializeField] Color m_changeEndColor;
 
@@ -168,7 +169,10 @@ namespace PPBC {
             r_healthBar.fillAmount = m_currentHealth / m_maxHealth;
 
             r_staminaBar.fillAmount = m_useSMG ? r_smg.GetStamina() : r_rocket.GetStamina();
-            r_staminaBar.color = Color.Lerp(m_chargeStarColor, m_changeEndColor, r_staminaBar.fillAmount);
+            Color color = m_color.Evaluate(r_staminaBar.fillAmount);
+            r_staminaBar.color = color;
+            m_modelRef.m_laserPointer.startColor = color;
+            m_modelRef.m_laserPointer.endColor = color;
 
             r_points.text = Mathf.RoundToInt(m_stats.m_points).ToString();
 

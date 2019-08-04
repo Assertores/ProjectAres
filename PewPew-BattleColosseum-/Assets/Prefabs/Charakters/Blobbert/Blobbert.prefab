@@ -302,6 +302,7 @@ MonoBehaviour:
       type: 3}
     m_halfPitchRange: 0.1
     m_halfVolumeRange: 0
+  m_laserPointer: {fileID: 0}
 --- !u!82 &7353004879546632628
 AudioSource:
   m_ObjectHideFlags: 0
@@ -553,7 +554,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5029602
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
