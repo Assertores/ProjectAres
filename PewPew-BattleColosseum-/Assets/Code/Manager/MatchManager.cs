@@ -320,28 +320,10 @@ namespace PPBC {
         #endregion
         #endregion
 
-        Coroutine h_startGame;
         public void StartGame() {
-            h_startGame = StartCoroutine(IEStartGame());
-            Timer.StartTimer(m_delay);
-        }
-
-        public void AbortStartGame() {
-            StopCoroutine(h_startGame);
-            Timer.AbortTimer();
-        }
-
-        IEnumerator IEStartGame() {
-
             m_isNextSceneMap = !DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode;
 
-            yield return new WaitForSeconds(m_delay);
-            foreach (var it in Player.s_references) {
-                it.StartBeam();
-            }
-            yield return new WaitForSeconds(0.6f);
             MainMenuE();
-
         }
 
         Coroutine h_cTM;
