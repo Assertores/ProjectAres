@@ -1364,12 +1364,46 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2073113917806082981, guid: 32137c3c70b1bcc47915539f056afb02,
+    - target: {fileID: 6432502037874532805, guid: 32137c3c70b1bcc47915539f056afb02,
         type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 243499012703872730, guid: 83da80f7e9092f44598b31f6b30776db,
-        type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023198147045869639, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602800793783552176, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7915730707407040929, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524641599880009678, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 324579792206350379, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842124866990459275, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178498947521364796, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32137c3c70b1bcc47915539f056afb02, type: 3}
 --- !u!1 &476612907
@@ -1755,6 +1789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_delay: 3
+  m_isNextSceneMap: 0
 --- !u!114 &547276810
 MonoBehaviour:
   m_ObjectHideFlags: 0
