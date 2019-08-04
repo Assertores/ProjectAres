@@ -58,10 +58,6 @@ namespace PPBC {
             throw new NotImplementedException();
         }
 
-        public float StartTransition() {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

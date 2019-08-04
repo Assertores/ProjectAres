@@ -111,11 +111,6 @@ namespace PPBC {
             });
         }
 
-        public float StartTransition() {
-            //Player transition
-            return 0;
-        }
-
         public void SetUpGame() {
             foreach (var it in Player.s_references) {
                 it.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);

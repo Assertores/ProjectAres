@@ -33,7 +33,7 @@ namespace PPBC {
 
         bool h_inEscMenu = false;
         float h_timeScale = 1;
-        void ToggleEscMenu() {
+        public void ToggleEscMenu() {
             if (!h_inEscMenu) {
                 if (SceneManager.GetSceneByName(StringCollection.S_ESCMENU).isLoaded) {
                     h_inEscMenu = true;

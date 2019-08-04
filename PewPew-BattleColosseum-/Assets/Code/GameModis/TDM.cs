@@ -31,11 +31,6 @@ namespace PPBC {
 
         public System.Action<bool> EndGame { get; set; }
 
-        public float StartTransition() {
-            //Player transition
-            return 0;
-        }
-
         public void SetUpGame() {
             foreach (var it in Player.s_references) {
                 DoRespawn(it);
@@ -66,9 +61,6 @@ namespace PPBC {
             m_isActive = false;
 
             yield return new WaitForSeconds(delay);
-
-            foreach (var it in Player.s_sortRef)
-                it.m_stats.m_points++;
 
             EndGame?.Invoke(true);
         }
@@ -103,7 +95,7 @@ namespace PPBC {
                 return 0;
             });
 
-            if (victim.m_stats.m_points < 0) {
+            if (victim.m_stats.m_points <= 0) {
                 DoEndGame();
                 return;
             }

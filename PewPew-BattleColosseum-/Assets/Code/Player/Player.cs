@@ -79,6 +79,9 @@ namespace PPBC {
         [SerializeField] Image r_staminaBar;
         [SerializeField] TextMeshProUGUI r_points;
         [SerializeField] SpriteRenderer r_outline;
+        [SerializeField] Animation r_respawnLogic;
+        [SerializeField] Animation r_dieLogic;
+        [SerializeField] Animation r_iFrame;
 
         public Animation r_plusOneAnim;
         public Animation r_minusOneAnim;
@@ -93,8 +96,12 @@ namespace PPBC {
         [SerializeField] float m_assistTime = 1;
         public d_rocketBalancingData m_rocket;
         public d_smgBalancingData m_sMG;
+        [SerializeField] Gradient m_color;
+        [SerializeField] Color m_chargeStarColor;
+        [SerializeField] Color m_changeEndColor;
 
         [HideInInspector] public d_playerStuts m_stats;
+        e_HarmingObjectType m_killerType;
 
         public ParticleSystem.MainModule[] m_systemsToChangeColor;
 
@@ -135,6 +142,8 @@ namespace PPBC {
             if (r_pillar) {
                 Destroy(r_pillar.gameObject);
             }
+
+            TransitionHandler.ReadyToChange -= DoColliderListClear;
         }
 
         void Start() {
@@ -152,12 +161,18 @@ namespace PPBC {
             }
             OnColorChange();
             r_deathOrbParent.SetActive(false);
+
+            TransitionHandler.ReadyToChange += DoColliderListClear;
         }
 
         void Update() {
             r_healthBar.fillAmount = m_currentHealth / m_maxHealth;
 
             r_staminaBar.fillAmount = m_useSMG ? r_smg.GetStamina() : r_rocket.GetStamina();
+            Color color = m_color.Evaluate(r_staminaBar.fillAmount);
+            r_staminaBar.color = color;
+            m_modelRef.m_laserPointer.startColor = color;
+            m_modelRef.m_laserPointer.endColor = color;
 
             r_points.text = Mathf.RoundToInt(m_stats.m_points).ToString();
 
@@ -175,8 +190,8 @@ namespace PPBC {
                     StartAnim(StringCollection.A_IDLEAIR, true);
                 }
             }
-
-            m_inVel = m_rb.velocity;
+            if(m_alive)
+                m_inVel = m_rb.velocity;
         }
 
         #endregion
@@ -193,6 +208,9 @@ namespace PPBC {
             if (!doTeamDamage && DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode && source.m_trace.m_owner && source.m_trace.m_owner.m_team == m_team)
                 return;
 
+            if (m_editHud)
+                return;
+
             //--> can die && should die <--
 
             m_stats.m_deaths++;
@@ -203,8 +221,27 @@ namespace PPBC {
             }
 
             KillFeed.AddKill(source.m_trace.m_owner?.m_modelRef.m_icon, source.m_trace.m_icon, m_modelRef.m_icon);
-
+            /*
             StartCoroutine(IEDie(source.m_trace));
+            /*/
+            m_alive = false;
+
+            m_killerType = source.m_trace.m_type;
+
+            StartCoroutine(IEWaitToDie(source.m_trace));
+
+            r_dieLogic.Play();
+            //*/
+        }
+
+        IEnumerator IEWaitToDie(IHarmingObject source) {
+            yield return new WaitForSeconds(r_dieLogic.clip.length);
+
+            m_levelColCount = 0;
+
+            DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
+
+            lastHit = null;
         }
 
         IEnumerator IEDie(IHarmingObject source) {
@@ -223,8 +260,8 @@ namespace PPBC {
             if(source.m_type == e_HarmingObjectType.SHOCKWAVE) {
                 FX_shockwaveExplosion.Play();
             }
-            
-            yield return new WaitForSeconds(StartAnim(StringCollection.A_DIE));
+
+            yield return new WaitForSeconds(r_dieLogic.clip.length);
             
             r_player.SetActive(false);
             DataHolder.s_modis[DataHolder.s_currentModi].PlayerDied(source, this);
@@ -273,6 +310,7 @@ namespace PPBC {
 
             m_controler = r_static.AddComponent<ControlerControl>();
             m_controler.m_index = index;
+
             m_playerIndex = index;
             DataHolder.s_players[index] = true;
 
@@ -287,11 +325,30 @@ namespace PPBC {
             m_useSMG = false;
             ChangeWeapon();
 
-            
-
             m_controler.Disconnect += Disconnect;
 
             return m_controler;
+        }
+
+        //only for Trailer Stuff
+        public void ChangeControlerUnsave(IControl newControler) {
+
+            m_controler = newControler;
+
+            m_playerIndex = m_controler.m_index;
+
+            m_rb = GetComponent<Rigidbody2D>();
+
+            r_smg.Init(this);
+            r_rocket.Init(this);
+
+            m_currentCaracter = -1;
+            ChangeChar(true);
+
+            m_useSMG = false;
+            ChangeWeapon();
+
+            m_controler.Disconnect += Disconnect;
         }
 
         public void Disconnect() {
@@ -307,7 +364,40 @@ namespace PPBC {
         }
 
         public void Respawn(Vector2 pos, float delay = 0) {
+            /*
             StartCoroutine(IERespawn(pos, delay));
+            /*/
+            if (delay > 0)
+                InControle(false);
+
+            r_player.SetActive(false);
+
+            StartCoroutine(IELerpToRespawnPoint(pos, delay));
+            //*/
+        }
+
+        IEnumerator IELerpToRespawnPoint(Vector2 pos, float delay = 0) {
+            float startTime = Time.time;
+            Vector2 starPos = transform.position;
+
+            while (startTime + delay > Time.time) {
+                //----- stuff that should happon in between -----
+                transform.position = Vector2.Lerp(starPos, pos, (Time.time - startTime) / delay);
+                yield return null;
+            }
+
+            transform.position = pos;
+
+            ResetVelocity();
+            ResetHealth();
+            StopShooting();
+            if (!m_useSMG)
+                ChangeWeapon();
+            if (delay > 0) {
+                StartCoroutine(IEIFrame());
+            }
+            
+            r_respawnLogic.Play();
         }
 
         IEnumerator IERespawn(Vector2 pos, float delay = 0) {
@@ -423,16 +513,67 @@ namespace PPBC {
             h_inControle = controle;
         }
 
+        public void SetPlayerVisable(bool value) {
+            r_player.SetActive(value);
+        }
+
+        public void SetPlayerActive(bool value) {
+            if (!m_rb)
+                m_rb = GetComponent<Rigidbody2D>();
+
+            m_rb.isKinematic = !value;
+            if (!value)
+                ResetVelocity();
+
+            if (!m_col)
+                m_col = GetComponent<Collider2D>();
+            m_col.enabled = value;
+        }
+
+        public void DoColliderListClear() {
+            m_levelColCount = 0;
+        }
+
         #endregion
-        
+
         IEnumerator IEIFrame() {
             Invincable(true);
-            yield return new WaitForSeconds(m_iFrameTime);//TODO: IFrame effect
+            yield return new WaitForSeconds(r_respawnLogic.clip.length);
+            r_iFrame.Play();
+            yield return new WaitForSeconds(m_iFrameTime);
             Invincable(false);
         }
 
         public void Invincable(bool value) {
             m_invincible = value;
+        }
+
+        public void DoDeathEffect() {
+            if (m_killerType == e_HarmingObjectType.LASOR || m_killerType == e_HarmingObjectType.DEATHZONE) {
+                r_laserDeathParent.transform.rotation = Quaternion.LookRotation(transform.forward, m_inVel);
+                FX_laserDeath.Play();
+
+            }else if (m_killerType == e_HarmingObjectType.SHOCKWAVE) {
+                FX_shockwaveExplosion.Play();
+            } else {
+                FX_death.Play();
+            }
+        }
+
+        public void DeathOrb(bool value) {
+            r_deathOrbParent.SetActive(value);
+        }
+
+        public void DoRespawnEffect() {
+            FX_respawn.Play();
+        }
+
+        public void DoRespawnSFX() {
+            SFX_respawnAudio.Play();
+        }
+
+        public void DoDieSFX() {
+
         }
 
         #region Control stuff
@@ -498,18 +639,7 @@ namespace PPBC {
             }
         }
 
-        public void SetPlayerActive(bool value) {
-            if (!m_rb)
-                m_rb = GetComponent<Rigidbody2D>();
-
-            m_rb.isKinematic = !value;
-            if (!value)
-                ResetVelocity();
-
-            if (!m_col)
-                m_col = GetComponent<Collider2D>();
-            m_col.enabled = value;
-        }
+        
 
         /// <summary>
         /// starts the animation if it isn't already running
@@ -561,6 +691,7 @@ namespace PPBC {
 
             if (m_editHud.gameObject.activeSelf) {
                 InControle(false);
+                ResetVelocity();
                 Invincable(true);
                 m_rb.simulated = false;
 

@@ -23,6 +23,8 @@ namespace PPBC {
         [SerializeField] Material m_spriteMaterial;
         [SerializeField] RectTransform m_KillFeed;
 
+        Color m_lightColor;
+
         #endregion
         #region MonoBehaviour
 
@@ -68,6 +70,11 @@ namespace PPBC {
                 Destroy(this);
                 return;
             }
+
+            //--> everything is available <--
+
+            m_lightColor = DataHolder.s_dirLight.color;
+
             if (DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
                 if(DataHolder.s_currentModi == -1)
                     DataHolder.s_currentModi = 0;
@@ -80,6 +87,7 @@ namespace PPBC {
         private void OnDestroy() {
             if(s_singelton == this) {
                 s_singelton = null;
+                DataHolder.s_dirLight.color = m_lightColor;
             }
         }
 

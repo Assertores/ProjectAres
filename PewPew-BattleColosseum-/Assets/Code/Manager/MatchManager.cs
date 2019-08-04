@@ -15,6 +15,8 @@ namespace PPBC {
         public Dictionary<Player, int> m_teamHolder = new Dictionary<Player, int>();
         [SerializeField] float m_delay;
 
+        public bool m_isNextSceneMap = false;
+
         #endregion
         #region MonoBehaviour
 
@@ -60,20 +62,27 @@ namespace PPBC {
 
             TeamSelectI();
             SceneManager.LoadScene(StringCollection.S_TEAMSELECT);
+
+            m_isNextSceneMap = true;
         }
 
         /// <summary>
         /// entrance to map
         /// </summary>
         void StartMap() {
+            /*
             print("starting map: " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
 
-            StartCoroutine(IEStartMap(DataHolder.s_modis[DataHolder.s_currentModi].StartTransition()));
-        }
+            TransitionHandler.ReadyToChange += MapI;
 
+            TransitionHandler.StartOutTransition();
+            /*/
+            DoStartMap();
+            //*/
+        }
         
-        IEnumerator IEStartMap(float delay) {
-            yield return new WaitForSeconds(delay);
+        void DoStartMap() {
+            print("starting map: " + DataHolder.s_maps[DataHolder.s_currentMap].m_name);
 
             MapI();
 
@@ -84,6 +93,8 @@ namespace PPBC {
                 it.Invincable(false);
                 it.InControle(true);
             }
+
+            m_isNextSceneMap = false;
         }
 
         void ExitMap(bool normal) {
@@ -231,6 +242,10 @@ namespace PPBC {
                 return;
             h_singleMap = true;
 
+            TransitionHandler.ReadyToChange -= MapI;
+
+            DoStartMap();
+
             print("MapI once");
 
             DataHolder.s_modis[DataHolder.s_currentModi].EndGame += MapE;
@@ -305,26 +320,10 @@ namespace PPBC {
         #endregion
         #endregion
 
-        Coroutine h_startGame;
         public void StartGame() {
-            h_startGame = StartCoroutine(IEStartGame());
-            Timer.StartTimer(m_delay);
-        }
+            m_isNextSceneMap = !DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode;
 
-        public void AbortStartGame() {
-            StopCoroutine(h_startGame);
-            Timer.AbortTimer();
-        }
-
-        IEnumerator IEStartGame() {
-
-            yield return new WaitForSeconds(m_delay);
-            foreach (var it in Player.s_references) {
-                it.StartBeam();
-            }
-            yield return new WaitForSeconds(0.6f);
             MainMenuE();
-
         }
 
         Coroutine h_cTM;

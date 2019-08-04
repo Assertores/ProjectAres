@@ -12,7 +12,8 @@ namespace PPBC {
         [Header("Reference")]
         [SerializeField] UnityEvent r_onButtonDeath;
         [SerializeField] TextMeshProUGUI r_healthText;
-
+        [SerializeField] Animator r_buttonAnim;
+    
         [Header("Balancing")]
         [SerializeField] float m_maxLife = -1;
         float m_currentLife;
@@ -61,6 +62,11 @@ namespace PPBC {
         public void TakeDamage(ITracer source, float damage, Vector2 recoilDir, bool doTeamDamage = true) {
             m_lastHitTime = Time.time;
             m_currentLife -= damage;
+            if(source.m_trace.m_type != e_HarmingObjectType.ROCKED) {
+                r_buttonAnim.SetTrigger("SmgHit");
+            } else {
+                r_buttonAnim.SetTrigger("RocketHit");
+            }
 
             if (m_currentLife <= 0)
                 Die(source);

@@ -20,7 +20,7 @@ MonoBehaviour:
   p_props: []
   p_forgrounds: []
   m_ballSpawn: {x: 0, y: 0}
-  m_icon: {fileID: 21300000, guid: 16539ba0bff52704c8bb1be6ab1bfa60, type: 3}
+  m_icon: {fileID: 21300000, guid: 2152cc326caa75c4a9d429aafecc3f35, type: 3}
   m_name: Hall of Fame
   m_size: 0
   m_background: 1

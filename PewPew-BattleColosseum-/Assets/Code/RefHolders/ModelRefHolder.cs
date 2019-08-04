@@ -50,5 +50,11 @@ namespace PPBC {
         public GameObject r_weaponRot;
         public d_rocketLauncherData m_rocket;
         public d_smgData m_sMG;
+
+        public LineRenderer m_laserPointer;
+
+        private void Awake() {
+            m_laserPointer = GetComponentInChildren<LineRenderer>();
+        }
     }
 }

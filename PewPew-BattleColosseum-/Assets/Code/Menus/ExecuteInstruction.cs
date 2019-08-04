@@ -10,13 +10,11 @@ namespace PPBC {
             if (MatchManager.s_currentMatch) {
                 MatchManager.s_currentMatch.StopGame();
             } else {
-                TransitionHandler.ReadyToChange = BackToMMImideatly;
-                TransitionHandler.StartOutTransition();
+                SceneManager.LoadScene(StringCollection.S_MAINMENU);
             }
-        }
-
-        void BackToMMImideatly() {
-            SceneManager.LoadScene(StringCollection.S_MAINMENU);
+            print("A");
+            DataHolder.s_escMenu.ToggleEscMenu();
+            print("B");
         }
     }
 }

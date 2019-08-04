@@ -1006,6 +1006,7 @@ MonoBehaviour:
   - {fileID: 5151474522508839637, guid: d0ab6ad948adf5f4d86647e0ed65973c, type: 3}
   - {fileID: 5151474522508839637, guid: 2f59479768908e145800506948735ae5, type: 3}
   m_dirLight: {fileID: 347431681967975084}
+  m_escMenu: {fileID: 4129946222036553813}
   m_commonSizes:
   - {x: 20, y: 10}
   m_commonBackgrounds:
@@ -1230,6 +1231,7 @@ GameObject:
   - component: {fileID: 5973170285712299569}
   - component: {fileID: 5727957389048857943}
   - component: {fileID: 3848793871529747527}
+  - component: {fileID: 1063659603571034372}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Exit
@@ -1298,9 +1300,29 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   r_healthText: {fileID: 7371877667959130542}
+  r_buttonAnim: {fileID: 1063659603571034372}
   m_maxLife: 100
   m_regDelay: 2
   m_regSpeed: 2
+--- !u!95 &1063659603571034372
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5530538735433997040}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 53b47a27c454b97438b2a367d5979bdc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7278471807788177484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,15 +1371,15 @@ MonoBehaviour:
   p_hill: {fileID: 700622219197246419, guid: e6cce23abb042ff42a790f314ae61f7d, type: 3}
   p_valley: {fileID: 1494409770337928004, guid: 00f9551defb2ea1458c30e0caf5ef0d9,
     type: 3}
-  m_PointsToWin: 100
+  m_PointsToWin: 75
   m_respawnDelay: 2
   m_valleyCount: 2
   m_zoneMoveDelay: 20
   m_zoneTimeInBetween: 2
-  m_pointGainPerSeconds: 2
+  m_pointGainPerSeconds: 1
   m_pointLossPerSeconds: 1
   m_hillDiameter: 5
-  m_valleyDiameter: 2
+  m_valleyDiameter: 3
   m_timeThreshold: 1
 --- !u!1 &7363573733610744735
 GameObject:
@@ -1420,7 +1442,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 42e0a74a90369d5449e0c24171e7f820, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
