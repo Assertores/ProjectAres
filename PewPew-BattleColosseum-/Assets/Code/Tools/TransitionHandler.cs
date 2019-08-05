@@ -105,6 +105,41 @@ namespace PPBC {
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
                 List<Player> teamA = Player.s_references.FindAll(x => x.m_team == 0);
                 List<Player> teamB = Player.s_references.FindAll(x => x.m_team == 1);
+                //*
+                if (teamA.Count == 2 && teamB.Count == 2) {
+                    animRef = r_team2v2;
+                } else if (teamA.Count == 3 && teamB.Count == 1) {
+                    animRef = r_team3v1;
+                } else if (teamA.Count == 1 && teamB.Count == 3) {
+                    animRef = r_team1v3;
+                } else if (teamA.Count == 1 && teamB.Count == 2) {
+                    animRef = r_team1v2;
+                } else if (teamA.Count == 2 && teamB.Count == 1) {
+                    animRef = r_team2v1;
+                } else if (teamA.Count == 1 && teamB.Count == 1) {
+                    animRef = r_team1v1;
+                } else {
+                    Debug.Log("no animation found");
+                    goto NoAnimation;
+                }
+
+                for (int i = 0; i < teamA.Count; i++) {
+                    animRef.r_chars[i].r_character.sprite = teamA[i].m_modelRef.m_icon;
+                    animRef.r_chars[i].r_charName.text = teamA[i].m_modelRef.m_name;
+                    Color color = teamA[0].GetPlayerColor();
+                    foreach (var it in animRef.r_chars[i].r_backgrounds) {
+                        it.color = color;
+                    }
+                }
+                for(int i = 0; i < teamB.Count; i++) {
+                    animRef.r_chars[i + teamA.Count].r_character.sprite = teamA[i].m_modelRef.m_icon;
+                    animRef.r_chars[i + teamA.Count].r_charName.text = teamA[i].m_modelRef.m_name;
+                    Color color = teamA[0].GetPlayerColor();
+                    foreach (var it in animRef.r_chars[i + teamA.Count].r_backgrounds) {
+                        it.color = color;
+                    }
+                }
+                /*/
                 if(teamA.Count == 2 && teamB.Count == 2) {
                     animRef = r_team2v2;
 
@@ -149,7 +184,32 @@ namespace PPBC {
                     animRef.r_p1Background.color = DataHolder.s_teamColors[0];
                     animRef.r_p2Background.color = DataHolder.s_teamColors[1];
                 }
+                //*/
             } else {
+                //*
+                switch (Player.s_references.Count) {
+                case 2:
+                    animRef = r_ffa2;
+                    break;
+                case 3:
+                    animRef = r_ffa3;
+                    break;
+                case 4:
+                    animRef = r_ffa4;
+                    break;
+                default:
+                    Debug.Log("no animation found");
+                    goto NoAnimation;
+                }
+                for (int i = 0; i < Player.s_references.Count; i++) {
+                    animRef.r_chars[i].r_character.sprite = Player.s_references[i].m_modelRef.m_icon;
+                    animRef.r_chars[i].r_charName.text = Player.s_references[i].m_modelRef.m_name;
+                    Color color = Player.s_references[0].GetPlayerColor();
+                    foreach(var it in animRef.r_chars[i].r_backgrounds) {
+                        it.color = color;
+                    }
+                }
+                /*/
                 switch (Player.s_references.Count) {
                 case 2:
                     animRef = r_ffa2;
@@ -184,18 +244,20 @@ namespace PPBC {
                 default:
                     break;
                 }
+                //*/
             }
 
-            if (animRef) {
-                animRef.r_name.text = DataHolder.s_modis[DataHolder.s_currentModi].m_name;
-                animRef.r_flavour.text = DataHolder.s_modis[DataHolder.s_currentModi].m_text;
+            animRef.r_name.text = DataHolder.s_modis[DataHolder.s_currentModi].m_name;
+            animRef.r_flavour.text = DataHolder.s_modis[DataHolder.s_currentModi].m_text;
 
-                animRef.gameObject.SetActive(true);
-                animRef.r_anim.Play(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-                float GameClipLength = animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-                print(GameClipLength);
-                yield return new WaitForSeconds(GameClipLength);
-            }
+            animRef.gameObject.SetActive(true);
+            animRef.r_anim.Play(animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+            float GameClipLength = animRef.r_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            print(GameClipLength);
+            yield return new WaitForSeconds(GameClipLength);
+
+NoAnimation:
+
             StartOutTransitionForReal();
         }
     }

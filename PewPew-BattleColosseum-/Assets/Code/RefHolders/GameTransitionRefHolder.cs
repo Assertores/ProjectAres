@@ -4,21 +4,19 @@ using UnityEngine;
 using TMPro;
 
 namespace PPBC {
+
+    [System.Serializable]
+    public struct d_CharRefs {
+        public SpriteRenderer[] r_backgrounds;
+        public SpriteRenderer r_character;
+        public TextMeshProUGUI r_charName;
+    }
+
     public class GameTransitionRefHolder : MonoBehaviour {
 
         public Animator r_anim;
 
-        public SpriteRenderer r_p1;
-        public SpriteRenderer r_p2;
-        public SpriteRenderer r_p3;
-        public SpriteRenderer r_p4;
-
-        [Tooltip("or 1 team")]
-        public SpriteRenderer r_p1Background;
-        [Tooltip("or 2 team")]
-        public SpriteRenderer r_p2Background;
-        public SpriteRenderer r_p3Background;
-        public SpriteRenderer r_p4Background;
+        public d_CharRefs[] r_chars;
 
         public TextMeshProUGUI r_name;
         public TextMeshProUGUI r_flavour;
