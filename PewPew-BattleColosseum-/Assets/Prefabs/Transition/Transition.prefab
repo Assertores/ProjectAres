@@ -549,11 +549,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionTeam22
       objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: 2085fdd1f5d573d4cbb54729d92f6d9b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: 2085fdd1f5d573d4cbb54729d92f6d9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -756,16 +751,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5321305834552527960}
     m_Modifications:
-    - target: {fileID: 8276301499759482600, guid: 2cb6d0f249e99844284fd542913b431f,
-        type: 3}
-      propertyPath: m_Name
-      value: TransitionTeam21
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: 2cb6d0f249e99844284fd542913b431f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: 2cb6d0f249e99844284fd542913b431f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -820,6 +805,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276301499759482600, guid: 2cb6d0f249e99844284fd542913b431f,
+        type: 3}
+      propertyPath: m_Name
+      value: TransitionTeam21
       objectReference: {fileID: 0}
     - target: {fileID: 3219358307947986946, guid: 2cb6d0f249e99844284fd542913b431f,
         type: 3}
@@ -963,16 +953,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5321305834552527960}
     m_Modifications:
-    - target: {fileID: 8276301499759482600, guid: 1810993634c12e14698390f1056cb744,
-        type: 3}
-      propertyPath: m_Name
-      value: TransitionTeam31
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: 1810993634c12e14698390f1056cb744,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: 1810993634c12e14698390f1056cb744,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1027,6 +1007,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276301499759482600, guid: 1810993634c12e14698390f1056cb744,
+        type: 3}
+      propertyPath: m_Name
+      value: TransitionTeam31
       objectReference: {fileID: 0}
     - target: {fileID: 3219358307947986946, guid: 1810993634c12e14698390f1056cb744,
         type: 3}
@@ -1175,16 +1160,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5321305834552527960}
     m_Modifications:
-    - target: {fileID: 8276301499759482600, guid: 7390fe430fff8614b90d9d0446ca8a07,
-        type: 3}
-      propertyPath: m_Name
-      value: TransitionTeam13
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: 7390fe430fff8614b90d9d0446ca8a07,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: 7390fe430fff8614b90d9d0446ca8a07,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1239,6 +1214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276301499759482600, guid: 7390fe430fff8614b90d9d0446ca8a07,
+        type: 3}
+      propertyPath: m_Name
+      value: TransitionTeam13
       objectReference: {fileID: 0}
     - target: {fileID: 3219358307947986946, guid: 7390fe430fff8614b90d9d0446ca8a07,
         type: 3}
@@ -1391,11 +1371,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TransitionFFA4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: f8765f1d9924b6247a7822aaa31fe402,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: f8765f1d9924b6247a7822aaa31fe402,
         type: 3}
@@ -1799,16 +1774,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5321305834552527960}
     m_Modifications:
-    - target: {fileID: 8276301499759482600, guid: abcd1da978464384aada4beb89cd3dcb,
-        type: 3}
-      propertyPath: m_Name
-      value: TransitionFFA2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: abcd1da978464384aada4beb89cd3dcb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: abcd1da978464384aada4beb89cd3dcb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1863,6 +1828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276301499759482600, guid: abcd1da978464384aada4beb89cd3dcb,
+        type: 3}
+      propertyPath: m_Name
+      value: TransitionFFA2
       objectReference: {fileID: 0}
     - target: {fileID: 7251976455690842351, guid: abcd1da978464384aada4beb89cd3dcb,
         type: 3}
@@ -2036,16 +2006,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5321305834552527960}
     m_Modifications:
-    - target: {fileID: 8276301499759482600, guid: bc87d1e1969795c48985f93fdb6b0aba,
-        type: 3}
-      propertyPath: m_Name
-      value: TransitionTeam12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: bc87d1e1969795c48985f93fdb6b0aba,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: bc87d1e1969795c48985f93fdb6b0aba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2100,6 +2060,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276301499759482600, guid: bc87d1e1969795c48985f93fdb6b0aba,
+        type: 3}
+      propertyPath: m_Name
+      value: TransitionTeam12
       objectReference: {fileID: 0}
     - target: {fileID: 7251976455690842351, guid: bc87d1e1969795c48985f93fdb6b0aba,
         type: 3}
@@ -2233,16 +2198,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5321305834552527960}
     m_Modifications:
-    - target: {fileID: 8276301499759482600, guid: 4ed27dda089b8ba42ae20349cf83a429,
-        type: 3}
-      propertyPath: m_Name
-      value: TransitionFFA3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276301499759482600, guid: 4ed27dda089b8ba42ae20349cf83a429,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3043407609977061117, guid: 4ed27dda089b8ba42ae20349cf83a429,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2297,6 +2252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276301499759482600, guid: 4ed27dda089b8ba42ae20349cf83a429,
+        type: 3}
+      propertyPath: m_Name
+      value: TransitionFFA3
       objectReference: {fileID: 0}
     - target: {fileID: 8731294768233212787, guid: 4ed27dda089b8ba42ae20349cf83a429,
         type: 3}
