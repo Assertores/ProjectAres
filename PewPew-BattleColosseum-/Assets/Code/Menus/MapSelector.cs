@@ -56,6 +56,8 @@ namespace PPBC {
                     element.r_text.text = DataHolder.s_maps[i].p_sizes[DataHolder.s_maps[i].m_size * -1 - 1].ToString();
                 }
             }
+            if (DataHolder.s_currentMap != 0)
+                m_finished = false;
         }
 
         void Update() {
