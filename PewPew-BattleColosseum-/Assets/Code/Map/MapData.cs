@@ -94,8 +94,8 @@ namespace PPBC {
             value.m_ballSpawn = this.m_ballSpawn;
 
             value.m_icon = "icon.png";
-            //byte[] pngShot = ScreenshotCam.TakeScreenShot().EncodeToPNG();
-            byte[] pngShot = ScreenshotCam.ScreenShotRipOff();
+            byte[] pngShot = ScreenshotCam.TakeScreenShot();
+            //byte[] pngShot = ScreenshotCam.ScreenShotRipOff();
             File.WriteAllBytes(StringCollection.P_MAPPARH + this.name  + "/" + "icon.png", pngShot);
 
             value.m_name = this.m_name;
