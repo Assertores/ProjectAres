@@ -124,6 +124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition
       objectReference: {fileID: 0}
+    - target: {fileID: 5321305834552527966, guid: 32137c3c70b1bcc47915539f056afb02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5321305834552527960, guid: 32137c3c70b1bcc47915539f056afb02,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -331,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 793680602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.46, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2.5, z: 1}
+  m_LocalScale: {x: 1, y: 2.8546875, z: 1}
   m_Children: []
   m_Father: {fileID: 1554486044}
   m_RootOrder: 1
@@ -439,7 +444,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -453,7 +458,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9, y: 4}
+  m_Size: {x: 2.805, y: 3.57}
   m_EdgeRadius: 0
 --- !u!114 &793680607
 MonoBehaviour:
@@ -824,7 +829,7 @@ Transform:
   m_GameObject: {fileID: 1350029033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.46, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2.5, z: 1}
+  m_LocalScale: {x: 1, y: 2.84375, z: 1}
   m_Children: []
   m_Father: {fileID: 1554486044}
   m_RootOrder: 0
@@ -932,7 +937,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -946,7 +951,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9, y: 4}
+  m_Size: {x: 2.805, y: 3.57}
   m_EdgeRadius: 0
 --- !u!114 &1350029038
 MonoBehaviour:
