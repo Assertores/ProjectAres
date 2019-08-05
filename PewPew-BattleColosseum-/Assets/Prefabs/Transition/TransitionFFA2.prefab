@@ -153,7 +153,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 1275068415
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -375,7 +375,7 @@ Transform:
   m_GameObject: {fileID: 3686096413018965912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.2118, y: 0, z: 0}
-  m_LocalScale: {x: 7.3660865, y: 14.656959, z: 7.4598}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 3043407609977061117}
   m_RootOrder: 3
@@ -417,8 +417,8 @@ SpriteRenderer:
   m_SortingLayerID: -1507667259
   m_SortingLayer: 8
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8402e9662cb94154fad2614e466cf169, type: 3}
-  m_Color: {r: 0.5849056, g: 0.111256525, b: 0.10208259, a: 0}
+  m_Sprite: {fileID: 21300000, guid: c15d70872cd78d849a1ed81bbd7f06cf, type: 3}
+  m_Color: {r: 0.5849056, g: 0.111256525, b: 0.10208259, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -454,7 +454,7 @@ Transform:
   m_GameObject: {fileID: 4166789290919001182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.2113, y: 0, z: 0}
-  m_LocalScale: {x: 7.3670382, y: 14.656959, z: 7.4598}
+  m_LocalScale: {x: 2, y: 2, z: 7.4598}
   m_Children: []
   m_Father: {fileID: 3043407609977061117}
   m_RootOrder: 2
@@ -496,8 +496,8 @@ SpriteRenderer:
   m_SortingLayerID: -1507667259
   m_SortingLayer: 8
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8402e9662cb94154fad2614e466cf169, type: 3}
-  m_Color: {r: 0.16078432, g: 0.17254902, b: 0.5568628, a: 0}
+  m_Sprite: {fileID: 21300000, guid: b246dd80075c5644c8d69ce095126fe8, type: 3}
+  m_Color: {r: 0.16078432, g: 0.17254902, b: 0.5568628, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -930,36 +930,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_TRANSITION_EFFECT
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893947076918, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268894256710306, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268892718259477, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5410268892872571909, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -974,6 +944,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268894256710306, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893947076918, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268892718259477, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc03a960ae7c204783010168c3974ea, type: 3}
