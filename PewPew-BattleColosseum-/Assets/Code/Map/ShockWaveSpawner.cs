@@ -67,7 +67,7 @@ namespace PPBC {
             }
 
             TransitionHandler.ReadyToChange += RestoreTimeScale;
-
+            CameraShake.DoCamerashake(0.05f,5);
             return m_delay;
         }
 
