@@ -24,16 +24,21 @@ namespace PPBC {
 
             var holder = RenderTexture.active;
 
+            RenderTexture rt = new RenderTexture(m_texture.width, m_texture.height, 24);
+            m_cam.targetTexture = rt;
+
             m_cam.gameObject.SetActive(true);
             m_cam.Render();
             m_cam.gameObject.SetActive(false);
 
-            RenderTexture.active = m_texture;
+            RenderTexture.active = rt;
 
             Texture2D value = new Texture2D(m_texture.width, m_texture.height, TextureFormat.RGB24, false);
             
             value.ReadPixels(new Rect(0, 0, value.width, value.height), 0, 0, false);
             RenderTexture.active = holder;
+
+            rt.Release();
 
             return value.EncodeToPNG();
         }
