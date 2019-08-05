@@ -1028,14 +1028,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_anim: {fileID: 2864625994048500572}
-  r_p1: {fileID: 3219358307947986946}
-  r_p2: {fileID: 708425480529971790}
-  r_p3: {fileID: 8731294768233212787}
-  r_p4: {fileID: 1093267372174857611}
-  r_p1Background: {fileID: 7251976455690842351}
-  r_p2Background: {fileID: 4986645567339063808}
-  r_p3Background: {fileID: 0}
-  r_p4Background: {fileID: 0}
+  r_chars:
+  - r_backgrounds:
+    - {fileID: 7251976455690842351}
+    r_character: {fileID: 3219358307947986946}
+    r_charName: {fileID: 0}
+  - r_backgrounds: []
+    r_character: {fileID: 708425480529971790}
+    r_charName: {fileID: 0}
+  - r_backgrounds:
+    - {fileID: 4986645567339063808}
+    r_character: {fileID: 8731294768233212787}
+    r_charName: {fileID: 0}
+  - r_backgrounds: []
+    r_character: {fileID: 1093267372174857611}
+    r_charName: {fileID: 0}
   r_name: {fileID: 2814720536049035503}
   r_flavour: {fileID: 241721624140585180}
 --- !u!114 &1357254461269535446

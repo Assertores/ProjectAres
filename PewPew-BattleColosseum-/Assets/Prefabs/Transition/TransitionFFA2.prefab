@@ -852,14 +852,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_anim: {fileID: 1165136267807960044}
-  r_p1: {fileID: 3219358307947986946}
-  r_p2: {fileID: 8731294768233212787}
-  r_p3: {fileID: 0}
-  r_p4: {fileID: 0}
-  r_p1Background: {fileID: 7251976455690842351}
-  r_p2Background: {fileID: 4986645567339063808}
-  r_p3Background: {fileID: 0}
-  r_p4Background: {fileID: 0}
+  r_chars:
+  - r_backgrounds:
+    - {fileID: 7251976455690842351}
+    r_character: {fileID: 3219358307947986946}
+    r_charName: {fileID: 0}
+  - r_backgrounds:
+    - {fileID: 4986645567339063808}
+    r_character: {fileID: 8731294768233212787}
+    r_charName: {fileID: 0}
   r_name: {fileID: 479558860753793569}
   r_flavour: {fileID: 3866590787013684116}
 --- !u!1001 &5473072517014813336
@@ -869,41 +870,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 967681248177002939}
     m_Modifications:
-    - target: {fileID: 5410268892872571910, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_TRANSITION_EFFECT
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893947076918, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268894256710306, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268892718259477, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5410268892872571907, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -957,6 +923,41 @@ PrefabInstance:
     - target: {fileID: 5410268892872571907, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268892872571910, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_TRANSITION_EFFECT
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893947076918, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268894256710306, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268892718259477, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5410268892872571909, guid: 6bc03a960ae7c204783010168c3974ea,

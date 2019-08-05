@@ -1109,14 +1109,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_anim: {fileID: 470987643728826366}
-  r_p1: {fileID: 3219358307947986946}
-  r_p2: {fileID: 6090989070369908188}
-  r_p3: {fileID: 8731294768233212787}
-  r_p4: {fileID: 0}
-  r_p1Background: {fileID: 7251976455690842351}
-  r_p2Background: {fileID: 3522684411340215896}
-  r_p3Background: {fileID: 4986645567339063808}
-  r_p4Background: {fileID: 0}
+  r_chars:
+  - r_backgrounds:
+    - {fileID: 7251976455690842351}
+    r_character: {fileID: 3219358307947986946}
+    r_charName: {fileID: 0}
+  - r_backgrounds:
+    - {fileID: 3522684411340215896}
+    r_character: {fileID: 6090989070369908188}
+    r_charName: {fileID: 0}
+  - r_backgrounds:
+    - {fileID: 4986645567339063808}
+    r_character: {fileID: 8731294768233212787}
+    r_charName: {fileID: 0}
   r_name: {fileID: 3450933753029421387}
   r_flavour: {fileID: 5213326303230520220}
 --- !u!95 &470987643728826366
