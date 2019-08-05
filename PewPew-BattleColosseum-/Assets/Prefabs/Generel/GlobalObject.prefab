@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 4438696786475770785}
   - component: {fileID: 347431681967975084}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Global Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1014,7 +1014,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31259e7d32fbe2944b781f2426cf7258, type: 2}
   m_commonColors:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0, g: 0.6862745, b: 1, a: 1}
+  - {r: 0.8980392, g: 0.7921569, b: 0.6313726, a: 1}
+  - {r: 0.5137255, g: 0.6156863, b: 0.7372549, a: 1}
+  - {r: 0.48235294, g: 0.7647059, b: 0.5647059, a: 1}
   m_commonMusics:
   - {fileID: 8300000, guid: 42e0a74a90369d5449e0c24171e7f820, type: 3}
   m_commonProps:
