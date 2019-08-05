@@ -83,16 +83,6 @@ namespace PPBC {
             }
             value.p_props = PJSONs.ToArray();
 
-            StringList.Clear();
-            foreach(var it in this.p_forgrounds) {
-                StringList.Add(it.name + ".png");
-                byte[] png = it.texture.EncodeToPNG();
-                File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + it.name + ".png", png);
-            }
-            value.p_forgrounds = StringList.ToArray();
-
-            value.m_ballSpawn = this.m_ballSpawn;
-
             value.m_icon = "icon.png";
             byte[] pngShot = ScreenshotCam.TakeScreenShot();
             //byte[] pngShot = ScreenshotCam.ScreenShotRipOff();
@@ -108,7 +98,7 @@ namespace PPBC {
             value.m_data = this.m_data;
 
             StreamWriter saveFile = File.CreateText(StringCollection.P_MAPPARH + this.name + "/" + this.name + ".map");
-            saveFile.Write(JsonUtility.ToJson(value));
+            saveFile.Write(JsonUtility.ToJson(value, true));
             saveFile.Close();
         }
 
@@ -183,16 +173,10 @@ namespace PPBC {
                 PropData element = new PropData();
                 element.m_image = LoadSprite(path, it.m_image, 200);
                 element.m_collider = it.m_collider;
+                pdata.Add(element);
             }
             this.p_props = pdata.ToArray();
 
-            spriteList.Clear();
-            foreach(var it in value.p_forgrounds) {
-                spriteList.Add(LoadSprite(path, it, 200));
-            }
-            this.p_forgrounds = spriteList.ToArray();
-
-            this.m_ballSpawn = value.m_ballSpawn;
             this.m_background = value.m_background;
             this.m_globalLight = value.m_globalLight;
             this.m_music = value.m_music;
@@ -219,10 +203,6 @@ namespace PPBC {
             original.p_stages.CopyTo(this.p_stages, 0);
             this.p_props = new PropData[original.p_props.Length];
             original.p_props.CopyTo(this.p_stages, 0);
-            this.p_forgrounds = new Sprite[original.p_forgrounds.Length];
-            original.p_forgrounds.CopyTo(this.p_forgrounds, 0);
-
-            this.m_ballSpawn = original.m_ballSpawn;
             this.m_icon = original.m_icon;
             this.m_name = original.m_name;
 
@@ -300,9 +280,7 @@ namespace PPBC {
 
         public Sprite[] p_stages;
         public PropData[] p_props;
-        public Sprite[] p_forgrounds;
 
-        public Vector2 m_ballSpawn;
         public Sprite m_icon;
         public string m_name;
 
@@ -324,9 +302,7 @@ namespace PPBC {
 
         public string[] p_stages;
         public PropJSON[] p_props;
-        public string[] p_forgrounds;
 
-        public Vector2 m_ballSpawn;
         public string m_icon;
         public string m_name;
 
