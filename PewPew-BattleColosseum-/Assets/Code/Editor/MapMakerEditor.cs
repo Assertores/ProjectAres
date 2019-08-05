@@ -45,7 +45,7 @@ namespace PPBC {
                     value.m_name = myTarget.m_name;
                 }
 
-                byte[] pngShot = ScreenshotCam.TakeScreenShot().EncodeToPNG();
+                byte[] pngShot = ScreenshotCam.TakeScreenShot();
                 File.WriteAllBytes("Assets/Prefabs/Map/m_" + value.m_name + "_icon.png", pngShot);
 
                 if(!mapExists)
