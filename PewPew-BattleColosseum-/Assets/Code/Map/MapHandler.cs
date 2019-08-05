@@ -376,13 +376,13 @@ namespace PPBC {
                 } else {//common
                     ren.sprite = DataHolder.s_commonStages[obj.index];
                 }
-                break;
+                break;*/
             case e_objType.LASERSPAWN:
                 tmp = Instantiate(DataHolder.s_commonLaserSpawner, obj.position, Quaternion.Euler(Vector3.zero));
                 tmp.GetComponent<LaserSpawner>().Init(obj.index);
                 //tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
                 break;
-            case e_objType.FLAG:
+            /*case e_objType.FLAG:
                 break;
             case e_objType.BASKETHOOP:
                 break;*/
