@@ -186,7 +186,7 @@ namespace PPBC {
                     if (false)//gamemodes eintragen
                         continue;
                     break;
-                case e_objType.FLAG:
+                /*case e_objType.FLAG:
                     if (name == StringCollection.M_FFA ||
                         name == StringCollection.M_TDM)
                         continue;
@@ -195,7 +195,7 @@ namespace PPBC {
                     if (name == StringCollection.M_FFA ||
                         name == StringCollection.M_TDM)
                         continue;
-                    break;
+                    break;*/
                 default:
                     break;
                 }
@@ -357,7 +357,7 @@ namespace PPBC {
                     tmp.GetComponentInChildren<Light>().color = DataHolder.s_commonColors[obj.index];
                 }
                 break;
-            case e_objType.FORGROUND:
+            /*case e_objType.FORGROUND:
                 if (obj.index < -s_refMap.p_stages.Length || obj.index >= DataHolder.s_commonStages.Length)
                     return null;
 
@@ -385,7 +385,7 @@ namespace PPBC {
             case e_objType.FLAG:
                 break;
             case e_objType.BASKETHOOP:
-                break;
+                break;*/
             default:
                 return null;
             }

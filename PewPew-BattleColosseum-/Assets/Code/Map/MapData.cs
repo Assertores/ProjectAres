@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine.Networking;
 
 namespace PPBC {
-    public enum e_objType { BACKGROUND = 0, STAGE, PROP, LASERSPAWN, SPAWNPOINT, FLAG, BASKETHOOP, FORGROUND, LIGHT, GLOBALLIGHT, MUSIC, SIZE, ENUMLENGTH }
+    public enum e_objType { BACKGROUND = 0, STAGE, PROP, LASERSPAWN, SPAWNPOINT, LIGHT, GLOBALLIGHT, MUSIC, SIZE, ENUMLENGTH }
 
     [System.Serializable]
     public struct d_mapData {

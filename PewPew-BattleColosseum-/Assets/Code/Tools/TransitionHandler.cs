@@ -105,7 +105,6 @@ namespace PPBC {
             if (DataHolder.s_modis[DataHolder.s_currentModi].m_isTeamMode) {
                 List<Player> teamA = Player.s_references.FindAll(x => x.m_team == 0);
                 List<Player> teamB = Player.s_references.FindAll(x => x.m_team == 1);
-                //*
                 if (teamA.Count == 2 && teamB.Count == 2) {
                     animRef = r_team2v2;
                 } else if (teamA.Count == 3 && teamB.Count == 1) {
@@ -139,54 +138,7 @@ namespace PPBC {
                         it.color = color;
                     }
                 }
-                /*/
-                if(teamA.Count == 2 && teamB.Count == 2) {
-                    animRef = r_team2v2;
-
-                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
-                    animRef.r_p2.sprite = teamA[1].m_modelRef.m_icon;
-                    animRef.r_p3.sprite = teamB[0].m_modelRef.m_icon;
-                    animRef.r_p4.sprite = teamB[1].m_modelRef.m_icon;
-                } else if(teamA.Count == 3 && teamB.Count == 1) {
-                    animRef = r_team3v1;
-
-                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
-                    animRef.r_p2.sprite = teamA[1].m_modelRef.m_icon;
-                    animRef.r_p3.sprite = teamA[2].m_modelRef.m_icon;
-                    animRef.r_p4.sprite = teamB[1].m_modelRef.m_icon;
-                } else if(teamA.Count == 1 && teamB.Count == 3) {
-                    animRef = r_team1v3;
-
-                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
-                    animRef.r_p2.sprite = teamB[0].m_modelRef.m_icon;
-                    animRef.r_p3.sprite = teamB[1].m_modelRef.m_icon;
-                    animRef.r_p4.sprite = teamB[2].m_modelRef.m_icon;
-                } else if(teamA.Count == 1 && teamB.Count == 2) {
-                    animRef = r_team1v2;
-
-                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
-                    animRef.r_p2.sprite = teamB[0].m_modelRef.m_icon;
-                    animRef.r_p3.sprite = teamB[1].m_modelRef.m_icon;
-                } else if(teamA.Count == 2 && teamB.Count == 1) {
-                    animRef = r_team2v1;
-
-                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
-                    animRef.r_p2.sprite = teamA[1].m_modelRef.m_icon;
-                    animRef.r_p3.sprite = teamB[0].m_modelRef.m_icon;
-                } else if(teamA.Count == 1 && teamB.Count == 1) {
-                    animRef = r_team1v1;
-
-                    animRef.r_p1.sprite = teamA[0].m_modelRef.m_icon;
-                    animRef.r_p2.sprite = teamB[0].m_modelRef.m_icon;
-                }
-
-                if (animRef) {
-                    animRef.r_p1Background.color = DataHolder.s_teamColors[0];
-                    animRef.r_p2Background.color = DataHolder.s_teamColors[1];
-                }
-                //*/
             } else {
-                //*
                 switch (Player.s_references.Count) {
                 case 2:
                     animRef = r_ffa2;
@@ -209,42 +161,6 @@ namespace PPBC {
                         it.color = color;
                     }
                 }
-                /*/
-                switch (Player.s_references.Count) {
-                case 2:
-                    animRef = r_ffa2;
-
-                    animRef.r_p1.sprite = Player.s_references[0].m_modelRef.m_icon;
-                    animRef.r_p1Background.color = Player.s_references[0].GetPlayerColor();
-                    animRef.r_p2.sprite = Player.s_references[1].m_modelRef.m_icon;
-                    animRef.r_p2Background.color = Player.s_references[1].GetPlayerColor();
-                    break;
-                case 3:
-                    animRef = r_ffa3;
-
-                    animRef.r_p1.sprite = Player.s_references[0].m_modelRef.m_icon;
-                    animRef.r_p1Background.color = Player.s_references[0].GetPlayerColor();
-                    animRef.r_p2.sprite = Player.s_references[1].m_modelRef.m_icon;
-                    animRef.r_p2Background.color = Player.s_references[1].GetPlayerColor();
-                    animRef.r_p3.sprite = Player.s_references[2].m_modelRef.m_icon;
-                    animRef.r_p3Background.color = Player.s_references[2].GetPlayerColor();
-                    break;
-                case 4:
-                    animRef = r_ffa4;
-
-                    animRef.r_p1.sprite = Player.s_references[0].m_modelRef.m_icon;
-                    animRef.r_p1Background.color = Player.s_references[0].GetPlayerColor();
-                    animRef.r_p2.sprite = Player.s_references[1].m_modelRef.m_icon;
-                    animRef.r_p2Background.color = Player.s_references[1].GetPlayerColor();
-                    animRef.r_p3.sprite = Player.s_references[2].m_modelRef.m_icon;
-                    animRef.r_p3Background.color = Player.s_references[2].GetPlayerColor();
-                    animRef.r_p4.sprite = Player.s_references[3].m_modelRef.m_icon;
-                    animRef.r_p4Background.color = Player.s_references[3].GetPlayerColor();
-                    break;
-                default:
-                    break;
-                }
-                //*/
             }
 
             animRef.r_name.text = DataHolder.s_modis[DataHolder.s_currentModi].m_name;
