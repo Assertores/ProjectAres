@@ -8,6 +8,8 @@ namespace PPBC {
         public static MapHandler s_singelton;
         public static MapData s_refMap { get; private set; }
 
+        public RenderTexture m_debugTexture;
+
         #region Variables
 
         [Header("References")]
