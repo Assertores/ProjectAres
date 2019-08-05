@@ -72,8 +72,8 @@ namespace PPBC {
             }
 
             //--> everything is available <--
-
-            m_lightColor = DataHolder.s_dirLight.color;
+            
+            m_lightColor = DataHolder.s_dirLight.color;//somehow light color is black
 
             if (DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
                 if(DataHolder.s_currentModi == -1)
@@ -87,7 +87,7 @@ namespace PPBC {
         private void OnDestroy() {
             if(s_singelton == this) {
                 s_singelton = null;
-                DataHolder.s_dirLight.color = m_lightColor;
+                DataHolder.s_dirLight.color = DataHolder.s_commonColors[0]; //m_lightColor;//color is black for some reason
             }
         }
 
