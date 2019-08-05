@@ -61,7 +61,8 @@ namespace PPBC {
 
             m_startChargeTime = Time.time;
             m_charging = true;
-            
+
+            m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_CHARGING, true);
         }
 
         public void StopShooting() {
@@ -80,6 +81,9 @@ namespace PPBC {
             }
 
             m_owner.m_modelRef?.m_rocket.r_weapon.SetActive(toMe);
+
+            m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_CHANGE, false);
+            m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.AddAnimation(0, StringCollection.AR_IDLE, true, 0);
         }
 
         public float GetStamina() {
@@ -109,10 +113,14 @@ namespace PPBC {
             }
 
             m_owner.m_rb.AddForce(-m_owner.m_modelRef.m_rocket.r_weapon.transform.right * m_owner.m_rocket.m_muzzleEnergy, ForceMode2D.Impulse);
+
+            m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_SHOOT, false);
+            m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.AddAnimation(0, StringCollection.AR_IDLE, true, 0);
         }
 
         void Overcharged() {
             Instantiate(m_owner.m_modelRef.m_rocket.p_explosion, m_owner.m_modelRef.m_rocket.r_barrel.position, m_owner.m_modelRef.m_rocket.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);
+            m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_IDLE, true);
         }
     }
 }

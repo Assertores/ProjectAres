@@ -79,7 +79,8 @@ namespace PPBC {
 
         public void StopShooting() {
             m_shootng = false;
-            
+
+            m_owner.m_modelRef.m_sMG.r_sMGAnim.AnimationState.SetAnimation(0, StringCollection.AS_IDLE, true);
         }
 
         public void ChangeWeapon(bool toMe) {
@@ -90,6 +91,7 @@ namespace PPBC {
             }
 
             m_owner.m_modelRef?.m_sMG.r_weapon.SetActive(toMe);
+            m_owner.m_modelRef.m_sMG.r_sMGAnim.AnimationState.SetAnimation(0, StringCollection.AS_CHANGE, false);
         }
 
         public float GetStamina() {
@@ -113,6 +115,8 @@ namespace PPBC {
                 //m_owner.m_modelRef.fx_WeaponAudio.volume = Random.Range(m_startVolume - srh.m_halfVolumeRange, m_startVolume + srh.m_halfVolumeRange);
                 m_owner.m_modelRef.fx_WeaponAudio.PlayOneShot(m_owner.m_modelRef.m_sMG.m_sounds[Random.Range(0, m_owner.m_modelRef.m_sMG.m_sounds.Length)]);
             }
+
+            m_owner.m_modelRef.m_sMG.r_sMGAnim.AnimationState.SetAnimation(0, StringCollection.AS_SHOOT, false);
         }
     }
 }
