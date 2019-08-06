@@ -7,6 +7,8 @@ namespace PPBC {
 
         #region Variables
 
+        [SerializeField] AudioClip m_shootSound;
+
         float m_startChargeTime = float.MinValue;
         public float m_stamina { get; private set; } = 0;
 
@@ -114,6 +116,8 @@ namespace PPBC {
             }
 
             m_owner.m_rb.AddForce(-m_owner.m_modelRef.m_rocket.r_weapon.transform.right * m_owner.m_rocket.m_muzzleEnergy, ForceMode2D.Impulse);
+
+            m_owner.m_modelRef.fx_WeaponAudio.PlayOneShot(m_shootSound);
 
             m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_SHOOT, false);
             m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.AddAnimation(0, StringCollection.AR_IDLE, true, 0);

@@ -883,6 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b37b8524340764eaaddb18e9d5a21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_shootSound: {fileID: 8300000, guid: 8f46b2e355e8d40409617f5cb58ef45f, type: 3}
 --- !u!70 &271708082470901396
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
