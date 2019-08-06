@@ -869,6 +869,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab37b8bd4ecaab42989e283dbaa3565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_cooldown: {fileID: 8300000, guid: 9de044058183b5649b80959bc35b7510, type: 3}
+  m_overheat: {fileID: 8300000, guid: 9636938a0c406ec429c1a309e60f20c9, type: 3}
 --- !u!114 &5245385892947505954
 MonoBehaviour:
   m_ObjectHideFlags: 0
