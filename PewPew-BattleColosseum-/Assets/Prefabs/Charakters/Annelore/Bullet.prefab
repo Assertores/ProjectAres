@@ -275,7 +275,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.161
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -294,23 +294,23 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.002
+      time: 0
       value: 1
-      inSlope: -0.00000057162777
-      outSlope: -0.00000057162777
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0.104480736
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1.002
-      inSlope: -0.002000801
-      outSlope: -0.002000801
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -334,7 +334,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.2777778
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -379,15 +379,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4597775431430855174}
     m_Modifications:
-    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4704396094684868177, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}
       propertyPath: m_Name
       value: SMG_WALLHIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059086260739660868, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5300036958407268441, guid: 5373deba5df47eb47a8bc4a9352ec7cc,
         type: 3}

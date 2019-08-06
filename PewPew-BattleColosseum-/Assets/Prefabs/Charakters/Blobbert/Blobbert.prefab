@@ -1190,6 +1190,21 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7449261870763519670, guid: 192d7c32744c9c14d9c23404c6912454,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449261870763519670, guid: 192d7c32744c9c14d9c23404c6912454,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.2777778
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449261870763519670, guid: 192d7c32744c9c14d9c23404c6912454,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 192d7c32744c9c14d9c23404c6912454, type: 3}
 --- !u!1 &3456936071581135995 stripped

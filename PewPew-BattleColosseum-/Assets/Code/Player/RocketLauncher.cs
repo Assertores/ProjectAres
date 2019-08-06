@@ -122,6 +122,8 @@ namespace PPBC {
         }
 
         void Overcharged() {
+            m_lastShot = Time.time;
+
             Instantiate(m_owner.m_modelRef.m_rocket.p_explosion, m_owner.m_modelRef.m_rocket.r_barrel.position, m_owner.m_modelRef.m_rocket.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);
             m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_IDLE, true);
             print("B");
