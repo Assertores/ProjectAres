@@ -7,6 +7,9 @@ namespace PPBC {
 
         #region Variables
 
+        [SerializeField] AudioClip m_cooldown;
+        [SerializeField] AudioClip m_overheat;
+
         float m_lastShot = float.MinValue;
         public float m_stamina { get; private set; } = 0;
         GameObject Vfx_muzzleflash;
@@ -30,6 +33,7 @@ namespace PPBC {
                 if (m_stamina > m_owner.m_sMG.m_shootForSec) {
                     m_forceCooldown = true;
                     m_shootng = false;
+                    m_owner.m_modelRef.fx_WeaponAudio.PlayOneShot(m_overheat);
                 }
             } else {
                 if(m_stamina > 0) {
@@ -37,6 +41,9 @@ namespace PPBC {
 
                     if (m_stamina < 0) {
                         m_stamina = 0;
+                        if(m_forceCooldown)
+                            m_owner.m_modelRef.fx_WeaponAudio.PlayOneShot(m_cooldown);
+
                         m_forceCooldown = false;
                     }
                 }
