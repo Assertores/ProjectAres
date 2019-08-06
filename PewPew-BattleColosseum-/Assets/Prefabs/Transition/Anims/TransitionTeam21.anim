@@ -11067,7 +11067,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: CharacterIconLeft
+    path: TransitionNametag
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11077,7 +11077,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: CharacterIconLeft
+    path: TransitionNametag
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11087,7 +11087,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: CharacterIconLeft
+    path: TransitionNametag
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11157,7 +11157,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: TransitionNametag
+    path: CharacterIconLeft
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11167,7 +11167,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: TransitionNametag
+    path: CharacterIconLeft
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -11177,7 +11177,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: TransitionNametag
+    path: CharacterIconLeft
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
