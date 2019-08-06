@@ -1848,8 +1848,8 @@ MonoBehaviour:
   - r_backgrounds: []
     r_character: {fileID: 1093267372174857611}
     r_charName: {fileID: 0}
-  r_name: {fileID: 0}
-  r_flavour: {fileID: 0}
+  r_name: {fileID: 2313465135411458077}
+  r_flavour: {fileID: 1830427521985417902}
 --- !u!114 &1357254461269535446
 MonoBehaviour:
   m_ObjectHideFlags: 0

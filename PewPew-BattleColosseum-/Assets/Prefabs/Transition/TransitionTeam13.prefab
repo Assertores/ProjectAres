@@ -403,7 +403,7 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1515,7 +1515,7 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1931,8 +1931,8 @@ MonoBehaviour:
   - r_backgrounds: []
     r_character: {fileID: 8731294768233212787}
     r_charName: {fileID: 0}
-  r_name: {fileID: 0}
-  r_flavour: {fileID: 0}
+  r_name: {fileID: 7015874665618196989}
+  r_flavour: {fileID: 6121871007965941042}
 --- !u!114 &3325998000159517220
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1930,8 +1930,8 @@ MonoBehaviour:
     - {fileID: 4986645567339063808}
     r_character: {fileID: 708425480529971790}
     r_charName: {fileID: 0}
-  r_name: {fileID: 0}
-  r_flavour: {fileID: 0}
+  r_name: {fileID: 1216639003559522751}
+  r_flavour: {fileID: 1164701339666680303}
 --- !u!114 &7758239286744316260
 MonoBehaviour:
   m_ObjectHideFlags: 0
