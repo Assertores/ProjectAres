@@ -183,16 +183,16 @@ namespace PPBC {
 
             switch (m_type) {
             case e_objType.BACKGROUND:
-                m_rawIndex = MapHandler.s_refMap.m_background;
+                m_rawIndex = MapHandler.s_singelton.m_backgroundIndex;
                 break;
             case e_objType.GLOBALLIGHT:
-                m_rawIndex = MapHandler.s_refMap.m_globalLight;
+                m_rawIndex = MapHandler.s_singelton.m_directionalLightIndex;
                 break;
             case e_objType.MUSIC:
-                m_rawIndex = MapHandler.s_refMap.m_music;
+                m_rawIndex = MapHandler.s_singelton.m_backgroundAudioIndex;
                 break;
             case e_objType.SIZE:
-                m_rawIndex = MapHandler.s_refMap.m_size;
+                m_rawIndex = MapHandler.s_singelton.m_cameraSizeIndex;
                 break;
             default:
                 m_rawIndex = 0;//everytime you change type it resets the index to 0

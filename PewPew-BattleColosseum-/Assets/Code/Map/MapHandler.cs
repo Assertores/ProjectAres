@@ -14,11 +14,11 @@ namespace PPBC {
 
         [Header("References")]
         BoxCollider2D m_cameraSize;
-        int m_cameraSizeIndex;
-        int m_backgroundAudioIndex;
+        public int m_cameraSizeIndex { get; private set; }
+        public int m_backgroundAudioIndex { get; private set; }
         [SerializeField] SpriteRenderer m_background;
-        int m_backgroundIndex;
-        int m_directionalLightIndex;
+        public int m_backgroundIndex { get; private set; }
+        public int m_directionalLightIndex { get; private set; }
         [SerializeField] Transform m_levelHolder;
         [SerializeField] GameObject m_lightPrefab;
         [SerializeField] GameObject m_ObjectInteractPrefab;
