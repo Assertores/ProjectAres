@@ -2118,7 +2118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd2bd39fc4e5cf4d981b080278c3590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_beamSound: {fileID: 8300000, guid: 9df21c5939948c046b525f04aa8b5613, type: 3}
+  m_beamSound: {fileID: 8300000, guid: 0f385bef7c87e5d4780a4c7df329300c, type: 3}
   m_delay: 3
 --- !u!111 &520179368
 Animation:
