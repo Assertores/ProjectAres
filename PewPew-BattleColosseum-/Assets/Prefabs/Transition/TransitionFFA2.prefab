@@ -1772,11 +1772,11 @@ MonoBehaviour:
   - r_backgrounds:
     - {fileID: 7251976455690842351}
     r_character: {fileID: 3219358307947986946}
-    r_charName: {fileID: 0}
+    r_charName: {fileID: 1140706547343302738}
   - r_backgrounds:
     - {fileID: 4986645567339063808}
     r_character: {fileID: 8731294768233212787}
-    r_charName: {fileID: 0}
+    r_charName: {fileID: 8520263915798042120}
   r_name: {fileID: 479558860753793569}
   r_flavour: {fileID: 3866590787013684116}
 --- !u!1 &8429730069897270049
@@ -2022,17 +2022,7 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
-        type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410268893947076918, guid: 6bc03a960ae7c204783010168c3974ea,
+    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
@@ -2042,7 +2032,17 @@ PrefabInstance:
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
+    - target: {fileID: 5410268893947076918, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
