@@ -808,6 +808,9 @@ MonoBehaviour:
   r_respawnLogic: {fileID: 5212051754545285008}
   r_dieLogic: {fileID: 2143134950089849311}
   r_iFrame: {fileID: 6586910988821748866}
+  m_death: {fileID: 8300000, guid: 2a4dc209fd5deb34c99f34a24304bf86, type: 3}
+  m_deathLaser: {fileID: 8300000, guid: c45f7bd980c87404e859380e40bcadce, type: 3}
+  m_deathShockwave: {fileID: 8300000, guid: e753b658678ecee4ea0a0cc8d1da6b88, type: 3}
   r_plusOneAnim: {fileID: 6299461937318211276}
   r_minusOneAnim: {fileID: 3084280794737149416}
   m_maxHealth: 100

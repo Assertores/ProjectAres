@@ -82,6 +82,9 @@ namespace PPBC {
         [SerializeField] Animation r_respawnLogic;
         [SerializeField] Animation r_dieLogic;
         [SerializeField] Animation r_iFrame;
+        [SerializeField] AudioClip m_death;
+        [SerializeField] AudioClip m_deathLaser;
+        [SerializeField] AudioClip m_deathShockwave;
 
         public Animation r_plusOneAnim;
         public Animation r_minusOneAnim;
@@ -574,7 +577,14 @@ namespace PPBC {
         }
 
         public void DoDieSFX() {
+            if (m_killerType == e_HarmingObjectType.LASOR || m_killerType == e_HarmingObjectType.DEATHZONE) {
+                m_modelRef.fx_ModelAudio.PlayOneShot(m_deathLaser);
 
+            } else if (m_killerType == e_HarmingObjectType.SHOCKWAVE) {
+                m_modelRef.fx_ModelAudio.PlayOneShot(m_deathShockwave);
+            } else {
+                m_modelRef.fx_ModelAudio.PlayOneShot(m_death);
+            }
         }
 
         #region Control stuff
