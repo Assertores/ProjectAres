@@ -33,7 +33,7 @@ namespace PPBC {
             List<BackgroundJSON> BGJSONs = new List<BackgroundJSON>();
             foreach (var it in this.p_backgrounds) {
                 BackgroundJSON element = new BackgroundJSON();
-                element.m_image = it.m_image.name + ".png";
+                element.m_image = it.m_image.name;
                 byte[] png = it.m_image.texture.EncodeToPNG();
                 File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + element.m_image, png);
 
@@ -52,13 +52,13 @@ namespace PPBC {
 
             StringList.Clear();
             foreach(var it in this.p_musics) {
-                StringList.Add(it.name + ".wav");
+                StringList.Add(it.name);
 
-                float[] wav = new float[it.samples * it.channels];
-                it.GetData(wav, 0);//https://docs.unity3d.com/ScriptReference/AudioClip.GetData.html
-                byte[] bwav = new byte[wav.Length * 4];
-                System.Buffer.BlockCopy(wav,0,bwav,0,bwav.Length);
-                File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + it.name + ".wav", bwav);
+                float[] ogg = new float[it.samples * it.channels];
+                it.GetData(ogg, 0);//https://docs.unity3d.com/ScriptReference/AudioClip.GetData.html
+                byte[] bogg = new byte[ogg.Length * 4];
+                System.Buffer.BlockCopy(ogg,0,bogg,0,bogg.Length);
+                File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + it.name, bogg);
             }
             value.p_musics = StringList.ToArray();
 
@@ -66,14 +66,14 @@ namespace PPBC {
             foreach(var it in this.p_stages) {
                 StringList.Add(it.name + ".png");
                 byte[] png = it.texture.EncodeToPNG();
-                File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + it.name + ".png", png);
+                File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + it.name, png);
             }
             value.p_stages = StringList.ToArray();
 
             List<PropJSON> PJSONs = new List<PropJSON>();
             foreach(var it in this.p_props) {
                 PropJSON element = new PropJSON();
-                element.m_image = it.m_image.name + ".png";
+                element.m_image = it.m_image.name;
                 byte[] png = it.m_image.texture.EncodeToPNG();
                 File.WriteAllBytes(StringCollection.P_MAPPARH + this.name + "/" + element.m_image, png);
 
@@ -157,7 +157,7 @@ namespace PPBC {
                 if (!tmpMusic) {
                     continue;
                 }
-                tmpMusic.name = Path.GetFileNameWithoutExtension(it);
+                tmpMusic.name = Path.GetFileName(it);
                 ac.Add(tmpMusic);
             }
             this.p_musics = ac.ToArray();
@@ -202,7 +202,7 @@ namespace PPBC {
             this.p_stages = new Sprite[original.p_stages.Length];
             original.p_stages.CopyTo(this.p_stages, 0);
             this.p_props = new PropData[original.p_props.Length];
-            original.p_props.CopyTo(this.p_stages, 0);
+            original.p_props.CopyTo(this.p_props, 0);
             this.m_icon = original.m_icon;
             this.m_name = original.m_name;
 
@@ -230,12 +230,15 @@ namespace PPBC {
             this.m_size = value.m_size;
 
             this.m_booted = e_loadedType.SHALLOW;
+
+            EditBoot();
         }
 
         static Sprite LoadSprite(string path, string name, int PPU = 512) {
             WWW tmp = new WWW("file:///" + path + name);
             while (!tmp.isDone) ;
             if (tmp == null) {
+                Debug.Log("A");
                 return null;
             }
             if (tmp.error != null) {
@@ -244,29 +247,16 @@ namespace PPBC {
             }
             Texture2D tmpTex = tmp.texture;
             if (!tmpTex) {
+                Debug.Log("B");
                 return null;
             }
-            Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width / 2, tmpTex.height / 2), PPU);
+            Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(0.5f,0.5f), PPU);
             if (!value) {
+                Debug.Log("C");
                 return null;
             }
             value.name = name;
             return value;
-        }
-
-        IEnumerator IELoadSprite(Sprite value, string path, string name, int PPU = 512) {
-            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture("file:///" + path + name)) {
-
-                yield return uwr.SendWebRequest();
-
-                if (uwr.isNetworkError || uwr.isHttpError) {
-                    Debug.Log(uwr.error);
-                } else {
-                    // Get downloaded asset bundle
-                    var tmpTex = DownloadHandlerTexture.GetContent(uwr);
-                    value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width / 2, tmpTex.height / 2), PPU);
-                }
-            }
         }
 
         e_loadedType m_booted = e_loadedType.EDITABLE;
