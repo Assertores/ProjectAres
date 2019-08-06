@@ -724,7 +724,8 @@ namespace PPBC {
             } else {
                 m_controler.Accept -= GoIntoEditMode;
 
-                StopEdit();
+                m_editHud.gameObject.SetActive(true);
+                GoIntoEditMode();
                 if (m_editHud)
                     Destroy(m_editHud.gameObject);
             }
