@@ -125,6 +125,7 @@ namespace PPBC {
             foreach (var it in Player.s_references) {
                 it.InControle(false);
                 it.ResetVelocity();
+                it.Respawn(transform.position);
             }
         }
 

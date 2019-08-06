@@ -168,6 +168,7 @@ namespace PPBC {
                 if(m_hightPerKill * it.m_stats.m_points > it.transform.position.y - r_leftMostPlayer.position.y) {
                     PositionPlayer(it, it.transform.position + new Vector3(0, m_pillarSpeed * Time.deltaTime, 0), Mathf.RoundToInt((it.transform.position.y - r_leftMostPlayer.position.y) / m_hightPerKill));
                 }
+                it.InControle(false);
             }
         }
 
@@ -276,6 +277,9 @@ namespace PPBC {
         }
 
         IEnumerator IEContinue() {
+            foreach (var it in Player.s_references){
+                it.InControle(true);
+            }
             Timer.StartTimer(m_timeToReturn);
             yield return new WaitForSeconds(m_timeToReturn);
             TransitionHandler.StartOutTransition();
