@@ -250,43 +250,13 @@ namespace PPBC {
                 Debug.Log("B");
                 return null;
             }
-            Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width / 2, tmpTex.height / 2), PPU);
+            Sprite value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(0.5f,0.5f), PPU);
             if (!value) {
                 Debug.Log("C");
                 return null;
             }
-            Debug.Log(value.texture.width + ":" + value.texture.height);
             value.name = name;
             return value;
-        }
-
-        static Sprite LoadSpriteNew(string path, string name, int PPU = 512){
-            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture("file:///" + path + name)){
-                while (!uwr.isDone) ;
-                if (uwr.isNetworkError || uwr.isHttpError) {
-                    Debug.Log(uwr.error);
-                    return null;
-                } else {
-                    // Get downloaded asset bundle
-                    var tmpTex = DownloadHandlerTexture.GetContent(uwr);
-                    return Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width / 2, tmpTex.height / 2), PPU);
-                }
-            }
-        }
-
-        IEnumerator IELoadSprite(Sprite value, string path, string name, int PPU = 512) {
-            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture("file:///" + path + name)) {
-
-                yield return uwr.SendWebRequest();
-
-                if (uwr.isNetworkError || uwr.isHttpError) {
-                    Debug.Log(uwr.error);
-                } else {
-                    // Get downloaded asset bundle
-                    var tmpTex = DownloadHandlerTexture.GetContent(uwr);
-                    value = Sprite.Create(tmpTex, new Rect(0, 0, tmpTex.width, tmpTex.height), new Vector2(tmpTex.width / 2, tmpTex.height / 2), PPU);
-                }
-            }
         }
 
         e_loadedType m_booted = e_loadedType.EDITABLE;
