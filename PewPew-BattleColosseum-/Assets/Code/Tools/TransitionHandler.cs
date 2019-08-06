@@ -124,7 +124,9 @@ namespace PPBC {
 
                 for (int i = 0; i < teamA.Count; i++) {
                     animRef.r_chars[i].r_character.sprite = teamA[i].m_modelRef.m_icon;
-                    animRef.r_chars[i].r_charName.text = teamA[i].m_modelRef.m_name;
+                    if(animRef.r_chars[i].r_charName)
+                        animRef.r_chars[i].r_charName.text = teamA[i].m_modelRef.m_name;
+
                     Color color = teamA[i].GetPlayerColor();
                     foreach (var it in animRef.r_chars[i].r_backgrounds) {
                         it.color = color;
@@ -132,7 +134,9 @@ namespace PPBC {
                 }
                 for(int i = 0; i < teamB.Count; i++) {
                     animRef.r_chars[i + teamA.Count].r_character.sprite = teamA[i].m_modelRef.m_icon;
-                    animRef.r_chars[i + teamA.Count].r_charName.text = teamA[i].m_modelRef.m_name;
+                    if (animRef.r_chars[i].r_charName)
+                        animRef.r_chars[i + teamA.Count].r_charName.text = teamA[i].m_modelRef.m_name;
+
                     Color color = teamA[i].GetPlayerColor();
                     foreach (var it in animRef.r_chars[i + teamA.Count].r_backgrounds) {
                         it.color = color;
@@ -155,7 +159,9 @@ namespace PPBC {
                 }
                 for (int i = 0; i < Player.s_references.Count; i++) {
                     animRef.r_chars[i].r_character.sprite = Player.s_references[i].m_modelRef.m_icon;
-                    animRef.r_chars[i].r_charName.text = Player.s_references[i].m_modelRef.m_name;
+                    if (animRef.r_chars[i].r_charName)
+                        animRef.r_chars[i].r_charName.text = Player.s_references[i].m_modelRef.m_name;
+
                     Color color = Player.s_references[i].GetPlayerColor();
                     foreach(var it in animRef.r_chars[i].r_backgrounds) {
                         it.color = color;
