@@ -187,6 +187,7 @@ namespace PPBC {
                 }
             } else {//Air
                 if (currentAnim == null || currentAnim == StringCollection.A_IDLE) {
+                    print(currentAnim);
                     StartAnim(StringCollection.A_IDLEAIR, true);
                 }
             }
@@ -667,7 +668,7 @@ namespace PPBC {
             if (!m_modelRef || !m_modelRef.r_modelAnim || m_modelRef.r_modelAnim.state.GetCurrent(0) == null)
                 return null;
 
-            return m_modelRef.r_modelAnim.state.GetCurrent(0).IsComplete ? null : m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
+            return !m_modelRef.r_modelAnim.state.GetCurrent(0).loop && m_modelRef.r_modelAnim.state.GetCurrent(0).IsComplete ? null : m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
         }
 
         public Color GetPlayerColor() {
