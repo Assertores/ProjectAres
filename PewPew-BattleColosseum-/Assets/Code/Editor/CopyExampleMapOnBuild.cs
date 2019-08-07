@@ -18,7 +18,7 @@ namespace PPBC {
         public int callbackOrder => 0;
 
         public void OnPostprocessBuild(BuildTarget target, string path) {
-            string dir = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path) + "_Data", "MAP");
+            string dir = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path) + "_Data", "MAP", "Example");
 
             Directory.CreateDirectory(dir);
 

@@ -276,6 +276,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0df027535ad154cb33b7b220197dba, type: 3}
+--- !u!82 &1546609766 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8487445268997914367, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8890603213896496574}
+  m_PrefabAsset: {fileID: 0}
 --- !u!222 &109906265606315580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -499,7 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   r_curtain: {fileID: 4388541742920105803}
   SFX_rattle: {fileID: 8300000, guid: 475dad6956ad3554b8d0e4329e79bcf4, type: 3}
-  SFX_impact: {fileID: 8300000, guid: 7bb5ddd896d709246a842d2824ab8e49, type: 3}
+  SFX_impact: {fileID: 8300000, guid: 70f51b8edad742f44ad9a3835ef2f548, type: 3}
   SFX_pullUp: {fileID: 8300000, guid: 15758d88333490b4695ac869a53b5d9c, type: 3}
   SFX_hum: {fileID: 8300000, guid: 8d9cce22ef876864caa45a8956a12c7b, type: 3}
 --- !u!82 &4388541742920105803
@@ -514,7 +520,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7bb5ddd896d709246a842d2824ab8e49, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.687
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -911,22 +917,22 @@ PrefabInstance:
     - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
         type: 3}
       propertyPath: m_TargetAudioSources.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
         type: 3}
       propertyPath: m_DirectAudioVolumes.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
         type: 3}
       propertyPath: m_EnabledAudioTracks.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
         type: 3}
       propertyPath: m_DirectAudioMutes.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
         type: 3}
@@ -937,13 +943,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: bc84c9e00d060a6498ddeec674483ebc,
+      objectReference: {fileID: 32900000, guid: 22caac7785bb3914e9deba7a40430e5e,
         type: 3}
     - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
         type: 3}
       propertyPath: m_ControlledAudioTrackCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+        type: 3}
+      propertyPath: m_TargetAudioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 1546609766}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d769bb24f134ad488b1f13caeaccc2b, type: 3}
 --- !u!1 &9095079909972167163

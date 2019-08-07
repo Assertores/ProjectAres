@@ -21,6 +21,9 @@ namespace PPBC {
                     Dictionary<Player, int> m_teams = new Dictionary<Player, int>();
                     foreach(var it in Player.s_references) {
                         m_teams[it] = it.m_team;
+                        it.InControle(false);
+                        it.SetPlayerActive(false);
+                        it.m_team = m_teams[it];
                     }
                     if (MatchManager.s_currentMatch.m_teamHolder != null && MatchManager.s_currentMatch.m_teamHolder.Count == 0) {
                         MatchManager.s_currentMatch.m_teamHolder = m_teams;

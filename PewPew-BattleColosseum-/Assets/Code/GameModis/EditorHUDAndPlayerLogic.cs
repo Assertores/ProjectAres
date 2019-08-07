@@ -264,11 +264,11 @@ namespace PPBC {
                 max = DataHolder.s_commonStages.Length;
                 min = MapHandler.s_refMap.p_stages.Length;
                 break;
-            case e_objType.LIGHT:
+            /*case e_objType.LIGHT:
                 max = DataHolder.s_commonColors.Length;
                 min = MapHandler.s_refMap.p_colors.Length;
                 break;
-            /*case e_objType.FORGROUND:
+            case e_objType.FORGROUND:
                 max = DataHolder.s_commonForgrounds.Length;
                 min = MapHandler.s_refMap.p_forgrounds.Length;
                 break;*/

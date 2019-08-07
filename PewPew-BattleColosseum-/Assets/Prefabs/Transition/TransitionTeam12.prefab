@@ -1736,7 +1736,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.298
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2072,21 +2072,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VSPARENT (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7071128834690866191, guid: f0aa33065d5940e46b442d4e88a101ad,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1507667259
-      objectReference: {fileID: 0}
-    - target: {fileID: 7071128834690866191, guid: f0aa33065d5940e46b442d4e88a101ad,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7071128834690866191, guid: f0aa33065d5940e46b442d4e88a101ad,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4571225694851283268, guid: f0aa33065d5940e46b442d4e88a101ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2151,6 +2136,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071128834690866191, guid: f0aa33065d5940e46b442d4e88a101ad,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1507667259
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071128834690866191, guid: f0aa33065d5940e46b442d4e88a101ad,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071128834690866191, guid: f0aa33065d5940e46b442d4e88a101ad,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0aa33065d5940e46b442d4e88a101ad, type: 3}
