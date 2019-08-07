@@ -190,7 +190,6 @@ namespace PPBC {
                 }
             } else {//Air
                 if (currentAnim == null || currentAnim == StringCollection.A_IDLE) {
-                    print(currentAnim);
                     StartAnim(StringCollection.A_IDLEAIR, true);
                 }
             }
