@@ -13,6 +13,7 @@ namespace PPBC {
                 Debug.Log(FX_vsEffect);
             }
             GetComponent<AudioSource>().PlayOneShot(fx_vsAudio);
+            CameraShake.DoCamerashake(0.12f, 0.25f);
         }
     }
 }
