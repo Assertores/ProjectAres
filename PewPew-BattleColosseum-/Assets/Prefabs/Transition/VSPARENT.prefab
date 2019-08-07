@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6530289705927190950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 23, y: 23, z: 1}
   m_Children:
   - {fileID: 7071128834690866185}
   m_Father: {fileID: 0}
@@ -103,35 +103,70 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5410268892872571909, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893894361945, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5410268893884142999, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5410268893947076918, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268893947076919, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5410268894256710306, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5410268894256710307, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5410268893629351017, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5410268892718259477, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410268892718259478, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc03a960ae7c204783010168c3974ea, type: 3}
