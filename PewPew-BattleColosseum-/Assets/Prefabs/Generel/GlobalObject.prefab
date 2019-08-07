@@ -1404,7 +1404,7 @@ MonoBehaviour:
   p_hill: {fileID: 700622219197246419, guid: e6cce23abb042ff42a790f314ae61f7d, type: 3}
   p_valley: {fileID: 1494409770337928004, guid: 00f9551defb2ea1458c30e0caf5ef0d9,
     type: 3}
-  m_PointsToWin: 75
+  m_PointsToWin: 50
   m_respawnDelay: 2
   m_valleyCount: 2
   m_zoneMoveDelay: 20
