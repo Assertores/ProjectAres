@@ -46,6 +46,7 @@ namespace PPBC {
         public System.Action<bool> EndGame { get; set; }
 
         public void AbortGame() {
+            m_isActive = false;
             EndGame(false);
         }
 
