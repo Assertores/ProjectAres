@@ -133,12 +133,12 @@ namespace PPBC {
                     }
                 }
                 for(int i = 0; i < teamB.Count; i++) {
-                    animRef.r_chars[i + teamA.Count].r_character.sprite = teamA[i].m_modelRef.m_icon;
+                    animRef.r_chars[i + teamA.Count].r_character.sprite = teamB[i].m_modelRef.m_icon;
                     if (animRef.r_chars[i].r_charName)
-                        animRef.r_chars[i + teamA.Count].r_charName.text = teamA[i].m_modelRef.m_name;
+                        animRef.r_chars[i + teamA.Count].r_charName.text = teamB[i].m_modelRef.m_name;
 
-                    Color color = teamA[i].GetPlayerColor();
-                    foreach (var it in animRef.r_chars[i + teamA.Count].r_backgrounds) {
+                    Color color = teamB[i].GetPlayerColor();
+                    foreach (var it in animRef.r_chars[i + teamB.Count].r_backgrounds) {
                         it.color = color;
                     }
                 }
