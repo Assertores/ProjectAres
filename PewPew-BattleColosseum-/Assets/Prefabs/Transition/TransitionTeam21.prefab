@@ -1917,14 +1917,14 @@ MonoBehaviour:
   r_anim: {fileID: 3215358629391401194}
   r_chars:
   - r_backgrounds:
-    - {fileID: 7251976455690842351}
+    - {fileID: 4986645567339063808}
     r_character: {fileID: 1093267372174857611}
     r_charName: {fileID: 0}
   - r_backgrounds: []
     r_character: {fileID: 3219358307947986946}
     r_charName: {fileID: 0}
   - r_backgrounds:
-    - {fileID: 4986645567339063808}
+    - {fileID: 7251976455690842351}
     r_character: {fileID: 708425480529971790}
     r_charName: {fileID: 0}
   r_name: {fileID: 6976400366543447433}
