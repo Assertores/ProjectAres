@@ -12,9 +12,17 @@ namespace PPBC {
             } else {
                 SceneManager.LoadScene(StringCollection.S_MAINMENU);
             }
-            print("A");
+
             DataHolder.s_escMenu.ToggleEscMenu();
-            print("B");
+        }
+
+        public void Quit(){
+#if UNITY_EDITOR
+            if (UnityEditor.EditorApplication.isPlaying) {
+                UnityEditor.EditorApplication.ExecuteMenuItem("Edit/Play");
+            }
+#endif
+            Application.Quit();
         }
     }
 }

@@ -183,16 +183,16 @@ namespace PPBC {
 
             switch (m_type) {
             case e_objType.BACKGROUND:
-                m_rawIndex = MapHandler.s_refMap.m_background;
+                m_rawIndex = MapHandler.s_singelton.m_backgroundIndex;
                 break;
             case e_objType.GLOBALLIGHT:
-                m_rawIndex = MapHandler.s_refMap.m_globalLight;
+                m_rawIndex = MapHandler.s_singelton.m_directionalLightIndex;
                 break;
             case e_objType.MUSIC:
-                m_rawIndex = MapHandler.s_refMap.m_music;
+                m_rawIndex = MapHandler.s_singelton.m_backgroundAudioIndex;
                 break;
             case e_objType.SIZE:
-                m_rawIndex = MapHandler.s_refMap.m_size;
+                m_rawIndex = MapHandler.s_singelton.m_cameraSizeIndex;
                 break;
             default:
                 m_rawIndex = 0;//everytime you change type it resets the index to 0
@@ -268,10 +268,10 @@ namespace PPBC {
                 max = DataHolder.s_commonColors.Length;
                 min = MapHandler.s_refMap.p_colors.Length;
                 break;
-            case e_objType.FORGROUND:
+            /*case e_objType.FORGROUND:
                 max = DataHolder.s_commonForgrounds.Length;
                 min = MapHandler.s_refMap.p_forgrounds.Length;
-                break;
+                break;*/
             case e_objType.GLOBALLIGHT:
                 max = DataHolder.s_commonColors.Length;
                 min = MapHandler.s_refMap.p_colors.Length;

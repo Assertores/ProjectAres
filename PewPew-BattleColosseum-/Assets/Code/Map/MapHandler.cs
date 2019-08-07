@@ -8,15 +8,17 @@ namespace PPBC {
         public static MapHandler s_singelton;
         public static MapData s_refMap { get; private set; }
 
+        public RenderTexture m_debugTexture;
+
         #region Variables
 
         [Header("References")]
         BoxCollider2D m_cameraSize;
-        int m_cameraSizeIndex;
-        int m_backgroundAudioIndex;
+        public int m_cameraSizeIndex { get; private set; }
+        public int m_backgroundAudioIndex { get; private set; }
         [SerializeField] SpriteRenderer m_background;
-        int m_backgroundIndex;
-        int m_directionalLightIndex;
+        public int m_backgroundIndex { get; private set; }
+        public int m_directionalLightIndex { get; private set; }
         [SerializeField] Transform m_levelHolder;
         [SerializeField] GameObject m_lightPrefab;
         [SerializeField] GameObject m_ObjectInteractPrefab;
@@ -72,8 +74,8 @@ namespace PPBC {
             }
 
             //--> everything is available <--
-
-            m_lightColor = DataHolder.s_dirLight.color;
+            
+            m_lightColor = DataHolder.s_dirLight.color;//somehow light color is black
 
             if (DataHolder.s_currentModi == -1 || DataHolder.s_modis[DataHolder.s_currentModi].m_name == StringCollection.M_COOPEDIT) {
                 if(DataHolder.s_currentModi == -1)
@@ -87,7 +89,7 @@ namespace PPBC {
         private void OnDestroy() {
             if(s_singelton == this) {
                 s_singelton = null;
-                DataHolder.s_dirLight.color = m_lightColor;
+                DataHolder.s_dirLight.color = DataHolder.s_commonColors[0]; //m_lightColor;//color is black for some reason
             }
         }
 
@@ -186,7 +188,7 @@ namespace PPBC {
                     if (false)//gamemodes eintragen
                         continue;
                     break;
-                case e_objType.FLAG:
+                /*case e_objType.FLAG:
                     if (name == StringCollection.M_FFA ||
                         name == StringCollection.M_TDM)
                         continue;
@@ -195,7 +197,7 @@ namespace PPBC {
                     if (name == StringCollection.M_FFA ||
                         name == StringCollection.M_TDM)
                         continue;
-                    break;
+                    break;*/
                 default:
                     break;
                 }
@@ -357,7 +359,7 @@ namespace PPBC {
                     tmp.GetComponentInChildren<Light>().color = DataHolder.s_commonColors[obj.index];
                 }
                 break;
-            case e_objType.FORGROUND:
+            /*case e_objType.FORGROUND:
                 if (obj.index < -s_refMap.p_stages.Length || obj.index >= DataHolder.s_commonStages.Length)
                     return null;
 
@@ -376,16 +378,16 @@ namespace PPBC {
                 } else {//common
                     ren.sprite = DataHolder.s_commonStages[obj.index];
                 }
-                break;
+                break;*/
             case e_objType.LASERSPAWN:
                 tmp = Instantiate(DataHolder.s_commonLaserSpawner, obj.position, Quaternion.Euler(Vector3.zero));
                 tmp.GetComponent<LaserSpawner>().Init(obj.index);
                 //tmp.layer = LayerMask.NameToLayer(StringCollection.L_LEVEL);
                 break;
-            case e_objType.FLAG:
+            /*case e_objType.FLAG:
                 break;
             case e_objType.BASKETHOOP:
-                break;
+                break;*/
             default:
                 return null;
             }

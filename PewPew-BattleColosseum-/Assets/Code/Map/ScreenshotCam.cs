@@ -13,10 +13,10 @@ namespace PPBC {
             gameObject.SetActive(true);
             m_cam = GetComponent<Camera>();
             m_texture = m_cam.targetTexture;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
 
-        public static Texture2D TakeScreenShot() {
+        public static byte[] TakeScreenShot() {
             m_cam.orthographicSize = FitCameraToAABB.m_aABB.size.y / 2;
             if (m_cam.orthographicSize * m_cam.aspect < FitCameraToAABB.m_aABB.size.x / 2) {
                 m_cam.orthographicSize = (FitCameraToAABB.m_aABB.size.x / 2) / m_cam.aspect;
@@ -24,18 +24,23 @@ namespace PPBC {
 
             var holder = RenderTexture.active;
 
-            RenderTexture.active = m_texture;
+            RenderTexture rt = new RenderTexture(m_texture.width, m_texture.height, 24);
+            m_cam.targetTexture = rt;
 
             m_cam.gameObject.SetActive(true);
             m_cam.Render();
             m_cam.gameObject.SetActive(false);
 
-            Texture2D value = new Texture2D(m_texture.width, m_texture.height);
+            RenderTexture.active = rt;
+
+            Texture2D value = new Texture2D(m_texture.width, m_texture.height, TextureFormat.RGB24, false);
             
             value.ReadPixels(new Rect(0, 0, value.width, value.height), 0, 0, false);
             RenderTexture.active = holder;
 
-            return value;
+            rt.Release();
+
+            return value.EncodeToPNG();
         }
     }
 }

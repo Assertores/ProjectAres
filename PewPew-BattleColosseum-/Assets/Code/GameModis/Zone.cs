@@ -86,8 +86,7 @@ namespace PPBC {
                 minDistance = float.MaxValue;
 
                 transform.position = new Vector2(Random.Range(-m_size.x / 2, m_size.x / 2), Random.Range(-m_size.y / 2, m_size.y / 2));
-
-                print(transform.position);
+                
                 if (SpawnPoint.s_references != null) {
                     foreach (var it in SpawnPoint.s_references) {
                         float dist = (transform.position - it.transform.position).magnitude;

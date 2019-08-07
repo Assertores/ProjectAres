@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_player: {fileID: 2130064355}
-  p_speticalClip: {fileID: 32900000, guid: be8e0633c74541d49a4ac43bd99d862e, type: 3}
+  p_speticalClip: {fileID: 32900000, guid: 2c2a7285b0d1ed6409e7e2b3b5e99f51, type: 3}
   m_commandLineArg: -nda
 --- !u!4 &1629684192
 Transform:

@@ -11,11 +11,19 @@ namespace PPBC {
 
         Coroutine h_startGame;
         public void StartGame() {
+            foreach (var it in Player.s_references) {
+                it.CanChangeCharacter(false);
+            }
+
             h_startGame = StartCoroutine(IEStartGame());
             Timer.StartTimer(m_delay);
         }
 
         public void AbortStartGame() {
+            foreach (var it in Player.s_references) {
+                it.CanChangeCharacter(true);
+            }
+
             StopCoroutine(h_startGame);
             Timer.AbortTimer();
         }

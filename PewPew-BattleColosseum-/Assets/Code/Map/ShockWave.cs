@@ -10,6 +10,7 @@ namespace PPBC {
 
         [SerializeField] AnimationCurve m_exand;
         [SerializeField] ContactFilter2D m_filter;
+        [SerializeField] Sprite m_icon_;
 
         float m_startTime = 0;
         Collider2D m_col;
@@ -35,7 +36,7 @@ namespace PPBC {
         #endregion
         #region IHarmingObject
 
-        public Sprite m_icon => null;
+        public Sprite m_icon => m_icon_;
 
         public e_HarmingObjectType m_type => e_HarmingObjectType.SHOCKWAVE;
 

@@ -33,7 +33,12 @@ namespace PPBC {
 
         public void SetUpGame() {
             foreach (var it in Player.s_references) {
-                DoRespawn(it);
+                var spawns = SpawnPoint.s_references.FindAll(x => x.m_team == it.m_team);
+                if (spawns.Count > 0)
+                    it.Respawn(spawns[Random.Range(0, spawns.Count)].transform.position);
+                else
+                    it.Respawn(SpawnPoint.s_references[Random.Range(0, SpawnPoint.s_references.Count)].transform.position);
+
                 it.m_stats.m_points = m_lifes;
             }
         }
@@ -45,6 +50,7 @@ namespace PPBC {
         }
 
         public void AbortGame() {
+            m_isActive = false;
             EndGame?.Invoke(false);
         }
 

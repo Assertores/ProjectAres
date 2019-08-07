@@ -82,6 +82,9 @@ namespace PPBC {
         [SerializeField] Animation r_respawnLogic;
         [SerializeField] Animation r_dieLogic;
         [SerializeField] Animation r_iFrame;
+        [SerializeField] AudioClip m_death;
+        [SerializeField] AudioClip m_deathLaser;
+        [SerializeField] AudioClip m_deathShockwave;
 
         public Animation r_plusOneAnim;
         public Animation r_minusOneAnim;
@@ -573,7 +576,14 @@ namespace PPBC {
         }
 
         public void DoDieSFX() {
+            if (m_killerType == e_HarmingObjectType.LASOR || m_killerType == e_HarmingObjectType.DEATHZONE) {
+                m_modelRef.fx_ModelAudio.PlayOneShot(m_deathLaser);
 
+            } else if (m_killerType == e_HarmingObjectType.SHOCKWAVE) {
+                m_modelRef.fx_ModelAudio.PlayOneShot(m_deathShockwave);
+            } else {
+                m_modelRef.fx_ModelAudio.PlayOneShot(m_death);
+            }
         }
 
         #region Control stuff
@@ -667,7 +677,7 @@ namespace PPBC {
             if (!m_modelRef || !m_modelRef.r_modelAnim || m_modelRef.r_modelAnim.state.GetCurrent(0) == null)
                 return null;
 
-            return m_modelRef.r_modelAnim.state.GetCurrent(0).IsComplete ? null : m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
+            return !m_modelRef.r_modelAnim.state.GetCurrent(0).loop && m_modelRef.r_modelAnim.state.GetCurrent(0).IsComplete ? null : m_modelRef?.r_modelAnim?.state.GetCurrent(0)?.Animation.Name;
         }
 
         public Color GetPlayerColor() {
@@ -724,7 +734,8 @@ namespace PPBC {
             } else {
                 m_controler.Accept -= GoIntoEditMode;
 
-                StopEdit();
+                m_editHud.gameObject.SetActive(true);
+                GoIntoEditMode();
                 if (m_editHud)
                     Destroy(m_editHud.gameObject);
             }

@@ -32,9 +32,13 @@ namespace PPBC {
             if (!m_col)
                 m_col = GetComponent<Collider2D>();
 
-            Collider2D[] tmp = new Collider2D[1];
-            if (Physics2D.OverlapCollider(m_col, m_filter, tmp) > 0) {
-                m_spawnInCollider = tmp[0];
+            Collider2D[] result = new Collider2D[10];
+            int count = Physics2D.OverlapCollider(m_col, m_filter, result);
+            for (int i = 0; i < count; i++) {
+                if (result[i].tag == StringCollection.T_PLAYER) {
+                    m_spawnInCollider = result[i];
+                    break;
+                }
             }
         }
 

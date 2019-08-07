@@ -45,6 +45,7 @@ namespace PPBC {
         }
 
         public void AbortGame() {
+            m_isActive = false;
             EndGame?.Invoke(false);
         }
 
