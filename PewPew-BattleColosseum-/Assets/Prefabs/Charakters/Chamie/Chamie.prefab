@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 7353004879546632628}
   - component: {fileID: 890526115313754423}
   m_Layer: 0
-  m_Name: Chami
+  m_Name: Chamie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_icon: {fileID: 21300000, guid: 7192f3e678dc2c04d97e0b66f2ffd827, type: 3}
-  m_name: Chami
+  m_name: Chamie
   r_modelAnim: {fileID: 4123549852183095616}
   fx_ModelAudio: {fileID: 7353004879546632628}
   fx_WeaponAudio: {fileID: 3751839624945460523}
@@ -1307,11 +1307,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9049426049345977205}
     m_Modifications:
-    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
-        type: 3}
-      propertyPath: m_Name
-      value: MUZZLEFLASH_SMG
-      objectReference: {fileID: 0}
     - target: {fileID: 7931340723058321447, guid: c751caebae1fed54d9af0de1f9ba7b41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1366,6 +1361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931340723058321442, guid: c751caebae1fed54d9af0de1f9ba7b41,
+        type: 3}
+      propertyPath: m_Name
+      value: MUZZLEFLASH_SMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c751caebae1fed54d9af0de1f9ba7b41, type: 3}

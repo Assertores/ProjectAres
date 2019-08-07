@@ -262,7 +262,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 034fad109950ac843bf36d43b2f7713f,
+      objectReference: {fileID: 32900000, guid: 6a2fa85d16febdd48aea1ea5d7a2feeb,
         type: 3}
     - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
         type: 3}
