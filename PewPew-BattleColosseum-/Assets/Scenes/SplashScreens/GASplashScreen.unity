@@ -274,6 +274,11 @@ PrefabInstance:
       propertyPath: m_TargetCamera
       value: 
       objectReference: {fileID: 1034460803}
+    - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+        type: 3}
+      propertyPath: m_TargetAudioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 1061938109}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d769bb24f134ad488b1f13caeaccc2b, type: 3}
 --- !u!1001 &985537274
@@ -440,3 +445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4297c0bec90e7d940ba6f0c1993f184c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1061938109 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8487445268997914367, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 798066533}
+  m_PrefabAsset: {fileID: 0}

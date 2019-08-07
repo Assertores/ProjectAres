@@ -472,13 +472,24 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 0acbcded9df9b5443bd31757d2f19467,
+      objectReference: {fileID: 32900000, guid: 9a83d4639d086c14f933447a5d89ea5c,
         type: 3}
+    - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+        type: 3}
+      propertyPath: m_TargetAudioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 2130064356}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d769bb24f134ad488b1f13caeaccc2b, type: 3}
 --- !u!328 &2130064355 stripped
 VideoPlayer:
   m_CorrespondingSourceObject: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130064354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2130064356 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8487445268997914367, guid: 6d769bb24f134ad488b1f13caeaccc2b,
     type: 3}
   m_PrefabInstance: {fileID: 2130064354}
   m_PrefabAsset: {fileID: 0}
