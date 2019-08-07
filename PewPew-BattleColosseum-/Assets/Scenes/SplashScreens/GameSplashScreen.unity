@@ -276,6 +276,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0df027535ad154cb33b7b220197dba, type: 3}
+--- !u!82 &1546609766 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8487445268997914367, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8890603213896496574}
+  m_PrefabAsset: {fileID: 0}
 --- !u!222 &109906265606315580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -944,6 +950,11 @@ PrefabInstance:
       propertyPath: m_ControlledAudioTrackCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8890603213825895801, guid: 6d769bb24f134ad488b1f13caeaccc2b,
+        type: 3}
+      propertyPath: m_TargetAudioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 1546609766}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d769bb24f134ad488b1f13caeaccc2b, type: 3}
 --- !u!1 &9095079909972167163
