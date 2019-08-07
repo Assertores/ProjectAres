@@ -38,6 +38,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4571225694851283268}
     m_Modifications:
+    - target: {fileID: 5410268892872571910, guid: 6bc03a960ae7c204783010168c3974ea,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_TRANSITION_EFFECT
+      objectReference: {fileID: 0}
     - target: {fileID: 5410268892872571907, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -93,17 +98,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268892872571910, guid: 6bc03a960ae7c204783010168c3974ea,
+    - target: {fileID: 5410268893629351019, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
-      propertyPath: m_Name
-      value: FX_TRANSITION_EFFECT
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
+    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268894256710306, guid: 6bc03a960ae7c204783010168c3974ea,
+    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
@@ -113,12 +118,12 @@ PrefabInstance:
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268893894361944, guid: 6bc03a960ae7c204783010168c3974ea,
+    - target: {fileID: 5410268894256710306, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5410268893884142998, guid: 6bc03a960ae7c204783010168c3974ea,
+    - target: {fileID: 5410268893629351016, guid: 6bc03a960ae7c204783010168c3974ea,
         type: 3}
       propertyPath: scalingMode
       value: 0
