@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_icon_: {fileID: 21300000, guid: 69aa50839a53fcc43b9d51bf55153e3d, type: 3}
-  r_text_: stay alive together
+  r_text_: Stay alive together
   m_lifes: 10
   m_respawnDelay: 2
   m_laserDelay: 25
@@ -852,8 +852,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_icon_: {fileID: 21300000, guid: 2be4c4eb551ac61488761c13c436c540, type: 3}
-  r_text_: get 5 kills
-  m_killsToWin: 5
+  r_text_: Get 7 kills
+  m_killsToWin: 7
   m_respawnDelay: 2
   m_laserDelay: 25
 --- !u!1 &3841625167925513082
@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_icon_: {fileID: 21300000, guid: a6eedb575d794d04d96d888928795d9b, type: 3}
-  r_text_: stay alive
+  r_text_: Stay alive
   m_lifes: 5
   m_respawnDelay: 2
   m_laserDelay: 25
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_icon_: {fileID: 21300000, guid: a30c9ff151a2f6847b7810b6b5eadd9f, type: 3}
-  r_text_: edit the map together
+  r_text_: Edit the map together
   p_EditingHUD: {fileID: 6130933300181253144, guid: a2d36ed00f6bca04cb2405ad81a6abb2,
     type: 3}
 --- !u!1 &5297499312010148168
