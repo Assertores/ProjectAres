@@ -347,7 +347,7 @@ namespace PPBC {
 
                 tmp.AddComponent<SpawnPoint>().m_team = obj.index;
                 break;
-            case e_objType.LIGHT:
+            /*case e_objType.LIGHT:
                 if (obj.index < -s_refMap.p_colors.Length || obj.index >= DataHolder.s_commonColors.Length)
                     return null;
 
@@ -359,7 +359,7 @@ namespace PPBC {
                     tmp.GetComponentInChildren<Light>().color = DataHolder.s_commonColors[obj.index];
                 }
                 break;
-            /*case e_objType.FORGROUND:
+            case e_objType.FORGROUND:
                 if (obj.index < -s_refMap.p_stages.Length || obj.index >= DataHolder.s_commonStages.Length)
                     return null;
 
