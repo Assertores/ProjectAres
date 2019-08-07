@@ -808,9 +808,9 @@ MonoBehaviour:
   r_respawnLogic: {fileID: 5212051754545285008}
   r_dieLogic: {fileID: 2143134950089849311}
   r_iFrame: {fileID: 6586910988821748866}
-  m_death: {fileID: 8300000, guid: 2a4dc209fd5deb34c99f34a24304bf86, type: 3}
-  m_deathLaser: {fileID: 8300000, guid: c45f7bd980c87404e859380e40bcadce, type: 3}
-  m_deathShockwave: {fileID: 8300000, guid: e753b658678ecee4ea0a0cc8d1da6b88, type: 3}
+  m_death: {fileID: 8300000, guid: 2bfc82c8bba825e409e39ec444392230, type: 3}
+  m_deathLaser: {fileID: 8300000, guid: 9e7c49b095c640e40a232d17427195fd, type: 3}
+  m_deathShockwave: {fileID: 8300000, guid: 9e7c49b095c640e40a232d17427195fd, type: 3}
   r_plusOneAnim: {fileID: 6299461937318211276}
   r_minusOneAnim: {fileID: 3084280794737149416}
   m_maxHealth: 100
@@ -2134,11 +2134,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 646553317731230916}
     m_Modifications:
-    - target: {fileID: 9217262860929983401, guid: b915d04d544a99d45b01d9c3127a9e94,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_SHOCKWAVE_EXPLOSION
-      objectReference: {fileID: 0}
     - target: {fileID: 875844963822952730, guid: b915d04d544a99d45b01d9c3127a9e94,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2208,6 +2203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217262860929983401, guid: b915d04d544a99d45b01d9c3127a9e94,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_SHOCKWAVE_EXPLOSION
       objectReference: {fileID: 0}
     - target: {fileID: 567849732298375084, guid: b915d04d544a99d45b01d9c3127a9e94,
         type: 3}
@@ -2592,11 +2592,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2248653792849515877}
     m_Modifications:
-    - target: {fileID: 4758818096133020910, guid: f857c5fcf2ef5bf46a9a844c1bc44feb,
-        type: 3}
-      propertyPath: m_Name
-      value: LAZERDEATH
-      objectReference: {fileID: 0}
     - target: {fileID: 4758818096133020915, guid: f857c5fcf2ef5bf46a9a844c1bc44feb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2651,6 +2646,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758818096133020910, guid: f857c5fcf2ef5bf46a9a844c1bc44feb,
+        type: 3}
+      propertyPath: m_Name
+      value: LAZERDEATH
       objectReference: {fileID: 0}
     - target: {fileID: 4758818096133020909, guid: f857c5fcf2ef5bf46a9a844c1bc44feb,
         type: 3}
@@ -2753,11 +2753,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1403341365237431161}
     m_Modifications:
-    - target: {fileID: 8766068974613422409, guid: ae7a625df253b4b4c9351abf2cd79d61,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_WALLSMOKE
-      objectReference: {fileID: 0}
     - target: {fileID: 5696977948042055712, guid: ae7a625df253b4b4c9351abf2cd79d61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2813,6 +2808,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8766068974613422409, guid: ae7a625df253b4b4c9351abf2cd79d61,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_WALLSMOKE
+      objectReference: {fileID: 0}
     - target: {fileID: 7246424610976985768, guid: ae7a625df253b4b4c9351abf2cd79d61,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -2844,11 +2844,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9129323274464931413}
     m_Modifications:
-    - target: {fileID: 4750486363277454733, guid: 6e489ab62541d1a4ab0fb2bad26aaa6d,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_RESPAWN
-      objectReference: {fileID: 0}
     - target: {fileID: 4750486363277454735, guid: 6e489ab62541d1a4ab0fb2bad26aaa6d,
         type: 3}
       propertyPath: playOnAwake
@@ -2908,6 +2903,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750486363277454733, guid: 6e489ab62541d1a4ab0fb2bad26aaa6d,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_RESPAWN
       objectReference: {fileID: 0}
     - target: {fileID: 4750486363277454732, guid: 6e489ab62541d1a4ab0fb2bad26aaa6d,
         type: 3}
