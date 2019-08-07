@@ -121,7 +121,6 @@ namespace PPBC {
 
             m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_SHOOT, false);
             m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.AddAnimation(0, StringCollection.AR_IDLE, true, 0);
-            print("A");
             m_owner.StartAnim(StringCollection.A_IDLEAIR, true);
         }
 
@@ -132,7 +131,6 @@ namespace PPBC {
 
             Instantiate(m_owner.m_modelRef.m_rocket.p_explosion, m_owner.m_modelRef.m_rocket.r_barrel.position, m_owner.m_modelRef.m_rocket.r_barrel.rotation).GetComponent<ITracer>()?.Init(this);
             m_owner.m_modelRef.m_rocket.r_RocketAnim.AnimationState.SetAnimation(0, StringCollection.AR_IDLE, true);
-            print("B");
             m_owner.StartAnim(StringCollection.A_IDLEAIR, true);
         }
     }

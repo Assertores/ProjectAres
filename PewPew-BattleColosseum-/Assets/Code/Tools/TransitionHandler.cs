@@ -138,7 +138,7 @@ namespace PPBC {
                         animRef.r_chars[i + teamA.Count].r_charName.text = teamB[i].m_modelRef.m_name;
 
                     Color color = teamB[i].GetPlayerColor();
-                    foreach (var it in animRef.r_chars[i + teamB.Count].r_backgrounds) {
+                    foreach (var it in animRef.r_chars[i + teamA.Count].r_backgrounds) {
                         it.color = color;
                     }
                 }
