@@ -1,19 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    [RequireComponent(typeof(SpriteRenderer))]
-    public class TeamColorTint : MonoBehaviour {
-
-        [SerializeField] int m_teamIndex;
-
-        void Start() {
-            SpriteRenderer ren = GetComponent<SpriteRenderer>();
-            float alpha = ren.color.a;
-            ren.color = DataHolder.s_teamColors[m_teamIndex];
-            ren.color = new Color(ren.color.r, ren.color.g, ren.color.b, alpha);
-            Destroy(this);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:fb4dd6c22601cc8a2209b885b838fa242e3ecaeaecb50c983f83b763bc4259f2
+size 554

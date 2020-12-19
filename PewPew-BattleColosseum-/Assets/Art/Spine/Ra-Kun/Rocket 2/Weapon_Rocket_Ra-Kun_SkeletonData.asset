@@ -1,24 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: Weapon_Rocket_Ra-Kun_SkeletonData
-  m_EditorClassIdentifier: 
-  atlasAssets:
-  - {fileID: 11400000, guid: 4d050359ea2e42049a7c67f5aec8d2c2, type: 2}
-  scale: 0.001953125
-  skeletonJSON: {fileID: 4900000, guid: 830fdaba13492ef4f8d9a30903690cde, type: 3}
-  skeletonDataModifiers: []
-  fromAnimation: []
-  toAnimation: []
-  duration: []
-  defaultMix: 0.2
-  controller: {fileID: 0}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b5d9feea7e65414577de55401553899c6c76d9522614fdef9927664922829177
+size 738

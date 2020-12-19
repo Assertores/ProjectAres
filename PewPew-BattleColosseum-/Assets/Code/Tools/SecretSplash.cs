@@ -1,33 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Video;
-
-namespace PPBC {
-    public class SecretSplash : MonoBehaviour {
-
-        #region Variables
-
-        [SerializeField] VideoPlayer r_player;
-        [SerializeField] VideoClip p_speticalClip;
-        [SerializeField] string m_commandLineArg;
-
-        #endregion
-        #region MonoBehaviour
-
-        private void Awake() {
-            if(m_commandLineArg != "" && r_player != null && p_speticalClip != null) {
-                foreach (string it in System.Environment.GetCommandLineArgs()) {
-                    if (it == m_commandLineArg) {
-                        r_player.clip = p_speticalClip;
-                        break;
-                    }
-                }
-            }
-
-            Destroy(this);
-        }
-
-        #endregion
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:df15331dc2e4717652166910729f20a02025fe5c36c90ef5c3df6f027b7687ff
+size 855

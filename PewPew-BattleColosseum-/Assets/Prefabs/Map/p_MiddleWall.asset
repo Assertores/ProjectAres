@@ -1,20 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df8b4541e6ac9d47a27d816050cc5c7, type: 3}
-  m_Name: p_MiddleWall
-  m_EditorClassIdentifier: 
-  m_image: {fileID: 21300000, guid: f01024aa99b307e41bcc15e5789f9a75, type: 3}
-  m_collider:
-  - {x: 0.36977255, y: 2.9785104}
-  - {x: -0.42630398, y: 2.9785104}
-  - {x: -0.40941572, y: -2.9355333}
-  - {x: 0.2156043, y: -2.9355333}
+version https://git-lfs.github.com/spec/v1
+oid sha256:47268c29f7b5e9fabb8e27f3bc0b5607bb48a946cb4f5a99725f0f2ce1bd3065
+size 633

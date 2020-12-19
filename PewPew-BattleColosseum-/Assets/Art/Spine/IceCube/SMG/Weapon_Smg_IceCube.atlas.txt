@@ -1,13 +1,3 @@
-
-Weapon_Smg_IceCube.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_IceCube_Smg_Ver1
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:e24f81fa89ef95fb2d931506b14da14e268ee32b74785804fc58744f5d31e9ca
+size 202

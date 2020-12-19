@@ -1,1 +1,3 @@
-"Up-to-date documentation at: https://github.com/speps/XInputDotNet" 
+version https://git-lfs.github.com/spec/v1
+oid sha256:279e589142011f4ee036770f8fc347e484573571cc9912bc1f62699bcaced6d5
+size 70

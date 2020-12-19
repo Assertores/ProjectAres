@@ -1,13 +1,3 @@
-
-Weapon_Smg_Ananas.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_Ananas_Smg_Ver1
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:fb1492911656fbb63833bc854e8dd6969ee3688d838b9cbf10b5916df4bed41b
+size 200

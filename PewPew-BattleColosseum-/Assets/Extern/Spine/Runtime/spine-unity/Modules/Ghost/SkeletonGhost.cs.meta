@@ -1,13 +1,3 @@
-fileFormatVersion: 2
-guid: 02f2fa991881c6d419500ccc40ad443f
-timeCreated: 1431858330
-licenseType: Free
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences:
-  - ghostShader: {fileID: 4800000, guid: 3873d4699ee8a4b4da8fa6b8c229b94d, type: 3}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:bdd954193c39e8f57f6770b68fe8a31b0510bdab21a136175a5a94e7f9d33cb7
+size 344

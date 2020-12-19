@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: Weapon_Rocket_Annelore_Atlas
-  m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: 4af7044060990ad49922e669cf3de325, type: 3}
-  materials:
-  - {fileID: 2100000, guid: e0368b33ef679d1498ffd603f9ddf372, type: 2}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6405da49d012f26c76b75fca88678bf0ee7fc867f9ddbc4fdafac75c622542df
+size 581

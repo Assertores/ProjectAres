@@ -1,13 +1,3 @@
-
-Weapon_Smg_Seker.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-Seker_SMG
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:5fc46b0ae57b0de55ed9b93ee9601d54814037c170f319f79b58a6df5e5554f2
+size 188

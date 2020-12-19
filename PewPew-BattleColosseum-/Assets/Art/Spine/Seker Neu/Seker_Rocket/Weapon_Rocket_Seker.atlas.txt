@@ -1,13 +1,3 @@
-
-Weapon_Rocket_Seker.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-Seker_Rocket
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:a7853ee8c202a147b05d7a8bbc2cea43bc15327dc4ddab2c4531482e1c444baa
+size 194

@@ -1,24 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-
-namespace PPBC {
-
-    [System.Serializable]
-    public struct d_CharRefs {
-        public SpriteRenderer[] r_backgrounds;
-        public SpriteRenderer r_character;
-        public TextMeshProUGUI r_charName;
-    }
-
-    public class GameTransitionRefHolder : MonoBehaviour {
-
-        public Animator r_anim;
-
-        public d_CharRefs[] r_chars;
-
-        public TextMeshProUGUI r_name;
-        public TextMeshProUGUI r_flavour;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5d8b76ed00999dc29d0099ce6ab65fffb91fba9234c59a0d6769706768733f97
+size 530

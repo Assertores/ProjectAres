@@ -1,21 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    public interface ITracer {
-
-        /// <summary>
-        /// reference to the source object
-        /// </summary>
-        IHarmingObject m_trace { get; }
-
-
-        /// <summary>
-        /// will be called once after instanciating
-        /// </summary>
-        /// <param name="trace">the source object</param>
-        /// <returns>a rigitbody to aply a force or null</returns>
-        Rigidbody2D Init(IHarmingObject trace);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:807c0851ce7063c12e535b783cd5d65c39ae63b0093023033d91e9f2aa14162c
+size 539

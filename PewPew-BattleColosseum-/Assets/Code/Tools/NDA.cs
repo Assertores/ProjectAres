@@ -1,28 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-namespace PPBC {
-    public class NDA : MonoBehaviour {
-
-        [SerializeField] float m_delay = 2;
-
-        private void Start() {
-            StartCoroutine(Wait());
-        }
-
-        IEnumerator Wait() {
-            yield return new WaitForSeconds(m_delay);
-            TransitionHandler.ReadyToChange += ReturnImideatly;
-
-            TransitionHandler.StartOutTransition();
-        }
-
-        void ReturnImideatly() {
-            TransitionHandler.ReadyToChange -= ReturnImideatly;
-
-            SceneManager.LoadScene(StringCollection.S_MAINMENU);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:819df09eb8d25cfecc0a71b2b2006e5774a06835624ed706316860884662e387
+size 689

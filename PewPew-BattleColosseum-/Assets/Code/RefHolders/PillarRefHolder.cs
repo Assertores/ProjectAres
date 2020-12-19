@@ -1,18 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-
-namespace PPBC {
-    public class PillarRefHolder : MonoBehaviour {
-
-        public TextMeshProUGUI r_points;
-        public SpriteRenderer r_light;
-
-        //calculation variables
-        [HideInInspector] public Vector3 m_holderPos;
-        [HideInInspector] public Vector3 m_middlePos;
-        [HideInInspector] public Vector3 m_targetPos;
-        [HideInInspector] public int m_previousMatchPoints;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a1953933abef274b73052b3a3c630113b6732dd4296f9cce711a653a06d7c029
+size 507

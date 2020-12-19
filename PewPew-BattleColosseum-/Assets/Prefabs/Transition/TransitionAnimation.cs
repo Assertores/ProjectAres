@@ -1,19 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    public class TransitionAnimation : MonoBehaviour {
-        [SerializeField] ParticleSystem[] FX_vsEffect;
-        [SerializeField] AudioClip fx_vsAudio;
-
-        public void DoVSEffect() {
-            for (int i = 0; i < FX_vsEffect.Length; i++) {
-                FX_vsEffect[i].Play();
-                Debug.Log(FX_vsEffect);
-            }
-            GetComponent<AudioSource>().PlayOneShot(fx_vsAudio);
-            CameraShake.DoCamerashake(0.12f, 0.5f);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1a439d1e585aea78a40afe77974eab0da9d31d1784490d1b996b0d8cb64a2bcb
+size 579

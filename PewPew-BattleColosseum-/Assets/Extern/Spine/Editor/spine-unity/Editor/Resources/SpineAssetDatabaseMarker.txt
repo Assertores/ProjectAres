@@ -1,1 +1,3 @@
-DO NOT MOVE OR DELETE THIS FILE
+version https://git-lfs.github.com/spec/v1
+oid sha256:f1f6a4c749eab9526694dcff02c44f06a6816769701226392ef643d5c51d357b
+size 31

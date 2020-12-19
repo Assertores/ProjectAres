@@ -1,6 +1,3 @@
-AnimationMatchModifierAsset
-===========================
-
-This is a SkeletonDataModifierAsset. Add it to a SkeletonDataAsset to apply its effects when its SkeletonData is loaded.
-
-AnimationMatchModifierAsset processes animations so that their timelines match. This allows them to function with naive Animation Apply systems such as SkeletonMecanim without the need for autoreset functionality.
+version https://git-lfs.github.com/spec/v1
+oid sha256:ce7fa5f5d92566b6a1ef34f9ef5b1dbc4f40127adaf7741b8c0d46b4a7d13ea3
+size 392

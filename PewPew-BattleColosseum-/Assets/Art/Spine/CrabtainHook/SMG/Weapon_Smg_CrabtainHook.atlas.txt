@@ -1,13 +1,3 @@
-
-Weapon_Smg_CrabtainHook.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_CrabtainHook_Smg_Ver2
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:88dae9cfb1229aa9f9a4f1e2132670a46e9b2bbff78542b1abf46b6c4a1571e1
+size 212

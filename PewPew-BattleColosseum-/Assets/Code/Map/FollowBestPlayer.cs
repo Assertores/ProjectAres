@@ -1,19 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    public class FollowBestPlayer : MonoBehaviour {
-
-        #region Variables
-        [Header("Balancing")]
-        [SerializeField] float m_lerpTime;
-        [SerializeField] float m_crownOffset;
-        #endregion
-        void LateUpdate() {
-
-            transform.position = Vector2.Lerp(transform.position, new Vector2(Player.s_sortRef[0].transform.position.x, Player.s_sortRef[0].transform.position.y + Player.s_sortRef[0].m_distanceToGround + m_crownOffset), m_lerpTime);
-
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:243f5868b6307fdb061af97a33a68fe6956e4f7243e3f0254890ad5ffa7f9871
+size 597

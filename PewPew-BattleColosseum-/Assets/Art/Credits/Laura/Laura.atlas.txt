@@ -1,20 +1,3 @@
-
-Laura.png
-size: 1024,512
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-Body
-  rotate: true
-  xy: 2, 48
-  size: 256, 512
-  orig: 256, 512
-  offset: 0, 0
-  index: -1
-Eyes
-  rotate: false
-  xy: 2, 2
-  size: 106, 44
-  orig: 106, 44
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:5d252ec5870fbbc31209af88ec887a5747bf4923ab64d74192d152ae06893387
+size 262

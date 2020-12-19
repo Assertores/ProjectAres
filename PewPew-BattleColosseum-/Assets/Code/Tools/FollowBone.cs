@@ -1,30 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Spine.Unity;
-
-namespace PPBC {
-    public class FollowBone : MonoBehaviour {
-
-        [SerializeField] SkeletonAnimation m_anim;
-        [SerializeField] string m_boneName = "Weapon";
-        Spine.Bone m_target;
-
-        void Start() {
-            if (!m_anim) {
-                Destroy(this);
-                return;
-            }
-
-            m_target = m_anim.skeleton.FindBone(m_boneName);
-            if (m_target == null) {
-                Destroy(this);
-                return;
-            }
-        }
-
-        void Update() {
-            transform.localPosition = new Vector2(m_target.WorldX, m_target.WorldY);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:0a6bc361cf839ded315a4f13fc868b26fc1508f171cfca21008201737b7a9ec9
+size 725

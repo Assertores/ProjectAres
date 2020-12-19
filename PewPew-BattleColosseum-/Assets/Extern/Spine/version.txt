@@ -1,2 +1,3 @@
-This Spine-Unity runtime works with data exported from Spine Editor version: 3.7.xx
-Package version: spine-unity-3_7-2019-06-19.unitypackage
+version https://git-lfs.github.com/spec/v1
+oid sha256:603beaf0e6a0560e921f32982e0f06be74e6a2febcb60bbd84dbdd68f7e7899e
+size 141

@@ -1,34 +1,3 @@
-
-Max.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-Body
-  rotate: false
-  xy: 2, 94
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
-Gloriole
-  rotate: false
-  xy: 2, 2
-  size: 101, 20
-  orig: 101, 20
-  offset: 0, 0
-  index: -1
-Wing L
-  rotate: false
-  xy: 2, 24
-  size: 130, 68
-  orig: 130, 68
-  offset: 0, 0
-  index: -1
-Wing R
-  rotate: false
-  xy: 516, 538
-  size: 130, 68
-  orig: 130, 68
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:48cea18b79f44d21ec43d6de4f9d94236f343a763ddb23fa68bcf0b8fb58228f
+size 457

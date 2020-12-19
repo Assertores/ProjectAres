@@ -1,16 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    public class BackgroundMaker : MonoBehaviour {
-
-#if UNITY_EDITOR
-
-        public string m_name;
-        public SpriteRenderer m_sprite;
-        public BoxCollider2D m_col;
-
-#endif
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:8eb1ae14a5b9e9831b7627bf8a1c0f7ba653ac4bbd33c92b748c80eefcbceb2b
+size 291

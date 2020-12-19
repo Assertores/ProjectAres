@@ -1,16 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-namespace PPBC {
-    public class SaveStart : MonoBehaviour {
-
-        private void Awake() {
-            if (!DataHolder.s_isInit)
-                SceneManager.LoadScene(StringCollection.S_GASS);
-            else
-                Destroy(this.gameObject);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:322eb2aac2679e5510e10600b81833cf50377b0d4e46327fe38b06a5e3de0d00
+size 391

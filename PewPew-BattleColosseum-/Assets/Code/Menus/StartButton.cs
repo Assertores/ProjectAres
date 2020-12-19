@@ -1,14 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace PPBC {
-    [RequireComponent(typeof(Slider))]
-    public class StartButton : MonoBehaviour {
-        // Start is called before the first frame update
-        void Start() {
-            GetComponent<Slider>().Select();
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4d039726934341bf82223e38724c4087a4d088c2f2bbd193ca9bda0ef16c3db5
+size 350

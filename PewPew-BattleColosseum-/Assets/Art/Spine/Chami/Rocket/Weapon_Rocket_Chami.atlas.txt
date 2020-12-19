@@ -1,13 +1,3 @@
-
-Weapon_Rocket_Chami.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_Chami_Rocket_Ver1
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:d7d152e28950ea7363b350e6fbe9737ab89d86c7d06bbb14e8398d27b903bd0f
+size 204

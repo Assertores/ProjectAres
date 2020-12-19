@@ -1,35 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!1045 &1
-EditorBuildSettings:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SplashScreens/GASplashScreen.unity
-    guid: 263ce93c0bc8e534fa990ff59ae1ff44
-  - enabled: 1
-    path: Assets/Scenes/SplashScreens/TeamSplashScreen.unity
-    guid: bfb5957fc89875749a880b85007ccc8a
-  - enabled: 1
-    path: Assets/Scenes/SplashScreens/GameSplashScreen.unity
-    guid: 8696cda198c525943b9642544c679c6b
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 2f7e1e4fbd1cb404abc778e3c178b8c0
-  - enabled: 1
-    path: Assets/Scenes/Extras/Credits.unity
-    guid: 372d5c023b98a694c9d4a94793027292
-  - enabled: 1
-    path: Assets/Scenes/Extras/TeamSelect.unity
-    guid: 6c88966807a40664ba775fa045c22f77
-  - enabled: 1
-    path: Assets/Scenes/Map.unity
-    guid: f3917042584f41740bb11c7da3874bdd
-  - enabled: 1
-    path: Assets/Scenes/WinScreen.unity
-    guid: 31296d47115b8af4b8b240d07c373892
-  - enabled: 1
-    path: Assets/Scenes/Extras/EscMenu.unity
-    guid: 996057fb0ae9f4b488941d8433cf8fe1
-  m_configObjects: {}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4a6631b80a1819342f0df44f1aaf988082118a33a244a979ae5fc9220405b19a
+size 1111

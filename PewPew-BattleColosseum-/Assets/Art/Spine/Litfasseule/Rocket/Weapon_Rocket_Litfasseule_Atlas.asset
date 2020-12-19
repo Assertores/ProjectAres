@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: Weapon_Rocket_Litfasseule_Atlas
-  m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: ed7f7dc5028f73841a53c3db3db3374c, type: 3}
-  materials:
-  - {fileID: 2100000, guid: 983811ce88ec01144a77d99620517dee, type: 2}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d6fba96bb4e4b326959fd83a51c2e24aea9b96c95bf92f9e279c7c8597b55358
+size 584

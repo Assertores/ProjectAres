@@ -1,21 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    [CreateAssetMenu(menuName = "Map/Background")]
-    public class BackgroundData : ScriptableObject {
-
-        public Sprite m_image;
-        public Vector2 m_position;
-        public Vector2 m_size;
-
-    }
-
-    [System.Serializable]
-    public class BackgroundJSON {
-        public string m_image;
-        public Vector2 m_position;
-        public Vector2 m_size;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:e5835d8de669950db783257828730487dfa87a8bd5659723dc06cdecdd34ae86
+size 474

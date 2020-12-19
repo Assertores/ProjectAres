@@ -1,13 +1,3 @@
-
-Weapon_Smg_MissingTexture.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_MissingTexture_SMG_Ver2
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:167af747ce2e8dae190e7f7c07b8f87eaf7a22382ce1c937ddecf525c7a66380
+size 216

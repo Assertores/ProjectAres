@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: Weapon_Smg_BobDerFisch_Atlas
-  m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: 32eb8ad1a8df53e48982e6d4b3a171bf, type: 3}
-  materials:
-  - {fileID: 2100000, guid: 8e59cbdffe4603f4b9949e003fa0a6c7, type: 2}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5f9ef147b107fe239cc4413f054f514bff86e8b033c7d9ee0dd4d376f4c25aa7
+size 581

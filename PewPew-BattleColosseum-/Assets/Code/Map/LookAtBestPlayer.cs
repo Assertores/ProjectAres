@@ -1,16 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    public class LookAtBestPlayer : MonoBehaviour {
-
-        #region MonoBehaviour
-
-        void Update() {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Player.s_sortRef[0].transform.position - transform.position), 0.2f);//framerate abhängig
-        }
-
-        #endregion
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:776c7001b873e5590b64e2e358ddd6c258d1c9b714955fab5b7ef933f3994487
+size 429

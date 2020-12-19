@@ -1,13 +1,3 @@
-
-Weapon_Rocket_IceCube.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_IceCube_Rocket_Ver1
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:fba3c4ad75cfb286ae393b0ad2fa1a2d6052f3aecb2babfc737610cf9df38750
+size 208

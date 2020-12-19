@@ -1,33 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df8b4541e6ac9d47a27d816050cc5c7, type: 3}
-  m_Name: p_Sci-Fi Circle
-  m_EditorClassIdentifier: 
-  m_image: {fileID: 21300000, guid: a0d33b75e86efce4bbcfefa2cce65d9e, type: 3}
-  m_collider:
-  - {x: -1.1752213, y: 0.15494537}
-  - {x: -1.080015, y: 0.5049559}
-  - {x: -0.8610406, y: 0.82432073}
-  - {x: -0.5073804, y: 1.086322}
-  - {x: -0.00837186, y: 1.1779114}
-  - {x: 0.33203554, y: 1.1313256}
-  - {x: 0.5842267, y: 1.0124354}
-  - {x: 0.7070017, y: 0.93494153}
-  - {x: 0.866155, y: 0.8051592}
-  - {x: 1.1198208, y: 0.41644663}
-  - {x: 1.169803, y: -0.068667635}
-  - {x: 1.0338135, y: -0.5553294}
-  - {x: 0.7655751, y: -0.8770886}
-  - {x: 0.31469744, y: -1.1383852}
-  - {x: -0.28363973, y: -1.1460407}
-  - {x: -0.80159783, y: -0.8622295}
-  - {x: -1.0859144, y: -0.4821887}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f4d57e30a47e3d8f30274c3a26f87d5ee91864c421f7717ca069c2ae5664e5a9
+size 1080

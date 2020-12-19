@@ -1,13 +1,3 @@
-
-Andi.png
-size: 1024,512
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-Andi
-  rotate: true
-  xy: 2, 2
-  size: 256, 512
-  orig: 256, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:359da9cc1e9802635f5d88d6c3abe83d43a8592319faee6b52d0fc3d37eed246
+size 169

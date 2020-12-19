@@ -1,20 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9df8b4541e6ac9d47a27d816050cc5c7, type: 3}
-  m_Name: p_Ground_Corner
-  m_EditorClassIdentifier: 
-  m_image: {fileID: 21300000, guid: 96ce9acb0cac72a489fa305097569d1b, type: 3}
-  m_collider:
-  - {x: 0.5, y: 0.85}
-  - {x: 0.5, y: -0.85}
-  - {x: -0.5, y: -0.85}
-  - {x: -0.5, y: 0.85}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1257d8cd0a0572cdf50830f5534f67e2c4ab845c0965964c3ff1aab8cba88f3f
+size 589

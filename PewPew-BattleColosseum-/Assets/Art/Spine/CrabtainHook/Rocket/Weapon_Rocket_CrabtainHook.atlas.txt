@@ -1,13 +1,3 @@
-
-Weapon_Rocket_CrabtainHook.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_CrabtainHook_Rocket_Ver2
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:0a7c96b67cbbcf5b49117417de642d6952eaecead5cbad5dff5ea98f424586fd
+size 218

@@ -1,20 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PPBC {
-    public class SpawnPoint : MonoBehaviour {
-
-        public static List<SpawnPoint> s_references = new List<SpawnPoint>();
-
-        public int m_team;
-
-        private void Awake() {
-            s_references.Add(this);
-        }
-
-        private void OnDestroy() {
-            s_references.Remove(this);
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:68a13fdff11d88c206371106b7f01f87ca74324ae5002717e9c8ee07602ea0d1
+size 423

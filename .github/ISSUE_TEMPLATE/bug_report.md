@@ -1,16 +1,3 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
----
-
-## Beschreibung
-//was ist dass problem in einem satz.
-
-## Reproduzierbarkeit
-- //jeder schritt als stickpunkt
-
-//dass ergebniss der schritte und was eigentlich hätte pasieren sollen hier hin
+version https://git-lfs.github.com/spec/v1
+oid sha256:44b9ca168e3dd4380d74e225277ea4dee86151a52be96e0d9320cc7dbe83d610
+size 296

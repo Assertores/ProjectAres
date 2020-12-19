@@ -1,13 +1,3 @@
-
-Weapon_Smg_Litfasseule.png
-size: 1024,1024
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-CHAR_Litfasseule_SMG_Ver2
-  rotate: false
-  xy: 2, 2
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
+version https://git-lfs.github.com/spec/v1
+oid sha256:3ef919fca8fd099151ab72626490294a94928cc04bb893f2958fa50fc01c70b9
+size 210
